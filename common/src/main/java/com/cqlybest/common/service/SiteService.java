@@ -35,6 +35,7 @@ public class SiteService {
     if (newSite != null && !newSite.equals(cachedSite)) {
       newSite.setLastUpdate(new Date());
       siteDao.saveOrUpdate(newSite);
+      cachedSite = newSite;
     }
   }
 

@@ -10,7 +10,7 @@
 			</div>
 			<div class="clearfix"></div>   
 		</div>
-		<form action="${ContextPath}/site/config.html" method="post">
+		<form id="site-config-form" action="${ContextPath}/site/config.html" method="post">
 			<div class="grid-content">
 				<div class="formRow">
 					<label>网站名称：</label>
@@ -56,3 +56,19 @@
 		</form>
 	</div>
 </div>
+<script>
+$('input,textarea,select').jqBootstrapValidation({
+	submitSuccess : function($form, event) {
+		event.preventDefault();
+		event.stopPropagation();
+		$form.ajaxSubmit({
+			success : function(response){
+				alert('success');
+			},
+			error : function() {
+				alert('error');
+			}
+		});
+	}
+});
+</script>

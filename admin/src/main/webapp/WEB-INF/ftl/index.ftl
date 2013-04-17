@@ -79,20 +79,8 @@
 		<script src="${ContextPath}/js/jquery.min.js"></script>
 		<script src="${ContextPath}/js/jquery-ui.min.js"></script>
 		<script src="${ContextPath}/js/bootstrap.min.js"></script>
-		<script src="${ContextPath}/js/chosen.jquery.min.js"></script>
-		<script src="${ContextPath}/js/autoresize.jquery.min.js"></script>
-		<script src="${ContextPath}/js/jquery.autotab.js"></script>
-		<script src="${ContextPath}/js/jquery.jgrowl_minimized.js"></script>
-		<script src="${ContextPath}/js/jquery.dataTables.min.js"></script>
-		<script src="${ContextPath}/js/jquery.stepy.min.js"></script>
-		<script src="${ContextPath}/js/jquery.validate.min.js"></script>
-		<script src="${ContextPath}/js/raphael.2.1.0.min.js"></script>
-		<script src="${ContextPath}/js/justgage.1.0.1.min.js"></script>
-		<script src="${ContextPath}/js/glisse.js"></script>
-		<script src="${ContextPath}/js/styleswitcher.js"></script>
-		<script src="${ContextPath}/js/moderniz.js"></script>
-		<script src="${ContextPath}/js/slidernav-min.js"></script>
-		<script src="${ContextPath}/js/jquery.fancybox.js"></script>
+		<script src="${ContextPath}/js/jqBootstrapValidation.js"></script>
+		<script src="${ContextPath}/js/jquery.form.js"></script>
 		<script src="${ContextPath}/js/jquery.ba-hashchange.min.js"></script>
 		<script src="${ContextPath}/js/application.js"></script>
 	</body>
