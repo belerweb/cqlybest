@@ -11,12 +11,9 @@
 		<link href="${ContextPath}/css/style.css" rel="stylesheet">
 		<link href="${ContextPath}/css/bootstrap.css" rel="stylesheet">
 		<link rel="stylesheet" href="${ContextPath}/css/jquery-ui-1.8.16.custom.css" media="screen"  />
-		<link rel="stylesheet" href="${ContextPath}/css/fullcalendar.css" media="screen"  />
 		<link rel="stylesheet" href="${ContextPath}/css/chosen.css" media="screen"  />
-		<link rel="stylesheet" href="${ContextPath}/css/glisse.css?1.css">
+		<link rel="stylesheet" href="${ContextPath}/css/glisse.css">
 		<link rel="stylesheet" href="${ContextPath}/css/jquery.jgrowl.css">
-		<link rel="stylesheet" href="${ContextPath}/css/demo_table.css" >
-		<link rel="stylesheet" href="${ContextPath}/css/jquery.fancybox.css?v=2.1.4" media="screen" />
 		<link rel="stylesheet" href="${ContextPath}/css/icon/font-awesome.css">    
 		<link rel="stylesheet" href="${ContextPath}/css/bootstrap-responsive.css">
 		<link rel="alternate stylesheet" type="text/css" media="screen" title="green-theme" href="${ContextPath}/css/color/green.css" />
@@ -35,24 +32,24 @@
 	<body>
 		<!--BEGIN HEADER-->
 		<div id="header" role="banner">
-			<a id="menu-link" class="head-button-link menu-hide" href="#menu"><span>Menu</span></a>
+			<a id="menu-link" class="head-button-link menu-hide" href="#menu"><span>菜单</span></a>
 			<!--Logo-->
-			<a href="dashboard.html" class="logo"><h1>Night Sky</h1></a>
+			<a href="dashboard.html" class="logo"><h1>重庆易游天下国际旅行社</h1></a>
 			<!--Logo END-->
 			<div class="right">
 				<!--profile box-->
 				<div class="dropdown left profile">
 					<a class="dropdown-toggle" data-toggle="dropdown" href="#">
-						<span class="double-spacer"></span>
-						<div class="profile-avatar"><img src="images/avatar.png" alt=""></div>
-						<div class="profile-username"><span>Welcome,</span> John Doe!</div>
+						<!-- span class="double-spacer"></span -->
+						<div class="profile-avatar"><img src="${(userInfo.avatar.avatarURL50)!}" alt=""></div>
+						<div class="profile-username"><span>你好，</span> ${(userInfo.nickname)!}！</div>
 						<div class="profile-caret"> <span class="caret"></span></div>
 						<span class="double-spacer"></span>
 					</a>
 					<div class="dropdown-menu pull-right profile-box">
 						<div class="triangle-3"></div>
 						<ul class="profile-navigation">
-							<li><a href="index.html"><i class="icon-off"></i> Logout</a></li>
+							<li><a href="${ContextPath}/logout.do"><i class="icon-off"></i> 退出</a></li>
 						</ul>
 					</div>
 				</div>
@@ -65,10 +62,10 @@
 			<!--BEGIN SIDEBAR-->
 			<div id="menu" role="navigation">
 				<ul class="main-menu">
-					<li class="active"><a href="#"><i class="general"></i> 网站</a></li>
+					<li data-mg="site"><a href="#mg=site"><i class="general"></i> 网站</a></li>
 				</ul>
 				<ul class="additional-menu">
-					<li class="active"><a href="#"><i class="icon-home"></i> 网站配置</a></li>
+					<li class="hide" data-mg="site" data-mu="${ContextPath}/site/config.html"><a href="#mg=site;mu=${ContextPath}/site/config.html"><i class="icon-home"></i> 网站配置</a></li>
 				</ul>
 				<div class="clearfix"></div>
 			</div>
@@ -96,5 +93,7 @@
 		<script src="${ContextPath}/js/moderniz.js"></script>
 		<script src="${ContextPath}/js/slidernav-min.js"></script>
 		<script src="${ContextPath}/js/jquery.fancybox.js"></script>
+		<script src="${ContextPath}/js/jquery.ba-hashchange.min.js"></script>
+		<script src="${ContextPath}/js/application.js"></script>
 	</body>
 </html>

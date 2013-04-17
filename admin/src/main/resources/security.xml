@@ -22,7 +22,7 @@ http://www.springframework.org/schema/beans http://www.springframework.org/schem
         <logout logout-url="/logout.do" />
         <intercept-url pattern="/index.html" access="permitAll" />
         <intercept-url pattern="/connector/**" access="permitAll" />
-        <intercept-url pattern="/**" access="permitAll" />
+        <intercept-url pattern="/**" access="isAuthenticated()" />
     </http>
 
 </beans:beans>

@@ -9,6 +9,12 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.cqlybest.common.bean.QQUser;
+import com.cqlybest.common.oauth.QQAuthenticationToken;
+import com.qq.connect.QQConnectException;
+import com.qq.connect.api.qzone.UserInfo;
+import com.qq.connect.javabeans.qzone.UserInfoBean;
+
 @Controller
 public class IndexController {
 
@@ -19,6 +25,15 @@ public class IndexController {
       return "login";
     }
 
+    if (authentication instanceof QQAuthenticationToken) {
+      QQUser user = (QQUser) authentication.getPrincipal();
+      try {
+        UserInfoBean userInfo = new UserInfo(user.getToken(), user.getOpenid()).getUserInfo();
+        model.addAttribute("userInfo", userInfo);
+      } catch (QQConnectException e) {
+        e.printStackTrace();
+      }
+    }
     return "index";
   }
 

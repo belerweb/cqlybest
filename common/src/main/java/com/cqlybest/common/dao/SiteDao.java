@@ -15,7 +15,7 @@ public class SiteDao extends AbstractDao<Site, Integer> {
 
   public Site findLatestSite() {
     Criteria criteria = getCurrentSession().createCriteria(entityClass);
-    criteria.addOrder(Order.desc("LAST_UPDATE"));
+    criteria.addOrder(Order.desc("lastUpdate"));
     criteria.setMaxResults(1);
     return (Site) criteria.uniqueResult();
   }
