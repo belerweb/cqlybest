@@ -10,45 +10,46 @@
 			</div>
 			<div class="clearfix"></div>   
 		</div>
-		<form id="site-config-form" action="${ContextPath}/site/config.html" method="post">
+		<!-- novalidate -->
+		<form id="site-config-form" action="${ContextPath}/site/config.html" method="post" class="form-horizontal">
 			<div class="grid-content">
-				<div class="formRow">
-					<label>网站名称：</label>
-					<div class="formRight">
-						<input type="text" class="span input" name="name" value="${(site.name)!}"> 
+				<div class="control-group">
+					<label class="control-label">网站名称：</label>
+					<div class="controls">
+						<input type="text" class="span input" name="name" value="${(site.name)!}" required="true"> 
 					</div>
 				</div>
-				<div class="formRow">
-					<label>关键字（词）：</label>
-					<div class="formRight">
+				<div class="control-group">
+					<label class="control-label">关键字（词）：</label>
+					<div class="controls">
 						<input type="text" class="span input" name="metaKeyword" value="${(site.metaKeyword)!}"> 
 					</div>
 				</div>
-				<div class="formRow">
-					<label>网站描述：</label>
-					<div class="formRight">
+				<div class="control-group">
+					<label class="control-label">网站描述：</label>
+					<div class="controls">
 						<input type="text" class="span input" name="metaDescription" value="${(site.metaDescription)!}"> 
 					</div>
 				</div>
-				<div class="formRow">
-					<label>ICP备案号：</label>
-					<div class="formRight">
+				<div class="control-group">
+					<label class="control-label">ICP备案号：</label>
+					<div class="controls">
 						<input type="text" class="span input" name="icp" value="${(site.icp)!}"> 
 					</div>
 				</div>
-				<div class="formRow">
-					<label>网站底部版权文字：</label>
-					<div class="formRight">
+				<div class="control-group">
+					<label class="control-label">网站底部版权文字：</label>
+					<div class="controls">
 						<input type="text" class="span input" name="copyright" value="${(site.copyright)!}"> 
 					</div>
 				</div>
-				<div class="formRow">
-					<label>统计代码：</label>
-					<div class="formRight">
+				<div class="control-group">
+					<label class="control-label">统计代码：</label>
+					<div class="controls">
 						<textarea rows="3" name="statisticalCode" class="span input same-height-1">${(site.statisticalCode)!}</textarea>
 					</div>
 				</div>
-				<div class="formRow text-center">
+				<div class="text-center">
 					<button class="btn btn-primary" type="submit">保存</button>
 				</div>
 				<div class="clearfix"></div>
@@ -57,16 +58,16 @@
 	</div>
 </div>
 <script>
-$('input,textarea,select').jqBootstrapValidation({
+$('input,textarea,select', '#site-config-form').jqBootstrapValidation({
 	submitSuccess : function($form, event) {
 		event.preventDefault();
 		event.stopPropagation();
 		$form.ajaxSubmit({
 			success : function(response){
-				alert('success');
+				alert('保存成功');
 			},
 			error : function() {
-				alert('error');
+				alert('保存失败');
 			}
 		});
 	}
