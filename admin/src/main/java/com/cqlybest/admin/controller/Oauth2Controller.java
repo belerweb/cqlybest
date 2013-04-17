@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.cqlybest.admin.oauth.QQAuthenticationToken;
 
 @Controller
-public class Oauth2Connector {
+public class Oauth2Controller {
 
   @RequestMapping("/connector/qq.do")
   @ResponseBody

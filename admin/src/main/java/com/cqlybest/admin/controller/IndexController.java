@@ -10,7 +10,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-public class Index {
+public class IndexController {
 
   @RequestMapping("/index.html")
   public String index(HttpServletRequest request, Model model) {
