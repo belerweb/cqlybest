@@ -1,4 +1,4 @@
-package com.cqlybest.admin.oauth;
+package com.cqlybest.common.oauth;
 
 import java.util.Collection;
 import java.util.Collections;
@@ -6,17 +6,17 @@ import java.util.Collections;
 import org.springframework.security.authentication.AbstractAuthenticationToken;
 import org.springframework.security.core.GrantedAuthority;
 
+import com.cqlybest.common.bean.QQUser;
+
 public class QQAuthenticationToken extends AbstractAuthenticationToken {
 
   private static final long serialVersionUID = -7795121296695826713L;
 
-  private String openId;
-  private String accessToken;
+  private QQUser user;
 
-  public QQAuthenticationToken(String openId, String accessToken) {
+  public QQAuthenticationToken(QQUser user) {
     this(Collections.<GrantedAuthority>emptyList());
-    this.openId = openId;
-    this.accessToken = accessToken;
+    this.user = user;
   }
 
   private QQAuthenticationToken(Collection<? extends GrantedAuthority> authorities) {
@@ -26,12 +26,12 @@ public class QQAuthenticationToken extends AbstractAuthenticationToken {
 
   @Override
   public Object getCredentials() {
-    return accessToken;
+    return user.getOpenid();
   }
 
   @Override
   public Object getPrincipal() {
-    return openId;
+    return user;
   }
 
 }

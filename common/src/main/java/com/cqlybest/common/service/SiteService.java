@@ -1,12 +1,12 @@
 package com.cqlybest.common.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Repository;
+import org.springframework.stereotype.Service;
 
 import com.cqlybest.common.bean.Site;
 import com.cqlybest.common.dao.SiteDao;
 
-@Repository
+@Service
 public class SiteService {
 
   private Site cachedSite;

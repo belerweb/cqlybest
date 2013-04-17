@@ -16,8 +16,6 @@ public class IndexController {
   public String index(HttpServletRequest request, Model model) {
     Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
     if (authentication == null || authentication instanceof AnonymousAuthenticationToken) {
-      model.addAttribute("scheme", request.getScheme());
-      model.addAttribute("serverName", request.getServerName());
       return "login";
     }
 

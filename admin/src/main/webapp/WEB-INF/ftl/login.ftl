@@ -35,7 +35,7 @@
 						<div class="pull-left">合作网站账号登录</div>
 						<div class="pull-right">
 							<ul class="social-links">
-								<li class="qq text-center" id="qqLoginBtn"></li>
+								<li class="qq text-center"><a href="${ContextPath}/connector/qq_login.do"><img alt="QQ登录" src="http://qzonestyle.gtimg.cn/qzone/vas/opensns/res/img/Connect_logo_7.png"></a></li>
 							</ul>
 						</div>
 						<div class="clear"></div>
