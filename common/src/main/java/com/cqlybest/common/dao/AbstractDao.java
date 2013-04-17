@@ -8,6 +8,7 @@ import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Criterion;
+import org.hibernate.criterion.Order;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.mybatis.spring.support.SqlSessionDaoSupport;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,7 +19,7 @@ public abstract class AbstractDao<E, I extends Serializable> extends SqlSessionD
   @Autowired
   private SessionFactory sessionFactory;
 
-  private Class<E> entityClass;
+  protected Class<E> entityClass;
 
   protected AbstractDao(Class<E> entityClass) {
     this.entityClass = entityClass;
@@ -43,6 +44,44 @@ public abstract class AbstractDao<E, I extends Serializable> extends SqlSessionD
   public List<E> findByCriteria(Criterion criterion) {
     Criteria criteria = getCurrentSession().createCriteria(entityClass);
     criteria.add(criterion);
+    return criteria.list();
+  }
+
+  public List<E> findByCriteria(Order order) {
+    Criteria criteria = getCurrentSession().createCriteria(entityClass);
+    criteria.addOrder(order);
+    return criteria.list();
+  }
+
+  public List<E> findByCriteria(Criterion criterion, Order order) {
+    Criteria criteria = getCurrentSession().createCriteria(entityClass);
+    criteria.add(criterion);
+    criteria.addOrder(order);
+    return criteria.list();
+  }
+
+  public List<E> findByCriteria(Criterion criterion, int page, int pageSize) {
+    Criteria criteria = getCurrentSession().createCriteria(entityClass);
+    criteria.add(criterion);
+    criteria.setFirstResult((Math.max(page, 1) - 1) * pageSize);
+    criteria.setMaxResults(pageSize);
+    return criteria.list();
+  }
+
+  public List<E> findByCriteria(Order order, int page, int pageSize) {
+    Criteria criteria = getCurrentSession().createCriteria(entityClass);
+    criteria.addOrder(order);
+    criteria.setFirstResult((Math.max(page, 1) - 1) * pageSize);
+    criteria.setMaxResults(pageSize);
+    return criteria.list();
+  }
+
+  public List<E> findByCriteria(Criterion criterion, Order order, int page, int pageSize) {
+    Criteria criteria = getCurrentSession().createCriteria(entityClass);
+    criteria.add(criterion);
+    criteria.addOrder(order);
+    criteria.setFirstResult((Math.max(page, 1) - 1) * pageSize);
+    criteria.setMaxResults(pageSize);
     return criteria.list();
   }
 
