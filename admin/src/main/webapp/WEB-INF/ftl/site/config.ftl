@@ -4,7 +4,7 @@
 	<div class="grid">
 		<div class="grid-title">
 			<div class="pull-left">
-				<div class="icon-title"><i class="icon-bookmark"></i></div>
+				<div class="icon-title"><i class="icon-cogs"></i></div>
 				<span>网站配置</span> 
 				<div class="clearfix"></div>
 			</div>
