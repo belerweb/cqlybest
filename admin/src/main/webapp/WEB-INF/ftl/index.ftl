@@ -59,14 +59,14 @@
 			<!--BEGIN SIDEBAR-->
 			<div id="menu" role="navigation">
 				<ul class="main-menu">
-					<li data-mg="site"><a href="#mg=site"><i class="tables"></i> 网站</a></li>
-					<li data-mg="user"><a href="#mg=user"><i class="tables"></i> 用户</a></li>
+					<li data-m="site"><a href="#m=site"><i class="tables"></i> 网站</a></li>
+					<li data-m="user"><a href="#m=user"><i class="tables"></i> 用户</a></li>
 				</ul>
 				<ul class="additional-menu">
-					<li class="hide" data-mg="site" data-mu="${ContextPath}/site/config.html"><a href="#mg=site;mu=${ContextPath}/site/config.html"><i class="icon-cogs"></i> 网站配置</a></li>
-					<li class="hide" data-mg="site" data-mu="${ContextPath}/product/list.html"><a href="#mg=site;mu=${ContextPath}/product/list.html"><i class="icon-road"></i> 旅游产品</a></li>
-					<li class="hide" data-mg="user" data-mu="${ContextPath}/user/customers.html"><a href="#mg=user;mu=${ContextPath}/site/customers.html"><i class="icon-user"></i> 客户</a></li>
-					<li class="hide" data-mg="user" data-mu="${ContextPath}/user/administrators.html"><a href="#mg=user;mu=${ContextPath}/site/administrators.html"><i class="icon-user-md"></i> 管理员</a></li>
+					<li class="hide" data-m="site" data-n="site.config"><a href="#m=site;n=site.config;u=${ContextPath}/site/config.html;t=#main"><i class="icon-cogs"></i> 网站配置</a></li>
+					<li class="hide" data-m="site" data-n="product.list"><a href="#m=site;n=product.list;u=${ContextPath}/product/list.html;t=#main"><i class="icon-road"></i> 旅游产品</a></li>
+					<li class="hide" data-m="user" data-n="user.customers"><a href="#m=user;n=user.customers;u=${ContextPath}/site/customers.html;t=#main"><i class="icon-user"></i> 客户</a></li>
+					<li class="hide" data-m="user" data-n="user.administrators"><a href="#m=user;n=user.administrators;u=${ContextPath}/site/administrators.html;t=#main"><i class="icon-user-md"></i> 管理员</a></li>
 				</ul>
 				<div class="clearfix"></div>
 			</div>

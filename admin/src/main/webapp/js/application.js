@@ -113,15 +113,19 @@ $(window).hashchange(function() {
 			var kv = pa[i].split('=');
 			param[kv[0]] = kv[1];
 		}
-		if (param.mg) {
+		if (param.m) {
+			// 主菜单
 			$('#menu .main-menu > li').removeClass('active');
-			$('#menu .main-menu > li[data-mg=' + param.mg + ']').addClass('active');
+			$('#menu .main-menu > li[data-m=' + param.m + ']').addClass('active');
 			$('#menu .additional-menu > li').hide().removeClass('active');
-			$('#menu .additional-menu > li[data-mg=' + param.mg + ']').show();
-			if (param.mu) {
-				$('#menu .additional-menu > li[data-mu="' + param.mu + '"]').addClass('active');
-				$('#main').load(param.mu);
+			$('#menu .additional-menu > li[data-m=' + param.m + ']').show();
+			if (param.n) {
+				// 子菜单
+				$('#menu .additional-menu > li[data-n="' + param.n + '"]').addClass('active');
 			}
+		}
+		if (param.u && param.t) {
+			$(t).load(param.u);
 		}
 	}
 });
