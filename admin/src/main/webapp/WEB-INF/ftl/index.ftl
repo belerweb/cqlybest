@@ -24,6 +24,7 @@
 		<![endif]-->
 		<script language="JavaScript">
 			if(navigator.userAgent.indexOf("Firefox") >= 0) document.write("<link rel='stylesheet' href='${ContextPath}/css/moz.css' type='text/css'>");
+			window.UEDITOR_HOME_URL = '${ContextPath}/js/ueditor/';
 		</script>
 	</head>
 	<body>
@@ -73,6 +74,7 @@
 			<!--SIDEBAR END-->
 			<!--BEGIN MAIN CONTENT-->
 			<div id="main" role="main">
+				<div class="block"><div id="mb"></div><div>
 			</div>
 			<!--MAIN CONTENT END-->
 		</div>
@@ -83,6 +85,8 @@
 		<script src="${ContextPath}/js/jquery.form.js"></script>
 		<script src="${ContextPath}/js/jquery.ba-hashchange.min.js"></script>
 		<script src="${ContextPath}/js/jquery.dataTables.min.js"></script>
+		<script src="${ContextPath}/js/ueditor/editor_config.js"></script>
+		<script src="${ContextPath}/js/ueditor/editor_all.js"></script>
 		<script src="${ContextPath}/js/application.js"></script>
 	</body>
 </html>

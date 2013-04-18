@@ -1,10 +1,10 @@
 <#assign ContextPath=springMacroRequestContext.getContextPath() />
-<div class="block">
+<div>
 	<div class="clearfix"></div>
 	<div class="pagetitle">
 		<h1>旅游产品</h1>
 		<div class="btn-group">
-			<button class="btn btn-primary">增加新产品</button>
+			<a href="#m=site;n=product.list;u=${ContextPath}/product/add.html;t=#main" class="btn btn-primary">增加新产品</a>
 		</div>
 		<div class="clearfix"></div>
 		<hr>
