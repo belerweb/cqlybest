@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping package="com.cqlybest.common.bean">
+    <class name="Product" table="PRODUCT">
+        <id name="id" column="ID">
+            <generator class="native" />
+        </id>
+        <property name="name" column="NAME" />
+        <property name="days" column="DAYS" />
+        <property name="daysUnit" column="DAYS_UNIT" />
+        <property name="description" column="DESCRIPTION" />
+        <property name="price" column="PRICE" />
+        <property name="priceDescription" column="PRICE_DESCRIPTION" />
+        <property name="effectiveDate" column="EFFECTIVE_DATE" />
+        <property name="expiryDate" column="EXPIRY_DATE" />
+        <property name="departureDate" column="DEPARTURE_DATE" />
+        <property name="published" column="PUBLISHED" />
+        <property name="lastUpdate" column="LAST_UPDATE" />
+    </class>
+</hibernate-mapping>

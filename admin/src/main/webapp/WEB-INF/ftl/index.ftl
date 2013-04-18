@@ -63,9 +63,13 @@
 			<div id="menu" role="navigation">
 				<ul class="main-menu">
 					<li data-mg="site"><a href="#mg=site"><i class="general"></i> 网站</a></li>
+					<li data-mg="user"><a href="#mg=user"><i class="general"></i> 用户</a></li>
 				</ul>
 				<ul class="additional-menu">
 					<li class="hide" data-mg="site" data-mu="${ContextPath}/site/config.html"><a href="#mg=site;mu=${ContextPath}/site/config.html"><i class="icon-home"></i> 网站配置</a></li>
+					<li class="hide" data-mg="site" data-mu="${ContextPath}/site/products.html"><a href="#mg=site;mu=${ContextPath}/site/products.html"><i class="icon-home"></i> 旅游产品</a></li>
+					<li class="hide" data-mg="user" data-mu="${ContextPath}/user/customers.html"><a href="#mg=user;mu=${ContextPath}/site/customers.html"><i class="icon-home"></i> 客户</a></li>
+					<li class="hide" data-mg="user" data-mu="${ContextPath}/user/administrators.html"><a href="#mg=user;mu=${ContextPath}/site/administrators.html"><i class="icon-home"></i> 管理员</a></li>
 				</ul>
 				<div class="clearfix"></div>
 			</div>
