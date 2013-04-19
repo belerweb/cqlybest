@@ -9,6 +9,7 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Criterion;
 import org.hibernate.criterion.Order;
+import org.hibernate.criterion.Projections;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.mybatis.spring.support.SqlSessionDaoSupport;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,6 +34,12 @@ public abstract class AbstractDao<E, I extends Serializable> extends SqlSessionD
     getCurrentSession().delete(e);
   }
 
+  public Integer total() {
+    Criteria criteria = getCurrentSession().createCriteria(entityClass);
+    criteria.setProjection(Projections.rowCount());
+    return (Integer) criteria.uniqueResult();
+  }
+
   public List<E> findAll() {
     return getCurrentSession().createCriteria(entityClass).list();
   }
@@ -41,26 +48,26 @@ public abstract class AbstractDao<E, I extends Serializable> extends SqlSessionD
     return (E) getCurrentSession().get(entityClass, id);
   }
 
-  public List<E> findByCriteria(Criterion criterion) {
+  public List<E> find(Criterion criterion) {
     Criteria criteria = getCurrentSession().createCriteria(entityClass);
     criteria.add(criterion);
     return criteria.list();
   }
 
-  public List<E> findByCriteria(Order order) {
+  public List<E> find(Order order) {
     Criteria criteria = getCurrentSession().createCriteria(entityClass);
     criteria.addOrder(order);
     return criteria.list();
   }
 
-  public List<E> findByCriteria(Criterion criterion, Order order) {
+  public List<E> find(Criterion criterion, Order order) {
     Criteria criteria = getCurrentSession().createCriteria(entityClass);
     criteria.add(criterion);
     criteria.addOrder(order);
     return criteria.list();
   }
 
-  public List<E> findByCriteria(Criterion criterion, int page, int pageSize) {
+  public List<E> find(Criterion criterion, int page, int pageSize) {
     Criteria criteria = getCurrentSession().createCriteria(entityClass);
     criteria.add(criterion);
     criteria.setFirstResult((Math.max(page, 1) - 1) * pageSize);
@@ -68,7 +75,7 @@ public abstract class AbstractDao<E, I extends Serializable> extends SqlSessionD
     return criteria.list();
   }
 
-  public List<E> findByCriteria(Order order, int page, int pageSize) {
+  public List<E> find(Order order, int page, int pageSize) {
     Criteria criteria = getCurrentSession().createCriteria(entityClass);
     criteria.addOrder(order);
     criteria.setFirstResult((Math.max(page, 1) - 1) * pageSize);
@@ -76,13 +83,39 @@ public abstract class AbstractDao<E, I extends Serializable> extends SqlSessionD
     return criteria.list();
   }
 
-  public List<E> findByCriteria(Criterion criterion, Order order, int page, int pageSize) {
+  public List<E> find(Criterion criterion, Order order, int page, int pageSize) {
     Criteria criteria = getCurrentSession().createCriteria(entityClass);
     criteria.add(criterion);
     criteria.addOrder(order);
     criteria.setFirstResult((Math.max(page, 1) - 1) * pageSize);
     criteria.setMaxResults(pageSize);
     return criteria.list();
+  }
+
+  public Integer max(String prop) {
+    Criteria criteria = getCurrentSession().createCriteria(entityClass);
+    criteria.setProjection(Projections.max(prop));
+    return (Integer) criteria.uniqueResult();
+  }
+
+  public Integer max(String prop, Criterion criterion) {
+    Criteria criteria = getCurrentSession().createCriteria(entityClass);
+    criteria.setProjection(Projections.max(prop));
+    criteria.add(criterion);
+    return (Integer) criteria.uniqueResult();
+  }
+
+  public Integer min(String prop) {
+    Criteria criteria = getCurrentSession().createCriteria(entityClass);
+    criteria.setProjection(Projections.min(prop));
+    return (Integer) criteria.uniqueResult();
+  }
+
+  public Integer min(String prop, Criterion criterion) {
+    Criteria criteria = getCurrentSession().createCriteria(entityClass);
+    criteria.setProjection(Projections.min(prop));
+    criteria.add(criterion);
+    return (Integer) criteria.uniqueResult();
   }
 
   public Session getCurrentSession() {

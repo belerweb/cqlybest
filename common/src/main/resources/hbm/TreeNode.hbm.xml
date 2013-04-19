@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping package="com.cqlybest.common.bean">
+    <class name="TreeNode" table="TREE_NODE">
+        <id name="id" column="ID">
+            <generator class="native" />
+        </id>
+        <property name="name" column="NAME" />
+        <property name="lft" column="LFT" />
+        <property name="rgt" column="RGT" />
+    </class>
+</hibernate-mapping>

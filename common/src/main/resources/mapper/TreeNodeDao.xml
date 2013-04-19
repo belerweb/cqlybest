@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="TreeNodeDao">
+
+    <update id="updateLft" parameterType="map">
+    <![CDATA[
+        UPDATE TREE_NODE SET LFT = LFT + #{increment} WHERE LFT > #{number}
+    ]]>
+    </update>
+
+    <update id="updateRgt" parameterType="map">
+    <![CDATA[
+        UPDATE TREE_NODE SET RGT = RGT + #{increment} WHERE RGT > #{number}
+    ]]>
+    </update>
+
+    <delete id="delete" parameterType="TreeNode">
+    <![CDATA[
+        DELETE FROM TREE_NODE WHERE lft >= #{lft} AND rgt <= #{rgt}
+    ]]>
+    </delete>
+
+</mapper>
