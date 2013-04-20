@@ -1,17 +1,19 @@
 package com.cqlybest.common.dao;
 
+import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.springframework.stereotype.Repository;
+import com.cqlybest.common.bean.DestinaionDao;
 
-import com.cqlybest.common.bean.TreeNode;
+public abstract class TreeNodeDao<T extends DestinaionDao, I extends Serializable>
+    extends AbstractDao<T, I> {
 
-@Repository
-public class TreeNodeDao extends AbstractDao<TreeNode, Integer> {
+  private String tableName;
 
-  protected TreeNodeDao() {
-    super(TreeNode.class);
+  protected TreeNodeDao(Class<T> entityClass, String tableName) {
+    super(entityClass);
+    this.tableName = tableName;
   }
 
 
@@ -23,6 +25,7 @@ public class TreeNodeDao extends AbstractDao<TreeNode, Integer> {
    */
   public void updateLft(int number, int increment) {
     Map<String, Object> param = new HashMap<String, Object>();
+    param.put("table", tableName);
     param.put("number", number);
     param.put("increment", increment);
     getSqlSession().update("TreeNodeDao.updateLft", param);;
@@ -37,13 +40,23 @@ public class TreeNodeDao extends AbstractDao<TreeNode, Integer> {
    */
   public void updateRgt(int number, int increment) {
     Map<String, Object> param = new HashMap<String, Object>();
+    param.put("table", tableName);
     param.put("number", number);
     param.put("increment", increment);
     getSqlSession().update("TreeNodeDao.updateRgt", param);;
   }
 
-  public void delete(TreeNode treeNode) {
-    getSqlSession().delete("TreeNodeDao.delete", treeNode);
+  /**
+   * 删除一个节点及其所有子节点
+   * 
+   * @param treeNode
+   */
+  public void delete(DestinaionDao treeNode) {
+    Map<String, Object> param = new HashMap<String, Object>();
+    param.put("table", tableName);
+    param.put("lft", treeNode.getLft());
+    param.put("rgt", treeNode.getRgt());
+    getSqlSession().delete("TreeNodeDao.delete", param);
   }
 
 }

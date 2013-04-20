@@ -12,9 +12,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.cqlybest.common.bean.TreeNode;
+import com.cqlybest.common.bean.Destination;
+import com.cqlybest.common.service.DestinationService;
 import com.cqlybest.common.service.JsonService;
-import com.cqlybest.common.service.TreeNodeService;
 
 @Controller
 public class DestinationController {
@@ -23,28 +23,28 @@ public class DestinationController {
   private JsonService jsonService;
 
   @Autowired
-  private TreeNodeService treeNodeService;
+  private DestinationService destinationService;
 
   @RequestMapping("/data/dict/destination.html")
   public void destination(Model model) throws JsonGenerationException, JsonMappingException,
       IOException {
-    model.addAttribute("tree", jsonService.writeValueAsString(treeNodeService.getTree()));
+    model.addAttribute("tree", jsonService.writeValueAsString(destinationService.getTree()));
   }
 
   @RequestMapping(value = "/data/dict/add_dest.html", method = RequestMethod.POST)
   @ResponseBody
-  public void addDict(@RequestParam Integer pid, TreeNode node) {
+  public void addDict(@RequestParam Integer pid, Destination node) {
     if (pid == 0) {
-      treeNodeService.add(node);
+      destinationService.add(node);
     } else {
-      treeNodeService.add(pid, node);
+      destinationService.add(pid, node);
     }
   }
 
   @RequestMapping(value = "/data/dict/del_dest.html", method = RequestMethod.POST)
   @ResponseBody
   public void delDict(@RequestParam Integer id) {
-    treeNodeService.delete(id);
+    destinationService.delete(id);
   }
 
 }

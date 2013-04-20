@@ -1,6 +1,6 @@
 package com.cqlybest.common.bean;
 
-public class TreeNode {
+public class DestinaionDao {
 
   private Integer id;
   private String name;

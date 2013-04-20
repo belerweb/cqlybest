@@ -6,19 +6,19 @@
 
     <update id="updateLft" parameterType="map">
     <![CDATA[
-        UPDATE TREE_NODE SET LFT = LFT + #{increment} WHERE LFT > #{number}
+        UPDATE ${table} SET LFT = LFT + #{increment} WHERE LFT > #{number}
     ]]>
     </update>
 
     <update id="updateRgt" parameterType="map">
     <![CDATA[
-        UPDATE TREE_NODE SET RGT = RGT + #{increment} WHERE RGT > #{number}
+        UPDATE ${table} SET RGT = RGT + #{increment} WHERE RGT > #{number}
     ]]>
     </update>
 
-    <delete id="delete" parameterType="TreeNode">
+    <delete id="delete" parameterType="map">
     <![CDATA[
-        DELETE FROM TREE_NODE WHERE lft >= #{lft} AND rgt <= #{rgt}
+        DELETE FROM ${table} WHERE lft >= #{lft} AND rgt <= #{rgt}
     ]]>
     </delete>
 
