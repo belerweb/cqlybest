@@ -7,7 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.cqlybest.common.bean.DestinaionDao;
+import com.cqlybest.common.bean.TreeNode;
 import com.cqlybest.common.bean.Destination;
 import com.cqlybest.common.dao.DestinationDao;
 
@@ -31,7 +31,7 @@ public class DestinationService {
 
   @Transactional(readOnly = false)
   public void add(Integer pid, Destination node) {
-    DestinaionDao parent = destinationDao.findById(pid);
+    TreeNode parent = destinationDao.findById(pid);
     Integer parentRgt = parent.getRgt();
     destinationDao.updateLft(parentRgt, 2);
     destinationDao.updateRgt(parentRgt - 1, 2);
@@ -42,7 +42,7 @@ public class DestinationService {
 
   @Transactional(readOnly = false)
   public void delete(Integer id) {
-    DestinaionDao node = destinationDao.findById(id);
+    TreeNode node = destinationDao.findById(id);
     Integer rgt = node.getRgt();
     int increment = -(rgt - node.getLft() + 1);
     destinationDao.delete(node);

@@ -1,6 +1,12 @@
 package com.cqlybest.common.bean;
 
-public class DestinaionDao {
+/**
+ * 树结构节点
+ * 
+ * @author jun
+ * 
+ */
+public class TreeNode {
 
   private Integer id;
   private String name;

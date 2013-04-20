@@ -4,9 +4,9 @@ import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
 
-import com.cqlybest.common.bean.DestinaionDao;
+import com.cqlybest.common.bean.TreeNode;
 
-public abstract class TreeNodeDao<T extends DestinaionDao, I extends Serializable>
+public abstract class TreeNodeDao<T extends TreeNode, I extends Serializable>
     extends AbstractDao<T, I> {
 
   private String tableName;
@@ -51,7 +51,7 @@ public abstract class TreeNodeDao<T extends DestinaionDao, I extends Serializabl
    * 
    * @param treeNode
    */
-  public void delete(DestinaionDao treeNode) {
+  public void delete(TreeNode treeNode) {
     Map<String, Object> param = new HashMap<String, Object>();
     param.put("table", tableName);
     param.put("lft", treeNode.getLft());
