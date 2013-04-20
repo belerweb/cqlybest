@@ -1,17 +1,20 @@
-package com.cqlybest.admin.service;
+package com.cqlybest.common.service;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import org.springframework.stereotype.Service;
+import org.springframework.stereotype.Component;
 
-@Service
-public class UserService implements UserDetailsService {
+@Component
+public class LoginComponent implements UserDetailsService {
+
+  @Autowired
+  private UserService userService;
 
   @Override
   public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-    // TODO implemnts
-    return null;
+    return userService.loadUserByUsername(username);
   }
 
 }

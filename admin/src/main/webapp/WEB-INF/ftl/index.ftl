@@ -39,8 +39,8 @@
 				<div class="dropdown left profile">
 					<a class="dropdown-toggle" data-toggle="dropdown" href="#">
 						<!-- span class="double-spacer"></span -->
-						<div class="profile-avatar"><img src="${(userInfo.avatar.avatarURL50)!}" alt=""></div>
-						<div class="profile-username"><span>你好，</span> ${(userInfo.nickname)!}！</div>
+						<div class="profile-avatar"><img src="${(user.avatar)!}" alt=""></div>
+						<div class="profile-username"><span>你好，</span> ${(user.nickname)!'朋友'}！</div>
 						<div class="profile-caret"> <span class="caret"></span></div>
 						<span class="double-spacer"></span>
 					</a>

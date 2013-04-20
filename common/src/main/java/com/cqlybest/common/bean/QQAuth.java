@@ -1,13 +1,8 @@
 package com.cqlybest.common.bean;
 
-import java.util.Collection;
 import java.util.Date;
 
-import org.springframework.security.core.GrantedAuthority;
-
-public class QQUser implements User {
-
-  private static final long serialVersionUID = -6961457379517207508L;
+public class QQAuth {
 
   private String openid;
   private String token;
@@ -15,47 +10,12 @@ public class QQUser implements User {
   private Date createdTime;
   private Date lastUpdate;
 
-  public QQUser() {}
+  public QQAuth() {}
 
-  public QQUser(String openid, String token, long expireIn) {
+  public QQAuth(String openid, String token, long expireIn) {
     this.openid = openid;
     this.token = token;
     this.expireIn = expireIn;
-  }
-
-  @Override
-  public Collection<? extends GrantedAuthority> getAuthorities() {
-    return null;
-  }
-
-  @Override
-  public String getPassword() {
-    return null;
-  }
-
-  @Override
-  public String getUsername() {
-    return null;
-  }
-
-  @Override
-  public boolean isAccountNonExpired() {
-    return true;
-  }
-
-  @Override
-  public boolean isAccountNonLocked() {
-    return true;
-  }
-
-  @Override
-  public boolean isCredentialsNonExpired() {
-    return true;
-  }
-
-  @Override
-  public boolean isEnabled() {
-    return true;
   }
 
   public String getOpenid() {

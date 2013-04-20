@@ -26,7 +26,7 @@ public abstract class AbstractDao<E, I extends Serializable> extends SqlSessionD
     this.entityClass = entityClass;
   }
 
-  public void saveOrUpdate(E e) {
+  public void saveOrUpdate(Object e) {
     getCurrentSession().saveOrUpdate(e);
   }
 
@@ -46,6 +46,10 @@ public abstract class AbstractDao<E, I extends Serializable> extends SqlSessionD
 
   public E findById(I id) {
     return (E) getCurrentSession().get(entityClass, id);
+  }
+
+  public <T, K extends Serializable> T findById(Class<T> cls, K id) {
+    return (T) getCurrentSession().get(cls, id);
   }
 
   public List<E> find(Criterion criterion) {
@@ -90,6 +94,13 @@ public abstract class AbstractDao<E, I extends Serializable> extends SqlSessionD
     criteria.setFirstResult((Math.max(page, 1) - 1) * pageSize);
     criteria.setMaxResults(pageSize);
     return criteria.list();
+  }
+
+  public E findOne(Criterion criterion) {
+    Criteria criteria = getCurrentSession().createCriteria(entityClass);
+    criteria.add(criterion);
+    criteria.setMaxResults(1);
+    return (E) criteria.uniqueResult();
   }
 
   public Integer max(String prop) {

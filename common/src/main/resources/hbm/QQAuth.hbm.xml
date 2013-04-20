@@ -4,7 +4,7 @@
         "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 
 <hibernate-mapping package="com.cqlybest.common.bean">
-    <class name="QQUser" table="QQ_USER">
+    <class name="QQAuth" table="QQ_AUTH">
         <id name="openid" column="OPENID">
             <generator class="assigned" />
         </id>
