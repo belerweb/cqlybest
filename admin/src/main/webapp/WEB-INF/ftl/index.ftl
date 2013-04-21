@@ -67,8 +67,8 @@
 					<li class="hide" data-m="site" data-n="site.config"><a href="#m=site;n=site.config;u=${ContextPath}/site/config.html;t=#main"><i class="icon-cogs"></i> 网站配置</a></li>
 					<li class="hide" data-m="site" data-n="product.list"><a href="#m=site;n=product.list;u=${ContextPath}/product/list.html;t=#main"><i class="icon-road"></i> 旅游产品</a></li>
 					<li class="hide" data-m="site" data-n="data.dict"><a href="#m=site;n=data.dict;u=${ContextPath}/data/dict.html;t=#main"><i class="icon-book"></i> 数据字典</a></li>
-					<li class="hide" data-m="user" data-n="user.customers"><a href="#m=user;n=user.customers;u=${ContextPath}/site/customers.html;t=#main"><i class="icon-user"></i> 客户</a></li>
-					<li class="hide" data-m="user" data-n="user.administrators"><a href="#m=user;n=user.administrators;u=${ContextPath}/site/administrators.html;t=#main"><i class="icon-user-md"></i> 管理员</a></li>
+					<li class="hide" data-m="user" data-n="user.customers"><a href="#m=user;n=user.customers;u=${ContextPath}/customer/list.html;t=#main"><i class="icon-user"></i> 客户</a></li>
+					<li class="hide" data-m="user" data-n="user.administrators"><a href="#m=user;n=user.administrators;u=${ContextPath}/administrator/list.html;t=#main"><i class="icon-user-md"></i> 管理员</a></li>
 				</ul>
 				<div class="clearfix"></div>
 			</div>

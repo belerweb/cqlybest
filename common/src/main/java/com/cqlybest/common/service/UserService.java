@@ -1,6 +1,7 @@
 package com.cqlybest.common.service;
 
 import java.util.Date;
+import java.util.List;
 
 import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.cqlybest.common.bean.LoginUser;
 import com.cqlybest.common.bean.QQAuth;
+import com.cqlybest.common.bean.Role;
 import com.cqlybest.common.dao.UserDao;
 
 @Service
@@ -19,6 +21,10 @@ public class UserService {
 
   @Autowired
   private UserDao userDao;
+
+  public void addUser(LoginUser user) {
+    userDao.saveOrUpdate(user);
+  }
 
   public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
     String usernameType = null;
@@ -67,6 +73,10 @@ public class UserService {
       userDao.saveOrUpdate(user);
     }
     return user;
+  }
+
+  public List<LoginUser> getUserList(Role role, int page, int pageSize) {
+    return userDao.findUser(role.getRole(), page, pageSize);
   }
 
 }

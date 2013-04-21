@@ -2,6 +2,7 @@ package com.cqlybest.common.bean;
 
 import java.util.Collection;
 import java.util.Collections;
+import java.util.Set;
 import java.util.UUID;
 
 import org.springframework.security.core.GrantedAuthority;
@@ -26,6 +27,8 @@ public class LoginUser implements UserDetails {
   private String qqOpenid;// QQ openid
   private QQAuth qqAuth;// QQ 授权
   private SinaAuth sinaAuth;// 新浪授权
+
+  private Set<Role> roles;// 角色
 
   public LoginUser() {}
 
@@ -129,6 +132,14 @@ public class LoginUser implements UserDetails {
 
   public void setSinaAuth(SinaAuth sinaAuth) {
     this.sinaAuth = sinaAuth;
+  }
+
+  public Set<Role> getRoles() {
+    return roles;
+  }
+
+  public void setRoles(Set<Role> roles) {
+    this.roles = roles;
   }
 
   @Override
