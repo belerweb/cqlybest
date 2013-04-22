@@ -26,6 +26,7 @@ public class DestinationService {
     }
     node.setLft(maxRgt + 1);
     node.setRgt(maxRgt + 2);
+    node.setPid(0);
     destinationDao.saveOrUpdate(node);
   }
 
@@ -37,6 +38,7 @@ public class DestinationService {
     destinationDao.updateRgt(parentRgt - 1, 2);
     node.setLft(parentRgt);
     node.setRgt(parentRgt + 1);
+    node.setPid(pid);
     destinationDao.saveOrUpdate(node);
   }
 

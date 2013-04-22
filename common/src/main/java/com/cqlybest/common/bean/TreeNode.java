@@ -12,6 +12,8 @@ public class TreeNode {
   private String name;
   private Integer lft;
   private Integer rgt;
+  private Integer pid;
+
 
   public Integer getId() {
     return id;
@@ -43,6 +45,14 @@ public class TreeNode {
 
   public void setRgt(Integer rgt) {
     this.rgt = rgt;
+  }
+
+  public Integer getPid() {
+    return pid;
+  }
+
+  public void setPid(Integer pid) {
+    this.pid = pid;
   }
 
 }

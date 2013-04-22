@@ -11,5 +11,6 @@
         <property name="name" column="NAME" />
         <property name="lft" column="LFT" />
         <property name="rgt" column="RGT" />
+        <property name="pid" column="PID" />
     </class>
 </hibernate-mapping>
