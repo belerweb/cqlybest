@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping package="com.cqlybest.common.bean">
+    <class name="Advertorial" table="ADVERTORIAL">
+        <id name="id" column="ID">
+            <generator class="native" />
+        </id>
+        <property name="title" column="TITLE" />
+        <property name="summary" column="SUMMARY" />
+        <property name="content" column="CONTENT" />
+        <set name="histories">
+            <key column="AID" />
+            <one-to-many class="AdvertorialHistrory" />
+        </set>
+    </class>
+</hibernate-mapping>
