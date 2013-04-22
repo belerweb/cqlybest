@@ -9,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.cqlybest.common.bean.LoginUser;
@@ -40,8 +41,12 @@ public class AdministratorController {
   }
 
   @RequestMapping(value = "/administrator/list.html", method = RequestMethod.GET)
-  public void list(Model model) {
-    model.addAttribute("admins", userService.getUserList(Role.ADMIN, 0, 10));
+  public void list(@RequestParam(defaultValue = "1") Integer page, Model model) {
+    Integer pageSize = 10;
+    model.addAttribute("page", page);
+    model.addAttribute("pageSize", pageSize);
+    model.addAttribute("total", userService.getUserListTotal(Role.ADMIN));
+    model.addAttribute("admins", userService.getUserList(Role.ADMIN, page, pageSize));
   }
 
   @RequestMapping(value = "/administrator/modify.html", method = RequestMethod.GET)

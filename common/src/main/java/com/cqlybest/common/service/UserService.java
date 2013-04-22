@@ -22,6 +22,7 @@ public class UserService {
   @Autowired
   private UserDao userDao;
 
+  @Transactional(readOnly = false)
   public void addUser(LoginUser user) {
     userDao.saveOrUpdate(user);
   }
@@ -73,6 +74,10 @@ public class UserService {
       userDao.saveOrUpdate(user);
     }
     return user;
+  }
+
+  public Long getUserListTotal(Role role) {
+    return userDao.findUserTotal(role.getRole());
   }
 
   public List<LoginUser> getUserList(Role role, int page, int pageSize) {

@@ -56,6 +56,9 @@
 	</div>
 </div>
 <script>
+$('#admin-check').change(function(){
+	$('input[id^=admin-check-]').attr('checked', this.checked);
+});
 $('#admin-list-table').dataTable({
 	oLanguage:{
 		oPaginate: {
@@ -65,14 +68,24 @@ $('#admin-list-table').dataTable({
 			sPrevious: '上一页'
 		}
 	},
-	iDeferLoading: 10000,
-	iDisplayStart: 0,
-	iDisplayLength: 20,
+	iDeferLoading: ${total},
+	iDisplayStart: ${(page-1)*pageSize},
+	iDisplayLength: ${pageSize},
 	sPaginationType: 'full_numbers',
 	bLengthChange: false,
 	bFilter: false,
 	bInfo: false,
 	bSort: false,
-	bServerSide: true
+	bServerSide: true,
+	fnServerData: function (sSource, aoData, fnCallback, oSettings) {
+		var p = {};
+		$.each(aoData, function(i, obj){
+			p[obj.name] = obj.value;
+		});
+		var q = {};
+		q.page = p.iDisplayStart / p.iDisplayLength + 1;
+		var u = '${ContextPath}/administrator/list.html?' + $.param(q);
+		location.hash = '#m=user;n=user.administrators;u=' + encodeURIComponent(encodeURIComponent(u)) + ';t=#main';
+	}
 });
 </script>

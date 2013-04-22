@@ -12,17 +12,18 @@ public class Role implements GrantedAuthority {
 
   private static final long serialVersionUID = -7470701733684274372L;
 
-  public static final Role ADMIN = new Role("ROLE_ADMIN");
-  public static final Role CUSTOMER = new Role("ROLE_CUSTOMER");
+  public static final Role ADMIN = new Role("ROLE_ADMIN", "管理员");
+  public static final Role CUSTOMER = new Role("ROLE_CUSTOMER", "客户");
 
   private String role;
   private String name;
 
   public Role() {}
 
-  public Role(String role) {
+  public Role(String role, String name) {
     Assert.hasText(role, "A granted authority textual representation is required");
     this.role = role;
+    this.name = name;
   }
 
   public String getRole() {

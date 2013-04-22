@@ -27,17 +27,18 @@ public abstract class AbstractDao<E, I extends Serializable> extends SqlSessionD
   }
 
   public void saveOrUpdate(Object e) {
-    getCurrentSession().saveOrUpdate(e);
+    Session currentSession = getCurrentSession();
+    currentSession.saveOrUpdate(e);
   }
 
   public void delete(E e) {
     getCurrentSession().delete(e);
   }
 
-  public Integer total() {
+  public Long total() {
     Criteria criteria = getCurrentSession().createCriteria(entityClass);
     criteria.setProjection(Projections.rowCount());
-    return (Integer) criteria.uniqueResult();
+    return (Long) criteria.uniqueResult();
   }
 
   public List<E> findAll() {

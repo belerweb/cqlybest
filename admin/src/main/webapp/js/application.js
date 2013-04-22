@@ -136,7 +136,7 @@ $(window).hashchange(function() {
 			}
 		}
 		if (param.u && param.t) {
-			$(param.t == '#main' ? '#mb' : param.t).load(param.u);
+			$(param.t == '#main' ? '#mb' : param.t).load(decodeURIComponent(param.u));
 		}
 	}
 });
