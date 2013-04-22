@@ -52,7 +52,7 @@
 				<div class="control-group">
 					<label class="control-label">确认密码：</label>
 					<div class="controls">
-						<input type="password" class="span input" name="repassword" data-validation-match-match="password" data-validation-minlength-message="确认密码与密码不一样"> 
+						<input type="password" class="span input" name="repassword" data-validation-match-match="password" data-validation-match-message="确认密码与密码不一样"> 
 					</div>
 				</div>
 				<div class="text-center">
