@@ -15,50 +15,109 @@
 		</div>
 		<!-- novalidate -->
 		<form id="product-add-form" action="${ContextPath}/product/add.html" method="post" class="form-horizontal grid-content">
-			<div class="row-fluid">
-				<div class="span6">
-					<div class="control-group">
-						<label class="control-label">产品名称：</label>
-						<div class="controls">
-							<input type="text" class="span" name="name" value="" required="true">
-						</div>
-					</div>
-					<div class="control-group">
-						<label class="control-label">行程天数：</label>
-						<div class="controls">
-							<input type="text" class="span6" name="days" value="1">
-							<select name="daysUnit" class="span6">
-								<option value="d">天</option>
-								<option value="m">月</option>
-								<option value="y">年</option>
-							</select>
-						</div>
-					</div>
-					<div class="control-group">
-						<label class="control-label">价格：</label>
-						<div class="controls">
-							<div class="input-prepend">
-								<span class="add-on">￥</span>
-								<input type="text" class="span" name="price">
+			<div class="tabbable">
+				<ul class="nav nav-tabs">
+					<li class="active"><a href="javascript:void(0);" data-toggle="tab" data-target="#product-base-tab">基本信息</a></li>
+					<li><a href="javascript:void(0);" data-toggle="tab" data-target="#product-detail-tab">介绍/描述</a></li>
+					<li><a href="javascript:void(0);" data-toggle="tab" data-target="#product-line-tab">行程地图</a></li>
+				</ul>
+				<div class="tab-content">
+					<div id="product-base-tab" class="tab-pane active">
+						<div class="row-fluid">
+							<div class="span6">
+								<div class="control-group">
+									<label class="control-label">产品名称：</label>
+									<div class="controls">
+										<input type="text" class="span" name="name" value="" required="true">
+									</div>
+								</div>
+								<div class="control-group">
+									<label class="control-label">行程天数：</label>
+									<div class="controls">
+										<input type="text" class="span6" name="days" value="1">
+										<select name="daysUnit" class="span6">
+											<option value="d">天</option>
+											<option value="m">月</option>
+											<option value="y">年</option>
+										</select>
+									</div>
+								</div>
+								<div class="control-group">
+									<label class="control-label">价格：</label>
+									<div class="controls">
+										<div class="input-prepend">
+											<span class="add-on">￥</span>
+											<input type="text" class="span" name="price">
+										</div>
+									</div>
+								</div>
+								<div class="control-group">
+									<label class="control-label">费用说明：</label>
+									<div class="controls">
+										<textarea rows="3" name="priceDescription" class="span input same-height-1">${(site.statisticalCode)!}</textarea>
+									</div>
+								</div>
+							</div>
+							<div class="span6">
 							</div>
 						</div>
 					</div>
-					<div class="control-group">
-						<label class="control-label">费用说明：</label>
-						<div class="controls">
-							<textarea rows="3" name="priceDescription" class="span input same-height-1">${(site.statisticalCode)!}</textarea>
+					<div id="product-detail-tab" class="tab-pane">
+						<div class="row-fluid">
+							<div class="span12">
+								<script type="text/plain" id="product-description" name="description"></script>
+							</div>
 						</div>
 					</div>
-				</div>
-				<div class="span6">
-				</div>
-			</div>
-			<div class="row-fluid">
-				<div class="span12">
-					<div class="control-group">
-						<label class="control-label">旅游介绍/产品描述</label>
-						<div class="controls">
-							<script type="text/plain" id="product-description" name="description"></script>
+					<div id="product-line-tab" class="tab-pane">
+						<div class="row-fluid">
+							<div class="span6">
+								<div class="control-group">
+									<label class="control-label">地图：</label>
+									<div class="controls">
+										<select name="map">
+											<option value="baidu">百度</option>
+											<option value="google">谷歌</option>
+										</select>
+									</div>
+								</div>
+								<div class="control-group">
+									<label class="control-label">行程：</label>
+									<div class="controls">
+										<label>
+											<span class="label label-info">时间</span>
+											<span> : </span>
+											<span class="label label-inverse">出发地</span>
+											<span> -&gt; </span>
+											<span class="label label-success">目的地</span>
+										</label>
+									</div>
+									<div class="controls">
+										<input type="text" class="input-small">
+										<span> : </span>
+										<input type="text" class="input-small">
+										<span> -&gt; </span>
+										<input type="text" class="input-small">
+									</div>
+									<div class="controls">
+										<input type="text" class="input-small">
+										<span> : </span>
+										<input type="text" class="input-small">
+										<span> -&gt; </span>
+										<input type="text" class="input-small">
+									</div>
+									<div class="controls">
+										<input type="text" class="input-small">
+										<span> : </span>
+										<input type="text" class="input-small">
+										<span> -&gt; </span>
+										<input type="text" class="input-small">
+									</div>
+								</div>
+							</div>
+							<div class="span6">
+								<div id="travel-map"></div>
+							</div>
 						</div>
 					</div>
 				</div>
@@ -71,6 +130,7 @@
 	</div>
 </div>
 <script>
+UE.delEditor('product-description');
 var pdEditor = UE.getEditor('product-description', {
 	initialContent: '',
 	initialFrameWidth: '100%'
