@@ -17,7 +17,7 @@
         <property name="avatar" column="AVATAR" />
         <property name="qqOpenid" column="QQ_OPRNID" />
         <set name="roles" table="LOGIN_USER_ROLE" cascade="all">
-            <key column="id" />
+            <key column="ID" />
             <many-to-many class="Role" column="ROLE" />
         </set>
     </class>

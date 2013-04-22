@@ -1,6 +1,7 @@
 package com.cqlybest.common.bean;
 
 import java.util.Date;
+import java.util.Set;
 
 public class Product {
 
@@ -16,6 +17,8 @@ public class Product {
   private Date departureDate; // 准确的出发日期
   private Boolean published; // 是否发布
   private Date lastUpdate;// 最后更新时间
+
+  private Set<Destination> destinations;
 
   public Integer getId() {
     return id;
@@ -111,6 +114,14 @@ public class Product {
 
   public void setLastUpdate(Date lastUpdate) {
     this.lastUpdate = lastUpdate;
+  }
+
+  public Set<Destination> getDestinations() {
+    return destinations;
+  }
+
+  public void setDestinations(Set<Destination> destinations) {
+    this.destinations = destinations;
   }
 
 }
