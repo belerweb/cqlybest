@@ -10,10 +10,11 @@ public class TreeNode {
 
   private Integer id;
   private String name;
+  private String pinyin;
+  private String py;
   private Integer lft;
   private Integer rgt;
   private Integer pid;
-
 
   public Integer getId() {
     return id;
@@ -29,6 +30,22 @@ public class TreeNode {
 
   public void setName(String name) {
     this.name = name;
+  }
+
+  public String getPinyin() {
+    return pinyin;
+  }
+
+  public void setPinyin(String pinyin) {
+    this.pinyin = pinyin;
+  }
+
+  public String getPy() {
+    return py;
+  }
+
+  public void setPy(String py) {
+    this.py = py;
   }
 
   public Integer getLft() {

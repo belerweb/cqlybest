@@ -1,4 +1,9 @@
 <#assign ContextPath=springMacroRequestContext.getContextPath() />
+<style type="text/css">
+.ui-menu .ui-menu-item a.ui-state-hover, .ui-menu .ui-menu-item a.ui-state-active {
+	font-weight: bold;
+}
+</style>
 <div>
 	<div class="clearfix"></div>
 	<div class="grid">
@@ -29,6 +34,12 @@
 									<label class="control-label">产品名称：</label>
 									<div class="controls">
 										<input type="text" class="span" name="name" value="" required="true">
+									</div>
+								</div>
+								<div class="control-group">
+									<label class="control-label">目的地：</label>
+									<div id="destinations" class="controls">
+										<ul style="margin: 0px 0px 5px;"></ul>
 									</div>
 								</div>
 							</div>
@@ -186,13 +197,71 @@
 	</div>
 </div>
 <script>
+var destinations = ${dests};
+(function(){
+	var pr  = [];
+	var pn  = [];
+	var pl  = [];
+	var pinyin  = [];
+	var py  = [];
+	for(var i=0;i<destinations.length;i++) {
+		var d = destinations[i];
+		d.value  = d.name;
+		if (pr.length>0 && d.lft>pr[pr.length-1]) {
+			var c = pr.pop();
+			pn.pop();
+			pl.pop();
+			pinyin.pop();
+			py.pop();
+			while(c+1<d.lft) {
+				c = pr.pop();
+				pn.pop();
+				pl.pop();
+				pinyin.pop();
+				py.pop();
+			}
+		}
+		if (pr.length==0) {
+			d.fullname = d.name;
+			d.label = d.name;
+		} else {
+			d.fullname = pn[pn.length-1] + d.name;
+			d.label = pl[pl.length-1] + '/' + d.name;
+			d.pinyin = pinyin[pinyin.length-1] + d.pinyin;
+			d.py = py[py.length-1] + d.py;
+		}
+		if(d.rgt-d.lft>1) {
+			pr.push(d.rgt);
+			pn.push(d.fullname);
+			pl.push(d.label);
+			pinyin.push(d.pinyin);
+			py.push(d.py);
+		}
+	}
+})();
+$('#destinations').tagit({
+	fieldName: 'destinations',
+	autocomplete: {
+		delay: 0,
+		minLength: 0,
+		source: function(request, response) {
+			var key = request.term.split(/,\s*/).pop();
+			response($.grep(destinations, function(obj,i){
+				return obj.pinyin.contains(key)||obj.py.contains(key)||obj.fullname.contains(key);
+			}));
+		}
+	},
+	beforeTagAdded: function(event, ui) {
+		ui.tag.addClass('label').addClass('label-success');
+	}
+});
 $('select', '#product-add-form').selectBoxIt({autoWidth:false});
 UE.delEditor('product-description');
 var pdEditor = UE.getEditor('product-description', {
 	initialContent: '',
 	initialFrameWidth: '100%'
 });
-$('input,textarea,select', '#product-add-form').jqBootstrapValidation({
+$('input,textarea,select', '#product-add-form').not('.ui-autocomplete-input').jqBootstrapValidation({
 	submitSuccess : function($form, event) {
 		event.preventDefault();
 		event.stopPropagation();

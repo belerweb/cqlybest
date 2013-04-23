@@ -6,16 +6,14 @@ import java.util.Map;
 
 import com.cqlybest.common.bean.TreeNode;
 
-public abstract class TreeNodeDao<T extends TreeNode, I extends Serializable>
-    extends AbstractDao<T, I> {
+public abstract class TreeDao<T extends TreeNode, I extends Serializable> extends AbstractDao<T, I> {
 
   private String tableName;
 
-  protected TreeNodeDao(Class<T> entityClass, String tableName) {
+  protected TreeDao(Class<T> entityClass, String tableName) {
     super(entityClass);
     this.tableName = tableName;
   }
-
 
   /**
    * 左值大于 number 的增加 increment

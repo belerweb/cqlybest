@@ -24,7 +24,7 @@ public class Product {
 
   private Set<Integer> recommendedMonths;// 推荐月份
   private Set<Integer> crowds;// 适合人群
-  private Set<Destination> destinations;// 目的地
+  private Set<String> destinations;// 目的地
 
   public Integer getId() {
     return id;
@@ -170,11 +170,11 @@ public class Product {
     this.crowds = crowds;
   }
 
-  public Set<Destination> getDestinations() {
+  public Set<String> getDestinations() {
     return destinations;
   }
 
-  public void setDestinations(Set<Destination> destinations) {
+  public void setDestinations(Set<String> destinations) {
     this.destinations = destinations;
   }
 

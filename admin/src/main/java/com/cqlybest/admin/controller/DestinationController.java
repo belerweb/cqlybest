@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.cqlybest.common.Cn2Spell;
 import com.cqlybest.common.bean.Destination;
 import com.cqlybest.common.service.DestinationService;
 import com.cqlybest.common.service.JsonService;
@@ -34,6 +35,8 @@ public class DestinationController {
   @RequestMapping(value = "/data/dict/add_dest.html", method = RequestMethod.POST)
   @ResponseBody
   public void addDict(@RequestParam Integer pid, Destination node) {
+    node.setPinyin(Cn2Spell.converterToSpell(node.getName()));
+    node.setPy(Cn2Spell.converterToFirstSpell(node.getName()));
     if (pid == 0) {
       destinationService.add(node);
     } else {

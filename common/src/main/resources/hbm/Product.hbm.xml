@@ -32,8 +32,8 @@
             <element column="CROWD" type="int" />
         </set>
         <set name="destinations" table="PRODUCT_DESTINATION" cascade="all">
-            <key column="PID" />
-            <many-to-many class="Destination" column="DID" />
+            <key column="ID" />
+            <element column="DESTINATION" type="string" />
         </set>
     </class>
 </hibernate-mapping>

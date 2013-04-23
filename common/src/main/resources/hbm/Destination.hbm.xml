@@ -9,6 +9,8 @@
             <generator class="native" />
         </id>
         <property name="name" column="NAME" />
+        <property name="pinyin" column="PINYIN" />
+        <property name="py" column="PY" />
         <property name="lft" column="LFT" />
         <property name="rgt" column="RGT" />
         <property name="pid" column="PID" />
