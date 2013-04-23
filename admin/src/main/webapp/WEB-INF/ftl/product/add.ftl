@@ -131,7 +131,7 @@
 								<div class="control-group">
 									<label class="control-label">地图：</label>
 									<div class="controls">
-										<select name="map">
+										<select name="map" class="input-small">
 											<option value="baidu">百度</option>
 											<option value="google">谷歌</option>
 										</select>
@@ -186,6 +186,7 @@
 	</div>
 </div>
 <script>
+$('select', '#product-add-form').selectBoxIt({autoWidth:false});
 UE.delEditor('product-description');
 var pdEditor = UE.getEditor('product-description', {
 	initialContent: '',

@@ -10,9 +10,11 @@
 		<meta name="author" content="">
 		<link href="${ContextPath}/css/style.css" rel="stylesheet">
 		<link href="${ContextPath}/css/bootstrap.css" rel="stylesheet">
+		<link href="${ContextPath}/css/jquery-ui-1.8.16.custom.css" rel="stylesheet">
 		<link rel="stylesheet" href="${ContextPath}/css/datatable.css">    
 		<link rel="stylesheet" href="${ContextPath}/css/icon/font-awesome.css">    
 		<link rel="stylesheet" href="${ContextPath}/css/bootstrap-responsive.css">
+		<link rel="stylesheet" href="${ContextPath}/css/jquery.selectBoxIt.css">
 		<link rel="alternate stylesheet" type="text/css" media="screen" title="green-theme" href="${ContextPath}/css/color/green.css" />
 		<link rel="alternate stylesheet" type="text/css" media="screen" title="red-theme" href="${ContextPath}/css/color/red.css" />
 		<link rel="alternate stylesheet" type="text/css" media="screen" title="blue-theme" href="${ContextPath}/css/color/blue.css" />
@@ -83,9 +85,11 @@
 		<script src="${ContextPath}/js/jquery.min.js"></script>
 		<script src="${ContextPath}/js/bootstrap.min.js"></script>
 		<script src="${ContextPath}/js/jqBootstrapValidation.js"></script>
+		<script src="${ContextPath}/js/jquery-ui.min.js"></script>
 		<script src="${ContextPath}/js/jquery.form.js"></script>
 		<script src="${ContextPath}/js/jquery.ba-hashchange.min.js"></script>
 		<script src="${ContextPath}/js/jquery.dataTables.min.js"></script>
+		<script src="${ContextPath}/js/jquery.selectBoxIt.js"></script>
 		<script src="${ContextPath}/js/ueditor/editor_config.js"></script>
 		<script src="${ContextPath}/js/ueditor/editor_all.js"></script>
 		<!--[if IE]>
