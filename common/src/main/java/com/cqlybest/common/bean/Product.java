@@ -15,10 +15,16 @@ public class Product {
   private Date effectiveDate; // 产品 生效日期
   private Date expiryDate; // 产品 失效日期
   private Date departureDate; // 准确的出发日期
+  private String tripCharacteristic;// 行程特色
+  private String serviceStandard;// 服务标准
+  private String friendlyReminder;// 友情提示
+  private String recommendedItem;// 推荐项目
   private Boolean published; // 是否发布
   private Date lastUpdate;// 最后更新时间
 
-  private Set<Destination> destinations;
+  private Set<Integer> recommendedMonths;// 推荐月份
+  private Set<Integer> crowds;// 适合人群
+  private Set<Destination> destinations;// 目的地
 
   public Integer getId() {
     return id;
@@ -100,6 +106,38 @@ public class Product {
     this.departureDate = departureDate;
   }
 
+  public String getTripCharacteristic() {
+    return tripCharacteristic;
+  }
+
+  public void setTripCharacteristic(String tripCharacteristic) {
+    this.tripCharacteristic = tripCharacteristic;
+  }
+
+  public String getServiceStandard() {
+    return serviceStandard;
+  }
+
+  public void setServiceStandard(String serviceStandard) {
+    this.serviceStandard = serviceStandard;
+  }
+
+  public String getFriendlyReminder() {
+    return friendlyReminder;
+  }
+
+  public void setFriendlyReminder(String friendlyReminder) {
+    this.friendlyReminder = friendlyReminder;
+  }
+
+  public String getRecommendedItem() {
+    return recommendedItem;
+  }
+
+  public void setRecommendedItem(String recommendedItem) {
+    this.recommendedItem = recommendedItem;
+  }
+
   public Boolean getPublished() {
     return published;
   }
@@ -114,6 +152,22 @@ public class Product {
 
   public void setLastUpdate(Date lastUpdate) {
     this.lastUpdate = lastUpdate;
+  }
+
+  public Set<Integer> getRecommendedMonths() {
+    return recommendedMonths;
+  }
+
+  public void setRecommendedMonths(Set<Integer> recommendedMonths) {
+    this.recommendedMonths = recommendedMonths;
+  }
+
+  public Set<Integer> getCrowds() {
+    return crowds;
+  }
+
+  public void setCrowds(Set<Integer> crowds) {
+    this.crowds = crowds;
   }
 
   public Set<Destination> getDestinations() {

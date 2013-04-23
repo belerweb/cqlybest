@@ -24,41 +24,97 @@
 				<div class="tab-content">
 					<div id="product-base-tab" class="tab-pane active">
 						<div class="row-fluid">
-							<div class="span6">
+							<div class="span12">
 								<div class="control-group">
 									<label class="control-label">产品名称：</label>
 									<div class="controls">
 										<input type="text" class="span" name="name" value="" required="true">
 									</div>
 								</div>
+							</div>
+						</div>
+						<div class="row-fluid">
+							<div class="span6">
 								<div class="control-group">
 									<label class="control-label">行程天数：</label>
 									<div class="controls">
-										<input type="text" class="span6" name="days" value="1">
-										<select name="daysUnit" class="span6">
+										<input type="text" class="input-small" name="days" value="1">
+										<select name="daysUnit" class="input-small">
 											<option value="d">天</option>
 											<option value="m">月</option>
 											<option value="y">年</option>
 										</select>
 									</div>
 								</div>
+							</div>
+							<div class="span6">
 								<div class="control-group">
 									<label class="control-label">价格：</label>
 									<div class="controls">
 										<div class="input-prepend">
 											<span class="add-on">￥</span>
-											<input type="text" class="span" name="price">
+											<input type="text" class="input-small" name="price">
 										</div>
 									</div>
 								</div>
+							</div>
+						</div>
+						<div class="row-fluid">
+							<div class="span12">
 								<div class="control-group">
 									<label class="control-label">费用说明：</label>
 									<div class="controls">
-										<textarea rows="3" name="priceDescription" class="span input same-height-1">${(site.statisticalCode)!}</textarea>
+										<textarea rows="3" name="priceDescription" class="span input same-height-1"></textarea>
 									</div>
 								</div>
-							</div>
-							<div class="span6">
+								<div class="control-group">
+									<label class="control-label">推荐月份：</label>
+									<div class="controls">
+										<label class="checkbox inline"><input name="recommendedMonths" value="1" type="checkbox"> 1月</label>
+										<label class="checkbox inline"><input name="recommendedMonths" value="2" type="checkbox"> 2月</label>
+										<label class="checkbox inline"><input name="recommendedMonths" value="3" type="checkbox"> 3月</label>
+										<label class="checkbox inline"><input name="recommendedMonths" value="4" type="checkbox"> 4月</label>
+										<label class="checkbox inline"><input name="recommendedMonths" value="5" type="checkbox"> 5月</label>
+										<label class="checkbox inline"><input name="recommendedMonths" value="6" type="checkbox"> 6月</label>
+										<label class="checkbox inline"><input name="recommendedMonths" value="7" type="checkbox"> 7月</label>
+										<label class="checkbox inline"><input name="recommendedMonths" value="8" type="checkbox"> 8月</label>
+										<label class="checkbox inline"><input name="recommendedMonths" value="9" type="checkbox"> 9月</label>
+										<label class="checkbox inline"><input name="recommendedMonths" value="10" type="checkbox"> 10月</label>
+										<label class="checkbox inline"><input name="recommendedMonths" value="11" type="checkbox"> 11月</label>
+										<label class="checkbox inline"><input name="recommendedMonths" value="12" type="checkbox"> 12月</label>
+									</div>
+								</div>
+								<div class="control-group">
+									<label class="control-label">适合人群：</label>
+									<div class="controls">
+										<label class="checkbox inline"><input name="crowds" value="1" type="checkbox"> 个人旅行</label>
+										<label class="checkbox inline"><input name="crowds" value="2" type="checkbox"> 团体旅行</label>
+									</div>
+								</div>
+								<div class="control-group">
+									<label class="control-label">行程特色：</label>
+									<div class="controls">
+										<textarea rows="3" name="tripCharacteristic" class="span input same-height-1"></textarea>
+									</div>
+								</div>
+								<div class="control-group">
+									<label class="control-label">服务标准：</label>
+									<div class="controls">
+										<textarea rows="3" name="serviceStandard" class="span input same-height-1"></textarea>
+									</div>
+								</div>
+								<div class="control-group">
+									<label class="control-label">友情提示：</label>
+									<div class="controls">
+										<textarea rows="3" name="friendlyReminder" class="span input same-height-1"></textarea>
+									</div>
+								</div>
+								<div class="control-group">
+									<label class="control-label">推荐项目：</label>
+									<div class="controls">
+										<textarea rows="3" name="recommendedItem" class="span input same-height-1"></textarea>
+									</div>
+								</div>
 							</div>
 						</div>
 					</div>
