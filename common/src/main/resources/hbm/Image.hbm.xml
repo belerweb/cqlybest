@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping package="com.cqlybest.common.bean">
+    <class name="Image" table="Image">
+        <id name="id" column="ID" length="36">
+            <generator class="assigned" />
+        </id>
+        <property name="imageType" column="IMAGE_TYPE" length="4" not-null="true" />
+        <property name="title" column="TITLE" length="64" />
+        <property name="description" column="DESCRIPTION" length="256" />
+        <property name="imageData" column="IMAGE_DATA" length="10000000" />
+    </class>
+</hibernate-mapping>
