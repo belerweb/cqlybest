@@ -71,6 +71,7 @@
 					<li class="hide" data-m="site" data-n="product.list"><a href="#m=site;n=product.list;u=${ContextPath}/product/list.html;t=#main"><i class="icon-road"></i> 旅游产品</a></li>
 					<li class="hide" data-m="site" data-n="poster.list"><a href="#m=site;n=poster.list;u=${ContextPath}/poster/list.html;t=#main"><i class="icon-picture"></i> 首页海报</a></li>
 					<li class="hide" data-m="site" data-n="data.dict"><a href="#m=site;n=data.dict;u=${ContextPath}/data/dict.html;t=#main"><i class="icon-book"></i> 数据字典</a></li>
+					<li class="hide" data-m="site" data-n="account.list"><a href="#m=site;n=account.list;u=${ContextPath}/account/list.html;t=#main"><i class="icon-github"></i> 账号管理</a></li>
 					<li class="hide" data-m="user" data-n="user.customers"><a href="#m=user;n=user.customers;u=${ContextPath}/customer/list.html;t=#main"><i class="icon-user"></i> 客户</a></li>
 					<li class="hide" data-m="user" data-n="user.administrators"><a href="#m=user;n=user.administrators;u=${ContextPath}/administrator/list.html;t=#main"><i class="icon-user-md"></i> 管理员</a></li>
 				</ul>

@@ -128,6 +128,13 @@ window.cqlybest = {
 		}
 		return result;
 	},
+	buildHash : function(param) {
+		var hash = [];
+		$.each(param, function(k, v) {
+			hash.push(k + '=' + v);
+		});
+		return '#' + hash.join(';');
+	},
 	ajaxSubmit : function($form, event) {
 		event.preventDefault();
 		event.stopPropagation();
@@ -185,7 +192,12 @@ $(window).hashchange(function() {
 
 (function() {
 	$('.page-load-btn').live('click', function() {
-		$($(this).attr('data-target')).load($(this).attr('data-url'));
+		$($(this).attr('data-target')).load($(this).attr('data-url'), function() {
+			var param = cqlybest.parseHash();
+			delete param.u;
+			param['_t'] = new Date().getTime();
+			location.hash = cqlybest.buildHash(param);
+		});
 	});
 	$('.ajax-action-btn').live('click', function() {
 		var url = $(this).attr('data-url');
@@ -194,11 +206,7 @@ $(window).hashchange(function() {
 				cqlybest.success(null, null, function() {
 					var param = cqlybest.parseHash();
 					param['_t'] = new Date().getTime();
-					var hash = [];
-					$.each(param, function(k, v) {
-						hash.push(k + '=' + v);
-					});
-					location.hash = '#' + hash.join(';');
+					location.hash = cqlybest.buildHash(param);
 				});
 			}).fail(function() {
 				cqlybest.error();
