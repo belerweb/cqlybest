@@ -1,10 +1,7 @@
 package com.cqlybest.common.bean;
 
-import java.io.Serializable;
 
-public class Image implements Serializable {
-
-  private static final long serialVersionUID = -7881695140200427362L;
+public class Image {
 
   private String id;
   private String imageType;

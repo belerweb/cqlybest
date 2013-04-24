@@ -115,29 +115,63 @@ $(function() {
 	});
 });
 
-$(window).hashchange(function() {
-	var hashData = location.hash.match(/^#(.+)$/);
-	if (hashData) {
-		var param = {};
-		var pa = hashData[1].split(';');
-		for ( var i = 0; i < pa.length; i++) {
-			var kv = pa[i].split('=');
-			param[kv[0]] = kv[1];
-		}
-		if (param.m) {
-			// 主菜单
-			$('#menu .main-menu > li').removeClass('active');
-			$('#menu .main-menu > li[data-m=' + param.m + ']').addClass('active');
-			$('#menu .additional-menu > li').hide().removeClass('active');
-			$('#menu .additional-menu > li[data-m=' + param.m + ']').show();
-			if (param.n) {
-				// 子菜单
-				$('#menu .additional-menu > li[data-n="' + param.n + '"]').addClass('active');
+window.cqlybest = {
+	parseHash : function() {
+		var result = {};
+		var hashData = location.hash.match(/^#(.+)$/);
+		if (hashData) {
+			var pa = hashData[1].split(';');
+			for ( var i = 0; i < pa.length; i++) {
+				var kv = pa[i].split('=');
+				result[kv[0]] = kv[1];
 			}
 		}
-		if (param.u && param.t) {
-			$(param.t == '#main' ? '#mb' : param.t).load(decodeURIComponent(param.u));
+		return result;
+	},
+	ajaxSubmit : function($form, event) {
+		event.preventDefault();
+		event.stopPropagation();
+		$form.ajaxSubmit({
+			success : function(response) {
+				cqlybest.success();
+			},
+			error : function() {
+				cqlybest.error();
+			}
+		});
+	},
+	success : function(message, label, func) {
+		var _message = message ? messsage : '<div class="alert alert-success">操作成功</div>';
+		var _label = label ? label : '确定';
+		var _func = func ? func : function() {
+			history.go(-1);
+		};
+		bootbox.alert(_message, _label, _func);
+	},
+	error : function(message, label, func) {
+		var _message = message ? messsage : '<div class="alert alert-error">操作失败</div>';
+		var _label = label ? label : '确定';
+		var _func = func ? func : function() {
+		};
+		bootbox.alert(_message, _label, _func);
+	}
+};
+
+$(window).hashchange(function() {
+	var param = cqlybest.parseHash();
+	if (param.m) {
+		// 主菜单
+		$('#menu .main-menu > li').removeClass('active');
+		$('#menu .main-menu > li[data-m=' + param.m + ']').addClass('active');
+		$('#menu .additional-menu > li').hide().removeClass('active');
+		$('#menu .additional-menu > li[data-m=' + param.m + ']').show();
+		if (param.n) {
+			// 子菜单
+			$('#menu .additional-menu > li[data-n="' + param.n + '"]').addClass('active');
 		}
+	}
+	if (param.u && param.t) {
+		$(param.t == '#main' ? '#mb' : param.t).load(decodeURIComponent(param.u));
 	}
 });
 
@@ -147,4 +181,41 @@ $(window).hashchange(function() {
 	} else {
 		$(window).hashchange();
 	}
+})();
+
+(function() {
+	$('.page-load-btn').live('click', function() {
+		$($(this).attr('data-target')).load($(this).attr('data-url'));
+	});
+	$('.ajax-action-btn').live('click', function() {
+		var url = $(this).attr('data-url');
+		var execute = function() {
+			$.get(url).done(function() {
+				cqlybest.success(null, null, function() {
+					var param = cqlybest.parseHash();
+					param['_t'] = new Date().getTime();
+					var hash = [];
+					$.each(param, function(k, v) {
+						hash.push(k + '=' + v);
+					});
+					location.hash = '#' + hash.join(';');
+				});
+			}).fail(function() {
+				cqlybest.error();
+			}).always(function() {
+			});
+		};
+		var confirm = $(this).attr('data-confirm');
+		if (confirm) {
+			var action = $(this).attr('data-action');
+			var title = $(this).attr('data-title');
+			bootbox.confirm('确认' + action + ' [' + title + '] ？', '取消', '确认', function(result) {
+				if (result) {
+					execute();
+				}
+			});
+		} else {
+			execute();
+		}
+	});
 })();
