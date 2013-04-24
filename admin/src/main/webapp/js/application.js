@@ -116,9 +116,9 @@ $(function() {
 });
 
 window.cqlybest = {
-	parseHash : function() {
+	parseHash : function(hash) {
 		var result = {};
-		var hashData = location.hash.match(/^#(.+)$/);
+		var hashData = (hash ? hash : location.hash).match(/^#(.+)$/);
 		if (hashData) {
 			var pa = hashData[1].split(';');
 			for ( var i = 0; i < pa.length; i++) {
@@ -178,7 +178,16 @@ $(window).hashchange(function() {
 		}
 	}
 	if (param.u && param.t) {
-		$(param.t == '#main' ? '#mb' : param.t).load(decodeURIComponent(param.u));
+		var container = $(param.t == '#main' ? '#mb' : param.t);
+		if (container.length) {
+			container.load(decodeURIComponent(param.u));
+		} else {
+			var hash = $('#menu .additional-menu .active a').attr('href');
+			var p = cqlybest.parseHash(hash);
+			$('#mb').load(p.u, function() {
+				$(param.t).load(param.u);
+			});
+		}
 	}
 });
 

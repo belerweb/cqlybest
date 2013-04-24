@@ -25,6 +25,9 @@ public class Product {
   private Set<Integer> recommendedMonths;// 推荐月份
   private Set<Integer> crowds;// 适合人群
   private Set<String> destinations;// 目的地
+  private Set<DictTraffic> traffics;// 交通方式
+  private Set<DictProductType> types;// 产品类型
+  private Set<DictProductGrade> grades;// 产品等级
 
   public Integer getId() {
     return id;
@@ -176,6 +179,30 @@ public class Product {
 
   public void setDestinations(Set<String> destinations) {
     this.destinations = destinations;
+  }
+
+  public Set<DictTraffic> getTraffics() {
+    return traffics;
+  }
+
+  public void setTraffics(Set<DictTraffic> traffics) {
+    this.traffics = traffics;
+  }
+
+  public Set<DictProductType> getTypes() {
+    return types;
+  }
+
+  public void setTypes(Set<DictProductType> types) {
+    this.types = types;
+  }
+
+  public Set<DictProductGrade> getGrades() {
+    return grades;
+  }
+
+  public void setGrades(Set<DictProductGrade> grades) {
+    this.grades = grades;
   }
 
 }

@@ -81,7 +81,7 @@
 			<!--SIDEBAR END-->
 			<!--BEGIN MAIN CONTENT-->
 			<div id="main" role="main">
-				<div class="block"><div id="mb"></div><div>
+				<div class="block"><div id="mb"></div></div>
 			</div>
 			<!--MAIN CONTENT END-->
 		</div>
