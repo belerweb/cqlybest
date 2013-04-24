@@ -11,7 +11,7 @@
 			<div class="clearfix"></div>   
 		</div>
 		<!-- novalidate -->
-		<form id="admin-add-form" action="${ContextPath}/administrator/add.html" method="post" class="form-horizontal">
+		<form id="main-content-form" action="${ContextPath}/administrator/add.html" method="post" class="form-horizontal">
 			<div class="grid-content">
 				<div class="control-group">
 					<label class="control-label">姓名：</label>
@@ -64,7 +64,7 @@
 	</div>
 </div>
 <script>
-$('input,textarea,select', '#admin-add-form').jqBootstrapValidation({
+$('input,textarea,select', '#main-content-form').jqBootstrapValidation({
 	submitSuccess : function($form, event) {
 		event.preventDefault();
 		event.stopPropagation();

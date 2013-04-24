@@ -11,7 +11,7 @@
 			<div class="clearfix"></div>   
 		</div>
 		<!-- novalidate -->
-		<form id="site-config-form" action="${ContextPath}/site/config.html" method="post" class="form-horizontal">
+		<form id="main-content-form" action="${ContextPath}/site/config.html" method="post" class="form-horizontal">
 			<div class="grid-content">
 				<div class="control-group">
 					<label class="control-label">网站名称：</label>
@@ -58,7 +58,7 @@
 	</div>
 </div>
 <script>
-$('input,textarea,select', '#site-config-form').jqBootstrapValidation({
+$('input,textarea,select', '#main-content-form').jqBootstrapValidation({
 	submitSuccess : function($form, event) {
 		event.preventDefault();
 		event.stopPropagation();

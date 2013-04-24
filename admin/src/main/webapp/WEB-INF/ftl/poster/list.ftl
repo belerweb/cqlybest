@@ -19,7 +19,7 @@
 			<div class="clearfix"></div>   
 		</div>
 		<div class="grid-content overflow">
-			<table id="poster-list-table" class="table table-striped">
+			<table id="main-list-table" class="table table-striped">
 				<thead>
 					<tr>
 						<th>标题</th>
@@ -68,7 +68,7 @@
 	</div>
 </div>
 <script>
-$('#poster-list-table').dataTable({
+$('#main-list-table').dataTable({
 	bLengthChange: false,
 	bFilter: false,
 	bInfo: false,

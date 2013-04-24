@@ -11,7 +11,7 @@
 			<div class="clearfix"></div>   
 		</div>
 		<!-- novalidate -->
-		<form id="poster-add-form" action="${ContextPath}/poster/add.html" method="post" class="form-horizontal">
+		<form id="main-content-form" action="${ContextPath}/poster/add.html" method="post" class="form-horizontal">
 			<div class="grid-content">
 				<div class="control-group">
 					<label class="control-label">标题：</label>
@@ -57,7 +57,7 @@
 	</div>
 </div>
 <script>
-$('input,textarea,select', '#poster-add-form').jqBootstrapValidation({
+$('input,textarea,select', '#main-content-form').jqBootstrapValidation({
 	submitSuccess : cqlybest.ajaxSubmit
 });
 </script>

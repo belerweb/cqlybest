@@ -11,7 +11,7 @@
 			<div class="clearfix"></div>   
 		</div>
 		<!-- novalidate -->
-		<form id="main-add-form" action="${ContextPath}/account/modify.html" method="post" class="form-horizontal">
+		<form id="main-content-form" action="${ContextPath}/account/modify.html" method="post" class="form-horizontal">
 			<input type="hidden" name="id" value="${(account.id)!}"
 >			<div class="grid-content">
 				<div class="control-group">
@@ -53,7 +53,7 @@
 	</div>
 </div>
 <script>
-$('input,textarea,select', '#main-add-form').jqBootstrapValidation({
+$('input,textarea,select', '#main-content-form').jqBootstrapValidation({
 	submitSuccess : cqlybest.ajaxSubmit
 });
 </script>

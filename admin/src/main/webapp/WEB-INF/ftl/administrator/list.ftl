@@ -22,7 +22,7 @@
 			<div class="clearfix"></div>   
 		</div>
 		<div class="grid-content overflow">
-			<table id="admin-list-table" class="table table-striped table-condensed">
+			<table id="main-list-table" class="table table-striped table-condensed">
 				<thead>
 					<tr>
 						<th><input id="admin-check" type="checkbox"><label for="admin-check"><span></span></label></th>
@@ -59,7 +59,7 @@
 $('#admin-check').change(function(){
 	$('input[id^=admin-check-]').attr('checked', this.checked);
 });
-$('#admin-list-table').dataTable({
+$('#main-list-table').dataTable({
 	oLanguage:{
 		oPaginate: {
 			sFirst: '首页',

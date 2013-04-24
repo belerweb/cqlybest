@@ -19,7 +19,7 @@
 			<div class="clearfix"></div>   
 		</div>
 		<!-- novalidate -->
-		<form id="product-add-form" action="${ContextPath}/product/add.html" method="post" class="form-horizontal grid-content">
+		<form id="main-content-form" action="${ContextPath}/product/add.html" method="post" class="form-horizontal grid-content">
 			<div class="tabbable">
 				<ul class="nav nav-tabs">
 					<li class="active"><a href="javascript:void(0);" data-toggle="tab" data-target="#product-base-tab">基本信息</a></li>
@@ -255,13 +255,13 @@ $('#destinations').tagit({
 		ui.tag.addClass('label').addClass('label-success');
 	}
 });
-$('select', '#product-add-form').selectBoxIt({autoWidth:false});
+$('select', '#main-content-form').selectBoxIt({autoWidth:false});
 UE.delEditor('product-description');
 var pdEditor = UE.getEditor('product-description', {
 	initialContent: '',
 	initialFrameWidth: '100%'
 });
-$('input,textarea,select', '#product-add-form').not('.ui-autocomplete-input').jqBootstrapValidation({
+$('input,textarea,select', '#main-content-form').not('.ui-autocomplete-input').jqBootstrapValidation({
 	submitSuccess : function($form, event) {
 		event.preventDefault();
 		event.stopPropagation();

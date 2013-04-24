@@ -24,7 +24,7 @@
 			<div class="clearfix"></div>   
 		</div>
 		<div class="grid-content overflow">
-			<table id="product-list-table" class="table table-striped">
+			<table id="main-list-table" class="table table-striped">
 				<thead>
 					<tr>
 						<th><input type="checkbox"></th>
@@ -55,7 +55,7 @@
 	</div>
 </div>
 <script>
-$('#product-list-table').dataTable({
+$('#main-list-table').dataTable({
 	oLanguage:{
 		oPaginate: {
 			sFirst: '首页',
