@@ -12,8 +12,8 @@
 		</div>
 		<!-- novalidate -->
 		<form id="main-content-form" action="${ContextPath}/account/modify.html" method="post" class="form-horizontal">
-			<input type="hidden" name="id" value="${(account.id)!}"
->			<div class="grid-content">
+			<input type="hidden" name="id" value="${(account.id)!}">
+			<div class="grid-content">
 				<div class="control-group">
 					<label class="control-label">名称：</label>
 					<div class="controls">
