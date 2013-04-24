@@ -40,7 +40,7 @@
         ,imagePath:URL + "jsp/"                     //图片修正地址，引用了fixedImagePath,如有特殊需求，可自行配置
        //,imageFieldName:"upfile"                   //图片数据的key,若此处修改，需要在后台对应文件修改对应参数
         //,compressSide:0                            //等比压缩的基准，确定maxImageSideLength参数的参照对象。0为按照最长边，1为按照宽度，2为按照高度
-        //,maxImageSideLength:900                    //上传图片最大允许的边长，超过会自动等比缩放,不缩放就设置一个比较大的值，更多设置在image.html中
+        //,maxImageSideLength:900                    //上传图片最大允许的边长，超过会自动等比缩放,不缩放就设置一个比较大的值，更多设置在image.htm中
 
         //涂鸦图片配置区
         ,scrawlUrl:URL+"jsp/scrawlUp.jsp"           //涂鸦上传地址
@@ -87,8 +87,8 @@
                 'directionalityltr', 'directionalityrtl', 'indent', '|',
                 'justifyleft', 'justifycenter', 'justifyright', 'justifyjustify', '|','touppercase','tolowercase','|',
                 'link', 'unlink', 'anchor', '|', 'imagenone', 'imageleft', 'imageright','imagecenter', '|',
-                'insertimage', 'emotion','scrawl', 'insertvideo','music','attachment', 'map', 'gmap', 'insertframe','highlightcode','webapp','pagebreak','template','background', '|',
-                'horizontal', 'date', 'time', 'spechars','snapscreen', 'wordimage', '|',
+                'insertimage', 'emotion','scrawl', 'insertvideo','music',/*'attachment'*/, 'map', 'gmap', 'insertframe','highlightcode',/*'webapp'*/,'pagebreak','template','background', '|',
+                'horizontal', 'date', 'time', 'spechars',/*'snapscreen'*/, 'wordimage', '|',
                 'inserttable', 'deletetable', 'insertparagraphbeforetable', 'insertrow', 'deleterow', 'insertcol', 'deletecol', 'mergecells', 'mergeright', 'mergedown', 'splittocells', 'splittorows', 'splittocols', '|',
                 'print', 'preview', 'searchreplace','help']
         ]
@@ -152,7 +152,7 @@
         //iframeUrlMap
         //dialog内容的路径 ～会被替换成URL,垓属性一旦打开，将覆盖所有的dialog的默认路径
         //,iframeUrlMap:{
-        // 'anchor':'~/dialogs/anchor/anchor.html',
+        // 'anchor':'~/dialogs/anchor/anchor.htm',
         // }
 
         //insertorderedlist
