@@ -8,10 +8,10 @@
         <id name="id" column="ID">
             <generator class="native" />
         </id>
-        <property name="title" column="TITLE" />
-        <property name="description" column="DESCRIPTION" />
-        <property name="imageUrl" column="IMAGE_URL" />
-        <property name="url" column="URL" />
+        <property name="title" column="TITLE" type="string" not-null="true" length="32" />
+        <property name="description" column="DESCRIPTION" type="string" length="256" />
+        <property name="imageUrl" column="IMAGE_URL" type="string" not-null="true" length="256" />
+        <property name="url" column="URL" type="string" length="256" />
         <property name="newWindow" column="NEW_WINDOW" />
         <property name="published" column="PUBLISHED" />
     </class>

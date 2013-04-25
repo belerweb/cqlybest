@@ -8,9 +8,9 @@
         <id name="id" column="ID" length="36">
             <generator class="assigned" />
         </id>
-        <property name="imageType" column="IMAGE_TYPE" length="4" not-null="true" />
-        <property name="title" column="TITLE" length="64" />
-        <property name="description" column="DESCRIPTION" length="256" />
+        <property name="imageType" column="IMAGE_TYPE" type="string" not-null="true" length="4" />
+        <property name="title" column="TITLE" type="string" length="64" />
+        <property name="description" column="DESCRIPTION" type="string" length="256" />
         <property name="imageData" column="IMAGE_DATA" length="10000000" />
     </class>
 </hibernate-mapping>

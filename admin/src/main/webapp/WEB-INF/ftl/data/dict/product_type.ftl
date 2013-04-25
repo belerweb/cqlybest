@@ -18,7 +18,7 @@
 		</thead>
 		<tbody>
 			<tr>
-				<td><input type="text" name="name" required="true" maxlength="8"></td>
+				<td><input type="text" name="name" required="true" maxlength="32"></td>
 				<td class="action-table">
 					<button type="submit" class="btn btn-primary">保存</button>
 				</td>

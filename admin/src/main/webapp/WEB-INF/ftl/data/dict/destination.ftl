@@ -3,7 +3,7 @@
 	<label><strong>添加目的地：</strong></label>
 	<label><span class="s_green">目的地</span> <strong> / </strong> </label>
 	<input name="pid" type="hidden">
-	<input name="name" type="text" class="input" required="true">
+	<input name="name" type="text" class="input" required="true" maxlength="32">
 	<button type="submit" class="btn btn-primary">保存</button>
 	<button type="button" class="del btn btn-danger"></button>
 </form>

@@ -28,13 +28,13 @@
 				<div class="control-group">
 					<label class="control-label">图片：</label>
 					<div class="controls">
-						<input type="text" class="span input" name="imageUrl" required="true" maxlength="128"> 
+						<input type="text" class="span input" name="imageUrl" required="true" maxlength="256"> 
 					</div>
 				</div>
 				<div class="control-group">
 					<label class="control-label">链接到：</label>
 					<div class="controls">
-						<input type="text" class="span input" name="url" maxlength="128"> 
+						<input type="text" class="span input" name="url" maxlength="256"> 
 					</div>
 				</div>
 				<div class="control-group">

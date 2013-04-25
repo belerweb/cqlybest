@@ -34,13 +34,13 @@
 				<div class="control-group">
 					<label class="control-label">电子邮件：</label>
 					<div class="controls">
-						<input type="email" class="span input" name="email"> 
+						<input type="email" class="span input" name="email" maxlength="32"> 
 					</div>
 				</div>
 				<div class="control-group">
 					<label class="control-label">用户名：</label>
 					<div class="controls">
-						<input type="text" class="span input" name="loginUsername" pattern="[a-zA-Z][a-zA-Z0-9_]{3}"> 
+						<input type="text" class="span input" name="loginUsername" pattern="[a-zA-Z][a-zA-Z0-9_]{3,15}"> 
 					</div>
 				</div>
 				<div class="control-group">

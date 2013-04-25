@@ -13,9 +13,6 @@
 				<span>增加新 产品</span> 
 				<div class="clearfix"></div>
 			</div>
-			<div class="pull-right"> 
-				<div class="icon-title"><a href="javascript:history.go(-1);" title="返回产品列表"><i class="icon-chevron-left"></i></a></div>
-			</div>
 			<div class="clearfix"></div>   
 		</div>
 		<!-- novalidate -->
@@ -33,7 +30,7 @@
 								<div class="control-group">
 									<label class="control-label">产品名称：</label>
 									<div class="controls">
-										<input type="text" class="span" name="name" value="" required="true">
+										<input type="text" class="span" name="name" required="true" maxlength="64">
 									</div>
 								</div>
 								<div class="control-group">
@@ -105,7 +102,7 @@
 								<div class="control-group">
 									<label class="control-label">费用说明：</label>
 									<div class="controls">
-										<textarea rows="3" name="priceDescription" class="span input same-height-1"></textarea>
+										<textarea rows="3" name="priceDescription" class="span input same-height-1" maxlength="1024"></textarea>
 									</div>
 								</div>
 								<div class="control-group">
@@ -135,25 +132,25 @@
 								<div class="control-group">
 									<label class="control-label">行程特色：</label>
 									<div class="controls">
-										<textarea rows="3" name="tripCharacteristic" class="span input same-height-1"></textarea>
+										<textarea rows="3" name="tripCharacteristic" class="span input same-height-1" maxlength="1024"></textarea>
 									</div>
 								</div>
 								<div class="control-group">
 									<label class="control-label">服务标准：</label>
 									<div class="controls">
-										<textarea rows="3" name="serviceStandard" class="span input same-height-1"></textarea>
+										<textarea rows="3" name="serviceStandard" class="span input same-height-1" maxlength="1024"></textarea>
 									</div>
 								</div>
 								<div class="control-group">
 									<label class="control-label">友情提示：</label>
 									<div class="controls">
-										<textarea rows="3" name="friendlyReminder" class="span input same-height-1"></textarea>
+										<textarea rows="3" name="friendlyReminder" class="span input same-height-1" maxlength="1024"></textarea>
 									</div>
 								</div>
 								<div class="control-group">
 									<label class="control-label">推荐项目：</label>
 									<div class="controls">
-										<textarea rows="3" name="recommendedItem" class="span input same-height-1"></textarea>
+										<textarea rows="3" name="recommendedItem" class="span input same-height-1" maxlength="1024"></textarea>
 									</div>
 								</div>
 							</div>

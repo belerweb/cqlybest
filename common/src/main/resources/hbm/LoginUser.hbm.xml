@@ -5,17 +5,17 @@
 
 <hibernate-mapping package="com.cqlybest.common.bean">
     <class name="LoginUser" table="LOGIN_USER">
-        <id name="id" column="ID">
+        <id name="id" column="ID" type="string" length="36">
             <generator class="assigned" />
         </id>
-        <property name="cellPhone" column="CELL_PHONE" />
-        <property name="email" column="EMAIL" />
-        <property name="loginUsername" column="USERNAME" />
-        <property name="password" column="PASSWORD" />
-        <property name="fullname" column="FULLNAME" />
-        <property name="nickname" column="NICKNAME" />
-        <property name="avatar" column="AVATAR" />
-        <property name="qqOpenid" column="QQ_OPRNID" />
+        <property name="cellPhone" column="CELL_PHONE" type="string" unique="true" length="16" />
+        <property name="email" column="EMAIL" type="string" unique="true" length="32" />
+        <property name="loginUsername" column="USERNAME" type="string" unique="true" length="16" />
+        <property name="password" column="PASSWORD" type="string" length="32" />
+        <property name="fullname" column="FULLNAME" type="string" length="16" />
+        <property name="nickname" column="NICKNAME" type="string" length="16" />
+        <property name="avatar" column="AVATAR" type="string" length="256" />
+        <property name="qqOpenid" column="QQ_OPRNID" type="string" unique="true" length="36" />
         <set name="roles" table="LOGIN_USER_ROLE" cascade="all">
             <key column="ID" />
             <many-to-many class="Role" column="ROLE" />

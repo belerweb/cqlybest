@@ -8,19 +8,19 @@
         <id name="id" column="ID">
             <generator class="native" />
         </id>
-        <property name="name" column="NAME" />
+        <property name="name" column="NAME" type="string" not-null="true" length="64" />
         <property name="days" column="DAYS" />
         <property name="daysUnit" column="DAYS_UNIT" />
-        <property name="description" column="DESCRIPTION" />
+        <property name="description" column="DESCRIPTION" type="text" />
         <property name="price" column="PRICE" />
-        <property name="priceDescription" column="PRICE_DESCRIPTION" />
+        <property name="priceDescription" column="PRICE_DESCRIPTION" type="string" length="1024" />
         <property name="effectiveDate" column="EFFECTIVE_DATE" />
         <property name="expiryDate" column="EXPIRY_DATE" />
         <property name="departureDate" column="DEPARTURE_DATE" />
-        <property name="tripCharacteristic" column="TRIP_CHARACTERISTIC" />
-        <property name="serviceStandard" column="SERVICE_STANDARD" />
-        <property name="friendlyReminder" column="FRIENDLY_REMINDER" />
-        <property name="recommendedItem" column="RECOMMENDED_ITEM" />
+        <property name="tripCharacteristic" column="TRIP_CHARACTERISTIC" type="string" length="1024" />
+        <property name="serviceStandard" column="SERVICE_STANDARD" type="string" length="1024" />
+        <property name="friendlyReminder" column="FRIENDLY_REMINDER" type="string" length="1024" />
+        <property name="recommendedItem" column="RECOMMENDED_ITEM" type="string" length="1024" />
         <property name="published" column="PUBLISHED" />
         <property name="lastUpdate" column="LAST_UPDATE" />
         <set name="recommendedMonths" table="PRODUCT_RECOMMENDED_MONTH">

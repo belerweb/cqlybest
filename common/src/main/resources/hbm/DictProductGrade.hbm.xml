@@ -8,8 +8,8 @@
         <id name="id" column="ID">
             <generator class="native" />
         </id>
-        <property name="name" column="NAME" />
-        <property name="pinyin" column="PINYIN" />
-        <property name="py" column="PY" />
+        <property name="name" column="NAME" type="string" unique="true" not-null="true" length="32" />
+        <property name="pinyin" column="PINYIN" type="string" length="256" />
+        <property name="py" column="PY" type="string" length="32" />
     </class>
 </hibernate-mapping>

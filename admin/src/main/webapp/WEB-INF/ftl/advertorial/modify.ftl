@@ -17,7 +17,7 @@
 				<div class="control-group">
 					<label class="control-label">标题：</label>
 					<div class="controls">
-						<input type="text" class="span input" name="title" value="${(advertorial.title)!}" required="true" maxlength="32"> 
+						<input type="text" class="span input" name="title" value="${(advertorial.title)!}" required="true" maxlength="64"> 
 					</div>
 				</div>
 				<div class="control-group">
