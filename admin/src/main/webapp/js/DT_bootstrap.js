@@ -13,7 +13,8 @@ $.extend(true, $.fn.dataTable.defaults, {
 		sZeroRecords : '',
 		sEmptyTable : '',
 		sInfo : '共 _TOTAL_ 条记录，当前显示 _START_ 到 _END_'
-	}
+	},
+	bSort : false
 });
 
 /* Default class modification */
@@ -21,7 +22,7 @@ $.extend($.fn.dataTableExt.oStdClasses, {
 	"sWrapper" : "dataTables_wrapper form-inline"
 });
 
-/* API method to get paging information */ 
+/* API method to get paging information */
 $.fn.dataTableExt.oApi.fnPagingInfo = function(oSettings) {
 	return {
 		"iStart" : oSettings._iDisplayStart,
@@ -146,4 +147,3 @@ if ($.fn.DataTable.TableTools) {
 		}
 	});
 }
-
