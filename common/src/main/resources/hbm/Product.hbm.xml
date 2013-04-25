@@ -23,17 +23,29 @@
         <property name="recommendedItem" column="RECOMMENDED_ITEM" />
         <property name="published" column="PUBLISHED" />
         <property name="lastUpdate" column="LAST_UPDATE" />
-        <set name="recommendedMonths" table="PRODUCT_RECOMMENDED_MONTH" cascade="all">
+        <set name="recommendedMonths" table="PRODUCT_RECOMMENDED_MONTH">
             <key column="ID" />
             <element column="MONTH" type="int" />
         </set>
-        <set name="crowds" table="PRODUCT_CROWD" cascade="all">
+        <set name="crowds" table="PRODUCT_CROWD">
             <key column="ID" />
             <element column="CROWD" type="int" />
         </set>
-        <set name="destinations" table="PRODUCT_DESTINATION" cascade="all">
+        <set name="destinations" table="PRODUCT_DESTINATION">
             <key column="ID" />
             <element column="DESTINATION" type="string" />
+        </set>
+        <set name="traffics" table="PRODUCT_TRAFFIC">
+            <key column="PID" />
+            <many-to-many class="DictTraffic" column="DID" />
+        </set>
+        <set name="types" table="PRODUCT_TYPE">
+            <key column="PID" />
+            <many-to-many class="DictProductType" column="DID" />
+        </set>
+        <set name="grades" table="PRODUCT_GRADE">
+            <key column="PID" />
+            <many-to-many class="DictProductGrade" column="DID" />
         </set>
     </class>
 </hibernate-mapping>

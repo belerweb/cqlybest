@@ -131,7 +131,7 @@ window.cqlybest = {
 	buildHash : function(param) {
 		var hash = [];
 		$.each(param, function(k, v) {
-			hash.push(k + '=' + v);
+			hash.push(k + '=' + encodeURIComponent(v));
 		});
 		return '#' + hash.join(';');
 	},

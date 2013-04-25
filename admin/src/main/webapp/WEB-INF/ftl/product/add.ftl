@@ -33,13 +33,37 @@
 								<div class="control-group">
 									<label class="control-label">产品名称：</label>
 									<div class="controls">
-										<input type="text" class="span" name="name" value="" required="true">
+										<input type="text" class="span" name="product.name" value="" required="true">
 									</div>
 								</div>
 								<div class="control-group">
 									<label class="control-label">目的地：</label>
 									<div id="destinations" class="controls">
 										<ul style="margin: 0px 0px 5px;"></ul>
+									</div>
+								</div>
+								<div class="control-group">
+									<label class="control-label">交通方式：</label>
+									<div class="controls">
+										<#list traffics as dict>
+										<label class="checkbox inline"><input name="trafficIds" value="${dict.id!}" type="checkbox"> ${dict.name!}</label>
+										</#list>
+									</div>
+								</div>
+								<div class="control-group">
+									<label class="control-label">产品类型：</label>
+									<div class="controls">
+										<#list types as dict>
+										<label class="checkbox inline"><input name="productTypeIds" value="${dict.id!}" type="checkbox"> ${dict.name!}</label>
+										</#list>
+									</div>
+								</div>
+								<div class="control-group">
+									<label class="control-label">产品等级：</label>
+									<div class="controls">
+										<#list grades as dict>
+										<label class="checkbox inline"><input name="productGrageIds" value="${dict.id!}" type="checkbox"> ${dict.name!}</label>
+										</#list>
 									</div>
 								</div>
 							</div>

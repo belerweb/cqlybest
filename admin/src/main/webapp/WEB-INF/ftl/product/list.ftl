@@ -30,24 +30,40 @@
 						<th><input type="checkbox"></th>
 						<th>产品名称</th>
 						<th>状态</th>
-						<th>操作</th>
 						<th>最后修改时间</th>
+						<th>操作</th>
 					</tr>
 				</thead>
 				<tbody>
+					<#list products as product>
 					<tr>
 						<td><input type="checkbox"></td>
-						<td>XXX</td>
+						<td>${product.name!}</td>
 						<td>
+							<#if product.published>
 							<span class="s_green">已发布</span>
+							<#else>
 							<span class="s_gray">未发布</span>
+							</#if>
 						</td>
+						<td>${product.lastUpdate?string('yyyy-MM-dd HH:mm:ss')}</td>
 						<td class="action-table">
+							<#if product.published>
+							<a href="javascript:void(0);" data-url="${ContextPath}/product/toggle.html?id=${product.id}&published=false"
+								class="ajax-action-btn" data-confirm="true" data-action="取消发布" data-title="${product.name!}"
+								title="取消发布"><img alt="取消发布" src="images/icon/table_unpublish.png"></a>
+							<#else>
+							<a href="javascript:void(0);" data-url="${ContextPath}/product/toggle.html?id=${product.id}&published=true"
+								class="ajax-action-btn" data-confirm="true" data-action="发布" data-title="${product.name!}"
+								title="发布"><img alt="发布" src="images/icon/table_publish.png"></a>
+							</#if>
 							<a href="#"><img alt="" src="images/icon/table_edit.png"></a>
-							<a href="#"><img alt="" src="images/icon/table_del.png"></a>
+							<a href="javascript:void(0);" data-url="${ContextPath}/product/delete.html?id=${product.id}"
+								class="ajax-action-btn" data-confirm="true" data-action="删除" data-title="${product.name!}"
+								title="删除"><img alt="删除" src="images/icon/table_del.png"></a>
 						</td>
-						<td>2013-4-18 23:34:55</td>
 					</tr>
+					</#list>
 				</tbody>
 			</table>
 			<div class="clearfix"></div>
@@ -64,13 +80,29 @@ $('#main-list-table').dataTable({
 			sPrevious: '上一页'
 		}
 	},
-	iDeferLoading: 10000,
-	iDisplayStart: 0,
-	iDisplayLength: 20,
+	iDeferLoading: ${total},
+	iDisplayStart: ${(page-1)*pageSize},
+	iDisplayLength: ${pageSize},
 	sPaginationType: 'full_numbers',
 	bLengthChange: false,
 	bFilter: false,
 	bInfo: false,
-	bServerSide: true
+	bServerSide: true,
+	fnServerData: function (sSource, aoData, fnCallback, oSettings) {
+		var p = {};
+		$.each(aoData, function(i, obj){
+			p[obj.name] = obj.value;
+		});
+		var q = {};
+		q.page = p.iDisplayStart / p.iDisplayLength + 1;
+		var u = '${ContextPath}/product/list.html?' + $.param(q);
+		var hash  = {
+			m: 'site',
+			n: 'product.list',
+			t: '#main',
+			u: encodeURIComponent(u)
+		};
+		location.hash = cqlybest.buildHash(hash);
+	}
 });
 </script>
