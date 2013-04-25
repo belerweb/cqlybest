@@ -33,12 +33,12 @@
 						<td>${advertorial.title!}</td>
 						<td>${advertorial.summary!}</td>
 						<td class="action-table">
-							<a href="${ContextPath}/advertorial/view.html?id=${advertorial.id!}" target="_blank" title="查看"><img alt="查看" src="images/icon/table_view.png"></a>
+							<a href="${ContextPath}/advertorial/view.html?id=${advertorial.id!}" target="_blank" class="safe" title="查看"><i class="icon-eye-open"></i></a>
 							<a href="javascript:void(0);" data-url="${ContextPath}/advertorial/modify.html?id=${advertorial.id}"
-								class="page-load-btn" data-target="#mb" title="修改"><img alt="修改" src="images/icon/table_edit.png"></a>
+								class="page-load-btn safe" data-target="#mb" title="修改"><i class="icon-edit"></i></a>
 							<a href="javascript:void(0);" data-url="${ContextPath}/advertorial/delete.html?id=${advertorial.id}"
-								class="ajax-action-btn" data-confirm="true" data-action="删除"
-								data-title="${advertorial.name!}" title="删除"><img alt="删除" src="images/icon/table_del.png"></a>
+								class="ajax-action-btn danger last" data-confirm="true" data-action="删除"
+								data-title="${advertorial.name!}" title="删除"><i class="icon-remove"></i></a>
 						</td>
 					</tr>
 					</#list>

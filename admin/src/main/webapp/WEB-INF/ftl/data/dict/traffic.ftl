@@ -28,8 +28,8 @@
 				<td>${dict.name!}</td>
 				<td class="action-table">
 					<a href="javascript:void(0);" data-url="${ContextPath}/data/dict/delete_traffic.html?id=${dict.id}"
-						class="ajax-action-btn" data-confirm="true" data-action="删除"
-						data-title="${dict.name!}" title="删除"><img alt="删除" src="images/icon/table_del.png"></a>
+						class="ajax-action-btn danger last" data-confirm="true" data-action="删除"
+						data-title="${dict.name!}" title="删除"><i class="icon-remove"></i></a>
 				</td>
 			</tr>
 			</#list>

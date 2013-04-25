@@ -25,6 +25,13 @@
 		</div>
 		<div class="grid-content overflow">
 			<table id="main-list-table" class="table table-striped">
+				<colgroup>
+					<col width="40" />
+					<col width="" />
+					<col width="80" />
+					<col width="170" />
+					<col width="120" />
+				</colgroup>
 				<thead>
 					<tr>
 						<th><input type="checkbox"></th>
@@ -50,17 +57,17 @@
 						<td class="action-table">
 							<#if product.published>
 							<a href="javascript:void(0);" data-url="${ContextPath}/product/toggle.html?id=${product.id}&published=false"
-								class="ajax-action-btn" data-confirm="true" data-action="取消发布" data-title="${product.name!}"
-								title="取消发布"><img alt="取消发布" src="images/icon/table_unpublish.png"></a>
+								class="ajax-action-btn gray" data-confirm="true" data-action="取消发布" data-title="${product.name!}"
+								title="取消发布"><i class="icon-download-alt"></i></a>
 							<#else>
 							<a href="javascript:void(0);" data-url="${ContextPath}/product/toggle.html?id=${product.id}&published=true"
-								class="ajax-action-btn" data-confirm="true" data-action="发布" data-title="${product.name!}"
-								title="发布"><img alt="发布" src="images/icon/table_publish.png"></a>
+								class="ajax-action-btn blue" data-confirm="true" data-action="发布" data-title="${product.name!}"
+								title="发布"><i class="icon-upload-alt"></i></a>
 							</#if>
-							<a href="#"><img alt="" src="images/icon/table_edit.png"></a>
+							<a href="javascript:void(0);" class="safe"><i class="icon-edit"></i></a>
 							<a href="javascript:void(0);" data-url="${ContextPath}/product/delete.html?id=${product.id}"
-								class="ajax-action-btn" data-confirm="true" data-action="删除" data-title="${product.name!}"
-								title="删除"><img alt="删除" src="images/icon/table_del.png"></a>
+								class="ajax-action-btn danger last" data-confirm="true" data-action="删除" data-title="${product.name!}"
+								title="删除"><i class="icon-remove"></i></a>
 						</td>
 					</tr>
 					</#list>

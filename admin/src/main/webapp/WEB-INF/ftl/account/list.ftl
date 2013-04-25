@@ -40,10 +40,10 @@
 						<td>${account.remark!}</td>
 						<td class="action-table">
 							<a href="javascript:void(0);" data-url="${ContextPath}/account/modify.html?id=${account.id}"
-								class="page-load-btn" data-target="#mb" title="修改"><img alt="修改" src="images/icon/table_edit.png"></a>
+								class="page-load-btn safe" data-target="#mb" title="修改"><i class="icon-edit"></i></a>
 							<a href="javascript:void(0);" data-url="${ContextPath}/account/delete.html?id=${account.id}"
-								class="ajax-action-btn" data-confirm="true" data-action="删除"
-								data-title="${account.name!}" title="删除"><img alt="删除" src="images/icon/table_del.png"></a>
+								class="ajax-action-btn danger last" data-confirm="true" data-action="删除"
+								data-title="${account.name!}" title="删除"><i class="icon-remove"></i></a>
 						</td>
 					</tr>
 					</#list>

@@ -51,19 +51,19 @@
 							</#if>
 						</td>
 						<td class="action-table">
-							<a href="${poster.imageUrl!}" target="_blank" title="查看图片"><img alt="查看图片" src="images/icon/table_view.png"></a>
+							<a href="${poster.imageUrl!}" target="_blank" title="查看图片" class="safe"><i class="icon-picture"></i></a>
 							<#if poster.published>
 							<a href="javascript:void(0);" data-url="${ContextPath}/poster/toggle.html?id=${poster.id}&published=false"
-								class="ajax-action-btn" data-confirm="true" data-action="取消发布" data-title="${poster.title!}"
-								title="取消发布"><img alt="取消发布" src="images/icon/table_unpublish.png"></a>
+								class="ajax-action-btn gray" data-confirm="true" data-action="取消发布" data-title="${poster.title!}"
+								title="取消发布"><i class="icon-download-alt"></i></a>
 							<#else>
 							<a href="javascript:void(0);" data-url="${ContextPath}/poster/toggle.html?id=${poster.id}&published=true"
-								class="ajax-action-btn" data-confirm="true" data-action="发布" data-title="${poster.title!}"
-								title="发布"><img alt="发布" src="images/icon/table_publish.png"></a>
+								class="ajax-action-btn blue" data-confirm="true" data-action="发布" data-title="${poster.title!}"
+								title="发布"><i class="icon-upload-alt"></i></a>
 							</#if>
 							<a href="javascript:void(0);" data-url="${ContextPath}/poster/delete.html?id=${poster.id}"
-								class="ajax-action-btn" data-confirm="true" data-action="删除" data-title="${poster.title!}"
-								title="删除"><img alt="删除" src="images/icon/table_del.png"></a>
+								class="ajax-action-btn danger last" data-confirm="true" data-action="删除" data-title="${poster.title!}"
+								title="删除"><i class="icon-remove"></i></a>
 						</td>
 					</tr>
 					</#list>
