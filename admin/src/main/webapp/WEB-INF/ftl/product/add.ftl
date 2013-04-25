@@ -33,7 +33,13 @@
 								<div class="control-group">
 									<label class="control-label">产品名称：</label>
 									<div class="controls">
-										<input type="text" class="span" name="product.name" value="" required="true">
+										<input type="text" class="span" name="name" value="" required="true">
+									</div>
+								</div>
+								<div class="control-group">
+									<label class="control-label">关键词/标签：</label>
+									<div class="controls">
+										<input type="text" class="input-small" id="product-keyword">
 									</div>
 								</div>
 								<div class="control-group">
@@ -278,6 +284,13 @@ $('#destinations').tagit({
 	beforeTagAdded: function(event, ui) {
 		ui.tag.addClass('label').addClass('label-success');
 	}
+});
+$('#product-keyword').cqlybestTag({
+	hiddenTagListName: 'keywordIds',
+	typeahead: true,
+	typeaheadAjaxSource: '/data/dict.html?action=dict&type=keyword',
+	typeaheadAjaxPolling: true,
+	AjaxPush: '/data/dict/add_keyword.html'
 });
 $('select', '#main-content-form').selectBoxIt({autoWidth:false});
 UE.delEditor('product-description');

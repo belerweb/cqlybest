@@ -47,5 +47,9 @@
             <key column="PID" />
             <many-to-many class="DictProductGrade" column="DID" />
         </set>
+        <set name="keywords" table="PRODUCT_KEYWORD">
+            <key column="PID" />
+            <many-to-many class="Keyword" column="DID" />
+        </set>
     </class>
 </hibernate-mapping>

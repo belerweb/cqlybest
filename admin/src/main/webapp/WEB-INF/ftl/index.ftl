@@ -15,6 +15,7 @@
 		<link rel="stylesheet" href="${ContextPath}/css/icon/font-awesome.css">
 		<link rel="stylesheet" href="${ContextPath}/css/bootstrap-responsive.css">
 		<link rel="stylesheet" href="${ContextPath}/css/jquery.selectBoxIt.css">
+		<link rel="stylesheet" href="${ContextPath}/css/bootstrap-tagmanager.css">
 		<link rel="stylesheet" href="${ContextPath}/css/jquery.tagit.css">
 		<link rel="alternate stylesheet" type="text/css" media="screen" title="green-theme" href="${ContextPath}/css/color/green.css" />
 		<link rel="alternate stylesheet" type="text/css" media="screen" title="red-theme" href="${ContextPath}/css/color/red.css" />
@@ -87,7 +88,7 @@
 		</div>
 		<!--/#wrapper-->
 		<script src="${ContextPath}/js/jquery.js"></script>
-		<script src="${ContextPath}/js/bootstrap.min.js"></script>
+		<script src="${ContextPath}/js/bootstrap.js"></script>
 		<script src="${ContextPath}/js/bootbox.js"></script>
 		<script src="${ContextPath}/js/jqBootstrapValidation.js"></script>
 		<script src="${ContextPath}/js/jquery-ui.min.js"></script>
@@ -96,6 +97,8 @@
 		<script src="${ContextPath}/js/jquery.dataTables.js"></script>
 		<script src="${ContextPath}/js/DT_bootstrap.js"></script>
 		<script src="${ContextPath}/js/jquery.selectBoxIt.js"></script>
+		<script src="${ContextPath}/js/bootstrap-tagmanager.js"></script>
+		<script src="${ContextPath}/js/bootstrap-tagmanager-cqlybest.js"></script>
 		<script src="${ContextPath}/js/tag-it.js"></script>
 		<script src="${ContextPath}/js/ueditor/editor_config.js"></script>
 		<script src="${ContextPath}/js/ueditor/editor_all.js"></script>

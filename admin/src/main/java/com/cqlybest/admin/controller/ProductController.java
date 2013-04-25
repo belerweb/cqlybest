@@ -10,6 +10,7 @@ import org.codehaus.jackson.map.JsonMappingException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -18,6 +19,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.cqlybest.common.bean.DictProductGrade;
 import com.cqlybest.common.bean.DictProductType;
 import com.cqlybest.common.bean.DictTraffic;
+import com.cqlybest.common.bean.Keyword;
 import com.cqlybest.common.bean.Product;
 import com.cqlybest.common.service.DestinationService;
 import com.cqlybest.common.service.DictService;
@@ -61,7 +63,8 @@ public class ProductController {
   @ResponseBody
   public void add(Product product, @RequestParam(required = false) List<Integer> trafficIds,
       @RequestParam(required = false) List<Integer> productTypeIds,
-      @RequestParam(required = false) List<Integer> productGradeIds) {
+      @RequestParam(required = false) List<Integer> productGradeIds,
+      @RequestParam(required = false) String keywordIds) {
     if (trafficIds != null && !trafficIds.isEmpty()) {
       Set<DictTraffic> items = new HashSet<>();
       for (Integer id : trafficIds) {
@@ -88,6 +91,15 @@ public class ProductController {
         items.add(item);
       }
       product.setGrades(items);
+    }
+    if (!StringUtils.isEmpty(keywordIds)) {
+      Set<Keyword> keywords = new HashSet<>();
+      for (String id : keywordIds.split(",")) {
+        Keyword keyword = new Keyword();
+        keyword.setId(Integer.parseInt(id));
+        keywords.add(keyword);
+      }
+      product.setKeywords(keywords);
     }
     productService.add(product);
   }

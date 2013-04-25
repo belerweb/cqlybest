@@ -1962,8 +1962,13 @@
       var that = this
 
       items = $(items).map(function (i, item) {
-        i = $(that.options.item).attr('data-value', item)
-        i.find('a').html(that.highlighter(item))
+      	if(typeof item==='object') {
+      		i = $(that.options.item).attr('data-value', item.name).attr('data-id', item.id)
+      		i.find('a').html(item.name)
+      	} else {
+	        i = $(that.options.item).attr('data-value', item)
+	        i.find('a').html(that.highlighter(item))
+      	}
         return i[0]
       })
 
