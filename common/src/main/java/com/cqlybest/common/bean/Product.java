@@ -24,7 +24,7 @@ public class Product {
 
   private Set<Integer> recommendedMonths;// 推荐月份
   private Set<Integer> crowds;// 适合人群
-  private Set<String> destinations;// 目的地
+  private Set<Destination> destinations;// 目的地
   private Set<DictTraffic> traffics;// 交通方式
   private Set<DictProductType> types;// 产品类型
   private Set<DictProductGrade> grades;// 产品等级
@@ -174,11 +174,11 @@ public class Product {
     this.crowds = crowds;
   }
 
-  public Set<String> getDestinations() {
+  public Set<Destination> getDestinations() {
     return destinations;
   }
 
-  public void setDestinations(Set<String> destinations) {
+  public void setDestinations(Set<Destination> destinations) {
     this.destinations = destinations;
   }
 

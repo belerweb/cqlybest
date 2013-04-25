@@ -15,6 +15,7 @@ import com.cqlybest.common.bean.DictProductGrade;
 import com.cqlybest.common.bean.DictProductType;
 import com.cqlybest.common.bean.DictTraffic;
 import com.cqlybest.common.bean.Keyword;
+import com.cqlybest.common.service.DestinationService;
 import com.cqlybest.common.service.DictService;
 
 @Controller
@@ -22,6 +23,9 @@ public class DictController {
 
   @Autowired
   private DictService dictService;
+
+  @Autowired
+  private DestinationService destinationService;
 
 
   @RequestMapping("/data/dict.html")
@@ -33,6 +37,9 @@ public class DictController {
     Map<String, Object> result = new HashMap<>();
     if ("keyword".equals(type)) {
       result.put("tags", dictService.getDict(Keyword.class));
+    }
+    if ("destination".equals(type)) {
+      result.put("tags", destinationService.getTree());
     }
     return result;
   }

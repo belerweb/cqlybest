@@ -39,13 +39,13 @@
 								<div class="control-group">
 									<label class="control-label">关键词/标签：</label>
 									<div class="controls">
-										<input type="text" class="input-small" id="product-keyword">
+										<input type="text" class="input" id="product-keyword">
 									</div>
 								</div>
 								<div class="control-group">
 									<label class="control-label">目的地：</label>
-									<div id="destinations" class="controls">
-										<ul style="margin: 0px 0px 5px;"></ul>
+									<div class="controls">
+										<input type="text" class="input" id="product-destination">
 									</div>
 								</div>
 								<div class="control-group">
@@ -227,7 +227,7 @@
 	</div>
 </div>
 <script>
-var destinations = ${dests};
+var destinations = ${dests!'[]'};
 (function(){
 	var pr  = [];
 	var pn  = [];
@@ -269,22 +269,6 @@ var destinations = ${dests};
 		}
 	}
 })();
-$('#destinations').tagit({
-	fieldName: 'destinations',
-	autocomplete: {
-		delay: 0,
-		minLength: 0,
-		source: function(request, response) {
-			var key = request.term.split(/,\s*/).pop();
-			response($.grep(destinations, function(obj,i){
-				return obj.pinyin.contains(key)||obj.py.contains(key)||obj.fullname.contains(key);
-			}));
-		}
-	},
-	beforeTagAdded: function(event, ui) {
-		ui.tag.addClass('label').addClass('label-success');
-	}
-});
 $('#product-keyword').cqlybestTag({
 	hiddenTagListName: 'keywordIds',
 	typeahead: true,
@@ -292,13 +276,19 @@ $('#product-keyword').cqlybestTag({
 	typeaheadAjaxPolling: true,
 	AjaxPush: '/data/dict/add_keyword.html'
 });
+$('#product-destination').cqlybestTag({
+	hiddenTagListName: 'destIds',
+	typeahead: true,
+	typeaheadAjaxSource: '/data/dict.html?action=dict&type=destination',
+	typeaheadAjaxPolling: true
+});
 $('select', '#main-content-form').selectBoxIt({autoWidth:false});
 UE.delEditor('product-description');
 var pdEditor = UE.getEditor('product-description', {
 	initialContent: '',
 	initialFrameWidth: '100%'
 });
-$('input,textarea,select', '#main-content-form').not('.ui-autocomplete-input').jqBootstrapValidation({
+$('input,textarea,select', '#main-content-form').jqBootstrapValidation({
 	submitSuccess : function($form, event) {
 		event.preventDefault();
 		event.stopPropagation();

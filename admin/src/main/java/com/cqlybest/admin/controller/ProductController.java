@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.cqlybest.common.bean.Destination;
 import com.cqlybest.common.bean.DictProductGrade;
 import com.cqlybest.common.bean.DictProductType;
 import com.cqlybest.common.bean.DictTraffic;
@@ -53,7 +54,7 @@ public class ProductController {
 
   @RequestMapping(value = "/product/add.html", method = RequestMethod.GET)
   public void add(Model model) throws JsonGenerationException, JsonMappingException, IOException {
-    model.addAttribute("dests", jsonService.writeValueAsString(destinationService.getTree()));
+    // model.addAttribute("dests", jsonService.writeValueAsString(destinationService.getTree()));
     model.addAttribute("traffics", dictService.getDict(DictTraffic.class));
     model.addAttribute("types", dictService.getDict(DictProductType.class));
     model.addAttribute("grades", dictService.getDict(DictProductGrade.class));
@@ -64,7 +65,8 @@ public class ProductController {
   public void add(Product product, @RequestParam(required = false) List<Integer> trafficIds,
       @RequestParam(required = false) List<Integer> productTypeIds,
       @RequestParam(required = false) List<Integer> productGradeIds,
-      @RequestParam(required = false) String keywordIds) {
+      @RequestParam(required = false) String keywordIds,
+      @RequestParam(required = false) String destIds) {
     if (trafficIds != null && !trafficIds.isEmpty()) {
       Set<DictTraffic> items = new HashSet<>();
       for (Integer id : trafficIds) {
@@ -100,6 +102,15 @@ public class ProductController {
         keywords.add(keyword);
       }
       product.setKeywords(keywords);
+    }
+    if (!StringUtils.isEmpty(destIds)) {
+      Set<Destination> destinations = new HashSet<>();
+      for (String id : destIds.split(",")) {
+        Destination destination = new Destination();
+        destination.setId(Integer.parseInt(id));
+        destinations.add(destination);
+      }
+      product.setDestinations(destinations);
     }
     productService.add(product);
   }
