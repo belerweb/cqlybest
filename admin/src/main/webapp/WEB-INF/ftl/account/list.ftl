@@ -55,10 +55,6 @@
 </div>
 <script>
 $('#main-list-table').dataTable({
-	oLanguage: {
-		sZeroRecords: '',
-		sEmptyTable: ''
-	},
 	bLengthChange: false,
 	bFilter: false,
 	bInfo: false,

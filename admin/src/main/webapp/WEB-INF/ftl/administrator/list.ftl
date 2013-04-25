@@ -60,18 +60,9 @@ $('#admin-check').change(function(){
 	$('input[id^=admin-check-]').attr('checked', this.checked);
 });
 $('#main-list-table').dataTable({
-	oLanguage:{
-		oPaginate: {
-			sFirst: '首页',
-			sLast: '尾页',
-			sNext: '下一页',
-			sPrevious: '上一页'
-		}
-	},
 	iDeferLoading: ${total},
 	iDisplayStart: ${(page-1)*pageSize},
 	iDisplayLength: ${pageSize},
-	sPaginationType: 'full_numbers',
 	bLengthChange: false,
 	bFilter: false,
 	bInfo: false,

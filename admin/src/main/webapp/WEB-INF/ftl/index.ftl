@@ -11,8 +11,8 @@
 		<link href="${ContextPath}/css/style.css" rel="stylesheet">
 		<link href="${ContextPath}/css/bootstrap.css" rel="stylesheet">
 		<link href="${ContextPath}/css/jquery-ui-1.8.16.custom.css" rel="stylesheet">
-		<link rel="stylesheet" href="${ContextPath}/css/datatable.css">    
-		<link rel="stylesheet" href="${ContextPath}/css/icon/font-awesome.css">    
+		<link rel="stylesheet" href="${ContextPath}/css/DT_bootstrap.css">
+		<link rel="stylesheet" href="${ContextPath}/css/icon/font-awesome.css">
 		<link rel="stylesheet" href="${ContextPath}/css/bootstrap-responsive.css">
 		<link rel="stylesheet" href="${ContextPath}/css/jquery.selectBoxIt.css">
 		<link rel="stylesheet" href="${ContextPath}/css/jquery.tagit.css">
@@ -93,7 +93,8 @@
 		<script src="${ContextPath}/js/jquery-ui.min.js"></script>
 		<script src="${ContextPath}/js/jquery.form.js"></script>
 		<script src="${ContextPath}/js/jquery.ba-hashchange.min.js"></script>
-		<script src="${ContextPath}/js/jquery.dataTables.min.js"></script>
+		<script src="${ContextPath}/js/jquery.dataTables.js"></script>
+		<script src="${ContextPath}/js/DT_bootstrap.js"></script>
 		<script src="${ContextPath}/js/jquery.selectBoxIt.js"></script>
 		<script src="${ContextPath}/js/tag-it.js"></script>
 		<script src="${ContextPath}/js/ueditor/editor_config.js"></script>

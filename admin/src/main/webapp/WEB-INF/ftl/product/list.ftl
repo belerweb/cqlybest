@@ -72,21 +72,11 @@
 </div>
 <script>
 $('#main-list-table').dataTable({
-	oLanguage:{
-		oPaginate: {
-			sFirst: '首页',
-			sLast: '尾页',
-			sNext: '下一页',
-			sPrevious: '上一页'
-		}
-	},
 	iDeferLoading: ${total},
 	iDisplayStart: ${(page-1)*pageSize},
 	iDisplayLength: ${pageSize},
-	sPaginationType: 'full_numbers',
 	bLengthChange: false,
 	bFilter: false,
-	bInfo: false,
 	bServerSide: true,
 	fnServerData: function (sSource, aoData, fnCallback, oSettings) {
 		var p = {};
