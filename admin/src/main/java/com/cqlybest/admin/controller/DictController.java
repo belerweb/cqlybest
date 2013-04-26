@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.cqlybest.common.bean.DepartureCity;
 import com.cqlybest.common.bean.DictProductGrade;
 import com.cqlybest.common.bean.DictProductType;
 import com.cqlybest.common.bean.DictTraffic;
@@ -44,6 +45,13 @@ public class DictController {
     return result;
   }
 
+  @RequestMapping(value = "/data/dict/departure_city.html", method = RequestMethod.POST)
+  @ResponseBody
+  public DepartureCity addDepartureCity(DepartureCity dict) {
+    dictService.addDict(dict);
+    return dict;
+  }
+
   @RequestMapping(value = "/data/dict/add_keyword.html", method = RequestMethod.POST)
   @ResponseBody
   public Keyword addKeyword(Keyword dict) {
@@ -65,8 +73,14 @@ public class DictController {
 
   @RequestMapping(value = "/data/dict/add_product_grade.html", method = RequestMethod.POST)
   @ResponseBody
-  public void addProductGrade(DictProductGrade dict) {
+  public void DepartureCity(DictProductGrade dict) {
     dictService.addDict(dict);
+  }
+
+  @RequestMapping("/data/dict/delete_departure_city.html")
+  @ResponseBody
+  public void deleteDepartureCity(DepartureCity dict) {
+    dictService.deleteDict(dict);
   }
 
   @RequestMapping("/data/dict/delete_keyword.html")
@@ -91,6 +105,11 @@ public class DictController {
   @ResponseBody
   public void deleteProductGrade(DictProductGrade dict) {
     dictService.deleteDict(dict);
+  }
+
+  @RequestMapping(value = "/data/dict/departure_city.html", method = RequestMethod.GET)
+  public void departureCity(Model model) {
+    model.addAttribute("dicts", dictService.getDict(DepartureCity.class));
   }
 
   @RequestMapping(value = "/data/dict/keyword.html", method = RequestMethod.GET)
