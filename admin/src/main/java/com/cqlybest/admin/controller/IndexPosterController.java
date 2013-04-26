@@ -33,8 +33,8 @@ public class IndexPosterController {
 
   @RequestMapping("/poster/delete.html")
   @ResponseBody
-  public void delete(IndexPoster poster) {
-    indexPosterService.delete(poster);
+  public void delete(@RequestParam Integer id) {
+    indexPosterService.delete(id);
   }
 
   @RequestMapping("/poster/toggle.html")

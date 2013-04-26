@@ -33,8 +33,8 @@ public class AdvertorialController {
 
   @RequestMapping("/advertorial/delete.html")
   @ResponseBody
-  public void delete(Advertorial advertorial) {
-    advertorialService.delete(advertorial);
+  public void delete(@RequestParam Integer id) {
+    advertorialService.delete(id);
   }
 
   @RequestMapping(method = RequestMethod.GET, value = "/advertorial/modify.html")

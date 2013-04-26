@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.cqlybest.common.bean.Advertorial;
 import com.cqlybest.common.dao.AdvertorialDao;
@@ -19,6 +20,7 @@ public class AdvertorialService {
    * 
    * @param advertorial
    */
+  @Transactional
   public void add(Advertorial advertorial) {
     advertorialDao.saveOrUpdate(advertorial);
   }
@@ -28,8 +30,12 @@ public class AdvertorialService {
    * 
    * @param ccount
    */
-  public void delete(Advertorial advertorial) {
-    advertorialDao.delete(advertorial);
+  @Transactional
+  public void delete(Integer id) {
+    Advertorial advertorial = advertorialDao.findById(id);
+    if (advertorial != null) {
+      advertorialDao.delete(advertorial);
+    }
   }
 
   /**
@@ -55,6 +61,7 @@ public class AdvertorialService {
    * 
    * @param advertorial
    */
+  @Transactional
   public void modify(Advertorial advertorial) {
     advertorialDao.saveOrUpdate(advertorial);
   }

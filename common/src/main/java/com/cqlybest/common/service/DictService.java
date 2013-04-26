@@ -22,7 +22,10 @@ public class DictService {
   }
 
   public void deleteDict(Dict dict) {
-    dictDao.delete(dict);
+    Dict _dict = dictDao.findById(dict.getClass(), dict.getId());
+    if (_dict != null) {
+      dictDao.delete(dict);
+    }
   }
 
   public <T extends Dict> List<T> getDict(Class<T> cls) {

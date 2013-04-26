@@ -52,6 +52,7 @@ public class ProductService {
     return productDao.findById(id);
   }
 
+  @Transactional
   public void togglePublished(Integer id, boolean published) {
     productDao.togglePublished(id, published);
   }

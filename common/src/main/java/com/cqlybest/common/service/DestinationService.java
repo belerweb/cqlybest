@@ -5,6 +5,7 @@ import java.util.List;
 import org.hibernate.criterion.Order;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.cqlybest.common.bean.TreeNode;
 import com.cqlybest.common.bean.Destination;
@@ -16,6 +17,7 @@ public class DestinationService {
   @Autowired
   private DestinationDao destinationDao;
 
+  @Transactional
   public void add(Destination node) {
     Integer maxRgt = destinationDao.max("rgt");
     if (maxRgt == null) {
@@ -27,6 +29,7 @@ public class DestinationService {
     destinationDao.saveOrUpdate(node);
   }
 
+  @Transactional
   public void add(Integer pid, Destination node) {
     TreeNode parent = destinationDao.findById(pid);
     Integer parentRgt = parent.getRgt();
@@ -38,13 +41,16 @@ public class DestinationService {
     destinationDao.saveOrUpdate(node);
   }
 
+  @Transactional
   public void delete(Integer id) {
     TreeNode node = destinationDao.findById(id);
-    Integer rgt = node.getRgt();
-    int increment = -(rgt - node.getLft() + 1);
-    destinationDao.delete(node);
-    destinationDao.updateLft(rgt, increment);
-    destinationDao.updateRgt(rgt, increment);
+    if (node != null) {
+      Integer rgt = node.getRgt();
+      int increment = -(rgt - node.getLft() + 1);
+      destinationDao.delete(node);
+      destinationDao.updateLft(rgt, increment);
+      destinationDao.updateRgt(rgt, increment);
+    }
   }
 
   public List<Destination> getTree() {

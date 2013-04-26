@@ -5,6 +5,7 @@ import java.util.List;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.cqlybest.common.bean.IndexPoster;
 import com.cqlybest.common.dao.IndexPosterDao;
@@ -20,17 +21,20 @@ public class IndexPosterService {
    * 
    * @param poster
    */
+  @Transactional
   public void add(IndexPoster poster) {
     indexPosterDao.saveOrUpdate(poster);
   }
 
   /**
    * 删除海报
-   * 
-   * @param poster
    */
-  public void delete(IndexPoster poster) {
-    indexPosterDao.delete(poster);
+  @Transactional
+  public void delete(Integer id) {
+    IndexPoster poster = indexPosterDao.findById(id);
+    if (poster != null) {
+      indexPosterDao.delete(poster);
+    }
   }
 
   /**
@@ -57,6 +61,7 @@ public class IndexPosterService {
    * @param id
    * @param published
    */
+  @Transactional
   public void togglePublished(Integer id, boolean published) {
     IndexPoster poster = indexPosterDao.findById(id);
     poster.setPublished(published);

@@ -6,7 +6,7 @@ package com.cqlybest.common.bean;
  * @author jun
  * 
  */
-public class Dict {
+public abstract class Dict {
 
   private Integer id;
   private String name;

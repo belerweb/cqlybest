@@ -33,8 +33,8 @@ public class AccountController {
 
   @RequestMapping("/account/delete.html")
   @ResponseBody
-  public void delete(Account account) {
-    accountService.delete(account);
+  public void delete(@RequestParam Integer id) {
+    accountService.delete(id);
   }
 
   @RequestMapping(method = RequestMethod.GET, value = "/account/modify.html")
