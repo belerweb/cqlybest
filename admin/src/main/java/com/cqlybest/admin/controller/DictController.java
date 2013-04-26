@@ -39,13 +39,16 @@ public class DictController {
     if ("keyword".equals(type)) {
       result.put("tags", dictService.getDict(Keyword.class));
     }
+    if ("departure-city".equals(type)) {
+      result.put("tags", dictService.getDict(DepartureCity.class));
+    }
     if ("destination".equals(type)) {
       result.put("tags", destinationService.getTree());
     }
     return result;
   }
 
-  @RequestMapping(value = "/data/dict/departure_city.html", method = RequestMethod.POST)
+  @RequestMapping(value = "/data/dict/add_departure_city.html", method = RequestMethod.POST)
   @ResponseBody
   public DepartureCity addDepartureCity(DepartureCity dict) {
     dictService.addDict(dict);

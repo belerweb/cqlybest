@@ -144,8 +144,8 @@ public class ProductController {
 
   @RequestMapping("/product/delete.html")
   @ResponseBody
-  public void delete(Product product) {
-    productService.delete(product);
+  public void delete(@RequestParam Integer id) {
+    productService.delete(id);
   }
 
   @RequestMapping("/product/toggle.html")

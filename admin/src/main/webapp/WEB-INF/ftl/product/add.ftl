@@ -40,6 +40,12 @@
 									</div>
 								</div>
 								<div class="control-group">
+									<label class="control-label">出发城市：</label>
+									<div class="controls">
+										<input type="text" class="input" id="product-departure-city">
+									</div>
+								</div>
+								<div class="control-group">
 									<label class="control-label">目的地：</label>
 									<div class="controls">
 										<input type="text" class="input" id="product-destination">
@@ -76,7 +82,7 @@
 								<div class="control-group">
 									<label class="control-label">行程天数：</label>
 									<div class="controls">
-										<input type="text" class="input-small" name="days" value="1">
+										<input type="text" class="input-small" id="product-days" name="days" value="1" pattern="(([0-9])|([1-9]\d*))" data-validation-pattern-message="天数是非负数">
 										<select name="daysUnit" class="input-small">
 											<option value="d">天</option>
 											<option value="m">月</option>
@@ -91,7 +97,8 @@
 									<div class="controls">
 										<div class="input-prepend">
 											<span class="add-on">￥</span>
-											<input type="text" class="input-small" name="price">
+											<input type="text" class="input-small" id="product-price" pattern="(([1-9]{1}\d*)|([0]{1}))(\.(\d){1,2})?" data-validation-pattern-message="价格是正数，最多两位小数">
+											<input type="hidden" name="price">
 										</div>
 									</div>
 								</div>
@@ -273,6 +280,13 @@ $('#product-keyword').cqlybestTag({
 	typeaheadAjaxPolling: true,
 	AjaxPush: '/data/dict/add_keyword.html'
 });
+$('#product-departure-city').cqlybestTag({
+	hiddenTagListName: 'departureCityIds',
+	typeahead: true,
+	typeaheadAjaxSource: '/data/dict.html?action=dict&type=departure-city',
+	typeaheadAjaxPolling: true,
+	AjaxPush: '/data/dict/add_departure_city.html'
+});
 $('#product-destination').cqlybestTag({
 	hiddenTagListName: 'destIds',
 	typeahead: true,
@@ -290,6 +304,19 @@ $('input,textarea,select', '#main-content-form').jqBootstrapValidation({
 		event.preventDefault();
 		event.stopPropagation();
 		pdEditor.sync();
+		// 天数
+		if (isNaN(parseFloat($('#product-days').val()))) {
+			$('#product-days').attr('name', null);
+		} else {
+			$('#product-days').attr('name', 'days');
+		}
+		// 价格
+		var price = parseFloat($('#product-price').val());
+		if (isNaN(price)) {
+			$('#product-price').next().attr('name', null);
+		} else {
+			$('#product-price').next().attr('name', 'price').val(price*100);
+		}
 		$form.ajaxSubmit({
 			success : function(response){
 				alert('保存成功');

@@ -41,6 +41,12 @@
 									</div>
 								</div>
 								<div class="control-group">
+									<label class="control-label">出发城市：</label>
+									<div class="controls">
+										<input type="text" class="input" id="product-departure-city" data-prefilled="<#if (product.departureCities)?exists><#list product.departureCities as i>${i.id},${i.name},</#list></#if>">
+									</div>
+								</div>
+								<div class="control-group">
 									<label class="control-label">目的地：</label>
 									<div class="controls">
 										<input type="text" class="input" id="product-destination" data-prefilled="<#if (product.destinations)?exists><#list product.destinations as i>${i.id},${i.name},</#list></#if>">
@@ -80,7 +86,7 @@
 								<div class="control-group">
 									<label class="control-label">行程天数：</label>
 									<div class="controls">
-										<input type="text" class="input-small" name="days" value="${(product.days)!'1'}">
+										<input type="text" class="input-small" id="product-days" name="days" value="${(product.days)!'1'}" pattern="(([0-9])|([1-9]\d*))" data-validation-pattern-message="天数是非负数">
 										<select name="daysUnit" class="input-small">
 											<option <#if (product.daysUnit)?exists && product.daysUnit='d'>selected="selected"</#if> value="d">天</option>
 											<option <#if (product.daysUnit)?exists && product.daysUnit='m'>selected="selected"</#if> value="m">月</option>
@@ -95,7 +101,8 @@
 									<div class="controls">
 										<div class="input-prepend">
 											<span class="add-on">￥</span>
-											<input type="text" class="input-small" name="price" value="<#if (product.price)?exists>${(product.price/100)?string('0.00')}</#if>">
+											<input type="text" value="<#if (product.price)?exists>${(product.price/100)?string('0.00')}</#if>" class="input-small" id="product-price" pattern="(([1-9]{1}\d*)|([0]{1}))(\.(\d){1,2})?" data-validation-pattern-message="价格是正数，最多两位小数">
+											<input type="hidden" name="price">
 										</div>
 									</div>
 								</div>
@@ -284,6 +291,14 @@ $('#product-keyword').cqlybestTag({
 	typeaheadAjaxPolling: true,
 	AjaxPush: '/data/dict/add_keyword.html'
 });
+$('#product-departure-city').cqlybestTag({
+	prefilled: $('#product-departure-city').attr('data-prefilled'),
+	hiddenTagListName: 'departureCityIds',
+	typeahead: true,
+	typeaheadAjaxSource: '/data/dict.html?action=dict&type=departure-city',
+	typeaheadAjaxPolling: true,
+	AjaxPush: '/data/dict/add_departure_city.html'
+});
 $('#product-destination').cqlybestTag({
 	prefilled: $('#product-destination').attr('data-prefilled'),
 	hiddenTagListName: 'destIds',
@@ -302,6 +317,19 @@ $('input,textarea,select', '#main-content-form').jqBootstrapValidation({
 		event.preventDefault();
 		event.stopPropagation();
 		pdEditor.sync();
+		// 天数
+		if (isNaN(parseFloat($('#product-days').val()))) {
+			$('#product-days').attr('name', null);
+		} else {
+			$('#product-days').attr('name', 'days');
+		}
+		// 价格
+		var price = parseFloat($('#product-price').val());
+		if (isNaN(price)) {
+			$('#product-price').next().attr('name', null);
+		} else {
+			$('#product-price').next().attr('name', 'price').val(price*100);
+		}
 		$form.ajaxSubmit({
 			success : function(response){
 				alert('保存成功');
