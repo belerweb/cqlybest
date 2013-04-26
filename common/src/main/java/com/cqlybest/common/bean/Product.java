@@ -29,6 +29,7 @@ public class Product {
   private Set<DictProductType> types;// 产品类型
   private Set<DictProductGrade> grades;// 产品等级
   private Set<Keyword> keywords;// 关键词
+  private Set<DepartureCity> departureCities;// 出发城市
 
   public Integer getId() {
     return id;
@@ -212,6 +213,14 @@ public class Product {
 
   public void setKeywords(Set<Keyword> keywords) {
     this.keywords = keywords;
+  }
+
+  public Set<DepartureCity> getDepartureCities() {
+    return departureCities;
+  }
+
+  public void setDepartureCities(Set<DepartureCity> departureCities) {
+    this.departureCities = departureCities;
   }
 
 }

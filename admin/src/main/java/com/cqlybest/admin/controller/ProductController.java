@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.cqlybest.common.bean.DepartureCity;
 import com.cqlybest.common.bean.Destination;
 import com.cqlybest.common.bean.DictProductGrade;
 import com.cqlybest.common.bean.DictProductType;
@@ -66,7 +67,9 @@ public class ProductController {
       @RequestParam(required = false) List<Integer> productTypeIds,
       @RequestParam(required = false) List<Integer> productGradeIds,
       @RequestParam(required = false) String keywordIds,
-      @RequestParam(required = false) String destIds) {
+      @RequestParam(required = false) String destIds,
+      @RequestParam(required = false) String departureCityIds) {
+    // 交通方式
     if (trafficIds != null && !trafficIds.isEmpty()) {
       Set<DictTraffic> items = new HashSet<>();
       for (Integer id : trafficIds) {
@@ -76,6 +79,7 @@ public class ProductController {
       }
       product.setTraffics(items);
     }
+    // 产品类型
     if (productTypeIds != null && !productTypeIds.isEmpty()) {
       Set<DictProductType> items = new HashSet<>();
       for (Integer id : productTypeIds) {
@@ -85,6 +89,7 @@ public class ProductController {
       }
       product.setTypes(items);
     }
+    // 产品等级
     if (productGradeIds != null && !productGradeIds.isEmpty()) {
       Set<DictProductGrade> items = new HashSet<>();
       for (Integer id : productGradeIds) {
@@ -94,6 +99,7 @@ public class ProductController {
       }
       product.setGrades(items);
     }
+    // 产品关键词
     if (!StringUtils.isEmpty(keywordIds)) {
       Set<Keyword> keywords = new HashSet<>();
       for (String id : keywordIds.split(",")) {
@@ -103,6 +109,7 @@ public class ProductController {
       }
       product.setKeywords(keywords);
     }
+    // 目的地
     if (!StringUtils.isEmpty(destIds)) {
       Set<Destination> destinations = new HashSet<>();
       for (String id : destIds.split(",")) {
@@ -111,6 +118,16 @@ public class ProductController {
         destinations.add(destination);
       }
       product.setDestinations(destinations);
+    }
+    // 出发城市
+    if (!StringUtils.isEmpty(departureCityIds)) {
+      Set<DepartureCity> departureCities = new HashSet<>();
+      for (String id : departureCityIds.split(",")) {
+        DepartureCity city = new DepartureCity();
+        city.setId(Integer.parseInt(id));
+        departureCities.add(city);
+      }
+      product.setDepartureCities(departureCities);
     }
     productService.add(product);
   }
