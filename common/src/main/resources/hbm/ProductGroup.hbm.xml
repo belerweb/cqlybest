@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping package="com.cqlybest.common.bean">
+    <class name="ProductGroup" table="Product_Group">
+        <id name="id" column="ID" type="string" length="36">
+            <generator class="assigned" />
+        </id>
+        <property name="name" column="NAME" type="string" not-null="true" length="16" />
+        <property name="groupType1" column="GROUP_TYPE_1" />
+        <property name="groupValue1" column="GROUP_VALUE_1" length="256" />
+        <property name="groupType2" column="GROUP_TYPE_2" />
+        <property name="groupValue2" column="GROUP_VALUE_2" length="256" />
+        <property name="groupType3" column="GROUP_TYPE_3" />
+        <property name="groupValue3" column="GROUP_VALUE_3" length="256" />
+        <property name="groupType4" column="GROUP_TYPE_4" />
+        <property name="groupValue4" column="GROUP_VALUE_4" length="256" />
+        <property name="groupType5" column="GROUP_TYPE_5" />
+        <property name="groupValue5" column="GROUP_VALUE_5" length="256" />
+        <property name="published" column="PUBLISHED" />
+    </class>
+</hibernate-mapping>
