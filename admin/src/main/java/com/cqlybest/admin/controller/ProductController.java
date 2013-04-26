@@ -61,9 +61,19 @@ public class ProductController {
     model.addAttribute("grades", dictService.getDict(DictProductGrade.class));
   }
 
-  @RequestMapping(value = "/product/add.html", method = RequestMethod.POST)
+  @RequestMapping(value = "/product/modify.html", method = RequestMethod.GET)
+  public void modify(@RequestParam Integer id, Model model) throws JsonGenerationException,
+      JsonMappingException, IOException {
+    // model.addAttribute("dests", jsonService.writeValueAsString(destinationService.getTree()));
+    model.addAttribute("traffics", dictService.getDict(DictTraffic.class));
+    model.addAttribute("types", dictService.getDict(DictProductType.class));
+    model.addAttribute("grades", dictService.getDict(DictProductGrade.class));
+    model.addAttribute("product", productService.getProduct(id));
+  }
+
+  @RequestMapping(value = {"/product/add.html", "/product/modify.html"}, method = RequestMethod.POST)
   @ResponseBody
-  public void add(Product product, @RequestParam(required = false) List<Integer> trafficIds,
+  public void edit(Product product, @RequestParam(required = false) List<Integer> trafficIds,
       @RequestParam(required = false) List<Integer> productTypeIds,
       @RequestParam(required = false) List<Integer> productGradeIds,
       @RequestParam(required = false) String keywordIds,
@@ -129,7 +139,7 @@ public class ProductController {
       }
       product.setDepartureCities(departureCities);
     }
-    productService.add(product);
+    productService.edit(product);
   }
 
   @RequestMapping("/product/delete.html")

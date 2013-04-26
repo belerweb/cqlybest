@@ -610,18 +610,15 @@
 			if (tagManagerOptions.prefilled != null) {
 				if (typeof (tagManagerOptions.prefilled) == "object") {
 					var pta = tagManagerOptions.prefilled;
-					jQuery.each(pta, function(key, val) {
-						var a = 1;
-						pushTag(val, obj, true);
+					jQuery.each(pta, function(key, item) {
+						pushTag(item.name, obj, true, item.id);
 					});
 				} else if (typeof (tagManagerOptions.prefilled) == "string") {
-					var pta = tagManagerOptions.prefilled.split(',');
-
-					jQuery.each(pta, function(key, val) {
-						var a = 1;
-						pushTag(val, obj, true);
-					});
-
+					var pta = tagManagerOptions.prefilled.replace(/,$/,'').split(',');
+					for ( var i = 0; i < pta.length;) {
+						pushTag(pta[i + 1], obj, true, pta[i]);
+						i = i + 2;
+					}
 				}
 			}
 		});

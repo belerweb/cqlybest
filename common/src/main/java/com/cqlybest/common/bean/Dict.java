@@ -45,4 +45,17 @@ public class Dict {
     this.py = py;
   }
 
+  @Override
+  public int hashCode() {
+    return id;
+  }
+
+  @Override
+  public boolean equals(Object obj) {
+    if (obj instanceof Dict) {
+      return id == ((Dict) obj).id;
+    }
+    return false;
+  }
+
 }

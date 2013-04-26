@@ -64,7 +64,8 @@
 								class="ajax-action-btn blue" data-confirm="true" data-action="发布" data-title="${product.name!}"
 								title="发布"><i class="icon-upload-alt"></i></a>
 							</#if>
-							<a href="javascript:void(0);" class="safe"><i class="icon-edit"></i></a>
+							<a href="javascript:void(0);" data-url="${ContextPath}/product/modify.html?id=${product.id}"
+								class="page-load-btn safe" data-target="#mb" title="修改"><i class="icon-edit"></i></a>
 							<a href="javascript:void(0);" data-url="${ContextPath}/product/delete.html?id=${product.id}"
 								class="ajax-action-btn danger last" data-confirm="true" data-action="删除" data-title="${product.name!}"
 								title="删除"><i class="icon-remove"></i></a>

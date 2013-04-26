@@ -10,13 +10,14 @@
 		<div class="grid-title">
 			<div class="pull-left">
 				<div class="icon-title"><i class="icon-plus"></i></div>
-				<span>增加新 产品</span> 
+				<span>修改产品</span> 
 				<div class="clearfix"></div>
 			</div>
 			<div class="clearfix"></div>   
 		</div>
 		<!-- novalidate -->
-		<form id="main-content-form" action="${ContextPath}/product/add.html" method="post" class="form-horizontal grid-content">
+		<form id="main-content-form" action="${ContextPath}/product/modify.html" method="post" class="form-horizontal grid-content">
+			<input type="hidden" name="id" value="${(product.id)!}">
 			<div class="tabbable">
 				<ul class="nav nav-tabs">
 					<li class="active"><a href="javascript:void(0);" data-toggle="tab" data-target="#product-base-tab">基本信息</a></li>
@@ -30,42 +31,45 @@
 								<div class="control-group">
 									<label class="control-label">产品名称：</label>
 									<div class="controls">
-										<input type="text" class="span" name="name" required="true" maxlength="64">
+										<input type="text" class="span" name="name" value="${(product.name)!}" required="true" maxlength="64">
 									</div>
 								</div>
 								<div class="control-group">
 									<label class="control-label">关键词/标签：</label>
 									<div class="controls">
-										<input type="text" class="input" id="product-keyword">
+										<input type="text" class="input" id="product-keyword" data-prefilled="<#if (product.keywords)?exists><#list product.keywords as i>${i.id},${i.name},</#list></#if>">
 									</div>
 								</div>
 								<div class="control-group">
 									<label class="control-label">目的地：</label>
 									<div class="controls">
-										<input type="text" class="input" id="product-destination">
+										<input type="text" class="input" id="product-destination" data-prefilled="<#if (product.destinations)?exists><#list product.destinations as i>${i.id},${i.name},</#list></#if>">
 									</div>
 								</div>
 								<div class="control-group">
 									<label class="control-label">交通方式：</label>
 									<div class="controls">
+										<#assign trafficsExists = (product.traffics)?exists>
 										<#list traffics as dict>
-										<label class="checkbox inline"><input name="trafficIds" value="${dict.id!}" type="checkbox"> ${dict.name!}</label>
+										<label class="checkbox inline"><input name="trafficIds" value="${dict.id!}" <#if trafficsExists && product.traffics?seq_contains(dict)>checked="checked"</#if> type="checkbox"> ${dict.name!}</label>
 										</#list>
 									</div>
 								</div>
 								<div class="control-group">
 									<label class="control-label">产品类型：</label>
 									<div class="controls">
+										<#assign typesExists = (product.types)?exists>
 										<#list types as dict>
-										<label class="checkbox inline"><input name="productTypeIds" value="${dict.id!}" type="checkbox"> ${dict.name!}</label>
+										<label class="checkbox inline"><input name="productTypeIds" value="${dict.id!}" <#if typesExists && product.types?seq_contains(dict)>checked="checked"</#if> type="checkbox"> ${dict.name!}</label>
 										</#list>
 									</div>
 								</div>
 								<div class="control-group">
 									<label class="control-label">产品等级：</label>
 									<div class="controls">
+										<#assign gradesExists = (product.grades)?exists>
 										<#list grades as dict>
-										<label class="checkbox inline"><input name="productGradeIds" value="${dict.id!}" type="checkbox"> ${dict.name!}</label>
+										<label class="checkbox inline"><input name="productGradeIds" value="${dict.id!}" <#if gradesExists && product.grades?seq_contains(dict)>checked="checked"</#if> type="checkbox"> ${dict.name!}</label>
 										</#list>
 									</div>
 								</div>
@@ -76,11 +80,11 @@
 								<div class="control-group">
 									<label class="control-label">行程天数：</label>
 									<div class="controls">
-										<input type="text" class="input-small" name="days" value="1">
+										<input type="text" class="input-small" name="days" value="${(product.days)!'1'}">
 										<select name="daysUnit" class="input-small">
-											<option value="d">天</option>
-											<option value="m">月</option>
-											<option value="y">年</option>
+											<option <#if (product.daysUnit)?exists && product.daysUnit='d'>selected="selected"</#if> value="d">天</option>
+											<option <#if (product.daysUnit)?exists && product.daysUnit='m'>selected="selected"</#if> value="m">月</option>
+											<option <#if (product.daysUnit)?exists && product.daysUnit='y'>selected="selected"</#if> value="y">年</option>
 										</select>
 									</div>
 								</div>
@@ -91,7 +95,7 @@
 									<div class="controls">
 										<div class="input-prepend">
 											<span class="add-on">￥</span>
-											<input type="text" class="input-small" name="price">
+											<input type="text" class="input-small" name="price" value="<#if (product.price)?exists>${(product.price/100)?string('0.00')}</#if>">
 										</div>
 									</div>
 								</div>
@@ -102,55 +106,61 @@
 								<div class="control-group">
 									<label class="control-label">费用说明：</label>
 									<div class="controls">
-										<textarea rows="3" name="priceDescription" class="span input same-height-1" maxlength="1024"></textarea>
+										<textarea rows="3" name="priceDescription" class="span input same-height-1" maxlength="1024">${(product.priceDescription)!}</textarea>
 									</div>
 								</div>
 								<div class="control-group">
 									<label class="control-label">推荐月份：</label>
 									<div class="controls">
-										<label class="checkbox inline"><input name="recommendedMonths" value="1" type="checkbox"> 1月</label>
-										<label class="checkbox inline"><input name="recommendedMonths" value="2" type="checkbox"> 2月</label>
-										<label class="checkbox inline"><input name="recommendedMonths" value="3" type="checkbox"> 3月</label>
-										<label class="checkbox inline"><input name="recommendedMonths" value="4" type="checkbox"> 4月</label>
-										<label class="checkbox inline"><input name="recommendedMonths" value="5" type="checkbox"> 5月</label>
-										<label class="checkbox inline"><input name="recommendedMonths" value="6" type="checkbox"> 6月</label>
-										<label class="checkbox inline"><input name="recommendedMonths" value="7" type="checkbox"> 7月</label>
-										<label class="checkbox inline"><input name="recommendedMonths" value="8" type="checkbox"> 8月</label>
-										<label class="checkbox inline"><input name="recommendedMonths" value="9" type="checkbox"> 9月</label>
-										<label class="checkbox inline"><input name="recommendedMonths" value="10" type="checkbox"> 10月</label>
-										<label class="checkbox inline"><input name="recommendedMonths" value="11" type="checkbox"> 11月</label>
-										<label class="checkbox inline"><input name="recommendedMonths" value="12" type="checkbox"> 12月</label>
+										<#assign recommendedMonthsExists = (product.recommendedMonths)?exists>
+										<label class="checkbox inline"><input name="recommendedMonths" value="1" <#if recommendedMonthsExists && product.recommendedMonths?seq_contains(1)>checked="checked"</#if> type="checkbox"> 1月</label>
+										<label class="checkbox inline"><input name="recommendedMonths" value="2" <#if recommendedMonthsExists && product.recommendedMonths?seq_contains(2)>checked="checked"</#if> type="checkbox"> 2月</label>
+										<label class="checkbox inline"><input name="recommendedMonths" value="3" <#if recommendedMonthsExists && product.recommendedMonths?seq_contains(3)>checked="checked"</#if> type="checkbox"> 3月</label>
+										<label class="checkbox inline"><input name="recommendedMonths" value="4" <#if recommendedMonthsExists && product.recommendedMonths?seq_contains(4)>checked="checked"</#if> type="checkbox"> 4月</label>
+										<label class="checkbox inline"><input name="recommendedMonths" value="5" <#if recommendedMonthsExists && product.recommendedMonths?seq_contains(5)>checked="checked"</#if> type="checkbox"> 5月</label>
+										<label class="checkbox inline"><input name="recommendedMonths" value="6" <#if recommendedMonthsExists && product.recommendedMonths?seq_contains(6)>checked="checked"</#if> type="checkbox"> 6月</label>
+										<label class="checkbox inline"><input name="recommendedMonths" value="7" <#if recommendedMonthsExists && product.recommendedMonths?seq_contains(7)>checked="checked"</#if> type="checkbox"> 7月</label>
+										<label class="checkbox inline"><input name="recommendedMonths" value="8" <#if recommendedMonthsExists && product.recommendedMonths?seq_contains(8)>checked="checked"</#if> type="checkbox"> 8月</label>
+										<label class="checkbox inline"><input name="recommendedMonths" value="9" <#if recommendedMonthsExists && product.recommendedMonths?seq_contains(9)>checked="checked"</#if> type="checkbox"> 9月</label>
+										<label class="checkbox inline"><input name="recommendedMonths" value="10" <#if recommendedMonthsExists && product.recommendedMonths?seq_contains(10)>checked="checked"</#if> type="checkbox"> 10月</label>
+										<label class="checkbox inline"><input name="recommendedMonths" value="11" <#if recommendedMonthsExists && product.recommendedMonths?seq_contains(11)>checked="checked"</#if> type="checkbox"> 11月</label>
+										<label class="checkbox inline"><input name="recommendedMonths" value="12" <#if recommendedMonthsExists && product.recommendedMonths?seq_contains(12)>checked="checked"</#if> type="checkbox"> 12月</label>
 									</div>
 								</div>
 								<div class="control-group">
 									<label class="control-label">适合人群：</label>
 									<div class="controls">
-										<label class="checkbox inline"><input name="crowds" value="1" type="checkbox"> 个人旅行</label>
-										<label class="checkbox inline"><input name="crowds" value="2" type="checkbox"> 团体旅行</label>
+										<#assign crowdsExists = (product.crowds)?exists>
+										<label class="checkbox inline">
+											<input name="crowds" value="1" <#if crowdsExists && product.crowds?seq_contains(1)>checked="checked"</#if> type="checkbox"> 个人旅行
+										</label>
+										<label class="checkbox inline">
+											<input name="crowds" value="2" <#if crowdsExists && product.crowds?seq_contains(2)>checked="checked"</#if> type="checkbox"> 团体旅行
+										</label>
 									</div>
 								</div>
 								<div class="control-group">
 									<label class="control-label">行程特色：</label>
 									<div class="controls">
-										<textarea rows="3" name="tripCharacteristic" class="span input same-height-1" maxlength="1024"></textarea>
+										<textarea rows="3" name="tripCharacteristic" class="span input same-height-1" maxlength="1024">${(product.tripCharacteristic)!}</textarea>
 									</div>
 								</div>
 								<div class="control-group">
 									<label class="control-label">服务标准：</label>
 									<div class="controls">
-										<textarea rows="3" name="serviceStandard" class="span input same-height-1" maxlength="1024"></textarea>
+										<textarea rows="3" name="serviceStandard" class="span input same-height-1" maxlength="1024">${(product.serviceStandard)!}</textarea>
 									</div>
 								</div>
 								<div class="control-group">
 									<label class="control-label">友情提示：</label>
 									<div class="controls">
-										<textarea rows="3" name="friendlyReminder" class="span input same-height-1" maxlength="1024"></textarea>
+										<textarea rows="3" name="friendlyReminder" class="span input same-height-1" maxlength="1024">${(product.friendlyReminder)!}</textarea>
 									</div>
 								</div>
 								<div class="control-group">
 									<label class="control-label">推荐项目：</label>
 									<div class="controls">
-										<textarea rows="3" name="recommendedItem" class="span input same-height-1" maxlength="1024"></textarea>
+										<textarea rows="3" name="recommendedItem" class="span input same-height-1" maxlength="1024">${(product.recommendedItem)!}</textarea>
 									</div>
 								</div>
 							</div>
@@ -159,7 +169,7 @@
 					<div id="product-detail-tab" class="tab-pane">
 						<div class="row-fluid">
 							<div class="span12">
-								<script type="text/plain" id="product-description" name="description"></script>
+								<script type="text/plain" id="product-description" name="description">${(product.description)!}</script>
 							</div>
 						</div>
 					</div>
@@ -267,6 +277,7 @@ var destinations = ${dests!'[]'};
 	}
 })();
 $('#product-keyword').cqlybestTag({
+	prefilled: $('#product-keyword').attr('data-prefilled'),
 	hiddenTagListName: 'keywordIds',
 	typeahead: true,
 	typeaheadAjaxSource: '/data/dict.html?action=dict&type=keyword',
@@ -274,6 +285,7 @@ $('#product-keyword').cqlybestTag({
 	AjaxPush: '/data/dict/add_keyword.html'
 });
 $('#product-destination').cqlybestTag({
+	prefilled: $('#product-destination').attr('data-prefilled'),
 	hiddenTagListName: 'destIds',
 	typeahead: true,
 	typeaheadAjaxSource: '/data/dict.html?action=dict&type=destination',

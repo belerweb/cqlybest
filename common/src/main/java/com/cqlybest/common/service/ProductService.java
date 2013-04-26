@@ -18,10 +18,10 @@ public class ProductService {
   private ProductDao productDao;
 
   @Transactional(readOnly = false)
-  public void add(Product newProduct) {
-    newProduct.setPublished(false);
-    newProduct.setLastUpdate(new Date());
-    productDao.saveOrUpdate(newProduct);
+  public void edit(Product product) {
+    product.setPublished(false);
+    product.setLastUpdate(new Date());
+    productDao.saveOrUpdate(product);
   }
 
   @Transactional(readOnly = false)
@@ -42,6 +42,10 @@ public class ProductService {
     updatedProduct.setPublished(false);
     updatedProduct.setLastUpdate(new Date());
     productDao.saveOrUpdate(updatedProduct);
+  }
+
+  public Product getProduct(Integer id) {
+    return productDao.findById(id);
   }
 
 }
