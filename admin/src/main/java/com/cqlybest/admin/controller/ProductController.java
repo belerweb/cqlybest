@@ -148,5 +148,11 @@ public class ProductController {
     productService.delete(product);
   }
 
+  @RequestMapping("/product/toggle.html")
+  @ResponseBody
+  public void toggle(@RequestParam Integer id, @RequestParam boolean published) {
+    productService.togglePublished(id, published);
+  }
+
 
 }

@@ -11,12 +11,14 @@ import com.cqlybest.common.bean.Product;
 import com.cqlybest.common.dao.ProductDao;
 
 @Service
-@Transactional(readOnly = true)
 public class ProductService {
 
   @Autowired
   private ProductDao productDao;
 
+  /**
+   * 编辑产品
+   */
   @Transactional(readOnly = false)
   public void edit(Product product) {
     product.setPublished(false);
@@ -24,6 +26,9 @@ public class ProductService {
     productDao.saveOrUpdate(product);
   }
 
+  /**
+   * 删除产品
+   */
   @Transactional(readOnly = false)
   public void delete(Product product) {
     productDao.delete(product);
@@ -37,15 +42,15 @@ public class ProductService {
     return productDao.findProductTotal(page, pageSize);
   }
 
-  @Transactional(readOnly = false)
-  public void modify(Product updatedProduct) {
-    updatedProduct.setPublished(false);
-    updatedProduct.setLastUpdate(new Date());
-    productDao.saveOrUpdate(updatedProduct);
-  }
-
+  /**
+   * 查询指定产品
+   */
   public Product getProduct(Integer id) {
     return productDao.findById(id);
+  }
+
+  public void togglePublished(Integer id, boolean published) {
+    productDao.togglePublished(id, published);
   }
 
 }
