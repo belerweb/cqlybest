@@ -24,7 +24,7 @@ public class DictService {
   public void deleteDict(Dict dict) {
     Dict _dict = dictDao.findById(dict.getClass(), dict.getId());
     if (_dict != null) {
-      dictDao.delete(dict);
+      dictDao.delete(_dict);
     }
   }
 
