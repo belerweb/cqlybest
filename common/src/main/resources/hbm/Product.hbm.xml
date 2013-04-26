@@ -13,14 +13,14 @@
         <property name="daysUnit" column="DAYS_UNIT" />
         <property name="description" column="DESCRIPTION" type="text" />
         <property name="price" column="PRICE" />
-        <property name="priceDescription" column="PRICE_DESCRIPTION" type="string" length="1024" />
+        <property name="priceDescription" column="PRICE_DESCRIPTION" type="string" length="2048" />
         <property name="effectiveDate" column="EFFECTIVE_DATE" />
         <property name="expiryDate" column="EXPIRY_DATE" />
         <property name="departureDate" column="DEPARTURE_DATE" />
-        <property name="tripCharacteristic" column="TRIP_CHARACTERISTIC" type="string" length="1024" />
-        <property name="serviceStandard" column="SERVICE_STANDARD" type="string" length="1024" />
-        <property name="friendlyReminder" column="FRIENDLY_REMINDER" type="string" length="1024" />
-        <property name="recommendedItem" column="RECOMMENDED_ITEM" type="string" length="1024" />
+        <property name="tripCharacteristic" column="TRIP_CHARACTERISTIC" type="string" length="2048" />
+        <property name="serviceStandard" column="SERVICE_STANDARD" type="string" length="5120" />
+        <property name="friendlyReminder" column="FRIENDLY_REMINDER" type="string" length="5120" />
+        <property name="recommendedItem" column="RECOMMENDED_ITEM" type="string" length="2048" />
         <property name="published" column="PUBLISHED" />
         <property name="lastUpdate" column="LAST_UPDATE" />
         <set name="recommendedMonths" table="PRODUCT_RECOMMENDED_MONTH">
@@ -32,8 +32,8 @@
             <element column="CROWD" type="int" />
         </set>
         <set name="destinations" table="PRODUCT_DESTINATION">
-            <key column="ID" />
-            <element column="DESTINATION" type="string" />
+            <key column="PID" />
+            <many-to-many class="Destination" column="DID" />
         </set>
         <set name="traffics" table="PRODUCT_TRAFFIC">
             <key column="PID" />

@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping package="com.cqlybest.common.bean">
+    <class name="QbProductDetail" table="qb_article_content_105">
+        <id name="aid">
+            <generator class="assigned" />
+        </id>
+        <property name="my_chufd" />
+        <property name="my_mdd" />
+        <property name="my_dengj" />
+        <property name="my_neix" />
+        <property name="my_data" />
+        <property name="my_picurl" />
+        <property name="my_price" />
+        <property name="my_moth" />
+        <property name="my_renq" />
+        <property name="my_city" />
+        <property name="my_tes" />
+        <property name="my_yqts" />
+        <property name="my_bbh" />
+        <property name="my_xgxl" />
+        <property name="my_fwbz" />
+        <property name="my_tjxm" />
+        <property name="my_xcts" />
+        <property name="my_jtfs" />
+    </class>
+</hibernate-mapping>
