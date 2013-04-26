@@ -4,13 +4,11 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import com.cqlybest.common.bean.Account;
 import com.cqlybest.common.dao.AccountDao;
 
 @Service
-@Transactional(readOnly = true)
 public class AccountService {
 
   @Autowired
@@ -21,7 +19,6 @@ public class AccountService {
    * 
    * @param account
    */
-  @Transactional(readOnly = false)
   public void add(Account account) {
     accountDao.saveOrUpdate(account);
   }
@@ -31,7 +28,6 @@ public class AccountService {
    * 
    * @param ccount
    */
-  @Transactional(readOnly = false)
   public void delete(Account account) {
     accountDao.delete(account);
   }
@@ -59,7 +55,6 @@ public class AccountService {
    * 
    * @param account
    */
-  @Transactional(readOnly = false)
   public void modify(Account account) {
     accountDao.saveOrUpdate(account);
   }

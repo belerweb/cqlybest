@@ -8,7 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import com.cqlybest.common.bean.LoginUser;
 import com.cqlybest.common.bean.QQAuth;
@@ -16,13 +15,11 @@ import com.cqlybest.common.bean.Role;
 import com.cqlybest.common.dao.UserDao;
 
 @Service
-@Transactional(readOnly = true)
 public class UserService {
 
   @Autowired
   private UserDao userDao;
 
-  @Transactional(readOnly = false)
   public void addUser(LoginUser user) {
     userDao.saveOrUpdate(user);
   }
@@ -54,7 +51,6 @@ public class UserService {
   /**
    * QQ 登录用户注册
    */
-  @Transactional(readOnly = false)
   public LoginUser register(QQAuth qqAuth) {
     QQAuth existed = userDao.findById(QQAuth.class, qqAuth.getOpenid());
     if (existed == null) {

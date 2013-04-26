@@ -4,13 +4,11 @@ import java.util.Date;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import com.cqlybest.common.bean.Site;
 import com.cqlybest.common.dao.SiteDao;
 
 @Service
-@Transactional(readOnly = true)
 public class SiteService {
 
   private Site cachedSite;
@@ -29,7 +27,6 @@ public class SiteService {
   /**
    * 修改网站配置信息
    */
-  @Transactional(readOnly = false)
   public void modifySite(Site newSite) {
     checkCachedSite();
     if (newSite != null && !newSite.equals(cachedSite)) {

@@ -5,7 +5,6 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import com.cqlybest.common.bean.Product;
 import com.cqlybest.common.dao.ProductDao;
@@ -19,7 +18,6 @@ public class ProductService {
   /**
    * 编辑产品
    */
-  @Transactional(readOnly = false)
   public void edit(Product product) {
     product.setPublished(false);
     product.setLastUpdate(new Date());
@@ -29,7 +27,6 @@ public class ProductService {
   /**
    * 删除产品
    */
-  @Transactional(readOnly = false)
   public void delete(Product product) {
     productDao.delete(product);
   }
