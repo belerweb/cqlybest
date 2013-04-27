@@ -126,7 +126,7 @@ public class ProductGroupController {
 
   @RequestMapping("/product_group/toggle.html")
   @ResponseBody
-  public void delete(@RequestParam String id, @RequestParam boolean published) {
+  public void toggle(@RequestParam String id, @RequestParam boolean published) {
     productGroupService.togglePublished(id, published);
   }
 

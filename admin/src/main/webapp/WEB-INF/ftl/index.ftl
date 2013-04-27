@@ -71,6 +71,7 @@
 					<li class="hide" data-m="site" data-n="site.config"><a href="#m=site;n=site.config;u=${ContextPath}/site/config.html;t=#main"><i class="icon-cogs"></i> 网站配置</a></li>
 					<li class="hide" data-m="site" data-n="product.list"><a href="#m=site;n=product.list;u=${ContextPath}/product/list.html;t=#main"><i class="icon-road"></i> 旅游产品</a></li>
 					<li class="hide" data-m="site" data-n="productgroup.list"><a href="#m=site;n=productgroup.list;u=${ContextPath}/product_group/list.html;t=#main"><i class="icon-th-large"></i> 产品聚合</a></li>
+					<li class="hide" data-m="site" data-n="menu.list"><a href="#m=site;n=menu.list;u=${ContextPath}/menu/list.html;t=#main"><i class="icon-reorder"></i> 菜单管理</a></li>
 					<li class="hide" data-m="site" data-n="poster.list"><a href="#m=site;n=poster.list;u=${ContextPath}/poster/list.html;t=#main"><i class="icon-picture"></i> 首页海报</a></li>
 					<li class="hide" data-m="site" data-n="data.dict"><a href="#m=site;n=data.dict;u=${ContextPath}/data/dict.html;t=#main"><i class="icon-book"></i> 数据字典</a></li>
 					<li class="hide" data-m="site" data-n="account.list"><a href="#m=site;n=account.list;u=${ContextPath}/account/list.html;t=#main"><i class="icon-github"></i> 账号管理</a></li>

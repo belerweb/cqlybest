@@ -9,7 +9,7 @@
 	<div class="grid">
 		<div class="grid-title">
 			<div class="pull-left">
-				<div class="icon-title"><i class="icon-plus"></i></div>
+				<div class="icon-title"><i class="icon-edit"></i></div>
 				<span>修改产品</span> 
 				<div class="clearfix"></div>
 			</div>

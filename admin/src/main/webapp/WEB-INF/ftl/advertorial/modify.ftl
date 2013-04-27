@@ -4,7 +4,7 @@
 	<div class="grid">
 		<div class="grid-title">
 			<div class="pull-left">
-				<div class="icon-title"><i class="icon-picture"></i></div>
+				<div class="icon-title"><i class="icon-edit"></i></div>
 				<span>修改软文: ${(advertorial.title)!}</span> 
 				<div class="clearfix"></div>
 			</div>

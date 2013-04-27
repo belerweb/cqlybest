@@ -24,7 +24,7 @@
 	<div class="grid">
 		<div class="grid-title">
 			<div class="pull-left">
-				<div class="icon-title"><i class="icon-picture"></i></div>
+				<div class="icon-title"><i class="icon-plus"></i></div>
 				<span>添加产品聚合</span> 
 				<div class="clearfix"></div>
 			</div>

@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping package="com.cqlybest.common.bean">
+    <class name="Menu" table="MENU">
+        <id name="id" column="ID" type="string" length="36">
+            <generator class="assigned" />
+        </id>
+        <property name="menuType" column="menu_Type" not-null="true" />
+        <property name="name" column="name" not-null="true" length="8" />
+        <property name="newWindow" column="new_Window" not-null="true" />
+        <many-to-one name="productGroup" column="product_group_id" />
+        <property name="pageContent" column="page_Content" type="text" />
+        <property name="url" column="url" length="128" />
+        <property name="displayOrder" column="display_Order" />
+        <property name="published" column="published" />
+    </class>
+</hibernate-mapping>

@@ -4,7 +4,7 @@
 	<div class="grid">
 		<div class="grid-title">
 			<div class="pull-left">
-				<div class="icon-title"><i class="icon-picture"></i></div>
+				<div class="icon-title"><i class="icon-plus"></i></div>
 				<span>添加首页海报</span> 
 				<div class="clearfix"></div>
 			</div>
