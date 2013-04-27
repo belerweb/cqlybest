@@ -12,10 +12,13 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.cqlybest.common.bean.DepartureCity;
 import com.cqlybest.common.bean.DictProductGrade;
 import com.cqlybest.common.bean.DictProductType;
 import com.cqlybest.common.bean.DictTraffic;
+import com.cqlybest.common.bean.Keyword;
 import com.cqlybest.common.bean.ProductGroup;
+import com.cqlybest.common.service.DestinationService;
 import com.cqlybest.common.service.DictService;
 import com.cqlybest.common.service.ProductGroupService;
 
@@ -27,6 +30,9 @@ public class ProductGroupController {
 
   @Autowired
   private DictService dictService;
+
+  @Autowired
+  private DestinationService destinationService;
 
   @RequestMapping(value = "/product_group/list.html", method = RequestMethod.GET)
   public void list(Model model) {
@@ -72,6 +78,9 @@ public class ProductGroupController {
     model.addAttribute("traffics", dictService.getDict(DictTraffic.class));
     model.addAttribute("types", dictService.getDict(DictProductType.class));
     model.addAttribute("grades", dictService.getDict(DictProductGrade.class));
+    model.addAttribute("keywords", dictService.getDict(Keyword.class));
+    model.addAttribute("departureCities", dictService.getDict(DepartureCity.class));
+    model.addAttribute("destinations", destinationService.getTree());
   }
 
   @RequestMapping(value = {"/product_group/add.html", "/product_group/modify.html"}, method = RequestMethod.POST)
