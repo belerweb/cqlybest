@@ -12,6 +12,12 @@
 .group-cnd-plus > span {
 	padding: 2px 5px 1px 2px;
 }
+.group-cnd-remove {
+}
+.group-cnd-remove > span{
+    margin: 0 0 0 5px;
+    padding: 3px 2px 2px 4px;
+}
 </style>
 <div>
 	<div class="clearfix"></div>
@@ -37,24 +43,47 @@
 				<div class="control-group">
 					<label class="control-label">聚合条件：</label>
 					<div id="group-cnds" class="controls">
-						<#assign groupCndNames=['推荐月份', '适合人群']>
+						<#assign groupCndNames=['推荐月份', '适合人群', '交通方式', '产品类型', '产品等级']>
 						<#list groupTypes as type>
 						<div class="group-cnd">
-							<span class="help-inline"><strong>按${groupCndNames[type-1]}：</strong></span>
+							<span class="help-inline"><strong>按${groupCndNames[type]}</strong><a href="javascript:void(0);" class="group-cnd-remove"><span class="label label-important"><i class="icon-remove"></i></span></a>：</span>
+							<#if type==0>
+								<#list groupValues[type_index]?split(",")  as value>
+								<span class="s_green">${value}月</span>
+								</#list>
+							</#if>
 							<#if type==1>
-							<#list groupValues[type_index]?split(",")  as value>
-							<span class="s_green">${value}月</span>
-							</#list>
+								<#assign crowds={'1':'个人旅行','2':'团体旅行'}>
+								<#list groupValues[type_index]?split(",")  as value>
+								<span class="s_green">${crowds[value]}</span>
+								</#list>
 							</#if>
 							<#if type==2>
-							<#assign crowds={'1':'个人旅行','2':'团体旅行'}>
-							<#list groupValues[type_index]?split(",")  as value>
-							<span class="s_green">${crowds[value]}</span>
-							</#list>
+								<#assign items =  groupValues[type_index]?split(",")>
+								<#list traffics as dict>
+									<#if items?seq_contains('${dict.id}')>
+									<span class="s_green">${dict.name!}</span>
+									</#if>
+								</#list>
+							</#if>
+							<#if type==3>
+								<#assign items =  groupValues[type_index]?split(",")>
+								<#list types as dict>
+									<#if items?seq_contains('${dict.id}')>
+									<span class="s_green">${dict.name!}</span>
+									</#if>
+								</#list>
+							</#if>
+							<#if type==4>
+								<#assign items =  groupValues[type_index]?split(",")>
+								<#list grades as dict>
+									<#if items?seq_contains('${dict.id}')>
+									<span class="s_green">${dict.name!}</span>
+									</#if>
+								</#list>
 							</#if>
 							<input type="hidden" name="groupTypes" value="${type}">
 							<input type="hidden" name="groupValues" value="${groupValues[type_index]}">
-							<button type="button" class="btn btn-danger">删除</button>
 						</div>
 						</#list>
 					</div>
@@ -67,7 +96,7 @@
 				</div>
 				<hr style="margin:0 0 10px;">
 				<div class="control-group">
-					<label class="control-label">推荐月份<a class="group-cnd-plus" href="javascript:void(0);" data-type="1"><span class="s_green"><i class="icon-plus"></i></span></a>：</label>
+					<label class="control-label">推荐月份<a class="group-cnd-plus" href="javascript:void(0);" data-type="0"><span class="s_green"><i class="icon-plus"></i></span></a>：</label>
 					<div class="controls">
 						<label class="checkbox inline"><input value="1" type="checkbox"> 1月</label>
 						<label class="checkbox inline"><input value="2" type="checkbox"> 2月</label>
@@ -84,10 +113,34 @@
 					</div>
 				</div>
 				<div class="control-group">
-					<label class="control-label">适合人群<a class="group-cnd-plus" href="javascript:void(0);" data-type="2"><span class="s_green"><i class="icon-plus"></i></span></a>：</label>
+					<label class="control-label">适合人群<a class="group-cnd-plus" href="javascript:void(0);" data-type="1"><span class="s_green"><i class="icon-plus"></i></span></a>：</label>
 					<div class="controls">
 						<label class="checkbox inline"><input value="1" type="checkbox"> 个人旅行</label>
 						<label class="checkbox inline"><input value="2" type="checkbox"> 团体旅行</label>
+					</div>
+				</div>
+				<div class="control-group">
+					<label class="control-label">交通方式<a class="group-cnd-plus" href="javascript:void(0);" data-type="2"><span class="s_green"><i class="icon-plus"></i></span></a>：</label>
+					<div class="controls">
+						<#list traffics as dict>
+						<label class="checkbox inline"><input value="${dict.id!}" type="checkbox"> ${dict.name!}</label>
+						</#list>
+					</div>
+				</div>
+				<div class="control-group">
+					<label class="control-label">产品类型<a class="group-cnd-plus" href="javascript:void(0);" data-type="3"><span class="s_green"><i class="icon-plus"></i></span></a>：</label>
+					<div class="controls">
+						<#list types as dict>
+						<label class="checkbox inline"><input value="${dict.id!}" type="checkbox"> ${dict.name!}</label>
+						</#list>
+					</div>
+				</div>
+				<div class="control-group">
+					<label class="control-label">产品等级<a class="group-cnd-plus" href="javascript:void(0);" data-type="4"><span class="s_green"><i class="icon-plus"></i></span></a>：</label>
+					<div class="controls">
+						<#list grades as dict>
+						<label class="checkbox inline"><input value="${dict.id!}" type="checkbox"> ${dict.name!}</label>
+						</#list>
 					</div>
 				</div>
 				<div class="clearfix"></div>
@@ -96,58 +149,50 @@
 	</div>
 </div>
 <script>
-$('#group-cnds button').click(function(){
-	$(this).parent().remove();
+var groupCndNames  =  ['推荐月份', '适合人群', '交通方式', '产品类型', '产品等级'];
+$('#group-cnds .group-cnd-remove').click(function(){
+	$(this).parents('.group-cnd').remove();
 });
 var generateCnd = function(name, objs, type, value) {
-	if ($('#group-cnds').children().length == 5) {
+	if ($('#group-cnds .group-cnd').length >= 5) {
 		bootbox.alert('<div class="alert alert-error">当前最多只允许5个聚合条件</div>', '确定');
 		return;
 	}
-	var html =  ['<div class="group-cnd"><span class="help-inline"><strong>按' + name + '：</strong></span>'];
+	var html =  ['<div class="group-cnd"><span class="help-inline"><strong>按' + name + '</strong>'];
+	html.push('<a href="javascript:void(0);" class="group-cnd-remove"><span class="label label-important">');
+	html.push('<i class="icon-remove"></i></span></a>：</span>');
 	$.each(objs, function(i, obj){
 		html.push('<span class="s_green">' + obj + '</span>');
 	});
 	html.push('<input type="hidden" name="groupTypes" value="' + type + '">');
-	html.push('<input type="hidden" name="groupValues" value="' + value + '">');
-	html.push('<button type="button" class="btn btn-danger">删除</button></div>');
+	html.push('<input type="hidden" name="groupValues" value="' + value + '"></div>');
 	var dom = $(html.join(''));
-	$('button', dom).click(function(){
-		$(this).parent().remove();
+	$('.group-cnd-remove', dom).click(function(){
+		$(this).parents('.group-cnd').remove();
 	});	
 	$('#group-cnds').append(dom);
 };
-$('.group-cnd-plus[data-type=1]').click(function(){
+var checkboxCnds = ['.group-cnd-plus[data-type=0]'];
+checkboxCnds.push('.group-cnd-plus[data-type=1]');
+checkboxCnds.push('.group-cnd-plus[data-type=2]');
+checkboxCnds.push('.group-cnd-plus[data-type=3]');
+checkboxCnds.push('.group-cnd-plus[data-type=4]');
+$(checkboxCnds.join(',')).click(function(){
 	var type = $(this).attr('data-type');
 	var value = [];
 	var names =  [];
 	var objs = $('input:checked', $(this).parents('.control-group'));
 	if (objs.length == 0) {
-		bootbox.alert('<div class="alert alert-error">至少勾选一个月份</div>', '确定');
+		bootbox.alert('<div class="alert alert-error">至少勾选一个值</div>', '确定');
 		return;
 	}
 	$.each(objs, function(i, obj){
 		value.push($(obj).val());
 		names.push($.trim($(obj).parent().text().trim()));
 	});
-	generateCnd('推荐月份', names, type, value.join(','));
+	generateCnd(groupCndNames[type], names, type, value.join(','));
 });
-$('.group-cnd-plus[data-type=2]').click(function(){
-	var type = $(this).attr('data-type');
-	var value = [];
-	var names =  [];
-	var objs = $('input:checked', $(this).parents('.control-group'));
-	if (objs.length == 0) {
-		bootbox.alert('<div class="alert alert-error">至少勾选人群</div>', '确定');
-		return;
-	}
-	$.each(objs, function(i, obj){
-		value.push($(obj).val());
-		names.push($.trim($(obj).parent().text().trim()));
-	});
-	generateCnd('适合人群', names, type, value.join(','));
-});
-$('input,textarea,select', '#main-content-form').jqBootstrapValidation({
+$('input,textarea,select', '#main-content-form').not(':hidden').jqBootstrapValidation({
 	submitSuccess : cqlybest.ajaxSubmit
 });
 </script>

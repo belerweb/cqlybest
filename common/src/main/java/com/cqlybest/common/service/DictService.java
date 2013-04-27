@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.cqlybest.common.Cn2Spell;
 import com.cqlybest.common.bean.Dict;
@@ -15,12 +16,14 @@ public class DictService {
   @Autowired
   private DictDao dictDao;
 
+  @Transactional
   public void addDict(Dict dict) {
     dict.setPinyin(Cn2Spell.converterToSpell(dict.getName()));
     dict.setPy(Cn2Spell.converterToFirstSpell(dict.getName()));
     dictDao.saveOrUpdate(dict);
   }
 
+  @Transactional
   public void deleteDict(Dict dict) {
     Dict _dict = dictDao.findById(dict.getClass(), dict.getId());
     if (_dict != null) {
