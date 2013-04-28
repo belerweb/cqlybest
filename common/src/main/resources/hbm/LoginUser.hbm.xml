@@ -15,7 +15,8 @@
         <property name="fullname" column="FULLNAME" type="string" length="16" />
         <property name="nickname" column="NICKNAME" type="string" length="16" />
         <property name="avatar" column="AVATAR" type="string" length="256" />
-        <property name="qqOpenid" column="QQ_OPRNID" type="string" unique="true" length="36" />
+        <many-to-one name="qqAuth" column="QQ_OPRNID" />
+        <many-to-one name="weiboAuth" column="WEIBO_UID" />
         <set name="roles" table="LOGIN_USER_ROLE" cascade="all">
             <key column="ID" />
             <many-to-many class="Role" column="ROLE" />

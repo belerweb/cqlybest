@@ -13,6 +13,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.cqlybest.common.bean.LoginUser;
 import com.cqlybest.common.bean.QQAuth;
 import com.cqlybest.common.bean.Role;
+import com.cqlybest.common.bean.WeiboAuth;
 import com.cqlybest.common.dao.UserDao;
 
 @Service
@@ -54,22 +55,47 @@ public class UserService {
    * QQ 登录用户注册
    */
   @Transactional
-  public LoginUser register(QQAuth qqAuth) {
-    QQAuth existed = userDao.findById(QQAuth.class, qqAuth.getOpenid());
+  public LoginUser register(QQAuth auth) {
+    QQAuth existed = userDao.findById(QQAuth.class, auth.getOpenid());
     if (existed == null) {
-      qqAuth.setCreatedTime(new Date());
-      qqAuth.setLastUpdate(new Date());
-      userDao.saveOrUpdate(qqAuth);
+      auth.setCreatedTime(new Date());
+      auth.setLastUpdate(new Date());
+      userDao.saveOrUpdate(auth);
     } else {
-      existed.setToken(qqAuth.getToken());
-      existed.setExpireIn(qqAuth.getExpireIn());
+      existed.setToken(auth.getToken());
+      existed.setExpireIn(auth.getExpireIn());
       existed.setLastUpdate(new Date());
       userDao.saveOrUpdate(existed);
     }
 
-    LoginUser user = userDao.findOne(Restrictions.eq("qqOpenid", qqAuth.getOpenid()));
+    LoginUser user = userDao.findOne(Restrictions.eq("qqAuth", auth));
     if (user == null) {
-      user = new LoginUser(qqAuth);
+      user = new LoginUser(auth);
+      userDao.saveOrUpdate(user);
+    }
+    return user;
+  }
+
+  /**
+   * 新浪微博登录用户注册
+   */
+  @Transactional
+  public LoginUser register(WeiboAuth auth) {
+    WeiboAuth existed = userDao.findById(WeiboAuth.class, auth.getUid());
+    if (existed == null) {
+      auth.setCreatedTime(new Date());
+      auth.setLastUpdate(new Date());
+      userDao.saveOrUpdate(auth);
+    } else {
+      existed.setToken(auth.getToken());
+      existed.setExpireIn(auth.getExpireIn());
+      existed.setLastUpdate(new Date());
+      userDao.saveOrUpdate(existed);
+    }
+
+    LoginUser user = userDao.findOne(Restrictions.eq("weiboAuth", auth));
+    if (user == null) {
+      user = new LoginUser(auth);
       userDao.saveOrUpdate(user);
     }
     return user;

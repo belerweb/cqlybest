@@ -24,17 +24,20 @@ public class LoginUser implements UserDetails {
   private String nickname;// 昵称
   private String avatar;// 头像
 
-  private String qqOpenid;// QQ openid
   private QQAuth qqAuth;// QQ 授权
-  private SinaAuth sinaAuth;// 新浪授权
+  private WeiboAuth weiboAuth;// 新浪微博授权
 
   private Set<Role> roles;// 角色
 
   public LoginUser() {}
 
-  public LoginUser(QQAuth qqAuth) {
-    this.qqAuth = qqAuth;
-    this.qqOpenid = qqAuth.getOpenid();
+  public LoginUser(QQAuth auth) {
+    this.qqAuth = auth;
+    this.id = UUID.randomUUID().toString();
+  }
+
+  public LoginUser(WeiboAuth auth) {
+    this.weiboAuth = auth;
     this.id = UUID.randomUUID().toString();
   }
 
@@ -110,14 +113,6 @@ public class LoginUser implements UserDetails {
     this.avatar = avatar;
   }
 
-  public String getQqOpenid() {
-    return qqOpenid;
-  }
-
-  public void setQqOpenid(String qqOpenid) {
-    this.qqOpenid = qqOpenid;
-  }
-
   public QQAuth getQqAuth() {
     return qqAuth;
   }
@@ -126,12 +121,12 @@ public class LoginUser implements UserDetails {
     this.qqAuth = qqAuth;
   }
 
-  public SinaAuth getSinaAuth() {
-    return sinaAuth;
+  public WeiboAuth getWeiboAuth() {
+    return weiboAuth;
   }
 
-  public void setSinaAuth(SinaAuth sinaAuth) {
-    this.sinaAuth = sinaAuth;
+  public void setWeiboAuth(WeiboAuth weiboAuth) {
+    this.weiboAuth = weiboAuth;
   }
 
   public Set<Role> getRoles() {
