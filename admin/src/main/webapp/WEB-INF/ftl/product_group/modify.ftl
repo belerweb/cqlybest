@@ -52,40 +52,40 @@
 								</#if>
 							</#list>
 						</#macro>
-						<#list groupTypes as type>
+						<#list group.groupItems as item>
 						<div class="group-cnd">
-							<span class="help-inline"><strong>按${groupCndNames[type]}</strong><a href="javascript:void(0);" class="group-cnd-remove"><span class="label label-important"><i class="icon-remove"></i></span></a>：</span>
-							<#if type==0>
-								<#list groupValues[type_index]?split(",")  as value>
+							<span class="help-inline"><strong>按${groupCndNames[item.groupType]}</strong><a href="javascript:void(0);" class="group-cnd-remove"><span class="label label-important"><i class="icon-remove"></i></span></a>：</span>
+							<#if item.groupType==0>
+								<#list item.groupValue?split(",")  as value>
 								<span class="s_green">${value}月</span>
 								</#list>
 							</#if>
-							<#if type==1>
+							<#if item.groupType==1>
 								<#assign crowds={'1':'个人旅行','2':'团体旅行'}>
-								<#list groupValues[type_index]?split(",")  as value>
+								<#list item.groupValue?split(",")  as value>
 								<span class="s_green">${crowds[value]}</span>
 								</#list>
 							</#if>
-							<#if type==2>
-								<@selectedDictRender traffics groupValues[type_index] />
+							<#if item.groupType==2>
+								<@selectedDictRender traffics item.groupValue />
 							</#if>
-							<#if type==3>
-								<@selectedDictRender types groupValues[type_index] />
+							<#if item.groupType==3>
+								<@selectedDictRender types item.groupValue />
 							</#if>
-							<#if type==4>
-								<@selectedDictRender grades groupValues[type_index] />
+							<#if item.groupType==4>
+								<@selectedDictRender grades item.groupValue />
 							</#if>
-							<#if type==5>
-								<@selectedDictRender keywords groupValues[type_index] />
+							<#if item.groupType==5>
+								<@selectedDictRender keywords item.groupValue />
 							</#if>
-							<#if type==6>
-								<@selectedDictRender departureCities groupValues[type_index] />
+							<#if item.groupType==6>
+								<@selectedDictRender departureCities item.groupValue />
 							</#if>
-							<#if type==7>
-								<@selectedDictRender destinations groupValues[type_index] />
+							<#if item.groupType==7>
+								<@selectedDictRender destinations item.groupValue />
 							</#if>
-							<input type="hidden" name="groupTypes" value="${type}">
-							<input type="hidden" name="groupValues" value="${groupValues[type_index]}">
+							<input type="hidden" name="groupTypes" value="${item.groupType}">
+							<input type="hidden" name="groupValues" value="${item.groupValue!}">
 						</div>
 						</#list>
 					</div>

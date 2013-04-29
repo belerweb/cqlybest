@@ -1,7 +1,8 @@
 package com.cqlybest.admin.controller;
 
-import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +19,7 @@ import com.cqlybest.common.bean.DictProductType;
 import com.cqlybest.common.bean.DictTraffic;
 import com.cqlybest.common.bean.Keyword;
 import com.cqlybest.common.bean.ProductGroup;
+import com.cqlybest.common.bean.ProductGroupItem;
 import com.cqlybest.common.service.DestinationService;
 import com.cqlybest.common.service.DictService;
 import com.cqlybest.common.service.ProductGroupService;
@@ -48,32 +50,7 @@ public class ProductGroupController {
 
   @RequestMapping(value = "/product_group/modify.html", method = RequestMethod.GET)
   public void modify(@RequestParam String id, Model model) {
-    ProductGroup group = productGroupService.getProductGroup(id);
-    List<Integer> groupTypes = new ArrayList<>();
-    List<String> groupValues = new ArrayList<>();
-    if (group.getGroupType1() != null) {
-      groupTypes.add(group.getGroupType1());
-      groupValues.add(group.getGroupValue1());
-    }
-    if (group.getGroupType2() != null) {
-      groupTypes.add(group.getGroupType2());
-      groupValues.add(group.getGroupValue2());
-    }
-    if (group.getGroupType3() != null) {
-      groupTypes.add(group.getGroupType3());
-      groupValues.add(group.getGroupValue3());
-    }
-    if (group.getGroupType4() != null) {
-      groupTypes.add(group.getGroupType4());
-      groupValues.add(group.getGroupValue4());
-    }
-    if (group.getGroupType5() != null) {
-      groupTypes.add(group.getGroupType5());
-      groupValues.add(group.getGroupValue5());
-    }
-    model.addAttribute("groupTypes", groupTypes);
-    model.addAttribute("groupValues", groupValues);
-    model.addAttribute("group", group);
+    model.addAttribute("group", productGroupService.getProductGroup(id));
 
     model.addAttribute("traffics", dictService.getDict(DictTraffic.class));
     model.addAttribute("types", dictService.getDict(DictProductType.class));
@@ -91,29 +68,16 @@ public class ProductGroupController {
     ProductGroup group = new ProductGroup();
     group.setId(id == null ? UUID.randomUUID().toString() : id);
     group.setName(name);
+    Set<ProductGroupItem> items = new HashSet<>();
     if (groupTypes != null) {
-      int size = groupTypes.size();
-      if (size >= 1) {
-        group.setGroupType1(groupTypes.get(0));
-        group.setGroupValue1(groupValues.get(0));
-      }
-      if (size >= 2) {
-        group.setGroupType2(groupTypes.get(1));
-        group.setGroupValue2(groupValues.get(1));
-      }
-      if (size >= 3) {
-        group.setGroupType3(groupTypes.get(2));
-        group.setGroupValue3(groupValues.get(2));
-      }
-      if (size >= 4) {
-        group.setGroupType4(groupTypes.get(3));
-        group.setGroupValue4(groupValues.get(3));
-      }
-      if (size >= 5) {
-        group.setGroupType5(groupTypes.get(4));
-        group.setGroupValue5(groupValues.get(4));
+      for (int i = 0; i < groupTypes.size(); i++) {
+        ProductGroupItem item = new ProductGroupItem();
+        item.setGroupType(groupTypes.get(i));
+        item.setGroupValue(groupValues.get(i));
+        items.add(item);
       }
     }
+    group.setGroupItems(items);
     group.setPublished(false);
     productGroupService.edit(group);
   }
