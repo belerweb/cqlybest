@@ -153,3 +153,17 @@ ul,li {
 #register-or-login li {
 	margin-bottom: 10px;
 }
+
+#login-box {
+	margin-top: 20px;
+	padding-bottom: 20px;
+}
+
+#login-box input[type="text"],#login-box  input[type="password"] {
+	width: 260px;
+}
+
+#login-box .btn {
+	padding-left: 30px;
+	padding-right: 30px;
+}

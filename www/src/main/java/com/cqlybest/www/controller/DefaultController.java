@@ -36,6 +36,11 @@ public class DefaultController {
     setCommonData(model);
   }
 
+  @RequestMapping("/default/login.html")
+  public void login(Model model) {
+    setCommonData(model);
+  }
+
   @RequestMapping("/default/pg/{id}.html")
   public Object pg(@PathVariable String id, Model model) {
     Menu menu = menuService.get(id);

@@ -42,6 +42,14 @@ public class IndexController {
   }
 
   /**
+   * 登录
+   */
+  @RequestMapping("/login.html")
+  public String login() {
+    return templateService.forward("/login.html");
+  }
+
+  /**
    * 聚合产品页
    */
   @RequestMapping("/pg/{id}.html")

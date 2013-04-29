@@ -20,7 +20,7 @@
 					<li><a href="javascript:void(0);"><img src="${ContextPath}/default/img/travel.png">境外海岛游</a></li>
 				</ul>
 			</div>
-			<div class="span10">ddd</div>
+			<div class="span10"></div>
 		</div>
 	</div>
 </div>

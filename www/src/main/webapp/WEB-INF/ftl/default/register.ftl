@@ -61,7 +61,6 @@
 </div>
 <script>
 	var PageContext = {
-		menu: 'index',
 		init: function(){
 			$('input', '#register-form').jqBootstrapValidation({
 				submitSuccess : function($form, event) {
