@@ -3,6 +3,11 @@
 	<div class="row">
 		<div class="span9">
 			<h4>${menu.name!}</h4>
+			<ul>
+				<#list products as product>
+				<li>${product.name!}</li>
+				</#list>
+			</ul>
 		</div>
 		<div class="span3">
 			<div class="box">

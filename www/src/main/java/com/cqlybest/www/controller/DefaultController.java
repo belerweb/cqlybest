@@ -1,5 +1,7 @@
 package com.cqlybest.www.controller;
 
+import java.util.Set;
+
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -10,7 +12,11 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.cqlybest.common.bean.Menu;
+import com.cqlybest.common.bean.ProductGroup;
+import com.cqlybest.common.bean.ProductGroupFilterItem;
+import com.cqlybest.common.bean.ProductGroupItem;
 import com.cqlybest.common.service.MenuService;
+import com.cqlybest.common.service.ProductService;
 import com.cqlybest.common.service.SiteService;
 import com.cqlybest.common.service.TemplateService;
 
@@ -19,12 +25,12 @@ public class DefaultController {
 
   @Autowired
   private TemplateService templateService;
-
   @Autowired
   private MenuService menuService;
-
   @Autowired
   private SiteService siteService;
+  @Autowired
+  private ProductService productService;
 
   @RequestMapping("/default/index.html")
   public void index(Model model) {
@@ -49,6 +55,11 @@ public class DefaultController {
       return new ResponseEntity<String>(StringUtils.EMPTY, HttpStatus.NOT_FOUND);
     }
 
+    ProductGroup group = menu.getProductGroup();
+    Set<ProductGroupItem> groupItems = group.getGroupItems();
+    Set<ProductGroupFilterItem> filterItems = group.getFilterItems();
+    model.addAttribute("total", productService.queryProductsTotal(groupItems, filterItems));
+    model.addAttribute("products", productService.queryProducts(groupItems, filterItems, 0, 10));
     model.addAttribute("menu", menu);
     setCommonData(model);
     return "/default/product_group";
