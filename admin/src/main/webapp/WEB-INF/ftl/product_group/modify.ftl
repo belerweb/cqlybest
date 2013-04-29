@@ -34,60 +34,111 @@
 		<form id="main-content-form" action="${ContextPath}/product_group/modify.html" method="post" class="form-horizontal">
 			<input type="hidden" name="id" value="${(group.id)!}">
 			<div class="grid-content">
-				<div class="control-group">
-					<label class="control-label">聚合名称：</label>
-					<div class="controls">
-						<input type="text" class="span input" name="name" value="${(group.name)!}" required="true" maxlength="16"> 
-					</div>
-				</div>
-				<div class="control-group">
-					<label class="control-label">聚合条件：</label>
-					<div id="group-cnds" class="controls">
-						<#assign groupCndNames=['推荐月份', '适合人群', '交通方式', '产品类型', '产品等级', '关键词/标签', '出发城市', '目的地']>
-						<#macro selectedDictRender dict values>
-							<#assign items = values?split(",")>
-							<#list dict as item>
-								<#if items?seq_contains('${item.id}')>
-								<span class="s_green">${item.name!}</span>
-								</#if>
-							</#list>
-						</#macro>
-						<#list group.groupItems as item>
-						<div class="group-cnd">
-							<span class="help-inline"><strong>按${groupCndNames[item.groupType]}</strong><a href="javascript:void(0);" class="group-cnd-remove"><span class="label label-important"><i class="icon-remove"></i></span></a>：</span>
-							<#if item.groupType==0>
-								<#list item.groupValue?split(",")  as value>
-								<span class="s_green">${value}月</span>
-								</#list>
-							</#if>
-							<#if item.groupType==1>
-								<#assign crowds={'1':'个人旅行','2':'团体旅行'}>
-								<#list item.groupValue?split(",")  as value>
-								<span class="s_green">${crowds[value]}</span>
-								</#list>
-							</#if>
-							<#if item.groupType==2>
-								<@selectedDictRender traffics item.groupValue />
-							</#if>
-							<#if item.groupType==3>
-								<@selectedDictRender types item.groupValue />
-							</#if>
-							<#if item.groupType==4>
-								<@selectedDictRender grades item.groupValue />
-							</#if>
-							<#if item.groupType==5>
-								<@selectedDictRender keywords item.groupValue />
-							</#if>
-							<#if item.groupType==6>
-								<@selectedDictRender departureCities item.groupValue />
-							</#if>
-							<#if item.groupType==7>
-								<@selectedDictRender destinations item.groupValue />
-							</#if>
-							<input type="hidden" name="groupTypes" value="${item.groupType}">
-							<input type="hidden" name="groupValues" value="${item.groupValue!}">
+				<ul class="nav nav-tabs">
+					<li class="active"><a href="javascript:void(0);" data-toggle="tab" data-target="#product-group-tab">聚合条件</a></li>
+					<li><a href="javascript:void(0);" data-toggle="tab" data-target="#product-group-filter-tab">过滤条件</a></li>
+				</ul>
+				<#assign groupCndNames=['推荐月份', '适合人群', '交通方式', '产品类型', '产品等级', '关键词/标签', '出发城市', '目的地']>
+				<#macro selectedDictRender dict values>
+					<#assign items = values?split(",")>
+					<#list dict as item>
+						<#if items?seq_contains('${item.id}')>
+						<span class="s_green">${item.name!}</span>
+						</#if>
+					</#list>
+				</#macro>
+				<div class="tab-content">
+					<div class="tab-pane active" id="product-group-tab">
+						<div class="control-group">
+							<label class="control-label">聚合名称：</label>
+							<div class="controls">
+								<input type="text" class="span input" name="name" value="${(group.name)!}" required="true" maxlength="16"> 
+							</div>
 						</div>
-						</#list>
+						<div class="control-group">
+							<label class="control-label">聚合条件：</label>
+							<div id="group-cnds" class="controls">
+								<#list group.groupItems as item>
+								<div class="group-cnd">
+									<span class="help-inline"><strong>按${groupCndNames[item.groupType]}</strong><a href="javascript:void(0);" class="group-cnd-remove"><span class="label label-important"><i class="icon-remove"></i></span></a>：</span>
+									<#if item.groupType==0>
+										<#list item.groupValue?split(",")  as value>
+										<span class="s_green">${value}月</span>
+										</#list>
+									</#if>
+									<#if item.groupType==1>
+										<#assign crowds={'1':'个人旅行','2':'团体旅行'}>
+										<#list item.groupValue?split(",")  as value>
+										<span class="s_green">${crowds[value]}</span>
+										</#list>
+									</#if>
+									<#if item.groupType==2>
+										<@selectedDictRender traffics item.groupValue />
+									</#if>
+									<#if item.groupType==3>
+										<@selectedDictRender types item.groupValue />
+									</#if>
+									<#if item.groupType==4>
+										<@selectedDictRender grades item.groupValue />
+									</#if>
+									<#if item.groupType==5>
+										<@selectedDictRender keywords item.groupValue />
+									</#if>
+									<#if item.groupType==6>
+										<@selectedDictRender departureCities item.groupValue />
+									</#if>
+									<#if item.groupType==7>
+										<@selectedDictRender destinations item.groupValue />
+									</#if>
+									<input type="hidden" name="groupTypes" value="${item.groupType}">
+									<input type="hidden" name="groupValues" value="${item.groupValue!}">
+								</div>
+								</#list>
+							</div>
+						</div>
+					</div>
+					<div class="tab-pane" id="product-group-filter-tab">
+						<div class="control-group">
+							<label class="control-label">过滤条件：</label>
+							<div id="filter-cnds" class="controls">
+								<#list group.filterItems as item>
+								<div class="group-cnd">
+									<span class="help-inline"><strong>按${groupCndNames[item.filterType]}</strong><a href="javascript:void(0);" class="group-cnd-remove"><span class="label label-important"><i class="icon-remove"></i></span></a>：</span>
+									<#if item.filterType==0>
+										<#list item.filterValue?split(",")  as value>
+										<span class="s_green">${value}月</span>
+										</#list>
+									</#if>
+									<#if item.filterType==1>
+										<#assign crowds={'1':'个人旅行','2':'团体旅行'}>
+										<#list item.filterValue?split(",")  as value>
+										<span class="s_green">${crowds[value]}</span>
+										</#list>
+									</#if>
+									<#if item.filterType==2>
+										<@selectedDictRender traffics item.filterValue />
+									</#if>
+									<#if item.filterType==3>
+										<@selectedDictRender types item.filterValue />
+									</#if>
+									<#if item.filterType==4>
+										<@selectedDictRender grades item.filterValue />
+									</#if>
+									<#if item.filterType==5>
+										<@selectedDictRender keywords item.filterValue />
+									</#if>
+									<#if item.filterType==6>
+										<@selectedDictRender departureCities item.filterValue />
+									</#if>
+									<#if item.filterType==7>
+										<@selectedDictRender destinations item.filterValue />
+									</#if>
+									<input type="hidden" name="filterTypes" value="${item.filterType}">
+									<input type="hidden" name="filterValues" value="${item.filterValue!}">
+								</div>
+								</#list>
+							</div>
+						</div>
 					</div>
 				</div>
 				<div class="text-center">
@@ -199,9 +250,9 @@ var groupCndNames  =  ['推荐月份', '适合人群', '交通方式', '产品�
 $('#group-cnds .group-cnd-remove').click(function(){
 	$(this).parents('.group-cnd').remove();
 });
-var generateCnd = function(name, objs, type, value) {
-	if ($('#group-cnds .group-cnd').length >= 5) {
-		bootbox.alert('<div class="alert alert-error">当前最多只允许5个聚合条件</div>', '确定');
+var generateCnd = function(t, name, objs, type, value) {
+	if ($('#' + t + '-cnds .group-cnd').length >= 5) {
+		bootbox.alert('<div class="alert alert-error">当前最多只允许5个条件</div>', '确定');
 		return;
 	}
 	var html =  ['<div class="group-cnd"><span class="help-inline"><strong>按' + name + '</strong>'];
@@ -210,13 +261,13 @@ var generateCnd = function(name, objs, type, value) {
 	$.each(objs, function(i, obj){
 		html.push('<span class="s_green">' + obj + '</span>');
 	});
-	html.push('<input type="hidden" name="groupTypes" value="' + type + '">');
-	html.push('<input type="hidden" name="groupValues" value="' + value + '"></div>');
+	html.push('<input type="hidden" name="' + t + 'Types" value="' + type + '">');
+	html.push('<input type="hidden" name="' + t + 'Values" value="' + value + '"></div>');
 	var dom = $(html.join(''));
 	$('.group-cnd-remove', dom).click(function(){
 		$(this).parents('.group-cnd').remove();
 	});	
-	$('#group-cnds').append(dom);
+	$('#' + t + '-cnds').append(dom);
 };
 var checkboxCnds = ['.group-cnd-plus[data-type=0]'];
 checkboxCnds.push('.group-cnd-plus[data-type=1]');
@@ -236,7 +287,11 @@ $(checkboxCnds.join(',')).click(function(){
 		value.push($(obj).val());
 		names.push($.trim($(obj).parent().text().trim()));
 	});
-	generateCnd(groupCndNames[type], names, type, value.join(','));
+	if ($('#group-cnds').is(":visible"))  {
+		generateCnd('group', groupCndNames[type], names, type, value.join(','));
+	} else {
+		generateCnd('filter', groupCndNames[type], names, type, value.join(','));
+	}
 });
 var tagCnds = ['.group-cnd-plus[data-type=5]'];
 tagCnds.push('.group-cnd-plus[data-type=6]');
@@ -253,7 +308,11 @@ $(tagCnds.join(',')).click(function(){
 		bootbox.alert('<div class="alert alert-error">至少输入/选择一个值</div>', '确定');
 		return;
 	}
-	generateCnd(groupCndNames[type], names, type, value);
+	if ($('#group-cnds').is(":visible"))  {
+		generateCnd('group', groupCndNames[type], names, type, value);
+	} else {
+		generateCnd('filter', groupCndNames[type], names, type, value);
+	}
 });
 $('input,textarea,select', '#main-content-form').not(':hidden').jqBootstrapValidation({
 	submitSuccess : cqlybest.ajaxSubmit

@@ -19,6 +19,7 @@ import com.cqlybest.common.bean.DictProductType;
 import com.cqlybest.common.bean.DictTraffic;
 import com.cqlybest.common.bean.Keyword;
 import com.cqlybest.common.bean.ProductGroup;
+import com.cqlybest.common.bean.ProductGroupFilterItem;
 import com.cqlybest.common.bean.ProductGroupItem;
 import com.cqlybest.common.service.DestinationService;
 import com.cqlybest.common.service.DictService;
@@ -64,20 +65,35 @@ public class ProductGroupController {
   @ResponseBody
   public void edit(@RequestParam(required = false) String id, @RequestParam String name,
       @RequestParam(required = false) List<Integer> groupTypes,
-      @RequestParam(required = false) List<String> groupValues) {
+      @RequestParam(required = false) List<String> groupValues,
+      @RequestParam(required = false) List<Integer> filterTypes,
+      @RequestParam(required = false) List<String> filterValues) {
     ProductGroup group = new ProductGroup();
     group.setId(id == null ? UUID.randomUUID().toString() : id);
     group.setName(name);
-    Set<ProductGroupItem> items = new HashSet<>();
+
+    Set<ProductGroupItem> groupItems = new HashSet<>();
     if (groupTypes != null) {
       for (int i = 0; i < groupTypes.size(); i++) {
         ProductGroupItem item = new ProductGroupItem();
         item.setGroupType(groupTypes.get(i));
         item.setGroupValue(groupValues.get(i));
-        items.add(item);
+        groupItems.add(item);
       }
     }
-    group.setGroupItems(items);
+    group.setGroupItems(groupItems);
+
+    Set<ProductGroupFilterItem> filterItems = new HashSet<>();
+    if (groupTypes != null) {
+      for (int i = 0; i < filterTypes.size(); i++) {
+        ProductGroupFilterItem item = new ProductGroupFilterItem();
+        item.setFilterType(filterTypes.get(i));
+        item.setFilterValue(filterValues.get(i));
+        filterItems.add(item);
+      }
+    }
+    group.setFilterItems(filterItems);
+
     group.setPublished(false);
     productGroupService.edit(group);
   }

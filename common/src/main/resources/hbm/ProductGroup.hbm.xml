@@ -13,6 +13,10 @@
             <key column="PGID" />
             <one-to-many class="ProductGroupItem" />
         </set>
+        <set name="filterItems" cascade="all">
+            <key column="PGID" />
+            <one-to-many class="ProductGroupFilterItem" />
+        </set>
         <property name="published" column="PUBLISHED" />
     </class>
 </hibernate-mapping>

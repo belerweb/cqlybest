@@ -11,6 +11,7 @@ public class ProductGroup {
   private String name;// 聚合名称，如出境参团、邮轮旅游度假
   private boolean published;// 是否发布
   private Set<ProductGroupItem> groupItems;
+  private Set<ProductGroupFilterItem> filterItems;
 
   public String getId() {
     return id;
@@ -44,5 +45,12 @@ public class ProductGroup {
     this.groupItems = groupItems;
   }
 
+  public Set<ProductGroupFilterItem> getFilterItems() {
+    return filterItems;
+  }
+
+  public void setFilterItems(Set<ProductGroupFilterItem> filterItems) {
+    this.filterItems = filterItems;
+  }
 
 }

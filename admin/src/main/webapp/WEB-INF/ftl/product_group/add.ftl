@@ -33,15 +33,30 @@
 		<!-- novalidate -->
 		<form id="main-content-form" action="${ContextPath}/product_group/add.html" method="post" class="form-horizontal">
 			<div class="grid-content">
-				<div class="control-group">
-					<label class="control-label">聚合名称：</label>
-					<div class="controls">
-						<input type="text" class="span input" name="name" required="true" maxlength="16"> 
+				<ul class="nav nav-tabs">
+					<li class="active"><a href="javascript:void(0);" data-toggle="tab" data-target="#product-group-tab">聚合条件</a></li>
+					<li><a href="javascript:void(0);" data-toggle="tab" data-target="#product-group-filter-tab">过滤条件</a></li>
+				</ul>
+				<div class="tab-content">
+					<div class="tab-pane active" id="product-group-tab">
+						<div class="control-group">
+							<label class="control-label">聚合名称：</label>
+							<div class="controls">
+								<input type="text" class="span input" name="name" required="true" maxlength="16"> 
+							</div>
+						</div>
+						<div class="control-group">
+							<label class="control-label">聚合条件：</label>
+							<div id="group-cnds" class="controls">
+							</div>
+						</div>
 					</div>
-				</div>
-				<div class="control-group">
-					<label class="control-label">聚合条件：</label>
-					<div id="group-cnds" class="controls">
+					<div class="tab-pane" id="product-group-filter-tab">
+						<div class="control-group">
+							<label class="control-label">过滤条件：</label>
+							<div id="filter-cnds" class="controls">
+							</div>
+						</div>
 					</div>
 				</div>
 				<div class="text-center">
@@ -150,9 +165,9 @@ $('#product-destination').cqlybestTag({
 });
 
 var groupCndNames  =  ['推荐月份', '适合人群', '交通方式', '产品类型', '产品等级', '关键词/标签', '出发城市', '目的地'];
-var generateCnd = function(name, objs, type, value) {
-	if ($('#group-cnds .group-cnd').length >= 5) {
-		bootbox.alert('<div class="alert alert-error">当前最多只允许5个聚合条件</div>', '确定');
+var generateCnd = function(t, name, objs, type, value) {
+	if ($('#' + t + '-cnds .group-cnd').length >= 5) {
+		bootbox.alert('<div class="alert alert-error">当前最多只允许5个条件</div>', '确定');
 		return;
 	}
 	var html =  ['<div class="group-cnd"><span class="help-inline"><strong>按' + name + '</strong>'];
@@ -161,13 +176,13 @@ var generateCnd = function(name, objs, type, value) {
 	$.each(objs, function(i, obj){
 		html.push('<span class="s_green">' + obj + '</span>');
 	});
-	html.push('<input type="hidden" name="groupTypes" value="' + type + '">');
-	html.push('<input type="hidden" name="groupValues" value="' + value + '"></div>');
+	html.push('<input type="hidden" name="' + t + 'Types" value="' + type + '">');
+	html.push('<input type="hidden" name="' + t + 'Values" value="' + value + '"></div>');
 	var dom = $(html.join(''));
 	$('.group-cnd-remove', dom).click(function(){
 		$(this).parents('.group-cnd').remove();
 	});	
-	$('#group-cnds').append(dom);
+	$('#' + t + '-cnds').append(dom);
 };
 var checkboxCnds = ['.group-cnd-plus[data-type=0]'];
 checkboxCnds.push('.group-cnd-plus[data-type=1]');
@@ -187,7 +202,11 @@ $(checkboxCnds.join(',')).click(function(){
 		value.push($(obj).val());
 		names.push($.trim($(obj).parent().text().trim()));
 	});
-	generateCnd(groupCndNames[type], names, type, value.join(','));
+	if ($('#group-cnds').is(":visible"))  {
+		generateCnd('group', groupCndNames[type], names, type, value.join(','));
+	} else {
+		generateCnd('filter', groupCndNames[type], names, type, value.join(','));
+	}
 });
 var tagCnds = ['.group-cnd-plus[data-type=5]'];
 tagCnds.push('.group-cnd-plus[data-type=6]');
@@ -204,7 +223,11 @@ $(tagCnds.join(',')).click(function(){
 		bootbox.alert('<div class="alert alert-error">至少输入/选择一个值</div>', '确定');
 		return;
 	}
-	generateCnd(groupCndNames[type], names, type, value);
+	if ($('#group-cnds').is(":visible"))  {
+		generateCnd('group', groupCndNames[type], names, type, value);
+	} else {
+		generateCnd('filter', groupCndNames[type], names, type, value);
+	}
 });
 $('input,textarea,select', '#main-content-form').not(':hidden').jqBootstrapValidation({
 	submitSuccess : cqlybest.ajaxSubmit
