@@ -15,9 +15,9 @@
 					<li data-active="index"><a href="${ContextPath}/index.html">首页</a></li>
 					<#list Menu as menu>
 					<#if menu.menuType==0>
-					<li><a <#if menu.newWindow>target="_blank"</#if> href="${ContextPath}/pg/${menu.id}.html">${menu.name}</a></li>
+					<li data-active="${menu.id}"><a <#if menu.newWindow>target="_blank"</#if> href="${ContextPath}/pg/${menu.id}.html">${menu.name}</a></li>
 					<#elseif menu.menuType==1>
-					<li><a <#if menu.newWindow>target="_blank"</#if> href="${ContextPath}/page/${menu.id}.html">${menu.name}</a></li>
+					<li data-active="${menu.id}"><a <#if menu.newWindow>target="_blank"</#if> href="${ContextPath}/page/${menu.id}.html">${menu.name}</a></li>
 					<#elseif menu.menuType==2>
 					<li><a <#if menu.newWindow>target="_blank"</#if> href="${menu.url}">${menu.name}</a></li>
 					</#if>
