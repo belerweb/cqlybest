@@ -24,4 +24,9 @@
 		</div>
 	</div>
 </div>
+<script>
+	var PageContext = {
+		menu : 'index'
+	};
+</script>
 <#include "/default/footer.ftl">

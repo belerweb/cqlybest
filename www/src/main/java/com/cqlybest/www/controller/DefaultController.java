@@ -31,6 +31,11 @@ public class DefaultController {
     setCommonData(model);
   }
 
+  @RequestMapping("/default/register.html")
+  public void register(Model model) {
+    setCommonData(model);
+  }
+
   @RequestMapping("/default/pg/{id}.html")
   public Object pg(@PathVariable String id, Model model) {
     Menu menu = menuService.get(id);
