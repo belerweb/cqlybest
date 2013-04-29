@@ -1,0 +1,139 @@
+body {
+	padding-top: 31px;
+	font-size: 12px;
+}
+
+body a {
+	outline: none;
+}
+
+ul,li {
+	list-style: none;
+}
+
+#top-nav .navbar-inner {
+	min-height: auto;
+}
+
+#top-nav .container {
+	padding: 3px 0;
+}
+
+#top-nav .pull-right a.mg {
+	margin-left: 5px;
+}
+
+#top-logo {
+	padding: 10px 0;
+}
+
+#top-logo .phone {
+	padding-top: 10px;
+}
+
+#top-logo .phone span {
+	font-size: 25px;
+	font-family: Georgia;
+	color: #FF770D;
+}
+
+#top-logo .phone-tip {
+	color: gray;
+	font-size: 12px;
+}
+
+#menu {
+	margin-bottom: 0;
+}
+
+#menu .navbar-inner {
+	background: url("../img/menu-bg.png") repeat-x scroll 0 0 transparent;
+	border-bottom: 1px solid #C54021;
+	border-radius: 0;
+}
+
+#menu a.brand {
+	background: url("../img/menu-brand-bg.png") repeat-x scroll 0 0
+		transparent;
+	color: #FFF;
+	font-size: 14px;
+	font-weight: bold;
+	text-shadow: none;
+	padding: 10px 20px 10px 50px;
+	width: 90px;
+}
+
+#menu .nav>li>a {
+	font-size: 14px;
+	font-weight: bold;
+	text-shadow: none;
+	color: #FFF;
+	padding: 10px 20px;
+	border-right: 1px solid #D44E19;
+}
+
+#menu .nav>.active>a,#menu .nav>li>a:hover,#menu .nav>.active>a:focus {
+	box-shadow: none;
+	background: url("../img/menu-active-bg.png") repeat-x scroll 0 0
+		transparent;
+}
+
+#menu .container {
+	width: 940px;
+}
+
+#full-slider {
+	background: green;
+	height: 300px;
+}
+
+#left-menu {
+	background: url("../img/left-menu-bg.png") repeat scroll 0 0 transparent;
+	/*增加透明度*/
+	position: relative;
+}
+
+#left-menu>ul {
+	margin: 0;
+}
+
+#left-menu>ul>li {
+	border-bottom: 1px solid #F1F3ED;
+	height: 49px;
+}
+
+#left-menu>ul>li.open {
+	height: 48px;
+	background: #FFF;
+	border: 1px solid gray;
+	border-right: none;
+}
+
+#left-menu>ul>li>a {
+	display: block;
+	height: 24px;
+	padding: 13px 0 12px 10px;
+}
+
+#left-menu>ul>li.open>a {
+	display: block;
+	height: 24px;
+	padding: 12px 0 12px 10px;
+}
+
+#left-menu div.dropdown-menu {
+	position: absolute;
+	top: 0px;
+	left: 140px;
+	margin: 0;
+	padding: 0;
+	border-radius: 0;
+	width: 798px;
+	height: 299px;
+	border: 1px solid #999999;
+	border-top: none;
+	border-radius: 0;
+	opacity: 1;
+	filter: alpha(opacity =             100);
+	background: #FFF;
+}
