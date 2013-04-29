@@ -49,6 +49,7 @@ public class DefaultController {
       return new ResponseEntity<String>(StringUtils.EMPTY, HttpStatus.NOT_FOUND);
     }
 
+    model.addAttribute("menu", menu);
     setCommonData(model);
     return "/default/product_group";
   }
