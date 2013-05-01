@@ -22,6 +22,8 @@
 				<ul class="nav nav-tabs">
 					<li class="active"><a href="javascript:void(0);" data-toggle="tab" data-target="#product-base-tab">基本信息</a></li>
 					<li><a href="javascript:void(0);" data-toggle="tab" data-target="#product-detail-tab">介绍/描述</a></li>
+					<li><a href="javascript:void(0);" data-toggle="tab" data-target="#product-poster-tab">海报图片 </a></li>
+					<li><a href="javascript:void(0);" data-toggle="tab" data-target="#product-photo-tab">相册图片</a></li>
 					<li><a href="javascript:void(0);" data-toggle="tab" data-target="#product-line-tab">行程地图</a></li>
 				</ul>
 				<div class="tab-content">
@@ -180,6 +182,44 @@
 							</div>
 						</div>
 					</div>
+					<div id="product-poster-tab" class="tab-pane">
+						<div class="row-fluid">
+							<div class="span12">
+								<div class="control-group">
+									<label class="control-label">图片：</label>
+									<div class="controls"><button id="add-product-poster" type="button" class="btn">添加</button></div>
+								</div>
+								<#list product.posters as image>
+								<div class="control-group">
+									<label class="control-label"><button type="button" class="btn del">删除</button></label>
+									<div class="controls">
+										<input type="hidden" name="posterIds" value="${image.id}">
+										<span>${image.title}</span>
+									</div>
+								</div>
+								</#list>
+							</div>
+						</div>
+					</div>
+					<div id="product-photo-tab" class="tab-pane">
+						<div class="row-fluid">
+							<div class="span12">
+								<div class="control-group">
+									<label class="control-label">图片：</label>
+									<div class="controls"><button id="add-product-photo" type="button" class="btn">添加</button></div>
+								</div>
+								<#list product.photos as image>
+								<div class="control-group">
+									<label class="control-label"><button type="button" class="btn del">删除</button></label>
+									<div class="controls">
+										<input type="hidden" name="photoIds" value="${image.id}">
+										<span>${image.title}</span>
+									</div>
+								</div>
+								</#list>
+							</div>
+						</div>
+					</div>
 					<div id="product-line-tab" class="tab-pane">
 						<div class="row-fluid">
 							<div class="span6">
@@ -312,6 +352,35 @@ var pdEditor = UE.getEditor('product-description', {
 	initialContent: '',
 	initialFrameWidth: '100%'
 });
+$('#add-product-poster .del, #product-photo-tab .del').click(function(){
+	$(this).parents('.control-group').remove();
+});
+$('#add-product-poster').click(function(){
+	var controlGroup = $(this).parents('.control-group');
+	var html =  ['<idv class="control-group"><label class="control-label"><button type="button" class="btn del">删除</button></label>'];
+	html.push('<div class="controls"><input type="file" class="input"></div></div>');
+	var newControlGroup = $(html.join(''));
+	$('.del', newControlGroup).click(function(){
+		$(this).parents('.control-group').remove();
+	});
+	$('input[type=file]', newControlGroup).change(function(){
+		$(this).attr('name', '_posters');
+	});
+	controlGroup.after(newControlGroup);
+});
+$('#add-product-photo').click(function(){
+	var controlGroup = $(this).parents('.control-group');
+	var html =  ['<idv class="control-group"><label class="control-label"><button type="button" class="btn del">删除</button></label>'];
+	html.push('<div class="controls"><input type="file" class="input"></div></div>');
+	var newControlGroup = $(html.join(''));
+	$('.del', newControlGroup).click(function(){
+		$(this).parents('.control-group').remove();
+	});
+	$('input[type=file]', newControlGroup).change(function(){
+		$(this).attr('name', '_photos');
+	});
+	controlGroup.after(newControlGroup);
+});
 $('input,textarea,select', '#main-content-form').jqBootstrapValidation({
 	submitSuccess : function($form, event) {
 		event.preventDefault();
@@ -331,11 +400,11 @@ $('input,textarea,select', '#main-content-form').jqBootstrapValidation({
 			$('#product-price').next().attr('name', 'price').val(price*100);
 		}
 		$form.ajaxSubmit({
-			success : function(response){
-				alert('保存成功');
+			success : function(response) {
+				cqlybest.success();
 			},
 			error : function() {
-				alert('保存失败');
+				cqlybest.error();
 			}
 		});
 	}

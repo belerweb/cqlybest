@@ -30,6 +30,8 @@ public class Product {
   private Set<DictProductGrade> grades;// 产品等级
   private Set<Keyword> keywords;// 关键词
   private Set<DepartureCity> departureCities;// 出发城市
+  private Set<Image> posters;// 海报图片
+  private Set<Image> photos;// 相册图片
 
   public Integer getId() {
     return id;
@@ -221,6 +223,22 @@ public class Product {
 
   public void setDepartureCities(Set<DepartureCity> departureCities) {
     this.departureCities = departureCities;
+  }
+
+  public Set<Image> getPosters() {
+    return posters;
+  }
+
+  public void setPosters(Set<Image> posters) {
+    this.posters = posters;
+  }
+
+  public Set<Image> getPhotos() {
+    return photos;
+  }
+
+  public void setPhotos(Set<Image> photos) {
+    this.photos = photos;
   }
 
 }

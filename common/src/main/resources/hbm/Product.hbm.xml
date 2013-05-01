@@ -55,5 +55,13 @@
             <key column="PID" />
             <many-to-many class="Keyword" column="DID" />
         </set>
+        <set name="posters" table="PRODUCT_POSTER">
+            <key column="PID" />
+            <many-to-many class="Image" column="IID" />
+        </set>
+        <set name="photos" table="PRODUCT_PHOTO">
+            <key column="PID" />
+            <many-to-many class="Image" column="IID" />
+        </set>
     </class>
 </hibernate-mapping>

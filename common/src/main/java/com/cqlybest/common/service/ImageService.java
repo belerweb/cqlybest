@@ -1,5 +1,8 @@
 package com.cqlybest.common.service;
 
+import java.io.IOException;
+import java.util.UUID;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,11 +12,17 @@ import org.springframework.web.multipart.MultipartFile;
 import com.cqlybest.common.bean.Image;
 import com.cqlybest.common.dao.ImageDao;
 
+import eu.medsea.util.MimeUtil;
+
 @Service
 public class ImageService {
 
   @Autowired
   private ImageDao imageDao;
+
+  public void add(Image image) {
+    imageDao.saveOrUpdate(image);
+  }
 
   public JSONObject validate(MultipartFile imageFile) throws JSONException {
     JSONObject result = new JSONObject();
@@ -41,6 +50,16 @@ public class ImageService {
 
   public Image get(String imageId) {
     return imageDao.findById(imageId);
+  }
+
+  public Image multipartFileToImage(MultipartFile file) throws IOException {
+    String name = file.getOriginalFilename();
+    Image image = new Image();
+    image.setId(UUID.randomUUID().toString());
+    image.setTitle(name);
+    image.setImageData(file.getBytes());
+    image.setImageType(MimeUtil.getFileExtension(name));
+    return image;
   }
 
 }
