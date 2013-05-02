@@ -32,6 +32,7 @@
 			if(navigator.userAgent.indexOf("Firefox") >= 0) document.write("<link rel='stylesheet' href='${ContextPath}/css/moz.css' type='text/css'>");
 			window.UEDITOR_HOME_URL = '${ContextPath}/js/ueditor/';
 			window.ContextPath = '${ContextPath}';
+			window.ImageServer = '${(Site.imageServer)!}';
 		</script>
 	</head>
 	<body>
@@ -79,7 +80,7 @@
 					<li class="hide" data-m="site" data-n="data.dict"><a href="#m=site;n=data.dict;u=${ContextPath}/data/dict.html;t=#main"><i class="icon-book"></i> 数据字典</a></li>
 					<li class="hide" data-m="site" data-n="account.list"><a href="#m=site;n=account.list;u=${ContextPath}/account/list.html;t=#main"><i class="icon-github"></i> 账号管理</a></li>
 					<li class="hide" data-m="site" data-n="advertorial.list"><a href="#m=site;n=advertorial.list;u=${ContextPath}/advertorial/list.html;t=#main"><i class="icon-file"></i> 软文管理</a></li>
-					<li class="hide" data-m="site" data-n="file"><a href="#m=site;n=file;u=${ContextPath}/file.html;t=#main"><i class="icon-user-md"></i> 文件管理</a></li>
+					<li class="hide" data-m="site" data-n="file"><a href="#m=site;n=file;u=${ContextPath}/file.html;t=#main"><i class="icon-folder-close"></i> 文件管理</a></li>
 					<li class="hide" data-m="user" data-n="user.customers"><a href="#m=user;n=user.customers;u=${ContextPath}/customer/list.html;t=#main"><i class="icon-user"></i> 客户</a></li>
 					<li class="hide" data-m="user" data-n="user.administrators"><a href="#m=user;n=user.administrators;u=${ContextPath}/administrator/list.html;t=#main"><i class="icon-user-md"></i> 管理员</a></li>
 				</ul>

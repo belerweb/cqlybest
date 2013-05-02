@@ -15,14 +15,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.multipart.MultipartFile;
 
 import com.cqlybest.common.bean.DepartureCity;
 import com.cqlybest.common.bean.Destination;
 import com.cqlybest.common.bean.DictProductGrade;
 import com.cqlybest.common.bean.DictProductType;
 import com.cqlybest.common.bean.DictTraffic;
-import com.cqlybest.common.bean.Image;
 import com.cqlybest.common.bean.Keyword;
 import com.cqlybest.common.bean.Product;
 import com.cqlybest.common.service.DestinationService;
@@ -80,11 +78,7 @@ public class ProductController {
       @RequestParam(required = false) List<Integer> productGradeIds,
       @RequestParam(required = false) String keywordIds,
       @RequestParam(required = false) String destIds,
-      @RequestParam(required = false) String departureCityIds,
-      @RequestParam(required = false) List<String> posterIds,
-      @RequestParam(required = false) List<String> photoIds,
-      @RequestParam(required = false) MultipartFile[] _posters,
-      @RequestParam(required = false) MultipartFile[] _photos) throws IOException {
+      @RequestParam(required = false) String departureCityIds) throws IOException {
     // 交通方式
     if (trafficIds != null) {
       Set<DictTraffic> items = new HashSet<>();
@@ -145,42 +139,6 @@ public class ProductController {
       }
       product.setDepartureCities(departureCities);
     }
-    // 海报
-    Set<Image> posters = new HashSet<>();
-    if (posterIds != null) {
-      for (String id : posterIds) {
-        Image image = new Image();
-        image.setId(id);
-        posters.add(image);
-      }
-    }
-    // 新上传海报
-    if (_posters != null) {
-      for (MultipartFile multipartFile : _posters) {
-        Image image = imageService.multipartFileToImage(multipartFile);
-        imageService.add(image);
-        posters.add(image);
-      }
-    }
-    product.setPosters(posters);
-    // 照片
-    Set<Image> photos = new HashSet<>();
-    if (photoIds != null) {
-      for (String id : photoIds) {
-        Image image = new Image();
-        image.setId(id);
-        photos.add(image);
-      }
-    }
-    // 新上传照片
-    if (_photos != null) {
-      for (MultipartFile multipartFile : _photos) {
-        Image image = imageService.multipartFileToImage(multipartFile);
-        imageService.add(image);
-        photos.add(image);
-      }
-    }
-    product.setPhotos(photos);
     productService.edit(product);
   }
 

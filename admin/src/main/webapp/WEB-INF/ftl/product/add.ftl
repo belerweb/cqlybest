@@ -177,7 +177,7 @@
 							<div class="span12">
 								<div class="control-group">
 									<label class="control-label">图片：</label>
-									<div class="controls"><button id="add-product-poster" type="button" class="btn">添加</button></div>
+									<div class="controls"><button id="add-product-poster" type="button" class="btn">添加</button><div class="help-block"></div></div>
 								</div>
 							</div>
 						</div>
@@ -187,7 +187,7 @@
 							<div class="span12">
 								<div class="control-group">
 									<label class="control-label">图片：</label>
-									<div class="controls"><button id="add-product-photo" type="button" class="btn">添加</button></div>
+									<div class="controls"><button id="add-product-photo" type="button" class="btn">添加</button><div class="help-block"></div></div>
 								</div>
 							</div>
 						</div>
@@ -321,31 +321,32 @@ var pdEditor = UE.getEditor('product-description', {
 	initialContent: '',
 	initialFrameWidth: '100%'
 });
-$('#add-product-poster').click(function(){
-	var controlGroup = $(this).parents('.control-group');
-	var html =  ['<idv class="control-group"><label class="control-label"><button type="button" class="btn del">删除</button></label>'];
-	html.push('<div class="controls"><input type="file" class="input"></div></div>');
-	var newControlGroup = $(html.join(''));
-	$('.del', newControlGroup).click(function(){
+var newFile = function(btn, name, hash) {
+	var html = ['<div class="control-group"><div class="controls"><div class="input-append">'];
+	html.push('<input class="input-xxlarge" name="'+name+'" type="text" readonly="readonly" value="'+ImageServer+'/image/'+hash+'">');
+	html.push('<button class="btn btn-danger" type="button" data-toggle="delete">删除</button>');
+	html.push('</div><div class="help-block"></div></div></div>');
+	var file = $(html.join(''));
+	$('[data-toggle=delete]', file).click(function(){
 		$(this).parents('.control-group').remove();
 	});
-	$('input[type=file]', newControlGroup).change(function(){
-		$(this).attr('name', '_posters');
+	$(btn).parents('.control-group').after(file);
+};
+$('#add-product-poster').click(function(){
+	var btn = this;
+	cqlybest.chooseFile(function(hashs){
+		$.each(hashs, function(i, hash){
+			newFile(btn, 'posters', hash);
+		})
 	});
-	controlGroup.after(newControlGroup);
 });
 $('#add-product-photo').click(function(){
-	var controlGroup = $(this).parents('.control-group');
-	var html =  ['<idv class="control-group"><label class="control-label"><button type="button" class="btn del">删除</button></label>'];
-	html.push('<div class="controls"><input type="file" class="input"></div></div>');
-	var newControlGroup = $(html.join(''));
-	$('.del', newControlGroup).click(function(){
-		$(this).parents('.control-group').remove();
+	var btn = this;
+	cqlybest.chooseFile(function(hashs){
+		$.each(hashs, function(i, hash){
+			newFile(btn, 'photos', hash);
+		})
 	});
-	$('input[type=file]', newControlGroup).change(function(){
-		$(this).attr('name', '_photos');
-	});
-	controlGroup.after(newControlGroup);
 });
 $('input,textarea,select', '#main-content-form').jqBootstrapValidation({
 	submitSuccess : function($form, event) {

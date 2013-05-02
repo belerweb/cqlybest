@@ -28,7 +28,10 @@
 				<div class="control-group">
 					<label class="control-label">图片：</label>
 					<div class="controls">
-						<input type="text" class="span input" name="imageUrl" required="true" maxlength="256"> 
+						<div class="input-append">
+							<input class="input-xxlarge" name="imageUrl" type="text" required="true" maxlength="256">
+							<button class="btn btn-success" type="button" data-toggle="upload">选择/上传</button>
+						</div>
 					</div>
 				</div>
 				<div class="control-group">
@@ -57,6 +60,9 @@
 	</div>
 </div>
 <script>
+$('[data-toggle=upload]').click(function(){
+	cqlybest.chooseFile($(this).prev());
+});
 $('input,textarea,select', '#main-content-form').jqBootstrapValidation({
 	submitSuccess : cqlybest.ajaxSubmit
 });

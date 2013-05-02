@@ -122,7 +122,7 @@ window.cqlybest = {
 			if (typeof arg == 'function') {
 				arg(files);
 			} else {
-				$(arg).val(files[0]||'').trigger('change');
+				$(arg).val(ImageServer + '/image/' + files[0]||'').trigger('change');
 			}
 		});
 		$('#elfinder-container').load(ContextPath + '/file.html');

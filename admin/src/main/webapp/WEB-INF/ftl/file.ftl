@@ -1,7 +1,7 @@
 <div id="elfinder"></div>
 <script type="text/javascript" charset="utf-8">
 $('#elfinder').elfinder({
-	url : 'http://elfinder.hahale.tv/connector.elfinder',
+	url : '${(Site.imageServer)!}/connector.action',
 	lang: 'zh_CN',
 	handlers : {
 		select : function(event, elfinderInstance) {

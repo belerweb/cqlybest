@@ -52,7 +52,7 @@
 				<div class="control-group">
 					<label class="control-label">图片服务器：</label>
 					<div class="controls">
-						<textarea rows="3" name="imageServer" class="span input same-height-1" maxlength="256">${(site.imageServer)!}</textarea>
+						<input type="text" class="span input" name="imageServer" value="${(site.imageServer)!}" maxlength="1024"> 
 					</div>
 				</div>
 				<div class="text-center">
