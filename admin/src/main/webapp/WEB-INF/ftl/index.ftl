@@ -17,6 +17,8 @@
 		<link rel="stylesheet" href="${ContextPath}/css/jquery.selectBoxIt.css">
 		<link rel="stylesheet" href="${ContextPath}/css/bootstrap-tagmanager.css">
 		<link rel="stylesheet" href="${ContextPath}/css/jquery.tagit.css">
+		<link rel="stylesheet" href="${ContextPath}/css/elfinder.min.css">
+		<link rel="stylesheet" href="${ContextPath}/css/elfinder-theme.css">
 		<link rel="alternate stylesheet" type="text/css" media="screen" title="green-theme" href="${ContextPath}/css/color/green.css" />
 		<link rel="alternate stylesheet" type="text/css" media="screen" title="red-theme" href="${ContextPath}/css/color/red.css" />
 		<link rel="alternate stylesheet" type="text/css" media="screen" title="blue-theme" href="${ContextPath}/css/color/blue.css" />
@@ -29,6 +31,7 @@
 		<script language="JavaScript">
 			if(navigator.userAgent.indexOf("Firefox") >= 0) document.write("<link rel='stylesheet' href='${ContextPath}/css/moz.css' type='text/css'>");
 			window.UEDITOR_HOME_URL = '${ContextPath}/js/ueditor/';
+			window.ContextPath = '${ContextPath}';
 		</script>
 	</head>
 	<body>
@@ -104,6 +107,8 @@
 		<script src="${ContextPath}/js/tag-it.js"></script>
 		<script src="${ContextPath}/js/ueditor/editor_config.js"></script>
 		<script src="${ContextPath}/js/ueditor/editor_all.js"></script>
+		<script src="${ContextPath}/js/elfinder.min.js"></script>
+		<script src="${ContextPath}/js/i18n/elfinder.zh_CN.js"></script>
 		<!--[if IE]>
 		<script src="${ContextPath}/js/Jit/Extras/excanvas.js"></script>
 		<![endif]-->

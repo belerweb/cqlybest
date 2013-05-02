@@ -12,16 +12,16 @@
         <div id="imageTab">
             <div id="tabHeads" class="tabhead">
                 <span tabSrc="remote"  class="focus"><var id="lang_tab_remote"></var></span>
-                <span tabSrc="local"><var id="lang_tab_local"></var></span>
-                <span tabSrc="imgManager"><var id="lang_tab_imgManager"></var></span>
-                <span tabSrc="imgSearch"><var id="lang_tab_imgSearch"></var></span>
             </div>
             <div id="tabBodys" class="tabbody">
                 <div id="remote" class="panel">
                     <table cellpadding="0" cellspacing="0">
                         <tr>
                             <td class="label"><label for="url"><var id="lang_input_url"></var></label></td>
-                            <td><input id="url" type="text"/></td>
+                            <td>
+                            	<input id="url" type="text" style="width: 420px;" />
+                            	<a href="javascript:void(0);" onclick="window.top.cqlybest.chooseFile(document.getElementById('url'));" class="button" style="display: inline-block; margin-left: 5px;">选择/上传</a>
+                            </td>
                         </tr>
                         <tr>
                             <td class="label"><label for="width"><var id="lang_input_width"></var></label></td>

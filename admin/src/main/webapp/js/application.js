@@ -116,6 +116,17 @@ $(function() {
 });
 
 window.cqlybest = {
+	chooseFile : function(arg) {
+		bootbox.alert("<div id='elfinder-container'></div>", '确定', function(){
+			var files = $('#elfinder').data('files') || [];
+			if (typeof arg == 'function') {
+				arg(files);
+			} else {
+				$(arg).val(files[0]||'').trigger('change');
+			}
+		});
+		$('#elfinder-container').load(ContextPath + '/file.html');
+	},
 	parseHash : function(hash) {
 		var result = {};
 		var hashData = (hash ? hash : location.hash).match(/^#(.+)$/);
