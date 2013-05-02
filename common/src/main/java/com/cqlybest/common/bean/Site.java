@@ -2,8 +2,6 @@ package com.cqlybest.common.bean;
 
 import java.util.Date;
 
-import org.apache.commons.lang.StringUtils;
-
 /**
  * @author jun
  * 
@@ -12,30 +10,13 @@ import org.apache.commons.lang.StringUtils;
 public class Site {
 
   private Integer id;
-  /**
-   * 网站名称
-   */
-  private String name;
-  /**
-   * 网页 meta keyword
-   */
-  private String metaKeyword;
-  /**
-   * 网页 meta description
-   */
-  private String metaDescription;
-  /**
-   * 网页版权说明文字
-   */
-  private String copyright;
-  /**
-   * 统计代码
-   */
-  private String statisticalCode;
-  /**
-   * 备案号
-   */
-  private String icp;
+  private String name;// 网站名称
+  private String metaKeyword;// 网页 meta keyword
+  private String metaDescription;// 网页 meta description
+  private String copyright;// 网页版权说明文字
+  private String statisticalCode;// 统计代码
+  private String icp;// 备案号
+  private String imageServer;// 图片服务器
   private Date lastUpdate;
 
   public Integer getId() {
@@ -94,6 +75,14 @@ public class Site {
     this.icp = icp;
   }
 
+  public String getImageServer() {
+    return imageServer;
+  }
+
+  public void setImageServer(String imageServer) {
+    this.imageServer = imageServer;
+  }
+
   public Date getLastUpdate() {
     return lastUpdate;
   }
@@ -102,17 +91,4 @@ public class Site {
     this.lastUpdate = lastUpdate;
   }
 
-  @Override
-  public boolean equals(Object obj) {
-    if (!(obj instanceof Site) || obj == null) {
-      return false;
-    }
-    Site site = (Site) obj;
-    return StringUtils.equals(this.name, site.name)
-        && StringUtils.equals(this.metaKeyword, site.metaKeyword)
-        && StringUtils.equals(this.metaDescription, site.metaDescription)
-        && StringUtils.equals(this.copyright, site.copyright)
-        && StringUtils.equals(this.statisticalCode, site.statisticalCode)
-        && StringUtils.equals(this.icp, site.icp);
-  }
 }

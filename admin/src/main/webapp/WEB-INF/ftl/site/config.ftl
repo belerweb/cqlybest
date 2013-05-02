@@ -49,6 +49,12 @@
 						<textarea rows="3" name="statisticalCode" class="span input same-height-1" maxlength="1024">${(site.statisticalCode)!}</textarea>
 					</div>
 				</div>
+				<div class="control-group">
+					<label class="control-label">图片服务器：</label>
+					<div class="controls">
+						<textarea rows="3" name="imageServer" class="span input same-height-1" maxlength="256">${(site.imageServer)!}</textarea>
+					</div>
+				</div>
 				<div class="text-center">
 					<button class="btn btn-primary" type="submit">保存</button>
 				</div>
