@@ -16,8 +16,13 @@ public class SmsController {
   private SmsService smsService;
 
   @RequestMapping(value = "/sms/list.html", method = RequestMethod.GET)
-  public void list(@RequestParam Integer page, Model model) {
-    model.addAttribute("list", null);
+  public void list(@RequestParam(defaultValue = "0") int page, Model model) {
+    page = Math.max(1, page);
+    int pageSize = 20;
+    model.addAttribute("page", page);
+    model.addAttribute("pageSize", pageSize);
+    model.addAttribute("total", smsService.querySmsTotal());
+    model.addAttribute("smss", smsService.querySmss(page, pageSize));
   }
 
   @RequestMapping(value = "/sms/send.html", method = RequestMethod.POST)

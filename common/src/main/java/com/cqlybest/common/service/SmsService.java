@@ -1,5 +1,8 @@
 package com.cqlybest.common.service;
 
+import java.util.List;
+
+import org.hibernate.criterion.Order;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -20,6 +23,15 @@ public class SmsService {
     sms.setContent(content);
     sms.setSuccess(SMS.send(phone, content).isSuccess());
     smsDao.saveOrUpdate(sms);
+  }
+
+
+  public Long querySmsTotal() {
+    return smsDao.total();
+  }
+
+  public List<Sms> querySmss(int page, int pageSize) {
+    return smsDao.find(Order.desc("sentDate"), page, pageSize);
   }
 
 }
