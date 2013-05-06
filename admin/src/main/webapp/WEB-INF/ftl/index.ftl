@@ -68,10 +68,13 @@
 			<!--BEGIN SIDEBAR-->
 			<div id="menu" role="navigation">
 				<ul class="main-menu">
+					<li data-m="dash"><a href="#m=dash"><i class="tables"></i> 工作台</a></li>
 					<li data-m="site"><a href="#m=site"><i class="tables"></i> 网站</a></li>
 					<li data-m="user"><a href="#m=user"><i class="tables"></i> 用户</a></li>
+					<li data-m="user"><a href="#m=sms"><i class="tables"></i> 短信</a></li>
 				</ul>
 				<ul class="additional-menu">
+					<li class="hide" data-m="dash" data-n="dash.dash"><a href="#m=dash;n=dash.dash;u=${ContextPath}/dashboard.html;t=#main"><i class="icon-dashboard"></i> 工作台</a></li>
 					<li class="hide" data-m="site" data-n="site.config"><a href="#m=site;n=site.config;u=${ContextPath}/site/config.html;t=#main"><i class="icon-cogs"></i> 网站配置</a></li>
 					<li class="hide" data-m="site" data-n="product.list"><a href="#m=site;n=product.list;u=${ContextPath}/product/list.html;t=#main"><i class="icon-road"></i> 旅游产品</a></li>
 					<li class="hide" data-m="site" data-n="productgroup.list"><a href="#m=site;n=productgroup.list;u=${ContextPath}/product_group/list.html;t=#main"><i class="icon-th-large"></i> 产品聚合</a></li>
@@ -83,6 +86,7 @@
 					<li class="hide" data-m="site" data-n="file"><a href="#m=site;n=file;u=${ContextPath}/file.html;t=#main"><i class="icon-folder-close"></i> 文件管理</a></li>
 					<li class="hide" data-m="user" data-n="user.customers"><a href="#m=user;n=user.customers;u=${ContextPath}/customer/list.html;t=#main"><i class="icon-user"></i> 客户</a></li>
 					<li class="hide" data-m="user" data-n="user.administrators"><a href="#m=user;n=user.administrators;u=${ContextPath}/administrator/list.html;t=#main"><i class="icon-user-md"></i> 管理员</a></li>
+					<li class="hide" data-m="sms" data-n="sms.list"><a href="#m=sms;n=sms.list;u=${ContextPath}/sms/list.html;t=#main"><i class="icon-comment"></i> 短信历史</a></li>
 				</ul>
 				<div class="clearfix"></div>
 			</div>
