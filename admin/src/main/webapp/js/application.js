@@ -128,7 +128,11 @@ window.cqlybest = {
 		$('#elfinder-container').load(ContextPath + '/file.html');
 	},
 	parseHash : function(hash) {
-		var _hash = (hash ? hash : location.hash).replace(/^#?/, '?');
+		var _hash = hash;
+		if (!_hash) {
+			_hash = location.href.split('#')[1] || '';
+		}
+		_hash = _hash.replace(/^#?/, '?');
 		return $.url(_hash).param();
 	},
 	buildHash : function(param) {
