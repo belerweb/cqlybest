@@ -9,9 +9,9 @@
             <generator class="native" />
         </id>
         <property name="uid" column="UID" type="string" length="36" />
-        <property name="from" column="FROM" type="string" length="32" />
+        <property name="from" column="_FROM" type="string" length="32" />
         <property name="phone" column="PHONE" type="string" not-null="true" length="16" />
-        <property name="to" column="TO" type="string" length="32" />
+        <property name="to" column="_TO" type="string" length="32" />
         <property name="content" column="CONTENT" type="string" length="1024" />
         <property name="sentDate" column="SENT_DATE"  />
         <property name="success" column="SUCCESS" />
