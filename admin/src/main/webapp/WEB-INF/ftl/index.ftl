@@ -72,6 +72,7 @@
 					<li data-m="site"><a href="#m=site"><i class="tables"></i> 网站</a></li>
 					<li data-m="user"><a href="#m=user"><i class="tables"></i> 用户</a></li>
 					<li data-m="user"><a href="#m=sms"><i class="tables"></i> 短信</a></li>
+					<li data-m="user"><a href="#m=template"><i class="tables"></i> 网站模板</a></li>
 				</ul>
 				<ul class="additional-menu">
 					<li class="hide" data-m="dash" data-n="dash.dash"><a href="#m=dash&n=dash.dash&u=${ContextPath}/dashboard.html&t=%23main"><i class="icon-dashboard"></i> 工作台</a></li>
@@ -87,6 +88,7 @@
 					<li class="hide" data-m="user" data-n="user.customers"><a href="#m=user&n=user.customers&u=${ContextPath}/customer/list.html&t=%23main"><i class="icon-user"></i> 客户</a></li>
 					<li class="hide" data-m="user" data-n="user.administrators"><a href="#m=user&n=user.administrators&u=${ContextPath}/administrator/list.html&t=%23main"><i class="icon-user-md"></i> 管理员</a></li>
 					<li class="hide" data-m="sms" data-n="sms.list"><a href="#m=sms&n=sms.list&u=${ContextPath}/sms/list.html&t=%23main"><i class="icon-comment"></i> 短信历史</a></li>
+					<li class="hide" data-m="template" data-n="template.template1"><a href="#m=template&n=template.template1&u=${ContextPath}/template/template1.html&t=%23main"><i class="icon-edit"></i> 模板一</a></li>
 				</ul>
 				<div class="clearfix"></div>
 			</div>
