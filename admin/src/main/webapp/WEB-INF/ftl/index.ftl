@@ -68,11 +68,11 @@
 			<!--BEGIN SIDEBAR-->
 			<div id="menu" role="navigation">
 				<ul class="main-menu">
-					<li data-m="dash"><a href="#m=dash"><i class="tables"></i> 工作台</a></li>
-					<li data-m="site"><a href="#m=site"><i class="tables"></i> 网站</a></li>
-					<li data-m="user"><a href="#m=user"><i class="tables"></i> 用户</a></li>
-					<li data-m="user"><a href="#m=sms"><i class="tables"></i> 短信</a></li>
-					<li data-m="user"><a href="#m=template"><i class="tables"></i> 网站模板</a></li>
+					<li data-m="dash"><a href="#m=dash"><i class="dashboard"></i> 工作台</a></li>
+					<li data-m="site"><a href="#m=site"><i class="site"></i> 网站</a></li>
+					<li data-m="user"><a href="#m=user"><i class="user"></i> 用户</a></li>
+					<li data-m="sms"><a href="#m=sms"><i class="sms"></i> 短信</a></li>
+					<li data-m="template"><a href="#m=template"><i class="template"></i> 网站模板</a></li>
 				</ul>
 				<ul class="additional-menu">
 					<li class="hide" data-m="dash" data-n="dash.dash"><a href="#m=dash&n=dash.dash&u=${ContextPath}/dashboard.html&t=%23main"><i class="icon-dashboard"></i> 工作台</a></li>
