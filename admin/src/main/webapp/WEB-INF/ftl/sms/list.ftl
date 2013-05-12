@@ -78,7 +78,7 @@ $('#main-list-table').dataTable({
 			m: 'site',
 			n: 'product.list',
 			t: '#main',
-			u: encodeURIComponent(u)
+			u: u
 		};
 		location.hash = cqlybest.buildHash(hash);
 	}

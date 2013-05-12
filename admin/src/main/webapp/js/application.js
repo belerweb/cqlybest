@@ -128,23 +128,11 @@ window.cqlybest = {
 		$('#elfinder-container').load(ContextPath + '/file.html');
 	},
 	parseHash : function(hash) {
-		var result = {};
-		var hashData = (hash ? hash : location.hash).match(/^#(.+)$/);
-		if (hashData) {
-			var pa = hashData[1].split(';');
-			for ( var i = 0; i < pa.length; i++) {
-				var kv = pa[i].split('=');
-				result[kv[0]] = kv[1];
-			}
-		}
-		return result;
+		var _hash = (hash ? hash : location.hash).replace(/^#?/, '?');
+		return $.url(_hash).param();
 	},
 	buildHash : function(param) {
-		var hash = [];
-		$.each(param, function(k, v) {
-			hash.push(k + '=' + encodeURIComponent(v));
-		});
-		return '#' + hash.join(';');
+		return '#' + $.param(param);
 	},
 	ajaxSubmit : function($form, event) {
 		event.preventDefault();

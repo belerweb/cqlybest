@@ -4,7 +4,7 @@
 	<div class="pagetitle">
 		<h1>软文</h1>
 		<div class="btn-group">
-			<a href="#m=site;n=advertorial.list;u=${ContextPath}/advertorial/add.html;t=#mb" class="btn btn-primary">增加新软文</a>
+			<a href="#m=site&n=advertorial.list&u=${ContextPath}/advertorial/add.html&t=#mb" class="btn btn-primary">增加新软文</a>
 		</div>
 		<div class="clearfix"></div>
 		<hr>

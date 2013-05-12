@@ -4,7 +4,7 @@
 	<div class="pagetitle">
 		<h1>菜单</h1>
 		<div class="btn-group">
-			<a href="#m=site;n=menu.list;u=${ContextPath}/menu/add.html;t=#mb" class="btn btn-primary">增加新菜单</a>
+			<a href="#m=site&n=menu.list&u=${ContextPath}/menu/add.html&t=#mb" class="btn btn-primary">增加新菜单</a>
 		</div>
 		<div class="clearfix"></div>
 		<hr>

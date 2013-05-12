@@ -4,7 +4,7 @@
 	<div class="pagetitle">
 		<h1>旅游产品</h1>
 		<div class="btn-group">
-			<a href="#m=site;n=product.list;u=${ContextPath}/product/add.html;t=#main" class="btn btn-primary">增加新产品</a>
+			<a href="#m=site&n=product.list&u=${ContextPath}/product/add.html&t=#main" class="btn btn-primary">增加新产品</a>
 		</div>
 		<div class="clearfix"></div>
 		<hr>
@@ -98,7 +98,7 @@ $('#main-list-table').dataTable({
 			m: 'site',
 			n: 'product.list',
 			t: '#main',
-			u: encodeURIComponent(u)
+			u: u
 		};
 		location.hash = cqlybest.buildHash(hash);
 	}

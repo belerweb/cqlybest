@@ -4,7 +4,7 @@
 	<div class="pagetitle">
 		<h1>账号</h1>
 		<div class="btn-group">
-			<a href="#m=site;n=account.list;u=${ContextPath}/account/add.html;t=#mb" class="btn btn-primary">增加新账号</a>
+			<a href="#m=site&n=account.list&u=${ContextPath}/account/add.html&t=#mb" class="btn btn-primary">增加新账号</a>
 		</div>
 		<div class="clearfix"></div>
 		<hr>

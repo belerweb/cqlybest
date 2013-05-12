@@ -4,7 +4,7 @@
 	<div class="pagetitle">
 		<h1>产品聚合</h1>
 		<div class="btn-group">
-			<a href="#m=site;n=productgroup.list;u=${ContextPath}/product_group/add.html;t=#mb" class="btn btn-primary">增加产品聚合</a>
+			<a href="#m=site&n=productgroup.list&u=${ContextPath}/product_group/add.html&t=#mb" class="btn btn-primary">增加产品聚合</a>
 		</div>
 		<div class="clearfix"></div>
 		<hr>
