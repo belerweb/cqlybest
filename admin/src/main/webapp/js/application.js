@@ -213,11 +213,13 @@ $(window).hashchange(function() {
 	});
 	$('.ajax-action-btn').live('click', function() {
 		var url = $(this).attr('data-url');
+		var dataTarget = $(this).attr('data-target') || '';
 		var execute = function() {
 			$.get(url).done(function() {
 				cqlybest.success(null, null, function() {
 					var param = cqlybest.parseHash();
 					param['_t'] = new Date().getTime();
+					param['dt'] = dataTarget;
 					location.hash = cqlybest.buildHash(param);
 				});
 			}).fail(function() {

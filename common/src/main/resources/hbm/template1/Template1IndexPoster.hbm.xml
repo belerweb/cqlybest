@@ -3,8 +3,8 @@
         "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
         "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 
-<hibernate-mapping package="com.cqlybest.common.bean">
-    <class name="IndexPoster" table="INDEX_POSTER">
+<hibernate-mapping package="com.cqlybest.common.bean.template1">
+    <class name="Template1IndexPoster" table="TEMPLATE1_INDEX_POSTER">
         <id name="id" column="ID">
             <generator class="native" />
         </id>
