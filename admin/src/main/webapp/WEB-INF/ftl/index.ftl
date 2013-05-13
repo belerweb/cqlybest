@@ -72,7 +72,6 @@
 					<li data-m="site"><a href="#m=site"><i class="site"></i> 网站</a></li>
 					<li data-m="user"><a href="#m=user"><i class="user"></i> 用户</a></li>
 					<li data-m="sms"><a href="#m=sms"><i class="sms"></i> 短信</a></li>
-					<li data-m="template"><a href="#m=template"><i class="template"></i> 网站模板</a></li>
 				</ul>
 				<ul class="additional-menu">
 					<li class="hide" data-m="dash" data-n="dash.dash"><a href="#m=dash&n=dash.dash&u=${ContextPath}/dashboard.html&t=%23main"><i class="icon-dashboard"></i> 工作台</a></li>
@@ -85,10 +84,10 @@
 					<li class="hide" data-m="site" data-n="account.list"><a href="#m=site&n=account.list&u=${ContextPath}/account/list.html&t=%23main"><i class="icon-github"></i> 账号管理</a></li>
 					<li class="hide" data-m="site" data-n="advertorial.list"><a href="#m=site&n=advertorial.list&u=${ContextPath}/advertorial/list.html&t=%23main"><i class="icon-file"></i> 软文管理</a></li>
 					<li class="hide" data-m="site" data-n="file"><a href="#m=site&n=file&u=${ContextPath}/file.html&t=%23main"><i class="icon-folder-close"></i> 文件管理</a></li>
+					<li class="hide" data-m="site" data-n="site.template1"><a href="#m=site&n=site.template1&u=${ContextPath}/template1/template.html&t=%23main"><i class="icon-edit"></i> 模板一</a></li>
 					<li class="hide" data-m="user" data-n="user.customers"><a href="#m=user&n=user.customers&u=${ContextPath}/customer/list.html&t=%23main"><i class="icon-user"></i> 客户</a></li>
 					<li class="hide" data-m="user" data-n="user.administrators"><a href="#m=user&n=user.administrators&u=${ContextPath}/administrator/list.html&t=%23main"><i class="icon-user-md"></i> 管理员</a></li>
 					<li class="hide" data-m="sms" data-n="sms.list"><a href="#m=sms&n=sms.list&u=${ContextPath}/sms/list.html&t=%23main"><i class="icon-comment"></i> 短信历史</a></li>
-					<li class="hide" data-m="template" data-n="template.template1"><a href="#m=template&n=template.template1&u=${ContextPath}/template/template1.html&t=%23main"><i class="icon-edit"></i> 模板一</a></li>
 				</ul>
 				<div class="clearfix"></div>
 			</div>
