@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.cqlybest.common.bean.template1.Template1IndexPoster;
 import com.cqlybest.common.bean.template1.Template1Menu;
+import com.cqlybest.common.bean.template1.Template1ProductGroup;
 import com.cqlybest.common.service.ProductGroupService;
 import com.cqlybest.common.service.Template1Service;
 
@@ -19,10 +20,15 @@ public class Template1Controller {
   @Autowired
   private Template1Service template1Service;
 
+  @Autowired
+  private ProductGroupService productGroupService;
+
   @RequestMapping(value = "/template1/template.html", method = RequestMethod.GET)
   public void template(Model model) {
     model.addAttribute("posters", template1Service.getPosters());
     model.addAttribute("menus", template1Service.getAllMenus());
+    model.addAttribute("productGroups", productGroupService.getAllProductGroup());
+    model.addAttribute("template1ProductGroups", template1Service.getAllIndexProductGroups());
   }
 
   @RequestMapping("/template1/poster.html")
@@ -50,9 +56,6 @@ public class Template1Controller {
   public void toggle(@RequestParam Integer id, @RequestParam boolean published) {
     template1Service.togglePublished(id, published);
   }
-
-  @Autowired
-  private ProductGroupService productGroupService;
 
   @RequestMapping(value = "/template1/menu.html", method = RequestMethod.GET)
   public void menu(Model model) {
@@ -104,6 +107,31 @@ public class Template1Controller {
   @ResponseBody
   public void down(@RequestParam String id) {
     template1Service.moveDown(id);
+  }
+
+  @RequestMapping(value = "/template1/product_group.html", method = RequestMethod.GET)
+  public void productGroup(Model model) {
+    model.addAttribute("productGroups", productGroupService.getAllProductGroup());
+    model.addAttribute("template1ProductGroups", template1Service.getAllIndexProductGroups());
+  }
+
+  @RequestMapping(value = "/template1/product_group/add.html", method = RequestMethod.POST)
+  @ResponseBody
+  public void addProductGroup(Template1ProductGroup group) {
+    template1Service.add(group);
+  }
+
+  @RequestMapping(value = "/template1/product_group/delete.html", method = RequestMethod.GET)
+  @ResponseBody
+  public void deleteProductGroup(Template1ProductGroup group) {
+    template1Service.delete(group);
+  }
+
+  @RequestMapping(value = "/template1/product_group/order.html", method = RequestMethod.POST)
+  @ResponseBody
+  public void orderProductGroup(@RequestParam(value = "ids[]") Integer[] ids,
+      @RequestParam(value = "orders[]") Integer[] orders) {
+    template1Service.orderProductGroup(ids, orders);
   }
 
 }

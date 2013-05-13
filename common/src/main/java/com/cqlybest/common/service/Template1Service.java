@@ -11,6 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.cqlybest.common.bean.template1.Template1IndexPoster;
 import com.cqlybest.common.bean.template1.Template1Menu;
+import com.cqlybest.common.bean.template1.Template1ProductGroup;
 import com.cqlybest.common.dao.Template1Dao;
 
 @Service
@@ -137,4 +138,24 @@ public class Template1Service {
         .asc("displayOrder"));
   }
 
+  @Transactional
+  public void add(Template1ProductGroup group) {
+    template1Dao.saveOrUpdate(group);
+  }
+
+  public List<Template1ProductGroup> getAllIndexProductGroups() {
+    return template1Dao.find(Template1ProductGroup.class, Order.asc("displayOrder"));
+  }
+
+  @Transactional
+  public void delete(Template1ProductGroup group) {
+    template1Dao.del(group);
+  }
+
+  @Transactional
+  public void orderProductGroup(Integer[] ids, Integer[] orders) {
+    for (int i = 0; i < ids.length; i++) {
+      template1Dao.updateProductGroupOrder(ids[i], orders[i]);
+    }
+  }
 }

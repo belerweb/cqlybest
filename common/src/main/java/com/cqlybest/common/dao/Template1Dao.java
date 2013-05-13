@@ -35,4 +35,12 @@ public class Template1Dao extends BaseDao {
     return query.executeUpdate();
   }
 
+  public void updateProductGroupOrder(Integer id, Integer order) {
+    String hql = "UPDATE Template1ProductGroup SET displayOrder = ? WHERE id = ?";
+    Query query = getCurrentSession().createQuery(hql);
+    query.setParameter(0, order);
+    query.setParameter(1, id);
+    query.executeUpdate();
+  }
+
 }

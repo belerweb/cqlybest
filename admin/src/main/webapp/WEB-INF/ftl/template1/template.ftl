@@ -17,7 +17,7 @@
 		<div class="tab-content">
 			<div id="template1-tab1" class="tab-pane fade active in"><#include "/template1/menu.ftl"></div>
 			<div id="template1-tab2" class="tab-pane fade"><#include "/template1/poster.ftl"></div>
-			<div id="template1-tab3" class="tab-pane fade"><#include "/template1/tab3.ftl"></div>
+			<div id="template1-tab3" class="tab-pane fade"><#include "/template1/product_group.ftl"></div>
 		</div>
 	</div>
 </div>

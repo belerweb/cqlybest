@@ -151,7 +151,7 @@ window.cqlybest = {
 		});
 	},
 	success : function(message, label, func) {
-		var _message = message ? messsage : '<div class="alert alert-success">操作成功</div>';
+		var _message = message ? message : '<div class="alert alert-success">操作成功</div>';
 		var _label = label ? label : '确定';
 		var _func = func ? func : function() {
 			history.go(-1);
@@ -159,7 +159,7 @@ window.cqlybest = {
 		bootbox.alert(_message, _label, _func);
 	},
 	error : function(message, label, func) {
-		var _message = message ? messsage : '<div class="alert alert-error">操作失败</div>';
+		var _message = message ? message : '<div class="alert alert-error">操作失败</div>';
 		var _label = label ? label : '确定';
 		var _func = func ? func : function() {
 		};
