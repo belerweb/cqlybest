@@ -1,13 +1,16 @@
 package com.cqlybest.common.service;
 
 import java.util.List;
+import java.util.UUID;
 
+import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.cqlybest.common.bean.template1.Template1IndexPoster;
+import com.cqlybest.common.bean.template1.Template1Menu;
 import com.cqlybest.common.dao.Template1Dao;
 
 @Service
@@ -68,5 +71,70 @@ public class Template1Service {
     template1Dao.saveOrUpdate(poster);
   }
 
+  @Transactional
+  public void add(Template1Menu menu) {
+    menu.setId(UUID.randomUUID().toString());
+    menu.setDisplayOrder(template1Dao.total(Template1Menu.class).intValue() + 1);
+    menu.setPublished(false);
+    template1Dao.saveOrUpdate(menu);
+  }
+
+  @Transactional
+  public void modify(Template1Menu menu) {
+    menu.setPublished(false);
+    template1Dao.saveOrUpdate(menu);
+  }
+
+  @Transactional
+  public void delete(String id) {
+    Template1Menu menu = template1Dao.find(Template1Menu.class, id);
+    if (menu != null) {
+      template1Dao.del(menu);
+    }
+  }
+
+  @Transactional
+  public void moveUp(String id) {
+    Template1Menu menu = template1Dao.find(Template1Menu.class, id);
+    int order = menu.getDisplayOrder();
+    Template1Menu prev = template1Dao.prevMenu(order);
+    if (prev != null) {
+      menu.setDisplayOrder(prev.getDisplayOrder());
+      prev.setDisplayOrder(order);
+      template1Dao.saveOrUpdate(menu);
+      template1Dao.saveOrUpdate(prev);
+    }
+  }
+
+  @Transactional
+  public void moveDown(String id) {
+    Template1Menu menu = template1Dao.find(Template1Menu.class, id);
+    int order = menu.getDisplayOrder();
+    Template1Menu next = template1Dao.nextMenu(order);
+    if (next != null) {
+      menu.setDisplayOrder(next.getDisplayOrder());
+      next.setDisplayOrder(order);
+      template1Dao.saveOrUpdate(menu);
+      template1Dao.saveOrUpdate(next);
+    }
+  }
+
+  @Transactional
+  public void togglePublished(String id, boolean published) {
+    template1Dao.toggleMenuPublished(id, published);
+  }
+
+  public Template1Menu get(String id) {
+    return template1Dao.find(Template1Menu.class, id);
+  }
+
+  public List<Template1Menu> getAllMenus() {
+    return template1Dao.find(Template1Menu.class, Order.asc("displayOrder"));
+  }
+
+  public List<Template1Menu> getPublishedMenus() {
+    return template1Dao.find(Template1Menu.class, Restrictions.eq("published", true), Order
+        .asc("displayOrder"));
+  }
 
 }

@@ -63,7 +63,7 @@
 			<div class="clearfix"></div>   
 		</div>
 		<!-- novalidate -->
-		<form id="main-content-form" action="${ContextPath}/template1/poster/add.html" method="post" class="form-horizontal">
+		<form id="template1-tab2-form" action="${ContextPath}/template1/poster/add.html" method="post" class="form-horizontal">
 			<div class="grid-content">
 				<div class="control-group">
 					<label class="control-label">标题：</label>
@@ -121,7 +121,7 @@ $('#template1-tab2-list-table').dataTable({
 $('[data-toggle=upload]').click(function(){
 	cqlybest.chooseFile($(this).prev());
 });
-$('input,textarea,select', '#main-content-form').jqBootstrapValidation({
+$('input,textarea,select', '#template1-tab2-form').jqBootstrapValidation({
 	submitSuccess : function($form, event) {
 		event.preventDefault();
 		event.stopPropagation();

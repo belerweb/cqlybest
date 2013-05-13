@@ -15,12 +15,15 @@
 	<div class="clearfix"></div>
 	<div class="grid-content">
 		<div class="tab-content">
-			<div id="template1-tab1" class="tab-pane fade active in"><#include "/template1/tab1.ftl"></div>
+			<div id="template1-tab1" class="tab-pane fade active in"><#include "/template1/menu.ftl"></div>
 			<div id="template1-tab2" class="tab-pane fade"><#include "/template1/poster.ftl"></div>
 			<div id="template1-tab3" class="tab-pane fade"><#include "/template1/tab3.ftl"></div>
 		</div>
 	</div>
 </div>
 <script>
-$('#template1 a[data-target=' + (cqlybest.parseHash().dt||'#template1-tab1') + ']').tab('show');
+var target = cqlybest.parseHash().dt||'';
+if (target != '') {
+	$('#template1 a[data-target=' + target + ']').tab('show');
+}
 </script>
