@@ -4,7 +4,7 @@
 	<div class="pagetitle">
 		<h1>管理员</h1>
 		<div class="btn-group">
-			<a href="#m=user&n=user.administrators&u=${ContextPath}/administrator/add.html&t=#main" class="btn btn-primary">增加管理员</a>
+			<a href="#m=user&n=user.administrators&u=${ContextPath}/administrator/add.html&t=%23main" class="btn btn-primary">增加管理员</a>
 		</div>
 		<div class="clearfix"></div>
 		<hr>
@@ -76,7 +76,7 @@ $('#main-list-table').dataTable({
 		var q = {};
 		q.page = p.iDisplayStart / p.iDisplayLength + 1;
 		var u = '${ContextPath}/administrator/list.html?' + $.param(q);
-		location.hash = '#m=user&n=user.administrators&u=' + encodeURIComponent(u) + ';t=#main';
+		location.hash = '#m=user&n=user.administrators&u=' + encodeURIComponent(u) + ';t=%23main';
 	}
 });
 </script>

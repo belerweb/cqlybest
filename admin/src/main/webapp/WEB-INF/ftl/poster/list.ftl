@@ -4,7 +4,7 @@
 	<div class="pagetitle">
 		<h1>首页海报</h1>
 		<div class="btn-group">
-			<a href="#m=site&n=poster.list&u=${ContextPath}/poster/add.html&t=#mb" class="btn btn-primary">增加新海报</a>
+			<a href="#m=site&n=poster.list&u=${ContextPath}/poster/add.html&t=%23mb" class="btn btn-primary">增加新海报</a>
 		</div>
 		<div class="clearfix"></div>
 		<hr>
