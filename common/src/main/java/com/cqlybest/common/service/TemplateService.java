@@ -6,7 +6,7 @@ import org.springframework.stereotype.Service;
 public class TemplateService {
 
   public String forward(String uri) {
-    return "forward:/default" + uri;
+    return "forward:/template1" + uri;
   }
 
 }

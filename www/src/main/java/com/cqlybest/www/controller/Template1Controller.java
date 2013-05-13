@@ -11,45 +11,45 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.cqlybest.common.bean.Menu;
 import com.cqlybest.common.bean.ProductGroup;
 import com.cqlybest.common.bean.ProductGroupFilterItem;
 import com.cqlybest.common.bean.ProductGroupItem;
-import com.cqlybest.common.service.MenuService;
+import com.cqlybest.common.bean.template1.Template1Menu;
 import com.cqlybest.common.service.ProductService;
 import com.cqlybest.common.service.SiteService;
+import com.cqlybest.common.service.Template1Service;
 import com.cqlybest.common.service.TemplateService;
 
 @Controller
-public class DefaultController {
+public class Template1Controller {
 
   @Autowired
-  private TemplateService templateService;
+  private Template1Service template1Service;
   @Autowired
-  private MenuService menuService;
+  private TemplateService templateService;
   @Autowired
   private SiteService siteService;
   @Autowired
   private ProductService productService;
 
-  @RequestMapping("/default/index.html")
+  @RequestMapping("/template1/index.html")
   public void index(Model model) {
     setCommonData(model);
   }
 
-  @RequestMapping("/default/register.html")
+  @RequestMapping("/template1/register.html")
   public void register(Model model) {
     setCommonData(model);
   }
 
-  @RequestMapping("/default/login.html")
+  @RequestMapping("/template1/login.html")
   public void login(Model model) {
     setCommonData(model);
   }
 
-  @RequestMapping("/default/pg/{id}.html")
+  @RequestMapping("/template1/pg/{id}.html")
   public Object pg(@PathVariable String id, Model model) {
-    Menu menu = menuService.get(id);
+    Template1Menu menu = template1Service.get(id);
     if (menu == null || menu.getMenuType() != 0) {
       // 菜单不存在或者不是产品聚合菜单
       return new ResponseEntity<String>(StringUtils.EMPTY, HttpStatus.NOT_FOUND);
@@ -62,12 +62,12 @@ public class DefaultController {
     model.addAttribute("products", productService.queryProducts(groupItems, filterItems, 0, 10));
     model.addAttribute("menu", menu);
     setCommonData(model);
-    return "/default/product_group";
+    return "/template1/product_group";
   }
 
-  @RequestMapping("/default/page/{id}.html")
+  @RequestMapping("/template1/page/{id}.html")
   public Object page(@PathVariable String id, Model model) {
-    Menu menu = menuService.get(id);
+    Template1Menu menu = template1Service.get(id);
     if (menu == null || menu.getMenuType() != 1) {
       // 菜单不存在或者不是产品聚合菜单
       return new ResponseEntity<String>(StringUtils.EMPTY, HttpStatus.NOT_FOUND);
@@ -75,12 +75,12 @@ public class DefaultController {
 
     model.addAttribute("page", menu);
     setCommonData(model);
-    return "/default/page";
+    return "/template1/page";
   }
 
   public void setCommonData(Model model) {
     model.addAttribute("Site", siteService.getSite());
-    model.addAttribute("Menu", menuService.getPublishedMenus());
+    model.addAttribute("Template1Menu", template1Service.getPublishedMenus());
   }
 
 }
