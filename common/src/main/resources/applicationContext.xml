@@ -12,11 +12,11 @@
     <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver" />
 
     <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource">
-        <property name="url" value="#{systemEnvironment['cqlybest.db.url']}" />
-        <property name="username" value="#{systemEnvironment['cqlybest.db.username']}" />
-        <property name="password" value="#{systemEnvironment['cqlybest.db.password']}" />
+        <property name="url" value="#{T(System).getProperty('cqlybest.db.url', T(System).getenv('cqlybest.db.url'))}" />
+        <property name="username" value="#{T(System).getProperty('cqlybest.db.username', T(System).getenv('cqlybest.db.username'))}" />
+        <property name="password" value="#{T(System).getProperty('cqlybest.db.password', T(System).getenv('cqlybest.db.password'))}" />
         <property name="testWhileIdle" value="true" />
-        <property name="validationQuery" value="#{systemEnvironment['cqlybest.db.validation']}" />
+        <property name="validationQuery" value="#{T(System).getProperty('cqlybest.db.validation', T(System).getenv('cqlybest.db.validation'))}" />
     </bean>
 
     <bean id="sessionFactory" class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
@@ -28,7 +28,7 @@
         </property>
         <property name="hibernateProperties">
             <props>
-                <prop key="hibernate.dialect">#{systemEnvironment['cqlybest.db.dialect']}</prop>
+                <prop key="hibernate.dialect">#{T(System).getProperty('cqlybest.db.dialect', T(System).getenv('cqlybest.db.dialect'))}</prop>
                 <prop key="hibernate.show_sql">true</prop>
                 <prop key="hibernate.hbm2ddl.auto">update</prop>
             </props>
