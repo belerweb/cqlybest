@@ -22,6 +22,9 @@
         <property name="friendlyReminder" column="FRIENDLY_REMINDER" type="string" length="5120" />
         <property name="recommendedItem" column="RECOMMENDED_ITEM" type="string" length="2048" />
         <property name="published" column="PUBLISHED" />
+        <property name="popular" column="POPULAR" />
+        <property name="recommend" column="RECOMMEND" />
+        <property name="specialOffer" column="SPECIAL_OFFER" />
         <property name="lastUpdate" column="LAST_UPDATE" />
         <set name="recommendedMonths" table="PRODUCT_RECOMMENDED_MONTH">
             <key column="ID" />
