@@ -176,7 +176,7 @@ public class Product {
     return specialOffer;
   }
 
-  public void setSpecialffer(boolean specialOffer) {
+  public void setSpecialOffer(boolean specialOffer) {
     this.specialOffer = specialOffer;
   }
 
