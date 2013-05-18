@@ -1,7 +1,7 @@
 <#assign ContextPath=springMacroRequestContext.getContextPath() />
 <style>
 .group-cnd {
-	margin: 0 0 20px;
+	margin: 0 0 10px;
 }
 .group-cnd span {
 	margin: 0 10px;

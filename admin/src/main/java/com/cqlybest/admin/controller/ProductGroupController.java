@@ -84,7 +84,7 @@ public class ProductGroupController {
     group.setGroupItems(groupItems);
 
     Set<ProductGroupFilterItem> filterItems = new HashSet<>();
-    if (groupTypes != null) {
+    if (filterTypes != null) {
       for (int i = 0; i < filterTypes.size(); i++) {
         ProductGroupFilterItem item = new ProductGroupFilterItem();
         item.setFilterType(filterTypes.get(i));
