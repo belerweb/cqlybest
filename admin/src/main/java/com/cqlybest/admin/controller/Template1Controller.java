@@ -1,5 +1,10 @@
 package com.cqlybest.admin.controller;
 
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+import java.util.UUID;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -8,9 +13,17 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.cqlybest.common.bean.DepartureCity;
+import com.cqlybest.common.bean.DictProductGrade;
+import com.cqlybest.common.bean.DictProductType;
+import com.cqlybest.common.bean.DictTraffic;
+import com.cqlybest.common.bean.Keyword;
 import com.cqlybest.common.bean.template1.Template1IndexPoster;
 import com.cqlybest.common.bean.template1.Template1Menu;
 import com.cqlybest.common.bean.template1.Template1ProductGroup;
+import com.cqlybest.common.bean.template1.Template1SubMenu;
+import com.cqlybest.common.service.DestinationService;
+import com.cqlybest.common.service.DictService;
 import com.cqlybest.common.service.ProductGroupService;
 import com.cqlybest.common.service.Template1Service;
 
@@ -22,6 +35,12 @@ public class Template1Controller {
 
   @Autowired
   private ProductGroupService productGroupService;
+
+  @Autowired
+  private DictService dictService;
+
+  @Autowired
+  private DestinationService destinationService;
 
   @RequestMapping(value = "/template1/template.html", method = RequestMethod.GET)
   public void template(Model model) {
@@ -69,7 +88,22 @@ public class Template1Controller {
 
   @RequestMapping(value = "/template1/menu/add.html", method = RequestMethod.POST)
   @ResponseBody
-  public void add(Template1Menu menu) {
+  public void add(Template1Menu menu, @RequestParam(required = false) List<Integer> _menuTypes,
+      @RequestParam(required = false) List<String> _menuValues,
+      @RequestParam(required = false) List<String> _titles) {
+    menu.setId(UUID.randomUUID().toString());
+    if (menu.getMenuType() == 0 && _menuTypes != null) {// 聚合菜单
+      Set<Template1SubMenu> subMenus = new HashSet<>();
+      for (int i = 0; i < _menuTypes.size(); i++) {
+        Template1SubMenu _menu = new Template1SubMenu();
+        _menu.setMenuId(menu.getId());
+        _menu.setTitle(_titles.get(i));
+        _menu.setMenuType(_menuTypes.get(i));
+        _menu.setMenuValue(_menuValues.get(i));
+        subMenus.add(_menu);
+      }
+      menu.setSubMenus(subMenus);
+    }
     template1Service.add(menu);
   }
 
@@ -83,11 +117,34 @@ public class Template1Controller {
   public void modify(@RequestParam String id, Model model) {
     model.addAttribute("productGroups", productGroupService.getAllProductGroup());
     model.addAttribute("menu", template1Service.get(id));
+
+    model.addAttribute("traffics", dictService.getDict(DictTraffic.class));
+    model.addAttribute("types", dictService.getDict(DictProductType.class));
+    model.addAttribute("grades", dictService.getDict(DictProductGrade.class));
+    model.addAttribute("keywords", dictService.getDict(Keyword.class));
+    model.addAttribute("departureCities", dictService.getDict(DepartureCity.class));
+    model.addAttribute("destinations", destinationService.getTree());
   }
 
   @RequestMapping(value = "/template1/menu/modify.html", method = RequestMethod.POST)
   @ResponseBody
-  public void modify(Template1Menu menu) {
+  public void modify(Template1Menu menu, @RequestParam(required = false) List<Integer> _menuTypes,
+      @RequestParam(required = false) List<String> _menuValues,
+      @RequestParam(required = false) List<String> _titles,
+      @RequestParam(required = false) List<Integer> _ids) {
+    if (menu.getMenuType() == 0 && _menuTypes != null) {// 聚合菜单
+      Set<Template1SubMenu> subMenus = new HashSet<>();
+      for (int i = 0; i < _menuTypes.size(); i++) {
+        Template1SubMenu _menu = new Template1SubMenu();
+        _menu.setId(_ids.get(i));
+        _menu.setMenuId(menu.getId());;
+        _menu.setTitle(_titles.get(i));
+        _menu.setMenuType(_menuTypes.get(i));
+        _menu.setMenuValue(_menuValues.get(i));
+        subMenus.add(_menu);
+      }
+      menu.setSubMenus(subMenus);
+    }
     template1Service.modify(menu);
   }
 

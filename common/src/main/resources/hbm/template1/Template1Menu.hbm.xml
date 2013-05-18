@@ -16,7 +16,7 @@
 		<property name="url" column="URL" length="128" />
 		<property name="displayOrder" column="DISPLAY_ORDER" />
 		<property name="published" column="PUBLISHED" />
-		<set name="subMenus" table="TEMPLATE1_SUB_MENU">
+		<set name="subMenus" table="TEMPLATE1_SUB_MENU" cascade="all" inverse="true">
 			<key column="MENU_ID" />
 			<one-to-many class="Template1SubMenu" />
 		</set>

@@ -43,4 +43,9 @@ public class Template1Dao extends BaseDao {
     query.executeUpdate();
   }
 
+  public void deleteSubMenus(String menuId) {
+    getCurrentSession().createQuery("DELETE FROM Template1SubMenu WHERE menuId = ?").setParameter(
+        0, menuId).executeUpdate();
+  }
+
 }

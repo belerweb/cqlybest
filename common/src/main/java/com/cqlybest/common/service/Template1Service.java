@@ -1,7 +1,6 @@
 package com.cqlybest.common.service;
 
 import java.util.List;
-import java.util.UUID;
 
 import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
@@ -74,7 +73,6 @@ public class Template1Service {
 
   @Transactional
   public void add(Template1Menu menu) {
-    menu.setId(UUID.randomUUID().toString());
     menu.setDisplayOrder(template1Dao.total(Template1Menu.class).intValue() + 1);
     menu.setPublished(false);
     template1Dao.saveOrUpdate(menu);
@@ -83,6 +81,7 @@ public class Template1Service {
   @Transactional
   public void modify(Template1Menu menu) {
     menu.setPublished(false);
+    template1Dao.deleteSubMenus(menu.getId());
     template1Dao.saveOrUpdate(menu);
   }
 
