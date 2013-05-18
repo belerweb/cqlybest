@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping package="com.cqlybest.common.bean.template1">
+	<class name="Template1SubMenu" table="TEMPLATE1_SUB_MENU">
+		<id name="id" column="ID">
+			<generator class="native" />
+		</id>
+		<property name="menuId" column="MENU_ID" not-null="true"
+			length="36" />
+		<property name="title" column="TITLE" length="32" />
+		<property name="menuType" column="MENU_TYPE" not-null="true" />
+		<property name="menuValue" column="MENU_VALUE" length="1024" />
+	</class>
+</hibernate-mapping>

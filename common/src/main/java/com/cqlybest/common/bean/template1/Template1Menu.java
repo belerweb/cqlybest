@@ -1,5 +1,7 @@
 package com.cqlybest.common.bean.template1;
 
+import java.util.Set;
+
 import com.cqlybest.common.bean.ProductGroup;
 
 /**
@@ -16,6 +18,7 @@ public class Template1Menu {
   private String url;// 外链URL
   private Integer displayOrder;// 菜单显示顺序
   private Boolean published;// 是否发布
+  private Set<Template1SubMenu> subMenus;// 针对聚合菜单子菜单
 
   public String getId() {
     return id;
@@ -87,6 +90,14 @@ public class Template1Menu {
 
   public void setPublished(Boolean published) {
     this.published = published;
+  }
+
+  public Set<Template1SubMenu> getSubMenus() {
+    return subMenus;
+  }
+
+  public void setSubMenus(Set<Template1SubMenu> subMenus) {
+    this.subMenus = subMenus;
   }
 
 }
