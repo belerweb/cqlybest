@@ -81,30 +81,40 @@
 										</#list>
 									</div>
 								</div>
-							</div>
-						</div>
-						<div class="row-fluid">
-							<div class="span6">
 								<div class="control-group">
+									<input type="hidden" name="daysUnit" value="d">
 									<label class="control-label">行程天数：</label>
 									<div class="controls">
 										<input type="text" class="input-small" id="product-days" name="days" value="${(product.days)!'1'}" pattern="(([0-9])|([1-9]\d*))" data-validation-pattern-message="天数是非负数">
-										<select name="daysUnit" class="input-small">
-											<option <#if (product.daysUnit)?exists && product.daysUnit='d'>selected="selected"</#if> value="d">天</option>
-											<option <#if (product.daysUnit)?exists && product.daysUnit='m'>selected="selected"</#if> value="m">月</option>
-											<option <#if (product.daysUnit)?exists && product.daysUnit='y'>selected="selected"</#if> value="y">年</option>
-										</select>
 									</div>
 								</div>
-							</div>
-							<div class="span6">
 								<div class="control-group">
-									<label class="control-label">价格：</label>
+									<label class="control-label">正常价格：</label>
 									<div class="controls">
 										<div class="input-prepend">
 											<span class="add-on">￥</span>
 											<input type="text" value="<#if (product.price)?exists>${(product.price/100)?string('0.00')}</#if>" class="input-small" id="product-price" pattern="(([1-9]{1}\d*)|([0]{1}))(\.(\d){1,2})?" data-validation-pattern-message="价格是正数，最多两位小数">
 											<input type="hidden" name="price">
+										</div>
+									</div>
+								</div>
+								<div class="control-group">
+									<label class="control-label">儿童价：</label>
+									<div class="controls">
+										<div class="input-prepend">
+											<span class="add-on">￥</span>
+											<input type="text" value="<#if (product.childPrice)?exists>${(product.childPrice/100)?string('0.00')}</#if>" class="input-small" id="product-child-price" pattern="(([1-9]{1}\d*)|([0]{1}))(\.(\d){1,2})?" data-validation-pattern-message="价格是正数，最多两位小数">
+											<input type="hidden" name="childPrice">
+										</div>
+									</div>
+								</div>
+								<div class="control-group">
+									<label class="control-label">特价：</label>
+									<div class="controls">
+										<div class="input-prepend">
+											<span class="add-on">￥</span>
+											<input type="text" value="<#if (product.specialPrice)?exists>${(product.specialPrice/100)?string('0.00')}</#if>" class="input-small" id="product-special-price" pattern="(([1-9]{1}\d*)|([0]{1}))(\.(\d){1,2})?" data-validation-pattern-message="价格是正数，最多两位小数">
+											<input type="hidden" name="specialPrice">
 										</div>
 									</div>
 								</div>
@@ -401,6 +411,20 @@ $('input,textarea,select', '#main-content-form').jqBootstrapValidation({
 			$('#product-price').next().attr('name', null);
 		} else {
 			$('#product-price').next().attr('name', 'price').val(price*100);
+		}
+		// 儿童价格
+		var price = parseFloat($('#product－child-price').val());
+		if (isNaN(price)) {
+			$('#product-child-price').next().attr('name', null);
+		} else {
+			$('#product-child-price').next().attr('name', 'price').val(price*100);
+		}
+		// 特价
+		var price = parseFloat($('#product-special-price').val());
+		if (isNaN(price)) {
+			$('#product-special-price').next().attr('name', null);
+		} else {
+			$('#product-special-price').next().attr('name', 'price').val(price*100);
 		}
 		$form.ajaxSubmit({
 			success : function(response) {

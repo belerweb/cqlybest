@@ -13,6 +13,8 @@
         <property name="daysUnit" column="DAYS_UNIT" />
         <property name="description" column="DESCRIPTION" type="text" />
         <property name="price" column="PRICE" />
+        <property name="childPrice" column="CHILD_PRICE" />
+        <property name="specialPrice" column="SPECIAL_PRICE" />
         <property name="priceDescription" column="PRICE_DESCRIPTION" type="string" length="2048" />
         <property name="effectiveDate" column="EFFECTIVE_DATE" />
         <property name="expiryDate" column="EXPIRY_DATE" />

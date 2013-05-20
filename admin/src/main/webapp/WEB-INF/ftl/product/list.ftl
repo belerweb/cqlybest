@@ -29,15 +29,19 @@
 					<col width="40" />
 					<col width="" />
 					<col width="80" />
-					<col width="170" />
+					<col width="80" />
+					<col width="80" />
+					<col width="80" />
 					<col width="120" />
 				</colgroup>
 				<thead>
 					<tr>
 						<th><input type="checkbox"></th>
 						<th>产品名称</th>
+						<th>热门</th>
+						<th>推荐</th>
+						<th>特价</th>
 						<th>状态</th>
-						<th>最后修改时间</th>
 						<th>操作</th>
 					</tr>
 				</thead>
@@ -47,15 +51,29 @@
 						<td><input type="checkbox"></td>
 						<td>${product.name!}</td>
 						<td>
-							<#if product.published>
+							<#if product.popular?exists && product.popular>
+							<span class="s_green">热门</span>
+							</#if>
+						</td>
+						<td>
+							<#if product.recommend?exists && product.recommend>
+							<span class="s_green">推荐</span>
+							</#if>
+						</td>
+						<td>
+							<#if product.specialOffer?exists && product.specialOffer>
+							<span class="s_green">特价</span>
+							</#if>
+						</td>
+						<td>
+							<#if product.published?exists && product.published>
 							<span class="s_green">已发布</span>
 							<#else>
 							<span class="s_gray">未发布</span>
 							</#if>
 						</td>
-						<td>${product.lastUpdate?string('yyyy-MM-dd HH:mm:ss')}</td>
 						<td class="action-table">
-							<#if product.published>
+							<#if product.published?exists && product.published>
 							<a href="javascript:void(0);" data-url="${ContextPath}/product/toggle.html?id=${product.id}&published=false"
 								class="ajax-action-btn gray" data-confirm="true" data-action="取消发布" data-title="${product.name!}"
 								title="取消发布"><i class="icon-download-alt"></i></a>

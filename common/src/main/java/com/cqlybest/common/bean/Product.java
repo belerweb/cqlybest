@@ -10,7 +10,9 @@ public class Product {
   private Integer days;// 行程天数
   private char daysUnit;// 行程天数单位 ：d/天，m/月，y/年
   private String description; // 产品介绍
-  private Integer price; // 价格
+  private Integer price; // 正常价格
+  private Integer childPrice; // 儿童价格
+  private Integer specialPrice; // 特价
   private String priceDescription; // 费用说明
   private Date effectiveDate; // 产品 生效日期
   private Date expiryDate; // 产品 失效日期
@@ -84,6 +86,22 @@ public class Product {
     this.price = price;
   }
 
+  public Integer getChildPrice() {
+    return childPrice;
+  }
+
+  public void setChildPrice(Integer childPrice) {
+    this.childPrice = childPrice;
+  }
+
+  public Integer getSpecialPrice() {
+    return specialPrice;
+  }
+
+  public void setSpecialPrice(Integer specialPrice) {
+    this.specialPrice = specialPrice;
+  }
+
   public String getPriceDescription() {
     return priceDescription;
   }
@@ -148,7 +166,7 @@ public class Product {
     this.recommendedItem = recommendedItem;
   }
 
-  public Boolean isPublished() {
+  public Boolean getPublished() {
     return published;
   }
 
@@ -156,7 +174,7 @@ public class Product {
     this.published = published;
   }
 
-  public Boolean isPopular() {
+  public Boolean getPopular() {
     return popular;
   }
 
@@ -164,7 +182,7 @@ public class Product {
     this.popular = popular;
   }
 
-  public Boolean isRecommend() {
+  public Boolean getRecommend() {
     return recommend;
   }
 
@@ -172,7 +190,7 @@ public class Product {
     this.recommend = recommend;
   }
 
-  public Boolean isSpecialOffer() {
+  public Boolean getSpecialOffer() {
     return specialOffer;
   }
 
