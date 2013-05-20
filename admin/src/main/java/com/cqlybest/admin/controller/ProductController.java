@@ -142,16 +142,40 @@ public class ProductController {
     productService.edit(product);
   }
 
-  @RequestMapping("/product/delete.html")
-  @ResponseBody
-  public void delete(@RequestParam Integer id) {
-    productService.delete(id);
-  }
-
   @RequestMapping("/product/toggle.html")
   @ResponseBody
   public void toggle(@RequestParam Integer id, @RequestParam boolean published) {
     productService.togglePublished(id, published);
+  }
+
+  @RequestMapping("/product/hot.html")
+  @ResponseBody
+  public void hot(@RequestParam(value = "ids[]") Integer[] ids, @RequestParam boolean hot) {
+    productService.updateProperty(ids, "popular", hot);
+  }
+
+  @RequestMapping("/product/recommend.html")
+  @ResponseBody
+  public void recommend(@RequestParam(value = "ids[]") Integer[] ids, @RequestParam boolean red) {
+    productService.updateProperty(ids, "recommend", red);
+  }
+
+  @RequestMapping("/product/special.html")
+  @ResponseBody
+  public void special(@RequestParam(value = "ids[]") Integer[] ids, @RequestParam boolean special) {
+    productService.updateProperty(ids, "specialOffer", special);
+  }
+
+  @RequestMapping("/product/pub.html")
+  @ResponseBody
+  public void pub(@RequestParam(value = "ids[]") Integer[] ids, @RequestParam boolean pub) {
+    productService.updateProperty(ids, "published", pub);
+  }
+
+  @RequestMapping("/product/delete.html")
+  @ResponseBody
+  public void del(@RequestParam(value = "ids[]") Integer[] ids) {
+    productService.delete(ids);
   }
 
 }

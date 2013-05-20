@@ -138,6 +138,12 @@ window.cqlybest = {
 	buildHash : function(param) {
 		return '#' + $.param(param);
 	},
+	reload : function() {
+		var param = cqlybest.parseHash();
+		delete param['_t'];
+		param['_t'] = new Date().getTime();
+		location.hash = cqlybest.buildHash(param);
+	},
 	ajaxSubmit : function($form, event) {
 		event.preventDefault();
 		event.stopPropagation();

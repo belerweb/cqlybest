@@ -33,11 +33,8 @@ public class ProductService {
    * 删除产品
    */
   @Transactional
-  public void delete(Integer id) {
-    Product product = productDao.findById(id);
-    if (product != null) {
-      productDao.delete(product);
-    }
+  public void delete(Integer[] ids) {
+    productDao.delete(ids);
   }
 
   public Long queryProductTotal() {
@@ -56,6 +53,10 @@ public class ProductService {
   public List<Product> queryProducts(Set<ProductGroupItem> groupItems,
       Set<ProductGroupFilterItem> filterItems, Integer page, Integer pageSize) {
     return productDao.findProducts(groupItems, filterItems, page, pageSize);
+  }
+
+  public void updateProperty(Integer[] ids, String prop, Object value) {
+    productDao.updateProperty(ids, prop, value);
   }
 
   /**

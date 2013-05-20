@@ -54,7 +54,7 @@
 				<tbody>
 					<#list products as product>
 					<tr>
-						<td><input type="checkbox"></td>
+						<td><input type="checkbox" value="${product.id}"></td>
 						<td>${product.name!}</td>
 						<td>
 							<#if product.popular?exists && product.popular>
@@ -90,7 +90,7 @@
 							</#if>
 							<a href="javascript:void(0);" data-url="${ContextPath}/product/modify.html?id=${product.id}"
 								class="page-load-btn safe" data-target="#mb" title="修改"><i class="icon-edit"></i></a>
-							<a href="javascript:void(0);" data-url="${ContextPath}/product/delete.html?id=${product.id}"
+							<a href="javascript:void(0);" data-url="${ContextPath}/product/delete.html?ids[]=${product.id}"
 								class="ajax-action-btn danger last" data-confirm="true" data-action="删除" data-title="${product.name!}"
 								title="删除"><i class="icon-remove"></i></a>
 						</td>
@@ -194,5 +194,14 @@ $('#product-marke-del').click(function(){
 	var items = getCheckedItems();
 	if (validateChecked(items)) {
 	}
+	bootbox.confirm('确认删除选择的产品嘛？', '取消', '确认', function(result) {
+		if (result) {
+			$.post('${ContextPath}/product/delete.html', {
+				ids: items
+			}, function(){
+				cqlybest.reload();
+			});
+		}
+	});
 });
 </script>

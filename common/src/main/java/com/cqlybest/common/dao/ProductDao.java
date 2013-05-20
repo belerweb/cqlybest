@@ -21,6 +21,11 @@ public class ProductDao extends AbstractDao<Product, Integer> {
     super(Product.class);
   }
 
+  public void delete(Integer[] ids) {
+    getCurrentSession().createQuery("DELETE FROM  Product WHERE id IN (:ids)").setParameterList(
+        "ids", ids).executeUpdate();
+  }
+
   public Long findProductTotal() {
     Criteria criteria = getCurrentSession().createCriteria(entityClass);
     criteria.setProjection(Projections.rowCount());
@@ -44,6 +49,14 @@ public class ProductDao extends AbstractDao<Product, Integer> {
     return query.executeUpdate();
   }
 
+  public int updateProperty(Integer[] ids, String prop, Object value) {
+    String hql = "UPDATE Product SET " + prop + " = ?, lastUpdate = ? WHERE id IN (?)";
+    Query query = getCurrentSession().createQuery(hql);
+    query.setParameter(0, value);
+    query.setParameter(1, new Date());
+    query.setParameter(2, ids);
+    return query.executeUpdate();
+  }
 
   public Long findProductsTotal(Set<ProductGroupItem> groupItems,
       Set<ProductGroupFilterItem> filterItems) {
