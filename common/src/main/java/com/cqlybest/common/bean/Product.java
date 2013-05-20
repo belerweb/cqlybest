@@ -19,10 +19,10 @@ public class Product {
   private String serviceStandard;// 服务标准
   private String friendlyReminder;// 友情提示
   private String recommendedItem;// 推荐项目
-  private boolean published; // 是否发布
-  private boolean popular;// 是否热门
-  private boolean recommend;// 是否推荐
-  private boolean specialOffer;// 是否特价
+  private Boolean published; // 是否发布
+  private Boolean popular;// 是否热门
+  private Boolean recommend;// 是否推荐
+  private Boolean specialOffer;// 是否特价
   private Date lastUpdate;// 最后更新时间
 
   private Set<Integer> recommendedMonths;// 推荐月份
@@ -148,35 +148,35 @@ public class Product {
     this.recommendedItem = recommendedItem;
   }
 
-  public boolean isPublished() {
+  public Boolean isPublished() {
     return published;
   }
 
-  public void setPublished(boolean published) {
+  public void setPublished(Boolean published) {
     this.published = published;
   }
 
-  public boolean isPopular() {
+  public Boolean isPopular() {
     return popular;
   }
 
-  public void setPopular(boolean popular) {
+  public void setPopular(Boolean popular) {
     this.popular = popular;
   }
 
-  public boolean isRecommend() {
+  public Boolean isRecommend() {
     return recommend;
   }
 
-  public void setRecommend(boolean recommend) {
+  public void setRecommend(Boolean recommend) {
     this.recommend = recommend;
   }
 
-  public boolean isSpecialOffer() {
+  public Boolean isSpecialOffer() {
     return specialOffer;
   }
 
-  public void setSpecialOffer(boolean specialOffer) {
+  public void setSpecialOffer(Boolean specialOffer) {
     this.specialOffer = specialOffer;
   }
 
