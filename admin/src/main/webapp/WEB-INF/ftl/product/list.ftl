@@ -153,55 +153,135 @@ var validateChecked = function(items, length) {
 $('#product-marke-hot').click(function(){
 	var items = getCheckedItems();
 	if (validateChecked(items)) {
+		bootbox.confirm('确认要对选择的产品标记为热门吗？', '取消', '确认', function(result) {
+			if (result) {
+				$.post('${ContextPath}/product/hot.html', {
+					ids: items,
+					hot: true
+				}, function(){
+					cqlybest.reload();
+				});
+			}
+		});
 	}
 });
 $('#product-marke-unhot').click(function(){
 	var items = getCheckedItems();
 	if (validateChecked(items)) {
+		bootbox.confirm('确认要对选择的产品取消热门标记吗？', '取消', '确认', function(result) {
+			if (result) {
+				$.post('${ContextPath}/product/hot.html', {
+					ids: items,
+					hot: false
+				}, function(){
+					cqlybest.reload();
+				});
+			}
+		});
 	}
 });
 $('#product-marke-red').click(function(){
 	var items = getCheckedItems();
 	if (validateChecked(items)) {
+		bootbox.confirm('确认要对选择的产品标记为推荐吗？', '取消', '确认', function(result) {
+			if (result) {
+				$.post('${ContextPath}/product/recommend.html', {
+					ids: items,
+					red: true
+				}, function(){
+					cqlybest.reload();
+				});
+			}
+		});
 	}
 });
 $('#product-marke-unred').click(function(){
 	var items = getCheckedItems();
 	if (validateChecked(items)) {
+		bootbox.confirm('确认要对选择的产品取消推荐吗？', '取消', '确认', function(result) {
+			if (result) {
+				$.post('${ContextPath}/product/recommend.html', {
+					ids: items,
+					red: false
+				}, function(){
+					cqlybest.reload();
+				});
+			}
+		});
 	}
 });
 $('#product-marke-special').click(function(){
 	var items = getCheckedItems();
 	if (validateChecked(items)) {
+		bootbox.confirm('确认要对选择的产品标记为特价吗？', '取消', '确认', function(result) {
+			if (result) {
+				$.post('${ContextPath}/product/special.html', {
+					ids: items,
+					special: true
+				}, function(){
+					cqlybest.reload();
+				});
+			}
+		});
 	}
 });
 $('#product-marke-unspecial').click(function(){
 	var items = getCheckedItems();
 	if (validateChecked(items)) {
+		bootbox.confirm('确认要对选择的产品取消特价吗？', '取消', '确认', function(result) {
+			if (result) {
+				$.post('${ContextPath}/product/special.html', {
+					ids: items,
+					special: false
+				}, function(){
+					cqlybest.reload();
+				});
+			}
+		});
 	}
 });
 $('#product-marke-pub').click(function(){
 	var items = getCheckedItems();
 	if (validateChecked(items)) {
+		bootbox.confirm('确认要发布选择的产品吗？', '取消', '确认', function(result) {
+			if (result) {
+				$.post('${ContextPath}/product/pub.html', {
+					ids: items,
+					pub: true
+				}, function(){
+					cqlybest.reload();
+				});
+			}
+		});
 	}
 });
 $('#product-marke-unpub').click(function(){
 	var items = getCheckedItems();
 	if (validateChecked(items)) {
+		bootbox.confirm('确认要取消发布选择的产品吗？', '取消', '确认', function(result) {
+			if (result) {
+				$.post('${ContextPath}/product/pub.html', {
+					ids: items,
+					pub: false
+				}, function(){
+					cqlybest.reload();
+				});
+			}
+		});
 	}
 });
 $('#product-marke-del').click(function(){
 	var items = getCheckedItems();
 	if (validateChecked(items)) {
+		bootbox.confirm('确认要删除选择的产品吗？', '取消', '确认', function(result) {
+			if (result) {
+				$.post('${ContextPath}/product/delete.html', {
+					ids: items
+				}, function(){
+					cqlybest.reload();
+				});
+			}
+		});
 	}
-	bootbox.confirm('确认删除选择的产品嘛？', '取消', '确认', function(result) {
-		if (result) {
-			$.post('${ContextPath}/product/delete.html', {
-				ids: items
-			}, function(){
-				cqlybest.reload();
-			});
-		}
-	});
 });
 </script>

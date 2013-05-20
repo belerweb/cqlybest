@@ -50,11 +50,11 @@ public class ProductDao extends AbstractDao<Product, Integer> {
   }
 
   public int updateProperty(Integer[] ids, String prop, Object value) {
-    String hql = "UPDATE Product SET " + prop + " = ?, lastUpdate = ? WHERE id IN (?)";
+    String hql = "UPDATE Product SET " + prop + " = ?, lastUpdate = ? WHERE id IN (:ids)";
     Query query = getCurrentSession().createQuery(hql);
     query.setParameter(0, value);
     query.setParameter(1, new Date());
-    query.setParameter(2, ids);
+    query.setParameterList("ids", ids);
     return query.executeUpdate();
   }
 
