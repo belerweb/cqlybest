@@ -190,27 +190,27 @@ div.DTFC_LeftFootWrapper table {
 	margin-right: 0;
 }
 
-.action-table a.blue {
-	color: #3921c;
+.action-table a.blue,.grid-title .icon-title a.blue,.grid-title .icon-title a.blue:hover {
+	color: #0088CC;
 }
 
-.action-table a.dark {
+.action-table a.dark,.grid-title .icon-title a.dark,.grid-title .icon-title a.dark:hover {
 	color: #000000;
 }
 
-.action-table a.yl {
+.action-table a.yl,.grid-title .icon-title a.yl,.grid-title .icon-title a.yl:hover {
 	color: #ffa735;
 }
 
-.action-table a.gray {
+.action-table a.gray,.grid-title .icon-title a.gray,.grid-title .icon-title a.gray:hover {
 	color: #b3b3b3;
 }
 
-.action-table a.safe {
+.action-table a.safe,.grid-title .icon-title a.safe,.grid-title .icon-title a.safe:hover {
 	color: #11A511;
 }
 
-.action-table a.danger {
+.action-table a.danger,.grid-title .icon-title a.danger,.grid-title .icon-title a.danger:hover {
 	color: #FF6666;
 }
 

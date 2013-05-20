@@ -88,7 +88,7 @@ $('#template1-tab3-save-order').click(function(){
 		orders.push(obj.value);
 	});
 	if (!valid) {
-		cqlybest.error('<div class="alert alert-error">显示顺序只能是0~999</div>');
+		cqlybest.error('显示顺序只能是0~999');
 		return;
 	}
 	$.post('${ContextPath}/template1/product_group/order.html', {ids:ids, orders:orders}, function(){

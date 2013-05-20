@@ -17,9 +17,15 @@
 				<div class="clearfix"></div>
 			</div>
 			<div class="pull-right"> 
-				<div class="icon-title"><a href="#" title="发布"><i class="icon-upload-alt"></i></a></div>
-				<div class="icon-title"><a href="#" title="取消发布"><i class="icon-download-alt"></i></a></div>
-				<div class="icon-title"><a href="#" title="删除"><i class="icon-remove"></i></a></div>
+				<div class="icon-title"><a id="product-marke-hot" href="javascript:void(0);" class="danger" title="批量标记为热门"><i class="icon-fire"></i></a></div>
+				<div class="icon-title"><a id="product-marke-unhot" href="javascript:void(0);" class="gray" title="批量取消热门"><i class="icon-fire"></i></a></div>
+				<div class="icon-title"><a id="product-marke-red" href="javascript:void(0);" class="blue" title="批量标记为推荐"><i class="icon-thumbs-up"></i></a></div>
+				<div class="icon-title"><a id="product-marke-unred" href="javascript:void(0);" class="gray" title="批量取消推荐"><i class="icon-thumbs-down"></i></a></div>
+				<div class="icon-title"><a id="product-marke-special" href="javascript:void(0);" class="yl" title="批量标记为特价"><i class="icon-bolt"></i></a></div>
+				<div class="icon-title"><a id="product-marke-unspecial" href="javascript:void(0);" class="gray" title="批量取消特价"><i class="icon-bolt"></i></a></div>
+				<div class="icon-title"><a id="product-marke-pub" href="javascript:void(0);" class="safe" title="发布"><i class="icon-upload-alt"></i></a></div>
+				<div class="icon-title"><a id="product-marke-unpub" href="javascript:void(0);" class="gray" title="取消发布"><i class="icon-download-alt"></i></a></div>
+				<div class="icon-title"><a id="product-marke-del" href="javascript:void(0);" class="danger" title="删除"><i class="icon-remove"></i></a></div>
 			</div>
 			<div class="clearfix"></div>   
 		</div>
@@ -119,6 +125,74 @@ $('#main-list-table').dataTable({
 			u: u
 		};
 		location.hash = cqlybest.buildHash(hash);
+	}
+});
+$('#main-list-table thead input:checkbox').click(function(){
+	$('#main-list-table tbody input:checkbox').attr('checked', this.checked);
+});
+var getCheckedItems = function() {
+	var result = [];
+	$('#main-list-table tbody input:checkbox:checked').each(function(i, obj){
+		result.push(obj.value);
+	});
+	return result;
+};
+var validateChecked = function(items, length) {
+	var message = false;
+	if (items.length == 0) {
+		message = '请选择产品';
+	}
+	if (length && items.length != length) {
+		message = '请选择一个产品';
+	}
+	if (message) {
+		cqlybest.error(message);
+	}
+	return !message;
+};
+$('#product-marke-hot').click(function(){
+	var items = getCheckedItems();
+	if (validateChecked(items)) {
+	}
+});
+$('#product-marke-unhot').click(function(){
+	var items = getCheckedItems();
+	if (validateChecked(items)) {
+	}
+});
+$('#product-marke-red').click(function(){
+	var items = getCheckedItems();
+	if (validateChecked(items)) {
+	}
+});
+$('#product-marke-unred').click(function(){
+	var items = getCheckedItems();
+	if (validateChecked(items)) {
+	}
+});
+$('#product-marke-special').click(function(){
+	var items = getCheckedItems();
+	if (validateChecked(items)) {
+	}
+});
+$('#product-marke-unspecial').click(function(){
+	var items = getCheckedItems();
+	if (validateChecked(items)) {
+	}
+});
+$('#product-marke-pub').click(function(){
+	var items = getCheckedItems();
+	if (validateChecked(items)) {
+	}
+});
+$('#product-marke-unpub').click(function(){
+	var items = getCheckedItems();
+	if (validateChecked(items)) {
+	}
+});
+$('#product-marke-del').click(function(){
+	var items = getCheckedItems();
+	if (validateChecked(items)) {
 	}
 });
 </script>
