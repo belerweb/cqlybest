@@ -1,6 +1,6 @@
-<#include "/default/header_top.ftl">
+<#include "/template1/header_top.ftl">
 <div id="register-or-login" class="container">
-	<div class="pull-left"><img src="${ContextPath}/default/img/logo.png"></div>
+	<div class="pull-left"><img src="${ContextPath}/template1/img/logo.png"></div>
 	<h2 class="pull-left">账户注册</h2>
 	<div class="clearfix"></div>
 	<hr>
@@ -89,4 +89,4 @@
 		}
 	};
 </script>
-<#include "/default/footer.ftl">
+<#include "/template1/footer.ftl">

@@ -1,4 +1,4 @@
-<#include "/default/header.ftl">
+<#include "/template1/header.ftl">
 <div class="container margin-menu">
 	<div class="row">
 		<div class="span9">
@@ -22,7 +22,7 @@
 				</div>
 			</div>
 			<div class="box">
-				<img src="${ContextPath}/default/img/c_09.jpg">
+				<img src="${ContextPath}/template1/img/c_09.jpg">
 			</div>
 			<div class="thumbnail">
 				<img src="http://www.cqlybest.com/upload_files/73/1_20120429110438_clkrr.jpg">
@@ -36,4 +36,4 @@
 		menu : '${menu.id!}'
 	};
 </script>
-<#include "/default/footer.ftl">
+<#include "/template1/footer.ftl">

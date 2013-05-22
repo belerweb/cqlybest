@@ -1,11 +1,11 @@
-<#include "/default/header_html.ftl">
+<#include "/template1/header_html.ftl">
 <style>
 body {
 	padding:0;
 }
 </style>
 <div id="register-or-login" class="container">
-	<div class="pull-left"><img src="${ContextPath}/default/img/logo.png"></div>
+	<div class="pull-left"><img src="${ContextPath}/template1/img/logo.png"></div>
 	<div class="clearfix"></div>
 </div>
 <div id="login-slider" style="background:#bFE5FA;">
@@ -50,4 +50,4 @@ body {
 		}
 	};
 </script>
-<#include "/default/footer.ftl">
+<#include "/template1/footer.ftl">

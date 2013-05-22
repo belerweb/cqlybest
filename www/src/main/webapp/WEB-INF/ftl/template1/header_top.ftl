@@ -1,9 +1,9 @@
-<#include "/default/header_html.ftl">
+<#include "/template1/header_html.ftl">
 <div id="top-nav" class="navbar navbar-fixed-top">
 	<div class="navbar-inner">
 		<div class="container">
 			<div class="pull-left">
-				<a href="http://e.weibo.com/3039642623" target="_blank"><img alt="微博加关注" src="${ContextPath}/default/img/weibo.png"> 加关注</a>
+				<a href="http://e.weibo.com/3039642623" target="_blank"><img alt="微博加关注" src="${ContextPath}/template1/img/weibo.png"> 加关注</a>
 			</div>
 			<div class="pull-right">
 				<#if User?exists>

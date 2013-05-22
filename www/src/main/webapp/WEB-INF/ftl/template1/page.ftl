@@ -1,4 +1,4 @@
-<#include "/default/header.ftl">
+<#include "/template1/header.ftl">
 <div class="container">
 	<div class="row">
 		<div class="span12">
@@ -13,4 +13,4 @@
 		menu : '${page.id!}'
 	};
 </script>
-<#include "/default/footer.ftl">
+<#include "/template1/footer.ftl">

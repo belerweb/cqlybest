@@ -4,12 +4,12 @@
 				<p></p>
 			</div>
 		</div>
-		<script src="${ContextPath}/default/js/jquery.min.js"></script>
-		<script src="${ContextPath}/default/js/bootstrap.min.js"></script>
-		<script src="${ContextPath}/default/js/twitter-bootstrap-hover-dropdown.js"></script>
-		<script src="${ContextPath}/default/js/jqBootstrapValidation.js"></script>
-		<script src="${ContextPath}/default/js/jquery.form.js"></script>
-		<script src="${ContextPath}/default/js/cqlybest.js"></script>
+		<script src="${ContextPath}/template1/js/jquery.min.js"></script>
+		<script src="${ContextPath}/template1/js/bootstrap.min.js"></script>
+		<script src="${ContextPath}/template1/js/twitter-bootstrap-hover-dropdown.js"></script>
+		<script src="${ContextPath}/template1/js/jqBootstrapValidation.js"></script>
+		<script src="${ContextPath}/template1/js/jquery.form.js"></script>
+		<script src="${ContextPath}/template1/js/cqlybest.js"></script>
 	</body>
 
 </html>

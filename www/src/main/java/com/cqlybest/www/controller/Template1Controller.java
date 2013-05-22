@@ -80,7 +80,7 @@ public class Template1Controller {
 
   public void setCommonData(Model model) {
     model.addAttribute("Site", siteService.getSite());
-    model.addAttribute("Template1Menu", template1Service.getPublishedMenus());
+    model.addAttribute("Menu", template1Service.getPublishedMenus());
   }
 
 }
