@@ -1,32 +1,43 @@
 <#include "/template1/header.ftl">
-<div id="full-slider">
-	<div class="container">
-		<div class="row">
-			<div id="left-menu" class="span2">
-				<ul>
-					<li>
-						<a href="javascript:void(0);" data-hover="dropdown" data-toggle="dropdown"><img src="${ContextPath}/template1/img/travel.png">境外海岛游</a>
-						<div class="dropdown-menu">
+<div class="container margin-menu">
+	<div class="row">
+		<div class="span9">
+			<#if posters?has_content>
+			<div class="row-fluid">
+				<div class="span12">
+					<div id="index-top-carousel" class="carousel slide" data-interval="3000">
+						<ol class="carousel-indicators">
+							<#list 0..posters?size-1 as i>
+							<li data-target="#index-top-carousel" data-slide-to="i" class="<#if i=0>active</#if>"></li>
+							</#list>
+						</ol>
+						<div class="carousel-inner">
+							<#list posters as poster>
+							<div class="<#if poster_index=0>active</#if> item">
+								<img alt="${poster.title!}" src="${poster.imageUrl!}?width=700&height=300">
+								<div class="carousel-caption">
+									<h4>${poster.title!}</h4>
+									<p>${poster.description!}</p>
+								</div>
+							</div>
+							</#list>
 						</div>
-					</li>
-					<li>
-						<a href="javascript:void(0);" data-hover="dropdown" data-toggle="dropdown"><img src="${ContextPath}/template1/img/travel.png">境外海岛游</a>
-						<div class="dropdown-menu">
-						</div>
-					</li>
-					<li><a href="javascript:void(0);"><img src="${ContextPath}/template1/img/travel.png">境外海岛游</a></li>
-					<li><a href="javascript:void(0);"><img src="${ContextPath}/template1/img/travel.png">境外海岛游</a></li>
-					<li><a href="javascript:void(0);"><img src="${ContextPath}/template1/img/travel.png">境外海岛游</a></li>
-					<li><a href="javascript:void(0);"><img src="${ContextPath}/template1/img/travel.png">境外海岛游</a></li>
-				</ul>
+						<a class="carousel-control left" href="#index-top-carousel" data-slide="prev">&lsaquo;</a>
+						<a class="carousel-control right" href="#index-top-carousel" data-slide="next">&rsaquo;</a>
+					</div>
+				</div>
 			</div>
-			<div class="span10"></div>
+			</#if>
 		</div>
+		<div class="span3"></div>
 	</div>
 </div>
 <script>
 	var PageContext = {
-		menu : 'index'
+		menu : 'index',
+		init : function() {
+			$('.carousel').carousel();
+		}
 	};
 </script>
 <#include "/template1/footer.ftl">

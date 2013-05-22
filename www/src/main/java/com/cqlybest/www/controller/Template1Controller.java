@@ -34,6 +34,7 @@ public class Template1Controller {
 
   @RequestMapping("/template1/index.html")
   public void index(Model model) {
+    model.addAttribute("posters", template1Service.getPublishedPosters());
     setCommonData(model);
   }
 
