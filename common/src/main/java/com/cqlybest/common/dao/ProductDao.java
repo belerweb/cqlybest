@@ -6,8 +6,10 @@ import java.util.Set;
 
 import org.hibernate.Criteria;
 import org.hibernate.Query;
+import org.hibernate.criterion.Disjunction;
 import org.hibernate.criterion.Projections;
 import org.hibernate.criterion.Restrictions;
+import org.hibernate.sql.JoinType;
 import org.springframework.stereotype.Repository;
 
 import com.cqlybest.common.bean.Product;
@@ -75,35 +77,44 @@ public class ProductDao extends AbstractDao<Product, Integer> {
 
   private Criteria createFindProductsCriteria(Set<ProductGroupItem> groupItems) {
     Criteria criteria = getCurrentSession().createCriteria(Product.class);
+    Disjunction or = Restrictions.disjunction();
     for (ProductGroupItem groupItem : groupItems) {
       int type = groupItem.getGroupType();
       Integer[] ids = retrieveIntegers(groupItem.getGroupValue());
       if (type == 0) {
-        criteria.createCriteria("recommendedMonths").add(Restrictions.in("elements", ids));
+        criteria.createAlias("recommendedMonths", "month", JoinType.LEFT_OUTER_JOIN);
+        or.add(Restrictions.in("month.elements", ids));
       }
       if (type == 1) {
-        criteria.createCriteria("crowds").add(Restrictions.in("elements", ids));
+        criteria.createAlias("crowds", "crowds", JoinType.LEFT_OUTER_JOIN);
+        or.add(Restrictions.in("crowds.elements", ids));
       }
       if (type == 2) {
-        criteria.createAlias("traffics", "traffic").add(Restrictions.in("traffic.id", ids));
+        criteria.createAlias("traffics", "traffic", JoinType.LEFT_OUTER_JOIN);
+        or.add(Restrictions.in("traffic.id", ids));
       }
       if (type == 3) {
-        criteria.createAlias("types", "type").add(Restrictions.in("type.id", ids));
+        criteria.createAlias("types", "type", JoinType.LEFT_OUTER_JOIN);
+        or.add(Restrictions.in("type.id", ids));
       }
       if (type == 4) {
-        criteria.createAlias("grades", "grade").add(Restrictions.in("grade.id", ids));
+        criteria.createAlias("grades", "grade", JoinType.LEFT_OUTER_JOIN);
+        or.add(Restrictions.in("grade.id", ids));
       }
       if (type == 5) {
-        criteria.createAlias("keywords", "keyword").add(Restrictions.in("keyword.id", ids));
+        criteria.createAlias("keywords", "keyword", JoinType.LEFT_OUTER_JOIN);
+        or.add(Restrictions.in("keyword.id", ids));
       }
       if (type == 6) {
-        criteria.createAlias("departureCities", "city").add(Restrictions.in("city.id", ids));
+        criteria.createAlias("departureCities", "city", JoinType.LEFT_OUTER_JOIN);
+        or.add(Restrictions.in("city.id", ids));
       }
       if (type == 7) {
-        criteria.createAlias("destinations", "dest").add(Restrictions.in("dest.id", ids));
+        criteria.createAlias("destinations", "dest", JoinType.LEFT_OUTER_JOIN);
+        or.add(Restrictions.in("dest.id", ids));
       }
     }
-    return criteria;
+    return criteria.add(or);
   }
 
 
