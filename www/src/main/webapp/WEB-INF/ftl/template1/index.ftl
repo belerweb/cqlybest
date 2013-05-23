@@ -31,7 +31,7 @@
 			<#if specials?has_content>
 			<div class="index-brand-section row-fluid">
 				<div class="span12">
-					<h4>特价产品<span class="more"><a href="#" target="_blank">更多</a></span></h4>
+					<h4>特价产品<span class="more"><a href="${ContextPath}/special.html" target="_blank">更多</a></span></h4>
 					<hr>
 				</div>
 				<ul class="thumbnails">
@@ -58,7 +58,7 @@
 			<#list groups as group>
 			<div class="index-brand-section row-fluid">
 				<div class="span12">
-					<h4>${(group.group.name)!}<span class="more"><a href="#" target="_blank">更多</a></span></h4>
+					<h4>${(group.group.name)!}<span class="more"><a href="${ContextPath}/group/${(group.group.id)!}.html" target="_blank">更多</a></span></h4>
 					<hr>
 				</div>
 				<ul class="thumbnails">
