@@ -52,9 +52,9 @@ public class IndexController {
   /**
    * 聚合产品页
    */
-  @RequestMapping("/pg/{id}.html")
+  @RequestMapping("/group/{id}.html")
   public String pg(@PathVariable String id) {
-    return templateService.forward("/pg/" + id + ".html");
+    return templateService.forward("/group/" + id + ".html");
   }
 
   /**

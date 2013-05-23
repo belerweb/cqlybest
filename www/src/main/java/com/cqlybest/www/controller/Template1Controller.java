@@ -49,7 +49,7 @@ public class Template1Controller {
     setCommonData(model);
   }
 
-  @RequestMapping("/template1/pg/{id}.html")
+  @RequestMapping("/template1/group/{id}.html")
   public Object pg(@PathVariable String id, Model model) {
     Template1Menu menu = template1Service.get(id);
     if (menu == null || menu.getMenuType() != 0) {
