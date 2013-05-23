@@ -166,10 +166,25 @@ public class Template1Service {
   }
 
   public List<Product> getSpecialProduct(int number) {
+    return getProductWithTrueProperty("specialOffer", number);// 特价
+  }
+
+  public List<Product> getRecommendedProduct(int number) {
+    return getProductWithTrueProperty("recommend", number);// 推荐
+  }
+
+  public List<Product> getHotProduct(int number) {
+    return getProductWithTrueProperty("popular", number);// 热门
+  }
+
+  private List<Product> getProductWithTrueProperty(String property, int number) {
     Conjunction condition = Restrictions.conjunction();
-    condition.add(Restrictions.eq("specialOffer", true));// 特价
+    condition.add(Restrictions.eq(property, true));
     condition.add(Restrictions.eq("published", true));// 已发布
-    return productDao.find(condition, 0, number);
+    if (number > 0) {
+      return productDao.find(condition, 0, number);
+    }
+    return productDao.find(condition);
   }
 
 }

@@ -79,7 +79,38 @@
 			</#list>
 			</#if>
 		</div>
-		<div class="span3"></div>
+		<div class="span3">
+			<!-- 特价 -->
+			<div class="index-recommend-box box">
+				<div class="title title-success"><strong>推荐产品</strong></div>
+				<div class="content">
+					<#list recommendeds as product>
+					<div class="thumbnail">
+						<div class="caption">
+							<#if product.posters?has_content>
+							<img alt="${product.title!}" src="${springx.rand(0,product.posters?size-1)}?width=196&height=99">
+							</#if>
+							<a class="title" href="${ContextPath}/product/${product.id}.html" target="_blank">${product.name!}</a>
+						</div>
+					</div>
+					</#list>
+				</div>
+			</div>
+			<!-- 热门 -->
+			<div class="box">
+				<div class="title title-important"><strong>热门线路</strong></div>
+				<div class="content">
+					<ul>
+						<#list hots as product>
+						<li>
+							<span class="badge badge-warning">${product_index+1}</span>
+							<a href="${ContextPath}/product/${product.id}.html" target="_blank">${product.name!}</a>
+						</li>
+						</#list>
+					</ul>
+				</div>
+			</div>
+		</div>
 	</div>
 </div>
 <script>

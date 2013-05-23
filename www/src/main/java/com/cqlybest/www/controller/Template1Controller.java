@@ -41,6 +41,8 @@ public class Template1Controller {
   public void index(Model model) {
     model.addAttribute("posters", template1Service.getPublishedPosters());// 海报
     model.addAttribute("specials", template1Service.getSpecialProduct(4));// 特价
+    model.addAttribute("recommendeds", template1Service.getRecommendedProduct(2));// 推荐
+    model.addAttribute("hots", template1Service.getHotProduct(10));// 热门
     List<Template1ProductGroup> items = template1Service.getAllIndexProductGroups();
     List<Map<String, Object>> groups = new ArrayList<Map<String, Object>>(items.size());
     for (Template1ProductGroup item : items) {
