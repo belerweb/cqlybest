@@ -28,6 +28,30 @@
 				</div>
 			</div>
 			</#if>
+			<#if specials?has_content>
+			<div id="index-special-brand" class="row-fluid">
+				<div class="span12">
+					<h4>特价产品</h4>
+					<hr>
+				</div>
+				<ul class="thumbnails">
+					<#list specials as product>
+					<li class="span3">
+						<div class="thumbnail">
+							<div class="caption">
+								<img alt="${product.title!}" src="http://r.uzaicdn.com/IndexManagerImageUrl/20130520090712%E6%B3%B0%E5%9B%BD.jpg">
+								<a class="title" href="#">${product.name!}</a>
+								<p>
+									<span><#if (product.specialPrice)?exists>¥${(product.specialPrice/100)?string('0.00')}<#else>特价</#if></span>
+									<#if (product.price)?exists><del>原价：¥${(product.price/100)?string('0.00')}</del></#if>
+								</p>
+							</div>
+						</div>
+					</li>
+					</#list>
+				</ul>
+			</div>
+			</#if>
 		</div>
 		<div class="span3"></div>
 	</div>

@@ -225,3 +225,36 @@ ul,li {
 	width:700px;
 	height:300px;
 }
+
+#index-special-brand .thumbnail {
+	padding: 2px;
+}
+#index-special-brand .thumbnail .caption {
+	padding: 2px;
+}
+#index-special-brand .thumbnail .caption a.title{
+	color: #666666;
+	font-size: 14px;
+	font-weight: bold;
+}
+#index-special-brand .thumbnail .caption a.title:hover{
+	color: #FF9900;
+}
+#index-special-brand .thumbnail .caption p{
+	margin: 0;
+}
+#index-special-brand .thumbnail .caption p span{
+	color: #FF6600;
+	font-size: 16px;
+}
+#index-special-brand .thumbnail .caption p del{
+	float: right;
+	text-decoration: line-through;
+}
+#index-special-brand h4 {
+	margin: 0;
+}
+#index-special-brand hr {
+	margin: 2px 0 4px;
+	border-color: #309100;
+}

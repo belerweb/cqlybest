@@ -34,7 +34,8 @@ public class Template1Controller {
 
   @RequestMapping("/template1/index.html")
   public void index(Model model) {
-    model.addAttribute("posters", template1Service.getPublishedPosters());
+    model.addAttribute("posters", template1Service.getPublishedPosters());// 海报
+    model.addAttribute("specials", template1Service.getSpecialProduct(4));// 特价
     setCommonData(model);
   }
 

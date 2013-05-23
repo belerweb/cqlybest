@@ -2,15 +2,18 @@ package com.cqlybest.common.service;
 
 import java.util.List;
 
+import org.hibernate.criterion.Conjunction;
 import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.cqlybest.common.bean.Product;
 import com.cqlybest.common.bean.template1.Template1IndexPoster;
 import com.cqlybest.common.bean.template1.Template1Menu;
 import com.cqlybest.common.bean.template1.Template1ProductGroup;
+import com.cqlybest.common.dao.ProductDao;
 import com.cqlybest.common.dao.Template1Dao;
 
 @Service
@@ -18,6 +21,10 @@ public class Template1Service {
 
   @Autowired
   private Template1Dao template1Dao;
+  @Autowired
+  private ProductDao productDao;
+
+
 
   /**
    * 增加海报
@@ -157,4 +164,12 @@ public class Template1Service {
       template1Dao.updateProductGroupOrder(ids[i], orders[i]);
     }
   }
+
+  public List<Product> getSpecialProduct(int number) {
+    Conjunction condition = Restrictions.conjunction();
+    condition.add(Restrictions.eq("specialOffer", true));// 特价
+    condition.add(Restrictions.eq("published", true));// 已发布
+    return productDao.find(condition, 0, number);
+  }
+
 }
