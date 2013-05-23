@@ -1,5 +1,9 @@
 package com.cqlybest.www.controller;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 import org.apache.commons.lang.StringUtils;
@@ -15,6 +19,7 @@ import com.cqlybest.common.bean.ProductGroup;
 import com.cqlybest.common.bean.ProductGroupFilterItem;
 import com.cqlybest.common.bean.ProductGroupItem;
 import com.cqlybest.common.bean.template1.Template1Menu;
+import com.cqlybest.common.bean.template1.Template1ProductGroup;
 import com.cqlybest.common.service.ProductService;
 import com.cqlybest.common.service.SiteService;
 import com.cqlybest.common.service.Template1Service;
@@ -36,6 +41,16 @@ public class Template1Controller {
   public void index(Model model) {
     model.addAttribute("posters", template1Service.getPublishedPosters());// 海报
     model.addAttribute("specials", template1Service.getSpecialProduct(4));// 特价
+    List<Template1ProductGroup> items = template1Service.getAllIndexProductGroups();
+    List<Map<String, Object>> groups = new ArrayList<Map<String, Object>>(items.size());
+    for (Template1ProductGroup item : items) {
+      ProductGroup productGroup = item.getProductGroup();
+      Map<String, Object> group = new HashMap<String, Object>();
+      group.put("group", productGroup);
+      group.put("products", productService.queryProducts(productGroup.getGroupItems(), null, 0, 4));
+      groups.add(group);
+    }
+    model.addAttribute("groups", groups);// 产品组合
     setCommonData(model);
   }
 

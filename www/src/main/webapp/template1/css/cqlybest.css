@@ -226,35 +226,38 @@ ul,li {
 	height:300px;
 }
 
-#index-special-brand .thumbnail {
+.index-brand-section .thumbnail {
 	padding: 2px;
 }
-#index-special-brand .thumbnail .caption {
+.index-brand-section .thumbnail .caption {
 	padding: 2px;
 }
-#index-special-brand .thumbnail .caption a.title{
+.index-brand-section .thumbnail .caption a.title{
 	color: #666666;
 	font-size: 14px;
 	font-weight: bold;
 }
-#index-special-brand .thumbnail .caption a.title:hover{
+.index-brand-section .thumbnail .caption a.title:hover{
 	color: #FF9900;
 }
-#index-special-brand .thumbnail .caption p{
+.index-brand-section .thumbnail .caption p{
 	margin: 0;
 }
-#index-special-brand .thumbnail .caption p span{
+.index-brand-section .thumbnail .caption p span{
 	color: #FF6600;
 	font-size: 16px;
 }
-#index-special-brand .thumbnail .caption p del{
+.index-brand-section .thumbnail .caption p del{
 	float: right;
 	text-decoration: line-through;
 }
-#index-special-brand h4 {
+.index-brand-section h4 {
 	margin: 0;
 }
-#index-special-brand hr {
+.index-brand-section hr {
 	margin: 2px 0 4px;
 	border-color: #309100;
+}
+.index-brand-section span.more{
+	float: right;
 }

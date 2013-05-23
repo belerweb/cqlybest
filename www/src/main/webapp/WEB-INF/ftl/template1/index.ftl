@@ -29,9 +29,9 @@
 			</div>
 			</#if>
 			<#if specials?has_content>
-			<div id="index-special-brand" class="row-fluid">
+			<div class="index-brand-section row-fluid">
 				<div class="span12">
-					<h4>特价产品</h4>
+					<h4>特价产品<span class="more"><a href="#" target="_blank">更多</a></span></h4>
 					<hr>
 				</div>
 				<ul class="thumbnails">
@@ -39,8 +39,10 @@
 					<li class="span3">
 						<div class="thumbnail">
 							<div class="caption">
-								<img alt="${product.title!}" src="http://r.uzaicdn.com/IndexManagerImageUrl/20130520090712%E6%B3%B0%E5%9B%BD.jpg">
-								<a class="title" href="#">${product.name!}</a>
+								<#if product.posters?has_content>
+								<img alt="${product.title!}" src="${springx.rand(0,product.posters?size-1)}?width=154&height=99">
+								</#if>
+								<a class="title" href="${ContextPath}/product/${product.id}.html" target="_blank">${product.name!}</a>
 								<p>
 									<span><#if (product.specialPrice)?exists>¥${(product.specialPrice/100)?string('0.00')}<#else>特价</#if></span>
 									<#if (product.price)?exists><del>原价：¥${(product.price/100)?string('0.00')}</del></#if>
@@ -51,6 +53,30 @@
 					</#list>
 				</ul>
 			</div>
+			</#if>
+			<#if groups?has_content>
+			<#list groups as group>
+			<div class="index-brand-section row-fluid">
+				<div class="span12">
+					<h4>${(group.group.name)!}<span class="more"><a href="#" target="_blank">更多</a></span></h4>
+					<hr>
+				</div>
+				<ul class="thumbnails">
+					<#list group.products as product>
+					<li class="span3">
+						<div class="thumbnail">
+							<div class="caption">
+								<#if product.posters?has_content>
+								<img alt="${product.title!}" src="${springx.rand(0,product.posters?size-1)}?width=154&height=99">
+								</#if>
+								<a class="title" href="${ContextPath}/product/${product.id}.html" target="_blank">${product.name!}</a>
+							</div>
+						</div>
+					</li>
+					</#list>
+				</ul>
+			</div>
+			</#list>
 			</#if>
 		</div>
 		<div class="span3"></div>
