@@ -21,6 +21,7 @@ import com.cqlybest.common.bean.DictProductGrade;
 import com.cqlybest.common.bean.DictProductType;
 import com.cqlybest.common.bean.DictTraffic;
 import com.cqlybest.common.bean.Keyword;
+import com.cqlybest.common.bean.Product;
 import com.cqlybest.common.bean.ProductFilterItem;
 import com.cqlybest.common.bean.ProductGroup;
 import com.cqlybest.common.bean.ProductGroupItem;
@@ -49,6 +50,9 @@ public class Template1Controller {
   @Autowired
   private DestinationService destinationService;
 
+  /**
+   * 首页
+   */
   @RequestMapping("/template1/index.html")
   public void index(Model model) {
     model.addAttribute("posters", template1Service.getPublishedPosters());// 海报
@@ -68,21 +72,33 @@ public class Template1Controller {
     setCommonData(model);
   }
 
+  /**
+   * 注册
+   */
   @RequestMapping("/template1/register.html")
   public void register(Model model) {
     setCommonData(model);
   }
 
+  /**
+   * 登录
+   */
   @RequestMapping("/template1/login.html")
   public void login(Model model) {
     setCommonData(model);
   }
 
+  /**
+   * 聚合产品页
+   */
   @RequestMapping("/template1/group/{id}.html")
   public String group(@PathVariable String id) {
     return "forward:/template1/group/" + id + "/0-0-0-0-0-0-0-0-0.html";
   }
 
+  /**
+   * 聚合产品页
+   */
   @RequestMapping("/template1/group/{id}/{f0}-{f1}-{f2}-{f3}-{f4}-{f5}-{f6}-{f7}-{page}.html")
   public Object group(@PathVariable String id, @PathVariable Integer f0, @PathVariable Integer f1,
       @PathVariable Integer f2, @PathVariable Integer f3, @PathVariable Integer f4,
@@ -131,6 +147,9 @@ public class Template1Controller {
     return "/template1/product_group";
   }
 
+  /**
+   * 自定义内容页
+   */
   @RequestMapping("/template1/page/{id}.html")
   public Object page(@PathVariable String id, Model model) {
     Template1Menu menu = template1Service.get(id);
@@ -144,7 +163,18 @@ public class Template1Controller {
     return "/template1/page";
   }
 
-  public void setCommonData(Model model) {
+  @RequestMapping("/template1/product/{id}.html")
+  public Object product(@PathVariable Integer id, Model model) {
+    Product product = productService.getProduct(id);
+    if (product == null) {
+      return new ResponseEntity<String>(StringUtils.EMPTY, HttpStatus.NOT_FOUND);
+    }
+    model.addAttribute("product", product);
+    setCommonData(model);
+    return "/template1/product";
+  }
+
+  private void setCommonData(Model model) {
     model.addAttribute("Site", siteService.getSite());
     model.addAttribute("Menu", template1Service.getPublishedMenus());
   }
