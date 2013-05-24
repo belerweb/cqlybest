@@ -226,6 +226,9 @@ ul,li {
 	height: 300px;
 }
 
+.index-brand-section .thumbnails li {
+}
+
 .index-brand-section .thumbnail {
 	padding: 2px;
 }
@@ -327,6 +330,10 @@ ul,li {
 
 #footer-help h4 {
 	margin: 0 0 10px;
+}
+
+.filter-box {
+	margin-bottom: 10px;
 }
 
 .filter-box .filter-main {

@@ -40,13 +40,27 @@
 					</ul>
 				</div>
 			</div>
-			</#if>
-			<h4>${menu.name!}, ${total}</h4>
-			<ul>
+			<div class="index-brand-section row-fluid">
 				<#list products as product>
-				<li>${product.id}:${product.name!}</li>
+				<#if product_index%4==0>
+				<ul class="thumbnails">
+				</#if>
+					<li class="span3">
+						<div class="thumbnail">
+							<div class="caption">
+								<#if product.posters?has_content>
+								<img alt="${product.title!}" src="${springx.rand(0,product.posters?size-1)}?width=154&height=99">
+								</#if>
+								<a class="title" href="${ContextPath}/product/${product.id}.html" target="_blank">${product.name!}</a>
+							</div>
+						</div>
+					</li>
+				<#if product_index%4==3>
+				</ul>
+				</#if>
 				</#list>
-			</ul>
+			</div>
+			</#if>
 		</div>
 		<div class="span3">
 			<div class="box">
