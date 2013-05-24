@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.cqlybest.common.bean.Product;
-import com.cqlybest.common.bean.ProductGroupFilterItem;
+import com.cqlybest.common.bean.ProductFilterItem;
 import com.cqlybest.common.bean.ProductGroupItem;
 import com.cqlybest.common.dao.ProductDao;
 
@@ -46,12 +46,12 @@ public class ProductService {
   }
 
   public Long queryProductsTotal(Set<ProductGroupItem> groupItems,
-      Set<ProductGroupFilterItem> filterItems) {
+      Set<ProductFilterItem> filterItems) {
     return productDao.findProductsTotal(groupItems, filterItems);
   }
 
   public List<Product> queryProducts(Set<ProductGroupItem> groupItems,
-      Set<ProductGroupFilterItem> filterItems, Integer page, Integer pageSize) {
+      Set<ProductFilterItem> filterItems, Integer page, Integer pageSize) {
     return productDao.findProducts(groupItems, filterItems, page, pageSize);
   }
 

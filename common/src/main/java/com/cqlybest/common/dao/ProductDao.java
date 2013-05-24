@@ -13,7 +13,7 @@ import org.hibernate.sql.JoinType;
 import org.springframework.stereotype.Repository;
 
 import com.cqlybest.common.bean.Product;
-import com.cqlybest.common.bean.ProductGroupFilterItem;
+import com.cqlybest.common.bean.ProductFilterItem;
 import com.cqlybest.common.bean.ProductGroupItem;
 
 @Repository
@@ -60,61 +60,95 @@ public class ProductDao extends AbstractDao<Product, Integer> {
     return query.executeUpdate();
   }
 
-  public Long findProductsTotal(Set<ProductGroupItem> groupItems,
-      Set<ProductGroupFilterItem> filterItems) {
-    return (Long) createFindProductsCriteria(groupItems).setProjection(Projections.rowCount())
-        .uniqueResult();
+  public Long findProductsTotal(Set<ProductGroupItem> groupItems, Set<ProductFilterItem> filterItems) {
+    return (Long) createFindProductsCriteria(groupItems, filterItems).setProjection(
+        Projections.countDistinct("id")).uniqueResult();
   }
 
   @SuppressWarnings("unchecked")
   public List<Product> findProducts(Set<ProductGroupItem> groupItems,
-      Set<ProductGroupFilterItem> filterItems, Integer page, Integer pageSize) {
-    Criteria criteria = createFindProductsCriteria(groupItems);
-    criteria.setFirstResult((Math.max(page, 1) - 1) * pageSize);
-    criteria.setMaxResults(pageSize);
+      Set<ProductFilterItem> filterItems, Integer page, Integer pageSize) {
+    Criteria criteria = createFindProductsCriteria(groupItems, filterItems);
+    if (pageSize > 0) {
+      criteria.setFirstResult((Math.max(page, 1) - 1) * pageSize);
+      criteria.setMaxResults(pageSize);
+    }
+    criteria.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY);
     return criteria.list();
   }
 
-  private Criteria createFindProductsCriteria(Set<ProductGroupItem> groupItems) {
+  private Criteria createFindProductsCriteria(Set<ProductGroupItem> groupItems,
+      Set<ProductFilterItem> filterItems) {
     Criteria criteria = getCurrentSession().createCriteria(Product.class);
-    Disjunction or = Restrictions.disjunction();
+    criteria.createAlias("recommendedMonths", "month", JoinType.LEFT_OUTER_JOIN);
+    criteria.createAlias("crowds", "crowds", JoinType.LEFT_OUTER_JOIN);
+    criteria.createAlias("traffics", "traffic", JoinType.LEFT_OUTER_JOIN);
+    criteria.createAlias("types", "type", JoinType.LEFT_OUTER_JOIN);
+    criteria.createAlias("grades", "grade", JoinType.LEFT_OUTER_JOIN);
+    criteria.createAlias("keywords", "keyword", JoinType.LEFT_OUTER_JOIN);
+    criteria.createAlias("departureCities", "city", JoinType.LEFT_OUTER_JOIN);
+    criteria.createAlias("destinations", "dest", JoinType.LEFT_OUTER_JOIN);
+    Disjunction groupCondition = Restrictions.disjunction();
     for (ProductGroupItem groupItem : groupItems) {
       int type = groupItem.getGroupType();
       Integer[] ids = retrieveIntegers(groupItem.getGroupValue());
       if (type == 0) {
-        criteria.createAlias("recommendedMonths", "month", JoinType.LEFT_OUTER_JOIN);
-        or.add(Restrictions.in("month.elements", ids));
+        groupCondition.add(Restrictions.in("month.elements", ids));
       }
       if (type == 1) {
-        criteria.createAlias("crowds", "crowds", JoinType.LEFT_OUTER_JOIN);
-        or.add(Restrictions.in("crowds.elements", ids));
+        groupCondition.add(Restrictions.in("crowds.elements", ids));
       }
       if (type == 2) {
-        criteria.createAlias("traffics", "traffic", JoinType.LEFT_OUTER_JOIN);
-        or.add(Restrictions.in("traffic.id", ids));
+        groupCondition.add(Restrictions.in("traffic.id", ids));
       }
       if (type == 3) {
-        criteria.createAlias("types", "type", JoinType.LEFT_OUTER_JOIN);
-        or.add(Restrictions.in("type.id", ids));
+        groupCondition.add(Restrictions.in("type.id", ids));
       }
       if (type == 4) {
-        criteria.createAlias("grades", "grade", JoinType.LEFT_OUTER_JOIN);
-        or.add(Restrictions.in("grade.id", ids));
+        groupCondition.add(Restrictions.in("grade.id", ids));
       }
       if (type == 5) {
-        criteria.createAlias("keywords", "keyword", JoinType.LEFT_OUTER_JOIN);
-        or.add(Restrictions.in("keyword.id", ids));
+        groupCondition.add(Restrictions.in("keyword.id", ids));
       }
       if (type == 6) {
-        criteria.createAlias("departureCities", "city", JoinType.LEFT_OUTER_JOIN);
-        or.add(Restrictions.in("city.id", ids));
+        groupCondition.add(Restrictions.in("city.id", ids));
       }
       if (type == 7) {
-        criteria.createAlias("destinations", "dest", JoinType.LEFT_OUTER_JOIN);
-        or.add(Restrictions.in("dest.id", ids));
+        groupCondition.add(Restrictions.in("dest.id", ids));
       }
     }
-    return criteria.add(or);
+    criteria.add(groupCondition);
+    if (filterItems != null) {
+      for (ProductFilterItem item : filterItems) {
+        int type = item.getType();
+        int id = item.getId();
+        if (type == 0) {
+          criteria.add(Restrictions.eq("month.elements", id));
+        }
+        if (type == 1) {
+          criteria.add(Restrictions.eq("crowds.elements", id));
+        }
+        if (type == 2) {
+          criteria.add(Restrictions.eq("traffic.id", id));
+        }
+        if (type == 3) {
+          criteria.add(Restrictions.eq("type.id", id));
+        }
+        if (type == 4) {
+          criteria.add(Restrictions.eq("grade.id", id));
+        }
+        if (type == 5) {
+          criteria.add(Restrictions.eq("keyword.id", id));
+        }
+        if (type == 6) {
+          criteria.add(Restrictions.eq("city.id", id));
+        }
+        if (type == 7) {
+          criteria.add(Restrictions.eq("dest.id", id));
+        }
+      }
+    }
+    return criteria;
   }
 
 

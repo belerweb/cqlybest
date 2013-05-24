@@ -41,7 +41,7 @@
 				</div>
 			</div>
 			</#if>
-			<h4>${menu.name!}</h4>
+			<h4>${menu.name!}, ${total}</h4>
 			<ul>
 				<#list products as product>
 				<li>${product.name!}</li>

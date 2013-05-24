@@ -2,6 +2,7 @@ package com.cqlybest.www.controller;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -20,8 +21,8 @@ import com.cqlybest.common.bean.DictProductGrade;
 import com.cqlybest.common.bean.DictProductType;
 import com.cqlybest.common.bean.DictTraffic;
 import com.cqlybest.common.bean.Keyword;
+import com.cqlybest.common.bean.ProductFilterItem;
 import com.cqlybest.common.bean.ProductGroup;
-import com.cqlybest.common.bean.ProductGroupFilterItem;
 import com.cqlybest.common.bean.ProductGroupItem;
 import com.cqlybest.common.bean.template1.Template1Menu;
 import com.cqlybest.common.bean.template1.Template1ProductGroup;
@@ -95,9 +96,17 @@ public class Template1Controller {
 
     ProductGroup group = menu.getProductGroup();
     Set<ProductGroupItem> groupItems = group.getGroupItems();
-    Set<ProductGroupFilterItem> filterItems = group.getFilterItems();
+    Set<ProductFilterItem> filterItems = new HashSet<>();
+    addToFilterSet(filterItems, 0, f0);
+    addToFilterSet(filterItems, 1, f1);
+    addToFilterSet(filterItems, 2, f2);
+    addToFilterSet(filterItems, 3, f3);
+    addToFilterSet(filterItems, 4, f4);
+    addToFilterSet(filterItems, 5, f5);
+    addToFilterSet(filterItems, 6, f6);
+    addToFilterSet(filterItems, 7, f7);
     model.addAttribute("total", productService.queryProductsTotal(groupItems, filterItems));
-    model.addAttribute("products", productService.queryProducts(groupItems, filterItems, 0, 10));
+    model.addAttribute("products", productService.queryProducts(groupItems, filterItems, 0, 0));
     model.addAttribute("menu", menu);
 
     // 过滤条件
@@ -138,6 +147,12 @@ public class Template1Controller {
   public void setCommonData(Model model) {
     model.addAttribute("Site", siteService.getSite());
     model.addAttribute("Menu", template1Service.getPublishedMenus());
+  }
+
+  private void addToFilterSet(Set<ProductFilterItem> set, Integer type, Integer id) {
+    if (id > 0) {
+      set.add(new ProductFilterItem(type, id));
+    }
   }
 
 }
