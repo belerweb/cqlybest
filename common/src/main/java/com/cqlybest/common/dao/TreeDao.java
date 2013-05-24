@@ -26,7 +26,7 @@ public abstract class TreeDao<T extends TreeNode, I extends Serializable> extend
     param.put("table", tableName);
     param.put("number", number);
     param.put("increment", increment);
-    getSqlSession().update("TreeNodeDao.updateLft", param);;
+    getSqlSession().update("TreeNodeDao.updateLft", param);
   }
 
 
@@ -41,7 +41,7 @@ public abstract class TreeDao<T extends TreeNode, I extends Serializable> extend
     param.put("table", tableName);
     param.put("number", number);
     param.put("increment", increment);
-    getSqlSession().update("TreeNodeDao.updateRgt", param);;
+    getSqlSession().update("TreeNodeDao.updateRgt", param);
   }
 
   /**

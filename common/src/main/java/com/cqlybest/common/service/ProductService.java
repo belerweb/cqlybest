@@ -1,5 +1,6 @@
 package com.cqlybest.common.service;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Set;
@@ -52,7 +53,30 @@ public class ProductService {
 
   public List<Product> queryProducts(Set<ProductGroupItem> groupItems,
       Set<ProductFilterItem> filterItems, Integer page, Integer pageSize) {
-    return productDao.findProducts(groupItems, filterItems, page, pageSize);
+    List<Integer> productIds = new ArrayList<>();
+    String[] tableNames =
+        new String[] {"PRODUCT_RECOMMENDED_MONTH", "PRODUCT_CROWD", "PRODUCT_TRAFFIC",
+            "PRODUCT_TYPE", "PRODUCT_GRADE", "PRODUCT_KEYWORD", "PRODUCT_DEPARTURE_CITY",
+            "PRODUCT_DESTINATION"};
+    String[] dictColumns = new String[] {"MONTH", "CROWD", "DID"};
+    for (ProductGroupItem item : groupItems) { // 聚合产品
+      int type = item.getGroupType();
+      String ids = item.getGroupValue();
+      productIds.addAll(productDao.findProductIdsByDict(tableNames[type], ids, type > 1
+          ? "PID"
+          : "ID", type > 1 ? dictColumns[2] : dictColumns[type]));
+    }
+    if (filterItems != null) {
+      for (ProductFilterItem item : filterItems) {// 过滤产品
+        int type = item.getType();
+        Integer ids = item.getId();
+        productIds.retainAll(productDao.findProductIdsByDict(tableNames[type], ids, type > 1
+            ? "PID"
+            : "ID", type > 1 ? dictColumns[2] : dictColumns[type]));
+      }
+    }
+
+    return productDao.getProducts(productIds, page, pageSize);
   }
 
   public void updateProperty(Integer[] ids, String prop, Object value) {

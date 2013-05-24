@@ -1,7 +1,10 @@
 package com.cqlybest.common.dao;
 
+import java.util.Collections;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 import org.hibernate.Criteria;
@@ -17,6 +20,7 @@ import com.cqlybest.common.bean.ProductFilterItem;
 import com.cqlybest.common.bean.ProductGroupItem;
 
 @Repository
+@SuppressWarnings("unchecked")
 public class ProductDao extends AbstractDao<Product, Integer> {
 
   protected ProductDao() {
@@ -34,7 +38,6 @@ public class ProductDao extends AbstractDao<Product, Integer> {
     return (Long) criteria.uniqueResult();
   }
 
-  @SuppressWarnings("unchecked")
   public List<Product> findProductTotal(int page, int pageSize) {
     Criteria criteria = getCurrentSession().createCriteria(entityClass);
     criteria.setFirstResult((Math.max(page, 1) - 1) * pageSize);
@@ -60,12 +63,35 @@ public class ProductDao extends AbstractDao<Product, Integer> {
     return query.executeUpdate();
   }
 
+  public List<Integer> findProductIdsByDict(String dictTable, Object ids, String pidColumn,
+      String dictColumn) {
+    Map<String, Object> param = new HashMap<>();
+    param.put("dictTable", dictTable);
+    param.put("ids", ids);
+    param.put("pidColumn", pidColumn);
+    param.put("dictColumn", dictColumn);
+    return getSqlSession().selectList("ProductDao.findProductIdsByDict", param);
+  }
+
+  public List<Product> getProducts(List<Integer> ids, Integer page, Integer pageSize) {
+    if (ids.isEmpty()) {
+      return Collections.emptyList();
+    }
+    Criteria criteria = getCurrentSession().createCriteria(Product.class);
+    criteria.add(Restrictions.in("id", ids));
+    if (pageSize > 0) {
+      criteria.setFirstResult((Math.max(page, 1) - 1) * pageSize);
+      criteria.setMaxResults(pageSize);
+    }
+    return criteria.list();
+  }
+
   public Long findProductsTotal(Set<ProductGroupItem> groupItems, Set<ProductFilterItem> filterItems) {
     return (Long) createFindProductsCriteria(groupItems, filterItems).setProjection(
         Projections.countDistinct("id")).uniqueResult();
   }
 
-  @SuppressWarnings("unchecked")
+  // 此方法效率太低
   public List<Product> findProducts(Set<ProductGroupItem> groupItems,
       Set<ProductFilterItem> filterItems, Integer page, Integer pageSize) {
     Criteria criteria = createFindProductsCriteria(groupItems, filterItems);
@@ -156,7 +182,7 @@ public class ProductDao extends AbstractDao<Product, Integer> {
     String[] idText = text.split(",");
     Integer[] ids = new Integer[idText.length];
     for (int i = 0; i < idText.length; i++) {
-      ids[i] = Integer.parseInt(idText[1]);
+      ids[i] = Integer.parseInt(idText[i]);
     }
     return ids;
   }

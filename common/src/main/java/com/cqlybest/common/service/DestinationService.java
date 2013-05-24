@@ -7,12 +7,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.cqlybest.common.bean.TreeNode;
 import com.cqlybest.common.bean.Destination;
+import com.cqlybest.common.bean.TreeNode;
 import com.cqlybest.common.dao.DestinationDao;
 
 @Service
 public class DestinationService {
+
+  private static List<Destination> DESTINATION_CACHE = null;
+  private static long DESTINATION_CACHE_TIME = 0;
 
   @Autowired
   private DestinationDao destinationDao;
@@ -54,7 +57,12 @@ public class DestinationService {
   }
 
   public List<Destination> getTree() {
-    return destinationDao.find(Order.asc("lft"));
+    if (DESTINATION_CACHE == null
+        || (System.currentTimeMillis() - DESTINATION_CACHE_TIME > 3600000)) {
+      DESTINATION_CACHE = destinationDao.find(Order.asc("lft"));
+      DESTINATION_CACHE_TIME = System.currentTimeMillis();
+    }
+    return DESTINATION_CACHE;
   }
 
 }
