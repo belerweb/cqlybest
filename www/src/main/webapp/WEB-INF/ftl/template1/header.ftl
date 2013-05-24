@@ -9,7 +9,6 @@
 <div id="menu" class="navbar">
 	<div class="navbar-inner">
 		<div class="container">
-			<a class="brand">全部旅游产品</a>
 			<div class="nav-collapse collapse">
 				<ul class="nav">
 					<li data-active="index"><a href="${ContextPath}/index.html">首页</a></li>
