@@ -2,6 +2,45 @@
 <div class="container margin-menu">
 	<div class="row">
 		<div class="span9">
+			<#assign Filters=[f0,f1,f2,f3,f4,f5,f6,f7,0]>
+			<#assign filterNames=['推荐月份', '适合人群', '交通方式', '产品类型', '产品等级', '标签', '出发城市', '目的地']>
+			<#macro selectedDictRender type dict values>
+				<#assign items = values?split(",")>
+				<#list dict as item>
+					<#if items?seq_contains('${item.id}')>
+					<@filterUrl type item.id item.name!'' Filters[type]==item.id/>
+					</#if>
+				</#list>
+			</#macro>
+			<#macro filterUrl index value text active>
+				<a href="${ContextPath}/group/${menu.id}/<#list Filters as v><#if v_index gt 0>-</#if><#if v_index==index>${value}<#else>${v}</#if></#list>.html" class="<#if active>active</#if>">${text}</a>
+			</#macro>
+			<#if (menu.productGroup.filterItems)?has_content>
+			<div class="filter-box">
+				<div class="filter-main">
+					<ul>
+						<#assign months=[{'id':1,'name':'1月'},{'id':2,'name':'2月'},{'id':3,'name':'3月'},{'id':4,'name':'4月'},{'id':5,'name':'5月'},{'id':6,'name':'6月'},{'id':7,'name':'7月'},{'id':8,'name':'8月'},{'id':9,'name':'9月'},{'id':10,'name':'10月'},{'id':11,'name':'11月'},{'id':12,'name':'12月'}]>
+						<#assign crowds=[{'id':1,'name':'个人旅行'},{'id':2,'name':'团体旅行'}]>
+						<#list menu.productGroup.filterItems?sort_by('filterType') as item>
+						<li>
+							<label>${filterNames[item.filterType]}:</label>
+							<span>
+								<@filterUrl item.filterType 0 '全部' Filters[item.filterType]==0/>
+								<#if item.filterType==0><@selectedDictRender item.filterType months item.filterValue /></#if>
+								<#if item.filterType==1><@selectedDictRender item.filterType crowds item.filterValue /></#if>
+								<#if item.filterType==2><@selectedDictRender item.filterType traffics item.filterValue /></#if>
+								<#if item.filterType==3><@selectedDictRender item.filterType types item.filterValue /></#if>
+								<#if item.filterType==4><@selectedDictRender item.filterType grades item.filterValue /></#if>
+								<#if item.filterType==5><@selectedDictRender item.filterType keywords item.filterValue /></#if>
+								<#if item.filterType==6><@selectedDictRender item.filterType departureCities item.filterValue /></#if>
+								<#if item.filterType==7><@selectedDictRender item.filterType destinations item.filterValue /></#if>
+							</span>
+						</li>
+						</#list>
+					</ul>
+				</div>
+			</div>
+			</#if>
 			<h4>${menu.name!}</h4>
 			<ul>
 				<#list products as product>

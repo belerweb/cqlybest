@@ -1,5 +1,7 @@
 package com.cqlybest.www.controller;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -53,8 +55,13 @@ public class IndexController {
    * 聚合产品页
    */
   @RequestMapping("/group/{id}.html")
-  public String pg(@PathVariable String id) {
+  public String group(@PathVariable String id) {
     return templateService.forward("/group/" + id + ".html");
+  }
+
+  @RequestMapping("/group/{id}/{f0}-{f1}-{f2}-{f3}-{f4}-{f5}-{f6}-{f7}-{page}.html")
+  public String group(HttpServletRequest request) {
+    return templateService.forward(request.getRequestURI());
   }
 
   /**

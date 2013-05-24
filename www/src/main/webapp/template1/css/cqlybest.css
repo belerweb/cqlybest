@@ -297,7 +297,8 @@ ul,li {
 .footer {
 	margin: 10px 0;
 }
-.footer ul{
+
+.footer ul {
 	margin: 0;
 }
 
@@ -323,6 +324,34 @@ ul,li {
 	display: inline;
 	padding: 0 5px;
 }
+
 #footer-help h4 {
 	margin: 0 0 10px;
+}
+
+.filter-box .filter-main {
+	border: 1px solid #CECECE;
+	padding: 10px;
+}
+
+.filter-box .filter-main ul {
+	margin: 0;
+}
+
+.filter-box .filter-main label {
+	display: inline-block;
+	margin-right: 10px;
+}
+
+.filter-box .filter-main a {
+	display: inline:block;
+	line-height: 22px;
+	margin: 0 10px 10px 0;
+	padding: 3px 5px;
+	line-height: 22px;
+}
+
+.filter-box .filter-main a.active {
+	background: none repeat scroll 0 0 #669835;
+	color: #FFFFFF;
 }
