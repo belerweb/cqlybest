@@ -11,10 +11,12 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.cqlybest.common.bean.LoginUser;
 import com.cqlybest.common.bean.PhoneValidationCode;
 import com.cqlybest.common.service.PhoneValidationService;
 import com.cqlybest.common.service.SmsService;
 import com.cqlybest.common.service.TemplateService;
+import com.cqlybest.common.service.UserService;
 
 @Controller
 public class IndexController {
@@ -25,6 +27,8 @@ public class IndexController {
   private PhoneValidationService phoneValidationService;
   @Autowired
   private SmsService smsService;
+  @Autowired
+  private UserService userService;
 
   @RequestMapping( {"/index.html", // 首页
       "/register.html",// 注册
@@ -40,11 +44,18 @@ public class IndexController {
 
   @RequestMapping(method = RequestMethod.POST, value = "/register.do")
   @ResponseBody
-  public void register(@RequestParam String cellPhone, @RequestParam String password,
-      @RequestParam String validationCode) {
-    System.out.println(cellPhone);
-    System.out.println(password);
-    System.out.println(validationCode);
+  public String register(@RequestParam String cellPhone, @RequestParam String password,
+      @RequestParam String validationCode, HttpSession session) {
+    PhoneValidationCode code = (PhoneValidationCode) session.getAttribute("PHONE_VALIDATION_CODE");
+    if (code == null || !validationCode.equalsIgnoreCase(code.getCode())) {
+      return "验证码不正确";
+    }
+    if (userService.getUserByCellPhone(cellPhone) != null) {
+      return "手机号已注册，您可以用此手机号登陆。如果忘记，可以使用找回密码功能。";
+    }
+    userService.addUser(new LoginUser(cellPhone, password));
+    session.removeAttribute("PHONE_VALIDATION_CODE");
+    return null;
   }
 
   @RequestMapping(method = RequestMethod.POST, value = "/register_phone_validation.do")
@@ -55,9 +66,10 @@ public class IndexController {
     }
     if (phoneValidationService.checkSendAvailable(cellPhone)) {
       String code = RandomStringUtils.randomNumeric(4);
-      phoneValidationService.save(new PhoneValidationCode(cellPhone, code));
-      smsService.send(cellPhone, "您正在重庆易游天下网站注册帐户，您的手机验证码是" + code);
-      session.setAttribute("PHONE_VALIDATION_CODE", code);
+      PhoneValidationCode validationCode = new PhoneValidationCode(cellPhone, code);
+      phoneValidationService.save(validationCode);
+      smsService.send(cellPhone, "您正在重庆易游天下网站注册帐户，您的手机验证码是" + code + "，使用一次后失效。");
+      session.setAttribute("PHONE_VALIDATION_CODE", validationCode);
       return null;
     }
     return "一分钟只能发送一次验证码，请稍后再试";

@@ -31,6 +31,12 @@ public class LoginUser implements UserDetails {
 
   public LoginUser() {}
 
+  public LoginUser(String cellPhone, String password) {
+    this.cellPhone = cellPhone;
+    this.password = password;
+    this.id = UUID.randomUUID().toString();
+  }
+
   public LoginUser(QQAuth auth) {
     this.qqAuth = auth;
     this.id = UUID.randomUUID().toString();

@@ -44,7 +44,7 @@
 				</div>
 				<div class="control-group">
 					<div class="controls">
-						<button type="submit" class="btn btn-warning" autocomplete="off"><strong>注册</strong></button>
+						<button type="submit" class="btn btn-warning" autocomplete="off" data-loading-text="注册中..."><strong>注册</strong></button>
 					</div>
 				</div>
 			</form>
@@ -66,10 +66,20 @@
 				submitSuccess : function($form, event) {
 					event.preventDefault();
 					event.stopPropagation();
+					var btn = $('button[type=submit]', $form);
+					btn.button('loading');
 					$form.ajaxSubmit({
 						success: function(response){
+							if (response && response.length) {
+								alert(response);
+								btn.button('reset');
+							} else {
+								alert("注册成功，请登录。");
+								location.href = '${ContextPath}/login.html';
+							}
 						},
 						error: function() {
+							btn.button('reset');
 						}
 					});
 				}

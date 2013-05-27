@@ -51,6 +51,10 @@ public class UserService {
     return user;
   }
 
+  public LoginUser getUserByCellPhone(String phone) {
+    return userDao.findOne(Restrictions.eq("cellPhone", phone));
+  }
+
   /**
    * QQ 登录用户注册
    */
