@@ -38,4 +38,10 @@ public class IndexController {
     System.out.println(validationCode);
   }
 
+  @RequestMapping(method = RequestMethod.POST, value = "/register_phone_validation.do")
+  @ResponseBody
+  public void registerPhoneValidation(@RequestParam String cellPhone) {
+
+  }
+
 }
