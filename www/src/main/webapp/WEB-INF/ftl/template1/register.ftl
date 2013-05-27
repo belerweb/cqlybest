@@ -38,7 +38,7 @@
 							<input type="text" name="validationCode" class="input-mini" autocomplete="off"
 								required="true" data-validation-required-message="请填写密码验证码"
 								data-validation-regex-regex="\d{4}" data-validation-regex-message="验证码是4位数字">
-							<button id="get-validation-code" class="btn" type="button" autocomplete="off" data-loading-text="验证码已发送到您的手机，如果没收到，1分钟后可重新获取...">点击获取验证码</button>
+							<button id="get-validation-code" class="btn" type="button" autocomplete="off" data-loading-text="验证码已发送，如果没收到，1分钟后可重新获取...">点击获取验证码</button>
 						</div>
 					</div>
 				</div>
@@ -79,7 +79,7 @@
 				btn.button('loading');
 				var resendTime = 60;
 				var interval = setInterval(function(){
-					btn.text('验证码已发送到您的手机，如果没收到，' + resendTime-- + '秒后可重新获取...');
+					btn.text('验证码已发送，如果没收到，' + resendTime-- + '秒后可重新获取...');
 				}, 1000);
 				setTimeout(function(){
 					clearInterval(interval);
