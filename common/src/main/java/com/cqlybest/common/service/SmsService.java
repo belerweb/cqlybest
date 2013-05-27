@@ -5,6 +5,7 @@ import java.util.List;
 import org.hibernate.criterion.Order;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.cqlybest.common.bean.Sms;
 import com.cqlybest.common.dao.SmsDao;
@@ -17,6 +18,7 @@ public class SmsService {
   @Autowired
   private SmsDao smsDao;
 
+  @Transactional
   public void send(String phone, String content) {
     Sms sms = new Sms();
     sms.setPhone(phone);

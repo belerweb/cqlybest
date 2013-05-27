@@ -5,10 +5,13 @@
 
 <hibernate-mapping package="com.cqlybest.common.bean">
 	<class name="PhoneValidationCode" table="PHONE_VALIDATION_CODE">
-		<id name="phone" column="PHONE" type="string" length="11">
-			<generator class="assigned" />
+		<id name="id" column="ID">
+			<generator class="native" />
 		</id>
-		<property name="code" column="CODE" type="string" length="16" />
-		<property name="createdTime" column="CREATED_TIME" />
+		<property name="phone" column="PHONE" type="string" not-null="true"
+			length="11" />
+		<property name="code" column="CODE" type="string" not-null="true"
+			length="4" />
+		<property name="createdTime" column="CREATED_TIME" not-null="true" />
 	</class>
 </hibernate-mapping>

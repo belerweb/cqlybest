@@ -10,7 +10,7 @@
 				<div class="control-group">
 					<label class="control-label">手机号：</label>
 					<div class="controls">
-						<input type="text" name="cellPhone" placeholder="手机号" autocomplete="off"
+						<input type="text" id="cellPhone" name="cellPhone" placeholder="手机号" autocomplete="off"
 							required="true" data-validation-required-message="请填写手机号"
 							data-validation-regex-regex="1[3458]\d{9}" data-validation-regex-message="请填写正确的手机号">
 					</div>
@@ -38,7 +38,7 @@
 							<input type="text" name="validationCode" class="input-mini" autocomplete="off"
 								required="true" data-validation-required-message="请填写密码验证码"
 								data-validation-regex-regex="\d{4}" data-validation-regex-message="验证码是4位数字">
-							<button id="get-validation-code" class="btn" type="button" autocomplete="off" data-loading-text="验证码已发送，如果没收到，1分钟后可重新获取...">点击获取验证码</button>
+							<button id="get-validation-code" class="btn" type="button" autocomplete="off" data-loading-text="发送中...">点击获取验证码</button>
 						</div>
 					</div>
 				</div>
@@ -76,15 +76,30 @@
 			});
 			$('#get-validation-code').click(function(){
 				var btn = $(this);
-				btn.button('loading');
 				var resendTime = 60;
-				var interval = setInterval(function(){
-					btn.text('验证码已发送，如果没收到，' + resendTime-- + '秒后可重新获取...');
-				}, 1000);
-				setTimeout(function(){
-					clearInterval(interval);
+				var cellPhone = $('#cellPhone').val();
+				if (!/^1[3458]\d{9}$/.test(cellPhone)) {
+					alert('请输入正确的手机号');
+					return;
+				}
+				btn.button('loading');
+				$.post('${ContextPath}/register_phone_validation.do', {
+					cellPhone: cellPhone
+				}).success(function(response){
+					if (response) {
+						alert(response);
+					} else {
+						var interval = setInterval(function(){
+							btn.text('验证码已发送，如果没收到，' + resendTime-- + '秒后可重新获取...');
+						}, 1000);
+						setTimeout(function(){
+							clearInterval(interval);
+							btn.button('reset');
+						}, 60000);
+					}
+				}).fail(function(){
 					btn.button('reset');
-				}, 60000);
+				});
 			});
 		}
 	};

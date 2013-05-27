@@ -8,9 +8,26 @@ import java.util.Date;
  */
 public class PhoneValidationCode {
 
+  private Integer id;
   private String phone;
   private String code;
   private Date createdTime;
+
+  public PhoneValidationCode() {}
+
+  public PhoneValidationCode(String phone, String code) {
+    this.phone = phone;
+    this.code = code;
+    this.createdTime = new Date();
+  }
+
+  public Integer getId() {
+    return id;
+  }
+
+  public void setId(Integer id) {
+    this.id = id;
+  }
 
   public String getPhone() {
     return phone;
