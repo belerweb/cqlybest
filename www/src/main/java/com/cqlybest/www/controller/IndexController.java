@@ -32,7 +32,7 @@ public class IndexController {
 
   @RequestMapping( {"/index.html", // 首页
       "/register.html",// 注册
-      "/login.html",// 登陆
+      "/login.html",// 登录
       "/group/{id}.html",// 产品聚合
       "/group/{id}/{f0}-{f1}-{f2}-{f3}-{f4}-{f5}-{f6}-{f7}-{page}.html",// 产品聚合
       "/page/{id}.html",// 自定义页面
@@ -51,7 +51,7 @@ public class IndexController {
       return "验证码不正确";
     }
     if (userService.getUserByCellPhone(cellPhone) != null) {
-      return "手机号已注册，您可以用此手机号登陆。如果忘记，可以使用找回密码功能。";
+      return "手机号已注册，您可以用此手机号登录。如果忘记，可以使用找回密码功能。";
     }
     userService.addUser(new LoginUser(cellPhone, password));
     session.removeAttribute("PHONE_VALIDATION_CODE");

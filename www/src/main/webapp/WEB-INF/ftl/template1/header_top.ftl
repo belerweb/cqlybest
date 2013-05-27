@@ -33,7 +33,7 @@
 				<a href="${ContextPath}/logout.do">退出</a>
 				<#else>
 				<span>亲，欢迎来易游天下！请</span>
-				<a href="${ContextPath}/login.html">登陆</a>
+				<a href="${ContextPath}/login.html">登录</a>
 				<a href="${ContextPath}/register.html" class="mg">免费注册</a>
 				<a href="${ContextPath}/connector/qq_login.do" class="mg"><img alt="QQ登录" src="http://qzonestyle.gtimg.cn/qzone/vas/opensns/res/img/Connect_logo_7.png"></a>
 				<a href="${ContextPath}/connector/weibo_login.do" class="mg"><img alt="用微博登录" src="http://timg.sjs.sinajs.cn/t4/appstyle/widget/images/loginButton/loginButton_24.png"></a>

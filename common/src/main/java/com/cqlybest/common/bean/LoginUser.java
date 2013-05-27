@@ -19,7 +19,7 @@ public class LoginUser implements UserDetails {
   private String id;// 用户编号
   private String cellPhone;// 手机号
   private String email;// 电子邮件
-  private String loginUsername;// 登陆用户名
+  private String loginUsername;// 登录用户名
   private String fullname;// 姓名
   private String nickname;// 昵称
   private String avatar;// 头像

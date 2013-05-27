@@ -23,13 +23,13 @@ body {
 						</div>
 						<div class="control-group">
 							<label><strong>登录密码：</strong></label>
-							<input type="text" name="j_password" autocomplete="off"
+							<input type="password" name="j_password" autocomplete="off"
 								required="true" data-validation-required-message="请填写密码">
 							<div class="help-block"></div>
 						</div>
-						<label class="checkbox">
+						<!-- label class="checkbox">
 							<input type="checkbox"> 十天内免登录
-						</label>
+						</label -->
 						<button class="btn btn-success" type="submit" autocomplete="off"><strong>登 录</strong></button>
 						<a href="${ContextPath}/register.html" class="btn pull-right" autocomplete="off"><strong>注 册</strong></a>
 						<div class="clearfix"></div>
