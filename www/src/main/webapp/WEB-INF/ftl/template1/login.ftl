@@ -15,15 +15,18 @@ body {
 			<div class="span4">
 				<div id="login-box" class="well well-small">
 					<form action="${ContextPath}/login.do" method="post" novalidate="novalidate">
+						<#if error?has_content && error>
+						<div class="alert alert-error">用户信息不正确！</div>
+						</#if>
 						<div class="control-group">
 							<label><strong>登录名：</strong></label>
-							<input type="text" name="j_username" placeholder="手机号/用户名/邮箱" autocomplete="off"
+							<input type="text" name="j_username" value="${username!}" placeholder="手机号/用户名/邮箱" autocomplete="off"
 								required="true" data-validation-required-message="请填写登录名（手机号/用户名/邮箱）">
 							<div class="help-block"></div>
 						</div>
 						<div class="control-group">
 							<label><strong>登录密码：</strong></label>
-							<input type="password" name="j_password" autocomplete="off"
+							<input type="password" name="j_password" placeholder="登录密码" autocomplete="off"
 								required="true" data-validation-required-message="请填写密码">
 							<div class="help-block"></div>
 						</div>
@@ -46,7 +49,15 @@ body {
 <script>
 	var PageContext = {
 		init: function(){
-			$('input', '#login-box form').jqBootstrapValidation({});
+			$('input', '#login-box form').jqBootstrapValidation({
+				submitSuccess : function($form, event) {
+					$.cookie('username', $('input[name=j_username]', $form).value(), { expires: 3650, path: '/' });
+				}
+			});
+			var username = '${username!}';
+			if (username.length) {
+				$.cookie('username', username, { expires: 3650, path: '/' });
+			}
 		}
 	};
 </script>

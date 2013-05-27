@@ -18,7 +18,7 @@ http://www.springframework.org/schema/beans http://www.springframework.org/schem
 
     <http auto-config="true" access-decision-manager-ref="accessDecisionManager" use-expressions="true">
         <form-login login-page="/login.html" login-processing-url="/login.do" always-use-default-target="true"
-            authentication-failure-url="/login.html" />
+            authentication-failure-url="/login.html?error=true" />
         <logout logout-url="/logout.do" />
         <intercept-url pattern="/index.html" access="permitAll" />
         <intercept-url pattern="/connector/**" access="permitAll" />

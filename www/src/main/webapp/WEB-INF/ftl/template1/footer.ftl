@@ -76,6 +76,7 @@
 		</div>
 		<script src="${ContextPath}/template1/js/jquery.min.js"></script>
 		<script src="${ContextPath}/template1/js/bootstrap.min.js"></script>
+		<script src="${ContextPath}/template1/js/jquery.cookie.js"></script>
 		<script src="${ContextPath}/template1/js/twitter-bootstrap-hover-dropdown.js"></script>
 		<script src="${ContextPath}/template1/js/jqBootstrapValidation.js"></script>
 		<script src="${ContextPath}/template1/js/jquery.form.js"></script>
