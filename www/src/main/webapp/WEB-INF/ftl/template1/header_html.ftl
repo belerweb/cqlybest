@@ -12,6 +12,7 @@
 		<title>重庆易游天下</title>
 		<link rel="stylesheet" href="${ContextPath}/template1/css/bootstrap.min.css">
 		<link rel="stylesheet" href="${ContextPath}/template1/css/cqlybest.css">
+		<link rel="shortcut icon" href="${ContextPath}/template1/favicon.ico">
 	</head>
 
 	<body>

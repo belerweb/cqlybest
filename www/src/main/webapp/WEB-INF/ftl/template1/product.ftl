@@ -8,6 +8,9 @@
 </div>
 <script>
 	var PageContext = {
+		init : function() {
+			document.title = '${product.name!}';
+		}
 	};
 </script>
 <#include "/template1/footer.ftl">
