@@ -40,7 +40,7 @@
 						<div class="thumbnail">
 							<div class="caption">
 								<#if product.posters?has_content>
-								<img alt="${product.title!}" src="${springx.rand(0,product.posters?size-1)}?width=154&height=99">
+								<img alt="${product.name!}" src="${springx.rand(0,product.posters?size-1)}?width=154&height=99">
 								</#if>
 								<a class="title" href="${ContextPath}/product/${product.id}.html" target="_blank">${product.name!}</a>
 								<p>
@@ -67,7 +67,7 @@
 						<div class="thumbnail">
 							<div class="caption">
 								<#if product.posters?has_content>
-								<img alt="${product.title!}" src="${springx.rand(0,product.posters?size-1)}?width=154&height=99">
+								<img alt="${product.name!}" src="${springx.rand(0,product.posters?size-1)}?width=154&height=99">
 								</#if>
 								<a class="title" href="${ContextPath}/product/${product.id}.html" target="_blank">${product.name!}</a>
 							</div>
@@ -88,7 +88,7 @@
 					<div class="thumbnail">
 						<div class="caption">
 							<#if product.posters?has_content>
-							<img alt="${product.title!}" src="${springx.rand(0,product.posters?size-1)}?width=196&height=99">
+							<img alt="${product.name!}" src="${springx.rand(0,product.posters?size-1)}?width=196&height=99">
 							</#if>
 							<a class="title" href="${ContextPath}/product/${product.id}.html" target="_blank">${product.name!}</a>
 						</div>

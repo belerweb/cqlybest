@@ -11,6 +11,7 @@
 		<meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
 		<title>重庆易游天下</title>
 		<link rel="stylesheet" href="${ContextPath}/template1/css/bootstrap.min.css">
+		<link rel="stylesheet" href="${ContextPath}/template1/js/gallery/jquery.ad-gallery.css">
 		<link rel="stylesheet" href="${ContextPath}/template1/css/cqlybest.css">
 		<link rel="shortcut icon" href="${ContextPath}/template1/favicon.ico">
 	</head>
