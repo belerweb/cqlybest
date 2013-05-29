@@ -27,6 +27,36 @@
 			<#else>
 			<p><span class="lname">预定价格：</span><span class="price">¥${(product.price/100)?string('0.00')}</span></p>
 			</#if>
+			<#if product.childPrice?has_content>
+			<p><span class="lname">儿童价：</span><span class="price">¥${(product.childPrice/100)?string('0.00')}</span></p>
+			</#if>
+			<#if product.departureCities?has_content>
+			<p><span class="lname">出发城市：</span><span><#list product.departureCities as item><#if item_index gt 0>,</#if>${item.name}</#list></span></p>
+			</#if>
+			<#if product.destinations?has_content>
+			<p><span class="lname">目的地：</span><span><#list product.destinations as item><#if item_index gt 0>,</#if>${item.name}</#list></span></span></p>
+			</#if>
+			<#if product.traffics?has_content>
+			<p><span class="lname">交通：</span><span><#list product.traffics as item><#if item_index gt 0>,</#if>${item.name}</#list></span></p>
+			</#if>
+			<#if product.types?has_content>
+			<p><span class="lname">产品类型：</span><span><#list product.types as item><#if item_index gt 0>,</#if>${item.name}</#list></span></p>
+			</#if>
+			<#if product.grades?has_content>
+			<p><span class="lname">产品等级：</span><span><#list product.grades as item><#if item_index gt 0>,</#if>${item.name}</#list></span></p>
+			</#if>
+			<#if product.days?has_content>
+			<p><span class="lname">行程天数：</span><span>${product.days}天</span></p>
+			</#if>
+			<p><span class="lname">咨询电话：</span><span class="price">023-63016655</span></p>
+			<p><span class="lname"></span><span class="price">023-63067799</span></p>
+			<p><span class="lname"></span><span class="price">023-63706551</span></p>
+			<br>
+			<p><span class="lname"></span><button type="button" class="btn btn-warning"><i class="icon-shopping-cart"></i>立即预定</button></p>
+			<br>
+			<#if product.priceDescription?has_content>
+			<div class="alert alert-success"><strong>费用说明：</strong>${product.priceDescription}</div>
+			</#if>
 		</div>
 		<div class="span8">
 			<div id="product-gallery" class="ad-gallery">
