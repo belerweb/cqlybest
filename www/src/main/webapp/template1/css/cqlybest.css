@@ -412,9 +412,11 @@ del {
 	margin: 0 15px;
 	width: auto;
 }
+
 #product-gallery.ad-gallery .ad-nav {
 	height: 64px;
 }
+
 #product-gallery.ad-gallery .ad-back {
 	left: 0;
 	height: 64px;
@@ -457,4 +459,46 @@ del {
 
 #product-info del span.price {
 	color: #9D9D9D;
+}
+
+#product-trip {
+	margin-top: 10px;
+	margin-bottom: 10px;
+}
+
+#product-trip .day-icon {
+	height: 100px;
+	width: 100px;
+	line-height: 100px;
+	font-size: 18px;
+}
+
+#product-trip .day {
+	margin-bottom: 10px;
+	border-bottom: 1px dashed #EEEEEE;
+}
+
+#product-trip .day.last {
+	margin-bottom: 10px;
+	border-bottom: none;
+	margin-bottom: 0;
+}
+
+#product-trip .title {
+	margin: 0;
+	border: 1px solid #468847;
+	border-radius: 5px 5px 0 0;
+	padding: 10px;
+	background-color: #DFF0D8;
+}
+
+#product-trip .day-trips {
+	border: 1px solid #468847;
+	border-top: none;
+	padding: 10px;
+	border-radius: 0 0 5px 5px;
+}
+
+#product-trip .nav-tabs,#product-trip .tab-content {
+	margin-bottom: 5px;
 }
