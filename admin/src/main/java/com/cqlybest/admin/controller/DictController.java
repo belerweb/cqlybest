@@ -34,7 +34,8 @@ public class DictController {
 
   @RequestMapping(value = "/data/dict.html", params = "action=dict")
   @ResponseBody
-  public Map<String, Object> dict(@RequestParam String type, @RequestParam String typeahead) {
+  public Map<String, Object> dict(@RequestParam String type,
+      @RequestParam(required = false) String typeahead, @RequestParam(required = false) String q) {
     Map<String, Object> result = new HashMap<>();
     if ("keyword".equals(type)) {
       result.put("tags", dictService.getDict(Keyword.class));

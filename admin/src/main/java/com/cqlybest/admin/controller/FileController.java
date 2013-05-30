@@ -5,17 +5,17 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.cqlybest.common.service.SiteService;
+import com.cqlybest.common.service.OptionService;
 
 @Controller
 public class FileController {
 
   @Autowired
-  private SiteService siteService;
+  private OptionService optionService;
 
   @RequestMapping("/file.html")
   public void file(Model model) {
-    model.addAttribute("Site", siteService.getSite());
+    model.addAttribute("Options", optionService.getOptions());
   }
 
 }

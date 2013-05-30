@@ -104,6 +104,9 @@
 })(jQuery);
 jQuery('input[placeholder], textarea[placeholder]').placeholder();
 
+$.fn.editable.defaults.emptytext = '未设置';
+$.fn.editable.defaults.send  = 'always';
+
 $(function() {
 	var h = $(document.body).height() - $('#header').height();
 	$('#wrap').height(h);

@@ -35,8 +35,8 @@ import com.cqlybest.common.bean.template1.Template1Menu;
 import com.cqlybest.common.bean.template1.Template1ProductGroup;
 import com.cqlybest.common.service.DestinationService;
 import com.cqlybest.common.service.DictService;
+import com.cqlybest.common.service.OptionService;
 import com.cqlybest.common.service.ProductService;
-import com.cqlybest.common.service.SiteService;
 import com.cqlybest.common.service.Template1Service;
 import com.cqlybest.common.service.TemplateService;
 
@@ -48,7 +48,7 @@ public class Template1Controller {
   @Autowired
   private TemplateService templateService;
   @Autowired
-  private SiteService siteService;
+  private OptionService optionService;
   @Autowired
   private ProductService productService;
   @Autowired
@@ -197,7 +197,7 @@ public class Template1Controller {
   }
 
   private void setCommonData(Model model) {
-    model.addAttribute("Site", siteService.getSite());
+    model.addAttribute("Options", optionService.getOptions());
     model.addAttribute("Menu", template1Service.getPublishedMenus());
   }
 

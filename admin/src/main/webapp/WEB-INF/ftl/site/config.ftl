@@ -11,52 +11,43 @@
 			<div class="clearfix"></div>   
 		</div>
 		<!-- novalidate -->
-		<form id="main-content-form" action="${ContextPath}/site/config.html" method="post" class="form-horizontal">
+		<form class="form-horizontal">
 			<div class="grid-content">
 				<div class="control-group">
 					<label class="control-label">网站名称：</label>
 					<div class="controls">
-						<input type="text" class="span input" name="name" value="${(site.name)!}" required="true" maxlength="256"> 
+						<a id="site_name" href="#" class="editable" data-type="text" data-url="${ContextPath}/site/config.html" data-value="${(options.site_name!)?html}"></a>
 					</div>
 				</div>
 				<div class="control-group">
 					<label class="control-label">关键字（词）：</label>
 					<div class="controls">
-						<input type="text" class="span input" name="metaKeyword" value="${(site.metaKeyword)!}" maxlength="256"> 
+						<a id="site_meta_keyword" href="#" class="editable" data-type="select2" data-url="${ContextPath}/site/config.html" data-value="${(options.site_meta_keyword!)?html}"></a>
 					</div>
 				</div>
 				<div class="control-group">
 					<label class="control-label">网站描述：</label>
 					<div class="controls">
-						<input type="text" class="span input" name="metaDescription" value="${(site.metaDescription)!}" maxlength="1024"> 
+						<a id="site_meta_description" href="#" class="editable" data-type="textarea" data-url="${ContextPath}/site/config.html" data-value="${(options.site_meta_description!)?html}"></a>
 					</div>
 				</div>
 				<div class="control-group">
 					<label class="control-label">ICP备案号：</label>
 					<div class="controls">
-						<input type="text" class="span input" name="icp" value="${(site.icp)!}" maxlength="32"> 
+						<a id="site_icp" href="#" class="editable" data-type="text" data-url="${ContextPath}/site/config.html" data-value="${(options.site_icp!)?html}"></a>
 					</div>
 				</div>
 				<div class="control-group">
 					<label class="control-label">网站底部版权文字：</label>
 					<div class="controls">
-						<input type="text" class="span input" name="copyright" value="${(site.copyright)!}" maxlength="1024"> 
+						<a id="site_copyright" href="#" class="editable" data-type="text" data-url="${ContextPath}/site/config.html" data-value="${(options.site_copyright!)?html}"></a>
 					</div>
 				</div>
 				<div class="control-group">
 					<label class="control-label">统计代码：</label>
 					<div class="controls">
-						<textarea rows="3" name="statisticalCode" class="span input same-height-1" maxlength="1024">${(site.statisticalCode)!}</textarea>
+						<a id="site_statistical_code" href="#" class="editable" data-type="textarea" data-url="${ContextPath}/site/config.html" data-value="${(options.site_statistical_code!)?html}"></a>
 					</div>
-				</div>
-				<div class="control-group">
-					<label class="control-label">图片服务器：</label>
-					<div class="controls">
-						<input type="text" class="span input" name="imageServer" value="${(site.imageServer)!}" maxlength="1024"> 
-					</div>
-				</div>
-				<div class="text-center">
-					<button class="btn btn-primary" type="submit">保存</button>
 				</div>
 				<div class="clearfix"></div>
 			</div>
@@ -64,18 +55,43 @@
 	</div>
 </div>
 <script>
-$('input,textarea,select', '#main-content-form').jqBootstrapValidation({
-	submitSuccess : function($form, event) {
-		event.preventDefault();
-		event.stopPropagation();
-		$form.ajaxSubmit({
-			success : function(response){
-				alert('保存成功');
+$('#site_name').editable({
+	// 长度 256
+});
+var keywords = [];
+$.each($('#site_meta_keyword').attr('data-value').split(','), function(i, obj){
+	if (obj.length) {keywords.push({id:obj, text:obj});}
+});
+$('#site_meta_keyword').editable({
+	inputclass: 'input-large',
+	select2: {
+		multiple: true,
+		ajax: {
+			url: '/data/dict.html?action=dict&type=keyword',
+			data: function (term, page) {
+				return {q:term};
 			},
-			error : function() {
-				alert('保存失败');
+			results: function(response) {
+				var result = [];
+				$.each(response.tags, function(i, obj){
+					result.push({id:obj.name,text:obj.name});
+				});
+				return {results:result};
 			}
-		});
-	}
+		}
+	},
+	source: keywords
+});
+$('#site_meta_description').editable({
+	// 长度 1024
+});
+$('#site_icp').editable({
+	// 长度 32
+});
+$('#site_copyright').editable({
+	// 长度 1024
+});
+$('#site_statistical_code').editable({
+	// 长度 1024
 });
 </script>

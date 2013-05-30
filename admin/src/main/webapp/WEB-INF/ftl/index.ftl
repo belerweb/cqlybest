@@ -19,6 +19,8 @@
 		<link rel="stylesheet" href="${ContextPath}/css/jquery.tagit.css">
 		<link rel="stylesheet" href="${ContextPath}/css/elfinder.min.css">
 		<link rel="stylesheet" href="${ContextPath}/css/elfinder-theme.css">
+		<link rel="stylesheet" href="${ContextPath}js/select2/select2.css">
+		<link rel="stylesheet" href="${ContextPath}/js/bootstrap-editable/css/bootstrap-editable.css">
 		<link rel="alternate stylesheet" type="text/css" media="screen" title="green-theme" href="${ContextPath}/css/color/green.css" />
 		<link rel="alternate stylesheet" type="text/css" media="screen" title="red-theme" href="${ContextPath}/css/color/red.css" />
 		<link rel="alternate stylesheet" type="text/css" media="screen" title="blue-theme" href="${ContextPath}/css/color/blue.css" />
@@ -32,7 +34,7 @@
 			if(navigator.userAgent.indexOf("Firefox") >= 0) document.write("<link rel='stylesheet' href='${ContextPath}/css/moz.css' type='text/css'>");
 			window.UEDITOR_HOME_URL = '${ContextPath}/js/ueditor/';
 			window.ContextPath = '${ContextPath}';
-			window.ImageServer = '${(Site.imageServer)!}';
+			window.ImageServer = '${(Options.imageServer)!}';
 		</script>
 	</head>
 	<body>
@@ -115,6 +117,8 @@
 		<script type="text/javascript" src="${ContextPath}/js/ueditor/editor_all.js"></script>
 		<script type="text/javascript" src="${ContextPath}/js/elfinder.min.js"></script>
 		<script type="text/javascript" src="${ContextPath}/js/i18n/elfinder.zh_CN.js"></script>
+		<script type="text/javascript" src="${ContextPath}/js/select2/select2.js"></script>
+		<script type="text/javascript" src="${ContextPath}/js/bootstrap-editable/js/bootstrap-editable.js"></script>
 		<!--[if IE]>
 		<script type="text/javascript" src="${ContextPath}/js/Jit/Extras/excanvas.js"></script>
 		<![endif]-->
