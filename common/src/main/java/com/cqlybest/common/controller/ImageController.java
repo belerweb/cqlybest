@@ -19,6 +19,8 @@ import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.cqlybest.common.bean.Image;
 import com.cqlybest.common.service.ImageService;
@@ -28,6 +30,15 @@ public class ImageController {
 
   @Autowired
   private ImageService imageService;
+
+  @RequestMapping("/image/upload.html")
+  public void upload() {}
+
+  @RequestMapping("/image/upload.do")
+  @ResponseBody
+  public Object upload(@RequestParam MultipartFile file) throws Exception {
+    return imageService.multipartFileToImage(file);
+  }
 
   @RequestMapping(value = "/{imageId}.{imageType:jpg|png|gif}", method = RequestMethod.GET)
   public ResponseEntity<byte[]> view(@PathVariable String imageId, @PathVariable String imageType,

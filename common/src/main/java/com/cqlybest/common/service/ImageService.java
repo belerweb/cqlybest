@@ -56,7 +56,6 @@ public class ImageService {
     String name = file.getOriginalFilename();
     Image image = new Image();
     image.setId(UUID.randomUUID().toString());
-    image.setTitle(name);
     image.setImageData(file.getBytes());
     image.setImageType(MimeUtil.getFileExtension(name));
     return image;

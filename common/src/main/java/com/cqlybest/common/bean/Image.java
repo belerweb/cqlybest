@@ -1,5 +1,7 @@
 package com.cqlybest.common.bean;
 
+import java.util.Date;
+
 
 public class Image {
 
@@ -9,6 +11,9 @@ public class Image {
   private String description;
   private byte[] imageData;
   private String extra;
+  private String extraKey;
+  private Date createdTime;
+  private Date lastUpdated;
 
   public String getId() {
     return id;
@@ -56,6 +61,30 @@ public class Image {
 
   public void setExtra(String extra) {
     this.extra = extra;
+  }
+
+  public String getExtraKey() {
+    return extraKey;
+  }
+
+  public void setExtraKey(String extraKey) {
+    this.extraKey = extraKey;
+  }
+
+  public Date getCreatedTime() {
+    return createdTime;
+  }
+
+  public void setCreatedTime(Date createdTime) {
+    this.createdTime = createdTime;
+  }
+
+  public Date getLastUpdated() {
+    return lastUpdated;
+  }
+
+  public void setLastUpdated(Date lastUpdated) {
+    this.lastUpdated = lastUpdated;
   }
 
 }
