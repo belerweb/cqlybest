@@ -4,6 +4,7 @@
 	<div class="pagetitle">
 		<h1>旅游产品</h1>
 		<div class="btn-group">
+			<a id="product-add" href="javascript:void(0);" class="btn btn-primary">增加新产品</a>
 			<a href="#m=site&n=product.list&u=${ContextPath}/product/add.html&t=%23main" class="btn btn-primary">增加新产品</a>
 		</div>
 		<div class="clearfix"></div>
@@ -283,5 +284,20 @@ $('#product-marke-del').click(function(){
 			}
 		});
 	}
+});
+$('#product-add').click(function(){
+	bootbox.prompt("产品名称", "取消", "确定", function(result) {
+		var name = $.trim(result);
+		if (name.length) {
+			$.post('${ContextPath}/product/add.do', {
+				name: name
+			}, function(response){
+				var hash = cqlybest.parseHash();
+				hash['u'] = '${ContextPath}/product/update.do?id=' + response;
+				hash['_t'] = new Date().getTime();
+				location.hash = cqlybest.buildHash(hash);
+			});
+		}
+	});
 });
 </script>

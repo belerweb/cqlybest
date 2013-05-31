@@ -23,10 +23,12 @@ import com.cqlybest.common.bean.DictProductType;
 import com.cqlybest.common.bean.DictTraffic;
 import com.cqlybest.common.bean.Keyword;
 import com.cqlybest.common.bean.Product;
+import com.cqlybest.common.bean.Product2;
 import com.cqlybest.common.service.DestinationService;
 import com.cqlybest.common.service.DictService;
 import com.cqlybest.common.service.ImageService;
 import com.cqlybest.common.service.JsonService;
+import com.cqlybest.common.service.Product2Service;
 import com.cqlybest.common.service.ProductService;
 
 @Controller
@@ -37,11 +39,46 @@ public class ProductController {
   @Autowired
   private ProductService productService;
   @Autowired
+  private Product2Service product2Service;
+  @Autowired
   private DestinationService destinationService;
   @Autowired
   private DictService dictService;
   @Autowired
   private ImageService imageService;
+
+  /**
+   * 添加产品
+   */
+  @RequestMapping(value = "/product/add.do", method = RequestMethod.POST)
+  @ResponseBody
+  public String add(@RequestParam String name) {
+    Product2 product = new Product2();
+    product.setName(name);
+    product2Service.add(product);
+    return product.getId();
+  }
+
+  /**
+   * 修改产品
+   */
+  @RequestMapping(value = "/product/update.do", method = RequestMethod.GET)
+  public void update(@RequestParam String id, Model model) {
+    model.addAttribute("product", product2Service.get(id));
+  }
+
+  /**
+   * 修改产品
+   */
+  @RequestMapping(value = "/product/update.do", method = RequestMethod.POST)
+  @ResponseBody
+  public void update(@RequestParam String pk, @RequestParam String name, @RequestParam String value) {
+    Object _value = value;
+    if ("days".equals(name)) {
+      _value = Integer.parseInt(value);
+    }
+    product2Service.update(pk, name, _value);
+  }
 
   @RequestMapping(value = "/product/list.html", method = RequestMethod.GET)
   public void products(@RequestParam(defaultValue = "0") int page, Model model) {
