@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Set;
 
 import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang.time.DateUtils;
 import org.codehaus.jackson.JsonGenerationException;
 import org.codehaus.jackson.map.JsonMappingException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -74,10 +75,16 @@ public class ProductController {
   @ResponseBody
   public void update(@RequestParam String pk, @RequestParam String name,
       @RequestParam(required = false) String value,
-      @RequestParam(required = false, value = "value[]") List<String> values) {
+      @RequestParam(required = false, value = "value[]") List<String> values) throws Exception {
     Object _value = value == null ? StringUtils.join(values, ",") : value;
     if ("days".equals(name)) {
       _value = Integer.parseInt(value);
+    }
+    if ("price".equals(name) || "childPrice".equals(name) || "specialPrice".equals(name)) {
+      _value = (int) (Double.parseDouble(value) * 100);
+    }
+    if ("effectiveDate".equals(name) || "expiryDate".equals(name) || "departureDate".equals(name)) {
+      _value = DateUtils.parseDate(value, new String[] {"yyyy-MM-dd"});
     }
     product2Service.update(pk, name, _value);
   }

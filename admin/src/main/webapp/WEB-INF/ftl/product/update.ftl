@@ -40,6 +40,36 @@
 								<a id="product_destinations" href="#" class="editable" data-pk="${id}" data-name="destinations" data-type="select2" data-url="${url}" data-value="${(product.destinations!)?html}">${(product.destinations!)?html}</a>
 							</div>
 						</div>
+						<div class="control-group">
+							<label class="control-label">正常价格：</label>
+							<div class="controls">
+								<a id="product_price" href="#" class="editable" data-pk="${id}" data-name="price" data-type="text" data-url="${url}" data-value="<#if (product.price)?exists>${(product.price/100)?string('0.00')}</#if>"></a>
+							</div>
+						</div>
+						<div class="control-group">
+							<label class="control-label">儿童价：</label>
+							<div class="controls">
+								<a id="product_child_price" href="#" class="editable" data-pk="${id}" data-name="childPrice" data-type="text" data-url="${url}" data-value="<#if (product.childPrice)?exists>${(product.childPrice/100)?string('0.00')}</#if>"></a>
+							</div>
+						</div>
+						<div class="control-group">
+							<label class="control-label">特价：</label>
+							<div class="controls">
+								<a id="product_special_price" href="#" class="editable" data-pk="${id}" data-name="specialPrice" data-type="text" data-url="${url}" data-value="<#if (product.specialPrice)?exists>${(product.specialPrice/100)?string('0.00')}</#if>"></a>
+							</div>
+						</div>
+						<div class="control-group">
+							<label class="control-label">生效日期：</label>
+							<div class="controls">
+								<a id="product_effective_date" href="#" class="select" data-pk="${id}" data-name="effectiveDate" data-type="date" data-url="${url}" data-value="${(product.effectiveDate!)?html}"></a>
+							</div>
+						</div>
+						<div class="control-group">
+							<label class="control-label">失效日期：</label>
+							<div class="controls">
+								<a id="product_expiry_date" href="#" class="select" data-pk="${id}" data-name="expiryDate" data-type="date" data-url="${url}" data-value="${(product.expiryDate!)?html}"></a>
+							</div>
+						</div>
 						<div class="clearfix"></div>
 					</div>
 					<div class="span6">
@@ -117,5 +147,15 @@ $('#product_destinations').editable({
 			callback(cqlybest.v2ss(el.val()||$('#product_destinations').data('value')));
 		}
 	}
+});
+$('#product_price').editable({
+});
+$('#product_child_price').editable({
+});
+$('#product_special_price').editable({
+});
+$('#product_effective_date').editable({
+});
+$('#product_expiry_date').editable({
 });
 </script>
