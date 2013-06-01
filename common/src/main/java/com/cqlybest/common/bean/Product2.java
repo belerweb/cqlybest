@@ -10,6 +10,8 @@ public class Product2 {
   private String code;// 产品代码
   private Integer days;// 行程天数
   private String daysUnit;// 行程天数单位 ：天/月/年
+  private String departureCities;// 出发城市
+  private String destinations;// 目的地
   private String description; // 产品介绍
   private Integer price; // 正常价格
   private Integer childPrice; // 儿童价格
@@ -28,12 +30,10 @@ public class Product2 {
   private Boolean specialOffer;// 是否特价
   private String recommendedMonths;// 推荐月份
   private String crowds;// 适合人群
-  private String destinations;// 目的地
   private String traffics;// 交通方式
   private String types;// 产品类型
   private String grades;// 产品等级
   private String keywords;// 关键词
-  private String departureCities;// 出发城市
   private List<Image> posters;// 海报图片
   private List<Image> photos;// 相册图片
   private Date createdTime;// 产品创建时间

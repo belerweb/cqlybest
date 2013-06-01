@@ -28,6 +28,18 @@
 								<a id="product_code" href="#" class="editable" data-pk="${id}" data-name="code" data-type="text" data-url="${url}" data-value="${(product.code!)?html}"></a>
 							</div>
 						</div>
+						<div class="control-group">
+							<label class="control-label">出发城市：</label>
+							<div class="controls">
+								<a id="product_departure_cities" href="#" class="editable" data-pk="${id}" data-name="departureCities" data-type="select2" data-url="${url}" data-value="${(product.departureCities!)?html}">${(product.departureCities!)?html}</a>
+							</div>
+						</div>
+						<div class="control-group">
+							<label class="control-label">目的地：</label>
+							<div class="controls">
+								<a id="product_destinations" href="#" class="editable" data-pk="${id}" data-name="destinations" data-type="select2" data-url="${url}" data-value="${(product.destinations!)?html}">${(product.destinations!)?html}</a>
+							</div>
+						</div>
 						<div class="clearfix"></div>
 					</div>
 					<div class="span6">
@@ -61,5 +73,49 @@ $('#product_days').editable({
 });
 $('#product_days_unit').editable({
 	source: [{value:'天',text:'天'},{value:'月',text:'月'},{value:'年',text:'年'}]
+});
+$('#product_departure_cities').editable({
+	inputclass: 'input-large',
+	select2: {
+		multiple: true,
+		ajax: {
+			url: '/data/dict.html?action=dict&type=departure-city',
+			data: function (term, page) {
+				return {q:term};
+			},
+			results: function(response) {
+				var result = [];
+				$.each(response.tags, function(i, obj){
+					result.push({id:obj.name,text:obj.name});
+				});
+				return {results:result};
+			}
+		},
+		initSelection: function(el, callback) {
+			callback(cqlybest.v2ss(el.val()||$('#product_departure_cities').data('value')));
+		}
+	}
+});
+$('#product_destinations').editable({
+	inputclass: 'input-large',
+	select2: {
+		multiple: true,
+		ajax: {
+			url: '/data/dict.html?action=dict&type=destination',
+			data: function (term, page) {
+				return {q:term};
+			},
+			results: function(response) {
+				var result = [];
+				$.each(response.tags, function(i, obj){
+					result.push({id:obj.name,text:obj.name});
+				});
+				return {results:result};
+			}
+		},
+		initSelection: function(el, callback) {
+			callback(cqlybest.v2ss(el.val()||$('#product_destinations').data('value')));
+		}
+	}
 });
 </script>

@@ -5,12 +5,12 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import org.apache.commons.lang.StringUtils;
 import org.codehaus.jackson.JsonGenerationException;
 import org.codehaus.jackson.map.JsonMappingException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -72,8 +72,10 @@ public class ProductController {
    */
   @RequestMapping(value = "/product/update.do", method = RequestMethod.POST)
   @ResponseBody
-  public void update(@RequestParam String pk, @RequestParam String name, @RequestParam String value) {
-    Object _value = value;
+  public void update(@RequestParam String pk, @RequestParam String name,
+      @RequestParam(required = false) String value,
+      @RequestParam(required = false, value = "value[]") List<String> values) {
+    Object _value = value == null ? StringUtils.join(values, ",") : value;
     if ("days".equals(name)) {
       _value = Integer.parseInt(value);
     }

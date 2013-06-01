@@ -3381,14 +3381,13 @@ $(function(){
                 if($.isArray(data) && data.length && !that.isMultiple) {
                    data = data[0]; 
                 }
-                                    
+                console.log(data)                    
                 callback(data);
             }; 
         }
            
         //overriding objects in config (as by default jQuery extend() is not recursive)
         this.options.select2 = $.extend({}, Constructor.defaults.select2, mixin, options.select2);
-        console.log(this.options.select2);
     };
 
     $.fn.editableutils.inherit(Constructor, $.fn.editabletypes.abstractinput);

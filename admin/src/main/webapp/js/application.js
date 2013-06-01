@@ -147,6 +147,13 @@ window.cqlybest = {
 		param['_t'] = new Date().getTime();
 		location.hash = cqlybest.buildHash(param);
 	},
+	v2ss : function(values) {
+		var result = [];
+		$.each((values||'').split(','), function(i, obj){
+			if (obj.length) {result.push({id:obj, text:obj});}
+		});
+		return result;
+	},
 	ajaxSubmit : function($form, event) {
 		event.preventDefault();
 		event.stopPropagation();

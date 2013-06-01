@@ -22,7 +22,7 @@
 				<div class="control-group">
 					<label class="control-label">关键字（词）：</label>
 					<div class="controls">
-						<a id="site_meta_keyword" href="#" class="editable" data-type="select2" data-url="${ContextPath}/site/config.html" data-value="${(options.site_meta_keyword!)?html}"></a>
+						<a id="site_meta_keyword" href="#" class="editable" data-type="select2" data-url="${ContextPath}/site/config.html" data-value="${(options.site_meta_keyword!)?html}">${(options.site_meta_keyword!)?html}</a>
 					</div>
 				</div>
 				<div class="control-group">
@@ -58,10 +58,6 @@
 $('#site_name').editable({
 	// 长度 256
 });
-var keywords = [];
-$.each($('#site_meta_keyword').attr('data-value').split(','), function(i, obj){
-	if (obj.length) {keywords.push({id:obj, text:obj});}
-});
 $('#site_meta_keyword').editable({
 	inputclass: 'input-large',
 	select2: {
@@ -78,9 +74,11 @@ $('#site_meta_keyword').editable({
 				});
 				return {results:result};
 			}
+		},
+		initSelection: function(el, callback) {
+			callback(cqlybest.v2ss(el.val()||$('#site_meta_keyword').data('value')));
 		}
-	},
-	source: keywords
+	}
 });
 $('#site_meta_description').editable({
 	// 长度 1024
