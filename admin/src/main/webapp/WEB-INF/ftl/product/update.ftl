@@ -61,13 +61,13 @@
 						<div class="control-group">
 							<label class="control-label">生效日期：</label>
 							<div class="controls">
-								<a id="product_effective_date" href="#" class="select" data-pk="${id}" data-name="effectiveDate" data-type="date" data-url="${url}" data-value="${(product.effectiveDate!)?html}"></a>
+								<a id="product_effective_date" href="#" class="select" data-pk="${id}" data-name="effectiveDate" data-type="date" data-url="${url}" data-value="<#if product.effectiveDate?exists>${product.effectiveDate?string('yyyy-MM-dd')}</#if>"></a>
 							</div>
 						</div>
 						<div class="control-group">
 							<label class="control-label">失效日期：</label>
 							<div class="controls">
-								<a id="product_expiry_date" href="#" class="select" data-pk="${id}" data-name="expiryDate" data-type="date" data-url="${url}" data-value="${(product.expiryDate!)?html}"></a>
+								<a id="product_expiry_date" href="#" class="select" data-pk="${id}" data-name="expiryDate" data-type="date" data-url="${url}" data-value="<#if product.expiryDate?exists>${product.expiryDate?string('yyyy-MM-dd')}</#if>"></a>
 							</div>
 						</div>
 						<div class="clearfix"></div>
@@ -83,6 +83,12 @@
 							<label class="control-label">行程天数单位：</label>
 							<div class="controls">
 								<a id="product_days_unit" href="#" class="select" data-pk="${id}" data-name="daysUnit" data-type="select" data-url="${url}" data-value="${(product.daysUnit!)?html}"></a>
+							</div>
+						</div>
+						<div class="control-group">
+							<label class="control-label">关键词/标签：</label>
+							<div class="controls">
+								<a id="product_keywords" href="#" class="editable" data-pk="${id}" data-name="keywords" data-type="select2" data-url="${url}" data-value="${(product.keywords!)?html}">${(product.keywords!)?html}</a>
 							</div>
 						</div>
 						<div class="clearfix"></div>
@@ -104,12 +110,9 @@ $('#product_days').editable({
 $('#product_days_unit').editable({
 	source: [{value:'天',text:'天'},{value:'月',text:'月'},{value:'年',text:'年'}]
 });
-$('#product_departure_cities').editable({
-	inputclass: 'input-large',
-	select2: {
-		multiple: true,
-		ajax: {
-			url: '/data/dict.html?action=dict&type=departure-city',
+var dictAjax = function(dict) {
+	return {
+			url: '/data/dict.html?action=dict&type=' + dict,
 			data: function (term, page) {
 				return {q:term};
 			},
@@ -120,32 +123,35 @@ $('#product_departure_cities').editable({
 				});
 				return {results:result};
 			}
-		},
-		initSelection: function(el, callback) {
-			callback(cqlybest.v2ss(el.val()||$('#product_departure_cities').data('value')));
-		}
+		};
+};
+var initSelection = function(el) {
+	return function(el, callback) {
+			callback(cqlybest.v2ss(el.val()||$(el).data('value')));
+		};
+};
+$('#product_departure_cities').editable({
+	inputclass: 'input-large',
+	select2: {
+		multiple: true,
+		ajax: dictAjax('departure-city'),
+		initSelection: initSelection('#product_departure_cities')
 	}
 });
 $('#product_destinations').editable({
 	inputclass: 'input-large',
 	select2: {
 		multiple: true,
-		ajax: {
-			url: '/data/dict.html?action=dict&type=destination',
-			data: function (term, page) {
-				return {q:term};
-			},
-			results: function(response) {
-				var result = [];
-				$.each(response.tags, function(i, obj){
-					result.push({id:obj.name,text:obj.name});
-				});
-				return {results:result};
-			}
-		},
-		initSelection: function(el, callback) {
-			callback(cqlybest.v2ss(el.val()||$('#product_destinations').data('value')));
-		}
+		ajax: dictAjax('destination'),
+		initSelection: initSelection('#product_destinations')
+	}
+});
+$('#product_keywords').editable({
+	inputclass: 'input-large',
+	select2: {
+		multiple: true,
+		ajax: dictAjax('keyword'),
+		initSelection: initSelection('#product_keywords')
 	}
 });
 $('#product_price').editable({
