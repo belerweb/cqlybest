@@ -91,6 +91,36 @@
 								<a id="product_keywords" href="#" class="editable" data-pk="${id}" data-name="keywords" data-type="select2" data-url="${url}" data-value="${(product.keywords!)?html}">${(product.keywords!)?html}</a>
 							</div>
 						</div>
+						<div class="control-group">
+							<label class="control-label">交通方式：</label>
+							<div class="controls">
+								<a id="product_traffics" href="#" class="editable" data-pk="${id}" data-name="traffics" data-type="select2" data-url="${url}" data-value="${(product.traffics!)?html}">${(product.traffics!)?html}</a>
+							</div>
+						</div>
+						<div class="control-group">
+							<label class="control-label">产品类型：</label>
+							<div class="controls">
+								<a id="product_types" href="#" class="editable" data-pk="${id}" data-name="types" data-type="select2" data-url="${url}" data-value="${(product.types!)?html}">${(product.types!)?html}</a>
+							</div>
+						</div>
+						<div class="control-group">
+							<label class="control-label">产品等级：</label>
+							<div class="controls">
+								<a id="product_grades" href="#" class="editable" data-pk="${id}" data-name="grades" data-type="select2" data-url="${url}" data-value="${(product.grades!)?html}">${(product.grades!)?html}</a>
+							</div>
+						</div>
+						<div class="control-group">
+							<label class="control-label">推荐月份：</label>
+							<div class="controls">
+								<a id="product_recommended_months" href="#" class="editable" data-pk="${id}" data-name="recommendedMonths" data-type="select2" data-url="${url}" data-value="${(product.recommendedMonths!)?html}">${(product.recommendedMonths!)?html}</a>
+							</div>
+						</div>
+						<div class="control-group">
+							<label class="control-label">适合人群：</label>
+							<div class="controls">
+								<a id="product_crowds" href="#" class="editable" data-pk="${id}" data-name="crowds" data-type="select2" data-url="${url}" data-value="${(product.crowds!)?html}">${(product.crowds!)?html}</a>
+							</div>
+						</div>
 						<div class="clearfix"></div>
 					</div>
 				</div>
@@ -152,6 +182,42 @@ $('#product_keywords').editable({
 		multiple: true,
 		ajax: dictAjax('keyword'),
 		initSelection: initSelection('#product_keywords')
+	}
+});
+$('#product_traffics').editable({
+	inputclass: 'input-large',
+	select2: {
+		multiple: true,
+		ajax: dictAjax('traffic'),
+		initSelection: initSelection('#product_traffics')
+	}
+});
+$('#product_types').editable({
+	inputclass: 'input-large',
+	select2: {
+		multiple: true,
+		ajax: dictAjax('product-type'),
+		initSelection: initSelection('#product_types')
+	}
+});
+$('#product_grades').editable({
+	inputclass: 'input-large',
+	select2: {
+		multiple: true,
+		ajax: dictAjax('product-grade'),
+		initSelection: initSelection('#product_grades')
+	}
+});
+$('#product_recommended_months').editable({
+	inputclass: 'input-large',
+	select2: {
+		tags: ['1月', '2月', '3月', '4月', '5月', '6月', '7月', '8月', '9月', '10月', '11月', '12月']
+	}
+});
+$('#product_crowds').editable({
+	inputclass: 'input-large',
+	select2: {
+		tags: ['个人旅行', '团体旅行']
 	}
 });
 $('#product_price').editable({

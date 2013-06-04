@@ -46,6 +46,15 @@ public class DictController {
     if ("destination".equals(type)) {
       result.put("tags", destinationService.getTree());
     }
+    if ("traffic".equals(type)) {
+      result.put("tags", dictService.getDict(DictTraffic.class));
+    }
+    if ("product-type".equals(type)) {
+      result.put("tags", dictService.getDict(DictProductType.class));
+    }
+    if ("product-grade".equals(type)) {
+      result.put("tags", dictService.getDict(DictProductGrade.class));
+    }
     return result;
   }
 
