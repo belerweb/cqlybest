@@ -12,149 +12,190 @@
 		</div>
 		<#assign id=product.id>
 		<#assign url="${ContextPath}/product/update.do">
-		<form class="form-horizontal">
-			<div class="grid-content">
-				<div class="row-fluid">
-					<div class="span6">
-						<div class="control-group">
-							<label class="control-label">产品名称：</label>
-							<div class="controls">
-								<a id="product_name" href="#" class="editable" data-pk="${id}" data-name="name" data-type="text" data-url="${url}" data-value="${(product.name!)?html}"></a>
+		<form class="form-horizontal grid-content">
+			<div class="tabbable">
+				<ul class="nav nav-tabs">
+					<li class="active"><a href="javascript:void(0);" data-toggle="tab" data-target="#product-base-tab">基本信息</a></li>
+					<li><a href="javascript:void(0);" data-toggle="tab" data-target="#product-detail-tab">详细行程</a></li>
+					<li><a href="javascript:void(0);" data-toggle="tab" data-target="#product-poster-tab">海报图片 </a></li>
+					<li><a href="javascript:void(0);" data-toggle="tab" data-target="#product-photo-tab">相册图片</a></li>
+				</ul>
+				<div class="tab-content">
+					<div id="product-base-tab" class="tab-pane active">
+						<div class="row-fluid">
+							<div class="span6">
+								<div class="control-group">
+									<label class="control-label">产品名称：</label>
+									<div class="controls">
+										<a id="product_name" href="#" class="editable" data-pk="${id}" data-name="name" data-type="text" data-url="${url}" data-value="${(product.name!)?html}"></a>
+									</div>
+								</div>
+								<div class="control-group">
+									<label class="control-label">产品代码：</label>
+									<div class="controls">
+										<a id="product_code" href="#" class="editable" data-pk="${id}" data-name="code" data-type="text" data-url="${url}" data-value="${(product.code!)?html}"></a>
+									</div>
+								</div>
+								<div class="control-group">
+									<label class="control-label">出发城市：</label>
+									<div class="controls">
+										<a id="product_departure_cities" href="#" class="editable" data-pk="${id}" data-name="departureCities" data-type="select2" data-url="${url}" data-value="${(product.departureCities!)?html}">${(product.departureCities!)?html}</a>
+									</div>
+								</div>
+								<div class="control-group">
+									<label class="control-label">目的地：</label>
+									<div class="controls">
+										<a id="product_destinations" href="#" class="editable" data-pk="${id}" data-name="destinations" data-type="select2" data-url="${url}" data-value="${(product.destinations!)?html}">${(product.destinations!)?html}</a>
+									</div>
+								</div>
+								<div class="control-group">
+									<label class="control-label">正常价格：</label>
+									<div class="controls">
+										<a id="product_price" href="#" class="editable" data-pk="${id}" data-name="price" data-type="text" data-url="${url}" data-value="<#if (product.price)?exists>${(product.price/100)?string('0.00')}</#if>"></a>
+									</div>
+								</div>
+								<div class="control-group">
+									<label class="control-label">儿童价：</label>
+									<div class="controls">
+										<a id="product_child_price" href="#" class="editable" data-pk="${id}" data-name="childPrice" data-type="text" data-url="${url}" data-value="<#if (product.childPrice)?exists>${(product.childPrice/100)?string('0.00')}</#if>"></a>
+									</div>
+								</div>
+								<div class="control-group">
+									<label class="control-label">特价：</label>
+									<div class="controls">
+										<a id="product_special_price" href="#" class="editable" data-pk="${id}" data-name="specialPrice" data-type="text" data-url="${url}" data-value="<#if (product.specialPrice)?exists>${(product.specialPrice/100)?string('0.00')}</#if>"></a>
+									</div>
+								</div>
+								<div class="control-group">
+									<label class="control-label">生效日期：</label>
+									<div class="controls">
+										<a id="product_effective_date" href="#" class="select" data-pk="${id}" data-name="effectiveDate" data-type="date" data-url="${url}" data-value="<#if product.effectiveDate?exists>${product.effectiveDate?string('yyyy-MM-dd')}</#if>"></a>
+									</div>
+								</div>
+								<div class="control-group">
+									<label class="control-label">失效日期：</label>
+									<div class="controls">
+										<a id="product_expiry_date" href="#" class="select" data-pk="${id}" data-name="expiryDate" data-type="date" data-url="${url}" data-value="<#if product.expiryDate?exists>${product.expiryDate?string('yyyy-MM-dd')}</#if>"></a>
+									</div>
+								</div>
+								<div class="control-group">
+									<label class="control-label">费用说明：</label>
+									<div class="controls">
+										<a id="product_price_description" href="#" class="editable" data-pk="${id}" data-name="priceDescription" data-type="textarea" data-url="${url}" data-value="${(product.priceDescription!)?html}"></a>
+									</div>
+								</div>
+								<div class="control-group">
+									<label class="control-label">行程特色：</label>
+									<div class="controls">
+										<a id="product_trip_characteristic" href="#" class="editable" data-pk="${id}" data-name="tripCharacteristic" data-type="textarea" data-url="${url}" data-value="${(product.tripCharacteristic!)?html}"></a>
+									</div>
+								</div>
+								<div class="control-group">
+									<label class="control-label">服务标准：</label>
+									<div class="controls">
+										<a id="product_service_standard" href="#" class="editable" data-pk="${id}" data-name="serviceStandard" data-type="textarea" data-url="${url}" data-value="${(product.serviceStandard!)?html}"></a>
+									</div>
+								</div>
+								<div class="control-group">
+									<label class="control-label">友情提示：</label>
+									<div class="controls">
+										<a id="product_friendly_reminder" href="#" class="editable" data-pk="${id}" data-name="friendlyReminder" data-type="textarea" data-url="${url}" data-value="${(product.friendlyReminder!)?html}"></a>
+									</div>
+								</div>
+								<div class="control-group">
+									<label class="control-label">推荐项目：</label>
+									<div class="controls">
+										<a id="product_recommended_item" href="#" class="editable" data-pk="${id}" data-name="recommendedItem" data-type="textarea" data-url="${url}" data-value="${(product.recommendedItem!)?html}"></a>
+									</div>
+								</div>
+								<div class="clearfix"></div>
+							</div>
+							<div class="span6">
+								<div class="control-group">
+									<label class="control-label">行程天数：</label>
+									<div class="controls">
+										<a id="product_days" href="#" class="editable" data-pk="${id}" data-name="days" data-type="text" data-url="${url}" data-value="${(product.days!)?html}"></a>
+									</div>
+								</div>
+								<div class="control-group">
+									<label class="control-label">行程天数单位：</label>
+									<div class="controls">
+										<a id="product_days_unit" href="#" class="select" data-pk="${id}" data-name="daysUnit" data-type="select" data-url="${url}" data-value="${(product.daysUnit!)?html}"></a>
+									</div>
+								</div>
+								<div class="control-group">
+									<label class="control-label">关键词/标签：</label>
+									<div class="controls">
+										<a id="product_keywords" href="#" class="editable" data-pk="${id}" data-name="keywords" data-type="select2" data-url="${url}" data-value="${(product.keywords!)?html}">${(product.keywords!)?html}</a>
+									</div>
+								</div>
+								<div class="control-group">
+									<label class="control-label">交通方式：</label>
+									<div class="controls">
+										<a id="product_traffics" href="#" class="editable" data-pk="${id}" data-name="traffics" data-type="select2" data-url="${url}" data-value="${(product.traffics!)?html}">${(product.traffics!)?html}</a>
+									</div>
+								</div>
+								<div class="control-group">
+									<label class="control-label">产品类型：</label>
+									<div class="controls">
+										<a id="product_types" href="#" class="editable" data-pk="${id}" data-name="types" data-type="select2" data-url="${url}" data-value="${(product.types!)?html}">${(product.types!)?html}</a>
+									</div>
+								</div>
+								<div class="control-group">
+									<label class="control-label">产品等级：</label>
+									<div class="controls">
+										<a id="product_grades" href="#" class="editable" data-pk="${id}" data-name="grades" data-type="select2" data-url="${url}" data-value="${(product.grades!)?html}">${(product.grades!)?html}</a>
+									</div>
+								</div>
+								<div class="control-group">
+									<label class="control-label">推荐月份：</label>
+									<div class="controls">
+										<a id="product_recommended_months" href="#" class="editable" data-pk="${id}" data-name="recommendedMonths" data-type="select2" data-url="${url}" data-value="${(product.recommendedMonths!)?html}">${(product.recommendedMonths!)?html}</a>
+									</div>
+								</div>
+								<div class="control-group">
+									<label class="control-label">适合人群：</label>
+									<div class="controls">
+										<a id="product_crowds" href="#" class="editable" data-pk="${id}" data-name="crowds" data-type="select2" data-url="${url}" data-value="${(product.crowds!)?html}">${(product.crowds!)?html}</a>
+									</div>
+								</div>
+								<div class="clearfix"></div>
 							</div>
 						</div>
-						<div class="control-group">
-							<label class="control-label">产品代码：</label>
-							<div class="controls">
-								<a id="product_code" href="#" class="editable" data-pk="${id}" data-name="code" data-type="text" data-url="${url}" data-value="${(product.code!)?html}"></a>
-							</div>
+						<div class="row-fluid">
 						</div>
-						<div class="control-group">
-							<label class="control-label">出发城市：</label>
-							<div class="controls">
-								<a id="product_departure_cities" href="#" class="editable" data-pk="${id}" data-name="departureCities" data-type="select2" data-url="${url}" data-value="${(product.departureCities!)?html}">${(product.departureCities!)?html}</a>
-							</div>
-						</div>
-						<div class="control-group">
-							<label class="control-label">目的地：</label>
-							<div class="controls">
-								<a id="product_destinations" href="#" class="editable" data-pk="${id}" data-name="destinations" data-type="select2" data-url="${url}" data-value="${(product.destinations!)?html}">${(product.destinations!)?html}</a>
-							</div>
-						</div>
-						<div class="control-group">
-							<label class="control-label">正常价格：</label>
-							<div class="controls">
-								<a id="product_price" href="#" class="editable" data-pk="${id}" data-name="price" data-type="text" data-url="${url}" data-value="<#if (product.price)?exists>${(product.price/100)?string('0.00')}</#if>"></a>
-							</div>
-						</div>
-						<div class="control-group">
-							<label class="control-label">儿童价：</label>
-							<div class="controls">
-								<a id="product_child_price" href="#" class="editable" data-pk="${id}" data-name="childPrice" data-type="text" data-url="${url}" data-value="<#if (product.childPrice)?exists>${(product.childPrice/100)?string('0.00')}</#if>"></a>
-							</div>
-						</div>
-						<div class="control-group">
-							<label class="control-label">特价：</label>
-							<div class="controls">
-								<a id="product_special_price" href="#" class="editable" data-pk="${id}" data-name="specialPrice" data-type="text" data-url="${url}" data-value="<#if (product.specialPrice)?exists>${(product.specialPrice/100)?string('0.00')}</#if>"></a>
-							</div>
-						</div>
-						<div class="control-group">
-							<label class="control-label">生效日期：</label>
-							<div class="controls">
-								<a id="product_effective_date" href="#" class="select" data-pk="${id}" data-name="effectiveDate" data-type="date" data-url="${url}" data-value="<#if product.effectiveDate?exists>${product.effectiveDate?string('yyyy-MM-dd')}</#if>"></a>
-							</div>
-						</div>
-						<div class="control-group">
-							<label class="control-label">失效日期：</label>
-							<div class="controls">
-								<a id="product_expiry_date" href="#" class="select" data-pk="${id}" data-name="expiryDate" data-type="date" data-url="${url}" data-value="<#if product.expiryDate?exists>${product.expiryDate?string('yyyy-MM-dd')}</#if>"></a>
-							</div>
-						</div>
-						<div class="control-group">
-							<label class="control-label">费用说明：</label>
-							<div class="controls">
-								<a id="product_price_description" href="#" class="editable" data-pk="${id}" data-name="priceDescription" data-type="textarea" data-url="${url}" data-value="${(product.priceDescription!)?html}"></a>
-							</div>
-						</div>
-						<div class="control-group">
-							<label class="control-label">行程特色：</label>
-							<div class="controls">
-								<a id="product_trip_characteristic" href="#" class="editable" data-pk="${id}" data-name="tripCharacteristic" data-type="textarea" data-url="${url}" data-value="${(product.tripCharacteristic!)?html}"></a>
-							</div>
-						</div>
-						<div class="control-group">
-							<label class="control-label">服务标准：</label>
-							<div class="controls">
-								<a id="product_service_standard" href="#" class="editable" data-pk="${id}" data-name="serviceStandard" data-type="textarea" data-url="${url}" data-value="${(product.serviceStandard!)?html}"></a>
-							</div>
-						</div>
-						<div class="control-group">
-							<label class="control-label">友情提示：</label>
-							<div class="controls">
-								<a id="product_friendly_reminder" href="#" class="editable" data-pk="${id}" data-name="friendlyReminder" data-type="textarea" data-url="${url}" data-value="${(product.friendlyReminder!)?html}"></a>
-							</div>
-						</div>
-						<div class="control-group">
-							<label class="control-label">推荐项目：</label>
-							<div class="controls">
-								<a id="product_recommended_item" href="#" class="editable" data-pk="${id}" data-name="recommendedItem" data-type="textarea" data-url="${url}" data-value="${(product.recommendedItem!)?html}"></a>
-							</div>
-						</div>
-						<div class="clearfix"></div>
 					</div>
-					<div class="span6">
-						<div class="control-group">
-							<label class="control-label">行程天数：</label>
-							<div class="controls">
-								<a id="product_days" href="#" class="editable" data-pk="${id}" data-name="days" data-type="text" data-url="${url}" data-value="${(product.days!)?html}"></a>
-							</div>
-						</div>
-						<div class="control-group">
-							<label class="control-label">行程天数单位：</label>
-							<div class="controls">
-								<a id="product_days_unit" href="#" class="select" data-pk="${id}" data-name="daysUnit" data-type="select" data-url="${url}" data-value="${(product.daysUnit!)?html}"></a>
-							</div>
-						</div>
-						<div class="control-group">
-							<label class="control-label">关键词/标签：</label>
-							<div class="controls">
-								<a id="product_keywords" href="#" class="editable" data-pk="${id}" data-name="keywords" data-type="select2" data-url="${url}" data-value="${(product.keywords!)?html}">${(product.keywords!)?html}</a>
-							</div>
-						</div>
-						<div class="control-group">
-							<label class="control-label">交通方式：</label>
-							<div class="controls">
-								<a id="product_traffics" href="#" class="editable" data-pk="${id}" data-name="traffics" data-type="select2" data-url="${url}" data-value="${(product.traffics!)?html}">${(product.traffics!)?html}</a>
-							</div>
-						</div>
-						<div class="control-group">
-							<label class="control-label">产品类型：</label>
-							<div class="controls">
-								<a id="product_types" href="#" class="editable" data-pk="${id}" data-name="types" data-type="select2" data-url="${url}" data-value="${(product.types!)?html}">${(product.types!)?html}</a>
-							</div>
-						</div>
-						<div class="control-group">
-							<label class="control-label">产品等级：</label>
-							<div class="controls">
-								<a id="product_grades" href="#" class="editable" data-pk="${id}" data-name="grades" data-type="select2" data-url="${url}" data-value="${(product.grades!)?html}">${(product.grades!)?html}</a>
-							</div>
-						</div>
-						<div class="control-group">
-							<label class="control-label">推荐月份：</label>
-							<div class="controls">
-								<a id="product_recommended_months" href="#" class="editable" data-pk="${id}" data-name="recommendedMonths" data-type="select2" data-url="${url}" data-value="${(product.recommendedMonths!)?html}">${(product.recommendedMonths!)?html}</a>
-							</div>
-						</div>
-						<div class="control-group">
-							<label class="control-label">适合人群：</label>
-							<div class="controls">
-								<a id="product_crowds" href="#" class="editable" data-pk="${id}" data-name="crowds" data-type="select2" data-url="${url}" data-value="${(product.crowds!)?html}">${(product.crowds!)?html}</a>
-							</div>
-						</div>
-						<div class="clearfix"></div>
+					<div id="product-detail-tab" class="tab-pane">
 					</div>
-				</div>
-				<div class="row-fluid">
+					<#assign ImageUpdateUrl='${ContextPath}/image/update.do'>
+					<div id="product-poster-tab" class="image-gallery tab-pane">
+						<div class="text-right"><button id="product-add-poster" type="button" class="btn btn-primary">添加</button></div>
+						<#if product.posters?has_content>
+						<div class="row-fluid">
+							<ul class="thumbnails">
+							<#list product.posters as image>
+								<li class="span3">
+									<div class="thumbnail">
+										<img src="${ContextPath}/image/${image.id}.${image.imageType}">
+										<div class="caption">
+											<a class="title" data-pk="${image.id}" data-name="title" data-type="text" data-url="${ImageUpdateUrl}" data-value="${(image.title!)?html}"></a>
+											<a class="description" data-pk="${image.id}" data-name="title" data-type="textarea" data-url="${ImageUpdateUrl}" data-value="${(image.description!)?html}"></a>
+										</div>
+									</div>
+								</li>
+								<#if image_index%4==3>
+							</ul>
+						</div>
+						<div class="row-fluid">
+							<ul class="thumbnails">
+								</#if>
+							</#list>
+							</ul>
+						</div>
+						</#if>
+					</div>
+					<div id="product-photo-tab" class="tab-pane">
+					</div>
 				</div>
 			</div>
 		</form>
@@ -269,5 +310,24 @@ $('#product_service_standard').editable({
 $('#product_friendly_reminder').editable({
 });
 $('#product_recommended_item').editable({
+});
+$('#product-add-poster').click(function(){
+	var winParam = ['dialogWidth=650px;dialogHeight=380px'];
+	winParam.push('center=yes');
+	winParam.push('help=no');
+	winParam.push('resizable=no');
+	winParam.push('status=no');
+	winParam.push('scroll=no');
+	var images = window.showModalDialog('${ContextPath}/image/upload.html',null,winParam.join(';'));
+	var gallery = $(this).parents('.image-gallery');
+	$.each(images, function(i, obj) {
+		$.post('${ContextPath}/image/update.do', {
+			pk: obj.id,
+			name: ['extra', 'extraKey'],
+			value: ['product-poster', '${id}']
+		}, function(){
+			console.log("success");
+		});
+	});
 });
 </script>

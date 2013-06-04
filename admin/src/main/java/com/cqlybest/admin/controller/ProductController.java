@@ -89,6 +89,7 @@ public class ProductController {
     product2Service.update(pk, name, _value);
   }
 
+
   @RequestMapping(value = "/product/list.html", method = RequestMethod.GET)
   public void products(@RequestParam(defaultValue = "0") int page, Model model) {
     page = Math.max(1, page);

@@ -1,12 +1,14 @@
 package com.cqlybest.common.service;
 
 import java.io.IOException;
+import java.util.Date;
 import java.util.UUID;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.cqlybest.common.bean.Image;
@@ -20,8 +22,16 @@ public class ImageService {
   @Autowired
   private ImageDao imageDao;
 
+  @Transactional
   public void add(Image image) {
+    image.setCreatedTime(new Date());
+    image.setLastUpdated(image.getCreatedTime());
     imageDao.saveOrUpdate(image);
+  }
+
+  @Transactional
+  public void update(String id, String name, Object value) {
+    imageDao.update(id, name, value);
   }
 
   public JSONObject validate(MultipartFile imageFile) throws JSONException {

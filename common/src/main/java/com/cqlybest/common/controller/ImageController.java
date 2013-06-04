@@ -4,6 +4,7 @@ import java.awt.image.BufferedImage;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.util.List;
 
 import javax.imageio.ImageIO;
 
@@ -37,10 +38,28 @@ public class ImageController {
   @RequestMapping("/image/upload.do")
   @ResponseBody
   public Object upload(@RequestParam MultipartFile file) throws Exception {
-    return imageService.multipartFileToImage(file);
+    Image image = imageService.multipartFileToImage(file);
+    imageService.add(image);
+    return image;
   }
 
-  @RequestMapping(value = "/{imageId}.{imageType:jpg|png|gif}", method = RequestMethod.GET)
+  @RequestMapping(value = "/image/update.do", method = RequestMethod.POST)
+  @ResponseBody
+  public void update(@RequestParam String pk, @RequestParam(required = false) String name,
+      @RequestParam(required = false) String value,
+      @RequestParam(required = false, value = "name[]") List<String> names,
+      @RequestParam(required = false, value = "value[]") List<String> values) {
+    if (name != null && value != null) {
+      imageService.update(pk, name, value);
+    }
+    if (names != null && values != null && names.size() == values.size()) {
+      for (int i = 0; i < names.size(); i++) {
+        imageService.update(pk, names.get(i), values.get(i));
+      }
+    }
+  }
+
+  @RequestMapping(value = "/image/{imageId}.{imageType:jpg|png|gif}", method = RequestMethod.GET)
   public ResponseEntity<byte[]> view(@PathVariable String imageId, @PathVariable String imageType,
       @RequestParam(required = false) Integer width,
       @RequestParam(required = false) Integer height,

@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.cqlybest.common.bean.Product2;
+import com.cqlybest.common.dao.ImageDao;
 import com.cqlybest.common.dao.Product2Dao;
 
 @Service
@@ -15,6 +16,8 @@ public class Product2Service {
 
   @Autowired
   private Product2Dao product2Dao;
+  @Autowired
+  private ImageDao imageDao;
 
   @Transactional
   public void add(Product2 product) {
@@ -26,13 +29,15 @@ public class Product2Service {
   }
 
   public Product2 get(String id) {
-    return product2Dao.findById(id);
+    Product2 product = product2Dao.findById(id);
+    product.setPosters(imageDao.queryImagesWithoutData("product-poster", id));
+    product.setPhotos(imageDao.queryImagesWithoutData("product-photo", id));
+    return product;
   }
 
   @Transactional
   public void update(String id, String name, Object value) {
     product2Dao.update(id, name, value);
   }
-
 
 }
