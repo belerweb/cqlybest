@@ -70,6 +70,36 @@
 								<a id="product_expiry_date" href="#" class="select" data-pk="${id}" data-name="expiryDate" data-type="date" data-url="${url}" data-value="<#if product.expiryDate?exists>${product.expiryDate?string('yyyy-MM-dd')}</#if>"></a>
 							</div>
 						</div>
+						<div class="control-group">
+							<label class="control-label">费用说明：</label>
+							<div class="controls">
+								<a id="product_price_description" href="#" class="editable" data-pk="${id}" data-name="priceDescription" data-type="textarea" data-url="${url}" data-value="${(product.priceDescription!)?html}"></a>
+							</div>
+						</div>
+						<div class="control-group">
+							<label class="control-label">行程特色：</label>
+							<div class="controls">
+								<a id="product_trip_characteristic" href="#" class="editable" data-pk="${id}" data-name="tripCharacteristic" data-type="textarea" data-url="${url}" data-value="${(product.tripCharacteristic!)?html}"></a>
+							</div>
+						</div>
+						<div class="control-group">
+							<label class="control-label">服务标准：</label>
+							<div class="controls">
+								<a id="product_service_standard" href="#" class="editable" data-pk="${id}" data-name="serviceStandard" data-type="textarea" data-url="${url}" data-value="${(product.serviceStandard!)?html}"></a>
+							</div>
+						</div>
+						<div class="control-group">
+							<label class="control-label">友情提示：</label>
+							<div class="controls">
+								<a id="product_friendly_reminder" href="#" class="editable" data-pk="${id}" data-name="friendlyReminder" data-type="textarea" data-url="${url}" data-value="${(product.friendlyReminder!)?html}"></a>
+							</div>
+						</div>
+						<div class="control-group">
+							<label class="control-label">推荐项目：</label>
+							<div class="controls">
+								<a id="product_recommended_item" href="#" class="editable" data-pk="${id}" data-name="recommendedItem" data-type="textarea" data-url="${url}" data-value="${(product.recommendedItem!)?html}"></a>
+							</div>
+						</div>
 						<div class="clearfix"></div>
 					</div>
 					<div class="span6">
@@ -229,5 +259,15 @@ $('#product_special_price').editable({
 $('#product_effective_date').editable({
 });
 $('#product_expiry_date').editable({
+});
+$('#product_price_description').editable({
+});
+$('#product_trip_characteristic').editable({
+});
+$('#product_service_standard').editable({
+});
+$('#product_friendly_reminder').editable({
+});
+$('#product_recommended_item').editable({
 });
 </script>
