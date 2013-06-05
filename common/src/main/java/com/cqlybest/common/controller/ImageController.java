@@ -59,6 +59,12 @@ public class ImageController {
     }
   }
 
+  @RequestMapping(value = "/image/delete.do", method = RequestMethod.POST)
+  @ResponseBody
+  public void delete(@RequestParam String id) {
+    imageService.delete(id);
+  }
+
   @RequestMapping(value = "/image/{imageId}.{imageType:jpg|png|gif}", method = RequestMethod.GET)
   public ResponseEntity<byte[]> view(@PathVariable String imageId, @PathVariable String imageType,
       @RequestParam(required = false) Integer width,

@@ -34,6 +34,11 @@ public class ImageService {
     imageDao.update(id, name, value);
   }
 
+  @Transactional
+  public void delete(String id) {
+    imageDao.delete(id);
+  }
+
   public JSONObject validate(MultipartFile imageFile) throws JSONException {
     JSONObject result = new JSONObject();
     result.put("code", 0);

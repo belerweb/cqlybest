@@ -48,4 +48,10 @@ public class ImageDao extends AbstractDao<Image, String> {
     return query.executeUpdate();
   }
 
+  public int delete(String id) {
+    Query query = getCurrentSession().createQuery("DELETE FROM Image WHERE id=?");
+    query.setParameter(0, id);
+    return query.executeUpdate();
+  }
+
 }

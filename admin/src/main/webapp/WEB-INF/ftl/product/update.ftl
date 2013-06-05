@@ -179,6 +179,7 @@
 										<div class="caption">
 											<p><a href="#" class="title editable-click <#if !image.title?has_content>editable-empty</#if>" data-pk="${image.id}" data-name="title" data-type="text" data-value="${(image.title!)?html}">${(image.title!'标题：未设置')?html}</a></p>
 											<p><a href="#" class="description editable-click <#if !image.description?has_content>editable-empty</#if>" data-pk="${image.id}" data-name="description" data-type="textarea" data-value="${(image.description!)?html}">${(image.description!'描述：未设置')?html}</a></p>
+											<button class="delete btn btn-danger" data-id="${image.id}">刪除</button>
 										</div>
 									</div>
 								</li>
@@ -310,6 +311,27 @@ $('#product_friendly_reminder').editable({
 });
 $('#product_recommended_item').editable({
 });
+var arrangeImags = function(el, images) {
+	var imgs = $('li', el).detach();
+	$('.image-gallery .row-fluid').remove();
+	if (images) {
+		$.each(images, function(i, obj){
+			var image = $('<li class="span3"><div class="thumbnail"><img src="${ContextPath}/image/'+obj.id+'.'+obj.imageType+'"><div class="caption"></div></div></li>');
+			$('.caption', image).append('<p><a href="#" class="title editable-click editable-empty" data-pk="'+obj.id+'" data-name="title" data-type="text">标题：未设置</a></p>');
+			$('.caption', image).append('<p><a href="#" class="description editable-click editable-empty" data-pk="'+obj.id+'" data-name="description" data-type="textarea">描述：未设置</a></p>');
+			$('.caption', image).append('<button class="delete btn btn-danger" data-id="'+obj.id+'">刪除</button>');
+			imgs.push(image);
+		});
+	}
+	var row;
+	for (var i=0;i<imgs.length;i++) {
+		if (i%4==0) {
+			row = $('<div class="row-fluid"><ul class="thumbnails"></ul></div>');
+			el.append(row);
+		}
+		$('ul', row).append(imgs[i]);
+	}
+};
 $('#product-add-poster').click(function(){
 	var winParam = ['dialogWidth=650px;dialogHeight=380px'];
 	winParam.push('center=yes');
@@ -325,12 +347,31 @@ $('#product-add-poster').click(function(){
 			name: ['extra', 'extraKey'],
 			value: ['product-poster', '${id}']
 		}, function(){
-			console.log("success");
+			// TODO
 		});
 	});
+	arrangeImags(gallery, images);
 });
 $('.image-gallery').editable({
 	selector: 'a.title,a.description',
 	url: '${ContextPath}/image/update.do'
 });
+$(function(){
+$('.image-gallery button.delete').die('click').live('click', function() {
+	var id = $(this).attr('data-id');
+	var image = $(this).parents('li');
+	var el = $(this).parents('.image-gallery');
+	bootbox.confirm('确认删除图片', '取消', '确认', function(result) {
+		if (result) {
+			$.post('${ContextPath}/image/delete.do', {
+				id: id
+			}).done(function(){
+				image.remove();
+				arrangeImags(el);
+			}).fail(function() {
+				cqlybest.error();
+			});
+		}
+	});
+});});
 </script>
