@@ -167,7 +167,6 @@
 					</div>
 					<div id="product-detail-tab" class="tab-pane">
 					</div>
-					<#assign ImageUpdateUrl='${ContextPath}/image/update.do'>
 					<div id="product-poster-tab" class="image-gallery tab-pane">
 						<div class="text-right"><button id="product-add-poster" type="button" class="btn btn-primary">添加</button></div>
 						<#if product.posters?has_content>
@@ -178,8 +177,8 @@
 									<div class="thumbnail">
 										<img src="${ContextPath}/image/${image.id}.${image.imageType}">
 										<div class="caption">
-											<a class="title" data-pk="${image.id}" data-name="title" data-type="text" data-url="${ImageUpdateUrl}" data-value="${(image.title!)?html}"></a>
-											<a class="description" data-pk="${image.id}" data-name="title" data-type="textarea" data-url="${ImageUpdateUrl}" data-value="${(image.description!)?html}"></a>
+											<p><a href="#" class="title editable-click <#if !image.title?has_content>editable-empty</#if>" data-pk="${image.id}" data-name="title" data-type="text" data-value="${(image.title!)?html}">${(image.title!'标题：未设置')?html}</a></p>
+											<p><a href="#" class="description editable-click <#if !image.description?has_content>editable-empty</#if>" data-pk="${image.id}" data-name="description" data-type="textarea" data-value="${(image.description!)?html}">${(image.description!'描述：未设置')?html}</a></p>
 										</div>
 									</div>
 								</li>
@@ -329,5 +328,9 @@ $('#product-add-poster').click(function(){
 			console.log("success");
 		});
 	});
+});
+$('.image-gallery').editable({
+	selector: 'a.title,a.description',
+	url: '${ContextPath}/image/update.do'
 });
 </script>
