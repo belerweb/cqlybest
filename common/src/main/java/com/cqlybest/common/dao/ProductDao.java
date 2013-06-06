@@ -15,20 +15,20 @@ import org.hibernate.criterion.Restrictions;
 import org.hibernate.sql.JoinType;
 import org.springframework.stereotype.Repository;
 
-import com.cqlybest.common.bean.Product2;
+import com.cqlybest.common.bean.Product;
 import com.cqlybest.common.bean.ProductFilterItem;
 import com.cqlybest.common.bean.ProductGroupItem;
 
 @Repository
 @SuppressWarnings("unchecked")
-public class Product2Dao extends AbstractDao<Product2, String> {
+public class ProductDao extends AbstractDao<Product, String> {
 
-  protected Product2Dao() {
-    super(Product2.class);
+  protected ProductDao() {
+    super(Product.class);
   }
 
   public int update(String id, String name, Object value) {
-    String hql = "UPDATE Product2 SET " + name + " = ?, lastUpdated = ? WHERE id = ?";
+    String hql = "UPDATE Product SET " + name + " = ?, lastUpdated = ? WHERE id = ?";
     Query query = getCurrentSession().createQuery(hql);
     query.setParameter(0, value);
     query.setParameter(1, new Date());
@@ -37,7 +37,7 @@ public class Product2Dao extends AbstractDao<Product2, String> {
   }
 
   public int update(String[] ids, String name, Object value) {
-    String hql = "UPDATE Product2 SET " + name + " = ?, lastUpdated = ? WHERE id IN (:ids)";
+    String hql = "UPDATE Product SET " + name + " = ?, lastUpdated = ? WHERE id IN (:ids)";
     Query query = getCurrentSession().createQuery(hql);
     query.setParameter(0, value);
     query.setParameter(1, new Date());
@@ -46,7 +46,7 @@ public class Product2Dao extends AbstractDao<Product2, String> {
   }
 
   public void delete(String[] ids) {
-    getCurrentSession().createQuery("DELETE FROM  Product2 WHERE id IN (:ids)").setParameterList(
+    getCurrentSession().createQuery("DELETE FROM  Product WHERE id IN (:ids)").setParameterList(
         "ids", ids).executeUpdate();
   }
 
@@ -57,7 +57,7 @@ public class Product2Dao extends AbstractDao<Product2, String> {
     return (Long) criteria.uniqueResult();
   }
 
-  public List<Product2> findProductTotal(int page, int pageSize) {
+  public List<Product> findProductTotal(int page, int pageSize) {
     Criteria criteria = getCurrentSession().createCriteria(entityClass);
     criteria.setFirstResult((Math.max(page, 1) - 1) * pageSize);
     criteria.setMaxResults(pageSize);
@@ -74,11 +74,11 @@ public class Product2Dao extends AbstractDao<Product2, String> {
     return getSqlSession().selectList("ProductDao.findProductIdsByDict", param);
   }
 
-  public List<Product2> getProducts(List<Integer> ids, Integer page, Integer pageSize) {
+  public List<Product> getProducts(List<Integer> ids, Integer page, Integer pageSize) {
     if (ids.isEmpty()) {
       return Collections.emptyList();
     }
-    Criteria criteria = getCurrentSession().createCriteria(Product2.class);
+    Criteria criteria = getCurrentSession().createCriteria(Product.class);
     criteria.add(Restrictions.in("id", ids));
     if (pageSize > 0) {
       criteria.setFirstResult((Math.max(page, 1) - 1) * pageSize);
@@ -93,7 +93,7 @@ public class Product2Dao extends AbstractDao<Product2, String> {
   }
 
   // 此方法效率太低
-  public List<Product2> findProducts(Set<ProductGroupItem> groupItems,
+  public List<Product> findProducts(Set<ProductGroupItem> groupItems,
       Set<ProductFilterItem> filterItems, Integer page, Integer pageSize) {
     Criteria criteria = createFindProductsCriteria(groupItems, filterItems);
     if (pageSize > 0) {
@@ -106,7 +106,7 @@ public class Product2Dao extends AbstractDao<Product2, String> {
 
   private Criteria createFindProductsCriteria(Set<ProductGroupItem> groupItems,
       Set<ProductFilterItem> filterItems) {
-    Criteria criteria = getCurrentSession().createCriteria(Product2.class);
+    Criteria criteria = getCurrentSession().createCriteria(Product.class);
     criteria.createAlias("recommendedMonths", "month", JoinType.LEFT_OUTER_JOIN);
     criteria.createAlias("crowds", "crowds", JoinType.LEFT_OUTER_JOIN);
     criteria.createAlias("traffics", "traffic", JoinType.LEFT_OUTER_JOIN);

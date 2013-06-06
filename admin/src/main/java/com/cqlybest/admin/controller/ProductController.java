@@ -12,12 +12,12 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.cqlybest.common.bean.Product2;
+import com.cqlybest.common.bean.Product;
 import com.cqlybest.common.service.DestinationService;
 import com.cqlybest.common.service.DictService;
 import com.cqlybest.common.service.ImageService;
 import com.cqlybest.common.service.JsonService;
-import com.cqlybest.common.service.Product2Service;
+import com.cqlybest.common.service.ProductService;
 
 @Controller
 public class ProductController {
@@ -25,7 +25,7 @@ public class ProductController {
   @Autowired
   private JsonService jsonService;
   @Autowired
-  private Product2Service product2Service;
+  private ProductService productService;
   @Autowired
   private DestinationService destinationService;
   @Autowired
@@ -39,9 +39,9 @@ public class ProductController {
   @RequestMapping(value = "/product/add.do", method = RequestMethod.POST)
   @ResponseBody
   public String add(@RequestParam String name) {
-    Product2 product = new Product2();
+    Product product = new Product();
     product.setName(name);
-    product2Service.add(product);
+    productService.add(product);
     return product.getId();
   }
 
@@ -50,7 +50,7 @@ public class ProductController {
    */
   @RequestMapping(value = "/product/update.do", method = RequestMethod.GET)
   public void update(@RequestParam String id, Model model) {
-    model.addAttribute("product", product2Service.get(id));
+    model.addAttribute("product", productService.get(id));
   }
 
   /**
@@ -71,7 +71,7 @@ public class ProductController {
     if ("effectiveDate".equals(name) || "expiryDate".equals(name) || "departureDate".equals(name)) {
       _value = DateUtils.parseDate(value, new String[] {"yyyy-MM-dd"});
     }
-    product2Service.update(pk, name, _value);
+    productService.update(pk, name, _value);
   }
 
   @RequestMapping(value = "/product/list.html", method = RequestMethod.GET)
@@ -80,44 +80,44 @@ public class ProductController {
     int pageSize = 10;
     model.addAttribute("page", page);
     model.addAttribute("pageSize", pageSize);
-    model.addAttribute("total", product2Service.queryProductTotal());
-    model.addAttribute("products", product2Service.queryProduct(page, pageSize));
+    model.addAttribute("total", productService.queryProductTotal());
+    model.addAttribute("products", productService.queryProduct(page, pageSize));
   }
 
   @RequestMapping("/product/toggle.html")
   @ResponseBody
   public void toggle(@RequestParam String id, @RequestParam boolean published) {
-    product2Service.update(id, "published", published);
+    productService.update(id, "published", published);
   }
 
   @RequestMapping("/product/hot.html")
   @ResponseBody
   public void hot(@RequestParam(value = "ids[]") String[] ids, @RequestParam boolean hot) {
-    product2Service.update(ids, "popular", hot);
+    productService.update(ids, "popular", hot);
   }
 
   @RequestMapping("/product/recommend.html")
   @ResponseBody
   public void recommend(@RequestParam(value = "ids[]") String[] ids, @RequestParam boolean red) {
-    product2Service.update(ids, "recommend", red);
+    productService.update(ids, "recommend", red);
   }
 
   @RequestMapping("/product/special.html")
   @ResponseBody
   public void special(@RequestParam(value = "ids[]") String[] ids, @RequestParam boolean special) {
-    product2Service.update(ids, "specialOffer", special);
+    productService.update(ids, "specialOffer", special);
   }
 
   @RequestMapping("/product/pub.html")
   @ResponseBody
   public void pub(@RequestParam(value = "ids[]") String[] ids, @RequestParam boolean pub) {
-    product2Service.update(ids, "published", pub);
+    productService.update(ids, "published", pub);
   }
 
   @RequestMapping("/product/delete.html")
   @ResponseBody
   public void del(@RequestParam(value = "ids[]") String[] ids) {
-    product2Service.delete(ids);
+    productService.delete(ids);
   }
 
 }

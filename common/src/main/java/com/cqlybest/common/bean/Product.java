@@ -3,7 +3,7 @@ package com.cqlybest.common.bean;
 import java.util.Date;
 import java.util.List;
 
-public class Product2 {
+public class Product {
 
   private String id;
   private String name;// 产品名称

@@ -9,11 +9,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.cqlybest.common.bean.Product2;
+import com.cqlybest.common.bean.Product;
 import com.cqlybest.common.bean.template1.Template1IndexPoster;
 import com.cqlybest.common.bean.template1.Template1Menu;
 import com.cqlybest.common.bean.template1.Template1ProductGroup;
-import com.cqlybest.common.dao.Product2Dao;
+import com.cqlybest.common.dao.ProductDao;
 import com.cqlybest.common.dao.Template1Dao;
 
 @Service
@@ -22,7 +22,7 @@ public class Template1Service {
   @Autowired
   private Template1Dao template1Dao;
   @Autowired
-  private Product2Dao product2Dao;
+  private ProductDao productDao;
 
 
 
@@ -165,26 +165,26 @@ public class Template1Service {
     }
   }
 
-  public List<Product2> getSpecialProduct(int number) {
+  public List<Product> getSpecialProduct(int number) {
     return getProductWithTrueProperty("specialOffer", number);// 特价
   }
 
-  public List<Product2> getRecommendedProduct(int number) {
+  public List<Product> getRecommendedProduct(int number) {
     return getProductWithTrueProperty("recommend", number);// 推荐
   }
 
-  public List<Product2> getHotProduct(int number) {
+  public List<Product> getHotProduct(int number) {
     return getProductWithTrueProperty("popular", number);// 热门
   }
 
-  private List<Product2> getProductWithTrueProperty(String property, int number) {
+  private List<Product> getProductWithTrueProperty(String property, int number) {
     Conjunction condition = Restrictions.conjunction();
     condition.add(Restrictions.eq(property, true));
     condition.add(Restrictions.eq("published", true));// 已发布
     if (number > 0) {
-      return product2Dao.find(condition, 0, number);
+      return productDao.find(condition, 0, number);
     }
-    return product2Dao.find(condition);
+    return productDao.find(condition);
   }
 
 }

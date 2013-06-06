@@ -4,7 +4,7 @@
         "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 
 <hibernate-mapping package="com.cqlybest.common.bean">
-    <class name="Product2" table="PRODUCT2">
+    <class name="Product" table="PRODUCT">
         <id name="id" column="ID" type="string" length="36">
             <generator class="assigned" />
         </id>

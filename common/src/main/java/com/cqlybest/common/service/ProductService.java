@@ -10,31 +10,31 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.cqlybest.common.bean.Product2;
+import com.cqlybest.common.bean.Product;
 import com.cqlybest.common.bean.ProductFilterItem;
 import com.cqlybest.common.bean.ProductGroupItem;
 import com.cqlybest.common.dao.ImageDao;
-import com.cqlybest.common.dao.Product2Dao;
+import com.cqlybest.common.dao.ProductDao;
 
 @Service
-public class Product2Service {
+public class ProductService {
 
   @Autowired
-  private Product2Dao product2Dao;
+  private ProductDao productDao;
   @Autowired
   private ImageDao imageDao;
 
   @Transactional
-  public void add(Product2 product) {
+  public void add(Product product) {
     product.setId(UUID.randomUUID().toString());
     Date now = new Date();
     product.setCreatedTime(now);
     product.setLastUpdated(now);
-    product2Dao.saveOrUpdate(product);
+    productDao.saveOrUpdate(product);
   }
 
-  public Product2 get(String id) {
-    Product2 product = product2Dao.findById(id);
+  public Product get(String id) {
+    Product product = productDao.findById(id);
     product.setPosters(imageDao.queryImagesWithoutData("product-poster", id));
     product.setPhotos(imageDao.queryImagesWithoutData("product-photo", id));
     return product;
@@ -42,33 +42,33 @@ public class Product2Service {
 
   @Transactional
   public void update(String id, String name, Object value) {
-    product2Dao.update(id, name, value);
+    productDao.update(id, name, value);
   }
 
   @Transactional
   public void update(String[] ids, String name, Object value) {
-    product2Dao.update(ids, name, value);
+    productDao.update(ids, name, value);
   }
 
   @Transactional
   public void delete(String[] ids) {
-    product2Dao.delete(ids);
+    productDao.delete(ids);
   }
 
   public Long queryProductTotal() {
-    return product2Dao.findProductTotal();
+    return productDao.findProductTotal();
   }
 
-  public List<Product2> queryProduct(int page, int pageSize) {
-    return product2Dao.findProductTotal(page, pageSize);
+  public List<Product> queryProduct(int page, int pageSize) {
+    return productDao.findProductTotal(page, pageSize);
   }
 
   public Long queryProductsTotal(Set<ProductGroupItem> groupItems,
       Set<ProductFilterItem> filterItems) {
-    return product2Dao.findProductsTotal(groupItems, filterItems);
+    return productDao.findProductsTotal(groupItems, filterItems);
   }
 
-  public List<Product2> queryProducts(Set<ProductGroupItem> groupItems,
+  public List<Product> queryProducts(Set<ProductGroupItem> groupItems,
       Set<ProductFilterItem> filterItems, Integer page, Integer pageSize) {
     List<Integer> productIds = new ArrayList<>();
     String[] tableNames =
@@ -79,7 +79,7 @@ public class Product2Service {
     for (ProductGroupItem item : groupItems) { // 聚合产品
       int type = item.getGroupType();
       String ids = item.getGroupValue();
-      productIds.addAll(product2Dao.findProductIdsByDict(tableNames[type], ids, type > 1
+      productIds.addAll(productDao.findProductIdsByDict(tableNames[type], ids, type > 1
           ? "PID"
           : "ID", type > 1 ? dictColumns[2] : dictColumns[type]));
     }
@@ -87,12 +87,12 @@ public class Product2Service {
       for (ProductFilterItem item : filterItems) {// 过滤产品
         int type = item.getType();
         Integer ids = item.getId();
-        productIds.retainAll(product2Dao.findProductIdsByDict(tableNames[type], ids, type > 1
+        productIds.retainAll(productDao.findProductIdsByDict(tableNames[type], ids, type > 1
             ? "PID"
             : "ID", type > 1 ? dictColumns[2] : dictColumns[type]));
       }
     }
 
-    return product2Dao.getProducts(productIds, page, pageSize);
+    return productDao.getProducts(productIds, page, pageSize);
   }
 }
