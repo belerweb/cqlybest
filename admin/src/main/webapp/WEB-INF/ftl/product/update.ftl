@@ -168,7 +168,7 @@
 					<div id="product-detail-tab" class="tab-pane">
 					</div>
 					<div id="product-poster-tab" class="image-gallery tab-pane">
-						<div class="text-right"><button id="product-add-poster" type="button" class="btn btn-primary">添加</button></div>
+						<div class="text-right"><button id="product-add-poster" type="button" data-extra="product-poster" class="btn btn-primary">添加</button></div>
 						<#if product.posters?has_content>
 						<div class="row-fluid">
 							<ul class="thumbnails">
@@ -194,7 +194,32 @@
 						</div>
 						</#if>
 					</div>
-					<div id="product-photo-tab" class="tab-pane">
+					<div id="product-photo-tab" class="image-gallery tab-pane">
+						<div class="text-right"><button id="product-add-photo" type="button" data-extra="product-photo" class="btn btn-primary">添加</button></div>
+						<#if product.photos?has_content>
+						<div class="row-fluid">
+							<ul class="thumbnails">
+							<#list product.photos as image>
+								<li class="span3">
+									<div class="thumbnail">
+										<img src="${ContextPath}/image/${image.id}.${image.imageType}">
+										<div class="caption">
+											<p><a href="#" class="title editable-click <#if !image.title?has_content>editable-empty</#if>" data-pk="${image.id}" data-name="title" data-type="text" data-value="${(image.title!)?html}">${(image.title!'标题：未设置')?html}</a></p>
+											<p><a href="#" class="description editable-click <#if !image.description?has_content>editable-empty</#if>" data-pk="${image.id}" data-name="description" data-type="textarea" data-value="${(image.description!)?html}">${(image.description!'描述：未设置')?html}</a></p>
+											<button class="delete btn btn-danger" data-id="${image.id}">刪除</button>
+										</div>
+									</div>
+								</li>
+								<#if image_index%4==3>
+							</ul>
+						</div>
+						<div class="row-fluid">
+							<ul class="thumbnails">
+								</#if>
+							</#list>
+							</ul>
+						</div>
+						</#if>
 					</div>
 				</div>
 			</div>
@@ -313,7 +338,7 @@ $('#product_recommended_item').editable({
 });
 var arrangeImags = function(el, images) {
 	var imgs = $('li', el).detach();
-	$('.image-gallery .row-fluid').remove();
+	$('.row-fluid', el).remove();
 	if (images) {
 		$.each(images, function(i, obj){
 			var image = $('<li class="span3"><div class="thumbnail"><img src="${ContextPath}/image/'+obj.id+'.'+obj.imageType+'"><div class="caption"></div></div></li>');
@@ -332,7 +357,7 @@ var arrangeImags = function(el, images) {
 		$('ul', row).append(imgs[i]);
 	}
 };
-$('#product-add-poster').click(function(){
+$('#product-add-poster,#product-add-photo').click(function(){
 	var winParam = ['dialogWidth=650px;dialogHeight=380px'];
 	winParam.push('center=yes');
 	winParam.push('help=no');
@@ -341,11 +366,12 @@ $('#product-add-poster').click(function(){
 	winParam.push('scroll=no');
 	var images = window.showModalDialog('${ContextPath}/image/upload.html',null,winParam.join(';'));
 	var gallery = $(this).parents('.image-gallery');
+	var extra = $(this).attr('data-extra');
 	$.each(images, function(i, obj) {
 		$.post('${ContextPath}/image/update.do', {
 			pk: obj.id,
 			name: ['extra', 'extraKey'],
-			value: ['product-poster', '${id}']
+			value: [extra, '${id}']
 		}, function(){
 			// TODO
 		});
@@ -356,7 +382,6 @@ $('.image-gallery').editable({
 	selector: 'a.title,a.description',
 	url: '${ContextPath}/image/update.do'
 });
-$(function(){
 $('.image-gallery button.delete').die('click').live('click', function() {
 	var id = $(this).attr('data-id');
 	var image = $(this).parents('li');
@@ -373,5 +398,5 @@ $('.image-gallery button.delete').die('click').live('click', function() {
 			});
 		}
 	});
-});});
+});
 </script>
