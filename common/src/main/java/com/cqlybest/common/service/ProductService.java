@@ -1,11 +1,13 @@
 package com.cqlybest.common.service;
 
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Set;
 import java.util.UUID;
 
+import org.hibernate.criterion.Conjunction;
+import org.hibernate.criterion.Disjunction;
+import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -63,36 +65,22 @@ public class ProductService {
     return productDao.findProductTotal(page, pageSize);
   }
 
-  public Long queryProductsTotal(Set<ProductGroupItem> groupItems,
-      Set<ProductFilterItem> filterItems) {
-    return productDao.findProductsTotal(groupItems, filterItems);
-  }
-
   public List<Product> queryProducts(Set<ProductGroupItem> groupItems,
       Set<ProductFilterItem> filterItems, Integer page, Integer pageSize) {
-    List<Integer> productIds = new ArrayList<>();
-    String[] tableNames =
-        new String[] {"PRODUCT_RECOMMENDED_MONTH", "PRODUCT_CROWD", "PRODUCT_TRAFFIC",
-            "PRODUCT_TYPE", "PRODUCT_GRADE", "PRODUCT_KEYWORD", "PRODUCT_DEPARTURE_CITY",
-            "PRODUCT_DESTINATION"};
-    String[] dictColumns = new String[] {"MONTH", "CROWD", "DID"};
+    Disjunction or = Restrictions.disjunction();
+    Conjunction and = Restrictions.conjunction();
+    String[] propertyNames =
+        new String[] {"recommendedMonths", "crowds", "traffics", "types", "grades", "keywords",
+            "departureCities", "destinations"};
     for (ProductGroupItem item : groupItems) { // 聚合产品
-      int type = item.getGroupType();
-      String ids = item.getGroupValue();
-      productIds.addAll(productDao.findProductIdsByDict(tableNames[type], ids, type > 1
-          ? "PID"
-          : "ID", type > 1 ? dictColumns[2] : dictColumns[type]));
+      or.add(Restrictions.in(propertyNames[item.getGroupType()], item.getGroupValue().split(",")));
     }
     if (filterItems != null) {
       for (ProductFilterItem item : filterItems) {// 过滤产品
-        int type = item.getType();
-        Integer ids = item.getId();
-        productIds.retainAll(productDao.findProductIdsByDict(tableNames[type], ids, type > 1
-            ? "PID"
-            : "ID", type > 1 ? dictColumns[2] : dictColumns[type]));
+        or.add(Restrictions.eq(propertyNames[item.getType()], item.getId()));
       }
     }
 
-    return productDao.getProducts(productIds, page, pageSize);
+    return productDao.getProducts(or, and, page, pageSize);
   }
 }

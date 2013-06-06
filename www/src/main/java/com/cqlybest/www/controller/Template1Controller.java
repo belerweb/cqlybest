@@ -9,7 +9,6 @@ import java.util.Set;
 
 import javax.servlet.http.HttpSession;
 
-import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -129,7 +128,7 @@ public class Template1Controller {
     Template1Menu menu = template1Service.get(id);
     if (menu == null || menu.getMenuType() != 0) {
       // 菜单不存在或者不是产品聚合菜单
-      return new ResponseEntity<String>(StringUtils.EMPTY, HttpStatus.NOT_FOUND);
+      return new ResponseEntity<Object>(HttpStatus.NOT_FOUND);
     }
 
     ProductGroup group = menu.getProductGroup();
@@ -143,8 +142,9 @@ public class Template1Controller {
     addToFilterSet(filterItems, 5, f5);
     addToFilterSet(filterItems, 6, f6);
     addToFilterSet(filterItems, 7, f7);
-    model.addAttribute("total", productService.queryProductsTotal(groupItems, filterItems));
-    model.addAttribute("products", productService.queryProducts(groupItems, filterItems, 0, 0));
+    List<Product> products = productService.queryProducts(groupItems, filterItems, 0, 0);
+    model.addAttribute("total", products.size());
+    model.addAttribute("products", products);
     model.addAttribute("menu", menu);
 
     // 过滤条件
@@ -177,7 +177,7 @@ public class Template1Controller {
     Template1Menu menu = template1Service.get(id);
     if (menu == null || menu.getMenuType() != 1) {
       // 菜单不存在或者不是产品聚合菜单
-      return new ResponseEntity<String>(StringUtils.EMPTY, HttpStatus.NOT_FOUND);
+      return new ResponseEntity<Object>(HttpStatus.NOT_FOUND);
     }
 
     model.addAttribute("page", menu);
@@ -189,7 +189,7 @@ public class Template1Controller {
   public Object product(@PathVariable String id, Model model) {
     Product product = productService.get(id);
     if (product == null) {
-      return new ResponseEntity<String>(StringUtils.EMPTY, HttpStatus.NOT_FOUND);
+      return new ResponseEntity<Object>(HttpStatus.NOT_FOUND);
     }
     model.addAttribute("product", product);
     setCommonData(model);
