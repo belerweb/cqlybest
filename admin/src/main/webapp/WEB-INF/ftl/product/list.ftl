@@ -5,7 +5,6 @@
 		<h1>旅游产品</h1>
 		<div class="btn-group">
 			<a id="product-add" href="javascript:void(0);" class="btn btn-primary">增加新产品</a>
-			<a href="#m=site&n=product.list&u=${ContextPath}/product/add.html&t=%23main" class="btn btn-primary">增加新产品</a>
 		</div>
 		<div class="clearfix"></div>
 		<hr>
@@ -89,7 +88,7 @@
 								class="ajax-action-btn blue" data-confirm="true" data-action="发布" data-title="${product.name!}"
 								title="发布"><i class="icon-upload-alt"></i></a>
 							</#if>
-							<a href="javascript:void(0);" data-url="${ContextPath}/product/modify.html?id=${product.id}"
+							<a href="javascript:void(0);" data-url="${ContextPath}/product/update.do?id=${product.id}"
 								class="page-load-btn safe" data-target="#mb" title="修改"><i class="icon-edit"></i></a>
 							<a href="javascript:void(0);" data-url="${ContextPath}/product/delete.html?ids[]=${product.id}"
 								class="ajax-action-btn danger last" data-confirm="true" data-action="删除" data-title="${product.name!}"
