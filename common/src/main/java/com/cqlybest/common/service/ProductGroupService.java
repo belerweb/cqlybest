@@ -1,6 +1,7 @@
 package com.cqlybest.common.service;
 
 import java.util.List;
+import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -16,8 +17,14 @@ public class ProductGroupService {
   private ProductGroupDao productGroupDao;
 
   @Transactional
-  public void edit(ProductGroup group) {
+  public void add(ProductGroup group) {
+    group.setId(UUID.randomUUID().toString());
     productGroupDao.saveOrUpdate(group);
+  }
+
+  @Transactional
+  public void update(String id, String name, Object value) {
+    productGroupDao.update(id, name, value);
   }
 
   @Transactional
@@ -26,11 +33,6 @@ public class ProductGroupService {
     if (group != null) {
       productGroupDao.delete(group);
     }
-  }
-
-  @Transactional
-  public void togglePublished(String id, boolean published) {
-    productGroupDao.togglePublished(id, published);
   }
 
   public List<ProductGroup> getAllProductGroup() {

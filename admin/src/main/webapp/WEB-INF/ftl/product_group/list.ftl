@@ -4,7 +4,7 @@
 	<div class="pagetitle">
 		<h1>产品聚合</h1>
 		<div class="btn-group">
-			<a href="#m=site&n=productgroup.list&u=${ContextPath}/product_group/add.html&t=%23mb" class="btn btn-primary">增加产品聚合</a>
+			<a id="product-group-add" href="javascript:void(0);" class="btn btn-primary">增加新产品</a>
 		</div>
 		<div class="clearfix"></div>
 		<hr>
@@ -53,7 +53,7 @@
 								class="ajax-action-btn blue" data-confirm="true" data-action="发布" data-title="${group.name!}"
 								title="发布"><i class="icon-upload-alt"></i></a>
 							</#if>
-							<a href="javascript:void(0);" data-url="${ContextPath}/product_group/modify.html?id=${group.id}"
+							<a href="javascript:void(0);" data-url="${ContextPath}/product_group/update.do?id=${group.id}"
 								class="page-load-btn safe" data-target="#mb" title="修改"><i class="icon-edit"></i></a>
 							<a href="javascript:void(0);" data-url="${ContextPath}/product_group/delete.html?id=${group.id}"
 								class="ajax-action-btn danger last" data-confirm="true" data-action="删除"
@@ -73,5 +73,20 @@ $('#main-list-table').dataTable({
 	bFilter: false,
 	bInfo: false,
 	bPaginate: false
+});
+$('#product-group-add').click(function(){
+	bootbox.prompt("聚合名称", "取消", "确定", function(result) {
+		var name = $.trim(result);
+		if (name.length) {
+			$.post('${ContextPath}/product_group/add.do', {
+				name: name
+			}, function(response){
+				var hash = cqlybest.parseHash();
+				hash['u'] = '${ContextPath}/product_group/update.do?id=' + response;
+				hash['_t'] = new Date().getTime();
+				location.hash = cqlybest.buildHash(hash);
+			});
+		}
+	});
 });
 </script>

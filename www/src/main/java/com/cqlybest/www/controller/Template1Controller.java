@@ -29,7 +29,6 @@ import com.cqlybest.common.bean.Keyword;
 import com.cqlybest.common.bean.Product;
 import com.cqlybest.common.bean.ProductFilterItem;
 import com.cqlybest.common.bean.ProductGroup;
-import com.cqlybest.common.bean.ProductGroupItem;
 import com.cqlybest.common.bean.template1.Template1Menu;
 import com.cqlybest.common.bean.template1.Template1ProductGroup;
 import com.cqlybest.common.service.DestinationService;
@@ -70,7 +69,7 @@ public class Template1Controller {
       ProductGroup productGroup = item.getProductGroup();
       Map<String, Object> group = new HashMap<String, Object>();
       group.put("group", productGroup);
-      group.put("products", productService.queryProducts(productGroup.getGroupItems(), null, 0, 4));
+      group.put("products", productService.queryProducts(productGroup, null, 0, 4));
       groups.add(group);
     }
     model.addAttribute("groups", groups);// 产品组合
@@ -132,7 +131,6 @@ public class Template1Controller {
     }
 
     ProductGroup group = menu.getProductGroup();
-    Set<ProductGroupItem> groupItems = group.getGroupItems();
     Set<ProductFilterItem> filterItems = new HashSet<>();
     addToFilterSet(filterItems, 0, f0);
     addToFilterSet(filterItems, 1, f1);
@@ -142,7 +140,7 @@ public class Template1Controller {
     addToFilterSet(filterItems, 5, f5);
     addToFilterSet(filterItems, 6, f6);
     addToFilterSet(filterItems, 7, f7);
-    List<Product> products = productService.queryProducts(groupItems, filterItems, 0, 0);
+    List<Product> products = productService.queryProducts(group, filterItems, 0, 0);
     model.addAttribute("total", products.size());
     model.addAttribute("products", products);
     model.addAttribute("menu", menu);

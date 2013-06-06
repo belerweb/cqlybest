@@ -12,10 +12,10 @@ public class ProductGroupDao extends AbstractDao<ProductGroup, String> {
     super(ProductGroup.class);
   }
 
-  public int togglePublished(String id, boolean published) {
-    String hql = "UPDATE ProductGroup SET published = ? WHERE id = ?";
+  public int update(String id, String name, Object value) {
+    String hql = "UPDATE ProductGroup SET " + name + " = ?, published = false WHERE id = ?";
     Query query = getCurrentSession().createQuery(hql);
-    query.setParameter(0, published);
+    query.setParameter(0, value);
     query.setParameter(1, id);
     return query.executeUpdate();
   }

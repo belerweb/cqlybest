@@ -7,6 +7,8 @@ import java.util.UUID;
 
 import org.hibernate.criterion.Conjunction;
 import org.hibernate.criterion.Disjunction;
+import org.hibernate.criterion.Junction;
+import org.hibernate.criterion.MatchMode;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -14,7 +16,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.cqlybest.common.bean.Product;
 import com.cqlybest.common.bean.ProductFilterItem;
-import com.cqlybest.common.bean.ProductGroupItem;
+import com.cqlybest.common.bean.ProductGroup;
 import com.cqlybest.common.dao.ImageDao;
 import com.cqlybest.common.dao.ProductDao;
 
@@ -65,22 +67,27 @@ public class ProductService {
     return productDao.findProductTotal(page, pageSize);
   }
 
-  public List<Product> queryProducts(Set<ProductGroupItem> groupItems,
-      Set<ProductFilterItem> filterItems, Integer page, Integer pageSize) {
+  public List<Product> queryProducts(ProductGroup productGroup, Set<ProductFilterItem> filterItems,
+      Integer page, Integer pageSize) {
     Disjunction or = Restrictions.disjunction();
     Conjunction and = Restrictions.conjunction();
-    String[] propertyNames =
-        new String[] {"recommendedMonths", "crowds", "traffics", "types", "grades", "keywords",
-            "departureCities", "destinations"};
-    for (ProductGroupItem item : groupItems) { // 聚合产品
-      or.add(Restrictions.in(propertyNames[item.getGroupType()], item.getGroupValue().split(",")));
-    }
-    if (filterItems != null) {
-      for (ProductFilterItem item : filterItems) {// 过滤产品
-        or.add(Restrictions.eq(propertyNames[item.getType()], item.getId()));
-      }
-    }
-
+    generateGroupCondition(or, "recommendedMonths", productGroup.getGroupMonths());
+    generateGroupCondition(or, "crowds", productGroup.getGroupCrowds());
+    generateGroupCondition(or, "traffics", productGroup.getGroupTraffics());
+    generateGroupCondition(or, "types", productGroup.getGroupTypes());
+    generateGroupCondition(or, "grades", productGroup.getGroupGrades());
+    generateGroupCondition(or, "keywords", productGroup.getGroupKeywords());
+    generateGroupCondition(or, "departureCities", productGroup.getGroupDepartureCities());
+    generateGroupCondition(or, "destinations", productGroup.getGroupDestinations());
     return productDao.getProducts(or, and, page, pageSize);
   }
+
+  private void generateGroupCondition(Junction condition, String property, String values) {
+    if (values != null) {
+      for (String value : values.split(",")) {
+        condition.add(Restrictions.like(property, value, MatchMode.ANYWHERE));
+      }
+    }
+  }
+
 }

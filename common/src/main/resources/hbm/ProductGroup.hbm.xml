@@ -9,14 +9,22 @@
             <generator class="assigned" />
         </id>
         <property name="name" column="NAME" type="string" not-null="true" length="16" />
-        <set name="groupItems" cascade="all">
-            <key column="PGID" />
-            <one-to-many class="ProductGroupItem" />
-        </set>
-        <set name="filterItems" cascade="all">
-            <key column="PGID" />
-            <one-to-many class="ProductGroupFilterItem" />
-        </set>
+        <property name="groupMonths" column="GROUP_MONTHS" length="256"/>
+        <property name="groupCrowds" column="GROUP_CROWDS" length="256"/>
+        <property name="groupTraffics" column="GROUP_TRAFFICS" length="256"/>
+        <property name="groupTypes" column="GROUP_TYPES" length="256"/>
+        <property name="groupGrades" column="GROUP_GRADES" length="256"/>
+        <property name="groupKeywords" column="GROUP_KEYWORDS" length="256"/>
+        <property name="groupDepartureCities" column="GROUP_DEPARTURECITIES" length="256"/>
+        <property name="groupDestinations" column="GROUP_DESTINATIONS" length="256"/>
+        <property name="filterMonths" column="FILTER_MONTHS" length="256"/>
+        <property name="filterCrowds" column="FILTER_CROWDS" length="256"/>
+        <property name="filterTraffics" column="FILTER_TRAFFICS" length="256"/>
+        <property name="filterTypes" column="FILTER_TYPES" length="256"/>
+        <property name="filterGrades" column="FILTER_GRADES" length="256"/>
+        <property name="filterKeywords" column="FILTER_KEYWORDS" length="256"/>
+        <property name="filterDepartureCities" column="FILTER_DEPARTURECITIES" length="256"/>
+        <property name="filterDestinations" column="FILTER_DESTINATIONS" length="256"/>
         <property name="published" column="PUBLISHED" />
     </class>
 </hibernate-mapping>

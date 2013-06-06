@@ -119,6 +119,30 @@ $(function() {
 });
 
 window.cqlybest = {
+	editableTag : function(el, dict) {
+		$(el).editable({
+			inputclass: 'input-large',
+			select2: {
+				multiple: true,
+				ajax: {
+					url: '/data/dict.html?action=dict&type=' + dict,
+					data: function (term, page) {
+						return {q:term};
+					},
+					results: function(response) {
+						var result = [];
+						$.each(response.tags, function(i, obj){
+							result.push({id:obj.name,text:obj.name});
+						});
+						return {results:result};
+					}
+				},
+				initSelection: function(el, callback) {
+					callback(cqlybest.v2ss(el.val()||$(el).data('value')));
+				}
+			}
+		});
+	},
 	chooseFile : function(arg) {
 		bootbox.alert("<div id='elfinder-container'></div>", '确定', function(){
 			var files = $('#elfinder').data('files') || [];

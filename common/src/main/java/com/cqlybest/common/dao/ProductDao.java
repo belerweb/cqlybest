@@ -1,9 +1,7 @@
 package com.cqlybest.common.dao;
 
 import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import org.hibernate.Criteria;
 import org.hibernate.Query;
@@ -57,16 +55,6 @@ public class ProductDao extends AbstractDao<Product, String> {
     criteria.setFirstResult((Math.max(page, 1) - 1) * pageSize);
     criteria.setMaxResults(pageSize);
     return criteria.list();
-  }
-
-  public List<String> findProductIdsByDict(String dictTable, Object ids, String pidColumn,
-      String dictColumn) {
-    Map<String, Object> param = new HashMap<>();
-    param.put("dictTable", dictTable);
-    param.put("ids", ids);
-    param.put("pidColumn", pidColumn);
-    param.put("dictColumn", dictColumn);
-    return getSqlSession().selectList("ProductDao.findProductIdsByDict", param);
   }
 
   public List<Product> getProducts(Disjunction or, Conjunction and, Integer page, Integer pageSize) {

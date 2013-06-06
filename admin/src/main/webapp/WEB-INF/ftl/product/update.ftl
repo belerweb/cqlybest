@@ -236,74 +236,12 @@ $('#product_days').editable({
 $('#product_days_unit').editable({
 	source: [{value:'天',text:'天'},{value:'月',text:'月'},{value:'年',text:'年'}]
 });
-var dictAjax = function(dict) {
-	return {
-			url: '/data/dict.html?action=dict&type=' + dict,
-			data: function (term, page) {
-				return {q:term};
-			},
-			results: function(response) {
-				var result = [];
-				$.each(response.tags, function(i, obj){
-					result.push({id:obj.name,text:obj.name});
-				});
-				return {results:result};
-			}
-		};
-};
-var initSelection = function(el) {
-	return function(el, callback) {
-			callback(cqlybest.v2ss(el.val()||$(el).data('value')));
-		};
-};
-$('#product_departure_cities').editable({
-	inputclass: 'input-large',
-	select2: {
-		multiple: true,
-		ajax: dictAjax('departure-city'),
-		initSelection: initSelection('#product_departure_cities')
-	}
-});
-$('#product_destinations').editable({
-	inputclass: 'input-large',
-	select2: {
-		multiple: true,
-		ajax: dictAjax('destination'),
-		initSelection: initSelection('#product_destinations')
-	}
-});
-$('#product_keywords').editable({
-	inputclass: 'input-large',
-	select2: {
-		multiple: true,
-		ajax: dictAjax('keyword'),
-		initSelection: initSelection('#product_keywords')
-	}
-});
-$('#product_traffics').editable({
-	inputclass: 'input-large',
-	select2: {
-		multiple: true,
-		ajax: dictAjax('traffic'),
-		initSelection: initSelection('#product_traffics')
-	}
-});
-$('#product_types').editable({
-	inputclass: 'input-large',
-	select2: {
-		multiple: true,
-		ajax: dictAjax('product-type'),
-		initSelection: initSelection('#product_types')
-	}
-});
-$('#product_grades').editable({
-	inputclass: 'input-large',
-	select2: {
-		multiple: true,
-		ajax: dictAjax('product-grade'),
-		initSelection: initSelection('#product_grades')
-	}
-});
+cqlybest.editableTag('#product_departure_cities', 'departure-city');
+cqlybest.editableTag('#product_destinations', 'destination');
+cqlybest.editableTag('#product_keywords', 'keyword');
+cqlybest.editableTag('#product_traffics', 'traffic');
+cqlybest.editableTag('#product_types', 'product-type');
+cqlybest.editableTag('#product_grades', 'product-grade');
 $('#product_recommended_months').editable({
 	inputclass: 'input-large',
 	select2: {

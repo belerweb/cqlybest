@@ -4,9 +4,5 @@
 
 <mapper namespace="ProductDao">
 
-	<select id="findProductIdsByDict" parameterType="map"
-		resultType="int">
-		SELECT ${pidColumn} FROM ${dictTable} WHERE ${dictColumn} IN (${ids})
-	</select>
 
 </mapper>
