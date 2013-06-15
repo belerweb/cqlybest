@@ -11,7 +11,7 @@
         <property name="cellPhone" column="CELL_PHONE" type="string" unique="true" length="16" />
         <property name="email" column="EMAIL" type="string" unique="true" length="32" />
         <property name="loginUsername" column="USERNAME" type="string" unique="true" length="16" />
-        <property name="password" column="PASSWORD" type="string" length="32" />
+        <property name="password" column="PASSWORD" type="string" length="64" />
         <property name="fullname" column="FULLNAME" type="string" length="16" />
         <property name="nickname" column="NICKNAME" type="string" length="16" />
         <property name="avatar" column="AVATAR" type="string" length="256" />
