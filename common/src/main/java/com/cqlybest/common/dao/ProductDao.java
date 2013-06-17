@@ -8,9 +8,11 @@ import org.hibernate.Query;
 import org.hibernate.criterion.Conjunction;
 import org.hibernate.criterion.Disjunction;
 import org.hibernate.criterion.Projections;
+import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Repository;
 
 import com.cqlybest.common.bean.Product;
+import com.cqlybest.common.bean.ProductTravel;
 
 @Repository
 @SuppressWarnings("unchecked")
@@ -38,11 +40,23 @@ public class ProductDao extends AbstractDao<Product, String> {
     return query.executeUpdate();
   }
 
+  public int updateTravel(Integer id, String name, String value) {
+    String hql = "UPDATE ProductTravel SET " + name + " = ? WHERE id = ?";
+    Query query = getCurrentSession().createQuery(hql);
+    query.setParameter(0, value);
+    query.setParameter(1, id);
+    return query.executeUpdate();
+  }
+
   public void delete(String[] ids) {
-    getCurrentSession().createQuery("DELETE FROM  Product WHERE id IN (:ids)").setParameterList(
+    getCurrentSession().createQuery("DELETE FROM Product WHERE id IN (:ids)").setParameterList(
         "ids", ids).executeUpdate();
   }
 
+  public void deleteTravel(Integer id) {
+    getCurrentSession().createQuery("DELETE FROM ProductTravel WHERE id=?").setParameter(0, id)
+        .executeUpdate();
+  }
 
   public Long findProductTotal() {
     Criteria criteria = getCurrentSession().createCriteria(entityClass);
@@ -65,6 +79,12 @@ public class ProductDao extends AbstractDao<Product, String> {
       criteria.setFirstResult((Math.max(page, 1) - 1) * pageSize);
       criteria.setMaxResults(pageSize);
     }
+    return criteria.list();
+  }
+
+  public List<ProductTravel> getTravels(String id) {
+    Criteria criteria = getCurrentSession().createCriteria(ProductTravel.class);
+    criteria.add(Restrictions.eq("productId", id));
     return criteria.list();
   }
 

@@ -34,6 +34,7 @@ public class Product {
   private String types;// 产品类型
   private String grades;// 产品等级
   private String keywords;// 关键词
+  private List<ProductTravel> travels; // 行程
   private List<Image> posters;// 海报图片
   private List<Image> photos;// 相册图片
   private Date createdTime;// 产品创建时间
@@ -269,6 +270,14 @@ public class Product {
 
   public void setDepartureCities(String departureCities) {
     this.departureCities = departureCities;
+  }
+
+  public List<ProductTravel> getTravels() {
+    return travels;
+  }
+
+  public void setTravels(List<ProductTravel> travels) {
+    this.travels = travels;
   }
 
   public List<Image> getPosters() {

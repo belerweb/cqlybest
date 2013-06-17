@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.cqlybest.common.bean.Product;
+import com.cqlybest.common.bean.ProductTravel;
 import com.cqlybest.common.service.DestinationService;
 import com.cqlybest.common.service.DictService;
 import com.cqlybest.common.service.ImageService;
@@ -72,6 +73,37 @@ public class ProductController {
       _value = DateUtils.parseDate(value, new String[] {"yyyy-MM-dd"});
     }
     productService.update(pk, name, _value);
+  }
+
+  /**
+   * 添加产品行程
+   */
+  @RequestMapping(value = "/product/travel/add.do", method = RequestMethod.POST)
+  @ResponseBody
+  public Integer addTravel(@RequestParam String productId, @RequestParam String name) {
+    ProductTravel travel = new ProductTravel();
+    travel.setProductId(productId);
+    travel.setName(name);
+    productService.add(travel);
+    return travel.getId();
+  }
+
+  /**
+   * 修改产品行程
+   */
+  @RequestMapping(value = "/product/travel/update.do", method = RequestMethod.POST)
+  @ResponseBody
+  public void update(@RequestParam Integer pk, @RequestParam String name, @RequestParam String value) {
+    productService.updateTravel(pk, name, value);
+  }
+
+  /**
+   * 修改产品行程
+   */
+  @RequestMapping(value = "/product/travel/delete.do", method = RequestMethod.POST)
+  @ResponseBody
+  public void update(@RequestParam Integer id) {
+    productService.deleteTravel(id);
   }
 
   @RequestMapping(value = "/product/list.html", method = RequestMethod.GET)

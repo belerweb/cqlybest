@@ -17,6 +17,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.cqlybest.common.bean.Product;
 import com.cqlybest.common.bean.ProductFilterItem;
 import com.cqlybest.common.bean.ProductGroup;
+import com.cqlybest.common.bean.ProductTravel;
 import com.cqlybest.common.dao.ImageDao;
 import com.cqlybest.common.dao.ProductDao;
 
@@ -37,8 +38,14 @@ public class ProductService {
     productDao.saveOrUpdate(product);
   }
 
+  @Transactional
+  public void add(ProductTravel travel) {
+    productDao.saveOrUpdate(travel);
+  }
+
   public Product get(String id) {
     Product product = productDao.findById(id);
+    product.setTravels(productDao.getTravels(id));
     product.setPosters(imageDao.queryImagesWithoutData("product-poster", id));
     product.setPhotos(imageDao.queryImagesWithoutData("product-photo", id));
     return product;
@@ -55,8 +62,18 @@ public class ProductService {
   }
 
   @Transactional
+  public void updateTravel(Integer id, String name, String value) {
+    productDao.updateTravel(id, name, value);
+  }
+
+  @Transactional
   public void delete(String[] ids) {
     productDao.delete(ids);
+  }
+
+  @Transactional
+  public void deleteTravel(Integer id) {
+    productDao.deleteTravel(id);
   }
 
   public Long queryProductTotal() {
