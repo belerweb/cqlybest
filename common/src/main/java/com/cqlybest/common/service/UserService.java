@@ -2,6 +2,7 @@ package com.cqlybest.common.service;
 
 import java.util.Date;
 import java.util.List;
+import java.util.UUID;
 
 import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,6 +25,7 @@ public class UserService {
 
   @Transactional
   public void addUser(LoginUser user) {
+    user.setId(UUID.randomUUID().toString());
     userDao.saveOrUpdate(user);
   }
 

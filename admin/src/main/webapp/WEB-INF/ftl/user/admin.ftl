@@ -4,7 +4,7 @@
 	<div class="pagetitle">
 		<h1>管理员</h1>
 		<div class="btn-group">
-			<a href="#m=user&n=user.administrators&u=${ContextPath}/administrator/add.html&t=%23main" class="btn btn-primary">增加管理员</a>
+			<a id="user-add" href="javascript:void(0);" class="btn btn-primary">增加管理员</a>
 		</div>
 		<div class="clearfix"></div>
 		<hr>
@@ -35,14 +35,14 @@
 					</tr>
 				</thead>
 				<tbody>
-					<#list admins as admin>
+					<#list users as user>
 					<tr>
-						<td><input id="admin-check-${admin_index}" type="checkbox"><label for="admin-check-${admin_index}"><span></span></label></td>
-						<td>${admin.fullname!}</td>
-						<td>${admin.cellPhone!}</td>
-						<td>${admin.email!}</td>
-						<td>${admin.loginUsername!}</td>
-						<td>${admin.nickname!}</td>
+						<td><input id="user-check-${user_index}" type="checkbox"><label for="user-check-${user_index}"><span></span></label></td>
+						<td>${user.fullname!}</td>
+						<td>${user.cellPhone!}</td>
+						<td>${user.email!}</td>
+						<td>${user.loginUsername!}</td>
+						<td>${user.nickname!}</td>
 						<td class="action-table">
 							<a href="#"><img alt="" src="images/icon/table_edit.png"></a>
 							<a href="#"><img alt="" src="images/icon/table_del.png"></a>
@@ -56,27 +56,20 @@
 	</div>
 </div>
 <script>
-$('#admin-check').change(function(){
-	$('input[id^=admin-check-]').attr('checked', this.checked);
-});
-$('#main-list-table').dataTable({
-	iDeferLoading: ${total},
-	iDisplayStart: ${(page-1)*pageSize},
-	iDisplayLength: ${pageSize},
-	bLengthChange: false,
-	bFilter: false,
-	bInfo: false,
-	bSort: false,
-	bServerSide: true,
-	fnServerData: function (sSource, aoData, fnCallback, oSettings) {
-		var p = {};
-		$.each(aoData, function(i, obj){
-			p[obj.name] = obj.value;
-		});
-		var q = {};
-		q.page = p.iDisplayStart / p.iDisplayLength + 1;
-		var u = '${ContextPath}/administrator/list.html?' + $.param(q);
-		location.hash = '#m=user&n=user.administrators&u=' + encodeURIComponent(u) + ';t=%23main';
-	}
+$('#user-add').click(function(){
+	bootbox.prompt("管理员姓名", "取消", "确定", function(result) {
+		var name = $.trim(result);
+		if (name.length) {
+			$.post('${ContextPath}/user/add.do', {
+				role: 'admin',
+				name: name
+			}, function(response){
+				var hash = cqlybest.parseHash();
+				hash['u'] = '${ContextPath}/user/admin/update.do?id=' + response;
+				hash['_t'] = new Date().getTime();
+				location.hash = cqlybest.buildHash(hash);
+			});
+		}
+	});
 });
 </script>
