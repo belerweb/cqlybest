@@ -107,7 +107,9 @@ public class UserController {
   @RequestMapping(value = "/user/fit/update.do", method = RequestMethod.POST)
   @ResponseBody
   public void fit(@RequestParam String pk, @RequestParam String name, @RequestParam String value,
-      Model model) {}
+      Model model) {
+    userService.update(pk, name, value);
+  }
 
   /**
    * 修改团体资料
@@ -124,7 +126,9 @@ public class UserController {
   @RequestMapping(value = "/user/group/update.do", method = RequestMethod.POST)
   @ResponseBody
   public void group(@RequestParam String pk, @RequestParam String name, @RequestParam String value,
-      Model model) {}
+      Model model) {
+    userService.update(pk, name, value);
+  }
 
   /**
    * 修改旅行社资料
@@ -141,7 +145,9 @@ public class UserController {
   @RequestMapping(value = "/user/agency/update.do", method = RequestMethod.POST)
   @ResponseBody
   public void agency(@RequestParam String pk, @RequestParam String name,
-      @RequestParam String value, Model model) {}
+      @RequestParam String value, Model model) {
+    userService.update(pk, name, value);
+  }
 
   /**
    * 修改管理员资料
