@@ -25,7 +25,6 @@
 			<table id="main-list-table" class="table table-striped table-condensed">
 				<thead>
 					<tr>
-						<th><input id="admin-check" type="checkbox"><label for="admin-check"><span></span></label></th>
 						<th>姓名</th>
 						<th>手机号</th>
 						<th>电子邮件</th>
@@ -37,15 +36,17 @@
 				<tbody>
 					<#list users as user>
 					<tr>
-						<td><input id="user-check-${user_index}" type="checkbox"><label for="user-check-${user_index}"><span></span></label></td>
 						<td>${user.fullname!}</td>
 						<td>${user.cellPhone!}</td>
 						<td>${user.email!}</td>
 						<td>${user.loginUsername!}</td>
 						<td>${user.nickname!}</td>
 						<td class="action-table">
-							<a href="#"><img alt="" src="images/icon/table_edit.png"></a>
-							<a href="#"><img alt="" src="images/icon/table_del.png"></a>
+							<a href="javascript:void(0);" data-url="${ContextPath}/user/admin/update.do?id=${user.id}"
+								class="page-load-btn safe" data-target="#mb" title="修改"><i class="icon-edit"></i></a>
+							<a href="javascript:void(0);" data-url="${ContextPath}/user/admin/delete.html?id=${user.id}"
+								class="ajax-action-btn danger last" data-confirm="true" data-action="删除" data-title="${user.fullname!}"
+								title="删除"><i class="icon-remove"></i></a>
 						</td>
 					</tr>
 					</#list>
