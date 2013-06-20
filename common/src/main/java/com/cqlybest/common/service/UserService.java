@@ -115,4 +115,14 @@ public class UserService {
     return userDao.findUser(role.getRole(), page, pageSize);
   }
 
+  public LoginUser getUser(String id) {
+    return userDao.findById(id);
+  }
+
+
+  @Transactional
+  public void update(String id, String name, Object value) {
+    userDao.update(id, name, value);
+  }
+
 }

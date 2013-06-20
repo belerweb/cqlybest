@@ -97,31 +97,69 @@ public class UserController {
    */
   @RequestMapping(value = "/user/fit/update.do", method = RequestMethod.GET)
   public void fit(@RequestParam String id, Model model) {
-    model.addAttribute("user", null);
+    LoginUser user = userService.getUser(id);
+    model.addAttribute("user", user);
   }
 
   /**
-   * 团体列表
+   * 修改散客资料
+   */
+  @RequestMapping(value = "/user/fit/update.do", method = RequestMethod.POST)
+  @ResponseBody
+  public void fit(@RequestParam String pk, @RequestParam String name, @RequestParam String value,
+      Model model) {}
+
+  /**
+   * 修改团体资料
    */
   @RequestMapping(value = "/user/group/update.do", method = RequestMethod.GET)
   public void group(@RequestParam String id, Model model) {
-    model.addAttribute("user", null);
+    LoginUser user = userService.getUser(id);
+    model.addAttribute("user", user);
   }
 
   /**
-   * 旅行社列表
+   * 修改团体资料
+   */
+  @RequestMapping(value = "/user/group/update.do", method = RequestMethod.POST)
+  @ResponseBody
+  public void group(@RequestParam String pk, @RequestParam String name, @RequestParam String value,
+      Model model) {}
+
+  /**
+   * 修改旅行社资料
    */
   @RequestMapping(value = "/user/agency/update.do", method = RequestMethod.GET)
   public void agency(@RequestParam String id, Model model) {
-    model.addAttribute("user", null);
+    LoginUser user = userService.getUser(id);
+    model.addAttribute("user", user);
   }
 
   /**
-   * 管理员列表
+   * 修改旅行社资料
+   */
+  @RequestMapping(value = "/user/agency/update.do", method = RequestMethod.POST)
+  @ResponseBody
+  public void agency(@RequestParam String pk, @RequestParam String name,
+      @RequestParam String value, Model model) {}
+
+  /**
+   * 修改管理员资料
    */
   @RequestMapping(value = "/user/admin/update.do", method = RequestMethod.GET)
   public void admin(@RequestParam String id, Model model) {
-    model.addAttribute("user", null);
+    LoginUser user = userService.getUser(id);
+    model.addAttribute("user", user);
+  }
+
+  /**
+   * 修改管理员资料
+   */
+  @RequestMapping(value = "/user/admin/update.do", method = RequestMethod.POST)
+  @ResponseBody
+  public void admin(@RequestParam String pk, @RequestParam String name, @RequestParam String value,
+      Model model) {
+    userService.update(pk, name, value);
   }
 
 }
