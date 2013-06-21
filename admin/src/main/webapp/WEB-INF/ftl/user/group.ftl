@@ -4,7 +4,7 @@
 	<div class="pagetitle">
 		<h1>团体</h1>
 		<div class="btn-group">
-			<a href="#m=user&n=user.administrators&u=${ContextPath}/administrator/add.html&t=%23main" class="btn btn-primary">增加管理员</a>
+			<a id="user-add" href="javascript:void(0);" class="btn btn-primary">增加团体</a>
 		</div>
 		<div class="clearfix"></div>
 		<hr>
@@ -25,8 +25,7 @@
 			<table id="main-list-table" class="table table-striped table-condensed">
 				<thead>
 					<tr>
-						<th><input id="admin-check" type="checkbox"><label for="admin-check"><span></span></label></th>
-						<th>姓名</th>
+						<th>名称</th>
 						<th>手机号</th>
 						<th>电子邮件</th>
 						<th>用户名</th>
@@ -37,15 +36,17 @@
 				<tbody>
 					<#list users as user>
 					<tr>
-						<td><input id="user-check-${user_index}" type="checkbox"><label for="user-check-${user_index}"><span></span></label></td>
 						<td>${user.fullname!}</td>
 						<td>${user.cellPhone!}</td>
 						<td>${user.email!}</td>
 						<td>${user.loginUsername!}</td>
 						<td>${user.nickname!}</td>
 						<td class="action-table">
-							<a href="#"><img alt="" src="images/icon/table_edit.png"></a>
-							<a href="#"><img alt="" src="images/icon/table_del.png"></a>
+							<a href="javascript:void(0);" data-url="${ContextPath}/user/group/update.do?id=${user.id}"
+								class="page-load-btn safe" data-target="#mb" title="修改"><i class="icon-edit"></i></a>
+							<a href="javascript:void(0);" data-url="${ContextPath}/user/group/delete.html?id=${user.id}"
+								class="ajax-action-btn danger last" data-confirm="true" data-action="删除" data-title="${user.fullname!}"
+								title="删除"><i class="icon-remove"></i></a>
 						</td>
 					</tr>
 					</#list>
@@ -56,27 +57,20 @@
 	</div>
 </div>
 <script>
-$('#admin-check').change(function(){
-	$('input[id^=admin-check-]').attr('checked', this.checked);
-});
-$('#main-list-table').dataTable({
-	iDeferLoading: ${total},
-	iDisplayStart: ${(page-1)*pageSize},
-	iDisplayLength: ${pageSize},
-	bLengthChange: false,
-	bFilter: false,
-	bInfo: false,
-	bSort: false,
-	bServerSide: true,
-	fnServerData: function (sSource, aoData, fnCallback, oSettings) {
-		var p = {};
-		$.each(aoData, function(i, obj){
-			p[obj.name] = obj.value;
-		});
-		var q = {};
-		q.page = p.iDisplayStart / p.iDisplayLength + 1;
-		var u = '${ContextPath}/administrator/list.html?' + $.param(q);
-		location.hash = '#m=user&n=user.administrators&u=' + encodeURIComponent(u) + ';t=%23main';
-	}
+$('#user-add').click(function(){
+	bootbox.prompt("团体名称", "取消", "确定", function(result) {
+		var name = $.trim(result);
+		if (name.length) {
+			$.post('${ContextPath}/user/add.do', {
+				role: 'group',
+				name: name
+			}, function(response){
+				var hash = cqlybest.parseHash();
+				hash['u'] = '${ContextPath}/user/group/update.do?id=' + response;
+				hash['_t'] = new Date().getTime();
+				location.hash = cqlybest.buildHash(hash);
+			});
+		}
+	});
 });
 </script>
