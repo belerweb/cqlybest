@@ -125,4 +125,9 @@ public class UserService {
     userDao.update(id, name, value);
   }
 
+  @Transactional
+  public void delete(LoginUser user) {
+    userDao.delete(user);
+  }
+
 }

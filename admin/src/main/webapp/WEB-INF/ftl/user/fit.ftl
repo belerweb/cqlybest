@@ -44,7 +44,7 @@
 						<td class="action-table">
 							<a href="javascript:void(0);" data-url="${ContextPath}/user/fit/update.do?id=${user.id}"
 								class="page-load-btn safe" data-target="#mb" title="修改"><i class="icon-edit"></i></a>
-							<a href="javascript:void(0);" data-url="${ContextPath}/user/fit/delete.html?id=${user.id}"
+							<a href="javascript:void(0);" data-url="${ContextPath}/user/delete.do?id=${user.id}"
 								class="ajax-action-btn danger last" data-confirm="true" data-action="删除" data-title="${user.fullname!}"
 								title="删除"><i class="icon-remove"></i></a>
 						</td>

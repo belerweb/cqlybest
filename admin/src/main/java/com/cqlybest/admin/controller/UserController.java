@@ -168,4 +168,15 @@ public class UserController {
     userService.update(pk, name, value);
   }
 
+  /**
+   * 删除
+   */
+  @RequestMapping("/user/delete.do")
+  @ResponseBody
+  public void delete(@RequestParam String id) {
+    LoginUser user = userService.getUser(id);
+    userService.delete(user);
+    // TODO 判断用户角色并删除相关信息
+  }
+
 }
