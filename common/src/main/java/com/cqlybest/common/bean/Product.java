@@ -39,6 +39,7 @@ public class Product {
   private List<Image> photos;// 相册图片
   private Date createdTime;// 产品创建时间
   private Date lastUpdated;// 最后更新时间
+  private List<ProductComment> comments; // 评论
 
   public String getId() {
     return id;
@@ -310,6 +311,14 @@ public class Product {
 
   public void setLastUpdated(Date lastUpdated) {
     this.lastUpdated = lastUpdated;
+  }
+
+  public List<ProductComment> getComments() {
+    return comments;
+  }
+
+  public void setComments(List<ProductComment> comments) {
+    this.comments = comments;
   }
 
 }
