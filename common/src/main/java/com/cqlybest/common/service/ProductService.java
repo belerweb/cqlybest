@@ -15,6 +15,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.cqlybest.common.bean.Product;
+import com.cqlybest.common.bean.ProductComment;
 import com.cqlybest.common.bean.ProductFilterItem;
 import com.cqlybest.common.bean.ProductGroup;
 import com.cqlybest.common.bean.ProductTravel;
@@ -43,11 +44,17 @@ public class ProductService {
     productDao.saveOrUpdate(travel);
   }
 
+  @Transactional
+  public void add(ProductComment comment) {
+    productDao.saveOrUpdate(comment);
+  }
+
   public Product get(String id) {
     Product product = productDao.findById(id);
     product.setTravels(productDao.getTravels(id));
     product.setPosters(imageDao.queryImagesWithoutData("product-poster", id));
     product.setPhotos(imageDao.queryImagesWithoutData("product-photo", id));
+    product.setComments(productDao.getComments(id));
     return product;
   }
 

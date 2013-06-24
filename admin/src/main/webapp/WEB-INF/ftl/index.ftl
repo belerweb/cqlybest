@@ -121,6 +121,7 @@
 		<script type="text/javascript" src="${ContextPath}/js/i18n/elfinder.zh_CN.js"></script>
 		<script type="text/javascript" src="${ContextPath}/js/select2/select2.js"></script>
 		<script type="text/javascript" src="${ContextPath}/js/bootstrap-editable/js/bootstrap-editable.js"></script>
+		<script type="text/javascript" src="${ContextPath}/js/jquery.dateFormat-1.0.js"></script>
 		<!--[if IE]>
 		<script type="text/javascript" src="${ContextPath}/js/Jit/Extras/excanvas.js"></script>
 		<![endif]-->

@@ -1,5 +1,6 @@
 package com.cqlybest.admin.controller;
 
+import java.util.Date;
 import java.util.List;
 
 import org.apache.commons.lang.StringUtils;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.cqlybest.common.bean.Product;
+import com.cqlybest.common.bean.ProductComment;
 import com.cqlybest.common.bean.ProductTravel;
 import com.cqlybest.common.service.DestinationService;
 import com.cqlybest.common.service.DictService;
@@ -150,6 +152,22 @@ public class ProductController {
   @ResponseBody
   public void del(@RequestParam(value = "ids[]") String[] ids) {
     productService.delete(ids);
+  }
+
+  /**
+   * 添加产品评论
+   */
+  @RequestMapping(value = "/product/comment/add.do", method = RequestMethod.POST)
+  @ResponseBody
+  public ProductComment addComment(@RequestParam String productId, @RequestParam String user,
+      @RequestParam String content) {
+    ProductComment comment = new ProductComment();
+    comment.setProductId(productId);
+    comment.setUser(user);
+    comment.setContent(content);
+    comment.setCommentTime(new Date());
+    productService.add(comment);
+    return comment;
   }
 
 }

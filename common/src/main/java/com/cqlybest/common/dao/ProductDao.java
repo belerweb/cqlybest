@@ -7,11 +7,13 @@ import org.hibernate.Criteria;
 import org.hibernate.Query;
 import org.hibernate.criterion.Conjunction;
 import org.hibernate.criterion.Disjunction;
+import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Projections;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Repository;
 
 import com.cqlybest.common.bean.Product;
+import com.cqlybest.common.bean.ProductComment;
 import com.cqlybest.common.bean.ProductTravel;
 
 @Repository
@@ -85,6 +87,13 @@ public class ProductDao extends AbstractDao<Product, String> {
   public List<ProductTravel> getTravels(String id) {
     Criteria criteria = getCurrentSession().createCriteria(ProductTravel.class);
     criteria.add(Restrictions.eq("productId", id));
+    return criteria.list();
+  }
+
+  public List<ProductComment> getComments(String id) {
+    Criteria criteria = getCurrentSession().createCriteria(ProductComment.class);
+    criteria.add(Restrictions.eq("productId", id));
+    criteria.addOrder(Order.desc("commentTime"));
     return criteria.list();
   }
 
