@@ -83,6 +83,11 @@ public class ProductService {
     productDao.deleteTravel(id);
   }
 
+  @Transactional
+  public void deleteComment(Integer id) {
+    productDao.deleteComment(id);
+  }
+
   public Long queryProductTotal() {
     return productDao.findProductTotal();
   }

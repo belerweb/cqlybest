@@ -60,6 +60,11 @@ public class ProductDao extends AbstractDao<Product, String> {
         .executeUpdate();
   }
 
+  public void deleteComment(Integer id) {
+    getCurrentSession().createQuery("DELETE FROM ProductComment WHERE id=?").setParameter(0, id)
+        .executeUpdate();
+  }
+
   public Long findProductTotal() {
     Criteria criteria = getCurrentSession().createCriteria(entityClass);
     criteria.setProjection(Projections.rowCount());

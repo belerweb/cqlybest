@@ -509,7 +509,7 @@ $('#product-comment-tab a.delete').die('click').live('click', function() {
 	var el = $(this).parents('.row-fluid');
 	bootbox.confirm('确认删除评论', '取消', '确认', function(result) {
 		if (result) {
-			$.post('${ContextPath}/comment/delete.do', {
+			$.post('${ContextPath}/product/comment/delete.do', {
 				id: id
 			}).done(function(){
 				el.remove();

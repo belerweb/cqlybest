@@ -170,4 +170,13 @@ public class ProductController {
     return comment;
   }
 
+  /**
+   * 添加产品评论
+   */
+  @RequestMapping(value = "/product/comment/delete.do", method = RequestMethod.POST)
+  @ResponseBody
+  public void addComment(@RequestParam Integer id) {
+    productService.deleteComment(id);
+  }
+
 }
