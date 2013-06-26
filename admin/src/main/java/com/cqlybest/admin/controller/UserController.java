@@ -4,6 +4,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.encoding.ShaPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -108,7 +109,11 @@ public class UserController {
   @ResponseBody
   public void fit(@RequestParam String pk, @RequestParam String name, @RequestParam String value,
       Model model) {
-    userService.update(pk, name, value);
+    Object _value = value;
+    if ("password".equals(name)) {
+      _value = new ShaPasswordEncoder(256).encodePassword(value, null);
+    }
+    userService.update(pk, name, _value);
   }
 
   /**
@@ -127,7 +132,11 @@ public class UserController {
   @ResponseBody
   public void group(@RequestParam String pk, @RequestParam String name, @RequestParam String value,
       Model model) {
-    userService.update(pk, name, value);
+    Object _value = value;
+    if ("password".equals(name)) {
+      _value = new ShaPasswordEncoder(256).encodePassword(value, null);
+    }
+    userService.update(pk, name, _value);
   }
 
   /**
@@ -146,7 +155,11 @@ public class UserController {
   @ResponseBody
   public void agency(@RequestParam String pk, @RequestParam String name,
       @RequestParam String value, Model model) {
-    userService.update(pk, name, value);
+    Object _value = value;
+    if ("password".equals(name)) {
+      _value = new ShaPasswordEncoder(256).encodePassword(value, null);
+    }
+    userService.update(pk, name, _value);
   }
 
   /**
@@ -165,7 +178,11 @@ public class UserController {
   @ResponseBody
   public void admin(@RequestParam String pk, @RequestParam String name, @RequestParam String value,
       Model model) {
-    userService.update(pk, name, value);
+    Object _value = value;
+    if ("password".equals(name)) {
+      _value = new ShaPasswordEncoder(256).encodePassword(value, null);
+    }
+    userService.update(pk, name, _value);
   }
 
   /**

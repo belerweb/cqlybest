@@ -3153,7 +3153,7 @@ Password
        //do not display password, show '[hidden]' instead
        value2html: function(value, element) {
            if(value) {
-               $(element).text('[hidden]');
+               $(element).text('[已隐藏]');
            } else {
                $(element).empty(); 
            }

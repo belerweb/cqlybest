@@ -47,7 +47,7 @@
 				<div class="control-group">
 					<label class="control-label">密码：</label>
 					<div class="controls">
-						<a id="user_password" href="#" class="editable" data-pk="${id}" data-name="password" data-type="text" data-url="${url}" data-value="${(user.password!)?html}"></a>
+						<a id="user_password" href="#" class="editable" data-pk="${id}" data-name="password" data-type="password" data-url="${url}" data-value="${(user.password!)?html}"></a>
 					</div>
 				</div>
 				<div class="clearfix"></div>
