@@ -25,7 +25,11 @@
 			<p><span class="lname">预定特价：</span><span>电话咨询</span></p>
 			</#if>
 			<#else>
+			<#if product.specialPrice?exists>
 			<p><span class="lname">预定价格：</span><span class="price">¥${(product.price/100)?string('0.00')}</span></p>
+			<#else>
+			<p><span class="lname">预定价格：</span><span>电话咨询</span></p>
+			</#if>
 			</#if>
 			<#if product.childPrice?has_content>
 			<p><span class="lname">儿童价：</span><span class="price">¥${(product.childPrice/100)?string('0.00')}</span></p>
@@ -77,55 +81,38 @@
 			</div>
 		</div>
 	</div>
+	<#if product.travels?has_content>
 	<div id="product-trip" class="row">
 		<div class="span12">
 			<h4 class="title">详细行程</h4>
 			<div class="day-trips">
-				<div class="day row-fluid">
+				<#list product.travels as travel>
+				<div class="day row-fluid <#if travel_index==product.travels?size-1>last</#if>">
 					<div class="span2">
-						<div class="day-icon img-circle alert-success text-center"><strong>第 1 天</strong></div>
+						<div class="day-icon img-circle alert-success text-center"><strong>${travel.name!}</strong></div>
 					</div>
 					<div class="span10">
 						<ul class="nav nav-tabs">
-							<li class="active"><a href="#d1-1" data-toggle="tab">游</a></li>
-							<li><a href="#d1-2" data-toggle="tab">行</a></li>
-							<li><a href="#d1-3" data-toggle="tab">吃</a></li>
-							<li><a href="#d1-4" data-toggle="tab">住</a></li>
-							<li><a href="#d1-5" data-toggle="tab">购</a></li>
+							<li class="active"><a href="#d${travel_index}-1" data-toggle="tab">游</a></li>
+							<li><a href="#d${travel_index}-2" data-toggle="tab">行</a></li>
+							<li><a href="#d${travel_index}-3" data-toggle="tab">吃</a></li>
+							<li><a href="#d${travel_index}-4" data-toggle="tab">住</a></li>
+							<li><a href="#d${travel_index}-5" data-toggle="tab">购</a></li>
 						</ul>
 						<div class="tab-content">
-							<div class="tab-pane active" id="d1-1">早餐后乘车前往【拉市海】（含骑马、划船门票200元，注：如果客人不骑马划船费用不退）游览（15KM,30分钟）。09：00点拉市海边上马，开始游览茶马古道：途经美丽的田园风光，纳西村庄。进入原始森林，感受大自然的气息。12：00—13：00午餐后乘车赴纳西先民在丽江坝子中最早的聚居地之一的【束河古镇】（赠送门票50元），免费参观滇西北最大的玉石城—滇缅玉石城店（120分钟左右），参观藻精华-螺旋藻（约30分钟）返回客栈，晚餐自理</div>
-							<div class="tab-pane" id="d1-2">行</div>
-							<div class="tab-pane" id="d1-3">吃</div>
-							<div class="tab-pane" id="d1-4">住</div>
-							<div class="tab-pane" id="d1-5">购</div>
+							<div class="tab-pane active" id="d${travel_index}-1">${travel.tour!}</div>
+							<div class="tab-pane" id="d${travel_index}-2">${travel.traffic!}</div>
+							<div class="tab-pane" id="d${travel_index}-3">${travel.eat!}</div>
+							<div class="tab-pane" id="d${travel_index}-4">${travel.live!}</div>
+							<div class="tab-pane" id="d${travel_index}-5">${travel.purchase!}</div>
 						</div>
 					</div>
 				</div>
-				<div class="day row-fluid last">
-					<div class="span2">
-						<div class="day-icon img-circle alert-success text-center"><strong>第 2 天</strong></div>
-					</div>
-					<div class="span10">
-						<ul class="nav nav-tabs">
-							<li class="active"><a href="#d2-1" data-toggle="tab">游</a></li>
-							<li><a href="#d2-2" data-toggle="tab">行</a></li>
-							<li><a href="#d2-3" data-toggle="tab">吃</a></li>
-							<li><a href="#d2-4" data-toggle="tab">住</a></li>
-							<li><a href="#d2-5" data-toggle="tab">购</a></li>
-						</ul>
-						<div class="tab-content">
-							<div class="tab-pane active" id="d2-1">早餐后乘车前往【拉市海】（含骑马、划船门票200元，注：如果客人不骑马划船费用不退）游览（15KM,30分钟）。09：00点拉市海边上马，开始游览茶马古道：途经美丽的田园风光，纳西村庄。进入原始森林，感受大自然的气息。12：00—13：00午餐后乘车赴纳西先民在丽江坝子中最早的聚居地之一的【束河古镇】（赠送门票50元），免费参观滇西北最大的玉石城—滇缅玉石城店（120分钟左右），参观藻精华-螺旋藻（约30分钟）返回客栈，晚餐自理</div>
-							<div class="tab-pane" id="d2-2">行</div>
-							<div class="tab-pane" id="d2-3">吃</div>
-							<div class="tab-pane" id="d2-4">住</div>
-							<div class="tab-pane" id="d2-5">购</div>
-						</div>
-					</div>
-				</div>
+				</#list>
 			</div>
 		</div>
 	</div>
+	</#if>
 </div>
 <script>
 	var PageContext = {
