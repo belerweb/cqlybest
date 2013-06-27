@@ -1,5 +1,6 @@
 package com.cqlybest.common.service;
 
+import java.util.Date;
 import java.util.List;
 
 import org.hibernate.criterion.Order;
@@ -19,10 +20,14 @@ public class SmsService {
   private SmsDao smsDao;
 
   @Transactional
-  public void send(String phone, String content) {
+  public void send(String uid, String from, String phone, String to, String content) {
     Sms sms = new Sms();
+    sms.setUid(uid);
+    sms.setFrom(from);
     sms.setPhone(phone);
+    sms.setTo(to);
     sms.setContent(content);
+    sms.setSentDate(new Date());
     sms.setSuccess(SMS.send(phone, content).isSuccess());
     smsDao.saveOrUpdate(sms);
   }

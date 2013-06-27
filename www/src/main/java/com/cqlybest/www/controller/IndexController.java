@@ -68,7 +68,7 @@ public class IndexController {
       String code = RandomStringUtils.randomNumeric(4);
       PhoneValidationCode validationCode = new PhoneValidationCode(cellPhone, code);
       phoneValidationService.save(validationCode);
-      smsService.send(cellPhone, "您正在重庆易游天下网站注册帐户，您的手机验证码是" + code + "，使用一次后失效。");
+      smsService.send(null, "系统", cellPhone, null, "您正在重庆易游天下网站注册帐户，您的手机验证码是" + code + "，使用一次后失效。");
       session.setAttribute("PHONE_VALIDATION_CODE", validationCode);
       return null;
     }
