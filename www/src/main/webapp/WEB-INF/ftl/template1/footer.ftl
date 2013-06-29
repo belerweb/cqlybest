@@ -52,9 +52,15 @@
 				<a title="可信网站" target="_blank" rel="nofollow" href="＃"><img src="${ContextPath}/template1/img/trust.png"></a>
 			</div>
 			<div class="footer text-center copyright">
-				<span>Copyright© 2013 易游天下国际旅行社(北京)有限公司重庆分社</span>
-				<span>国际证许可证号:L-CQ-CJ-00000</span>
-				<span>渝ICP备12004321号</span>
+				<#if (Options.site_copyright)?has_content>
+				<span>${Options.site_copyright}</span>
+				</#if>
+				<#if (Options.site_icp_license)?has_content>
+				<span>${Options.site_icp_license}</span>
+				</#if>
+				<#if (Options.site_icp)?has_content>
+				<span>${Options.site_icp}</span>
+				</#if>
 			</div>
 			<div class="footer text-center link">
 				<ul>
@@ -73,6 +79,9 @@
 					<li><a href="#" target="_blank">12306</a></li>
 				</ul>
 			</div>
+			<#if (Options.site_statistical_code)?has_content>
+			<div class="hide">${Options.site_statistical_code}</div>
+			</#if>
 		</div>
 		<script src="${ContextPath}/template1/js/jquery.min.js"></script>
 		<script src="${ContextPath}/template1/js/bootstrap.min.js"></script>

@@ -44,6 +44,12 @@
 					</div>
 				</div>
 				<div class="control-group">
+					<label class="control-label">许可证号：</label>
+					<div class="controls">
+						<a id="site_icp_license" href="#" class="editable" data-type="text" data-url="${ContextPath}/site/config.html" data-value="${(options.site_icp_license!)?html}"></a>
+					</div>
+				</div>
+				<div class="control-group">
 					<label class="control-label">网站底部版权文字：</label>
 					<div class="controls">
 						<a id="site_copyright" href="#" class="editable" data-type="text" data-url="${ContextPath}/site/config.html" data-value="${(options.site_copyright!)?html}"></a>
@@ -90,6 +96,9 @@ $('#site_meta_keyword').editable({
 });
 $('#site_meta_description').editable({
 	// 长度 1024
+});
+$('#site_icp_license').editable({
+	// 长度 32
 });
 $('#site_icp').editable({
 	// 长度 32
