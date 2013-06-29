@@ -1,3 +1,4 @@
+<#assign Title=product.name! />
 <#include "/template1/header.ftl">
 <div class="container margin-menu">
 	<div class="row">

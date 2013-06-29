@@ -20,6 +20,12 @@
 					</div>
 				</div>
 				<div class="control-group">
+					<label class="control-label">Meta：</label>
+					<div class="controls">
+						<a id="site_meta" href="#" class="editable" data-type="textarea" data-url="${ContextPath}/site/config.html" data-value="${(options.site_meta!)?html}"></a>
+					</div>
+				</div>
+				<div class="control-group">
 					<label class="control-label">关键字（词）：</label>
 					<div class="controls">
 						<a id="site_meta_keyword" href="#" class="editable" data-type="select2" data-url="${ContextPath}/site/config.html" data-value="${(options.site_meta_keyword!)?html}">${(options.site_meta_keyword!)?html}</a>
@@ -57,6 +63,8 @@
 <script>
 $('#site_name').editable({
 	// 长度 256
+});
+$('#site_meta').editable({
 });
 $('#site_meta_keyword').editable({
 	inputclass: 'input-large',
