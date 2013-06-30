@@ -1,10 +1,12 @@
 <#include "/template1/header_top.ftl">
 <div id="top-logo" class="container text-right">
 	<div class="pull-left"><img src="${ContextPath}/template1/img/logo.png"></div>
+	<#if (Options.site_400)?has_content>
 	<div class="pull-right">
-		<div class="phone"><span><img src="${ContextPath}/template1/img/contact.png">400-023-9761</span></div>
+		<div class="phone"><span><img src="${ContextPath}/template1/img/contact.png">${Options.site_400}</span></div>
 		<div class="phone-tip"><i>7x24 小时，用心为您服务</i></div>
 	</div>
+	</#if>
 </div>
 <div id="menu" class="navbar">
 	<div class="navbar-inner">

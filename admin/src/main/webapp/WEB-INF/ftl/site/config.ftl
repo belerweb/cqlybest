@@ -20,6 +20,12 @@
 					</div>
 				</div>
 				<div class="control-group">
+					<label class="control-label">400电话：</label>
+					<div class="controls">
+						<a id="site_400" href="#" class="editable" data-type="text" data-url="${ContextPath}/site/config.html" data-value="${(options.site_400!)?html}"></a>
+					</div>
+				</div>
+				<div class="control-group">
 					<label class="control-label">Meta：</label>
 					<div class="controls">
 						<a id="site_meta" href="#" class="editable" data-type="textarea" data-url="${ContextPath}/site/config.html" data-value="${(options.site_meta!)?html}"></a>
@@ -69,6 +75,8 @@
 <script>
 $('#site_name').editable({
 	// 长度 256
+});
+$('#site_400').editable({
 });
 $('#site_meta').editable({
 });
