@@ -186,7 +186,7 @@ public class Template1Controller {
   @RequestMapping("/template1/product/{id}.html")
   public Object product(@PathVariable String id, Model model) {
     Product product = productService.get(id);
-    if (product == null) {
+    if (product == null || !product.getPublished()) {
       return new ResponseEntity<Object>(HttpStatus.NOT_FOUND);
     }
     model.addAttribute("product", product);
