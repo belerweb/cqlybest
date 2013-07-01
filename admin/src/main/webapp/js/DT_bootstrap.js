@@ -12,7 +12,8 @@ $.extend(true, $.fn.dataTable.defaults, {
 		},
 		sZeroRecords : '',
 		sEmptyTable : '',
-		sInfo : '共 _TOTAL_ 条记录，当前显示 _START_ 到 _END_'
+		sInfo : '共 _TOTAL_ 条记录，当前显示 _START_ 到 _END_',
+		sInfoEmpty : '没有数据'
 	},
 	bSort : false
 });

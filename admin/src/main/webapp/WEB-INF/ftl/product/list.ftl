@@ -9,7 +9,66 @@
 		<div class="clearfix"></div>
 		<hr>
 	</div>
-	<div class="grid">
+	<div id="search-form" class="form-inline" style="margin-top:20px;">
+		<div class="row-fluid">
+			<div class="span4">
+				<label class="checkbox inline"><strong>热门：</strong></label>
+				<label class="radio inline">
+					<input name="product-hot" <#if !paramHot?exists>checked="checked"</#if> type="radio" value="-1"> 全部
+				</label>
+				<label class="radio inline">
+					<input name="product-hot" <#if paramHot?exists && paramHot>checked="checked"</#if> type="radio" value="true"> 是
+				</label>
+				<label class="radio inline">
+					<input name="product-hot" <#if paramHot?exists && !paramHot>checked="checked"</#if> type="radio" value="false"> 否
+				</label>
+			</div>
+			<div class="span4">
+				<label class="checkbox inline"><strong>推荐：</strong></label>
+				<label class="radio inline">
+					<input name="product-red" <#if !paramRed?exists>checked="checked"</#if> type="radio" value="-1"> 全部
+				</label>
+				<label class="radio inline">
+					<input name="product-red" <#if paramRed?exists && paramRed>checked="checked"</#if> type="radio" value="true"> 是
+				</label>
+				<label class="radio inline">
+					<input name="product-red" <#if paramRed?exists && !paramRed>checked="checked"</#if> type="radio" value="false"> 否
+				</label>
+			</div>
+			<div class="span4">
+				<label class="checkbox inline"><strong>特价：</strong></label>
+				<label class="radio inline">
+					<input name="product-spe" <#if !paramSpe?exists>checked="checked"</#if> type="radio" value="-1"> 全部
+				</label>
+				<label class="radio inline">
+					<input name="product-spe" <#if paramSpe?exists && paramSpe>checked="checked"</#if> type="radio" value="true"> 是
+				</label>
+				<label class="radio inline">
+					<input name="product-spe" <#if paramSpe?exists && !paramSpe>checked="checked"</#if> type="radio" value="false"> 否
+				</label>
+			</div>
+		</div>
+		<div class="row-fluid">
+			<div class="span4">
+				<label class="checkbox inline"><strong>发布：</strong></label>
+				<label class="radio inline">
+					<input name="product-pub" <#if !paramPub?exists>checked="checked"</#if> type="radio" checked="checked" value="-1"> 全部
+				</label>
+				<label class="radio inline">
+					<input name="product-pub" <#if paramPub?exists && paramPub>checked="checked"</#if> type="radio" value="true"> 是
+				</label>
+				<label class="radio inline">
+					<input name="product-pub" <#if paramPub?exists && !paramPub>checked="checked"</#if> type="radio" value="false"> 否
+				</label>
+			</div>
+			<div class="span4">
+				<label class="checkbox inline"><strong>名称：</strong></label>
+				<input type="text" class="input-small" placeholder="关键词" name="product-name" value="${paramName!}">
+			</div>
+			<div class="span4"><button type="button" class="btn s">搜索</button></div>
+		</div>
+	</div>
+	<div class="grid" style="margin-top:5px;">
 		<div class="grid-title">
 			<div class="pull-left">
 				<div class="icon-title"><i class="icon-table"></i></div>
@@ -298,5 +357,23 @@ $('#product-add').click(function(){
 			});
 		}
 	});
+});
+
+$('#search-form button.s').click(function(){
+	var hash = cqlybest.parseHash();
+	var p = [];
+	var hot = $('#search-form input[name=product-hot]:checked').val();
+	var red = $('#search-form input[name=product-red]:checked').val();
+	var spe = $('#search-form input[name=product-spe]:checked').val();
+	var pub = $('#search-form input[name=product-pub]:checked').val();
+	var name = $.trim($('#search-form input[name=product-name]').val());
+	if (hot!='-1') p.push('hot=' + hot);
+	if (red!='-1') p.push('red=' + red);
+	if (spe!='-1') p.push('spe=' + spe);
+	if (pub!='-1') p.push('pub=' + pub);
+	if (!/^\s*$/.test(name)) p.push('name=' + name);
+	hash['u'] = '${ContextPath}/product/list.html?' + p.join('&');
+	hash['_t'] = new Date().getTime();
+	location.hash = cqlybest.buildHash(hash);
 });
 </script>

@@ -3,10 +3,12 @@ package com.cqlybest.common.dao;
 import java.util.Date;
 import java.util.List;
 
+import org.apache.commons.lang.StringUtils;
 import org.hibernate.Criteria;
 import org.hibernate.Query;
 import org.hibernate.criterion.Conjunction;
 import org.hibernate.criterion.Disjunction;
+import org.hibernate.criterion.MatchMode;
 import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Projections;
 import org.hibernate.criterion.Restrictions;
@@ -65,14 +67,41 @@ public class ProductDao extends AbstractDao<Product, String> {
         .executeUpdate();
   }
 
-  public Long findProductTotal() {
+  private void buidBooleanCondition(Criteria criteria, String prop, Boolean value) {
+    if (value != null) {
+      if (value) {
+        criteria.add(Restrictions.eq(prop, true));
+      } else {
+        Disjunction disjunction = Restrictions.disjunction();
+        disjunction.add(Restrictions.eq(prop, false));
+        disjunction.add(Restrictions.isNull(prop));
+        criteria.add(disjunction);
+      }
+    }
+  }
+
+  private void buidProductCriteria(Criteria criteria, Boolean hot, Boolean red, Boolean spe,
+      Boolean pub, String name) {
+    buidBooleanCondition(criteria, "popular", hot);;
+    buidBooleanCondition(criteria, "recommend", red);;
+    buidBooleanCondition(criteria, "specialOffer", spe);;
+    buidBooleanCondition(criteria, "published", pub);;
+    if (StringUtils.isNotEmpty(name)) {
+      criteria.add(Restrictions.like("name", name, MatchMode.ANYWHERE));
+    }
+  }
+
+  public Long findProductTotal(Boolean hot, Boolean red, Boolean spe, Boolean pub, String name) {
     Criteria criteria = getCurrentSession().createCriteria(entityClass);
+    buidProductCriteria(criteria, hot, red, spe, pub, name);
     criteria.setProjection(Projections.rowCount());
     return (Long) criteria.uniqueResult();
   }
 
-  public List<Product> findProductTotal(int page, int pageSize) {
+  public List<Product> findProductTotal(Boolean hot, Boolean red, Boolean spe, Boolean pub,
+      String name, int page, int pageSize) {
     Criteria criteria = getCurrentSession().createCriteria(entityClass);
+    buidProductCriteria(criteria, hot, red, spe, pub, name);
     criteria.setFirstResult((Math.max(page, 1) - 1) * pageSize);
     criteria.setMaxResults(pageSize);
     return criteria.list();

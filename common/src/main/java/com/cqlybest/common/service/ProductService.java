@@ -88,12 +88,13 @@ public class ProductService {
     productDao.deleteComment(id);
   }
 
-  public Long queryProductTotal() {
-    return productDao.findProductTotal();
+  public Long queryProductTotal(Boolean hot, Boolean red, Boolean spe, Boolean pub, String name) {
+    return productDao.findProductTotal(hot, red, spe, pub, name);
   }
 
-  public List<Product> queryProduct(int page, int pageSize) {
-    return productDao.findProductTotal(page, pageSize);
+  public List<Product> queryProduct(Boolean hot, Boolean red, Boolean spe, Boolean pub,
+      String name, int page, int pageSize) {
+    return productDao.findProductTotal(hot, red, spe, pub, name, page, pageSize);
   }
 
   public List<Product> queryProducts(ProductGroup productGroup, Set<ProductFilterItem> filterItems,

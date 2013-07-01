@@ -109,13 +109,23 @@ public class ProductController {
   }
 
   @RequestMapping(value = "/product/list.html", method = RequestMethod.GET)
-  public void products(@RequestParam(defaultValue = "0") int page, Model model) {
+  public void products(@RequestParam(required = false) Boolean hot,
+      @RequestParam(required = false) Boolean red, @RequestParam(required = false) Boolean spe,
+      @RequestParam(required = false) Boolean pub, @RequestParam(required = false) String name,
+      @RequestParam(defaultValue = "0") int page, Model model) {
     page = Math.max(1, page);
     int pageSize = 10;
     model.addAttribute("page", page);
     model.addAttribute("pageSize", pageSize);
-    model.addAttribute("total", productService.queryProductTotal());
-    model.addAttribute("products", productService.queryProduct(page, pageSize));
+    model.addAttribute("total", productService.queryProductTotal(hot, red, spe, pub, name));
+    model.addAttribute("products", productService.queryProduct(hot, red, spe, pub, name, page,
+        pageSize));
+
+    model.addAttribute("paramHot", hot);
+    model.addAttribute("paramRed", red);
+    model.addAttribute("paramSpe", spe);
+    model.addAttribute("paramPub", pub);
+    model.addAttribute("paramName", name);
   }
 
   @RequestMapping("/product/toggle.html")
