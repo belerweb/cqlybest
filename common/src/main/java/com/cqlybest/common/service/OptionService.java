@@ -20,7 +20,7 @@ public class OptionService {
   private long lastCachedTime;
 
   public Map<String, String> getOptions() {
-    if (cachedOptions == null || System.currentTimeMillis() - lastCachedTime > 3600000) {
+    if (cachedOptions == null || System.currentTimeMillis() - lastCachedTime > 0) {
       cachedOptions = new HashMap<>();
       for (Option option : optionDao.findAll()) {
         cachedOptions.put(option.getName(), option.getValue());

@@ -57,8 +57,7 @@ public class DestinationService {
   }
 
   public List<Destination> getTree() {
-    if (DESTINATION_CACHE == null
-        || (System.currentTimeMillis() - DESTINATION_CACHE_TIME > 3600000)) {
+    if (DESTINATION_CACHE == null || (System.currentTimeMillis() - DESTINATION_CACHE_TIME > 0)) {
       DESTINATION_CACHE = destinationDao.find(Order.asc("lft"));
       DESTINATION_CACHE_TIME = System.currentTimeMillis();
     }

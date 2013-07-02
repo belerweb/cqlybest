@@ -39,7 +39,7 @@ public class DictService {
   public List<? extends Dict> getDict(Class<? extends Dict> cls) {
     String name = cls.getSimpleName();
     List<? extends Dict> result = DICT_CACHE.get(name);
-    if (result == null || (System.currentTimeMillis() - DICT_CACHE_TIME.get(name)) > 3600000) {
+    if (result == null || (System.currentTimeMillis() - DICT_CACHE_TIME.get(name)) > 0) {
       result = dictDao.findAllDict(cls);
       DICT_CACHE.put(name, result);
       DICT_CACHE_TIME.put(name, System.currentTimeMillis());
