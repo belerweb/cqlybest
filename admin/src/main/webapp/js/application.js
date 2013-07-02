@@ -143,16 +143,14 @@ window.cqlybest = {
 			}
 		});
 	},
-	chooseFile : function(arg) {
-		bootbox.alert("<div id='elfinder-container'></div>", '确定', function(){
-			var files = $('#elfinder').data('files') || [];
-			if (typeof arg == 'function') {
-				arg(files);
-			} else {
-				$(arg).val(ImageServer + '/image/' + files[0]||'').trigger('change');
-			}
-		});
-		$('#elfinder-container').load(ContextPath + '/file.html');
+	uploadImage : function(context) {
+		var winParam = ['dialogWidth=650px;dialogHeight=380px'];
+		winParam.push('center=yes');
+		winParam.push('help=no');
+		winParam.push('resizable=no');
+		winParam.push('status=no');
+		winParam.push('scroll=no');
+		return window.showModalDialog(context + '/image/upload.html',null,winParam.join(';'));
 	},
 	parseHash : function(hash) {
 		var _hash = hash;

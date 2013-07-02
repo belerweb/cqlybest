@@ -420,25 +420,21 @@ var arrangeImags = function(el, images) {
 	}
 };
 $('#product-add-poster,#product-add-photo').click(function(){
-	var winParam = ['dialogWidth=650px;dialogHeight=380px'];
-	winParam.push('center=yes');
-	winParam.push('help=no');
-	winParam.push('resizable=no');
-	winParam.push('status=no');
-	winParam.push('scroll=no');
-	var images = window.showModalDialog('${ContextPath}/image/upload.html',null,winParam.join(';'));
-	var gallery = $(this).parents('.image-gallery');
-	var extra = $(this).attr('data-extra');
-	$.each(images, function(i, obj) {
-		$.post('${ContextPath}/image/update.do', {
-			pk: obj.id,
-			name: ['extra', 'extraKey'],
-			value: [extra, '${id}']
-		}, function(){
-			// TODO
+	var images = cqlybest.uploadImage('${ContextPath}');
+	if (images) {
+		var gallery = $(this).parents('.image-gallery');
+		var extra = $(this).attr('data-extra');
+		$.each(images, function(i, obj) {
+			$.post('${ContextPath}/image/update.do', {
+				pk: obj.id,
+				name: ['extra', 'extraKey'],
+				value: [extra, '${id}']
+			}, function(){
+				// TODO
+			});
 		});
-	});
-	arrangeImags(gallery, images);
+		arrangeImags(gallery, images);
+	}
 });
 $('.image-gallery').editable({
 	selector: 'a.title,a.description',

@@ -72,7 +72,7 @@
 							<ul class="ad-thumb-list">
 								<#if product.photos?has_content>
 								<#list product.photos as image>
-								<li><a href="${ContextPath}/image/${image.id}.${image.imageType}?width=608&height=400"><img alt="${product.name!}" src="${ContextPath}/image/${image.id}.${image.imageType}?width=90&height=60"></a></li>
+								<li><a href="${ContextPath}/image/${image.id}.${image.imageType}?width=608&height=400"><img alt="${image.title!}" src="${ContextPath}/image/${image.id}.${image.imageType}?width=90&height=60"></a></li>
 								</#list>
 								</#if>
 							</ul>

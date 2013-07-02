@@ -109,7 +109,13 @@ public class ProductService {
     generateGroupCondition(or, "keywords", productGroup.getGroupKeywords());
     generateGroupCondition(or, "departureCities", productGroup.getGroupDepartureCities());
     generateGroupCondition(or, "destinations", productGroup.getGroupDestinations());
-    return productDao.getProducts(or, and, page, pageSize);
+    List<Product> products = productDao.getProducts(or, and, page, pageSize);
+    if (pageSize != null) {
+      for (Product product : products) {
+        product.setPosters(imageDao.queryImagesWithoutData("product-poster", product.getId()));
+      }
+    }
+    return products;
   }
 
   private void generateGroupCondition(Junction condition, String property, String values) {

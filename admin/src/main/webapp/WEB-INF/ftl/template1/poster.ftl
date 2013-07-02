@@ -118,9 +118,14 @@ $('#template1-tab2-list-table').dataTable({
 	bInfo: false,
 	bPaginate: false
 });
+
 $('[data-toggle=upload]').click(function(){
-	cqlybest.chooseFile($(this).prev());
+	var images = cqlybest.uploadImage('${ContextPath}');
+	if (images && images.length) {
+		$(this).prev().val('/image/' + images[0].id + '.' + images[0].imageType);
+	}
 });
+
 $('input,textarea,select', '#template1-tab2-form').jqBootstrapValidation({
 	submitSuccess : function($form, event) {
 		event.preventDefault();
