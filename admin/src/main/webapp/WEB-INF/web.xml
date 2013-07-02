@@ -25,6 +25,10 @@
 	</filter>
 	<filter-mapping>
 		<filter-name>hibernateFilter</filter-name>
+		<url-pattern>/</url-pattern>
+	</filter-mapping>
+	<filter-mapping>
+		<filter-name>hibernateFilter</filter-name>
 		<url-pattern>*.html</url-pattern>
 	</filter-mapping>
 	<filter-mapping>
@@ -39,6 +43,10 @@
 		<filter-name>springSecurityFilterChain</filter-name>
 		<filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
 	</filter>
+	<filter-mapping>
+		<filter-name>springSecurityFilterChain</filter-name>
+		<url-pattern>/</url-pattern>
+	</filter-mapping>
 	<filter-mapping>
 		<filter-name>springSecurityFilterChain</filter-name>
 		<url-pattern>*.html</url-pattern>
@@ -83,5 +91,17 @@
 		<param-name>org.eclipse.jetty.servlet.Default.useFileMappedBuffer</param-name>
 		<param-value>false</param-value>
 	</context-param>
+	<context-param>
+		<param-name>org.eclipse.jetty.servlet.Default.dirAllowed</param-name>
+		<param-value>false</param-value>
+	</context-param>
+	<context-param>
+		<param-name>org.eclipse.jetty.servlet.Default.welcomeServlets</param-name>
+		<param-value>true</param-value>
+	</context-param>
+
+	<welcome-file-list>
+		<welcome-file>index.html</welcome-file>
+	</welcome-file-list>
 
 </web-app>
