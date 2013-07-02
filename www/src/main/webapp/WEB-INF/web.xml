@@ -18,6 +18,10 @@
 		<filter-name>hibernateFilter</filter-name>
 		<url-pattern>*.do</url-pattern>
 	</filter-mapping>
+	<filter-mapping>
+		<filter-name>hibernateFilter</filter-name>
+		<url-pattern>/image/*</url-pattern>
+	</filter-mapping>
 	<filter>
 		<filter-name>springSecurityFilterChain</filter-name>
 		<filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>

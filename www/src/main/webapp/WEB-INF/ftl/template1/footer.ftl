@@ -83,14 +83,18 @@
 			<div class="hide">${Options.site_statistical_code}</div>
 			</#if>
 		</div>
-		<script src="${ContextPath}/template1/js/jquery.min.js"></script>
-		<script src="${ContextPath}/template1/js/bootstrap.min.js"></script>
+		<#if (Options.release)?exists>
+		<script src="${ContextPath}/template1/js/application.min.js"></script>
+		<#else>
+		<script src="${ContextPath}/template1/js/jquery.js"></script>
+		<script src="${ContextPath}/template1/js/bootstrap.js"></script>
 		<script src="${ContextPath}/template1/js/jquery.cookie.js"></script>
 		<script src="${ContextPath}/template1/js/twitter-bootstrap-hover-dropdown.js"></script>
 		<script src="${ContextPath}/template1/js/jqBootstrapValidation.js"></script>
 		<script src="${ContextPath}/template1/js/jquery.form.js"></script>
-		<script src="${ContextPath}/template1/js/gallery/jquery.ad-gallery.js"></script>
+		<script src="${ContextPath}/template1/js/jquery.ad-gallery.js"></script>
 		<script src="${ContextPath}/template1/js/cqlybest.js"></script>
+		</#if>
 	</body>
 
 </html>

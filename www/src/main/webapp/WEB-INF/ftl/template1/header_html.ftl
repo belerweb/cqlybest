@@ -13,9 +13,13 @@
 		<meta name="Keywords" content="<#if Keywords?has_content>${Keywords}<#else>${(Options.site_meta_keyword)!}</#if>"/>
 		<meta name="Description" content="<#if Description?has_content>${Description}<#else>${(Options.site_meta_description)!}</#if>"/>
 		${(Options.site_meta)!}
-		<link rel="stylesheet" href="${ContextPath}/template1/css/bootstrap.min.css">
-		<link rel="stylesheet" href="${ContextPath}/template1/js/gallery/jquery.ad-gallery.css">
+		<#if (Options.release)?exists>
+		<link rel="stylesheet" href="${ContextPath}/template1/css/application.min.css">
+		<#else>
+		<link rel="stylesheet" href="${ContextPath}/template1/css/bootstrap.css">
+		<link rel="stylesheet" href="${ContextPath}/template1/css/jquery.ad-gallery.css">
 		<link rel="stylesheet" href="${ContextPath}/template1/css/cqlybest.css">
+		</#if>
 		<link rel="shortcut icon" href="${ContextPath}/template1/favicon.ico">
 	</head>
 

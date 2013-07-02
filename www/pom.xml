@@ -1,23 +1,65 @@
 <?xml version="1.0"?>
 <project xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"
-    xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
 
-    <modelVersion>4.0.0</modelVersion>
-    <parent>
-        <groupId>com.cqlybest</groupId>
-        <artifactId>cqlybest</artifactId>
-        <version>1.0.0-SNAPSHOT</version>
-        <relativePath>../pom.xml</relativePath>
-    </parent>
-    <artifactId>cqlybest-www</artifactId>
-    <packaging>war</packaging>
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>com.cqlybest</groupId>
+		<artifactId>cqlybest</artifactId>
+		<version>1.0.0-SNAPSHOT</version>
+		<relativePath>../pom.xml</relativePath>
+	</parent>
+	<artifactId>cqlybest-www</artifactId>
+	<packaging>war</packaging>
 
-    <dependencies>
-        <dependency>
-            <groupId>${project.groupId}</groupId>
-            <artifactId>cqlybest-common</artifactId>
-            <version>${project.version}</version>
-        </dependency>
-    </dependencies>
+	<dependencies>
+		<dependency>
+			<groupId>${project.groupId}</groupId>
+			<artifactId>cqlybest-common</artifactId>
+			<version>${project.version}</version>
+		</dependency>
+	</dependencies>
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>com.samaxes.maven</groupId>
+				<artifactId>minify-maven-plugin</artifactId>
+				<version>1.7</version>
+				<executions>
+					<execution>
+						<id>default-minify</id>
+						<phase>process-resources</phase>
+						<configuration>
+							<charset>utf-8</charset>
+							<cssSourceDir>template1/css</cssSourceDir>
+							<cssSourceFiles>
+								<cssSourceFile>bootstrap.css</cssSourceFile>
+								<cssSourceFile>jquery.ad-gallery.css</cssSourceFile>
+								<cssSourceFile>cqlybest.css</cssSourceFile>
+							</cssSourceFiles>
+							<cssFinalFile>application.css</cssFinalFile>
+							<jsEngine>closure</jsEngine>
+							<jsSourceDir>template1/js</jsSourceDir>
+							<jsSourceFiles>
+								<jsSourceFile>jquery.js</jsSourceFile>
+								<jsSourceFile>bootstrap.js</jsSourceFile>
+								<jsSourceFile>jquery.cookie.js</jsSourceFile>
+								<jsSourceFile>twitter-bootstrap-hover-dropdown.js</jsSourceFile>
+								<jsSourceFile>jqBootstrapValidation.js</jsSourceFile>
+								<jsSourceFile>jquery.form.js</jsSourceFile>
+								<jsSourceFile>jquery.ad-gallery.js</jsSourceFile>
+								<jsSourceFile>cqlybest.js</jsSourceFile>
+							</jsSourceFiles>
+							<jsFinalFile>application.js</jsFinalFile>
+						</configuration>
+						<goals>
+							<goal>minify</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+		</plugins>
+	</build>
 
 </project>

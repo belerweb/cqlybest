@@ -26,6 +26,12 @@ public class OptionService {
         cachedOptions.put(option.getName(), option.getValue());
       }
     }
+
+    String release = System.getProperty("cqlybest.release", System.getenv("cqlybest.release"));
+    if (release != null) {
+      cachedOptions.put("release", release);
+    }
+
     return cachedOptions;
   }
 
