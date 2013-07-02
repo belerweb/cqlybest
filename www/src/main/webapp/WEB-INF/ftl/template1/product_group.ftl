@@ -38,7 +38,8 @@
 						<div class="thumbnail">
 							<div class="caption">
 								<#if product.posters?has_content>
-								<img alt="${product.title!}" src="${springx.rand(0,product.posters?size-1)}?width=154&height=99">
+								<#assign image = springx.rand(0,product.posters?size-1) />
+								<img alt="${product.title!}" src="${ContextPath}/image/${image.id}.${image.imageType}?width=154&height=99">
 								</#if>
 								<a class="title" href="${ContextPath}/product/${product.id}.html" target="_blank">${product.name!}</a>
 							</div>

@@ -71,8 +71,8 @@
 						<div class="ad-thumbs">
 							<ul class="ad-thumb-list">
 								<#if product.photos?has_content>
-								<#list product.photos as photo>
-								<li><a href="${photo}?width=608&height=400"><img alt="${product.name!}" src="${photo}?width=90&height=60"></a></li>
+								<#list product.photos as image>
+								<li><a href="${ContextPath}/image/${image.id}.${image.imageType}?width=608&height=400"><img alt="${product.name!}" src="${ContextPath}/image/${image.id}.${image.imageType}?width=90&height=60"></a></li>
 								</#list>
 								</#if>
 							</ul>
@@ -120,6 +120,7 @@
 		init : function() {
 			document.title = '${product.name!}';
 			$('.ad-gallery').adGallery({
+				loader_image: '${ContextPath}/template1/img/gallery/loader.gif'
 			});
 		}
 	};
