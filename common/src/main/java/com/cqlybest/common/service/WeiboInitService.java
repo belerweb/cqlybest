@@ -2,7 +2,6 @@ package com.cqlybest.common.service;
 
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.stereotype.Service;
-import org.springframework.util.Assert;
 
 import weibo4j.util.WeiboConfig;
 
@@ -30,9 +29,6 @@ public class WeiboInitService implements InitializingBean {
   public void afterPropertiesSet() throws Exception {
     String appKey = System.getProperty(WEIBO_APP_KEY, System.getenv(WEIBO_APP_KEY));
     String appSecret = System.getProperty(WEIBO_APP_SECRET, System.getenv(WEIBO_APP_SECRET));
-    Assert.notNull(appKey, "weibo.app_key must confid in env or system properties.");
-    Assert.notNull(appSecret, "weibo.app_secret must confid in env or system properties.");
-
     WeiboConfig.updateProperties(CLIENT_ID, appKey);
     WeiboConfig.updateProperties(CLIENT_SECRET, appSecret);
   }

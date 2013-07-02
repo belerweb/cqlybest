@@ -2,7 +2,6 @@ package com.cqlybest.common.service;
 
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.stereotype.Service;
-import org.springframework.util.Assert;
 
 import com.qq.connect.utils.QQConnectConfig;
 
@@ -21,8 +20,6 @@ public class QQConnectInitService implements InitializingBean {
   public void afterPropertiesSet() throws Exception {
     String appId = System.getProperty(QQ_APP_ID, System.getenv(QQ_APP_ID));
     String appKey = System.getProperty(QQ_APP_KEY, System.getenv(QQ_APP_KEY));
-    Assert.notNull(appId, "qq.app_id must confid in env or system properties.");
-    Assert.notNull(appKey, "qq.app_key must confid in env or system properties.");
     QQConnectConfig.updateProperties(APP_ID, appId);
     QQConnectConfig.updateProperties(APP_KEY, appKey);
   }
