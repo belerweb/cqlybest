@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.cqlybest.common.bean.DepartureCity;
+import com.cqlybest.common.bean.Dict;
 import com.cqlybest.common.bean.DictProductGrade;
 import com.cqlybest.common.bean.DictProductType;
 import com.cqlybest.common.bean.DictTraffic;
@@ -38,24 +39,54 @@ public class DictController {
       @RequestParam(required = false) String typeahead, @RequestParam(required = false) String q) {
     Map<String, Object> result = new HashMap<>();
     if ("keyword".equals(type)) {
-      result.put("tags", dictService.getDict(Keyword.class));
+      result.put("tags", dictService.getDict(Keyword.class, q));
     }
     if ("departure-city".equals(type)) {
-      result.put("tags", dictService.getDict(DepartureCity.class));
+      result.put("tags", dictService.getDict(DepartureCity.class, q));
     }
     if ("destination".equals(type)) {
       result.put("tags", destinationService.getTree());
     }
     if ("traffic".equals(type)) {
-      result.put("tags", dictService.getDict(DictTraffic.class));
+      result.put("tags", dictService.getDict(DictTraffic.class, q));
     }
     if ("product-type".equals(type)) {
-      result.put("tags", dictService.getDict(DictProductType.class));
+      result.put("tags", dictService.getDict(DictProductType.class, q));
     }
     if ("product-grade".equals(type)) {
-      result.put("tags", dictService.getDict(DictProductGrade.class));
+      result.put("tags", dictService.getDict(DictProductGrade.class, q));
     }
     return result;
+  }
+
+  @RequestMapping(value = "/data/dict/add.do", method = RequestMethod.POST)
+  @ResponseBody
+  public Integer add(@RequestParam String type, @RequestParam String value) {
+    Dict dict = null;
+    if ("keyword".equals(type)) {
+      dict = new Keyword();
+    }
+    if ("departure-city".equals(type)) {
+      dict = new DepartureCity();
+    }
+    if ("destination".equals(type)) {
+      // TODO dict = new DepartureCity();
+    }
+    if ("traffic".equals(type)) {
+      dict = new DictTraffic();
+    }
+    if ("product-type".equals(type)) {
+      dict = new DictProductType();
+    }
+    if ("product-grade".equals(type)) {
+      dict = new DictProductGrade();
+    }
+    if (dict != null) {
+      dict.setName(value);
+      dictService.addDict(dict);
+      return dict.getId();
+    }
+    return null;
   }
 
   @RequestMapping(value = "/data/dict/add_departure_city.html", method = RequestMethod.POST)

@@ -47,4 +47,8 @@ public class DictService {
     return result;
   }
 
+  public List<? extends Dict> getDict(Class<? extends Dict> cls, String keyword) {
+    return dictDao.findDict(cls, keyword);
+  }
+
 }

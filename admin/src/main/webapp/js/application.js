@@ -137,6 +137,28 @@ window.cqlybest = {
 						return {results:result};
 					}
 				},
+				createSearchChoice: function(term) {
+					if (/^[0-9a-zA-Z\s]{0,5}$/.test(term) || term.length<2) {
+						return;
+					}
+					var result;
+					$.ajax({
+						async: false,
+						type: 'POST',
+						url: '/data/dict/add.do',
+						data: {
+							type: dict,
+							value: term
+						},
+						timeout: 2000,
+						success: function(data) {
+							if (data) {
+								result = {id: data, text: term};
+							}
+						},
+					});
+					return result;
+				},
 				initSelection: function(el, callback) {
 					callback(cqlybest.v2ss(el.val()||$(el).data('value')));
 				}
