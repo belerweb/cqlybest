@@ -36,19 +36,19 @@
 			<p><span class="lname">儿童价：</span><span class="price">¥${(product.childPrice/100)?string('0.00')}</span></p>
 			</#if>
 			<#if product.departureCities?has_content>
-			<p><span class="lname">出发城市：</span><span><#list product.departureCities as item><#if item_index gt 0>,</#if>${item.name}</#list></span></p>
+			<p><span class="lname">出发城市：</span><span><#list product.departureCities?split(",") as item><#if item_index gt 0>,</#if>${item}</#list></span></p>
 			</#if>
 			<#if product.destinations?has_content>
-			<p><span class="lname">目的地：</span><span><#list product.destinations as item><#if item_index gt 0>,</#if>${item.name}</#list></span></span></p>
+			<p><span class="lname">目的地：</span><span><#list product.destinations?split(",") as item><#if item_index gt 0>,</#if>${item}</#list></span></span></p>
 			</#if>
 			<#if product.traffics?has_content>
-			<p><span class="lname">交通：</span><span><#list product.traffics as item><#if item_index gt 0>,</#if>${item.name}</#list></span></p>
+			<p><span class="lname">交通：</span><span><#list product.traffics?split(",") as item><#if item_index gt 0>,</#if>${item}</#list></span></p>
 			</#if>
 			<#if product.types?has_content>
-			<p><span class="lname">产品类型：</span><span><#list product.types as item><#if item_index gt 0>,</#if>${item.name}</#list></span></p>
+			<p><span class="lname">产品类型：</span><span><#list product.types?split(",") as item><#if item_index gt 0>,</#if>${item}</#list></span></p>
 			</#if>
 			<#if product.grades?has_content>
-			<p><span class="lname">产品等级：</span><span><#list product.grades as item><#if item_index gt 0>,</#if>${item.name}</#list></span></p>
+			<p><span class="lname">产品等级：</span><span><#list product.grades?split(",") as item><#if item_index gt 0>,</#if>${item}</#list></span></p>
 			</#if>
 			<#if product.days?has_content>
 			<p><span class="lname">行程天数：</span><span>${product.days}天</span></p>
