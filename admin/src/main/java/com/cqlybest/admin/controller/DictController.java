@@ -61,7 +61,7 @@ public class DictController {
 
   @RequestMapping(value = "/data/dict/add.do", method = RequestMethod.POST)
   @ResponseBody
-  public Integer add(@RequestParam String type, @RequestParam String value) {
+  public void add(@RequestParam String type, @RequestParam String value) {
     Dict dict = null;
     if ("keyword".equals(type)) {
       dict = new Keyword();
@@ -84,9 +84,7 @@ public class DictController {
     if (dict != null) {
       dict.setName(value);
       dictService.addDict(dict);
-      return dict.getId();
     }
-    return null;
   }
 
   @RequestMapping(value = "/data/dict/add_departure_city.html", method = RequestMethod.POST)

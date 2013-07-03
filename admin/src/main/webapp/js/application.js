@@ -137,27 +137,20 @@ window.cqlybest = {
 						return {results:result};
 					}
 				},
-				createSearchChoice: function(term) {
-					if (/^[0-9a-zA-Z\s]{0,5}$/.test(term) || term.length<2) {
-						return;
-					}
-					var result;
-					$.ajax({
-						async: false,
-						type: 'POST',
-						url: '/data/dict/add.do',
-						data: {
-							type: dict,
-							value: term
-						},
-						timeout: 2000,
-						success: function(data) {
-							if (data) {
-								result = {id: data, text: term};
-							}
-						},
-					});
-					return result;
+				formatNoMatches: function(term) {
+					setTimeout(function(){
+						$('.select2-no-results button').off('click').on('click', function() {
+							var btn = $(this);
+							$.post('/data/dict/add.do', {
+								type: dict,
+								value: term
+							}, function() {
+								btn.prev().text('保存成功，重新选择即可');
+								btn.remove();
+							});
+						});
+					}, 1000);
+					return '<span>没有找到匹配项</span><button type="button">保存 [' + term + ']</button>';
 				},
 				initSelection: function(el, callback) {
 					callback(cqlybest.v2ss(el.val()||$(el).data('value')));
