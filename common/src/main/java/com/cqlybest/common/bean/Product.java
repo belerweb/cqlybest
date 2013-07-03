@@ -40,6 +40,7 @@ public class Product {
   private Date createdTime;// 产品创建时间
   private Date lastUpdated;// 最后更新时间
   private List<ProductComment> comments; // 评论
+  private List<ProductCalendar> calendar;// 日历
 
   public String getId() {
     return id;
@@ -319,6 +320,14 @@ public class Product {
 
   public void setComments(List<ProductComment> comments) {
     this.comments = comments;
+  }
+
+  public List<ProductCalendar> getCalendar() {
+    return calendar;
+  }
+
+  public void setCalendar(List<ProductCalendar> calendar) {
+    this.calendar = calendar;
   }
 
 }

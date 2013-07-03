@@ -15,6 +15,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.cqlybest.common.bean.Product;
+import com.cqlybest.common.bean.ProductCalendar;
 import com.cqlybest.common.bean.ProductComment;
 import com.cqlybest.common.bean.ProductFilterItem;
 import com.cqlybest.common.bean.ProductGroup;
@@ -49,6 +50,20 @@ public class ProductService {
     productDao.saveOrUpdate(comment);
   }
 
+  @Transactional
+  public void addCalendar(String productId, Date start, Date end, Integer price) {
+    productDao.deleteCalendar(productId, start, end);
+    Date date = start;
+    while (date.getTime() <= end.getTime()) {
+      ProductCalendar calendar = new ProductCalendar();
+      calendar.setProductId(productId);
+      calendar.setDate(date);
+      calendar.setPrice(price);
+      productDao.saveOrUpdate(calendar);
+      date = new Date(date.getTime() + 86400000);
+    }
+  }
+
   public Product get(String id) {
     Product product = productDao.findById(id);
     product.setTravels(productDao.getTravels(id));
@@ -56,6 +71,10 @@ public class ProductService {
     product.setPhotos(imageDao.queryImagesWithoutData("product-photo", id));
     product.setComments(productDao.getComments(id));
     return product;
+  }
+
+  public List<ProductCalendar> getCalendar(String id) {
+    return productDao.getCalendar(id);
   }
 
   @Transactional
@@ -86,6 +105,11 @@ public class ProductService {
   @Transactional
   public void deleteComment(Integer id) {
     productDao.deleteComment(id);
+  }
+
+  @Transactional
+  public void deleteCalendar(String productId, Date start, Date end) {
+    productDao.deleteCalendar(productId, start, end);
   }
 
   public Long queryProductTotal(Boolean hot, Boolean red, Boolean spe, Boolean pub, String name) {

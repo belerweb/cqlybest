@@ -406,7 +406,7 @@ a:focus {
   display: block;
   float: left;
   width: 100%;
-  min-height: 30px;
+  /*min-height: 30px;*/
   margin-left: 2.127659574468085%;
   *margin-left: 2.074468085106383%;
   -webkit-box-sizing: border-box;

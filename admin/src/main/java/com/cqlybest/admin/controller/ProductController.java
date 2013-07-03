@@ -1,5 +1,6 @@
 package com.cqlybest.admin.controller;
 
+import java.text.ParseException;
 import java.util.Date;
 import java.util.List;
 
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.cqlybest.common.bean.Product;
+import com.cqlybest.common.bean.ProductCalendar;
 import com.cqlybest.common.bean.ProductComment;
 import com.cqlybest.common.bean.ProductTravel;
 import com.cqlybest.common.service.DestinationService;
@@ -181,12 +183,48 @@ public class ProductController {
   }
 
   /**
-   * 添加产品评论
+   * 删除产品评论
    */
   @RequestMapping(value = "/product/comment/delete.do", method = RequestMethod.POST)
   @ResponseBody
-  public void addComment(@RequestParam Integer id) {
+  public void deleteComment(@RequestParam Integer id) {
     productService.deleteComment(id);
+  }
+
+  /**
+   * 添加产品日历
+   */
+  @RequestMapping(value = "/product/calendar/add.do", method = RequestMethod.POST)
+  @ResponseBody
+  public void addCalendar(@RequestParam String productId, @RequestParam String start,
+      @RequestParam String end, @RequestParam(required = false) String price) throws ParseException {
+    Integer _price = null;
+    if (StringUtils.isNotEmpty(price)) {
+      _price = (int) Double.parseDouble(price) * 100;
+    }
+    productService.addCalendar(productId, DateUtils.parseDate(start, new String[] {"yyyy-MM-dd"}),
+        DateUtils.parseDate(end, new String[] {"yyyy-MM-dd"}), _price);
+  }
+
+  /**
+   * 删除产品日历
+   */
+  @RequestMapping(value = "/product/calendar/delete.do", method = RequestMethod.POST)
+  @ResponseBody
+  public void deleteCalendar(@RequestParam String productId, @RequestParam String start,
+      @RequestParam String end) throws ParseException {
+    productService.deleteCalendar(productId, DateUtils
+        .parseDate(start, new String[] {"yyyy-MM-dd"}), DateUtils.parseDate(end,
+        new String[] {"yyyy-MM-dd"}));
+  }
+
+  /**
+   * 获取产品日历
+   */
+  @RequestMapping(value = "/product/calendar.do", method = RequestMethod.GET)
+  @ResponseBody
+  public List<ProductCalendar> getCalendar(@RequestParam String id) {
+    return productService.getCalendar(id);
   }
 
 }

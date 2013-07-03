@@ -13,7 +13,6 @@
 		<link href="${ContextPath}/css/jquery-ui-1.8.16.custom.css" rel="stylesheet">
 		<link rel="stylesheet" href="${ContextPath}/css/DT_bootstrap.css">
 		<link rel="stylesheet" href="${ContextPath}/css/icon/font-awesome.css">
-		<link rel="stylesheet" href="${ContextPath}/css/bootstrap-responsive.css">
 		<link rel="stylesheet" href="${ContextPath}/css/jquery.selectBoxIt.css">
 		<link rel="stylesheet" href="${ContextPath}/css/bootstrap-tagmanager.css">
 		<link rel="stylesheet" href="${ContextPath}/css/jquery.tagit.css">
@@ -21,6 +20,7 @@
 		<link rel="stylesheet" href="${ContextPath}/css/elfinder-theme.css">
 		<link rel="stylesheet" href="${ContextPath}js/select2/select2.css">
 		<link rel="stylesheet" href="${ContextPath}/js/bootstrap-editable/css/bootstrap-editable.css">
+		<link rel="stylesheet" href="${ContextPath}/css/bootstrap.calendar.css">
 		<link rel="alternate stylesheet" type="text/css" media="screen" title="green-theme" href="${ContextPath}/css/color/green.css" />
 		<link rel="alternate stylesheet" type="text/css" media="screen" title="red-theme" href="${ContextPath}/css/color/red.css" />
 		<link rel="alternate stylesheet" type="text/css" media="screen" title="blue-theme" href="${ContextPath}/css/color/blue.css" />
@@ -121,6 +121,7 @@
 		<script type="text/javascript" src="${ContextPath}/js/i18n/elfinder.zh_CN.js"></script>
 		<script type="text/javascript" src="${ContextPath}/js/select2/select2.js"></script>
 		<script type="text/javascript" src="${ContextPath}/js/bootstrap-editable/js/bootstrap-editable.js"></script>
+		<script type="text/javascript" src="${ContextPath}/js/bootstrap.calendar.js"></script>
 		<script type="text/javascript" src="${ContextPath}/js/jquery.dateFormat-1.0.js"></script>
 		<!--[if IE]>
 		<script type="text/javascript" src="${ContextPath}/js/Jit/Extras/excanvas.js"></script>

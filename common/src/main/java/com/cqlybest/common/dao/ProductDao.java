@@ -15,6 +15,7 @@ import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Repository;
 
 import com.cqlybest.common.bean.Product;
+import com.cqlybest.common.bean.ProductCalendar;
 import com.cqlybest.common.bean.ProductComment;
 import com.cqlybest.common.bean.ProductTravel;
 
@@ -65,6 +66,12 @@ public class ProductDao extends AbstractDao<Product, String> {
   public void deleteComment(Integer id) {
     getCurrentSession().createQuery("DELETE FROM ProductComment WHERE id=?").setParameter(0, id)
         .executeUpdate();
+  }
+
+  public void deleteCalendar(String productId, Date start, Date end) {
+    getCurrentSession().createQuery(
+        "DELETE FROM ProductCalendar WHERE productId=? AND date >= ? AND date <=?").setParameter(0,
+        productId).setParameter(1, start).setParameter(2, end).executeUpdate();
   }
 
   private void buidBooleanCondition(Criteria criteria, String prop, Boolean value) {
@@ -128,6 +135,12 @@ public class ProductDao extends AbstractDao<Product, String> {
     Criteria criteria = getCurrentSession().createCriteria(ProductComment.class);
     criteria.add(Restrictions.eq("productId", id));
     criteria.addOrder(Order.desc("commentTime"));
+    return criteria.list();
+  }
+
+  public List<ProductCalendar> getCalendar(String id) {
+    Criteria criteria = getCurrentSession().createCriteria(ProductCalendar.class);
+    criteria.add(Restrictions.eq("productId", id));
     return criteria.list();
   }
 

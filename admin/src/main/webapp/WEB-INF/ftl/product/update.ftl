@@ -17,6 +17,7 @@
 				<ul class="nav nav-tabs">
 					<li class="active"><a href="javascript:void(0);" data-toggle="tab" data-target="#product-base-tab">基本信息</a></li>
 					<li><a href="javascript:void(0);" data-toggle="tab" data-target="#product-detail-tab">详细行程</a></li>
+					<li><a href="javascript:void(0);" data-toggle="tab" data-target="#product-calendar-tab">日历</a></li>
 					<li><a href="javascript:void(0);" data-toggle="tab" data-target="#product-poster-tab">海报图片 </a></li>
 					<li><a href="javascript:void(0);" data-toggle="tab" data-target="#product-photo-tab">相册图片</a></li>
 					<li><a href="javascript:void(0);" data-toggle="tab" data-target="#product-comment-tab">评论</a></li>
@@ -221,6 +222,7 @@
 						</#list>
 						</#if>
 					</div>
+					<#include "update_calendar.ftl">
 					<div id="product-poster-tab" class="image-gallery tab-pane">
 						<div class="text-right"><button id="product-add-poster" type="button" data-extra="product-poster" class="btn btn-primary">添加</button></div>
 						<#if product.posters?has_content>
