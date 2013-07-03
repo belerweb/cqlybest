@@ -13,6 +13,7 @@ import com.cqlybest.common.bean.Product;
 import com.cqlybest.common.bean.template1.Template1IndexPoster;
 import com.cqlybest.common.bean.template1.Template1Menu;
 import com.cqlybest.common.bean.template1.Template1ProductGroup;
+import com.cqlybest.common.dao.ImageDao;
 import com.cqlybest.common.dao.ProductDao;
 import com.cqlybest.common.dao.Template1Dao;
 
@@ -23,8 +24,8 @@ public class Template1Service {
   private Template1Dao template1Dao;
   @Autowired
   private ProductDao productDao;
-
-
+  @Autowired
+  private ImageDao imageDao;
 
   /**
    * 增加海报
@@ -181,10 +182,18 @@ public class Template1Service {
     Conjunction condition = Restrictions.conjunction();
     condition.add(Restrictions.eq(property, true));
     condition.add(Restrictions.eq("published", true));// 已发布
+    List<Product> products = null;
     if (number > 0) {
-      return productDao.find(condition, 0, number);
+      products = productDao.find(condition, 0, number);
+    } else {
+      products = productDao.find(condition);
     }
-    return productDao.find(condition);
+
+    for (Product product : products) {
+      product.setPosters(imageDao.queryImagesWithoutData("product-poster", product.getId()));
+    }
+
+    return products;
   }
 
 }

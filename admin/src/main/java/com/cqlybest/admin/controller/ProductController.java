@@ -200,7 +200,7 @@ public class ProductController {
       @RequestParam String end, @RequestParam(required = false) String price) throws ParseException {
     Integer _price = null;
     if (StringUtils.isNotEmpty(price)) {
-      _price = (int) Double.parseDouble(price) * 100;
+      _price = (int) (Double.parseDouble(price) * 100);
     }
     productService.addCalendar(productId, DateUtils.parseDate(start, new String[] {"yyyy-MM-dd"}),
         DateUtils.parseDate(end, new String[] {"yyyy-MM-dd"}), _price);
