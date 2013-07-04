@@ -57,7 +57,13 @@ public class MaldivesService {
 
   public MaldivesSeaIsland get(String id) {
     MaldivesSeaIsland island = maldivesDao.findById(id);
-    island.setRooms(maldivesDao.getRooms(id));
+    List<MaldivesRoom> rooms = maldivesDao.getRooms(id);
+    for (MaldivesRoom room : rooms) {
+      room.setPictures(imageDao.queryImagesWithoutData("maldives-room-picture", room.getId()
+          .toString()));
+    }
+    island.setRooms(rooms);
+    island.setPictures(imageDao.queryImagesWithoutData("maldives-island-poster", id));
     return island;
   }
 

@@ -23,11 +23,11 @@
 					<#include "update_base.ftl">
 					<#include "update_room.ftl">
 					<div id="island-poster-tab" class="image-gallery tab-pane">
-						<div class="text-right"><button id="island-add-poster" type="button" data-extra="maldives-island-poster" class="btn btn-primary">添加</button></div>
-						<#if island.posters?has_content>
+						<div class="text-right"><button id="island-add-poster" type="button" data-extra="maldives-island-poster" data-extra-key="${id}" class="btn btn-primary">添加</button></div>
+						<#if island.pictures?has_content>
 						<div class="row-fluid">
 							<ul class="thumbnails">
-							<#list island.posters as image>
+							<#list island.pictures as image>
 								<li class="span3">
 									<div class="thumbnail">
 										<img src="${ContextPath}/image/${image.id}.${image.imageType}">
@@ -76,16 +76,17 @@ var arrangeImags = function(el, images) {
 		$('ul', row).append(imgs[i]);
 	}
 };
-$('#island-add-poster,#island-add-photo').click(function(){
+$('#island-add-poster,#island-add-photo,.maldives-room-picture-add').click(function(){
 	var images = cqlybest.uploadImage('${ContextPath}');
 	if (images) {
 		var gallery = $(this).parents('.image-gallery');
 		var extra = $(this).attr('data-extra');
+		var extraKey = $(this).attr('data-extra-key');
 		$.each(images, function(i, obj) {
 			$.post('${ContextPath}/image/update.do', {
 				pk: obj.id,
 				name: ['extra', 'extraKey'],
-				value: [extra, '${id}']
+				value: [extra, extraKey]
 			}, function(){
 				// TODO
 			});

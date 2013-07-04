@@ -18,7 +18,7 @@
 		<div id="island-room-accordion-${room_index}" class="accordion-body collapse <#if room_index==0>in</#if>">
 			<div class="accordion-inner">
 				<div class="row-fluid">
-					<div class="span3">
+					<div class="span4">
 						<div class="control-group">
 							<label class="control-label">中文名称：</label>
 							<div class="controls">
@@ -26,7 +26,7 @@
 							</div>
 						</div>
 					</div>
-					<div class="span3">
+					<div class="span4">
 						<div class="control-group">
 							<label class="control-label">英文名称：</label>
 							<div class="controls">
@@ -34,7 +34,7 @@
 							</div>
 						</div>
 					</div>
-					<div class="span3">
+					<div class="span4">
 						<div class="control-group">
 							<label class="control-label">房间数量：</label>
 							<div class="controls">
@@ -72,6 +72,40 @@
 									${room.description!}
 								</div>
 								<button type="button" class="btn btn-success">编辑</button>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="row-fluid">
+					<div class="span12">
+						<div class="control-group">
+							<label class="control-label">图片：</label>
+							<div class="controls image-gallery">
+								<button type="button" data-extra="maldives-room-picture" data-extra-key="${roomId}" class="btn btn-primary maldives-room-picture-add">添加</button>
+								<#if room.pictures?has_content>
+								<div class="row-fluid">
+									<ul class="thumbnails">
+									<#list room.pictures as image>
+										<li class="span3">
+											<div class="thumbnail">
+												<img src="${ContextPath}/image/${image.id}.${image.imageType}">
+												<div class="caption">
+													<p><a href="#" class="title editable-click <#if !image.title?has_content>editable-empty</#if>" data-pk="${image.id}" data-name="title" data-type="text" data-value="${(image.title!)?html}">${(image.title!'标题：未设置')?html}</a></p>
+													<p><a href="#" class="description editable-click <#if !image.description?has_content>editable-empty</#if>" data-pk="${image.id}" data-name="description" data-type="textarea" data-value="${(image.description!)?html}">${(image.description!'描述：未设置')?html}</a></p>
+													<button class="delete btn btn-danger" data-id="${image.id}">刪除</button>
+												</div>
+											</div>
+										</li>
+										<#if image_index%4==3>
+									</ul>
+								</div>
+								<div class="row-fluid">
+									<ul class="thumbnails">
+										</#if>
+									</#list>
+									</ul>
+								</div>
+								</#if>
 							</div>
 						</div>
 					</div>

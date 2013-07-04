@@ -17,7 +17,7 @@ public class MaldivesSeaIsland {
   private String snorkeling; // 浮潜等级
   private String price; // 参考价格
 
-  private List<Image> picture;// 图片
+  private List<Image> pictures;// 图片
   private List<MaldivesRoom> rooms;// 房型
 
   private Date createdTime;// 创建时间
@@ -87,12 +87,12 @@ public class MaldivesSeaIsland {
     this.price = price;
   }
 
-  public List<Image> getPicture() {
-    return picture;
+  public List<Image> getPictures() {
+    return pictures;
   }
 
-  public void setPicture(List<Image> picture) {
-    this.picture = picture;
+  public void setPictures(List<Image> pictures) {
+    this.pictures = pictures;
   }
 
   public List<MaldivesRoom> getRooms() {
