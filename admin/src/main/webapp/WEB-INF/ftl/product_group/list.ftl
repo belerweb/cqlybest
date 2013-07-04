@@ -4,7 +4,7 @@
 	<div class="pagetitle">
 		<h1>产品聚合</h1>
 		<div class="btn-group">
-			<a id="product-group-add" href="javascript:void(0);" class="btn btn-primary">增加新产品</a>
+			<a id="product-group-add" href="javascript:void(0);" class="btn btn-primary">增加新聚合</a>
 		</div>
 		<div class="clearfix"></div>
 		<hr>
