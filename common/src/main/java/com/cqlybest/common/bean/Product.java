@@ -8,6 +8,8 @@ public class Product {
   private String id;
   private String name;// 产品名称
   private String code;// 产品代码
+  private int productType; // 产品类型：0/普通产品; 1/马尔代夫
+
   private Integer days;// 行程天数
   private String daysUnit;// 行程天数单位 ：天/月/年
   private String departureCities;// 出发城市
@@ -64,6 +66,14 @@ public class Product {
 
   public void setCode(String code) {
     this.code = code;
+  }
+
+  public int getProductType() {
+    return productType;
+  }
+
+  public void setProductType(int productType) {
+    this.productType = productType;
   }
 
   public Integer getDays() {

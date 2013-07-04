@@ -43,9 +43,10 @@ public class ProductController {
    */
   @RequestMapping(value = "/product/add.do", method = RequestMethod.POST)
   @ResponseBody
-  public String add(@RequestParam String name) {
+  public String add(@RequestParam String name, @RequestParam int type) {
     Product product = new Product();
     product.setName(name);
+    product.setProductType(type);
     productService.add(product);
     return product.getId();
   }

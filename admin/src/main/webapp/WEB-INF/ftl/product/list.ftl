@@ -344,18 +344,41 @@ $('#product-marke-del').click(function(){
 	}
 });
 $('#product-add').click(function(){
-	bootbox.prompt("产品名称", "取消", "确定", function(result) {
-		var name = $.trim(result);
-		if (name.length) {
+	var action = $(this).parent();
+	var form = ['<form class="form-horizontal"><legend>添加产品</legend>'];
+	form.push('<div class="control-group"><label class="control-label">名称：</label>');
+	form.push('<div class="controls"><input type="text" name="name"></div></div>');
+	form.push('<div class="control-group"><label class="control-label">类型：</label>');
+	form.push('<div class="controls"><label class="radio inline"><input type="radio" name="type" value="0" checked="checked">普通产品</label>');
+	form.push('<label class="radio inline"><input type="radio" name="type" value="1"> 马尔代夫</lavel>');
+	form.push('</div></div></form>');
+	var dialog = bootbox.dialog(form.join(''), [{
+		label: '取消'
+	}, {
+		label: '确定',
+		callback: function(){
+			var name = $.trim($('input[name=name]', dialog).val());
+			var type = $.trim($('input[name=type]:checked', dialog).val());
+			if (!/^.{1,32}$/.test(name)) {
+				bootbox.alert('请输入用户，且长度不超过32位');
+				return false;
+			}
 			$.post('${ContextPath}/product/add.do', {
-				name: name
-			}, function(response){
+				name: name,
+				type: type
+			}).done(function(data){
 				var hash = cqlybest.parseHash();
-				hash['u'] = '${ContextPath}/product/update.do?id=' + response;
+				hash['u'] = '${ContextPath}/product/update.do?id=' + data;
 				hash['_t'] = new Date().getTime();
 				location.hash = cqlybest.buildHash(hash);
+			}).fail(function() {
+				cqlybest.error();
 			});
 		}
+	}]);
+	$('form', dialog).on('submit', function(e) {
+		e.preventDefault();
+		dialog.find(".btn-primary").click();
 	});
 });
 

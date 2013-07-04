@@ -29,6 +29,11 @@
 								<div class="control-group">
 									<label class="control-label">产品名称：</label>
 									<div class="controls">
+										<#if product.productType==0>
+										<span class="label label-success">普通产品</span>
+										<#elseif product.productType==1>
+										<span class="label label-success">马尔代夫</span>
+										</#if>
 										<a id="product_name" href="#" class="editable" data-pk="${id}" data-name="name" data-type="text" data-url="${url}" data-value="${(product.name!)?html}"></a>
 									</div>
 								</div>

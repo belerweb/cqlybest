@@ -4,39 +4,41 @@
         "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 
 <hibernate-mapping package="com.cqlybest.common.bean">
-    <class name="Product" table="PRODUCT">
-        <id name="id" column="ID" type="string" length="36">
-            <generator class="assigned" />
-        </id>
-        <property name="name" column="NAME" length="64" />
-        <property name="code" column="CODE" length="16" />
-        <property name="days" column="DAYS" />
-        <property name="daysUnit" column="DAYS_UNIT" />
-        <property name="description" column="DESCRIPTION" type="text" />
-        <property name="price" column="PRICE" />
-        <property name="childPrice" column="CHILD_PRICE" />
-        <property name="specialPrice" column="SPECIAL_PRICE" />
-        <property name="priceDescription" column="PRICE_DESCRIPTION" length="2048" />
-        <property name="effectiveDate" column="EFFECTIVE_DATE" />
-        <property name="expiryDate" column="EXPIRY_DATE" />
-        <property name="departureDate" column="DEPARTURE_DATE" />
-        <property name="tripCharacteristic" column="TRIP_CHARACTERISTIC" length="2048" />
-        <property name="serviceStandard" column="SERVICE_STANDARD" length="5120" />
-        <property name="friendlyReminder" column="FRIENDLY_REMINDER" length="5120" />
-        <property name="recommendedItem" column="RECOMMENDED_ITEM" length="2048" />
-        <property name="published" column="PUBLISHED" />
-        <property name="popular" column="POPULAR" />
-        <property name="recommend" column="RECOMMEND" />
-        <property name="specialOffer" column="SPECIAL_OFFER" />
-        <property name="createdTime" column="CREATED_TIME" />
-        <property name="lastUpdated" column="LAST_UPDATED" />
-        <property name="recommendedMonths" column="RECOMMENDED_MONTHS" />
-        <property name="crowds" column="CROWDS" />
-        <property name="destinations" column="DESTINATIONS" />
-        <property name="traffics" column="TRAFFICS" />
-        <property name="types" column="TYPES" />
-        <property name="grades" column="GRADES" />
-        <property name="keywords" column="KEYWORDS" />
-        <property name="departureCities" column="DEPARTURE_CITIES" />
-    </class>
+	<class name="Product" table="PRODUCT">
+		<id name="id" column="ID" type="string" length="36">
+			<generator class="assigned" />
+		</id>
+		<property name="name" column="NAME" length="64" />
+		<property name="code" column="CODE" length="16" />
+		<property name="productType" column="PRODUCT_TYPE" />
+
+		<property name="days" column="DAYS" />
+		<property name="daysUnit" column="DAYS_UNIT" />
+		<property name="description" column="DESCRIPTION" type="text" />
+		<property name="price" column="PRICE" />
+		<property name="childPrice" column="CHILD_PRICE" />
+		<property name="specialPrice" column="SPECIAL_PRICE" />
+		<property name="priceDescription" column="PRICE_DESCRIPTION" length="2048" />
+		<property name="effectiveDate" column="EFFECTIVE_DATE" />
+		<property name="expiryDate" column="EXPIRY_DATE" />
+		<property name="departureDate" column="DEPARTURE_DATE" />
+		<property name="tripCharacteristic" column="TRIP_CHARACTERISTIC" length="2048" />
+		<property name="serviceStandard" column="SERVICE_STANDARD" length="5120" />
+		<property name="friendlyReminder" column="FRIENDLY_REMINDER" length="5120" />
+		<property name="recommendedItem" column="RECOMMENDED_ITEM" length="2048" />
+		<property name="published" column="PUBLISHED" />
+		<property name="popular" column="POPULAR" />
+		<property name="recommend" column="RECOMMEND" />
+		<property name="specialOffer" column="SPECIAL_OFFER" />
+		<property name="createdTime" column="CREATED_TIME" />
+		<property name="lastUpdated" column="LAST_UPDATED" />
+		<property name="recommendedMonths" column="RECOMMENDED_MONTHS" />
+		<property name="crowds" column="CROWDS" />
+		<property name="destinations" column="DESTINATIONS" />
+		<property name="traffics" column="TRAFFICS" />
+		<property name="types" column="TYPES" />
+		<property name="grades" column="GRADES" />
+		<property name="keywords" column="KEYWORDS" />
+		<property name="departureCities" column="DEPARTURE_CITIES" />
+	</class>
 </hibernate-mapping>
