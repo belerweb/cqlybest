@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.cqlybest.common.bean.MaldivesRoom;
 import com.cqlybest.common.bean.MaldivesSeaIsland;
 import com.cqlybest.common.service.DestinationService;
 import com.cqlybest.common.service.DictService;
@@ -65,6 +66,33 @@ public class MaldivesController {
     maldivesService.update(pk, name, _value);
   }
 
+  /**
+   * 添加房型
+   */
+  @RequestMapping(value = "/maldives/room/add.do", method = RequestMethod.POST)
+  @ResponseBody
+  public void addRoom(@RequestParam String islandId, @RequestParam String zhName,
+      @RequestParam String enName) {
+    MaldivesRoom room = new MaldivesRoom();
+    room.setIslandId(islandId);
+    room.setZhName(zhName);
+    room.setEnName(enName);
+    maldivesService.add(room);
+  }
+
+  /**
+   * 修改房型
+   */
+  @RequestMapping(value = "/maldives/room/update.do", method = RequestMethod.POST)
+  @ResponseBody
+  public void update(@RequestParam Integer pk, @RequestParam String name, @RequestParam String value) {
+    Object _value = value;
+    if ("num".equals(name)) {
+      _value = Integer.parseInt(value);
+    }
+    maldivesService.updateRoom(pk, name, _value);
+  }
+
   @RequestMapping(value = "/maldives/list.do", method = RequestMethod.GET)
   public void products(@RequestParam(defaultValue = "0") int page, Model model) {
     page = Math.max(1, page);
@@ -81,4 +109,12 @@ public class MaldivesController {
     maldivesService.delete(ids);
   }
 
+  /**
+   * 获取房型
+   */
+  @RequestMapping(value = "/maldives/room.do", method = RequestMethod.GET)
+  public String getRooms(@RequestParam String islandId, Model model) {
+    model.addAttribute("rooms", maldivesService.getRooms(islandId));
+    return "/maldives/update_room_accordion";
+  }
 }

@@ -16,10 +16,12 @@
 			<div class="tabbable">
 				<ul class="nav nav-tabs">
 					<li class="active"><a href="javascript:void(0);" data-toggle="tab" data-target="#island-base-tab">基本信息</a></li>
+					<li><a href="javascript:void(0);" data-toggle="tab" data-target="#island-room-tab">房型</a></li>
 					<li><a href="javascript:void(0);" data-toggle="tab" data-target="#island-poster-tab">海报图片</a></li>
 				</ul>
 				<div class="tab-content">
 					<#include "update_base.ftl">
+					<#include "update_room.ftl">
 					<div id="island-poster-tab" class="image-gallery tab-pane">
 						<div class="text-right"><button id="island-add-poster" type="button" data-extra="maldives-island-poster" class="btn btn-primary">添加</button></div>
 						<#if island.posters?has_content>

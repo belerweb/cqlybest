@@ -110,11 +110,11 @@ $.fn.editable.defaults.send  = 'always';
 $(function() {
 	var h = $(document.body).height() - $('#header').height();
 	$('#wrap').height(h);
-	$('#mb').height(h - 20).css('overflow', 'auto');
+	$('#mb').height(h - 20);//.css('overflow', 'auto');
 	$(window).on('resize', function() {
 		var h = $(document.body).height() - $('#header').height();
 		$('#wrap').height(h);
-		$('#mb').height(h - 20).css('overflow', 'auto');
+		$('#mb').height(h - 20);//.css('overflow', 'auto');
 	});
 });
 
