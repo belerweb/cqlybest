@@ -80,6 +80,13 @@ public abstract class AbstractDao<E, I extends Serializable> extends SqlSessionD
     return criteria.list();
   }
 
+  public List<E> find(int page, int pageSize) {
+    Criteria criteria = getCurrentSession().createCriteria(entityClass);
+    criteria.setFirstResult((Math.max(page, 1) - 1) * pageSize);
+    criteria.setMaxResults(pageSize);
+    return criteria.list();
+  }
+
   public List<E> find(Order order, int page, int pageSize) {
     Criteria criteria = getCurrentSession().createCriteria(entityClass);
     criteria.addOrder(order);
