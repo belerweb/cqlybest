@@ -92,7 +92,7 @@
 												<div class="caption">
 													<p><a href="#" class="title editable-click <#if !image.title?has_content>editable-empty</#if>" data-pk="${image.id}" data-name="title" data-type="text" data-value="${(image.title!)?html}">${(image.title!'标题：未设置')?html}</a></p>
 													<p><a href="#" class="description editable-click <#if !image.description?has_content>editable-empty</#if>" data-pk="${image.id}" data-name="description" data-type="textarea" data-value="${(image.description!)?html}">${(image.description!'描述：未设置')?html}</a></p>
-													<button class="delete btn btn-danger" data-id="${image.id}">刪除</button>
+													<button class="delete btn btn-danger" type="button" data-id="${image.id}">刪除</button>
 												</div>
 											</div>
 										</li>
