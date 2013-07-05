@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.cqlybest.common.Version;
 import com.cqlybest.common.bean.Option;
 import com.cqlybest.common.dao.OptionDao;
 
@@ -15,6 +16,8 @@ public class OptionService {
 
   @Autowired
   private OptionDao optionDao;
+  @Autowired
+  private Version version;
 
   private Map<String, String> cachedOptions;
   private long lastCachedTime;
@@ -32,6 +35,8 @@ public class OptionService {
       cachedOptions.put("release", release);
     }
 
+    cachedOptions.put("version", version.getVersion());
+    cachedOptions.put("build", version.getBuildTime());
     return cachedOptions;
   }
 

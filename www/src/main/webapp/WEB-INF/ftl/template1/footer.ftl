@@ -84,16 +84,16 @@
 			</#if>
 		</div>
 		<#if (Options.release)?exists>
-		<script src="${ContextPath}/template1/js/application.min.js"></script>
+		<script src="${ContextPath}/template1/js/application.min.js?build=${(Options.build)!}"></script>
 		<#else>
-		<script src="${ContextPath}/template1/js/jquery.js"></script>
-		<script src="${ContextPath}/template1/js/bootstrap.js"></script>
-		<script src="${ContextPath}/template1/js/jquery.cookie.js"></script>
-		<script src="${ContextPath}/template1/js/twitter-bootstrap-hover-dropdown.js"></script>
-		<script src="${ContextPath}/template1/js/jqBootstrapValidation.js"></script>
-		<script src="${ContextPath}/template1/js/jquery.form.js"></script>
-		<script src="${ContextPath}/template1/js/jquery.ad-gallery.js"></script>
-		<script src="${ContextPath}/template1/js/cqlybest.js"></script>
+		<script src="${ContextPath}/template1/js/jquery.js?build=${(Options.build)!}"></script>
+		<script src="${ContextPath}/template1/js/bootstrap.js?build=${(Options.build)!}"></script>
+		<script src="${ContextPath}/template1/js/jquery.cookie.js?build=${(Options.build)!}"></script>
+		<script src="${ContextPath}/template1/js/twitter-bootstrap-hover-dropdown.js?build=${(Options.build)!}"></script>
+		<script src="${ContextPath}/template1/js/jqBootstrapValidation.js?build=${(Options.build)!}"></script>
+		<script src="${ContextPath}/template1/js/jquery.form.js?build=${(Options.build)!}"></script>
+		<script src="${ContextPath}/template1/js/jquery.ad-gallery.js?build=${(Options.build)!}"></script>
+		<script src="${ContextPath}/template1/js/cqlybest.js?build=${(Options.build)!}"></script>
 		</#if>
 	</body>
 

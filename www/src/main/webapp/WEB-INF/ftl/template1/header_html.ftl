@@ -14,11 +14,11 @@
 		<meta name="Description" content="<#if Description?has_content>${Description}<#else>${(Options.site_meta_description)!}</#if>"/>
 		${(Options.site_meta)!}
 		<#if (Options.release)?exists>
-		<link rel="stylesheet" href="${ContextPath}/template1/css/application.min.css">
+		<link rel="stylesheet" href="${ContextPath}/template1/css/application.min.css?build=${(Options.build)!}">
 		<#else>
-		<link rel="stylesheet" href="${ContextPath}/template1/css/bootstrap.css">
-		<link rel="stylesheet" href="${ContextPath}/template1/css/jquery.ad-gallery.css">
-		<link rel="stylesheet" href="${ContextPath}/template1/css/cqlybest.css">
+		<link rel="stylesheet" href="${ContextPath}/template1/css/bootstrap.css?build=${(Options.build)!}">
+		<link rel="stylesheet" href="${ContextPath}/template1/css/jquery.ad-gallery.css?build=${(Options.build)!}">
+		<link rel="stylesheet" href="${ContextPath}/template1/css/cqlybest.css?build=${(Options.build)!}">
 		</#if>
 		<link rel="shortcut icon" href="${ContextPath}/template1/favicon.ico">
 	</head>
