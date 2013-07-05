@@ -100,12 +100,12 @@ public class ImageController {
     BufferedImage scaleImage;
     if (oWidth / (double) oHeight > width / (double) height) {
       double rate = oHeight / (double) height;
-      scaleImage = Scalr.resize(bufferedImage, (int) (oWidth / rate), height);
+      scaleImage = Scalr.resize(bufferedImage, (int) Math.ceil(oWidth / rate), height);
       int x = (scaleImage.getWidth() - width) / 2;
       scaleImage = Scalr.crop(scaleImage, x, 0, width, height);
     } else {
       double rate = oWidth / (double) width;
-      scaleImage = Scalr.resize(bufferedImage, width, (int) (oHeight / rate));
+      scaleImage = Scalr.resize(bufferedImage, width, (int) Math.ceil(oHeight / rate));
       int y = (scaleImage.getHeight() - height) / 2;
       scaleImage = Scalr.crop(scaleImage, 0, y, width, height);
     }

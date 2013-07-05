@@ -13,6 +13,14 @@
 	border-color: #309100;
 	margin: 2px 0 4px;
 }
+.room-gallery{
+	margin: -15px 0 10px 0;
+}
+.room-gallery a{
+	display: inline-block;
+	height:100px;
+	width:100px;
+}
 </style>
 <div id="maldives-island" class="container">
 	<h3 class="name">${island.zhName!} <span>${island.enName!}</span></h3>
@@ -51,64 +59,9 @@
 					<li><a href="#maldives-island-room－tab">房型介绍</a></li>
 				</ul>
 			</div>
-			<div id="maldives-island-info－tab" class="maldives-island-section">
-				<div class="title">
-					<h4>岛屿详情</h4>
-					<hr>
-				</div>
-				<table class="table table-condensed">
-					<colgroup>
-						<col width="70" />
-						<col width="280" />
-						<col width="70" />
-						<col width="280" />
-					</colgroup>
-					<tbody>
-						<tr>
-							<th>中文名称：</th>
-							<td>${island.zhName!}
-							<th>英文名称：</th>
-							<td>${island.enName!}
-						</tr>
-						<tr>
-							<th>岛屿级别：</th>
-							<td>${island.level!}
-							<th>上岛方式：</th>
-							<td>${island.way!}
-						</tr>
-						<tr>
-							<th>岛屿大小：</th>
-							<td>${island.area!}
-							<th>浮潜等级：</th>
-							<td>${island.snorkeling!}
-						</tr>
-						<tr>
-							<th>参考价格：</th>
-							<td colspan="3">${island.price!}
-						</tr>
-						<tr>
-							<th>详细信息：</th>
-							<td colspan="3">${island.description!}
-						</tr>
-					</tbody>
-				</table>
-			</div>
-			<div id="maldives-island-hotel－tab" class="maldives-island-section">
-				<div class="title">
-					<h4>酒店详情</h4>
-					<hr>
-				</div>
-			</div>
-			<div id="maldives-island-room－tab" class="maldives-island-section">
-				<div class="title">
-					<h4>房型介绍</h4>
-					<hr>
-				</div>
-				<#if island.rooms?has_content>
-				<#list island.rooms as room>
-				</#list>
-				</#if>
-			</div>
+			<#include "maldives_info.ftl">
+			<#include "maldives_hotel.ftl">
+			<#include "maldives_room.ftl">
 		</div>
 		<div class="span3">
 		</div>
