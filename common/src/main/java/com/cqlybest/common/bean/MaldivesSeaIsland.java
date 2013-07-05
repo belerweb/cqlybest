@@ -16,6 +16,7 @@ public class MaldivesSeaIsland {
   private String area; // 岛屿大小
   private String snorkeling; // 浮潜等级
   private String price; // 参考价格
+  private String description;
 
   private List<Image> pictures;// 图片
   private List<MaldivesRoom> rooms;// 房型
@@ -117,6 +118,14 @@ public class MaldivesSeaIsland {
 
   public void setLastUpdated(Date lastUpdated) {
     this.lastUpdated = lastUpdated;
+  }
+
+  public String getDescription() {
+    return description;
+  }
+
+  public void setDescription(String description) {
+    this.description = description;
   }
 
 }

@@ -1,6 +1,6 @@
 <div id="island-base-tab" class="tab-pane active">
 	<div class="row-fluid">
-		<div class="span6">
+		<div class="span12">
 			<div class="control-group">
 				<label class="control-label">中文名称：</label>
 				<div class="controls">
@@ -43,29 +43,36 @@
 					<a id="island_price" href="#" class="editable" data-pk="${id}" data-name="price" data-type="text" data-url="${url}" data-value="${(island.price!)?html}"></a>
 				</div>
 			</div>
+			<div class="control-group">
+				<label class="control-label">详细信息：</label>
+				<div class="controls">
+					<div data-pk="${id}" data-name="description" data-type="wysihtml5" data-url="${url}" data-toggle="manual" data-original-title="编辑详细信息">
+						${island.description!}
+					</div>
+					<button type="button" class="btn btn-success">编辑</button>
+				</div>
+			</div>
 			<div class="clearfix"></div>
 		</div>
-		<div class="span6">
+		<!-- div class="span6">
 			<div class="clearfix"></div>
-		</div>
+		</div -->
 	</div>
 	<div class="row-fluid">
 	</div>
 </div>
 
 <script type="text/javascript">
-$('#island_zh_name').editable({
-});
-$('#island_en_name').editable({
-});
-$('#island_level').editable({
-});
-$('#island_way').editable({
-});
-$('#island_area').editable({
-});
-$('#island_snorkeling').editable({
-});
-$('#island_price').editable({
+$('#island_zh_name').editable({});
+$('#island_en_name').editable({});
+$('#island_level').editable({});
+$('#island_way').editable({});
+$('#island_area').editable({});
+$('#island_snorkeling').editable({});
+$('#island_price').editable({});
+$('#island-base-tab div[data-name=description]').next().click(function(e) {
+	e.stopPropagation();
+	e.preventDefault();
+	$(this).prev().editable('toggle');
 });
 </script>

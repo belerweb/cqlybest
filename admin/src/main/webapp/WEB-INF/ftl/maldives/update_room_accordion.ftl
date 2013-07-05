@@ -68,7 +68,7 @@
 						<div class="control-group">
 							<label class="control-label">说明：</label>
 							<div class="controls">
-								<div data-pk="${roomId}" data-name="description" data-type="wysihtml5" data-toggle="manual" data-original-title="编辑房型说明">
+								<div data-pk="${roomId}" data-name="description" data-type="wysihtml5" data-url="${roomUrl}" data-toggle="manual" data-original-title="编辑房型说明">
 									${room.description!}
 								</div>
 								<button type="button" class="btn btn-success">编辑</button>

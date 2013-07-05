@@ -15,6 +15,7 @@
 		<property name="area" column="AREA" length="32" />
 		<property name="snorkeling" column="SNORKELING" length="32" />
 		<property name="price" column="PRICE" length="32" />
+		<property name="description" column="DESCRIPTION" length="102400" />
 		<property name="createdTime" column="CREATED_TIME" />
 		<property name="lastUpdated" column="LAST_UPDATED" />
 	</class>
