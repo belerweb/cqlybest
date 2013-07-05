@@ -72,7 +72,7 @@ public class ImageService {
     Image image = new Image();
     image.setId(UUID.randomUUID().toString());
     image.setImageData(file.getBytes());
-    image.setImageType(MimeUtil.getFileExtension(name));
+    image.setImageType(MimeUtil.getFileExtension(name).toLowerCase());
     return image;
   }
 

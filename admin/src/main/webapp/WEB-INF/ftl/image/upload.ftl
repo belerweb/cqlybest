@@ -52,6 +52,7 @@
 			'Error: Invalid file extension:': '错误：不允许地文件类型：'
 		});
 		$('#uploader').pluploadQueue({
+			multipart: true,
 			runtimes : 'html4',
 			url : '${ContextPath}/image/upload.do',
 			filters : [{title : '图片', extensions : 'jpg,gif,png'}],
