@@ -26,6 +26,7 @@ import com.cqlybest.common.bean.DictProductGrade;
 import com.cqlybest.common.bean.DictProductType;
 import com.cqlybest.common.bean.DictTraffic;
 import com.cqlybest.common.bean.Keyword;
+import com.cqlybest.common.bean.MaldivesSeaIsland;
 import com.cqlybest.common.bean.Product;
 import com.cqlybest.common.bean.ProductFilterItem;
 import com.cqlybest.common.bean.ProductGroup;
@@ -33,6 +34,7 @@ import com.cqlybest.common.bean.template1.Template1Menu;
 import com.cqlybest.common.bean.template1.Template1ProductGroup;
 import com.cqlybest.common.service.DestinationService;
 import com.cqlybest.common.service.DictService;
+import com.cqlybest.common.service.MaldivesService;
 import com.cqlybest.common.service.OptionService;
 import com.cqlybest.common.service.ProductService;
 import com.cqlybest.common.service.Template1Service;
@@ -49,6 +51,8 @@ public class Template1Controller {
   private OptionService optionService;
   @Autowired
   private ProductService productService;
+  @Autowired
+  private MaldivesService maldivesService;
   @Autowired
   private DictService dictService;
   @Autowired
@@ -192,6 +196,17 @@ public class Template1Controller {
     model.addAttribute("product", product);
     setCommonData(model);
     return "/template1/product";
+  }
+
+  @RequestMapping("/template1/maldives/{id}.html")
+  public Object maldives(@PathVariable String id, Model model) {
+    MaldivesSeaIsland island = maldivesService.get(id);
+    if (island == null) {
+      return new ResponseEntity<Object>(HttpStatus.NOT_FOUND);
+    }
+    model.addAttribute("island", island);
+    setCommonData(model);
+    return "/template1/maldives";
   }
 
   private void setCommonData(Model model) {

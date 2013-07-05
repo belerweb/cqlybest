@@ -36,7 +36,8 @@ public class IndexController {
       "/group/{id}.html",// 产品聚合
       "/group/{id}/{f0}-{f1}-{f2}-{f3}-{f4}-{f5}-{f6}-{f7}-{page}.html",// 产品聚合
       "/page/{id}.html",// 自定义页面
-      "/product/{id}.html"// 自定义页面
+      "/product/{id}.html",// 产品页面,
+      "/maldives/{id}.html"// 马尔代夫
   })
   public String forward(HttpServletRequest request) {
     return templateService.forward(request.getRequestURI());
