@@ -5,10 +5,13 @@
 
 <hibernate-mapping package="com.cqlybest.common.bean">
 	<class name="ProductMaldives" table="PRODUCT_MALDIVES">
-		<id name="productId" column="PRODUCT_ID" length="36">
-			<generator class="assigned" />
+		<id name="id" column="ID">
+			<generator class="native" />
 		</id>
-		<property name="maldivesIslandId" column="MALDIVES_ISLAND_ID" length="36" />
-		<property name="maldivesRoomId" column="MALDIVES_ROOM_ID" />
+		<property name="productId" column="PRODUCT_ID" length="36" />
+		<property name="name" column="NAME" length="8" />
+		<property name="islandId" column="ISLAND_ID" length="36" />
+		<property name="roomId" column="ROOM_ID" />
+		<property name="extra" column="EXTRA" length="1024" />
 	</class>
 </hibernate-mapping>

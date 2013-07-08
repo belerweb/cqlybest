@@ -17,6 +17,7 @@ import org.springframework.stereotype.Repository;
 import com.cqlybest.common.bean.Product;
 import com.cqlybest.common.bean.ProductCalendar;
 import com.cqlybest.common.bean.ProductComment;
+import com.cqlybest.common.bean.ProductMaldives;
 import com.cqlybest.common.bean.ProductTravel;
 
 @Repository
@@ -53,6 +54,14 @@ public class ProductDao extends AbstractDao<Product, String> {
     return query.executeUpdate();
   }
 
+  public int updateMaldives(Integer id, String name, Object value) {
+    String hql = "UPDATE ProductMaldives SET " + name + " = ? WHERE id = ?";
+    Query query = getCurrentSession().createQuery(hql);
+    query.setParameter(0, value);
+    query.setParameter(1, id);
+    return query.executeUpdate();
+  }
+
   public void delete(String[] ids) {
     getCurrentSession().createQuery("DELETE FROM Product WHERE id IN (:ids)").setParameterList(
         "ids", ids).executeUpdate();
@@ -60,6 +69,11 @@ public class ProductDao extends AbstractDao<Product, String> {
 
   public void deleteTravel(Integer id) {
     getCurrentSession().createQuery("DELETE FROM ProductTravel WHERE id=?").setParameter(0, id)
+        .executeUpdate();
+  }
+
+  public void deleteMaldives(Integer id) {
+    getCurrentSession().createQuery("DELETE FROM ProductMaldives WHERE id=?").setParameter(0, id)
         .executeUpdate();
   }
 
@@ -127,6 +141,12 @@ public class ProductDao extends AbstractDao<Product, String> {
 
   public List<ProductTravel> getTravels(String id) {
     Criteria criteria = getCurrentSession().createCriteria(ProductTravel.class);
+    criteria.add(Restrictions.eq("productId", id));
+    return criteria.list();
+  }
+
+  public List<ProductMaldives> getMaldives(String id) {
+    Criteria criteria = getCurrentSession().createCriteria(ProductMaldives.class);
     criteria.add(Restrictions.eq("productId", id));
     return criteria.list();
   }

@@ -39,7 +39,7 @@ $('#product-add-comment').click(function(){
 				return false;
 			}
 			$.post('${ContextPath}/product/comment/add.do', {
-				productId: '${id}',
+				productId: '${product.id}',
 				user: user,
 				content: content
 			}).done(function(obj){

@@ -1,8 +1,11 @@
 package com.cqlybest.admin.controller;
 
 import java.text.ParseException;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.lang.time.DateUtils;
@@ -14,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.cqlybest.common.bean.MaldivesRoom;
 import com.cqlybest.common.bean.Product;
 import com.cqlybest.common.bean.ProductCalendar;
 import com.cqlybest.common.bean.ProductComment;
@@ -64,11 +68,6 @@ public class ProductController {
     model.addAttribute("product", product);
     if (product.getProductType() == Product.MALDIVES) {
       model.addAttribute("maldivesIslands", maldivesService.list(1, null));
-      ProductMaldives maldivesIsland = product.getMaldivesIsland();
-      if (maldivesIsland != null && maldivesIsland.getMaldivesIslandId() != null) {
-        model.addAttribute("maldivesRooms", maldivesService.getSimpleRooms(maldivesIsland
-            .getMaldivesIslandId()));
-      }
     }
   }
 
@@ -107,21 +106,58 @@ public class ProductController {
   }
 
   /**
-   * 修改产品行程
+   * 添加马尔代夫行程
    */
-  @RequestMapping(value = "/product/travel/update.do", method = RequestMethod.POST)
+  @RequestMapping(value = "/product/maldives/add.do", method = RequestMethod.POST)
   @ResponseBody
-  public void update(@RequestParam Integer pk, @RequestParam String name, @RequestParam String value) {
-    productService.updateTravel(pk, name, value);
+  public void addMaldives(@RequestParam String productId, @RequestParam String name) {
+    ProductMaldives maldives = new ProductMaldives();
+    maldives.setProductId(productId);
+    maldives.setName(name);
+    productService.add(maldives);
   }
 
   /**
    * 修改产品行程
    */
+  @RequestMapping(value = "/product/travel/update.do", method = RequestMethod.POST)
+  @ResponseBody
+  public void updateTravel(@RequestParam Integer pk, @RequestParam String name,
+      @RequestParam String value) {
+    productService.updateTravel(pk, name, value);
+  }
+
+  /**
+   * 修改马儿代夫产品行程
+   */
+  @RequestMapping(value = "/product/maldives/update.do", method = RequestMethod.POST)
+  @ResponseBody
+  public void updateMaldives(@RequestParam Integer pk, @RequestParam String name,
+      @RequestParam String value) {
+    String _name = name.substring(9);
+    Object _value = value;
+    if (_name.equals("roomId")) {
+      _value = Integer.parseInt(value);
+    }
+    productService.updateMaldives(pk, _name, _value);
+  }
+
+  /**
+   * 删除产品行程
+   */
   @RequestMapping(value = "/product/travel/delete.do", method = RequestMethod.POST)
   @ResponseBody
-  public void update(@RequestParam Integer id) {
+  public void deleteTravel(@RequestParam Integer id) {
     productService.deleteTravel(id);
+  }
+
+  /**
+   * 删除马尔代夫产品行程
+   */
+  @RequestMapping(value = "/product/maldives/delete.do", method = RequestMethod.POST)
+  @ResponseBody
+  public void deleteMaldives(@RequestParam Integer id) {
+    productService.deleteMaldives(id);
   }
 
   @RequestMapping(value = "/product/list.html", method = RequestMethod.GET)
@@ -241,4 +277,20 @@ public class ProductController {
     return productService.getCalendar(id);
   }
 
+  /**
+   * 获取马代海岛房型
+   */
+  @RequestMapping(value = "/product/maldives/room/list.do", method = RequestMethod.GET)
+  @ResponseBody
+  public List<Object> getMaldivesIslandRooms(@RequestParam String islandId) {
+    List<Object> result = new ArrayList<>();
+    List<MaldivesRoom> rooms = maldivesService.getSimpleRooms(islandId);
+    for (MaldivesRoom room : rooms) {
+      Map<String, Object> obj = new HashMap<>();
+      obj.put("value", room.getId());
+      obj.put("text", room.getZhName() + room.getEnName());
+      result.add(obj);
+    }
+    return result;
+  }
 }

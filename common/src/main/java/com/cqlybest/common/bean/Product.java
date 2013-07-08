@@ -12,7 +12,6 @@ public class Product {
   private String name;// 产品名称
   private String code;// 产品代码
   private int productType; // 产品类型：0/普通产品; 1/马尔代夫
-
   private Integer days;// 行程天数
   private String daysUnit;// 行程天数单位 ：天/月/年
   private String departureCities;// 出发城市
@@ -48,8 +47,7 @@ public class Product {
   private List<Image> photos;// 相册图片
   private List<ProductComment> comments; // 评论
   private List<ProductCalendar> calendar;// 日历
-
-  private ProductMaldives maldivesIsland;
+  private List<ProductMaldives> maldives;// 马尔代夫行程
 
   public String getId() {
     return id;
@@ -347,12 +345,12 @@ public class Product {
     this.calendar = calendar;
   }
 
-  public ProductMaldives getMaldivesIsland() {
-    return maldivesIsland;
+  public List<ProductMaldives> getMaldives() {
+    return maldives;
   }
 
-  public void setMaldivesIsland(ProductMaldives maldivesIsland) {
-    this.maldivesIsland = maldivesIsland;
+  public void setMaldives(List<ProductMaldives> maldives) {
+    this.maldives = maldives;
   }
 
 }

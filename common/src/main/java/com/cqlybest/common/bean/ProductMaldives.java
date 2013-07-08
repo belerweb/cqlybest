@@ -6,9 +6,20 @@ package com.cqlybest.common.bean;
  */
 public class ProductMaldives {
 
+  private Integer id;
   private String productId;// 产品ID
-  private String maldivesIslandId;// 马尔代夫海岛ID
-  private Integer maldivesRoomId;// 房型ID
+  private String name;// 如：第一天
+  private String islandId;// 马尔代夫海岛ID
+  private Integer roomId;// 房型ID
+  private String extra;
+
+  public Integer getId() {
+    return id;
+  }
+
+  public void setId(Integer id) {
+    this.id = id;
+  }
 
   public String getProductId() {
     return productId;
@@ -18,20 +29,36 @@ public class ProductMaldives {
     this.productId = productId;
   }
 
-  public String getMaldivesIslandId() {
-    return maldivesIslandId;
+  public String getName() {
+    return name;
   }
 
-  public void setMaldivesIslandId(String maldivesIslandId) {
-    this.maldivesIslandId = maldivesIslandId;
+  public void setName(String name) {
+    this.name = name;
   }
 
-  public Integer getMaldivesRoomId() {
-    return maldivesRoomId;
+  public String getIslandId() {
+    return islandId;
   }
 
-  public void setMaldivesRoomId(Integer maldivesRoomId) {
-    this.maldivesRoomId = maldivesRoomId;
+  public void setIslandId(String islandId) {
+    this.islandId = islandId;
+  }
+
+  public Integer getRoomId() {
+    return roomId;
+  }
+
+  public void setRoomId(Integer roomId) {
+    this.roomId = roomId;
+  }
+
+  public String getExtra() {
+    return extra;
+  }
+
+  public void setExtra(String extra) {
+    this.extra = extra;
   }
 
 }

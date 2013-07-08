@@ -10,8 +10,6 @@ import org.hibernate.criterion.Disjunction;
 import org.hibernate.criterion.Junction;
 import org.hibernate.criterion.MatchMode;
 import org.hibernate.criterion.Restrictions;
-import org.springframework.beans.BeanWrapper;
-import org.springframework.beans.BeanWrapperImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -49,6 +47,11 @@ public class ProductService {
   }
 
   @Transactional
+  public void add(ProductMaldives maldives) {
+    productDao.saveOrUpdate(maldives);
+  }
+
+  @Transactional
   public void add(ProductComment comment) {
     productDao.saveOrUpdate(comment);
   }
@@ -69,12 +72,13 @@ public class ProductService {
 
   public Product get(String id) {
     Product product = productDao.findById(id);
-    product.setTravels(productDao.getTravels(id));
     product.setPosters(imageDao.queryImagesWithoutData("product-poster", id));
     product.setPhotos(imageDao.queryImagesWithoutData("product-photo", id));
     product.setComments(productDao.getComments(id));
     if (product.getProductType() == Product.MALDIVES) {
-      product.setMaldivesIsland(productDao.findById(ProductMaldives.class, id));
+      product.setMaldives(productDao.getMaldives(id));
+    } else {
+      product.setTravels(productDao.getTravels(id));
     }
     return product;
   }
@@ -85,18 +89,7 @@ public class ProductService {
 
   @Transactional
   public void update(String id, String name, Object value) {
-    if (name.equals("maldivesIslandId") || name.equals("maldivesRoomId")) {
-      ProductMaldives maldivesIsland = productDao.findById(ProductMaldives.class, id);
-      if (maldivesIsland == null) {
-        maldivesIsland = new ProductMaldives();
-        maldivesIsland.setProductId(id);
-      }
-      BeanWrapper wrapper = new BeanWrapperImpl(maldivesIsland);
-      wrapper.setPropertyValue(name, value);
-      productDao.saveOrUpdate(maldivesIsland);
-    } else {
-      productDao.update(id, name, value);
-    }
+    productDao.update(id, name, value);
   }
 
   @Transactional
@@ -110,6 +103,11 @@ public class ProductService {
   }
 
   @Transactional
+  public void updateMaldives(Integer id, String name, Object value) {
+    productDao.updateMaldives(id, name, value);
+  }
+
+  @Transactional
   public void delete(String[] ids) {
     productDao.delete(ids);
   }
@@ -117,6 +115,11 @@ public class ProductService {
   @Transactional
   public void deleteTravel(Integer id) {
     productDao.deleteTravel(id);
+  }
+
+  @Transactional
+  public void deleteMaldives(Integer id) {
+    productDao.deleteMaldives(id);
   }
 
   @Transactional
