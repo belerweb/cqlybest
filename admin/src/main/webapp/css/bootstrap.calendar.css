@@ -49,7 +49,7 @@
      vertical-align: middle;
 }
 
-.calendar TD, TD.day{
+.calendar TD, .calendar TD.day{
      height: 50px;
      /*width: 60px;*/
 

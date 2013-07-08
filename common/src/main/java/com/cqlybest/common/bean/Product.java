@@ -5,6 +5,9 @@ import java.util.List;
 
 public class Product {
 
+  public static final int NORMAL = 0;// 普通产品
+  public static final int MALDIVES = 1;// 马尔代夫
+
   private String id;
   private String name;// 产品名称
   private String code;// 产品代码
@@ -36,13 +39,17 @@ public class Product {
   private String types;// 产品类型
   private String grades;// 产品等级
   private String keywords;// 关键词
+
+  private Date createdTime;// 产品创建时间
+  private Date lastUpdated;// 最后更新时间
+
   private List<ProductTravel> travels; // 行程
   private List<Image> posters;// 海报图片
   private List<Image> photos;// 相册图片
-  private Date createdTime;// 产品创建时间
-  private Date lastUpdated;// 最后更新时间
   private List<ProductComment> comments; // 评论
   private List<ProductCalendar> calendar;// 日历
+
+  private ProductMaldives maldivesIsland;
 
   public String getId() {
     return id;
@@ -90,6 +97,22 @@ public class Product {
 
   public void setDaysUnit(String daysUnit) {
     this.daysUnit = daysUnit;
+  }
+
+  public String getDepartureCities() {
+    return departureCities;
+  }
+
+  public void setDepartureCities(String departureCities) {
+    this.departureCities = departureCities;
+  }
+
+  public String getDestinations() {
+    return destinations;
+  }
+
+  public void setDestinations(String destinations) {
+    this.destinations = destinations;
   }
 
   public String getDescription() {
@@ -236,14 +259,6 @@ public class Product {
     this.crowds = crowds;
   }
 
-  public String getDestinations() {
-    return destinations;
-  }
-
-  public void setDestinations(String destinations) {
-    this.destinations = destinations;
-  }
-
   public String getTraffics() {
     return traffics;
   }
@@ -276,12 +291,20 @@ public class Product {
     this.keywords = keywords;
   }
 
-  public String getDepartureCities() {
-    return departureCities;
+  public Date getCreatedTime() {
+    return createdTime;
   }
 
-  public void setDepartureCities(String departureCities) {
-    this.departureCities = departureCities;
+  public void setCreatedTime(Date createdTime) {
+    this.createdTime = createdTime;
+  }
+
+  public Date getLastUpdated() {
+    return lastUpdated;
+  }
+
+  public void setLastUpdated(Date lastUpdated) {
+    this.lastUpdated = lastUpdated;
   }
 
   public List<ProductTravel> getTravels() {
@@ -308,22 +331,6 @@ public class Product {
     this.photos = photos;
   }
 
-  public Date getCreatedTime() {
-    return createdTime;
-  }
-
-  public void setCreatedTime(Date createdTime) {
-    this.createdTime = createdTime;
-  }
-
-  public Date getLastUpdated() {
-    return lastUpdated;
-  }
-
-  public void setLastUpdated(Date lastUpdated) {
-    this.lastUpdated = lastUpdated;
-  }
-
   public List<ProductComment> getComments() {
     return comments;
   }
@@ -338,6 +345,14 @@ public class Product {
 
   public void setCalendar(List<ProductCalendar> calendar) {
     this.calendar = calendar;
+  }
+
+  public ProductMaldives getMaldivesIsland() {
+    return maldivesIsland;
+  }
+
+  public void setMaldivesIsland(ProductMaldives maldivesIsland) {
+    this.maldivesIsland = maldivesIsland;
   }
 
 }

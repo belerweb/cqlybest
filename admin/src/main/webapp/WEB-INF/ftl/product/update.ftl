@@ -118,6 +118,22 @@
 								<div class="clearfix"></div>
 							</div>
 							<div class="span6">
+								<#if product.productType==1>
+								<div class="control-group">
+									<label class="control-label">马代海岛：</label>
+									<div class="controls">
+										<a href="#" class="editable" data-pk="${id}" data-name="maldivesIslandId" data-type="select" data-url="${url}" data-value="${(product.maldivesIsland.maldivesIslandId)!}"></a>
+									</div>
+								</div>
+								<#if (product.maldivesIsland.maldivesIslandId)?has_content>
+								<div class="control-group">
+									<label class="control-label">房型：</label>
+									<div class="controls">
+										<a href="#" class="editable" data-pk="${id}" data-name="maldivesRoomId" data-type="select" data-url="${url}" data-value="${(product.maldivesIsland.maldivesRoomId)!}"></a>
+									</div>
+								</div>
+								</#if>
+								</#if>
 								<div class="control-group">
 									<label class="control-label">行程天数：</label>
 									<div class="controls">
@@ -316,26 +332,38 @@ $('#product_crowds').editable({
 		tags: ['个人旅行', '团体旅行']
 	}
 });
-$('#product_price').editable({
+$('#product_price').editable();
+$('#product_child_price').editable();
+$('#product_special_price').editable();
+$('#product_effective_date').editable();
+$('#product_expiry_date').editable();
+$('#product_price_description').editable();
+$('#product_trip_characteristic').editable();
+$('#product_service_standard').editable();
+$('#product_friendly_reminder').editable();
+$('#product_recommended_item').editable();
+<#if product.productType==1>
+$('#product-base-tab a[data-name=maldivesIslandId]').editable({
+	prepend: '请选择马代海岛',
+	source: [
+		<#list maldivesIslands as island>
+		<#if island_index gt 0>,</#if>{value: '${island.id}', text: '${island.zhName!}${island.enName!}'}
+		</#list>
+	]
+}).on('save', function(e, params) {
+	$('#mb').load('${ContextPath}/product/update.do?id=${product.id}');
 });
-$('#product_child_price').editable({
+<#if (product.maldivesIsland.maldivesIslandId)?has_content>
+$('#product-base-tab a[data-name=maldivesRoomId]').editable({
+	prepend: '请选择房型',
+	source: [
+		<#list maldivesRooms as room>
+		<#if room_index gt 0>,</#if>{value: '${room.id}', text: '${room.zhName!}${room.enName!}'}
+		</#list>
+	]
 });
-$('#product_special_price').editable({
-});
-$('#product_effective_date').editable({
-});
-$('#product_expiry_date').editable({
-});
-$('#product_price_description').editable({
-});
-$('#product_trip_characteristic').editable({
-});
-$('#product_service_standard').editable({
-});
-$('#product_friendly_reminder').editable({
-});
-$('#product_recommended_item').editable({
-});
+</#if>
+</#if>
 
 $('#product-add-travel').click(function(){
 	var container = $(this).parents('.tab-pane');

@@ -59,6 +59,12 @@ public abstract class AbstractDao<E, I extends Serializable> extends SqlSessionD
     return criteria.list();
   }
 
+  public <T> List<T> find(Class<T> cls, Criterion criterion) {
+    Criteria criteria = getCurrentSession().createCriteria(cls);
+    criteria.add(criterion);
+    return criteria.list();
+  }
+
   public List<E> find(Order order) {
     Criteria criteria = getCurrentSession().createCriteria(entityClass);
     criteria.addOrder(order);

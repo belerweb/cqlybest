@@ -17,11 +17,13 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.cqlybest.common.bean.Product;
 import com.cqlybest.common.bean.ProductCalendar;
 import com.cqlybest.common.bean.ProductComment;
+import com.cqlybest.common.bean.ProductMaldives;
 import com.cqlybest.common.bean.ProductTravel;
 import com.cqlybest.common.service.DestinationService;
 import com.cqlybest.common.service.DictService;
 import com.cqlybest.common.service.ImageService;
 import com.cqlybest.common.service.JsonService;
+import com.cqlybest.common.service.MaldivesService;
 import com.cqlybest.common.service.ProductService;
 
 @Controller
@@ -37,6 +39,8 @@ public class ProductController {
   private DictService dictService;
   @Autowired
   private ImageService imageService;
+  @Autowired
+  private MaldivesService maldivesService;
 
   /**
    * 添加产品
@@ -56,7 +60,16 @@ public class ProductController {
    */
   @RequestMapping(value = "/product/update.do", method = RequestMethod.GET)
   public void update(@RequestParam String id, Model model) {
-    model.addAttribute("product", productService.get(id));
+    Product product = productService.get(id);
+    model.addAttribute("product", product);
+    if (product.getProductType() == Product.MALDIVES) {
+      model.addAttribute("maldivesIslands", maldivesService.list(1, null));
+      ProductMaldives maldivesIsland = product.getMaldivesIsland();
+      if (maldivesIsland != null && maldivesIsland.getMaldivesIslandId() != null) {
+        model.addAttribute("maldivesRooms", maldivesService.getSimpleRooms(maldivesIsland
+            .getMaldivesIslandId()));
+      }
+    }
   }
 
   /**

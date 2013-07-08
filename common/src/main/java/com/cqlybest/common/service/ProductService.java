@@ -10,6 +10,8 @@ import org.hibernate.criterion.Disjunction;
 import org.hibernate.criterion.Junction;
 import org.hibernate.criterion.MatchMode;
 import org.hibernate.criterion.Restrictions;
+import org.springframework.beans.BeanWrapper;
+import org.springframework.beans.BeanWrapperImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -19,6 +21,7 @@ import com.cqlybest.common.bean.ProductCalendar;
 import com.cqlybest.common.bean.ProductComment;
 import com.cqlybest.common.bean.ProductFilterItem;
 import com.cqlybest.common.bean.ProductGroup;
+import com.cqlybest.common.bean.ProductMaldives;
 import com.cqlybest.common.bean.ProductTravel;
 import com.cqlybest.common.dao.ImageDao;
 import com.cqlybest.common.dao.ProductDao;
@@ -70,6 +73,9 @@ public class ProductService {
     product.setPosters(imageDao.queryImagesWithoutData("product-poster", id));
     product.setPhotos(imageDao.queryImagesWithoutData("product-photo", id));
     product.setComments(productDao.getComments(id));
+    if (product.getProductType() == Product.MALDIVES) {
+      product.setMaldivesIsland(productDao.findById(ProductMaldives.class, id));
+    }
     return product;
   }
 
@@ -79,7 +85,18 @@ public class ProductService {
 
   @Transactional
   public void update(String id, String name, Object value) {
-    productDao.update(id, name, value);
+    if (name.equals("maldivesIslandId") || name.equals("maldivesRoomId")) {
+      ProductMaldives maldivesIsland = productDao.findById(ProductMaldives.class, id);
+      if (maldivesIsland == null) {
+        maldivesIsland = new ProductMaldives();
+        maldivesIsland.setProductId(id);
+      }
+      BeanWrapper wrapper = new BeanWrapperImpl(maldivesIsland);
+      wrapper.setPropertyValue(name, value);
+      productDao.saveOrUpdate(maldivesIsland);
+    } else {
+      productDao.update(id, name, value);
+    }
   }
 
   @Transactional

@@ -4,6 +4,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
+import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -71,8 +72,11 @@ public class MaldivesService {
     return maldivesDao.total();
   }
 
-  public List<MaldivesSeaIsland> list(int page, int pageSize) {
-    return maldivesDao.find(page, pageSize);
+  public List<MaldivesSeaIsland> list(Integer page, Integer pageSize) {
+    if (page != null && pageSize != null) {
+      return maldivesDao.find(page, pageSize);
+    }
+    return maldivesDao.findAll();
   }
 
   public List<MaldivesRoom> getRooms(String islandId) {
@@ -82,5 +86,10 @@ public class MaldivesService {
     }
     return rooms;
   }
+
+  public List<MaldivesRoom> getSimpleRooms(String islandId) {
+    return maldivesDao.find(MaldivesRoom.class, Restrictions.eq("islandId", islandId));
+  }
+
 
 }

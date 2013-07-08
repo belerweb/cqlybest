@@ -11,7 +11,6 @@
 		<property name="name" column="NAME" length="64" />
 		<property name="code" column="CODE" length="16" />
 		<property name="productType" column="PRODUCT_TYPE" />
-
 		<property name="days" column="DAYS" />
 		<property name="daysUnit" column="DAYS_UNIT" />
 		<property name="description" column="DESCRIPTION" type="text" />
@@ -30,8 +29,6 @@
 		<property name="popular" column="POPULAR" />
 		<property name="recommend" column="RECOMMEND" />
 		<property name="specialOffer" column="SPECIAL_OFFER" />
-		<property name="createdTime" column="CREATED_TIME" />
-		<property name="lastUpdated" column="LAST_UPDATED" />
 		<property name="recommendedMonths" column="RECOMMENDED_MONTHS" />
 		<property name="crowds" column="CROWDS" />
 		<property name="destinations" column="DESTINATIONS" />
@@ -40,5 +37,7 @@
 		<property name="grades" column="GRADES" />
 		<property name="keywords" column="KEYWORDS" />
 		<property name="departureCities" column="DEPARTURE_CITIES" />
+		<property name="createdTime" column="CREATED_TIME" />
+		<property name="lastUpdated" column="LAST_UPDATED" />
 	</class>
 </hibernate-mapping>
