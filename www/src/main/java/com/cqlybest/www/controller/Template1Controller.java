@@ -195,7 +195,7 @@ public class Template1Controller {
     if (product == null || !product.getPublished()) {
       return new ResponseEntity<Object>(HttpStatus.NOT_FOUND);
     }
-    model.addAttribute("product", product);
+    product.setCalendar(productService.getCalendar(id));
     if (product.getProductType() == Product.MALDIVES) {
       List<MaldivesRoom> rooms = new ArrayList<>();
       List<MaldivesRoom> distinctRooms = new ArrayList<>();
@@ -217,6 +217,7 @@ public class Template1Controller {
       model.addAttribute("distinctRooms", distinctRooms);
       model.addAttribute("islands", islands);
       model.addAttribute("distinctIslands", distinctIslands);
+      model.addAttribute("product", product);
     }
 
     setCommonData(model);

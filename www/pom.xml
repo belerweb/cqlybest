@@ -37,6 +37,7 @@
 								<cssSourceFile>bootstrap.css</cssSourceFile>
 								<cssSourceFile>jquery.ad-gallery.css</cssSourceFile>
 								<cssSourceFile>bootstrap-image-gallery.css</cssSourceFile>
+								<cssSourceFile>bootstrap.calendar.css</cssSourceFile>
 								<cssSourceFile>cqlybest.css</cssSourceFile>
 							</cssSourceFiles>
 							<cssFinalFile>application.css</cssFinalFile>
@@ -52,6 +53,7 @@
 								<jsSourceFile>jquery.ad-gallery.js</jsSourceFile>
 								<jsSourceFile>load-image.js</jsSourceFile>
 								<jsSourceFile>bootstrap-image-gallery.js</jsSourceFile>
+								<jsSourceFile>bootstrap.calendar.js</jsSourceFile>
 								<jsSourceFile>cqlybest.js</jsSourceFile>
 							</jsSourceFiles>
 							<jsFinalFile>application.js</jsFinalFile>

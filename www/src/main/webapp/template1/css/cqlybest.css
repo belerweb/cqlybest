@@ -543,3 +543,21 @@ del {
 	text-decoration: line-through;
 	color: #666666;
 }
+.product-room {
+	margin: 0 0 10px;
+}
+.product-room .table{
+	margin-bottom: 5px;
+}
+.product-room .day {
+	background-color: #DFF0D8;
+	font-weight: bold;
+	font-size: 18px;
+	text-align: center;
+	color: #468847;
+}
+
+.product-room th.name {
+	background-color: #DFF0D8;
+	text-align: center;
+}

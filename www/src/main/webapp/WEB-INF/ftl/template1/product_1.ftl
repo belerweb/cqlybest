@@ -75,7 +75,12 @@
 			</table>
 		</div>
 		<div class="span4">
-
+		</div>
+	</div>
+	<div class="row">
+		<div id="product-calendar" class="span8">
+		</div>
+		<div class="span4">
 		</div>
 	</div>
 	<div class="row" style="margin-top:10px;margin-bottom:10px;">
@@ -83,9 +88,20 @@
 			<div id="maldives-island-info-nav">
 				<ul class="nav nav-tabs">
 					<li class="active"><a href="#maldives-island-room－tab">房型介绍</a></li>
+					<#if product.priceDescription?has_content>
+					<li><a href="#maldives-island-fee－tab">费用说明</a></li>
+					</#if>
 				</ul>
 			</div>
 			<#include "product_1_room.ftl">
+			<#if product.priceDescription?has_content>
+			<div id="maldives-island-fee－tab" class="maldives-island-section">
+				<div class="title">
+					<h4>费用说明</h4>
+				</div>
+				<div>${product.priceDescription}</div>
+			</div>
+			</#if>
 		</div>
 		<div class="span4">
 		</div>
@@ -108,6 +124,19 @@
 <script>
 	var PageContext = {
 		init : function() {
+			$('#product-calendar').Calendar({
+				events: function() {
+					return {
+						event: [
+							<#if product.calendar?has_content>
+							<#list product.calendar as day>
+							<#if day_index gt 0>,</#if>{date: '${day.date?string('yyyy-MM-dd')}', price: '${day.price!}'}
+							</#list>
+							</#if>
+						]
+					}
+				}
+			});
 		}
 	};
 </script>

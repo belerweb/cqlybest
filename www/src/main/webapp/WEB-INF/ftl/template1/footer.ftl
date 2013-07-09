@@ -95,6 +95,7 @@
 		<script src="${ContextPath}/template1/js/jquery.ad-gallery.js?build=${(Options.build)!}"></script>
 		<script src="${ContextPath}/template1/js/load-image.js?build=${(Options.build)!}"></script>
 		<script src="${ContextPath}/template1/js/bootstrap-image-gallery.js?build=${(Options.build)!}"></script>
+		<script src="${ContextPath}/template1/js/bootstrap.calendar.js?build=${(Options.build)!}"></script>
 		<script src="${ContextPath}/template1/js/cqlybest.js?build=${(Options.build)!}"></script>
 		</#if>
 	</body>
