@@ -14,6 +14,7 @@
 			<div class="tabbable">
 				<ul id="product-update-tabs" class="nav nav-tabs">
 					<li class="active"><a href="javascript:void(0);" data-toggle="tab" data-target="#product-base-tab">基本信息</a></li>
+					<li><a href="javascript:void(0);" data-toggle="tab" data-target="#product-traffic-tab">交通</a></li>
 					<#if product.productType==1>
 					<li><a href="javascript:void(0);" data-toggle="tab" data-target="#product-detail-tab">马代行程</a></li>
 					<#else>
@@ -26,6 +27,7 @@
 				</ul>
 				<div class="tab-content">
 					<#include "update_base.ftl">
+					<#include "update_traffic.ftl">
 					<#if product.productType==1>
 					<#include "update_maldives.ftl">
 					<#else>

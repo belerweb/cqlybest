@@ -18,6 +18,7 @@ import com.cqlybest.common.bean.Product;
 import com.cqlybest.common.bean.ProductCalendar;
 import com.cqlybest.common.bean.ProductComment;
 import com.cqlybest.common.bean.ProductMaldives;
+import com.cqlybest.common.bean.ProductTraffic;
 import com.cqlybest.common.bean.ProductTravel;
 
 @Repository
@@ -54,6 +55,14 @@ public class ProductDao extends AbstractDao<Product, String> {
     return query.executeUpdate();
   }
 
+  public int updateTraffic(Integer id, String name, Object value) {
+    String hql = "UPDATE ProductTraffic SET " + name + " = ? WHERE id = ?";
+    Query query = getCurrentSession().createQuery(hql);
+    query.setParameter(0, value);
+    query.setParameter(1, id);
+    return query.executeUpdate();
+  }
+
   public int updateMaldives(Integer id, String name, Object value) {
     String hql = "UPDATE ProductMaldives SET " + name + " = ? WHERE id = ?";
     Query query = getCurrentSession().createQuery(hql);
@@ -69,6 +78,11 @@ public class ProductDao extends AbstractDao<Product, String> {
 
   public void deleteTravel(Integer id) {
     getCurrentSession().createQuery("DELETE FROM ProductTravel WHERE id=?").setParameter(0, id)
+        .executeUpdate();
+  }
+
+  public void deleteTraffic(Integer id) {
+    getCurrentSession().createQuery("DELETE FROM ProductTraffic WHERE id=?").setParameter(0, id)
         .executeUpdate();
   }
 
@@ -141,6 +155,12 @@ public class ProductDao extends AbstractDao<Product, String> {
 
   public List<ProductTravel> getTravels(String id) {
     Criteria criteria = getCurrentSession().createCriteria(ProductTravel.class);
+    criteria.add(Restrictions.eq("productId", id));
+    return criteria.list();
+  }
+
+  public List<ProductTraffic> getTraffic(String id) {
+    Criteria criteria = getCurrentSession().createCriteria(ProductTraffic.class);
     criteria.add(Restrictions.eq("productId", id));
     return criteria.list();
   }

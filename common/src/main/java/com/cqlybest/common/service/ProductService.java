@@ -20,6 +20,7 @@ import com.cqlybest.common.bean.ProductComment;
 import com.cqlybest.common.bean.ProductFilterItem;
 import com.cqlybest.common.bean.ProductGroup;
 import com.cqlybest.common.bean.ProductMaldives;
+import com.cqlybest.common.bean.ProductTraffic;
 import com.cqlybest.common.bean.ProductTravel;
 import com.cqlybest.common.dao.ImageDao;
 import com.cqlybest.common.dao.ProductDao;
@@ -43,6 +44,11 @@ public class ProductService {
 
   @Transactional
   public void add(ProductTravel travel) {
+    productDao.saveOrUpdate(travel);
+  }
+
+  @Transactional
+  public void add(ProductTraffic travel) {
     productDao.saveOrUpdate(travel);
   }
 
@@ -75,6 +81,7 @@ public class ProductService {
     product.setPosters(imageDao.queryImagesWithoutData("product-poster", id));
     product.setPhotos(imageDao.queryImagesWithoutData("product-photo", id));
     product.setComments(productDao.getComments(id));
+    product.setTrafficList(productDao.getTraffic(id));
     if (product.getProductType() == Product.MALDIVES) {
       List<ProductMaldives> maldives = productDao.getMaldives(id);
       product.setMaldives(maldives);
@@ -104,6 +111,11 @@ public class ProductService {
   }
 
   @Transactional
+  public void updateTraffic(Integer id, String name, Object value) {
+    productDao.updateTraffic(id, name, value);
+  }
+
+  @Transactional
   public void updateMaldives(Integer id, String name, Object value) {
     productDao.updateMaldives(id, name, value);
   }
@@ -116,6 +128,11 @@ public class ProductService {
   @Transactional
   public void deleteTravel(Integer id) {
     productDao.deleteTravel(id);
+  }
+
+  @Transactional
+  public void deleteTraffic(Integer id) {
+    productDao.deleteTraffic(id);
   }
 
   @Transactional

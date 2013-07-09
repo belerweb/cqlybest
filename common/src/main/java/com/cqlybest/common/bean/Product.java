@@ -43,6 +43,7 @@ public class Product {
   private Date lastUpdated;// 最后更新时间
 
   private List<ProductTravel> travels; // 行程
+  private List<ProductTraffic> trafficList; // 交通
   private List<Image> posters;// 海报图片
   private List<Image> photos;// 相册图片
   private List<ProductComment> comments; // 评论
@@ -311,6 +312,14 @@ public class Product {
 
   public void setTravels(List<ProductTravel> travels) {
     this.travels = travels;
+  }
+
+  public List<ProductTraffic> getTrafficList() {
+    return trafficList;
+  }
+
+  public void setTrafficList(List<ProductTraffic> trafficList) {
+    this.trafficList = trafficList;
   }
 
   public List<Image> getPosters() {

@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping package="com.cqlybest.common.bean">
+	<class name="ProductTraffic" table="PRODUCT_TRAFFIC">
+		<id name="id" column="ID">
+			<generator class="native" />
+		</id>
+		<property name="productId" column="PRODUCT_ID" length="36" />
+		<property name="name" column="NAME" length="8" />
+		<property name="departure" column="DEPARTURE" length="16" />
+		<property name="destination" column="DESTINATION" length="16" />
+		<property name="type" column="type" />
+		<property name="flights" column="FLIGHTS" length="16" />
+		<property name="departureTime" column="DEPARTURE_TIME" />
+		<property name="landingTime" column="LANDING_TIME" />
+		<property name="extra" column="EXTRA" length="1024" />
+	</class>
+</hibernate-mapping>

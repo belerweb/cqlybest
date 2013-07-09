@@ -22,6 +22,7 @@ import com.cqlybest.common.bean.Product;
 import com.cqlybest.common.bean.ProductCalendar;
 import com.cqlybest.common.bean.ProductComment;
 import com.cqlybest.common.bean.ProductMaldives;
+import com.cqlybest.common.bean.ProductTraffic;
 import com.cqlybest.common.bean.ProductTravel;
 import com.cqlybest.common.service.DestinationService;
 import com.cqlybest.common.service.DictService;
@@ -106,6 +107,20 @@ public class ProductController {
   }
 
   /**
+   * 添加产品交通
+   */
+  @RequestMapping(value = "/product/traffic/add.do", method = RequestMethod.POST)
+  @ResponseBody
+  public void addTraffic(@RequestParam String productId, @RequestParam String name,
+      @RequestParam int type) {
+    ProductTraffic traffic = new ProductTraffic();
+    traffic.setProductId(productId);
+    traffic.setName(name);
+    traffic.setType(type);
+    productService.add(traffic);
+  }
+
+  /**
    * 添加马尔代夫行程
    */
   @RequestMapping(value = "/product/maldives/add.do", method = RequestMethod.POST)
@@ -125,6 +140,25 @@ public class ProductController {
   public void updateTravel(@RequestParam Integer pk, @RequestParam String name,
       @RequestParam String value) {
     productService.updateTravel(pk, name, value);
+  }
+
+  /**
+   * 修改产品交通
+   * 
+   * @throws Exception
+   */
+  @RequestMapping(value = "/product/traffic/update.do", method = RequestMethod.POST)
+  @ResponseBody
+  public void updateTraffic(@RequestParam Integer pk, @RequestParam String name,
+      @RequestParam String value) throws Exception {
+    Object _value = value;
+    if (name.equals("type")) {
+      _value = Integer.parseInt(value);
+    }
+    if (name.equals("departureTime") || name.equals("landingTime")) {
+      _value = DateUtils.parseDate(value, new String[] {"HH:mm"});
+    }
+    productService.updateTraffic(pk, name, _value);
   }
 
   /**
@@ -149,6 +183,15 @@ public class ProductController {
   @ResponseBody
   public void deleteTravel(@RequestParam Integer id) {
     productService.deleteTravel(id);
+  }
+
+  /**
+   * 删除产品交通
+   */
+  @RequestMapping(value = "/product/traffic/delete.do", method = RequestMethod.POST)
+  @ResponseBody
+  public void deleteTraffic(@RequestParam Integer id) {
+    productService.deleteTraffic(id);
   }
 
   /**

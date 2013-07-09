@@ -62,7 +62,7 @@ $('#product-detail-tab button.add').click(function(){
 				name: name
 			}, function(){
 				$('#mb').load('${ContextPath}/product/update.do?id=${product.id}', function(){
-					$('#product-update-tabs li:eq(1) a').tab('show');
+					$('#product-update-tabs a[data-target="#product-detail-tab"]').tab('show');
 				});
 			});
 		}
@@ -78,7 +78,7 @@ $('#product-detail-tab a[data-name="maldives.islandId"]').editable({
 	]
 }).on('save', function(){
 	$('#mb').load('${ContextPath}/product/update.do?id=${product.id}', function(){
-		$('#product-update-tabs li:eq(1) a').tab('show');
+		$('#product-update-tabs a[data-target="#product-detail-tab"]').tab('show');
 	});
 });
 $('#product-detail-tab a[data-name="maldives.roomId"]').editable({

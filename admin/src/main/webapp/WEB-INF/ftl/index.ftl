@@ -121,6 +121,7 @@
 		<script type="text/javascript" src="${ContextPath}/js/ueditor/editor_all.js"></script>
 		<script type="text/javascript" src="${ContextPath}/js/elfinder.min.js"></script>
 		<script type="text/javascript" src="${ContextPath}/js/i18n/elfinder.zh_CN.js"></script>
+		<script type="text/javascript" src="${ContextPath}/js/moment.js"></script>
 		<script type="text/javascript" src="${ContextPath}/js/select2/select2.js"></script>
 		<script type="text/javascript" src="${ContextPath}/js/bootstrap-editable/js/bootstrap-editable.js"></script>
 		<script type="text/javascript" src="${ContextPath}/js/wysihtml5-0.3.0.js"></script>  
