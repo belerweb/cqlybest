@@ -76,7 +76,8 @@ public class ProductService {
     product.setPhotos(imageDao.queryImagesWithoutData("product-photo", id));
     product.setComments(productDao.getComments(id));
     if (product.getProductType() == Product.MALDIVES) {
-      product.setMaldives(productDao.getMaldives(id));
+      List<ProductMaldives> maldives = productDao.getMaldives(id);
+      product.setMaldives(maldives);
     } else {
       product.setTravels(productDao.getTravels(id));
     }

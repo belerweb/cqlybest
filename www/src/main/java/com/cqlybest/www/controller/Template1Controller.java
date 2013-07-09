@@ -26,10 +26,12 @@ import com.cqlybest.common.bean.DictProductGrade;
 import com.cqlybest.common.bean.DictProductType;
 import com.cqlybest.common.bean.DictTraffic;
 import com.cqlybest.common.bean.Keyword;
+import com.cqlybest.common.bean.MaldivesRoom;
 import com.cqlybest.common.bean.MaldivesSeaIsland;
 import com.cqlybest.common.bean.Product;
 import com.cqlybest.common.bean.ProductFilterItem;
 import com.cqlybest.common.bean.ProductGroup;
+import com.cqlybest.common.bean.ProductMaldives;
 import com.cqlybest.common.bean.template1.Template1Menu;
 import com.cqlybest.common.bean.template1.Template1ProductGroup;
 import com.cqlybest.common.service.DestinationService;
@@ -194,8 +196,31 @@ public class Template1Controller {
       return new ResponseEntity<Object>(HttpStatus.NOT_FOUND);
     }
     model.addAttribute("product", product);
+    if (product.getProductType() == Product.MALDIVES) {
+      List<MaldivesRoom> rooms = new ArrayList<>();
+      List<MaldivesRoom> distinctRooms = new ArrayList<>();
+      List<MaldivesSeaIsland> islands = new ArrayList<>();
+      List<MaldivesSeaIsland> distinctIslands = new ArrayList<>();
+      for (ProductMaldives maldives : product.getMaldives()) {
+        MaldivesRoom room = maldivesService.getRoom(maldives.getRoomId());
+        rooms.add(room);
+        if (!distinctRooms.contains(room)) {
+          distinctRooms.add(room);
+        }
+        MaldivesSeaIsland island = maldivesService.getIslandWithoutRoom(maldives.getIslandId());
+        islands.add(island);
+        if (!distinctIslands.contains(island)) {
+          distinctIslands.add(island);
+        }
+      }
+      model.addAttribute("rooms", rooms);
+      model.addAttribute("distinctRooms", distinctRooms);
+      model.addAttribute("islands", islands);
+      model.addAttribute("distinctIslands", distinctIslands);
+    }
+
     setCommonData(model);
-    return "/template1/product";
+    return "/template1/product_" + product.getProductType();
   }
 
   @RequestMapping("/template1/maldives/{id}.html")

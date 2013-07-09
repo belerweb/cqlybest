@@ -68,6 +68,14 @@ public class MaldivesService {
     return island;
   }
 
+  public MaldivesSeaIsland getIslandWithoutRoom(String id) {
+    MaldivesSeaIsland island = maldivesDao.findById(id);
+    if (island != null) {
+      island.setPictures(imageDao.queryImagesWithoutData("maldives-island-poster", id));
+    }
+    return island;
+  }
+
   public Long total() {
     return maldivesDao.total();
   }
@@ -79,10 +87,18 @@ public class MaldivesService {
     return maldivesDao.findAll();
   }
 
+  public MaldivesRoom getRoom(Integer id) {
+    MaldivesRoom room = maldivesDao.findById(MaldivesRoom.class, id);
+    room.setPictures(imageDao.queryImagesWithoutData("maldives-room-picture", room.getId()
+        .toString()));
+    return room;
+  }
+
   public List<MaldivesRoom> getRooms(String islandId) {
     List<MaldivesRoom> rooms = maldivesDao.getRooms(islandId);
     for (MaldivesRoom room : rooms) {
-      room.setPictures(imageDao.queryImagesWithoutData("maldives-room-picture", islandId));
+      room.setPictures(imageDao.queryImagesWithoutData("maldives-room-picture", room.getId()
+          .toString()));
     }
     return rooms;
   }
@@ -90,6 +106,5 @@ public class MaldivesService {
   public List<MaldivesRoom> getSimpleRooms(String islandId) {
     return maldivesDao.find(MaldivesRoom.class, Restrictions.eq("islandId", islandId));
   }
-
 
 }

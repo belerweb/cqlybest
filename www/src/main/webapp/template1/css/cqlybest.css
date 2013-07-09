@@ -502,3 +502,44 @@ del {
 #product-trip .nav-tabs,#product-trip .tab-content {
 	margin-bottom: 5px;
 }
+
+.product-gallery .gallery-item {
+	float: left;
+}
+
+.product-gallery .gallery-item img {
+	border: 2px solid #DDDDDD;
+	margin-left: 6px;
+	margin-bottom: 5px;
+}
+
+.product-gallery .gallery-item.first img {
+	border: 1px solid #DDDDDD;
+	margin-left: 0;
+}
+
+.product-gallery .gallery-item.row-first img {
+	margin-left: 1px;
+}
+
+.product-basic-table {
+	
+}
+
+.product-basic-table th,.product-basic-table td {
+	border: none;
+}
+
+.product-basic-table th.name {
+	color: #F89406;
+	width: 70px;
+}
+
+.product-basic-table td.price {
+	font-family: Georgia;
+	font-size: 16px;
+}
+.product-basic-table td.del {
+	text-decoration: line-through;
+	color: #666666;
+}
