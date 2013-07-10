@@ -12,6 +12,7 @@ public class ProductMaldives {
   private String islandId;// 马尔代夫海岛ID
   private Integer roomId;// 房型ID
   private String extra;
+  private String meal;
 
   public Integer getId() {
     return id;
@@ -59,6 +60,14 @@ public class ProductMaldives {
 
   public void setExtra(String extra) {
     this.extra = extra;
+  }
+
+  public String getMeal() {
+    return meal;
+  }
+
+  public void setMeal(String meal) {
+    this.meal = meal;
   }
 
 }

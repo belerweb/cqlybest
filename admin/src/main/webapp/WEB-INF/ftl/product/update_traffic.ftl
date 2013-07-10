@@ -89,10 +89,15 @@ $('#product-traffic-tab button.add').click(function(){
 		dialog.find(".btn-primary").click();
 	});
 });
-$('#product-traffic-tab a.editable').not('[data-type=select]').editable();
+$('#product-traffic-tab a.editable').not('[data-type=select]').not('[data-type=combodate]').editable();
 $('#product-traffic-tab a[data-name=type]').editable({
 	prepend: '',
 	source: [{value:1, text: '火车'}, {value:2, text: '飞机'}]
+});
+$('#product-traffic-tab a[data-type=combodate]').editable({
+	combodate: {
+		minuteStep: 1
+	}
 });
 $('#product-traffic-tab button.delete').on('click', function() {
 	var id = $(this).attr('data-id');

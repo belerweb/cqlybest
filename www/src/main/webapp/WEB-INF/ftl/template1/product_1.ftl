@@ -88,7 +88,7 @@
 							<#if product.trafficList?has_content>
 							<li class="active"><a href="#maldives-island-traffic－tab">交通方式</a></li>
 							</#if>
-							<li><a href="#maldives-island-room－tab">房型介绍</a></li>
+							<li><a href="#maldives-island-room－tab">详细行程</a></li>
 							<#if product.priceDescription?has_content>
 							<li><a href="#maldives-island-fee－tab">费用说明</a></li>
 							</#if>

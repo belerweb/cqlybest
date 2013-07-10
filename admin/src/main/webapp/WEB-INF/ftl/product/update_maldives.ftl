@@ -40,7 +40,17 @@
 	<div class="row-fluid">
 		<div class="span12">
 			<div class="control-group">
-				<label class="control-label">补充信息：</label>
+				<label class="control-label">用餐：</label>
+				<div class="controls">
+					<a href="#" class="editable" data-pk="${maldives.id}" data-name="maldives.meal" data-type="text" data-url="${PMURL}" value="${maldives.meal!}"></a>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="row-fluid">
+		<div class="span12">
+			<div class="control-group">
+				<label class="control-label">详细信息：</label>
 				<div class="controls">
 					<a href="#" class="editable" data-pk="${maldives.id}" data-name="maldives.extra" data-type="textarea" data-url="${PMURL}">${maldives.extra!?html}</a>
 				</div>

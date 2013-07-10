@@ -1,6 +1,6 @@
 <div id="maldives-island-room－tab" class="maldives-island-section">
 	<div class="title">
-		<h4>房型介绍</h4>
+		<h4>详细行程</h4>
 	</div>
 	<#assign notIslandRoom=0>
 	<#if product.maldives?has_content>
@@ -21,31 +21,38 @@
 					<col width="" />
 				</colgroup>
 				<tbody>
+					<#assign island=islands[maldives_index-notIslandRoom]>
 					<tr>
-						<th colspan="2" class="name">${room.zhName!}${room.enName!}</th>
+						<th colspan="2" class="name">${island.zhName!}${island.enName!} <br> ${room.zhName!}${room.enName!}</th>
 					</tr>
+					<#if maldives.meal?has_content>
+					<tr>
+						<th>用餐：</th>
+						<td>${maldives.meal!}</td>
+					</tr>
+					</#if>
+					<#if maldives.extra?has_content>
+					<tr>
+						<th>详细行程：</th>
+						<td>${maldives.extra}</td>
+					</tr>
+					</#if>
 					<#if room.requirements?has_content>
 					<tr>
-						<th>入住要求：</th>
+						<th>入住限制：</th>
 						<td>${room.requirements}</td>
+					</tr>
+					</#if>
+					<#if room.description?has_content>
+					<tr>
+						<th>房间简介：</th>
+						<td>${room.description}</td>
 					</tr>
 					</#if>
 					<#if room.roomFacility?has_content>
 					<tr>
 						<th>房间设施：</th>
 						<td>${room.roomFacility}</td>
-					</tr>
-					</#if>
-					<#if room.description?has_content>
-					<tr>
-						<th>详细信息：</th>
-						<td>${room.description}</td>
-					</tr>
-					</#if>
-					<#if maldives.extra?has_content>
-					<tr>
-						<th>补充说明：</th>
-						<td>${maldives.extra}</td>
 					</tr>
 					</#if>
 				</tbody>

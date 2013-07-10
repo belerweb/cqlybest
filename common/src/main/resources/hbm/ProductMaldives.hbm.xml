@@ -13,5 +13,6 @@
 		<property name="islandId" column="ISLAND_ID" length="36" />
 		<property name="roomId" column="ROOM_ID" />
 		<property name="extra" column="EXTRA" length="1024" />
+		<property name="meal" column="MEAL" length="32" />
 	</class>
 </hibernate-mapping>
