@@ -27,6 +27,19 @@
 				</div>
 			</div>
 			<div class="control-group">
+				<label class="control-label">儿童价：</label>
+				<div class="controls">
+					<input type="text" name="childPrice">
+					<div class="help-block"></div>
+				</div>
+			</div>
+			<div class="control-group">
+				<label class="control-label">特价：</label>
+				<div class="controls">
+					<label class="checkbox"><input name="special" type="checkbox"> 是</label>
+				</div>
+			</div>
+			<div class="control-group">
 				<div class="controls">
 					<button type="button" class="btn btn-primary save">保存</button>
 					<button type="button" class="btn btn-danger del">删除</button>
@@ -74,7 +87,9 @@ $('#product-calendar-tab button.save').click(function(){
 		productId: '${product.id}',
 		start: $('#product-calendar-tab input[name=start]').val(),
 		end: $('#product-calendar-tab input[name=end]').val(),
-		price: $('#product-calendar-tab input[name=price]').val()
+		price: $('#product-calendar-tab input[name=price]').val(),
+		childPrice: $('#product-calendar-tab input[name=childPrice]').val(),
+		special: $('#product-calendar-tab input[name=special]').is(':checked')
 	}, function() {
 		$('#product-calendar-tab .calendar-container').data('plugin_Calendar').renderCalendar(new Date());
 	});

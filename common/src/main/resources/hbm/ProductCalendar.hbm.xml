@@ -11,5 +11,7 @@
 		<property name="productId" column="PRODUCT_ID" length="36" />
 		<property name="date" column="DATE" />
 		<property name="price" column="PRICE" />
+		<property name="special" column="SPECIAL" />
+		<property name="childPrice" column="CHILD_PRICE" />
 	</class>
 </hibernate-mapping>

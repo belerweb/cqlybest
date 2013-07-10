@@ -12,6 +12,8 @@ public class ProductCalendar {
   private String productId;// 产品ID
   private Date date;// 日期
   private Integer price;// 价格
+  private boolean special;// 是否特价
+  private Integer childPrice;// 儿童价
 
   public Integer getId() {
     return id;
@@ -43,6 +45,22 @@ public class ProductCalendar {
 
   public void setPrice(Integer price) {
     this.price = price;
+  }
+
+  public boolean isSpecial() {
+    return special;
+  }
+
+  public void setSpecial(boolean special) {
+    this.special = special;
+  }
+
+  public Integer getChildPrice() {
+    return childPrice;
+  }
+
+  public void setChildPrice(Integer childPrice) {
+    this.childPrice = childPrice;
   }
 
 }

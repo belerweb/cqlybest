@@ -63,7 +63,8 @@ public class ProductService {
   }
 
   @Transactional
-  public void addCalendar(String productId, Date start, Date end, Integer price) {
+  public void addCalendar(String productId, Date start, Date end, Integer price,
+      Integer childPrice, boolean special) {
     productDao.deleteCalendar(productId, start, end);
     Date date = start;
     while (date.getTime() <= end.getTime()) {
@@ -71,6 +72,8 @@ public class ProductService {
       calendar.setProductId(productId);
       calendar.setDate(date);
       calendar.setPrice(price);
+      calendar.setChildPrice(childPrice);
+      calendar.setSpecial(special);
       productDao.saveOrUpdate(calendar);
       date = new Date(date.getTime() + 86400000);
     }
@@ -118,6 +121,10 @@ public class ProductService {
   @Transactional
   public void updateMaldives(Integer id, String name, Object value) {
     productDao.updateMaldives(id, name, value);
+    if (name.equals("islandId")) {
+      // 修改海岛时需要将房间置空
+      productDao.updateMaldives(id, "roomId", null);
+    }
   }
 
   @Transactional

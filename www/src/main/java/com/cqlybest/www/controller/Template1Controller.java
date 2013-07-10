@@ -9,6 +9,7 @@ import java.util.Set;
 
 import javax.servlet.http.HttpSession;
 
+import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -196,12 +197,16 @@ public class Template1Controller {
       return new ResponseEntity<Object>(HttpStatus.NOT_FOUND);
     }
     product.setCalendar(productService.getCalendar(id));
+
     if (product.getProductType() == Product.MALDIVES) {
       List<MaldivesRoom> rooms = new ArrayList<>();
       List<MaldivesRoom> distinctRooms = new ArrayList<>();
       List<MaldivesSeaIsland> islands = new ArrayList<>();
       List<MaldivesSeaIsland> distinctIslands = new ArrayList<>();
       for (ProductMaldives maldives : product.getMaldives()) {
+        if (StringUtils.isEmpty(maldives.getIslandId()) || maldives.getRoomId() == null) {
+          continue;
+        }
         MaldivesRoom room = maldivesService.getRoom(maldives.getRoomId());
         rooms.add(room);
         if (!distinctRooms.contains(room)) {
@@ -217,9 +222,9 @@ public class Template1Controller {
       model.addAttribute("distinctRooms", distinctRooms);
       model.addAttribute("islands", islands);
       model.addAttribute("distinctIslands", distinctIslands);
-      model.addAttribute("product", product);
     }
 
+    model.addAttribute("product", product);
     setCommonData(model);
     return "/template1/product_" + product.getProductType();
   }

@@ -84,7 +84,7 @@ public class ProductController {
     if ("days".equals(name)) {
       _value = Integer.parseInt(value);
     }
-    if ("price".equals(name) || "childPrice".equals(name) || "specialPrice".equals(name)) {
+    if ("price".equals(name) || "marketPrice".equals(name)) {
       _value = (int) (Double.parseDouble(value) * 100);
     }
     if ("effectiveDate".equals(name) || "expiryDate".equals(name) || "departureDate".equals(name)) {
@@ -290,13 +290,19 @@ public class ProductController {
   @RequestMapping(value = "/product/calendar/add.do", method = RequestMethod.POST)
   @ResponseBody
   public void addCalendar(@RequestParam String productId, @RequestParam String start,
-      @RequestParam String end, @RequestParam(required = false) String price) throws ParseException {
+      @RequestParam String end, @RequestParam(required = false) String price,
+      @RequestParam(required = false) String childPrice,
+      @RequestParam(defaultValue = "false") boolean special) throws ParseException {
     Integer _price = null;
+    Integer _childPrice = null;
     if (StringUtils.isNotEmpty(price)) {
       _price = (int) (Double.parseDouble(price) * 100);
     }
+    if (StringUtils.isNotEmpty(childPrice)) {
+      _childPrice = (int) (Double.parseDouble(childPrice) * 100);
+    }
     productService.addCalendar(productId, DateUtils.parseDate(start, new String[] {"yyyy-MM-dd"}),
-        DateUtils.parseDate(end, new String[] {"yyyy-MM-dd"}), _price);
+        DateUtils.parseDate(end, new String[] {"yyyy-MM-dd"}), _price, _childPrice, special);
   }
 
   /**

@@ -2,14 +2,19 @@
 	<div class="title">
 		<h4>房型介绍</h4>
 	</div>
+	<#assign notIslandRoom=0>
 	<#if product.maldives?has_content>
 	<#list product.maldives as maldives>
-	<#assign room=rooms[maldives_index]>
 	<div class="row-fluid product-room">
 		<div class="span2">
 			<div class="day well well-small">${maldives.name!}</div>
 		</div>
 		<div class="span10">
+		<#if !(maldives.islandId?has_content && maldives.roomId?has_content)>
+			<#assign notIslandRoom=notIslandRoom+1>
+			${maldives.extra!}
+		<#else>
+			<#assign room=rooms[maldives_index-notIslandRoom]>
 			<table class="table table-condensed">
 				<colgroup>
 					<col width="70" />
@@ -37,6 +42,12 @@
 						<td>${room.description}</td>
 					</tr>
 					</#if>
+					<#if maldives.extra?has_content>
+					<tr>
+						<th>补充说明：</th>
+						<td>${maldives.extra}</td>
+					</tr>
+					</#if>
 				</tbody>
 			</table>
 			<#if room.pictures?has_content>
@@ -47,6 +58,7 @@
 			</#list>
 			</div>
 			</#if>
+		</#if>
 		</div>
 	</div>
 	</#list>

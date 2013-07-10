@@ -17,9 +17,8 @@ public class Product {
   private String departureCities;// 出发城市
   private String destinations;// 目的地
   private String description; // 产品介绍
-  private Integer price; // 正常价格
-  private Integer childPrice; // 儿童价格
-  private Integer specialPrice; // 特价
+  private Integer marketPrice; // 市场价
+  private Integer price; // 参考价格
   private String priceDescription; // 费用说明
   private Date effectiveDate; // 产品生效日期
   private Date expiryDate; // 产品失效日期
@@ -122,28 +121,20 @@ public class Product {
     this.description = description;
   }
 
+  public Integer getMarketPrice() {
+    return marketPrice;
+  }
+
+  public void setMarketPrice(Integer marketPrice) {
+    this.marketPrice = marketPrice;
+  }
+
   public Integer getPrice() {
     return price;
   }
 
   public void setPrice(Integer price) {
     this.price = price;
-  }
-
-  public Integer getChildPrice() {
-    return childPrice;
-  }
-
-  public void setChildPrice(Integer childPrice) {
-    this.childPrice = childPrice;
-  }
-
-  public Integer getSpecialPrice() {
-    return specialPrice;
-  }
-
-  public void setSpecialPrice(Integer specialPrice) {
-    this.specialPrice = specialPrice;
   }
 
   public String getPriceDescription() {

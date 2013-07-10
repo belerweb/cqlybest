@@ -33,21 +33,15 @@
 				</div>
 			</div>
 			<div class="control-group">
-				<label class="control-label">正常价格：</label>
+				<label class="control-label">市场价：</label>
+				<div class="controls">
+					<a id="product_market_price" href="#" class="editable" data-pk="${ID}" data-name="marketPrice" data-type="text" data-url="${URL}" data-value="<#if (product.marketPrice)?exists>${(product.marketPrice/100)?string('0.00')}</#if>"></a>
+				</div>
+			</div>
+			<div class="control-group">
+				<label class="control-label">参考价格：</label>
 				<div class="controls">
 					<a id="product_price" href="#" class="editable" data-pk="${ID}" data-name="price" data-type="text" data-url="${URL}" data-value="<#if (product.price)?exists>${(product.price/100)?string('0.00')}</#if>"></a>
-				</div>
-			</div>
-			<div class="control-group">
-				<label class="control-label">儿童价：</label>
-				<div class="controls">
-					<a id="product_child_price" href="#" class="editable" data-pk="${ID}" data-name="childPrice" data-type="text" data-url="${URL}" data-value="<#if (product.childPrice)?exists>${(product.childPrice/100)?string('0.00')}</#if>"></a>
-				</div>
-			</div>
-			<div class="control-group">
-				<label class="control-label">特价：</label>
-				<div class="controls">
-					<a id="product_special_price" href="#" class="editable" data-pk="${ID}" data-name="specialPrice" data-type="text" data-url="${URL}" data-value="<#if (product.specialPrice)?exists>${(product.specialPrice/100)?string('0.00')}</#if>"></a>
 				</div>
 			</div>
 			<div class="control-group">
@@ -176,8 +170,7 @@ $('#product_crowds').editable({
 	}
 });
 $('#product_price').editable();
-$('#product_child_price').editable();
-$('#product_special_price').editable();
+$('#product_market_price').editable();
 $('#product_effective_date').editable();
 $('#product_expiry_date').editable();
 $('#product_price_description').editable();

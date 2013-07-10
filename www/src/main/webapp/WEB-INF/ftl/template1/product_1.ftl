@@ -87,12 +87,18 @@
 		<div class="span8">
 			<div id="maldives-island-info-nav">
 				<ul class="nav nav-tabs">
-					<li class="active"><a href="#maldives-island-room－tab">房型介绍</a></li>
+					<#if product.trafficList?has_content>
+					<li class="active"><a href="#maldives-island-traffic－tab">交通方式</a></li>
+					</#if>
+					<li><a href="#maldives-island-room－tab">房型介绍</a></li>
 					<#if product.priceDescription?has_content>
 					<li><a href="#maldives-island-fee－tab">费用说明</a></li>
 					</#if>
 				</ul>
 			</div>
+			<#if product.trafficList?has_content>
+			<#include "product_1_traffic.ftl">
+			</#if>
 			<#include "product_1_room.ftl">
 			<#if product.priceDescription?has_content>
 			<div id="maldives-island-fee－tab" class="maldives-island-section">

@@ -1,4 +1,4 @@
-/*!
+/**!
  * jQuery lightweight plugin boilerplate
  * Original author: @ajpiano
  * Further changes, comments: @addyosmani
@@ -260,7 +260,7 @@
                                 type: 'changeDay',
                                 day: day,
                                 month: month,
-                                year: year,
+                                year: year
                             });
                         }else if(target.is('.holiday')){
                             var day = parseInt(target.attr('day'), 10)||1;
@@ -271,7 +271,7 @@
                                 type: 'onEvent',
                                 day: day,
                                 month: month,
-                                year: year,
+                                year: year
                             });
                         }else if(target.is('.today')){
                             var day = parseInt(target.attr('day'), 10)||1;
@@ -282,7 +282,7 @@
                                 type: 'changeDay',
                                 day: day,
                                 month: month,
-                                year: year,
+                                year: year
                             });
             }
                         break;
@@ -295,7 +295,7 @@
                                     this.live_date = prv;
                                     this.renderCalendar(prv, this.events);
                                     this.element.trigger({
-                                        type: 'onPrev',
+                                        type: 'onPrev'
                                     });
                                     break;
                                 case 'current':
@@ -304,7 +304,7 @@
                                     this.live_date = now;
                                     this.renderCalendar(now, this.events);
                                     this.element.trigger({
-                                        type: 'onCurrent',
+                                        type: 'onCurrent'
                                     });
                                     break;
                                 case 'next':
@@ -313,7 +313,7 @@
                                     this.live_date = nxt;
                                     this.renderCalendar(nxt, this.events);
                                     this.element.trigger({
-                                        type: 'onNext',
+                                        type: 'onNext'
                                     });
                                     break
                             }
