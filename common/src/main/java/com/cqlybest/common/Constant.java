@@ -9,4 +9,6 @@ public class Constant {
   public static final String OPTION_SITE_STATISTICAL_CODE = "site_statistical_code";// 统计代码
   public static final String OPTION_SITE_ICP = "site_icp";// 备案号
 
+  public static final String IMAGE_MALDIVES_ROOM_PICTURE = "maldives-room-picture";// 马尔代夫房间图片
+
 }

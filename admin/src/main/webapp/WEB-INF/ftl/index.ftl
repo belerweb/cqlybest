@@ -20,7 +20,8 @@
 		<link rel="stylesheet" href="${ContextPath}/css/elfinder-theme.css">
 		<link rel="stylesheet" href="${ContextPath}js/select2/select2.css">
 		<link rel="stylesheet" href="${ContextPath}/js/bootstrap-editable/css/bootstrap-editable.css">
-		<link rel="stylesheet" href="${ContextPath}/css/bootstrap-wysihtml5-0.0.2.css">  
+		<link rel="stylesheet" href="${ContextPath}/js/inputs-ext/wysihtml5/bootstrap-wysihtml5/bootstrap-wysihtml5-0.0.2.css">  
+		<link rel="stylesheet" href="${ContextPath}/css/wysiwyg-color.css">  
 		<link rel="stylesheet" href="${ContextPath}/css/bootstrap.calendar.css">
 		<link rel="alternate stylesheet" type="text/css" media="screen" title="green-theme" href="${ContextPath}/css/color/green.css" />
 		<link rel="alternate stylesheet" type="text/css" media="screen" title="red-theme" href="${ContextPath}/css/color/red.css" />
@@ -124,9 +125,9 @@
 		<script type="text/javascript" src="${ContextPath}/js/moment.js"></script>
 		<script type="text/javascript" src="${ContextPath}/js/select2/select2.js"></script>
 		<script type="text/javascript" src="${ContextPath}/js/bootstrap-editable/js/bootstrap-editable.js"></script>
-		<script type="text/javascript" src="${ContextPath}/js/wysihtml5-0.3.0.js"></script>  
-		<script type="text/javascript" src="${ContextPath}/js/bootstrap-wysihtml5-0.0.2.js"></script>  
-		<script type="text/javascript" src="${ContextPath}/js/wysihtml5.js"></script>  
+		<script type="text/javascript" src="${ContextPath}/js/inputs-ext/wysihtml5/bootstrap-wysihtml5/wysihtml5-0.3.0.js"></script>  
+		<script type="text/javascript" src="${ContextPath}/js/inputs-ext/wysihtml5/bootstrap-wysihtml5/bootstrap-wysihtml5-0.0.2.js"></script>  
+		<script type="text/javascript" src="${ContextPath}/js/inputs-ext/wysihtml5/wysihtml5.js"></script>  
 		<script type="text/javascript" src="${ContextPath}/js/bootstrap.calendar.js"></script>
 		<script type="text/javascript" src="${ContextPath}/js/jquery.dateFormat-1.0.js"></script>
 		<!--[if IE]>

@@ -44,12 +44,11 @@
 				</div>
 			</div>
 			<div class="control-group">
-				<label class="control-label">详细信息：</label>
+				<label class="control-label"><a herf="javascript:void(0);">详细信息：</a></label>
 				<div class="controls">
 					<div data-pk="${id}" data-name="description" data-type="wysihtml5" data-url="${url}" data-toggle="manual" data-original-title="编辑详细信息">
 						${island.description!}
 					</div>
-					<button type="button" class="btn btn-success">编辑</button>
 				</div>
 			</div>
 			<div class="clearfix"></div>

@@ -341,12 +341,12 @@
 
     var defaultOptions = $.fn.wysihtml5.defaultOptions = {
         "font-styles": true,
-        "color": false,
+        "color": true,
         "emphasis": true,
         "lists": true,
-        "html": false,
+        "html": true,
         "link": true,
-        "image": true,
+        "image": false,
         events: {},
         parserRules: {
             classes: {
@@ -401,8 +401,8 @@
                 "div": 1
             }
         },
-        stylesheets: ["./lib/css/wysiwyg-color.css"], // (path_to_project/lib/css/wysiwyg-color.css)
-        locale: "en"
+        stylesheets: ["wysiwyg-color.css"], // (path_to_project/lib/css/wysiwyg-color.css)
+        locale: "zh"
     };
 
     if (typeof $.fn.wysihtml5.defaultOptionsCache === 'undefined') {
@@ -410,47 +410,47 @@
     }
 
     var locale = $.fn.wysihtml5.locale = {
-        en: {
+        zh: {
             font_styles: {
-                normal: "Normal text",
-                h1: "Heading 1",
-                h2: "Heading 2",
-                h3: "Heading 3"
+                normal: "正文",
+                h1: "一级标题",
+                h2: "二级标题",
+                h3: "三级标题"
             },
             emphasis: {
-                bold: "Bold",
-                italic: "Italic",
-                underline: "Underline"
+                bold: "粗体",
+                italic: "斜体",
+                underline: "下划线"
             },
             lists: {
-                unordered: "Unordered list",
-                ordered: "Ordered list",
-                outdent: "Outdent",
-                indent: "Indent"
+                unordered: "列表",
+                ordered: "排序列表",
+                outdent: "退格",
+                indent: "缩进"
             },
             link: {
-                insert: "Insert link",
-                cancel: "Cancel"
+                insert: "插入超链接",
+                cancel: "取消"
             },
             image: {
-                insert: "Insert image",
-                cancel: "Cancel"
+                insert: "插入图片",
+                cancel: "取消"
             },
             html: {
-                edit: "Edit HTML"
+                edit: "编辑 HTML"
             },
             colours: {
-                black: "Black",
-                silver: "Silver",
-                gray: "Grey",
-                maroon: "Maroon",
-                red: "Red",
-                purple: "Purple",
-                green: "Green",
-                olive: "Olive",
-                navy: "Navy",
-                blue: "Blue",
-                orange: "Orange"
+                black: "黑色",
+                silver: "银色",
+                gray: "灰色",
+                maroon: "褐红色",
+                red: "红色",
+                purple: "紫色",
+                green: "绿色",
+                olive: "橄榄色",
+                navy: "海军蓝",
+                blue: "蓝色",
+                orange: "橙色"
             }
         }
     };

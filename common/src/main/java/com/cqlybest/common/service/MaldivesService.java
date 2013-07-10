@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.cqlybest.common.Constant;
 import com.cqlybest.common.bean.MaldivesRoom;
 import com.cqlybest.common.bean.MaldivesSeaIsland;
 import com.cqlybest.common.dao.ImageDao;
@@ -56,12 +57,18 @@ public class MaldivesService {
     maldivesDao.delete(ids);
   }
 
+  @Transactional
+  public void deleteRoom(Integer id) {
+    maldivesDao.deleteRoom(id);
+    imageDao.deleteByExtra(Constant.IMAGE_MALDIVES_ROOM_PICTURE, id.toString());
+  }
+
   public MaldivesSeaIsland get(String id) {
     MaldivesSeaIsland island = maldivesDao.findById(id);
     List<MaldivesRoom> rooms = maldivesDao.getRooms(id);
     for (MaldivesRoom room : rooms) {
-      room.setPictures(imageDao.queryImagesWithoutData("maldives-room-picture", room.getId()
-          .toString()));
+      room.setPictures(imageDao.queryImagesWithoutData(Constant.IMAGE_MALDIVES_ROOM_PICTURE, room
+          .getId().toString()));
     }
     island.setRooms(rooms);
     island.setPictures(imageDao.queryImagesWithoutData("maldives-island-poster", id));
@@ -89,16 +96,16 @@ public class MaldivesService {
 
   public MaldivesRoom getRoom(Integer id) {
     MaldivesRoom room = maldivesDao.findById(MaldivesRoom.class, id);
-    room.setPictures(imageDao.queryImagesWithoutData("maldives-room-picture", room.getId()
-        .toString()));
+    room.setPictures(imageDao.queryImagesWithoutData(Constant.IMAGE_MALDIVES_ROOM_PICTURE, room
+        .getId().toString()));
     return room;
   }
 
   public List<MaldivesRoom> getRooms(String islandId) {
     List<MaldivesRoom> rooms = maldivesDao.getRooms(islandId);
     for (MaldivesRoom room : rooms) {
-      room.setPictures(imageDao.queryImagesWithoutData("maldives-room-picture", room.getId()
-          .toString()));
+      room.setPictures(imageDao.queryImagesWithoutData(Constant.IMAGE_MALDIVES_ROOM_PICTURE, room
+          .getId().toString()));
     }
     return rooms;
   }

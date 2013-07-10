@@ -20,6 +20,7 @@
 		<link rel="stylesheet" href="${ContextPath}/template1/css/jquery.ad-gallery.css?build=${(Options.build)!}">
 		<link rel="stylesheet" href="${ContextPath}/template1/css/bootstrap-image-gallery.css?build=${(Options.build)!}">
 		<link rel="stylesheet" href="${ContextPath}/template1/css/bootstrap.calendar.css?build=${(Options.build)!}">
+		<link rel="stylesheet" href="${ContextPath}/template1/css/wysiwyg-color.css?build=${(Options.build)!}">
 		<link rel="stylesheet" href="${ContextPath}/template1/css/cqlybest.css?build=${(Options.build)!}">
 		</#if>
 		<!--[if lt IE 7]><link rel="stylesheet" href="${ContextPath}/template1/css/bootstrap-ie6.css"><![endif]-->

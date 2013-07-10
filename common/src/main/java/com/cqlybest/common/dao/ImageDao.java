@@ -54,4 +54,11 @@ public class ImageDao extends AbstractDao<Image, String> {
     return query.executeUpdate();
   }
 
+  public int deleteByExtra(String extra, String extraKey) {
+    Query query = getCurrentSession().createQuery("DELETE FROM Image WHERE extra=? AND extraKey=?");
+    query.setParameter(0, extra);
+    query.setParameter(1, extraKey);
+    return query.executeUpdate();
+  }
+
 }

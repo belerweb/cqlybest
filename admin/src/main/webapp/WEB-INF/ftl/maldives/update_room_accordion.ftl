@@ -8,10 +8,11 @@
 	<#if rooms?exists>
 	<#list rooms as room>
 	<div class="accordion-group">
-		<div class="accordion-heading">
+		<div class="accordion-heading" style="position:relative;">
 			<a class="accordion-toggle" data-toggle="collapse" data-parent="#island-room-accordion" href="#island-room-accordion-${room_index}">
 			${room.zhName!} ${room.enName}
 			</a>
+			<button data-id="${room.id}" type="button" class="btn btn-danger delete" style="position:absolute;right:10px;top:3px;">删除</button>
 		</div>
 		<#assign roomId=room.id />
 		<#assign roomUrl="${ContextPath}/maldives/room/update.do" />
@@ -56,9 +57,11 @@
 				<div class="row-fluid">
 					<div class="span12">
 						<div class="control-group">
-							<label class="control-label">房间设施：</label>
+							<label class="control-label"><a href="javascript:void(0);">房间设施：</a></label>
 							<div class="controls">
-								<a href="#" class="editable" data-pk="${roomId}" data-name="roomFacility" data-type="textarea" data-url="${roomUrl}" data-value="${(room.roomFacility!)?html}"></a>
+								<div data-pk="${roomId}" data-name="roomFacility" data-type="wysihtml5" data-url="${roomUrl}" data-toggle="manual" data-original-title="编辑房间设施">
+									${room.roomFacility!}
+								</div>
 							</div>
 						</div>
 					</div>
@@ -66,12 +69,11 @@
 				<div class="row-fluid">
 					<div class="span12">
 						<div class="control-group">
-							<label class="control-label">说明：</label>
+							<label class="control-label"><a href="javascript:void(0);">说明：</a></label>
 							<div class="controls">
 								<div data-pk="${roomId}" data-name="description" data-type="wysihtml5" data-url="${roomUrl}" data-toggle="manual" data-original-title="编辑房型说明">
 									${room.description!}
 								</div>
-								<button type="button" class="btn btn-success">编辑</button>
 							</div>
 						</div>
 					</div>
@@ -121,11 +123,19 @@ $('#island-room-accordion a[data-name=zhName]').editable({});
 $('#island-room-accordion a[data-name=enName]').editable({});
 $('#island-room-accordion a[data-name=num]').editable({});
 $('#island-room-accordion a[data-name=requirements]').editable({});
-$('#island-room-accordion a[data-name=roomFacility]').editable({});
-$('#island-room-accordion div[data-name=description]').editable({});
-$('#island-room-accordion div[data-name=description]').next().click(function(e) {
-	e.stopPropagation();
-	e.preventDefault();
-	$(this).prev().editable('toggle');
+$('#island-room-accordion .accordion-heading button.delete').click(function(e) {
+	var id = $(this).attr('data-id');
+	var el = $($(this).parents('.accordion-group').get(0));
+	bootbox.confirm('确认删除房型?', '取消', '确认', function(result) {
+		if (result) {
+			$.post('${ContextPath}/maldives/room/delete.do', {
+				id: id
+			}).done(function(){
+				el.remove();
+			}).fail(function() {
+				cqlybest.error();
+			});
+		}
+	});
 });
 </script>

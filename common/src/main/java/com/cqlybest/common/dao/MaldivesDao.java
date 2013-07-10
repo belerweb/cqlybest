@@ -51,6 +51,11 @@ public class MaldivesDao extends AbstractDao<MaldivesSeaIsland, String> {
         .setParameterList("ids", ids).executeUpdate();
   }
 
+  public void deleteRoom(Integer id) {
+    getCurrentSession().createQuery("DELETE FROM MaldivesRoom WHERE id = ?").setParameter(0, id)
+        .executeUpdate();
+  }
+
   public List<MaldivesRoom> getRooms(String islandId) {
     Criteria criteria = getCurrentSession().createCriteria(MaldivesRoom.class);
     criteria.add(Restrictions.eq("islandId", islandId));

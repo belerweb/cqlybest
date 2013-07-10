@@ -109,6 +109,12 @@ public class MaldivesController {
     maldivesService.delete(ids);
   }
 
+  @RequestMapping("/maldives/room/delete.do")
+  @ResponseBody
+  public void deleteRoom(@RequestParam Integer id) {
+    maldivesService.deleteRoom(id);
+  }
+
   /**
    * 获取房型
    */

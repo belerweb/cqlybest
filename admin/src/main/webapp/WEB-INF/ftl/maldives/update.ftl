@@ -102,7 +102,7 @@ $('.image-gallery button.delete').die('click').live('click', function() {
 	var id = $(this).attr('data-id');
 	var image = $(this).parents('li');
 	var el = $(this).parents('.image-gallery');
-	bootbox.confirm('确认删除图片', '取消', '确认', function(result) {
+	bootbox.confirm('确认删除图片?', '取消', '确认', function(result) {
 		if (result) {
 			$.post('${ContextPath}/image/delete.do', {
 				id: id
@@ -114,5 +114,16 @@ $('.image-gallery button.delete').die('click').live('click', function() {
 			});
 		}
 	});
+});
+
+$('div[data-type=wysihtml5]').editable({
+	wysihtml5: {
+		stylesheets: ['${ContextPath}/css/wysiwyg-color.css']
+	}
+});
+$('div[data-type=wysihtml5]').parent().prev().click(function(e) {
+	e.stopPropagation();
+	e.preventDefault();
+	$(this).next().children().editable('toggle');
 });
 </script>
