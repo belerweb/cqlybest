@@ -10,6 +10,7 @@ import java.util.Map;
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.lang.time.DateUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -24,6 +25,7 @@ import com.cqlybest.common.bean.ProductComment;
 import com.cqlybest.common.bean.ProductMaldives;
 import com.cqlybest.common.bean.ProductTraffic;
 import com.cqlybest.common.bean.ProductTravel;
+import com.cqlybest.common.controller.ControllerHelper;
 import com.cqlybest.common.service.DestinationService;
 import com.cqlybest.common.service.DictService;
 import com.cqlybest.common.service.ImageService;
@@ -32,7 +34,7 @@ import com.cqlybest.common.service.MaldivesService;
 import com.cqlybest.common.service.ProductService;
 
 @Controller
-public class ProductController {
+public class ProductController extends ControllerHelper {
 
   @Autowired
   private JsonService jsonService;
@@ -288,33 +290,44 @@ public class ProductController {
    * 添加产品日历
    */
   @RequestMapping(value = "/product/calendar/add.do", method = RequestMethod.POST)
-  @ResponseBody
-  public void addCalendar(@RequestParam String productId, @RequestParam String start,
-      @RequestParam String end, @RequestParam(required = false) String price,
-      @RequestParam(required = false) String childPrice,
-      @RequestParam(defaultValue = "false") boolean special) throws ParseException {
-    Integer _price = null;
-    Integer _childPrice = null;
-    if (StringUtils.isNotEmpty(price)) {
-      _price = (int) (Double.parseDouble(price) * 100);
+  public ResponseEntity<Object> addCalendar(@RequestParam String productId,
+      @RequestParam String start, @RequestParam String end, @RequestParam String price,
+      @RequestParam(required = false) String childPrice, @RequestParam boolean special)
+      throws ParseException {
+    if (!start.matches("^\\d{4}-\\d{2}-\\d{2}") || !end.matches("^\\d{4}-\\d{2}-\\d{2}")) {
+      return error("必须设置有效的开始日期和结束日期");
     }
+    if (StringUtils.isEmpty(price)
+        || !price.matches("^((0(.[\\d]{1,2})?)|([1-9][0-9]*(.[\\d]{1,2})?))$")) {
+      return error("必须设置价格/正数/最多支持两位小数");
+    }
+    if (StringUtils.isNotEmpty(childPrice)
+        && !childPrice.matches("^((0(.[\\d]{1,2})?)|([1-9][0-9]*(.[\\d]{1,2})?))$")) {
+      return error("儿童价必须是正数/最多支持两位小数");
+    }
+    Integer _price = (int) (Double.parseDouble(price) * 100);
+    Integer _childPrice = null;
     if (StringUtils.isNotEmpty(childPrice)) {
       _childPrice = (int) (Double.parseDouble(childPrice) * 100);
     }
     productService.addCalendar(productId, DateUtils.parseDate(start, new String[] {"yyyy-MM-dd"}),
         DateUtils.parseDate(end, new String[] {"yyyy-MM-dd"}), _price, _childPrice, special);
+    return ok();
   }
 
   /**
    * 删除产品日历
    */
   @RequestMapping(value = "/product/calendar/delete.do", method = RequestMethod.POST)
-  @ResponseBody
-  public void deleteCalendar(@RequestParam String productId, @RequestParam String start,
-      @RequestParam String end) throws ParseException {
+  public ResponseEntity<Object> deleteCalendar(@RequestParam String productId,
+      @RequestParam String start, @RequestParam String end) throws ParseException {
+    if (!start.matches("^\\d{4}-\\d{2}-\\d{2}") || !end.matches("^\\d{4}-\\d{2}-\\d{2}")) {
+      return error("必须设置有效的开始日期和结束日期");
+    }
     productService.deleteCalendar(productId, DateUtils
         .parseDate(start, new String[] {"yyyy-MM-dd"}), DateUtils.parseDate(end,
         new String[] {"yyyy-MM-dd"}));
+    return ok();
   }
 
   /**

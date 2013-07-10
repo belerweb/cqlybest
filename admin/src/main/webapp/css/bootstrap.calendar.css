@@ -104,7 +104,7 @@
 
 .calendar TD SPAN.weekday{
     color: #468847;
-    display: block;
+    float: right;
     font-size: 20px;
     font-weight: bold;
     padding: 2px 4px;
@@ -112,7 +112,15 @@
 }
 .calendar TD SPAN.price{
     display: block;
-    font-size: 10px;
+    font-size: 12px;
+    clear: both;
+    text-align: center;
+}
+.calendar TD SPAN.price.child{
+}
+.calendar TD SPAN.special{
+    float: left;
+    font-size: 18px;
 }
 
 .calendar TD SPAN.weekday:hover{

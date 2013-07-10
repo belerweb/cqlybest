@@ -56,6 +56,10 @@ var chooseDate = function(data) {
 		$('#product-calendar-tab input[name=start]').val(date);
 	} else {
 		$('#product-calendar-tab input[name=end]').val(date);
+		var obj = $('td#day_' + data.day).data();
+		$('#product-calendar-tab input[name=price]').val(obj.price);
+		$('#product-calendar-tab input[name=childPrice]').val(obj.childPrice?obj.childPrice:'');
+		$('#product-calendar-tab input[name=special]').attr('checked', obj.special);
 	}
 	$('#product-calendar-tab .calendar').data('click', click+1);
 };
@@ -69,11 +73,9 @@ $('#product-calendar-tab .calendar-container').Calendar({
 			success: function(data) {
 				$.each(data, function(i, obj){
 					var cal = {date: $.format.date(new Date(obj.date), 'yyyy-MM-dd')};
-					if (obj.price) {
-						cal.price = obj.price/100;
-					} else {
-						cal.price = <#if (product.price)?exists>${(product.price/100)?string('0.00')}<#else>''</#if>;
-					}
+					cal.price = obj.price/100;
+					cal.childPrice = obj.childPrice ? obj.childPrice/100 : false;
+					cal.special = obj.special;
 					calendar.event.push(cal);
 				});
 			}
@@ -90,8 +92,15 @@ $('#product-calendar-tab button.save').click(function(){
 		price: $('#product-calendar-tab input[name=price]').val(),
 		childPrice: $('#product-calendar-tab input[name=childPrice]').val(),
 		special: $('#product-calendar-tab input[name=special]').is(':checked')
-	}, function() {
+	}).done(function() {
+		$('#product-calendar-tab input[name=start]').val('');
+		$('#product-calendar-tab input[name=end]').val('');
+		$('#product-calendar-tab input[name=price]').val('');
+		$('#product-calendar-tab input[name=childPrice]').val('');
+		 $('#product-calendar-tab input[name=special]').attr('checked', false);
 		$('#product-calendar-tab .calendar-container').data('plugin_Calendar').renderCalendar(new Date());
+	}).fail(function(xhr) {
+		cqlybest.error(eval(xhr.responseText));
 	});
 });
 $('#product-calendar-tab button.del').click(function(){
@@ -99,8 +108,10 @@ $('#product-calendar-tab button.del').click(function(){
 		productId: '${product.id}',
 		start: $('#product-calendar-tab input[name=start]').val(),
 		end: $('#product-calendar-tab input[name=end]').val()
-	}, function() {
+	}).done(function() {
 		$('#product-calendar-tab .calendar-container').data('plugin_Calendar').renderCalendar(new Date());
+	}).fail(function(xhr) {
+		cqlybest.error(eval(xhr.responseText));
 	});
 });
 </script>
