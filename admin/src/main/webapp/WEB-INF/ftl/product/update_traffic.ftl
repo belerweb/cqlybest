@@ -40,7 +40,7 @@
 				</td>
 				<td>
 					<a href="#" class="editable" data-pk="${traffic.id}" data-name="landingTime" data-type="combodate" data-url="${PTURL}"
-						data-value="<#if traffic.landingTime?has_content>${traffic.landingTime?string('HH:mm')}</#if>" data-format="HH:mm" data-template="HH : mm"></a>
+						data-value="<#if traffic.landingTime?has_content>${traffic.landingTime?string('dd HH:mm')}</#if>" data-format="DD HH:mm" data-viewformat="第D天 HH:mm" data-template="DD HH : mm"></a>
 				</td>
 				<td>
 					<a href="#" class="editable" data-pk="${traffic.id}" data-name="extra" data-type="text" data-url="${PTURL}">${traffic.extra!}</a>
@@ -61,7 +61,7 @@ $('#product-traffic-tab button.add').click(function(){
 	form.push('<div class="control-group"><label class="control-label">名称：</label>');
 	form.push('<div class="controls"><input type="text" name="name" placeholder="如：第一天"></div></div>');
 	form.push('<div class="control-group"><label class="control-label">类型：</label>');
-	form.push('<div class="controls"><label class="radio inline"><input type="radio" name="type" value="1" checked="checked"> 火车</label>');
+	form.push('<div class="controls"><label class="radio inline"><input type="radio" name="type" value="1"> 火车</label>');
 	form.push('<label class="radio inline"><input type="radio" name="type" value="2"> 飞机</lavel>');
 	form.push('</div></div></form>');
 	var dialog = bootbox.dialog(form.join(''), [{
@@ -91,6 +91,7 @@ $('#product-traffic-tab button.add').click(function(){
 });
 $('#product-traffic-tab a.editable').not('[data-type=select]').editable();
 $('#product-traffic-tab a[data-name=type]').editable({
+	prepend: '',
 	source: [{value:1, text: '火车'}, {value:2, text: '飞机'}]
 });
 $('#product-traffic-tab button.delete').on('click', function() {

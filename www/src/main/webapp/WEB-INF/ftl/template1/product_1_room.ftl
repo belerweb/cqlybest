@@ -17,7 +17,7 @@
 			<#assign room=rooms[maldives_index-notIslandRoom]>
 			<table class="table table-condensed">
 				<colgroup>
-					<col width="70" />
+					<col width="75" />
 					<col width="" />
 				</colgroup>
 				<tbody>

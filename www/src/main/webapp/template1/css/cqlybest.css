@@ -508,8 +508,8 @@ del {
 }
 
 .product-gallery .gallery-item img {
-	border: 2px solid #DDDDDD;
-	margin-left: 6px;
+	border: 1px solid #DDDDDD;
+	margin-left: 4px;
 	margin-bottom: 5px;
 }
 
@@ -519,11 +519,10 @@ del {
 }
 
 .product-gallery .gallery-item.row-first img {
-	margin-left: 1px;
+	margin-left: 0;
 }
 
 .product-basic-table {
-	
 }
 
 .product-basic-table th,.product-basic-table td {

@@ -114,7 +114,7 @@ public class ProductController extends ControllerHelper {
   @RequestMapping(value = "/product/traffic/add.do", method = RequestMethod.POST)
   @ResponseBody
   public void addTraffic(@RequestParam String productId, @RequestParam String name,
-      @RequestParam int type) {
+      @RequestParam(required = false) Integer type) {
     ProductTraffic traffic = new ProductTraffic();
     traffic.setProductId(productId);
     traffic.setName(name);
@@ -155,10 +155,10 @@ public class ProductController extends ControllerHelper {
       @RequestParam String value) throws Exception {
     Object _value = value;
     if (name.equals("type")) {
-      _value = Integer.parseInt(value);
+      _value = value.isEmpty() ? null : Integer.parseInt(value);
     }
     if (name.equals("departureTime") || name.equals("landingTime")) {
-      _value = DateUtils.parseDate(value, new String[] {"HH:mm"});
+      _value = DateUtils.parseDate(value, new String[] {"HH:mm", "dd HH:mm"});
     }
     productService.updateTraffic(pk, name, _value);
   }

@@ -13,7 +13,7 @@ public class ProductTraffic {
   private String name;// 如：第一天
   private String departure;// 出发地
   private String destination;// 目的地
-  private int type;// 1：火车;2：飞机
+  private Integer type;// 1：火车;2：飞机
   private String flights; // 班次
   private Date departureTime;// 出发时间
   private Date landingTime;// 到达时间
@@ -59,11 +59,11 @@ public class ProductTraffic {
     this.destination = destination;
   }
 
-  public int getType() {
+  public Integer getType() {
     return type;
   }
 
-  public void setType(int type) {
+  public void setType(Integer type) {
     this.type = type;
   }
 
