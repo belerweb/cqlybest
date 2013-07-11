@@ -8,6 +8,7 @@ import org.hibernate.Query;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Repository;
 
+import com.cqlybest.common.bean.MaldivesDining;
 import com.cqlybest.common.bean.MaldivesRoom;
 import com.cqlybest.common.bean.MaldivesSeaIsland;
 
@@ -38,17 +39,17 @@ public class MaldivesDao extends AbstractDao<MaldivesSeaIsland, String> {
     return query.executeUpdate();
   }
 
+  public void delete(String[] ids) {
+    getCurrentSession().createQuery("DELETE FROM MaldivesSeaIsland WHERE id IN (:ids)")
+        .setParameterList("ids", ids).executeUpdate();
+  }
+
   public int updateRoom(Integer id, String name, Object value) {
     String hql = "UPDATE MaldivesRoom SET " + name + " = ? WHERE id = ?";
     Query query = getCurrentSession().createQuery(hql);
     query.setParameter(0, value);
     query.setParameter(1, id);
     return query.executeUpdate();
-  }
-
-  public void delete(String[] ids) {
-    getCurrentSession().createQuery("DELETE FROM MaldivesSeaIsland WHERE id IN (:ids)")
-        .setParameterList("ids", ids).executeUpdate();
   }
 
   public void deleteRoom(Integer id) {
@@ -58,6 +59,25 @@ public class MaldivesDao extends AbstractDao<MaldivesSeaIsland, String> {
 
   public List<MaldivesRoom> getRooms(String islandId) {
     Criteria criteria = getCurrentSession().createCriteria(MaldivesRoom.class);
+    criteria.add(Restrictions.eq("islandId", islandId));
+    return criteria.list();
+  }
+
+  public int updateDining(Integer id, String name, Object value) {
+    String hql = "UPDATE MaldivesDining SET " + name + " = ? WHERE id = ?";
+    Query query = getCurrentSession().createQuery(hql);
+    query.setParameter(0, value);
+    query.setParameter(1, id);
+    return query.executeUpdate();
+  }
+
+  public void deleteDining(Integer id) {
+    getCurrentSession().createQuery("DELETE FROM MaldivesDining WHERE id = ?").setParameter(0, id)
+        .executeUpdate();
+  }
+
+  public List<MaldivesDining> getDinings(String islandId) {
+    Criteria criteria = getCurrentSession().createCriteria(MaldivesDining.class);
     criteria.add(Restrictions.eq("islandId", islandId));
     return criteria.list();
   }

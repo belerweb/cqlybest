@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.cqlybest.common.bean.MaldivesDining;
 import com.cqlybest.common.bean.MaldivesRoom;
 import com.cqlybest.common.bean.MaldivesSeaIsland;
 import com.cqlybest.common.service.DestinationService;
@@ -72,6 +73,22 @@ public class MaldivesController {
     maldivesService.update(pk, name, _value);
   }
 
+  @RequestMapping(value = "/maldives/list.do", method = RequestMethod.GET)
+  public void products(@RequestParam(defaultValue = "0") int page, Model model) {
+    page = Math.max(1, page);
+    int pageSize = 10;
+    model.addAttribute("page", page);
+    model.addAttribute("pageSize", pageSize);
+    model.addAttribute("total", maldivesService.total());
+    model.addAttribute("islands", maldivesService.list(page, pageSize));
+  }
+
+  @RequestMapping("/maldives/delete.do")
+  @ResponseBody
+  public void del(@RequestParam(value = "ids[]") String[] ids) {
+    maldivesService.delete(ids);
+  }
+
   /**
    * 添加房型
    */
@@ -91,28 +108,13 @@ public class MaldivesController {
    */
   @RequestMapping(value = "/maldives/room/update.do", method = RequestMethod.POST)
   @ResponseBody
-  public void update(@RequestParam Integer pk, @RequestParam String name, @RequestParam String value) {
+  public void updateRoom(@RequestParam Integer pk, @RequestParam String name,
+      @RequestParam String value) {
     Object _value = value;
     if ("num".equals(name)) {
-      _value = Integer.parseInt(value);
+      _value = StringUtils.isEmpty(value) ? null : Integer.valueOf(value);
     }
     maldivesService.updateRoom(pk, name, _value);
-  }
-
-  @RequestMapping(value = "/maldives/list.do", method = RequestMethod.GET)
-  public void products(@RequestParam(defaultValue = "0") int page, Model model) {
-    page = Math.max(1, page);
-    int pageSize = 10;
-    model.addAttribute("page", page);
-    model.addAttribute("pageSize", pageSize);
-    model.addAttribute("total", maldivesService.total());
-    model.addAttribute("islands", maldivesService.list(page, pageSize));
-  }
-
-  @RequestMapping("/maldives/delete.do")
-  @ResponseBody
-  public void del(@RequestParam(value = "ids[]") String[] ids) {
-    maldivesService.delete(ids);
   }
 
   @RequestMapping("/maldives/room/delete.do")
@@ -129,4 +131,39 @@ public class MaldivesController {
     model.addAttribute("rooms", maldivesService.getRooms(islandId));
     return "/maldives/update_room_accordion";
   }
+
+  @RequestMapping(value = "/maldives/dining/add.do", method = RequestMethod.POST)
+  @ResponseBody
+  public void addDining(@RequestParam String islandId, @RequestParam String zhName,
+      @RequestParam String enName) {
+    MaldivesDining dining = new MaldivesDining();
+    dining.setIslandId(islandId);
+    dining.setZhName(zhName);
+    dining.setEnName(enName);
+    maldivesService.add(dining);
+  }
+
+  @RequestMapping(value = "/maldives/dining/update.do", method = RequestMethod.POST)
+  @ResponseBody
+  public void updateDining(@RequestParam Integer pk, @RequestParam String name,
+      @RequestParam String value) {
+    Object _value = value;
+    if ("reservation".equals(name)) {
+      _value = StringUtils.isEmpty(value) ? null : Boolean.valueOf(value);
+    }
+    maldivesService.updateDining(pk, name, _value);
+  }
+
+  @RequestMapping("/maldives/dining/delete.do")
+  @ResponseBody
+  public void deleteDining(@RequestParam Integer id) {
+    maldivesService.deleteDining(id);
+  }
+
+  @RequestMapping(value = "/maldives/dining.do", method = RequestMethod.GET)
+  public String getDinings(@RequestParam String islandId, Model model) {
+    model.addAttribute("dinings", maldivesService.getDinings(islandId));
+    return "/maldives/update_dining_accordion";
+  }
+
 }

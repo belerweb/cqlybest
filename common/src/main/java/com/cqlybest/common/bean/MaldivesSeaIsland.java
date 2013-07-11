@@ -33,6 +33,7 @@ public class MaldivesSeaIsland {
 
   private List<Image> pictures;// 图片
   private List<MaldivesRoom> rooms;// 房型
+  private List<MaldivesDining> dinings;// 餐饮设施
 
   private Date createdTime;// 创建时间
   private Date lastUpdated;// 最后更新时间
@@ -227,6 +228,14 @@ public class MaldivesSeaIsland {
 
   public void setLastUpdated(Date lastUpdated) {
     this.lastUpdated = lastUpdated;
+  }
+
+  public List<MaldivesDining> getDinings() {
+    return dinings;
+  }
+
+  public void setDinings(List<MaldivesDining> dinings) {
+    this.dinings = dinings;
   }
 
 }

@@ -18,14 +18,16 @@
 					<li class="active"><a href="javascript:void(0);" data-toggle="tab" data-target="#island-base-tab">基本信息</a></li>
 					<li><a href="javascript:void(0);" data-toggle="tab" data-target="#island-hotel-tab">酒店信息</a></li>
 					<li><a href="javascript:void(0);" data-toggle="tab" data-target="#island-room-tab">房型</a></li>
+					<li><a href="javascript:void(0);" data-toggle="tab" data-target="#island-dining-tab">餐饮设施</a></li>
 					<li><a href="javascript:void(0);" data-toggle="tab" data-target="#island-poster-tab">海报图片</a></li>
 				</ul>
 				<div class="tab-content">
 					<#include "update_base.ftl">
 					<#include "update_hotel.ftl">
 					<#include "update_room.ftl">
+					<#include "update_dining.ftl">
 					<div id="island-poster-tab" class="image-gallery tab-pane">
-						<div class="text-right"><button id="island-add-poster" type="button" data-extra="maldives-island-poster" data-extra-key="${id}" class="btn btn-primary">添加</button></div>
+						<div class="text-right"><button type="button" data-extra="maldives-island-poster" data-extra-key="${id}" class="btn btn-primary action action-add picture">添加</button></div>
 						<#if island.pictures?has_content>
 						<div class="row-fluid">
 							<ul class="thumbnails">
@@ -79,10 +81,10 @@ var arrangeImags = function(el, images) {
 		$('ul', row).append(imgs[i]);
 	}
 };
-$('#island-add-poster,#island-add-photo,.maldives-room-picture-add').click(function(){
+$('button.picture.action-add').click(function(){
 	var images = cqlybest.uploadImage('${ContextPath}');
 	if (images) {
-		var gallery = $(this).parents('.image-gallery');
+		var gallery = $(this).closest('.image-gallery');
 		var extra = $(this).attr('data-extra');
 		var extraKey = $(this).attr('data-extra-key');
 		$.each(images, function(i, obj) {
@@ -103,8 +105,8 @@ $('.image-gallery').editable({
 });
 $('.image-gallery button.delete').die('click').live('click', function() {
 	var id = $(this).attr('data-id');
-	var image = $(this).parents('li');
-	var el = $(this).parents('.image-gallery');
+	var image = $(this).closest('li');
+	var el = $(this).closest('.image-gallery');
 	bootbox.confirm('确认删除图片?', '取消', '确认', function(result) {
 		if (result) {
 			$.post('${ContextPath}/image/delete.do', {

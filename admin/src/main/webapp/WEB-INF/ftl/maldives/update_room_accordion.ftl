@@ -83,7 +83,7 @@
 						<div class="control-group">
 							<label class="control-label">图片：</label>
 							<div class="controls image-gallery">
-								<button type="button" data-extra="maldives-room-picture" data-extra-key="${roomId}" class="btn btn-primary maldives-room-picture-add">添加</button>
+								<button type="button" data-extra="maldives-room-picture" data-extra-key="${roomId}" class="btn btn-primary action action-add picture">添加</button>
 								<#if room.pictures?has_content>
 								<div class="row-fluid">
 									<ul class="thumbnails">
