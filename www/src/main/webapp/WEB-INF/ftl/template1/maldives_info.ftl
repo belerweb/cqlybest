@@ -4,18 +4,12 @@
 		<hr>
 	</div>
 	<table class="table table-condensed">
-		<colgroup>
-			<col width="70" />
-			<col width="280" />
-			<col width="70" />
-			<col width="280" />
-		</colgroup>
 		<tbody>
 			<tr>
-				<th>中文名称：</th>
-				<td>${island.zhName!}</td>
-				<th>英文名称：</th>
-				<td>${island.enName!}</td>
+				<th style="width: 75px;">中文名称：</th>
+				<td style="width: 275px;">${island.zhName!}</td>
+				<th style="width: 75px;">英文名称：</th>
+				<td style="width: 275px;">${island.enName!}</td>
 			</tr>
 			<tr>
 				<th>岛屿级别：</th>
@@ -34,8 +28,7 @@
 				<td colspan="3">${island.price!}</td>
 			</tr>
 			<tr>
-				<th>详细信息：</th>
-				<td colspan="3">${island.description!}</td>
+				<td colspan="4">${island.description!}</td>
 			</tr>
 		</tbody>
 	</table>

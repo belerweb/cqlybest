@@ -67,7 +67,10 @@
 		</div>
 	</div>
 </div>
-<script>
+<#include "/template1/image-gallery.ftl">
+<@gallery 'maldives-gallery' />
+
+<script type="text/javascript">
 	var PageContext = {
 		init: function() {
 			$(document.body).scrollspy({target: '#maldives-island-info-nav'});

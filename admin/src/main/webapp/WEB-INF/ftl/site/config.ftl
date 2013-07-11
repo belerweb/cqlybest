@@ -34,7 +34,7 @@
 				<div class="control-group">
 					<label class="control-label">关键字（词）：</label>
 					<div class="controls">
-						<a id="site_meta_keyword" href="#" class="editable" data-type="select2" data-url="${ContextPath}/site/config.html" data-value="${(options.site_meta_keyword!)?html}">${(options.site_meta_keyword!)?html}</a>
+						<a id="site_meta_keyword" href="#" class="editable" data-dict="tag" data-type="select2" data-url="${ContextPath}/site/config.html" data-value="${(options.site_meta_keyword!)?html}">${(options.site_meta_keyword!)?html}</a>
 					</div>
 				</div>
 				<div class="control-group">
@@ -80,28 +80,7 @@ $('#site_400').editable({
 });
 $('#site_meta').editable({
 });
-$('#site_meta_keyword').editable({
-	inputclass: 'input-large',
-	select2: {
-		multiple: true,
-		ajax: {
-			url: '/data/dict.html?action=dict&type=keyword',
-			data: function (term, page) {
-				return {q:term};
-			},
-			results: function(response) {
-				var result = [];
-				$.each(response.tags, function(i, obj){
-					result.push({id:obj.name,text:obj.name});
-				});
-				return {results:result};
-			}
-		},
-		initSelection: function(el, callback) {
-			callback(cqlybest.v2ss(el.val()||$('#site_meta_keyword').data('value')));
-		}
-	}
-});
+cqlybest.editableTag('#site_meta_keyword');
 $('#site_meta_description').editable({
 	// 长度 1024
 });

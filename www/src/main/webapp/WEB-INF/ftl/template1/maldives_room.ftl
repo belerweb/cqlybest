@@ -15,21 +15,21 @@
 				<th colspan="2">${room.zhName!}${room.enName!} <#if room.num?has_content><span class="label label-success">${room.num}间</span></#if></th>
 			</tr>
 			<tr>
-				<th>入住要求：</th>
+				<th style="width: 75px;">入住要求：</th>
 				<td>${room.requirements!}</td>
 			</tr>
 			<tr>
-				<th>房间设施：</th>
+				<th style="width: 75px;">房间设施：</th>
 				<td>${room.roomFacility!}</td>
 			</tr>
 			<tr>
-				<th>详细信息：</th>
+				<th style="width: 75px;">详细信息：</th>
 				<td>${room.description!}</td>
 			</tr>
 		</tbody>
 	</table>
 	<#if room.pictures?has_content>
-	<div class="room-gallery"><#list room.pictures as image><#assign imageUrl='${ContextPath}/image/${image.id}.${image.imageType}'><a data-gallery="gallery" href="${imageUrl}" title="${image.title!}"><img src="${imageUrl}?width=100&height=100"></a></#list></div>
+	<div class="room-gallery" data-toggle="modal-gallery" data-target="#maldives-gallery" data-selector="a"><#list room.pictures as image><#assign imageUrl='${ContextPath}/image/${image.id}.${image.imageType}'><a href="${imageUrl}" title="${image.title!}"><img src="${imageUrl}?width=100&height=100"></a></#list></div>
 	</#if>
 	</#list>
 	</#if>
