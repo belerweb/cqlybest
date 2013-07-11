@@ -8,6 +8,7 @@
 		<id name="id" column="ID" type="string" length="36">
 			<generator class="assigned" />
 		</id>
+
 		<property name="zhName" column="ZH_NAME" length="64" />
 		<property name="enName" column="EN_NAME" length="64" />
 		<property name="level" column="LEVEL" length="32" />
@@ -16,6 +17,18 @@
 		<property name="snorkeling" column="SNORKELING" length="32" />
 		<property name="price" column="PRICE" length="32" />
 		<property name="description" column="DESCRIPTION" length="102400" />
+
+		<property name="hotelName" column="HOTEL_NAME" length="64" />
+		<property name="hotelLevel" column="HOTEL_LEVEL" />
+		<property name="hotelStart" column="HOTEL_START" length="16" />
+		<property name="hotelRoomNum" column="HOTEL_ROOM_NUM" />
+		<property name="hotelSite" column="HOTEL_SITE" length="64" />
+		<property name="hotelTel" column="HOTEL_TEL" length="32" />
+		<property name="hotelFax" column="HOTEL_FAX" length="32" />
+		<property name="hotelChinese" column="HOTEL_CHINESE" />
+		<property name="hotelAirport" column="HOTEL_AIRPORT" />
+		<property name="hotelDescription" column="HOTEL_DESCRIPTION" />
+
 		<property name="createdTime" column="CREATED_TIME" />
 		<property name="lastUpdated" column="LAST_UPDATED" />
 	</class>

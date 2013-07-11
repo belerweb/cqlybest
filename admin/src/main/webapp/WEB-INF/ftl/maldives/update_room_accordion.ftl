@@ -23,7 +23,7 @@
 						<div class="control-group">
 							<label class="control-label">中文名称：</label>
 							<div class="controls">
-								<a href="#" class="editable" data-pk="${roomId}" data-name="zhName" data-type="text" data-url="${roomUrl}" data-value="${(room.zhName!)?html}"></a>
+								<a href="#" class="editable" data-pk="${roomId}" data-name="zhName" data-type="text" data-url="${roomUrl}" data-value="${room.zhName!}"></a>
 							</div>
 						</div>
 					</div>
@@ -31,7 +31,7 @@
 						<div class="control-group">
 							<label class="control-label">英文名称：</label>
 							<div class="controls">
-								<a href="#" class="editable" data-pk="${roomId}" data-name="enName" data-type="text" data-url="${roomUrl}" data-value="${(room.enName!)?html}"></a>
+								<a href="#" class="editable" data-pk="${roomId}" data-name="enName" data-type="text" data-url="${roomUrl}" data-value="${room.enName!}"></a>
 							</div>
 						</div>
 					</div>
@@ -39,7 +39,7 @@
 						<div class="control-group">
 							<label class="control-label">房间数量：</label>
 							<div class="controls">
-								<a href="#" class="editable" data-pk="${roomId}" data-name="num" data-type="text" data-url="${roomUrl}" data-value="${(room.num!)?html}"></a>
+								<a href="#" class="editable" data-pk="${roomId}" data-name="num" data-type="text" data-url="${roomUrl}" data-value="${room.num!}"></a>
 							</div>
 						</div>
 					</div>
@@ -49,7 +49,7 @@
 						<div class="control-group">
 							<label class="control-label">入住要求：</label>
 							<div class="controls">
-								<a href="#" class="editable" data-pk="${roomId}" data-name="requirements" data-type="textarea" data-url="${roomUrl}" data-value="${(room.requirements!)?html}"></a>
+								<a href="#" class="editable" data-pk="${roomId}" data-name="requirements" data-type="textarea" data-url="${roomUrl}" data-value="${room.requirements!}"></a>
 							</div>
 						</div>
 					</div>
@@ -57,7 +57,7 @@
 				<div class="row-fluid">
 					<div class="span12">
 						<div class="control-group">
-							<label class="control-label"><a href="javascript:void(0);">房间设施：</a></label>
+							<label class="control-label"><a herf="#" class="editable-wysihtml5">房间设施：</a></label>
 							<div class="controls">
 								<div data-pk="${roomId}" data-name="roomFacility" data-type="wysihtml5" data-url="${roomUrl}" data-toggle="manual" data-original-title="编辑房间设施">
 									${room.roomFacility!}
@@ -69,7 +69,7 @@
 				<div class="row-fluid">
 					<div class="span12">
 						<div class="control-group">
-							<label class="control-label"><a href="javascript:void(0);">说明：</a></label>
+							<label class="control-label"><a herf="#" class="editable-wysihtml5">说明：</a></label>
 							<div class="controls">
 								<div data-pk="${roomId}" data-name="description" data-type="wysihtml5" data-url="${roomUrl}" data-toggle="manual" data-original-title="编辑房型说明">
 									${room.description!}
@@ -92,8 +92,8 @@
 											<div class="thumbnail">
 												<img src="${ContextPath}/image/${image.id}.${image.imageType}">
 												<div class="caption">
-													<p><a href="#" class="title editable-click <#if !image.title?has_content>editable-empty</#if>" data-pk="${image.id}" data-name="title" data-type="text" data-value="${(image.title!)?html}">${(image.title!'标题：未设置')?html}</a></p>
-													<p><a href="#" class="description editable-click <#if !image.description?has_content>editable-empty</#if>" data-pk="${image.id}" data-name="description" data-type="textarea" data-value="${(image.description!)?html}">${(image.description!'描述：未设置')?html}</a></p>
+													<p><a href="#" class="title editable-click <#if !image.title?has_content>editable-empty</#if>" data-pk="${image.id}" data-name="title" data-type="text" data-value="${image.title!}">${image.title!'标题：未设置'}</a></p>
+													<p><a href="#" class="description editable-click <#if !image.description?has_content>editable-empty</#if>" data-pk="${image.id}" data-name="description" data-type="textarea">${image.description!'描述：未设置'}</a></p>
 													<button class="delete btn btn-danger" type="button" data-id="${image.id}">刪除</button>
 												</div>
 											</div>
@@ -119,10 +119,6 @@
 	</#if>
 </div>
 <script type="text/javascript">
-$('#island-room-accordion a[data-name=zhName]').editable({});
-$('#island-room-accordion a[data-name=enName]').editable({});
-$('#island-room-accordion a[data-name=num]').editable({});
-$('#island-room-accordion a[data-name=requirements]').editable({});
 $('#island-room-accordion .accordion-heading button.delete').click(function(e) {
 	var id = $(this).attr('data-id');
 	var el = $($(this).parents('.accordion-group').get(0));

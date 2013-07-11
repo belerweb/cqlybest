@@ -14,13 +14,15 @@
 		<#assign url="${ContextPath}/maldives/update.do">
 		<form class="form-horizontal grid-content">
 			<div class="tabbable">
-				<ul class="nav nav-tabs">
+				<ul id="island-update-tabs" class="nav nav-tabs">
 					<li class="active"><a href="javascript:void(0);" data-toggle="tab" data-target="#island-base-tab">基本信息</a></li>
+					<li><a href="javascript:void(0);" data-toggle="tab" data-target="#island-hotel-tab">酒店信息</a></li>
 					<li><a href="javascript:void(0);" data-toggle="tab" data-target="#island-room-tab">房型</a></li>
 					<li><a href="javascript:void(0);" data-toggle="tab" data-target="#island-poster-tab">海报图片</a></li>
 				</ul>
 				<div class="tab-content">
 					<#include "update_base.ftl">
+					<#include "update_hotel.ftl">
 					<#include "update_room.ftl">
 					<div id="island-poster-tab" class="image-gallery tab-pane">
 						<div class="text-right"><button id="island-add-poster" type="button" data-extra="maldives-island-poster" data-extra-key="${id}" class="btn btn-primary">添加</button></div>
@@ -32,8 +34,8 @@
 									<div class="thumbnail">
 										<img src="${ContextPath}/image/${image.id}.${image.imageType}">
 										<div class="caption">
-											<p><a href="#" class="title editable-click <#if !image.title?has_content>editable-empty</#if>" data-pk="${image.id}" data-name="title" data-type="text" data-value="${(image.title!)?html}">${(image.title!'标题：未设置')?html}</a></p>
-											<p><a href="#" class="description editable-click <#if !image.description?has_content>editable-empty</#if>" data-pk="${image.id}" data-name="description" data-type="textarea" data-value="${(image.description!)?html}">${(image.description!'描述：未设置')?html}</a></p>
+											<p><a href="#" class="title editable-click <#if !image.title?has_content>editable-empty</#if>" data-pk="${image.id}" data-name="title" data-type="text" data-value="${image.title!}">${image.title!'标题：未设置'}</a></p>
+											<p><a href="#" class="description editable-click <#if !image.description?has_content>editable-empty</#if>" data-pk="${image.id}" data-name="description" data-type="textarea">${(image.description!'描述：未设置')?html}</a></p>
 											<button class="delete btn btn-danger" type="button" data-id="${image.id}">刪除</button>
 										</div>
 									</div>
@@ -55,6 +57,7 @@
 	</div>
 </div>
 <script type="text/javascript">
+
 var arrangeImags = function(el, images) {
 	var imgs = $('li', el).detach();
 	$('.row-fluid', el).remove();
@@ -116,14 +119,16 @@ $('.image-gallery button.delete').die('click').live('click', function() {
 	});
 });
 
+$('.editable[data-type=text]').editable();
+$('.editable[data-type=textarea]').editable();
 $('div[data-type=wysihtml5]').editable({
 	wysihtml5: {
 		stylesheets: ['${ContextPath}/css/wysiwyg-color.css']
 	}
 });
-$('div[data-type=wysihtml5]').parent().prev().click(function(e) {
+$('.editable-wysihtml5').click(function(e) {
 	e.stopPropagation();
 	e.preventDefault();
-	$(this).next().children().editable('toggle');
+	$(this).parent().next().children().editable('toggle');
 });
 </script>

@@ -35,7 +35,9 @@ $('#island-room-add').click(function(){
 				zhName: zhName,
 				enName: enName
 			}).done(function(data){
-				$('#island-room-accordion-container').load('${ContextPath}/maldives/room.do?islandId=${island.id}');
+				$('#mb').load('${ContextPath}/maldives/update.do?id=${island.id}', function() {
+					$('#island-update-tabs a[data-target="#island-room-tab"]').tab('show');
+				});
 			}).fail(function() {
 				cqlybest.error();
 			});

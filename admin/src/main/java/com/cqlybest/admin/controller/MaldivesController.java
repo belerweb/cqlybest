@@ -63,6 +63,12 @@ public class MaldivesController {
       @RequestParam(required = false) String value,
       @RequestParam(required = false, value = "value[]") List<String> values) throws Exception {
     Object _value = value == null ? StringUtils.join(values, ",") : value;
+    if (name.equals("hotelLevel") || name.equals("hotelRoomNum")) {
+      _value = StringUtils.isEmpty(value) ? null : Integer.valueOf(value);
+    }
+    if (name.equals("hotelChinese")) {
+      _value = StringUtils.isEmpty(value) ? null : Boolean.valueOf(value);
+    }
     maldivesService.update(pk, name, _value);
   }
 

@@ -18,6 +18,19 @@ public class MaldivesSeaIsland {
   private String price; // 参考价格
   private String description;
 
+  private String hotelName;// 酒店集团
+  private Integer hotelLevel;// 酒店星级
+  private String hotelStart;// 开始营业
+  private Integer hotelRoomNum;// 房间总数
+  private String hotelSite;// 官方网址
+  private String hotelTel;// 电话
+  private String hotelFax;// 传真
+  private Boolean hotelChinese;// 中文服务
+  private String hotelAirport;// 机场柜台号
+  private String hotelDescription;// 酒店介绍
+
+  private List<Image> hotelPictures;// 酒店图片
+
   private List<Image> pictures;// 图片
   private List<MaldivesRoom> rooms;// 房型
 
@@ -88,6 +101,102 @@ public class MaldivesSeaIsland {
     this.price = price;
   }
 
+  public String getDescription() {
+    return description;
+  }
+
+  public void setDescription(String description) {
+    this.description = description;
+  }
+
+  public String getHotelName() {
+    return hotelName;
+  }
+
+  public void setHotelName(String hotelName) {
+    this.hotelName = hotelName;
+  }
+
+  public Integer getHotelLevel() {
+    return hotelLevel;
+  }
+
+  public void setHotelLevel(Integer hotelLevel) {
+    this.hotelLevel = hotelLevel;
+  }
+
+  public String getHotelStart() {
+    return hotelStart;
+  }
+
+  public void setHotelStart(String hotelStart) {
+    this.hotelStart = hotelStart;
+  }
+
+  public Integer getHotelRoomNum() {
+    return hotelRoomNum;
+  }
+
+  public void setHotelRoomNum(Integer hotelRoomNum) {
+    this.hotelRoomNum = hotelRoomNum;
+  }
+
+  public String getHotelSite() {
+    return hotelSite;
+  }
+
+  public void setHotelSite(String hotelSite) {
+    this.hotelSite = hotelSite;
+  }
+
+  public String getHotelTel() {
+    return hotelTel;
+  }
+
+  public void setHotelTel(String hotelTel) {
+    this.hotelTel = hotelTel;
+  }
+
+  public String getHotelFax() {
+    return hotelFax;
+  }
+
+  public void setHotelFax(String hotelFax) {
+    this.hotelFax = hotelFax;
+  }
+
+  public Boolean getHotelChinese() {
+    return hotelChinese;
+  }
+
+  public void setHotelChinese(Boolean hotelChinese) {
+    this.hotelChinese = hotelChinese;
+  }
+
+  public String getHotelAirport() {
+    return hotelAirport;
+  }
+
+  public void setHotelAirport(String hotelAirport) {
+    this.hotelAirport = hotelAirport;
+  }
+
+  public String getHotelDescription() {
+    return hotelDescription;
+  }
+
+  public void setHotelDescription(String hotelDescription) {
+    this.hotelDescription = hotelDescription;
+  }
+
+  public List<Image> getHotelPictures() {
+    return hotelPictures;
+  }
+
+  public void setHotelPictures(List<Image> hotelPictures) {
+    this.hotelPictures = hotelPictures;
+  }
+
   public List<Image> getPictures() {
     return pictures;
   }
@@ -118,14 +227,6 @@ public class MaldivesSeaIsland {
 
   public void setLastUpdated(Date lastUpdated) {
     this.lastUpdated = lastUpdated;
-  }
-
-  public String getDescription() {
-    return description;
-  }
-
-  public void setDescription(String description) {
-    this.description = description;
   }
 
 }
