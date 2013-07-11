@@ -15,7 +15,7 @@ import com.cqlybest.common.dao.DictDao;
 @Service
 public class DictService {
 
-  private static final Map<String, List<? extends Dict>> DICT_CACHE = new HashMap<>();
+  private static final Map<String, List<Dict>> DICT_CACHE = new HashMap<>();
   private static final Map<String, Long> DICT_CACHE_TIME = new HashMap<>();
 
   @Autowired
@@ -29,26 +29,30 @@ public class DictService {
   }
 
   @Transactional
-  public void deleteDict(Dict dict) {
-    Dict _dict = dictDao.findById(dict.getClass(), dict.getId());
-    if (_dict != null) {
-      dictDao.delete(_dict);
+  public void delete(Integer id) {
+    Dict dict = dictDao.findById(id);
+    if (dict != null) {
+      dictDao.delete(dict);
     }
   }
 
-  public List<? extends Dict> getDict(Class<? extends Dict> cls) {
-    String name = cls.getSimpleName();
-    List<? extends Dict> result = DICT_CACHE.get(name);
-    if (result == null || (System.currentTimeMillis() - DICT_CACHE_TIME.get(name)) > 0) {
-      result = dictDao.findAllDict(cls);
-      DICT_CACHE.put(name, result);
-      DICT_CACHE_TIME.put(name, System.currentTimeMillis());
+  public List<Dict> getDict(String type) {
+    List<Dict> result = DICT_CACHE.get(type);
+    if (result == null || (System.currentTimeMillis() - DICT_CACHE_TIME.get(type)) > 0) {
+      result = dictDao.findAllDict(type);
+      DICT_CACHE.put(type, result);
+      DICT_CACHE_TIME.put(type, System.currentTimeMillis());
     }
     return result;
   }
 
-  public List<? extends Dict> getDict(Class<? extends Dict> cls, String keyword) {
-    return dictDao.findDict(cls, keyword);
+  public List<Dict> getDict(String type, String keyword) {
+    return dictDao.findDict(type, keyword);
+  }
+
+  @Transactional
+  public void update(Integer id, String name, String value) {
+    dictDao.update(id, name, value);
   }
 
 }

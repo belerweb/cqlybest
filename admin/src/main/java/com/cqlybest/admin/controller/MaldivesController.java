@@ -14,25 +14,13 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.cqlybest.common.bean.MaldivesDining;
 import com.cqlybest.common.bean.MaldivesRoom;
 import com.cqlybest.common.bean.MaldivesSeaIsland;
-import com.cqlybest.common.service.DestinationService;
-import com.cqlybest.common.service.DictService;
-import com.cqlybest.common.service.ImageService;
-import com.cqlybest.common.service.JsonService;
 import com.cqlybest.common.service.MaldivesService;
 
 @Controller
 public class MaldivesController {
 
   @Autowired
-  private JsonService jsonService;
-  @Autowired
   private MaldivesService maldivesService;
-  @Autowired
-  private DestinationService destinationService;
-  @Autowired
-  private DictService dictService;
-  @Autowired
-  private ImageService imageService;
 
   /**
    * 添加海岛

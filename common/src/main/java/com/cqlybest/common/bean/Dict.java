@@ -2,16 +2,14 @@ package com.cqlybest.common.bean;
 
 /**
  * 数据字典
- * 
- * @author jun
- * 
  */
-public abstract class Dict {
+public class Dict {
 
   private Integer id;
   private String name;
   private String pinyin;
   private String py;
+  private String type;
 
   public Integer getId() {
     return id;
@@ -56,6 +54,14 @@ public abstract class Dict {
       return id == ((Dict) obj).id;
     }
     return false;
+  }
+
+  public String getType() {
+    return type;
+  }
+
+  public void setType(String type) {
+    this.type = type;
   }
 
 }

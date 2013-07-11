@@ -23,13 +23,13 @@
 			<div class="control-group">
 				<label class="control-label">出发城市：</label>
 				<div class="controls">
-					<a id="product_departure_cities" href="#" class="editable" data-pk="${ID}" data-name="departureCities" data-type="select2" data-url="${URL}" data-value="${(product.departureCities!)?html}">${(product.departureCities!)?html}</a>
+					<a id="product_departure_cities" href="#" class="editable" data-dict="departure-city" data-pk="${ID}" data-name="departureCities" data-type="select2" data-url="${URL}" data-value="${(product.departureCities!)?html}">${(product.departureCities!)?html}</a>
 				</div>
 			</div>
 			<div class="control-group">
 				<label class="control-label">目的地：</label>
 				<div class="controls">
-					<a id="product_destinations" href="#" class="editable" data-pk="${ID}" data-name="destinations" data-type="select2" data-url="${URL}" data-value="${(product.destinations!)?html}">${(product.destinations!)?html}</a>
+					<a id="product_destinations" href="#" class="editable" data-dict="destination" data-pk="${ID}" data-name="destinations" data-type="select2" data-url="${URL}" data-value="${(product.destinations!)?html}">${(product.destinations!)?html}</a>
 				</div>
 			</div>
 			<div class="control-group">
@@ -104,25 +104,25 @@
 			<div class="control-group">
 				<label class="control-label">关键词/标签：</label>
 				<div class="controls">
-					<a id="product_keywords" href="#" class="editable" data-pk="${ID}" data-name="keywords" data-type="select2" data-url="${URL}" data-value="${(product.keywords!)?html}">${(product.keywords!)?html}</a>
+					<a id="product_keywords" href="#" class="editable" data-dict="tag" data-pk="${ID}" data-name="keywords" data-type="select2" data-url="${URL}" data-value="${(product.keywords!)?html}">${(product.keywords!)?html}</a>
 				</div>
 			</div>
 			<div class="control-group">
 				<label class="control-label">交通方式：</label>
 				<div class="controls">
-					<a id="product_traffics" href="#" class="editable" data-pk="${ID}" data-name="traffics" data-type="select2" data-url="${URL}" data-value="${(product.traffics!)?html}">${(product.traffics!)?html}</a>
+					<a id="product_traffics" href="#" class="editable" data-dict="traffic" data-pk="${ID}" data-name="traffics" data-type="select2" data-url="${URL}" data-value="${(product.traffics!)?html}">${(product.traffics!)?html}</a>
 				</div>
 			</div>
 			<div class="control-group">
 				<label class="control-label">产品类型：</label>
 				<div class="controls">
-					<a id="product_types" href="#" class="editable" data-pk="${ID}" data-name="types" data-type="select2" data-url="${URL}" data-value="${(product.types!)?html}">${(product.types!)?html}</a>
+					<a id="product_types" href="#" class="editable" data-dict="product-type" data-pk="${ID}" data-name="types" data-type="select2" data-url="${URL}" data-value="${(product.types!)?html}">${(product.types!)?html}</a>
 				</div>
 			</div>
 			<div class="control-group">
 				<label class="control-label">产品等级：</label>
 				<div class="controls">
-					<a id="product_grades" href="#" class="editable" data-pk="${ID}" data-name="grades" data-type="select2" data-url="${URL}" data-value="${(product.grades!)?html}">${(product.grades!)?html}</a>
+					<a id="product_grades" href="#" class="editable" data-dict="product-grade" data-pk="${ID}" data-name="grades" data-type="select2" data-url="${URL}" data-value="${(product.grades!)?html}">${(product.grades!)?html}</a>
 				</div>
 			</div>
 			<div class="control-group">
@@ -151,12 +151,12 @@ $('#product_days').editable();
 $('#product_days_unit').editable({
 	source: [{value:'天',text:'天'},{value:'月',text:'月'},{value:'年',text:'年'}]
 });
-cqlybest.editableTag('#product_departure_cities', 'departure-city');
-cqlybest.editableTag('#product_destinations', 'destination');
-cqlybest.editableTag('#product_keywords', 'keyword');
-cqlybest.editableTag('#product_traffics', 'traffic');
-cqlybest.editableTag('#product_types', 'product-type');
-cqlybest.editableTag('#product_grades', 'product-grade');
+cqlybest.editableTag('#product_departure_cities');
+cqlybest.editableTag('#product_destinations');
+cqlybest.editableTag('#product_keywords');
+cqlybest.editableTag('#product_traffics');
+cqlybest.editableTag('#product_types');
+cqlybest.editableTag('#product_grades');
 $('#product_recommended_months').editable({
 	inputclass: 'input-large',
 	select2: {

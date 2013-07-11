@@ -18,4 +18,11 @@ public class Constant {
   public static final String IMAGE_PRODUCT_POSTER = "product-poster";// 产品海报
   public static final String IMAGE_PRODUCT_PHOTO = "product-photo";// 产品图片
 
+  public static final String DICT_DEPARTURE_CITY = "departure-city";// 出发城市
+  public static final String DICT_DESTINATION = "destination";// 目的地
+  public static final String DICT_PRODUCT_TYPE = "product-type";// 产品类型
+  public static final String DICT_PRODUCT_GRADE = "product-grade";// 产品等级
+  public static final String DICT_TRAFFIC = "traffic";// 交通方式
+  public static final String DICT_TAG = "tag";// 标签
+
 }

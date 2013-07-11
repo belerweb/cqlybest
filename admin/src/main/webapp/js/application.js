@@ -119,43 +119,46 @@ $(function() {
 });
 
 window.cqlybest = {
-	editableTag : function(el, dict) {
-		$(el).editable({
-			inputclass: 'input-large',
-			select2: {
-				multiple: true,
-				ajax: {
-					url: '/data/dict.html?action=dict&type=' + dict,
-					data: function (term, page) {
-						return {q:term};
-					},
-					results: function(response) {
-						var result = [];
-						$.each(response.tags, function(i, obj){
-							result.push({id:obj.name,text:obj.name});
-						});
-						return {results:result};
-					}
-				},
-				formatNoMatches: function(term) {
-					setTimeout(function(){
-						$('.select2-no-results button').off('click').on('click', function() {
-							var btn = $(this);
-							$.post('/data/dict/add.do', {
-								type: dict,
-								value: term
-							}, function() {
-								btn.prev().text('保存成功，重新选择即可');
-								btn.remove();
+	editableTag : function(el) {
+		$(el).each(function(i, obj){
+			var type = $(obj).attr('data-dict');
+			$(obj).editable({
+				inputclass: 'input-large',
+				select2: {
+					multiple: true,
+					ajax: {
+						url: '/dict/search.do?type=' + type,
+						data: function (term, page) {
+							return {q:term};
+						},
+						results: function(response) {
+							var result = [];
+							$.each(response.tags, function(i, obj){
+								result.push({id:obj.name,text:obj.name});
 							});
-						});
-					}, 1000);
-					return '<span>没有找到匹配项</span><button type="button">保存 [' + term + ']</button>';
-				},
-				initSelection: function(el, callback) {
-					callback(cqlybest.v2ss(el.val()||$(el).data('value')));
+							return {results:result};
+						}
+					},
+					formatNoMatches: function(term) {
+						setTimeout(function(){
+							$('.select2-no-results button').off('click').on('click', function() {
+								var btn = $(this);
+								$.post('/dict/add.do', {
+									type: type,
+									name: term
+								}, function() {
+									btn.prev().text('保存成功，重新选择即可');
+									btn.remove();
+								});
+							});
+						}, 1000);
+						return '<span>没有找到匹配项</span><button type="button">保存 [' + term + ']</button>';
+					},
+					initSelection: function(el, callback) {
+						callback(cqlybest.v2ss(el.val()||$(el).data('value')));
+					}
 				}
-			}
+			});
 		});
 	},
 	uploadImage : function(context) {

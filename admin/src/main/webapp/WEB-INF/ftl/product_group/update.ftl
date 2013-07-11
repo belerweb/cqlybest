@@ -46,37 +46,37 @@
 						<div class="control-group">
 							<label class="control-label">按交通方式聚合：</label>
 							<div class="controls">
-								<a id="group_traffics" href="#" class="editable" data-pk="${id}" data-name="groupTraffics" data-type="select2" data-url="${url}" data-value="${(group.groupTraffics!)?html}">${(group.groupTraffics!)?html}</a>
+								<a id="group_traffics" href="#" class="editable" data-dict="traffic" data-pk="${id}" data-name="groupTraffics" data-type="select2" data-url="${url}" data-value="${(group.groupTraffics!)?html}">${(group.groupTraffics!)?html}</a>
 							</div>
 						</div>
 						<div class="control-group">
 							<label class="control-label">按产品类型聚合：</label>
 							<div class="controls">
-								<a id="group_types" href="#" class="editable" data-pk="${id}" data-name="groupTypes" data-type="select2" data-url="${url}" data-value="${(group.groupTypes!)?html}">${(group.groupTypes!)?html}</a>
+								<a id="group_types" href="#" class="editable" data-dict="product-type" data-pk="${id}" data-name="groupTypes" data-type="select2" data-url="${url}" data-value="${(group.groupTypes!)?html}">${(group.groupTypes!)?html}</a>
 							</div>
 						</div>
 						<div class="control-group">
 							<label class="control-label">按产品等级聚合：</label>
 							<div class="controls">
-								<a id="group_grades" href="#" class="editable" data-pk="${id}" data-name="groupGrades" data-type="select2" data-url="${url}" data-value="${(group.groupGrades!)?html}">${(group.groupGrades!)?html}</a>
+								<a id="group_grades" href="#" class="editable" data-dict="product-grade" data-pk="${id}" data-name="groupGrades" data-type="select2" data-url="${url}" data-value="${(group.groupGrades!)?html}">${(group.groupGrades!)?html}</a>
 							</div>
 						</div>
 						<div class="control-group">
 							<label class="control-label">按关键词/标签聚合：</label>
 							<div class="controls">
-								<a id="group_keywords" href="#" class="editable" data-pk="${id}" data-name="groupKeywords" data-type="select2" data-url="${url}" data-value="${(group.groupKeywords!)?html}">${(group.groupKeywords!)?html}</a>
+								<a id="group_keywords" href="#" class="editable" data-dict="tag" data-pk="${id}" data-name="groupKeywords" data-type="select2" data-url="${url}" data-value="${(group.groupKeywords!)?html}">${(group.groupKeywords!)?html}</a>
 							</div>
 						</div>
 						<div class="control-group">
 							<label class="control-label">按出发城市聚合：</label>
 							<div class="controls">
-								<a id="group_departure_cities" href="#" class="editable" data-pk="${id}" data-name="groupDepartureCities" data-type="select2" data-url="${url}" data-value="${(group.groupDepartureCities!)?html}">${(group.groupDepartureCities!)?html}</a>
+								<a id="group_departure_cities" href="#" class="editable" data-dict="departure-city" data-pk="${id}" data-name="groupDepartureCities" data-type="select2" data-url="${url}" data-value="${(group.groupDepartureCities!)?html}">${(group.groupDepartureCities!)?html}</a>
 							</div>
 						</div>
 						<div class="control-group">
 							<label class="control-label">按目的地聚合：</label>
 							<div class="controls">
-								<a id="group_destinations" href="#" class="editable" data-pk="${id}" data-name="groupDestinations" data-type="select2" data-url="${url}" data-value="${(group.groupDestinations!)?html}">${(group.groupDestinations!)?html}</a>
+								<a id="group_destinations" href="#" class="editable" data-dict="destination" data-pk="${id}" data-name="groupDestinations" data-type="select2" data-url="${url}" data-value="${(group.groupDestinations!)?html}">${(group.groupDestinations!)?html}</a>
 							</div>
 						</div>
 						<div class="clearfix"></div>
@@ -101,37 +101,37 @@
 						<div class="control-group">
 							<label class="control-label">按交通方式过滤：</label>
 							<div class="controls">
-								<a id="filter_traffics" href="#" class="editable" data-pk="${id}" data-name="filterTraffics" data-type="select2" data-url="${url}" data-value="${(group.filterTraffics!)?html}">${(group.filterTraffics!)?html}</a>
+								<a id="filter_traffics" href="#" class="editable" data-dict="traffic" data-pk="${id}" data-name="filterTraffics" data-type="select2" data-url="${url}" data-value="${(group.filterTraffics!)?html}">${(group.filterTraffics!)?html}</a>
 							</div>
 						</div>
 						<div class="control-group">
 							<label class="control-label">按产品类型过滤：</label>
 							<div class="controls">
-								<a id="filter_types" href="#" class="editable" data-pk="${id}" data-name="filterTypes" data-type="select2" data-url="${url}" data-value="${(group.filterTypes!)?html}">${(group.filterTypes!)?html}</a>
+								<a id="filter_types" href="#" class="editable" data-dict="product-type" data-pk="${id}" data-name="filterTypes" data-type="select2" data-url="${url}" data-value="${(group.filterTypes!)?html}">${(group.filterTypes!)?html}</a>
 							</div>
 						</div>
 						<div class="control-group">
 							<label class="control-label">按产品等级过滤：</label>
 							<div class="controls">
-								<a id="filter_grades" href="#" class="editable" data-pk="${id}" data-name="filterGrades" data-type="select2" data-url="${url}" data-value="${(group.filterGrades!)?html}">${(group.filterGrades!)?html}</a>
+								<a id="filter_grades" href="#" class="editable" data-dict="product-grade" data-pk="${id}" data-name="filterGrades" data-type="select2" data-url="${url}" data-value="${(group.filterGrades!)?html}">${(group.filterGrades!)?html}</a>
 							</div>
 						</div>
 						<div class="control-group">
 							<label class="control-label">按关键词/标签过滤：</label>
 							<div class="controls">
-								<a id="filter_keywords" href="#" class="editable" data-pk="${id}" data-name="filterKeywords" data-type="select2" data-url="${url}" data-value="${(group.filterKeywords!)?html}">${(group.filterKeywords!)?html}</a>
+								<a id="filter_keywords" href="#" class="editable" data-dict="tag" data-pk="${id}" data-name="filterKeywords" data-type="select2" data-url="${url}" data-value="${(group.filterKeywords!)?html}">${(group.filterKeywords!)?html}</a>
 							</div>
 						</div>
 						<div class="control-group">
 							<label class="control-label">按出发城市过滤：</label>
 							<div class="controls">
-								<a id="filter_departure_cities" href="#" class="editable" data-pk="${id}" data-name="filterDepartureCities" data-type="select2" data-url="${url}" data-value="${(group.filterDepartureCities!)?html}">${(group.filterDepartureCities!)?html}</a>
+								<a id="filter_departure_cities" href="#" class="editable" data-dict="departure-city" data-pk="${id}" data-name="filterDepartureCities" data-type="select2" data-url="${url}" data-value="${(group.filterDepartureCities!)?html}">${(group.filterDepartureCities!)?html}</a>
 							</div>
 						</div>
 						<div class="control-group">
 							<label class="control-label">按目的地过滤：</label>
 							<div class="controls">
-								<a id="filter_destinations" href="#" class="editable" data-pk="${id}" data-name="filterDestinations" data-type="select2" data-url="${url}" data-value="${(group.filterDestinations!)?html}">${(group.filterDestinations!)?html}</a>
+								<a id="filter_destinations" href="#" class="editable" data-dict="destination" data-pk="${id}" data-name="filterDestinations" data-type="select2" data-url="${url}" data-value="${(group.filterDestinations!)?html}">${(group.filterDestinations!)?html}</a>
 							</div>
 						</div>
 						<div class="clearfix"></div>
@@ -156,16 +156,16 @@ $('#group_crowds,#filter_crowds').editable({
 		tags: ['个人旅行', '团体旅行']
 	}
 });
-cqlybest.editableTag('#group_traffics', 'traffic');
-cqlybest.editableTag('#group_types', 'product-type');
-cqlybest.editableTag('#group_grades', 'product-grade');
-cqlybest.editableTag('#group_keywords', 'keyword');
-cqlybest.editableTag('#group_departure_cities', 'departure-city');
-cqlybest.editableTag('#group_destinations', 'destination');
-cqlybest.editableTag('#filter_traffics', 'traffic');
-cqlybest.editableTag('#filter_types', 'product-type');
-cqlybest.editableTag('#filter_grades', 'product-grade');
-cqlybest.editableTag('#filter_keywords', 'keyword');
-cqlybest.editableTag('#filter_departure_cities', 'departure-city');
-cqlybest.editableTag('#filter_destinations', 'destination');
+cqlybest.editableTag('#group_traffics');
+cqlybest.editableTag('#group_types');
+cqlybest.editableTag('#group_grades');
+cqlybest.editableTag('#group_keywords');
+cqlybest.editableTag('#group_departure_cities');
+cqlybest.editableTag('#group_destinations');
+cqlybest.editableTag('#filter_traffics');
+cqlybest.editableTag('#filter_types');
+cqlybest.editableTag('#filter_grades');
+cqlybest.editableTag('#filter_keywords');
+cqlybest.editableTag('#filter_departure_cities');
+cqlybest.editableTag('#filter_destinations');
 </script>

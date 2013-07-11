@@ -26,7 +26,6 @@ import com.cqlybest.common.bean.ProductMaldives;
 import com.cqlybest.common.bean.ProductTraffic;
 import com.cqlybest.common.bean.ProductTravel;
 import com.cqlybest.common.controller.ControllerHelper;
-import com.cqlybest.common.service.DestinationService;
 import com.cqlybest.common.service.DictService;
 import com.cqlybest.common.service.ImageService;
 import com.cqlybest.common.service.JsonService;
@@ -40,8 +39,6 @@ public class ProductController extends ControllerHelper {
   private JsonService jsonService;
   @Autowired
   private ProductService productService;
-  @Autowired
-  private DestinationService destinationService;
   @Autowired
   private DictService dictService;
   @Autowired
