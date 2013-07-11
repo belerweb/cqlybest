@@ -48,29 +48,28 @@ public class MaldivesService {
 
     List<MaldivesRoom> rooms = maldivesDao.getRooms(id);
     for (MaldivesRoom room : rooms) {
-      room.setPictures(imageDao.queryImagesWithoutData(Constant.IMAGE_MALDIVES_ROOM_PICTURE, room
-          .getId().toString()));
+      room.setPictures(imageDao.queryImages(Constant.IMAGE_MALDIVES_ROOM_PICTURE, room.getId()
+          .toString()));
     }
     island.setRooms(rooms);
 
     List<MaldivesDining> dinings = maldivesDao.getDinings(id);
     for (MaldivesDining dining : dinings) {
-      dining.setPictures(imageDao.queryImagesWithoutData(Constant.IMAGE_MALDIVES_DINING_PICTURE,
-          dining.getId().toString()));
+      dining.setPictures(imageDao.queryImages(Constant.IMAGE_MALDIVES_DINING_PICTURE, dining
+          .getId().toString()));
     }
     island.setDinings(dinings);
 
-    island.setPictures(imageDao.queryImagesWithoutData(Constant.IMAGE_MALDIVES_ISLAND_POSTER, id));
-    island.setHotelPictures(imageDao.queryImagesWithoutData(Constant.IMAGE_MALDIVES_HOTEL_PICTURE,
-        id));
+    island.setPictures(imageDao.queryImages(Constant.IMAGE_MALDIVES_ISLAND_POSTER, id));
+    island.setHotelPictures(imageDao.queryImages(Constant.IMAGE_MALDIVES_HOTEL_PICTURE, id));
+    island.setPlays(imageDao.queryImages(Constant.IMAGE_MALDIVES_ISLAND_PLAY, id));
     return island;
   }
 
   public MaldivesSeaIsland getIslandWithoutRoom(String id) {
     MaldivesSeaIsland island = maldivesDao.findById(id);
     if (island != null) {
-      island
-          .setPictures(imageDao.queryImagesWithoutData(Constant.IMAGE_MALDIVES_ISLAND_POSTER, id));
+      island.setPictures(imageDao.queryImages(Constant.IMAGE_MALDIVES_ISLAND_POSTER, id));
     }
     return island;
   }
@@ -109,16 +108,16 @@ public class MaldivesService {
 
   public MaldivesRoom getRoom(Integer id) {
     MaldivesRoom room = maldivesDao.findById(MaldivesRoom.class, id);
-    room.setPictures(imageDao.queryImagesWithoutData(Constant.IMAGE_MALDIVES_ROOM_PICTURE, room
-        .getId().toString()));
+    room.setPictures(imageDao.queryImages(Constant.IMAGE_MALDIVES_ROOM_PICTURE, room.getId()
+        .toString()));
     return room;
   }
 
   public List<MaldivesRoom> getRooms(String islandId) {
     List<MaldivesRoom> rooms = maldivesDao.getRooms(islandId);
     for (MaldivesRoom room : rooms) {
-      room.setPictures(imageDao.queryImagesWithoutData(Constant.IMAGE_MALDIVES_ROOM_PICTURE, room
-          .getId().toString()));
+      room.setPictures(imageDao.queryImages(Constant.IMAGE_MALDIVES_ROOM_PICTURE, room.getId()
+          .toString()));
     }
     return rooms;
   }
@@ -145,16 +144,16 @@ public class MaldivesService {
 
   public MaldivesDining getDining(Integer id) {
     MaldivesDining dining = maldivesDao.findById(MaldivesDining.class, id);
-    dining.setPictures(imageDao.queryImagesWithoutData(Constant.IMAGE_MALDIVES_DINING_PICTURE,
-        dining.getId().toString()));
+    dining.setPictures(imageDao.queryImages(Constant.IMAGE_MALDIVES_DINING_PICTURE, dining.getId()
+        .toString()));
     return dining;
   }
 
   public List<MaldivesDining> getDinings(String islandId) {
     List<MaldivesDining> dinings = maldivesDao.getDinings(islandId);
     for (MaldivesDining dining : dinings) {
-      dining.setPictures(imageDao.queryImagesWithoutData(Constant.IMAGE_MALDIVES_DINING_PICTURE,
-          dining.getId().toString()));
+      dining.setPictures(imageDao.queryImages(Constant.IMAGE_MALDIVES_DINING_PICTURE, dining
+          .getId().toString()));
     }
     return dinings;
   }

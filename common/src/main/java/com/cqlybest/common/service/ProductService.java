@@ -14,6 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.cqlybest.common.Constant;
 import com.cqlybest.common.bean.Product;
 import com.cqlybest.common.bean.ProductCalendar;
 import com.cqlybest.common.bean.ProductComment;
@@ -81,8 +82,8 @@ public class ProductService {
 
   public Product get(String id) {
     Product product = productDao.findById(id);
-    product.setPosters(imageDao.queryImagesWithoutData("product-poster", id));
-    product.setPhotos(imageDao.queryImagesWithoutData("product-photo", id));
+    product.setPosters(imageDao.queryImages(Constant.IMAGE_PRODUCT_POSTER, id));
+    product.setPhotos(imageDao.queryImages(Constant.IMAGE_PRODUCT_PHOTO, id));
     product.setComments(productDao.getComments(id));
     product.setTrafficList(productDao.getTraffic(id));
     if (product.getProductType() == Product.MALDIVES) {
@@ -181,7 +182,7 @@ public class ProductService {
     List<Product> products = productDao.getProducts(or, and, page, pageSize);
     if (pageSize != null) {
       for (Product product : products) {
-        product.setPosters(imageDao.queryImagesWithoutData("product-poster", product.getId()));
+        product.setPosters(imageDao.queryImages(Constant.IMAGE_PRODUCT_POSTER, product.getId()));
       }
     }
     return products;

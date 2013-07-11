@@ -19,6 +19,7 @@
 					<li><a href="javascript:void(0);" data-toggle="tab" data-target="#island-hotel-tab">酒店信息</a></li>
 					<li><a href="javascript:void(0);" data-toggle="tab" data-target="#island-room-tab">房型</a></li>
 					<li><a href="javascript:void(0);" data-toggle="tab" data-target="#island-dining-tab">餐饮设施</a></li>
+					<li><a href="javascript:void(0);" data-toggle="tab" data-target="#island-play-tab">娱乐设施</a></li>
 					<li><a href="javascript:void(0);" data-toggle="tab" data-target="#island-poster-tab">海报图片</a></li>
 				</ul>
 				<div class="tab-content">
@@ -26,6 +27,33 @@
 					<#include "update_hotel.ftl">
 					<#include "update_room.ftl">
 					<#include "update_dining.ftl">
+					<div id="island-play-tab" class="image-gallery tab-pane">
+						<div class="text-right"><button type="button" data-extra="maldives-island-play" data-extra-key="${id}" class="btn btn-primary action action-add picture">添加</button></div>
+						<#if island.plays?has_content>
+						<div class="row-fluid">
+							<ul class="thumbnails">
+							<#list island.plays as image>
+								<li class="span3">
+									<div class="thumbnail">
+										<img src="${ContextPath}/image/${image.id}.${image.imageType}">
+										<div class="caption">
+											<p><a href="#" class="title editable-click <#if !image.title?has_content>editable-empty</#if>" data-pk="${image.id}" data-name="title" data-type="text" data-value="${image.title!}">${image.title!'分类：未设置'}</a></p>
+											<p><a href="#" class="description editable-click <#if !image.description?has_content>editable-empty</#if>" data-pk="${image.id}" data-name="description" data-type="text" data-value="${image.description!}">${image.description!'名称：未设置'}</a></p>
+											<button class="delete btn btn-danger" type="button" data-id="${image.id}">刪除</button>
+										</div>
+									</div>
+								</li>
+								<#if image_index%4==3>
+							</ul>
+						</div>
+						<div class="row-fluid">
+							<ul class="thumbnails">
+								</#if>
+							</#list>
+							</ul>
+						</div>
+						</#if>
+					</div>
 					<div id="island-poster-tab" class="image-gallery tab-pane">
 						<div class="text-right"><button type="button" data-extra="maldives-island-poster" data-extra-key="${id}" class="btn btn-primary action action-add picture">添加</button></div>
 						<#if island.pictures?has_content>
@@ -59,7 +87,6 @@
 	</div>
 </div>
 <script type="text/javascript">
-
 var arrangeImags = function(el, images) {
 	var imgs = $('li', el).detach();
 	$('.row-fluid', el).remove();

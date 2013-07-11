@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.cqlybest.common.Constant;
 import com.cqlybest.common.bean.Product;
 import com.cqlybest.common.bean.template1.Template1IndexPoster;
 import com.cqlybest.common.bean.template1.Template1Menu;
@@ -190,7 +191,7 @@ public class Template1Service {
     }
 
     for (Product product : products) {
-      product.setPosters(imageDao.queryImagesWithoutData("product-poster", product.getId()));
+      product.setPosters(imageDao.queryImages(Constant.IMAGE_PRODUCT_POSTER, product.getId()));
     }
 
     return products;

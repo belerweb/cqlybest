@@ -13,5 +13,9 @@ public class Constant {
   public static final String IMAGE_MALDIVES_ROOM_PICTURE = "maldives-room-picture";// 马尔代夫房间图片
   public static final String IMAGE_MALDIVES_HOTEL_PICTURE = "maldives-hotel-picture";// 马尔代夫酒店图片
   public static final String IMAGE_MALDIVES_DINING_PICTURE = "maldives-dining-picture";// 马尔代夫房间设施
+  public static final String IMAGE_MALDIVES_ISLAND_PLAY = "maldives-island-play";// 马尔代夫娱乐设施
+
+  public static final String IMAGE_PRODUCT_POSTER = "product-poster";// 产品海报
+  public static final String IMAGE_PRODUCT_PHOTO = "product-photo";// 产品图片
 
 }

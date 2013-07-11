@@ -21,7 +21,7 @@ public class ImageDao extends AbstractDao<Image, String> {
     super(Image.class);
   }
 
-  public List<Image> queryImagesWithoutData(String extra, String extraKey) {
+  public List<Image> queryImages(String extra, String extraKey) {
     Criteria criteria = getCurrentSession().createCriteria(entityClass);
     ProjectionList projection = Projections.projectionList();
     projection.add(Projections.property("id"), "id");
