@@ -15,8 +15,6 @@
 		<link rel="stylesheet" href="${ContextPath}/css/icon/font-awesome.css">
 		<link rel="stylesheet" href="${ContextPath}/css/jquery.selectBoxIt.css">
 		<link rel="stylesheet" href="${ContextPath}/css/bootstrap-tagmanager.css">
-		<link rel="stylesheet" href="${ContextPath}/css/elfinder.min.css">
-		<link rel="stylesheet" href="${ContextPath}/css/elfinder-theme.css">
 		<link rel="stylesheet" href="${ContextPath}js/select2/select2.css">
 		<link rel="stylesheet" href="${ContextPath}/js/bootstrap-editable/css/bootstrap-editable.css">
 		<link rel="stylesheet" href="${ContextPath}/js/inputs-ext/wysihtml5/bootstrap-wysihtml5/bootstrap-wysihtml5-0.0.2.css">  
@@ -85,7 +83,6 @@
 					<li class="hide" data-m="site" data-n="dict.list"><a href="#m=site&n=dict.list&u=${ContextPath}/dict/list.html?type%3Dtag&t=%23main"><i class="icon-book"></i> 数据字典</a></li>
 					<li class="hide" data-m="site" data-n="account.list"><a href="#m=site&n=account.list&u=${ContextPath}/account/list.html&t=%23main"><i class="icon-github"></i> 账号管理</a></li>
 					<li class="hide" data-m="site" data-n="advertorial.list"><a href="#m=site&n=advertorial.list&u=${ContextPath}/advertorial/list.html&t=%23main"><i class="icon-file"></i> 软文管理</a></li>
-					<li class="hide" data-m="site" data-n="file"><a href="#m=site&n=file&u=${ContextPath}/file.html&t=%23main"><i class="icon-folder-close"></i> 文件管理</a></li>
 					<li class="hide" data-m="site" data-n="site.template1"><a href="#m=site&n=site.template1&u=${ContextPath}/template1/template.html&t=%23main"><i class="icon-edit"></i> 模板一</a></li>
 					<li class="hide" data-m="user" data-n="user.fit"><a href="#m=user&n=user.fit&u=${ContextPath}/user/fit.html&t=%23main"><i class="icon-user"></i> 普通用户</a></li>
 					<li class="hide" data-m="user" data-n="user.group"><a href="#m=user&n=user.group&u=${ContextPath}/user/group.html&t=%23main"><i class="icon-group"></i> 团体</a></li>
@@ -118,8 +115,6 @@
 		<script type="text/javascript" src="${ContextPath}/js/bootstrap-tagmanager-cqlybest.js"></script>
 		<script type="text/javascript" src="${ContextPath}/js/ueditor/editor_config.js"></script>
 		<script type="text/javascript" src="${ContextPath}/js/ueditor/editor_all.js"></script>
-		<script type="text/javascript" src="${ContextPath}/js/elfinder.min.js"></script>
-		<script type="text/javascript" src="${ContextPath}/js/i18n/elfinder.zh_CN.js"></script>
 		<script type="text/javascript" src="${ContextPath}/js/moment.js"></script>
 		<script type="text/javascript" src="${ContextPath}/js/select2/select2.js"></script>
 		<script type="text/javascript" src="${ContextPath}/js/bootstrap-editable/js/bootstrap-editable.js"></script>
