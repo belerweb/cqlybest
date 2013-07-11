@@ -15,7 +15,6 @@
 		<link rel="stylesheet" href="${ContextPath}/css/icon/font-awesome.css">
 		<link rel="stylesheet" href="${ContextPath}/css/jquery.selectBoxIt.css">
 		<link rel="stylesheet" href="${ContextPath}/css/bootstrap-tagmanager.css">
-		<link rel="stylesheet" href="${ContextPath}/css/jquery.tagit.css">
 		<link rel="stylesheet" href="${ContextPath}/css/elfinder.min.css">
 		<link rel="stylesheet" href="${ContextPath}/css/elfinder-theme.css">
 		<link rel="stylesheet" href="${ContextPath}js/select2/select2.css">
@@ -117,7 +116,6 @@
 		<script type="text/javascript" src="${ContextPath}/js/jquery.selectBoxIt.js"></script>
 		<script type="text/javascript" src="${ContextPath}/js/bootstrap-tagmanager.js"></script>
 		<script type="text/javascript" src="${ContextPath}/js/bootstrap-tagmanager-cqlybest.js"></script>
-		<script type="text/javascript" src="${ContextPath}/js/tag-it.js"></script>
 		<script type="text/javascript" src="${ContextPath}/js/ueditor/editor_config.js"></script>
 		<script type="text/javascript" src="${ContextPath}/js/ueditor/editor_all.js"></script>
 		<script type="text/javascript" src="${ContextPath}/js/elfinder.min.js"></script>
@@ -130,10 +128,6 @@
 		<script type="text/javascript" src="${ContextPath}/js/inputs-ext/wysihtml5/wysihtml5.js"></script>  
 		<script type="text/javascript" src="${ContextPath}/js/bootstrap.calendar.js"></script>
 		<script type="text/javascript" src="${ContextPath}/js/jquery.dateFormat-1.0.js"></script>
-		<!--[if IE]>
-		<script type="text/javascript" src="${ContextPath}/js/Jit/Extras/excanvas.js"></script>
-		<![endif]-->
-		<script type="text/javascript" src="${ContextPath}/js/Jit/jit.js"></script>
 		<script type="text/javascript" src="${ContextPath}/js/application.js"></script>
 	</body>
 </html>
