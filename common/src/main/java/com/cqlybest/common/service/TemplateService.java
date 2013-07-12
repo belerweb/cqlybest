@@ -5,8 +5,8 @@ import org.springframework.stereotype.Service;
 @Service
 public class TemplateService {
 
-  public String forward(String uri) {
-    return "forward:/template1" + uri;
+  public String getTemplate() {
+    return "/template1";
   }
 
 }

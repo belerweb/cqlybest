@@ -6,7 +6,7 @@
 	<hr>
 	<div class="row">
 		<div class="span8">
-			<form id="register-form" action="${ContextPath}/register.do" method="post" class="form-horizontal" novalidate="novalidate">
+			<form id="register-form" action="${ContextPath}/user/register" method="post" class="form-horizontal" novalidate="novalidate">
 				<div class="control-group">
 					<label class="control-label">手机号：</label>
 					<div class="controls">
@@ -53,8 +53,8 @@
 			<h2>合作账户免注册， 直接登录</h2>
 			<hr>
 			<ul>
-				<li><a href="${ContextPath}/connector/qq_login.do" class="mg"><img alt="QQ登录" src="http://qzonestyle.gtimg.cn/qzone/vas/opensns/res/img/Connect_logo_7.png"></a></li>
-				<li><a href="${ContextPath}/connector/weibo_login.do" class="mg"><img alt="用微博登录" src="http://timg.sjs.sinajs.cn/t4/appstyle/widget/images/loginButton/loginButton_24.png"></a></li>
+				<li><a href="${ContextPath}/connector/qq_login" class="mg"><img alt="QQ登录" src="http://qzonestyle.gtimg.cn/qzone/vas/opensns/res/img/Connect_logo_7.png"></a></li>
+				<li><a href="${ContextPath}/connector/weibo_login" class="mg"><img alt="用微博登录" src="http://timg.sjs.sinajs.cn/t4/appstyle/widget/images/loginButton/loginButton_24.png"></a></li>
 			</ul>
 		</div>
 	</div>
@@ -93,7 +93,7 @@
 					return;
 				}
 				btn.button('loading');
-				$.post('${ContextPath}/register_phone_validation.do', {
+				$.post('${ContextPath}/user/phone_validation', {
 					cellPhone: cellPhone
 				}).success(function(response){
 					if (response) {

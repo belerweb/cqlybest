@@ -1,4 +1,7 @@
 $(function() {
+	$.fn.editable.defaults.emptytext = '未设置';
+	$.fn.editable.defaults.send  = 'always';
+
 	var page = window.PageContext || {};
 
 	// active menu

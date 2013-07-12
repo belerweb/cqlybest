@@ -19,12 +19,14 @@ http://www.springframework.org/schema/beans http://www.springframework.org/schem
 	</authentication-manager>
 
 	<http auto-config="true" access-decision-manager-ref="accessDecisionManager" use-expressions="true">
-		<form-login login-page="/login.html" login-processing-url="/login.do" always-use-default-target="true"
+		<form-login login-page="/login.html" login-processing-url="/user/login" always-use-default-target="true"
 			authentication-failure-url="/login.html?error=true" />
-		<logout logout-url="/logout.do" />
-		<intercept-url pattern="/index.html" access="permitAll" />
+		<logout logout-url="/user/logout" />
+		<intercept-url pattern="/**/*.html" access="permitAll" />
 		<intercept-url pattern="/connector/**" access="permitAll" />
-		<intercept-url pattern="/**" access="permitAll" />
+		<intercept-url pattern="/user/phone_validation" access="permitAll" />
+		<intercept-url pattern="/user/register" access="permitAll" />
+		<intercept-url pattern="/**" access="isAuthenticated()" />
 	</http>
 
 </beans:beans>

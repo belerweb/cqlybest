@@ -27,13 +27,13 @@ public class WeiboLoginController {
   @Autowired
   private UserService userService;
 
-  @RequestMapping("/connector/weibo_login.do")
+  @RequestMapping("/connector/weibo_login")
   public String weiboLogin(HttpServletRequest request) {
     String redirect = "redirect:/index.html";
     try {
       String redirectURI =
           request.getScheme() + "://" + request.getServerName() + request.getContextPath()
-              + "/connector/weibo.do";
+              + "/connector/weibo";
       WeiboConfig.updateProperties(WeiboInitService.REDIRECT_URI, redirectURI);
       redirect =
           "redirect:"
@@ -46,7 +46,7 @@ public class WeiboLoginController {
     return redirect;
   }
 
-  @RequestMapping("/connector/weibo.do")
+  @RequestMapping("/connector/weibo")
   public String weibo(@RequestParam String state, @RequestParam String code,
       HttpServletRequest request) {
     String redirect = "redirect:/index.html";

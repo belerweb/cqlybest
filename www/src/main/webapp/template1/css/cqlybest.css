@@ -180,6 +180,14 @@ del {
 	margin: 20px 0;
 }
 
+.form-horizontal .control-group {
+	margin-bottom: 10px;
+}
+
+.controls > .control-label {
+	text-align: left; 
+}
+
 .box {
 	border: 1px solid #DDDDDD;
 	margin-bottom: 10px;
@@ -578,4 +586,13 @@ del {
 .product-room th.name {
 	background-color: #DFF0D8;
 	text-align: center;
+}
+
+.nav-sidebar .nav-header {
+	font-weight: bold;
+	font-size: 14px;
+	color: #333333;
+}
+.nav-sidebar .divider {
+	margin: 0;
 }

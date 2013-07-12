@@ -26,13 +26,13 @@ public class QQLoginController {
   @Autowired
   private UserService userService;
 
-  @RequestMapping("/connector/qq_login.do")
+  @RequestMapping("/connector/qq_login")
   public String qqLogin(HttpServletRequest request) {
     String redirect = "redirect:/index.html";
     try {
       String redirectURI =
           request.getScheme() + "://" + request.getServerName() + request.getContextPath()
-              + "/connector/qq.do";
+              + "/connector/qq";
       QQConnectConfig.updateProperties(QQConnectInitService.REDIRECT_URI, redirectURI);
       redirect = "redirect:" + OAUTH.getAuthorizeURL(request);
     } catch (QQConnectException e) {
@@ -42,7 +42,7 @@ public class QQLoginController {
     return redirect;
   }
 
-  @RequestMapping("/connector/qq.do")
+  @RequestMapping("/connector/qq")
   public String qq(HttpServletRequest request) {
     String redirect = "redirect:/index.html";
     try {

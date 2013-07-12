@@ -8,17 +8,17 @@ body {
 	<div class="pull-left"><img src="${ContextPath}/template1/img/logo.png"></div>
 	<div class="clearfix"></div>
 </div>
-<div id="login-slider" style="background:#bFE5FA url('${ContextPath}/image/${Options['template1-login-poster']}') center;">
+<div id="login-slider" style="background:#bFE5FA url('${ContextPath}/image/${Options['template1-login-poster']!}') center;">
 	<div class="container">
 		<div class="row">
 			<div class="span8">
-				<#if Options['template1-login-poster']?has_content>
-				<a id="login-poster" href="${Options['template1-login-poster']}" target="_blank"></a>
+				<#if Options['template1-login-poster-link']?has_content>
+				<a id="login-poster" href="${Options['template1-login-poster-link']}" target="_blank"></a>
 				</#if>
 			</div>
 			<div class="span4">
 				<div id="login-box" class="well well-small">
-					<form action="${ContextPath}/login.do" method="post" novalidate="novalidate">
+					<form action="${ContextPath}/user/login" method="post" novalidate="novalidate">
 						<#if error?has_content && error>
 						<div class="alert alert-error">用户信息不正确！</div>
 						</#if>
@@ -42,8 +42,8 @@ body {
 						<div class="clearfix"></div>
 					</form>
 					<hr>
-					<a href="${ContextPath}/connector/qq_login.do"><img alt="QQ登录" src="http://qzonestyle.gtimg.cn/qzone/vas/opensns/res/img/Connect_logo_7.png"></a>
-					<a href="${ContextPath}/connector/weibo_login.do" class="pull-right"><img alt="用微博登录" src="http://timg.sjs.sinajs.cn/t4/appstyle/widget/images/loginButton/loginButton_24.png"></a>
+					<a href="${ContextPath}/connector/qq_login"><img alt="QQ登录" src="http://qzonestyle.gtimg.cn/qzone/vas/opensns/res/img/Connect_logo_7.png"></a>
+					<a href="${ContextPath}/connector/weibo_login" class="pull-right"><img alt="用微博登录" src="http://timg.sjs.sinajs.cn/t4/appstyle/widget/images/loginButton/loginButton_24.png"></a>
 					<div class="clearfix"></div>
 				</div>
 			</div>
@@ -55,14 +55,14 @@ body {
 		init: function(){
 			$('input', '#login-box form').jqBootstrapValidation({
 				submitSuccess : function($form, event) {
-					$.cookie('username', $('input[name=j_username]', $form).value(), { expires: 3650, path: '/' });
+					$.cookie('username', $('input[name=j_username]', $form).val(), { expires: 3650, path: '/' });
 				}
 			});
 			var username = '${username!}';
 			if (username.length) {
 				$.cookie('username', username, { expires: 3650, path: '/' });
 			}
-			$('#login-poster').css('display:block').height($('#login-box').height()),
+			$('#login-poster').css('display', 'block').height($('#login-box').height());
 		}
 	};
 </script>

@@ -1,79 +1,127 @@
 package com.cqlybest.www.controller;
 
-import javax.servlet.http.HttpServletRequest;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 import javax.servlet.http.HttpSession;
 
-import org.apache.commons.lang.RandomStringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.AuthenticationException;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.CookieValue;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.cqlybest.common.bean.LoginUser;
-import com.cqlybest.common.bean.PhoneValidationCode;
-import com.cqlybest.common.service.PhoneValidationService;
-import com.cqlybest.common.service.SmsService;
+import com.cqlybest.common.bean.ProductGroup;
+import com.cqlybest.common.bean.template1.Template1Menu;
+import com.cqlybest.common.bean.template1.Template1ProductGroup;
+import com.cqlybest.common.service.DictService;
+import com.cqlybest.common.service.MaldivesService;
+import com.cqlybest.common.service.OptionService;
+import com.cqlybest.common.service.ProductService;
+import com.cqlybest.common.service.Template1Service;
 import com.cqlybest.common.service.TemplateService;
-import com.cqlybest.common.service.UserService;
 
 @Controller
 public class IndexController {
 
+
+  @Autowired
+  private Template1Service template1Service;
   @Autowired
   private TemplateService templateService;
   @Autowired
-  private PhoneValidationService phoneValidationService;
+  private OptionService optionService;
   @Autowired
-  private SmsService smsService;
+  private ProductService productService;
   @Autowired
-  private UserService userService;
+  private MaldivesService maldivesService;
+  @Autowired
+  private DictService dictService;
 
-  @RequestMapping( {"/index.html", // 首页
-      "/register.html",// 注册
-      "/login.html",// 登录
-      "/group/{id}.html",// 产品聚合
-      "/group/{id}/{f0}-{f1}-{f2}-{f3}-{f4}-{f5}-{f6}-{f7}-{page}.html",// 产品聚合
-      "/page/{id}.html",// 自定义页面
-      "/product/{id}.html",// 产品页面,
-      "/maldives/{id}.html"// 马尔代夫
-  })
-  public String forward(HttpServletRequest request) {
-    return templateService.forward(request.getRequestURI());
+  /**
+   * 首页
+   */
+  @RequestMapping("/index.html")
+  public String index(Model model) {
+    model.addAttribute("posters", template1Service.getPublishedPosters());// 海报
+    model.addAttribute("specials", template1Service.getSpecialProduct(4));// 特价
+    model.addAttribute("recommendeds", template1Service.getRecommendedProduct(2));// 推荐
+    model.addAttribute("hots", template1Service.getHotProduct(10));// 热门
+    List<Template1ProductGroup> items = template1Service.getAllIndexProductGroups();
+    List<Map<String, Object>> groups = new ArrayList<Map<String, Object>>(items.size());
+    for (Template1ProductGroup item : items) {
+      ProductGroup productGroup = item.getProductGroup();
+      Map<String, Object> group = new HashMap<String, Object>();
+      group.put("group", productGroup);
+      group.put("products", productService.queryProducts(productGroup, null, 0, 4));
+      groups.add(group);
+    }
+    model.addAttribute("groups", groups);// 产品组合
+    setCommonData(model);
+    return templateService.getTemplate() + "/index";
   }
 
-  @RequestMapping(method = RequestMethod.POST, value = "/register.do")
-  @ResponseBody
-  public String register(@RequestParam String cellPhone, @RequestParam String password,
-      @RequestParam String validationCode, HttpSession session) {
-    PhoneValidationCode code = (PhoneValidationCode) session.getAttribute("PHONE_VALIDATION_CODE");
-    if (code == null || !validationCode.equalsIgnoreCase(code.getCode())) {
-      return "验证码不正确";
-    }
-    if (userService.getUserByCellPhone(cellPhone) != null) {
-      return "手机号已注册，您可以用此手机号登录。如果忘记，可以使用找回密码功能。";
-    }
-    userService.addUser(new LoginUser(cellPhone, password));
-    session.removeAttribute("PHONE_VALIDATION_CODE");
-    return null;
+  /**
+   * 注册
+   */
+  @RequestMapping("/register.html")
+  public String register(Model model) {
+    setCommonData(model);
+    return templateService.getTemplate() + "/register";
   }
 
-  @RequestMapping(method = RequestMethod.POST, value = "/register_phone_validation.do")
-  @ResponseBody
-  public String registerPhoneValidation(@RequestParam String cellPhone, HttpSession session) {
-    if (!cellPhone.matches("^1[3458]\\d{9}$")) {
-      return "手机号码不正确";
+  /**
+   * 登录
+   */
+  @RequestMapping("/login.html")
+  @SuppressWarnings("deprecation")
+  public String login(@RequestParam(required = false) Boolean error,
+      @CookieValue(required = false) String username, HttpSession session, Model model) {
+    Object exception = session.getAttribute("SPRING_SECURITY_LAST_EXCEPTION");
+    if (Boolean.TRUE.equals(error) && exception != null) {
+      model.addAttribute("error", true);
+      if (exception instanceof AuthenticationException) {
+        Authentication auth = ((AuthenticationException) exception).getAuthentication();
+        if (auth != null) {
+          model.addAttribute("username", auth.getPrincipal());
+        }
+      }
+      session.removeAttribute("SPRING_SECURITY_LAST_EXCEPTION");
     }
-    if (phoneValidationService.checkSendAvailable(cellPhone)) {
-      String code = RandomStringUtils.randomNumeric(4);
-      PhoneValidationCode validationCode = new PhoneValidationCode(cellPhone, code);
-      phoneValidationService.save(validationCode);
-      smsService.send(null, "系统", cellPhone, null, "您正在重庆易游天下网站注册帐户，您的手机验证码是" + code + "，使用一次后失效。");
-      session.setAttribute("PHONE_VALIDATION_CODE", validationCode);
-      return null;
+    if (!model.containsAttribute("username")) {
+      model.addAttribute("username", username);
     }
-    return "一分钟只能发送一次验证码，请稍后再试";
+    setCommonData(model);
+    return templateService.getTemplate() + "/login";
+  }
+
+  /**
+   * 自定义内容页
+   */
+  @RequestMapping("/page/{id}.html")
+  public Object page(@PathVariable String id, Model model) {
+    Template1Menu menu = template1Service.get(id);
+    if (menu == null || menu.getMenuType() != 1) {
+      // 菜单不存在或者不是产品聚合菜单
+      return new ResponseEntity<Object>(HttpStatus.NOT_FOUND);
+    }
+
+    model.addAttribute("page", menu);
+    setCommonData(model);
+    return templateService.getTemplate() + "/page";
+  }
+
+  private void setCommonData(Model model) {
+    model.addAttribute("Options", optionService.getOptions());
+    model.addAttribute("Menu", template1Service.getPublishedMenus());
   }
 
 }

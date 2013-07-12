@@ -38,6 +38,7 @@
 								<cssSourceFile>jquery.ad-gallery.css</cssSourceFile>
 								<cssSourceFile>bootstrap-image-gallery.css</cssSourceFile>
 								<cssSourceFile>bootstrap.calendar.css</cssSourceFile>
+								<cssSourceFile>bootstrap-editable.css</cssSourceFile>
 								<cssSourceFile>wysiwyg-color.css</cssSourceFile>
 								<cssSourceFile>cqlybest.css</cssSourceFile>
 							</cssSourceFiles>
@@ -55,6 +56,7 @@
 								<jsSourceFile>load-image.js</jsSourceFile>
 								<jsSourceFile>bootstrap-image-gallery.js</jsSourceFile>
 								<jsSourceFile>bootstrap.calendar.js</jsSourceFile>
+								<jsSourceFile>bootstrap-editable.js</jsSourceFile>
 								<jsSourceFile>cqlybest.js</jsSourceFile>
 							</jsSourceFiles>
 							<jsFinalFile>application.js</jsFinalFile>

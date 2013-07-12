@@ -35,8 +35,8 @@
 						<div class="pull-left">合作网站账号登录</div>
 						<div class="pull-right">
 							<ul class="social-links">
-								<li class="qq text-center"><a href="${ContextPath}/connector/qq_login.do"><img alt="QQ登录" src="http://qzonestyle.gtimg.cn/qzone/vas/opensns/res/img/Connect_logo_7.png"></a></li>
-								<li class="sina text-center"><a href="${ContextPath}/connector/weibo_login.do"><img alt="用微博登录" src="http://timg.sjs.sinajs.cn/t4/appstyle/widget/images/loginButton/loginButton_24.png"></a></li>
+								<li class="qq text-center"><a href="${ContextPath}/connector/qq_login"><img alt="QQ登录" src="http://qzonestyle.gtimg.cn/qzone/vas/opensns/res/img/Connect_logo_7.png"></a></li>
+								<li class="sina text-center"><a href="${ContextPath}/connector/weibo_login"><img alt="用微博登录" src="http://timg.sjs.sinajs.cn/t4/appstyle/widget/images/loginButton/loginButton_24.png"></a></li>
 							</ul>
 						</div>
 						<div class="clear"></div>
