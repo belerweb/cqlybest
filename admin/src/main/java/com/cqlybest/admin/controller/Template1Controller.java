@@ -19,6 +19,7 @@ import com.cqlybest.common.bean.template1.Template1Menu;
 import com.cqlybest.common.bean.template1.Template1ProductGroup;
 import com.cqlybest.common.bean.template1.Template1SubMenu;
 import com.cqlybest.common.service.DictService;
+import com.cqlybest.common.service.OptionService;
 import com.cqlybest.common.service.ProductGroupService;
 import com.cqlybest.common.service.Template1Service;
 
@@ -27,12 +28,12 @@ public class Template1Controller {
 
   @Autowired
   private Template1Service template1Service;
-
   @Autowired
   private ProductGroupService productGroupService;
-
   @Autowired
   private DictService dictService;
+  @Autowired
+  private OptionService optionService;
 
   @RequestMapping(value = "/template1/template.html", method = RequestMethod.GET)
   public void template(Model model) {
@@ -40,6 +41,7 @@ public class Template1Controller {
     model.addAttribute("menus", template1Service.getAllMenus());
     model.addAttribute("productGroups", productGroupService.getAllProductGroup());
     model.addAttribute("template1ProductGroups", template1Service.getAllIndexProductGroups());
+    model.addAttribute("options", optionService.getOptions());
   }
 
   @RequestMapping("/template1/poster.html")

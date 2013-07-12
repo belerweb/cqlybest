@@ -8,10 +8,14 @@ body {
 	<div class="pull-left"><img src="${ContextPath}/template1/img/logo.png"></div>
 	<div class="clearfix"></div>
 </div>
-<div id="login-slider" style="background:#bFE5FA;">
+<div id="login-slider" style="background:#bFE5FA url('${ContextPath}/image/${Options['template1-login-poster']}') center;">
 	<div class="container">
 		<div class="row">
-			<div class="span8"></div>
+			<div class="span8">
+				<#if Options['template1-login-poster']?has_content>
+				<a id="login-poster" href="${Options['template1-login-poster']}" target="_blank"></a>
+				</#if>
+			</div>
 			<div class="span4">
 				<div id="login-box" class="well well-small">
 					<form action="${ContextPath}/login.do" method="post" novalidate="novalidate">
@@ -58,6 +62,7 @@ body {
 			if (username.length) {
 				$.cookie('username', username, { expires: 3650, path: '/' });
 			}
+			$('#login-poster').css('display:block').height($('#login-box').height()),
 		}
 	};
 </script>
