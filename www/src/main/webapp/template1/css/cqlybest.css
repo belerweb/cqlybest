@@ -522,7 +522,22 @@ del {
 	margin-left: 0;
 }
 
+.maldives-play-gallery .gallery-item {
+	float: left;
+}
+
+.maldives-play-gallery .gallery-item img {
+	border: 1px solid #DDDDDD;
+	margin-left: 8px;
+	margin-bottom: 8px;
+}
+
+.maldives-play-gallery .gallery-item.row-first img {
+	margin-left: 0;
+}
+
 .product-basic-table {
+	
 }
 
 .product-basic-table th,.product-basic-table td {
@@ -538,16 +553,20 @@ del {
 	font-family: Georgia;
 	font-size: 16px;
 }
+
 .product-basic-table td.del {
 	text-decoration: line-through;
 	color: #666666;
 }
+
 .product-room {
 	margin: 0 0 10px;
 }
-.product-room .table{
+
+.product-room .table {
 	margin-bottom: 5px;
 }
+
 .product-room .day {
 	background-color: #DFF0D8;
 	font-weight: bold;

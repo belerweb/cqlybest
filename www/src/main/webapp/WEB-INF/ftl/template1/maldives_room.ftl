@@ -11,7 +11,7 @@
 			<col width="" />
 		</colgroup>
 		<tbody>
-			<tr style="background:#5bb75b;">
+			<tr style="background:#DFF0D8;">
 				<th colspan="2">${room.zhName!}${room.enName!} <#if room.num?has_content><span class="label label-success">${room.num}间</span></#if></th>
 			</tr>
 			<tr>

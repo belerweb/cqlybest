@@ -23,7 +23,7 @@
 					<div class="product-gallery" data-toggle="modal-gallery" data-target="#product-gallery" data-selector="div.gallery-item">
 						<#if product.photos?has_content>
 						<#list product.photos as image>
-						<div class="gallery-item <#if image_index==0> first</#if><#if image_index%5==1> row-first</#if><#if image_index gt 8> hide</#if>"
+						<div class="gallery-item <#if image_index==0> first</#if><#if image_index%5==1> row-first</#if><#if image_index gt 10> hide</#if>"
 							data-href="${ContextPath}/image/${image.id}.${image.imageType}" title="${image.title!}">
 							<#if image_index==0>
 							<img src="${ContextPath}/image/${image.id}.${image.imageType}?width=341&height=260">
