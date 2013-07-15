@@ -5,32 +5,26 @@
 			<div class="pull-left">
 				<a href="http://e.weibo.com/3039642623" target="_blank"><img alt="微博加关注" src="${ContextPath}/template1/img/weibo.png"> 加关注</a>
 			</div>
-			<div class="pull-right">
+			<div class="pull-right dropdown">
 				<#if User?exists>
-				<span>
-					<#if User.nickname?has_content>
-					${User.nickname!''}
-					<#else>
-						<#if User.loginUsername?has_content>
-						${User.loginUsername!''}
-						<#else>
-							<#if User.fullname?has_content>
-							${User.fullname!''}
-							<#else>
-								<#if User.cellPhone?has_content>
-								${User.cellPhone!''}
-								<#else>
-									<#if User.email?has_content>
-									${User.email!''}
-									<#else>
-									<a href="${ContextPath}/user/info">完善个人信息</a>
-									</#if>
-								</#if>
-							</#if>
-						</#if>
-					</#if>
-				</span>
-				<a href="${ContextPath}/user/logout">退出</a>
+				<#if User.avatar?has_content>
+				<#if User.avatar?starts_with('http')>
+				<img src="${User.avatar}" class="avatar">
+				<#else>
+				<img src="${ContextPath}/image/${User.avatar}?width=32&height=32" class="avatar">
+				</#if>
+				<#else>
+				<img src="${ContextPath}/template1/img/avatar.gif" class="avatar">
+				</#if>
+				<a class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown"
+					href="<#if User.nickname?has_content>#<#else>${ContextPath}/user/home</#if>">
+					<#if User.nickname?has_content>${User.nickname}<#else>完善个人信息</#if> <b class="caret"></b>
+				</a>
+				<ul class="dropdown-menu">
+					<li><a href="${ContextPath}/user/home">用户中心</a></li>
+					<li class="divider"></li>
+					<li><a href="${ContextPath}/user/logout">退出</a></li>
+				</ul>
 				<#else>
 				<span>亲，欢迎来易游天下！请</span>
 				<a href="${ContextPath}/login.html">登录</a>

@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import weibo4j.Oauth;
+import weibo4j.Users;
 import weibo4j.http.AccessToken;
 import weibo4j.model.WeiboException;
 import weibo4j.util.WeiboConfig;
@@ -55,7 +56,12 @@ public class WeiboLoginController {
       String token = accessToken.getAccessToken();
       WeiboAuth auth =
           new WeiboAuth(accessToken.getUid(), token, Long.parseLong(accessToken.getExpireIn()));
-      LoginUser user = userService.register(auth);
+
+      // 读取用户详细信息
+      Users api = new Users();
+      api.setToken(token);
+      LoginUser user = userService.register(auth, api.showUserById(accessToken.getUid()));
+
       SecurityContextHolder.getContext().setAuthentication(new WeiboAuthToken(user));
     } catch (WeiboException e) {
       // TODO Auto-generated catch block

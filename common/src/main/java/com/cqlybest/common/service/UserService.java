@@ -11,6 +11,8 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import weibo4j.model.User;
+
 import com.cqlybest.common.bean.LoginUser;
 import com.cqlybest.common.bean.QQAuth;
 import com.cqlybest.common.bean.Role;
@@ -86,7 +88,7 @@ public class UserService {
    * 新浪微博登录用户注册
    */
   @Transactional
-  public LoginUser register(WeiboAuth auth) {
+  public LoginUser register(WeiboAuth auth, User weiboUser) {
     WeiboAuth existed = userDao.findById(WeiboAuth.class, auth.getUid());
     if (existed == null) {
       auth.setCreatedTime(new Date());
@@ -102,8 +104,11 @@ public class UserService {
     LoginUser user = userDao.findOne(Restrictions.eq("weiboAuth", auth));
     if (user == null) {
       user = new LoginUser(auth);
-      userDao.saveOrUpdate(user);
     }
+    user.setNickname(weiboUser.getScreenName());
+    user.setAvatar(weiboUser.getProfileImageUrl());
+    userDao.saveOrUpdate(user);
+    userDao.saveOrUpdate(weiboUser);
     return user;
   }
 

@@ -27,6 +27,11 @@ del {
 	margin-left: 5px;
 }
 
+#top-nav .avatar{
+	width: 32px;
+	height: 32px;
+}
+
 #top-logo {
 	padding: 10px 0;
 }
