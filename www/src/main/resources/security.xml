@@ -22,8 +22,10 @@ http://www.springframework.org/schema/beans http://www.springframework.org/schem
 		<form-login login-page="/login.html" login-processing-url="/user/login" always-use-default-target="true"
 			authentication-failure-url="/login.html?error=true" />
 		<logout logout-url="/user/logout" />
+		<intercept-url pattern="/" access="permitAll" />
 		<intercept-url pattern="/**/*.html" access="permitAll" />
 		<intercept-url pattern="/connector/**" access="permitAll" />
+		<intercept-url pattern="/image/**" access="permitAll" />
 		<intercept-url pattern="/user/phone_validation" access="permitAll" />
 		<intercept-url pattern="/user/register" access="permitAll" />
 		<intercept-url pattern="/**" access="isAuthenticated()" />
