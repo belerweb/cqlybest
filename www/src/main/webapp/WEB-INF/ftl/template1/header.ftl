@@ -1,6 +1,12 @@
 <#include "/template1/header_top.ftl">
 <div id="top-logo" class="container text-right">
-	<div class="pull-left"><img src="${ContextPath}/template1/img/logo.png"></div>
+	<div class="pull-left">
+		<#if (Options['template1-logo'])?has_content>
+		<img src="${ContextPath}/image/${Options['template1-logo']}">
+		<#else>
+		${(Options.site_name)!}
+		</#if>
+	</div>
 	<#if (Options.site_400)?has_content>
 	<div class="pull-right">
 		<div class="phone"><span><img src="${ContextPath}/template1/img/contact.png">${Options.site_400}</span></div>
