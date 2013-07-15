@@ -4,13 +4,17 @@
         "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 
 <hibernate-mapping package="com.cqlybest.common.bean">
-    <class name="QQAuth" table="QQ_AUTH">
-        <id name="openid" column="OPENID" type="string" length="36">
-            <generator class="assigned" />
-        </id>
-        <property name="token" column="TOKEN" type="string" length="36" />
-        <property name="expireIn" column="EXPIRE_IN" />
-        <property name="createdTime" column="CREATED_TIME" />
-        <property name="lastUpdate" column="LAST_UPDATE" />
-    </class>
+	<class name="QQAuth" table="QQ_AUTH">
+		<id name="openid" column="OPENID" type="string" length="36">
+			<generator class="assigned" />
+		</id>
+		<property name="token" column="TOKEN" type="string" length="36" />
+		<property name="expireIn" column="EXPIRE_IN" />
+		<property name="gender" column="GENDER" length="4" />
+		<property name="level" column="LEVEL" />
+		<property name="vip" column="VIP" />
+		<property name="yellowYearVip" column="YELLOW_YEAR_VIP" />
+		<property name="createdTime" column="CREATED_TIME" />
+		<property name="lastUpdate" column="LAST_UPDATE" />
+	</class>
 </hibernate-mapping>

@@ -7,6 +7,10 @@ public class QQAuth {
   private String openid;
   private String token;
   private long expireIn;
+  private String gender;
+  private Integer level;
+  private Boolean vip;
+  private Boolean yellowYearVip;
   private Date createdTime;
   private Date lastUpdate;
 
@@ -56,6 +60,38 @@ public class QQAuth {
 
   public void setLastUpdate(Date lastUpdate) {
     this.lastUpdate = lastUpdate;
+  }
+
+  public String getGender() {
+    return gender;
+  }
+
+  public void setGender(String gender) {
+    this.gender = gender;
+  }
+
+  public Integer getLevel() {
+    return level;
+  }
+
+  public void setLevel(Integer level) {
+    this.level = level;
+  }
+
+  public Boolean getVip() {
+    return vip;
+  }
+
+  public void setVip(Boolean vip) {
+    this.vip = vip;
+  }
+
+  public Boolean getYellowYearVip() {
+    return yellowYearVip;
+  }
+
+  public void setYellowYearVip(Boolean yellowYearVip) {
+    this.yellowYearVip = yellowYearVip;
   }
 
 }

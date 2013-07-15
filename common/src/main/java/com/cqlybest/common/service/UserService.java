@@ -18,6 +18,7 @@ import com.cqlybest.common.bean.QQAuth;
 import com.cqlybest.common.bean.Role;
 import com.cqlybest.common.bean.WeiboAuth;
 import com.cqlybest.common.dao.UserDao;
+import com.qq.connect.javabeans.qzone.UserInfoBean;
 
 @Service
 public class UserService {
@@ -63,24 +64,30 @@ public class UserService {
    * QQ 登录用户注册
    */
   @Transactional
-  public LoginUser register(QQAuth auth) {
-    QQAuth existed = userDao.findById(QQAuth.class, auth.getOpenid());
-    if (existed == null) {
-      auth.setCreatedTime(new Date());
-      auth.setLastUpdate(new Date());
-      userDao.saveOrUpdate(auth);
+  public LoginUser register(QQAuth auth, UserInfoBean qzoneUser) {
+    QQAuth _auth = userDao.findById(QQAuth.class, auth.getOpenid());
+    if (_auth == null) {
+      _auth = auth;
+      _auth.setCreatedTime(new Date());
     } else {
-      existed.setToken(auth.getToken());
-      existed.setExpireIn(auth.getExpireIn());
-      existed.setLastUpdate(new Date());
-      userDao.saveOrUpdate(existed);
+      _auth.setToken(auth.getToken());
+      _auth.setExpireIn(auth.getExpireIn());
     }
+    _auth.setLevel(qzoneUser.getLevel());
+    _auth.setGender(qzoneUser.getGender());
+    _auth.setVip(qzoneUser.isVip());
+    _auth.setYellowYearVip(qzoneUser.isYellowYearVip());
+    _auth.setLastUpdate(new Date());
+    userDao.saveOrUpdate(_auth);
 
     LoginUser user = userDao.findOne(Restrictions.eq("qqAuth", auth));
     if (user == null) {
       user = new LoginUser(auth);
-      userDao.saveOrUpdate(user);
     }
+    user.setNickname(qzoneUser.getNickname());
+    user.setAvatar(qzoneUser.getAvatar().getAvatarURL50());
+    // userDao.saveOrUpdate(weiboUser);
+    userDao.saveOrUpdate(user);
     return user;
   }
 
@@ -89,17 +96,16 @@ public class UserService {
    */
   @Transactional
   public LoginUser register(WeiboAuth auth, User weiboUser) {
-    WeiboAuth existed = userDao.findById(WeiboAuth.class, auth.getUid());
-    if (existed == null) {
-      auth.setCreatedTime(new Date());
-      auth.setLastUpdate(new Date());
-      userDao.saveOrUpdate(auth);
+    WeiboAuth _auth = userDao.findById(WeiboAuth.class, auth.getUid());
+    if (_auth == null) {
+      _auth = auth;
+      _auth.setCreatedTime(new Date());
     } else {
-      existed.setToken(auth.getToken());
-      existed.setExpireIn(auth.getExpireIn());
-      existed.setLastUpdate(new Date());
-      userDao.saveOrUpdate(existed);
+      _auth.setToken(auth.getToken());
+      _auth.setExpireIn(auth.getExpireIn());
     }
+    _auth.setLastUpdate(new Date());
+    userDao.saveOrUpdate(_auth);
 
     LoginUser user = userDao.findOne(Restrictions.eq("weiboAuth", auth));
     if (user == null) {
@@ -107,8 +113,8 @@ public class UserService {
     }
     user.setNickname(weiboUser.getScreenName());
     user.setAvatar(weiboUser.getProfileImageUrl());
-    userDao.saveOrUpdate(user);
     userDao.saveOrUpdate(weiboUser);
+    userDao.saveOrUpdate(user);
     return user;
   }
 
