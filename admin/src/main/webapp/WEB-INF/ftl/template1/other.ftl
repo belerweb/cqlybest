@@ -1,7 +1,7 @@
 <div class="row-fluid form-horizontal">
 	<div class="span6">
 		<div class="control-group">
-			<label class="control-label"><a href="#" class="logo">LOGO：</a></label>
+			<label class="control-label"><a href="#" class="site-logo">LOGO：</a></label>
 			<div class="controls" data-id="<#if options['template1-logo']?has_content>${options['template1-logo']?split('.')[0]}</#if>">
 				<#if options['template1-logo']?has_content>
 				<img src="${ContextPath}/image/${options['template1-logo']}">
@@ -28,7 +28,7 @@
 </div>
 
 <script type="text/javascript">
-$('#template1 .logo').click(function(e) {
+$('#template1 .site-logo').click(function(e) {
 	e.stopPropagation();
 	e.preventDefault();
 	var images = cqlybest.uploadImage('${ContextPath}');
