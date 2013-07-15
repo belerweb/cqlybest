@@ -115,7 +115,7 @@ $('button.picture.action-add').click(function(){
 		var extra = $(this).attr('data-extra');
 		var extraKey = $(this).attr('data-extra-key');
 		$.each(images, function(i, obj) {
-			$.post('${ContextPath}/image/update.do', {
+			$.post('${ContextPath}/image/update', {
 				pk: obj.id,
 				name: ['extra', 'extraKey'],
 				value: [extra, extraKey]
@@ -128,7 +128,7 @@ $('button.picture.action-add').click(function(){
 });
 $('.image-gallery').editable({
 	selector: 'a.title,a.description',
-	url: '${ContextPath}/image/update.do'
+	url: '${ContextPath}/image/update'
 });
 $('.image-gallery button.delete').die('click').live('click', function() {
 	var id = $(this).attr('data-id');
@@ -136,7 +136,7 @@ $('.image-gallery button.delete').die('click').live('click', function() {
 	var el = $(this).closest('.image-gallery');
 	bootbox.confirm('确认删除图片?', '取消', '确认', function(result) {
 		if (result) {
-			$.post('${ContextPath}/image/delete.do', {
+			$.post('${ContextPath}/image/delete', {
 				id: id
 			}).done(function(){
 				image.remove();

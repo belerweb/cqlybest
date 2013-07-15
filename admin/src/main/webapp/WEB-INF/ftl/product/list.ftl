@@ -139,17 +139,17 @@
 						</td>
 						<td class="action-table">
 							<#if product.published?exists && product.published>
-							<a href="javascript:void(0);" data-url="${ContextPath}/product/toggle.html?id=${product.id}&published=false"
+							<a href="javascript:void(0);" data-url="${ContextPath}/product/toggle.do?id=${product.id}&published=false"
 								class="ajax-action-btn gray" data-confirm="true" data-action="取消发布" data-title="${product.name!}"
 								title="取消发布"><i class="icon-download-alt"></i></a>
 							<#else>
-							<a href="javascript:void(0);" data-url="${ContextPath}/product/toggle.html?id=${product.id}&published=true"
+							<a href="javascript:void(0);" data-url="${ContextPath}/product/toggle.do?id=${product.id}&published=true"
 								class="ajax-action-btn blue" data-confirm="true" data-action="发布" data-title="${product.name!}"
 								title="发布"><i class="icon-upload-alt"></i></a>
 							</#if>
 							<a href="javascript:void(0);" data-url="${ContextPath}/product/update.do?id=${product.id}"
 								class="page-load-btn safe" data-target="#mb" title="修改"><i class="icon-edit"></i></a>
-							<a href="javascript:void(0);" data-url="${ContextPath}/product/delete.html?ids[]=${product.id}"
+							<a href="javascript:void(0);" data-url="${ContextPath}/product/delete.do?ids[]=${product.id}"
 								class="ajax-action-btn danger last" data-confirm="true" data-action="删除" data-title="${product.name!}"
 								title="删除"><i class="icon-remove"></i></a>
 						</td>
@@ -176,7 +176,7 @@ $('#main-list-table').dataTable({
 		});
 		var q = {};
 		q.page = p.iDisplayStart / p.iDisplayLength + 1;
-		var u = '${ContextPath}/product/list.html?' + $.param(q);
+		var u = '${ContextPath}/product/list.do?' + $.param(q);
 		var hash  = {
 			m: 'site',
 			n: 'product.list',
@@ -214,7 +214,7 @@ $('#product-marke-hot').click(function(){
 	if (validateChecked(items)) {
 		bootbox.confirm('确认要对选择的产品标记为热门吗？', '取消', '确认', function(result) {
 			if (result) {
-				$.post('${ContextPath}/product/hot.html', {
+				$.post('${ContextPath}/product/hot.do', {
 					ids: items,
 					hot: true
 				}, function(){
@@ -229,7 +229,7 @@ $('#product-marke-unhot').click(function(){
 	if (validateChecked(items)) {
 		bootbox.confirm('确认要对选择的产品取消热门标记吗？', '取消', '确认', function(result) {
 			if (result) {
-				$.post('${ContextPath}/product/hot.html', {
+				$.post('${ContextPath}/product/hot.do', {
 					ids: items,
 					hot: false
 				}, function(){
@@ -244,7 +244,7 @@ $('#product-marke-red').click(function(){
 	if (validateChecked(items)) {
 		bootbox.confirm('确认要对选择的产品标记为推荐吗？', '取消', '确认', function(result) {
 			if (result) {
-				$.post('${ContextPath}/product/recommend.html', {
+				$.post('${ContextPath}/product/recommend.do', {
 					ids: items,
 					red: true
 				}, function(){
@@ -259,7 +259,7 @@ $('#product-marke-unred').click(function(){
 	if (validateChecked(items)) {
 		bootbox.confirm('确认要对选择的产品取消推荐吗？', '取消', '确认', function(result) {
 			if (result) {
-				$.post('${ContextPath}/product/recommend.html', {
+				$.post('${ContextPath}/product/recommend.do', {
 					ids: items,
 					red: false
 				}, function(){
@@ -274,7 +274,7 @@ $('#product-marke-special').click(function(){
 	if (validateChecked(items)) {
 		bootbox.confirm('确认要对选择的产品标记为特价吗？', '取消', '确认', function(result) {
 			if (result) {
-				$.post('${ContextPath}/product/special.html', {
+				$.post('${ContextPath}/product/special.do', {
 					ids: items,
 					special: true
 				}, function(){
@@ -289,7 +289,7 @@ $('#product-marke-unspecial').click(function(){
 	if (validateChecked(items)) {
 		bootbox.confirm('确认要对选择的产品取消特价吗？', '取消', '确认', function(result) {
 			if (result) {
-				$.post('${ContextPath}/product/special.html', {
+				$.post('${ContextPath}/product/special.do', {
 					ids: items,
 					special: false
 				}, function(){
@@ -304,7 +304,7 @@ $('#product-marke-pub').click(function(){
 	if (validateChecked(items)) {
 		bootbox.confirm('确认要发布选择的产品吗？', '取消', '确认', function(result) {
 			if (result) {
-				$.post('${ContextPath}/product/pub.html', {
+				$.post('${ContextPath}/product/pub.do', {
 					ids: items,
 					pub: true
 				}, function(){
@@ -319,7 +319,7 @@ $('#product-marke-unpub').click(function(){
 	if (validateChecked(items)) {
 		bootbox.confirm('确认要取消发布选择的产品吗？', '取消', '确认', function(result) {
 			if (result) {
-				$.post('${ContextPath}/product/pub.html', {
+				$.post('${ContextPath}/product/pub.do', {
 					ids: items,
 					pub: false
 				}, function(){
@@ -334,7 +334,7 @@ $('#product-marke-del').click(function(){
 	if (validateChecked(items)) {
 		bootbox.confirm('确认要删除选择的产品吗？', '取消', '确认', function(result) {
 			if (result) {
-				$.post('${ContextPath}/product/delete.html', {
+				$.post('${ContextPath}/product/delete.do', {
 					ids: items
 				}, function(){
 					cqlybest.reload();
@@ -395,7 +395,7 @@ $('#search-form button.s').click(function(){
 	if (spe!='-1') p.push('spe=' + spe);
 	if (pub!='-1') p.push('pub=' + pub);
 	if (!/^\s*$/.test(name)) p.push('name=' + name);
-	hash['u'] = '${ContextPath}/product/list.html?' + p.join('&');
+	hash['u'] = '${ContextPath}/product/list.do?' + p.join('&');
 	hash['_t'] = new Date().getTime();
 	location.hash = cqlybest.buildHash(hash);
 });

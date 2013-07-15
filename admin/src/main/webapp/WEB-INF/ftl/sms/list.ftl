@@ -73,7 +73,7 @@ $('#main-list-table').dataTable({
 		});
 		var q = {};
 		q.page = p.iDisplayStart / p.iDisplayLength + 1;
-		var u = '${ContextPath}/sms/list.html?' + $.param(q);
+		var u = '${ContextPath}/sms/list.do?' + $.param(q);
 		var hash  = {
 			m: 'site',
 			n: 'product.list',

@@ -11,7 +11,7 @@
 			<div class="clearfix"></div>   
 		</div>
 		<!-- novalidate -->
-		<#assign URL='${ContextPath}/site/config.html'>
+		<#assign URL='${ContextPath}/site/config.do'>
 		<form class="form-horizontal">
 			<div class="grid-content">
 				<div class="control-group">

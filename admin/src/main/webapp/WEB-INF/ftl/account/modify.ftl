@@ -11,7 +11,7 @@
 			<div class="clearfix"></div>   
 		</div>
 		<!-- novalidate -->
-		<form id="main-content-form" action="${ContextPath}/account/modify.html" method="post" class="form-horizontal">
+		<form id="main-content-form" action="${ContextPath}/account/modify.do" method="post" class="form-horizontal">
 			<input type="hidden" name="id" value="${(account.id)!}">
 			<div class="grid-content">
 				<div class="control-group">

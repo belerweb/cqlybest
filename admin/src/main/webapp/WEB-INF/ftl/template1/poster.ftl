@@ -33,15 +33,15 @@
 						<td class="action-table">
 							<a href="${poster.imageUrl!}" target="_blank" title="查看图片" class="safe"><i class="icon-picture"></i></a>
 							<#if poster.published>
-							<a href="javascript:void(0);" data-url="${ContextPath}/template1/poster/toggle.html?id=${poster.id}&published=false"
+							<a href="javascript:void(0);" data-url="${ContextPath}/template1/poster/toggle.do?id=${poster.id}&published=false"
 								class="ajax-action-btn gray" data-confirm="true" data-action="取消发布" data-title="${poster.title!}"
 								title="取消发布" data-target="#template1-tab2"><i class="icon-download-alt"></i></a>
 							<#else>
-							<a href="javascript:void(0);" data-url="${ContextPath}/template1/poster/toggle.html?id=${poster.id}&published=true"
+							<a href="javascript:void(0);" data-url="${ContextPath}/template1/poster/toggle.do?id=${poster.id}&published=true"
 								class="ajax-action-btn blue" data-confirm="true" data-action="发布" data-title="${poster.title!}"
 								title="发布" data-target="#template1-tab2"><i class="icon-upload-alt"></i></a>
 							</#if>
-							<a href="javascript:void(0);" data-url="${ContextPath}/template1/poster/delete.html?id=${poster.id}"
+							<a href="javascript:void(0);" data-url="${ContextPath}/template1/poster/delete.do?id=${poster.id}"
 								class="ajax-action-btn danger last" data-confirm="true" data-action="删除" data-title="${poster.title!}"
 								title="删除" data-target="#template1-tab2"><i class="icon-remove"></i></a>
 						</td>
@@ -63,7 +63,7 @@
 			<div class="clearfix"></div>   
 		</div>
 		<!-- novalidate -->
-		<form id="template1-tab2-form" action="${ContextPath}/template1/poster/add.html" method="post" class="form-horizontal">
+		<form id="template1-tab2-form" action="${ContextPath}/template1/poster/add.do" method="post" class="form-horizontal">
 			<div class="grid-content">
 				<div class="control-group">
 					<label class="control-label">标题：</label>
@@ -133,7 +133,7 @@ $('input,textarea,select', '#template1-tab2-form').jqBootstrapValidation({
 		$form.ajaxSubmit({
 			success : function(response) {
 				cqlybest.success(null, null, function(){
-					$('#template1-tab2').load('${ContextPath}/template1/poster.html');
+					$('#template1-tab2').load('${ContextPath}/template1/poster.do');
 				});
 			},
 			error : function() {

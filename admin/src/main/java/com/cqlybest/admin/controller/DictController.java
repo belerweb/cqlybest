@@ -20,7 +20,7 @@ public class DictController {
   @Autowired
   private DictService dictService;
 
-  @RequestMapping("/dict/list.html")
+  @RequestMapping("/dict/list.do")
   public void dict(@RequestParam String type, Model model) {
     model.addAttribute("type", type);
     model.addAttribute("dicts", dictService.getDict(type));

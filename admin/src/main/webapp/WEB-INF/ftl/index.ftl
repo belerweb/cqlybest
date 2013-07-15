@@ -41,7 +41,7 @@
 		<div id="header" role="banner">
 			<a id="menu-link" class="head-button-link menu-hide" href="#menu"><span>菜单</span></a>
 			<!--Logo-->
-			<a href="dashboard.html" class="logo"><h1>重庆易游天下国际旅行社</h1></a>
+			<a href="dashboard.do" class="logo"><h1>重庆易游天下国际旅行社</h1></a>
 			<!--Logo END-->
 			<div class="right">
 				<!--profile box-->
@@ -75,20 +75,20 @@
 					<li data-m="sms"><a href="#m=sms"><i class="sms"></i> 短信</a></li>
 				</ul>
 				<ul class="additional-menu">
-					<li class="hide" data-m="dash" data-n="dash.dash"><a href="#m=dash&n=dash.dash&u=${ContextPath}/dashboard.html&t=%23main"><i class="icon-dashboard"></i> 工作台</a></li>
-					<li class="hide" data-m="site" data-n="site.config"><a href="#m=site&n=site.config&u=${ContextPath}/site/config.html&t=%23main"><i class="icon-cogs"></i> 网站配置</a></li>
-					<li class="hide" data-m="site" data-n="product.list"><a href="#m=site&n=product.list&u=${ContextPath}/product/list.html&t=%23main"><i class="icon-road"></i> 旅游产品</a></li>
+					<li class="hide" data-m="dash" data-n="dash.dash"><a href="#m=dash&n=dash.dash&u=${ContextPath}/dashboard.do&t=%23main"><i class="icon-dashboard"></i> 工作台</a></li>
+					<li class="hide" data-m="site" data-n="site.config"><a href="#m=site&n=site.config&u=${ContextPath}/site/config.do&t=%23main"><i class="icon-cogs"></i> 网站配置</a></li>
+					<li class="hide" data-m="site" data-n="product.list"><a href="#m=site&n=product.list&u=${ContextPath}/product/list.do&t=%23main"><i class="icon-road"></i> 旅游产品</a></li>
 					<li class="hide" data-m="site" data-n="maldives.list"><a href="#m=site&n=maldives.list&u=${ContextPath}/maldives/list.do&t=%23main"><i class="icon-road"></i> 马尔代夫</a></li>
-					<li class="hide" data-m="site" data-n="productgroup.list"><a href="#m=site&n=productgroup.list&u=${ContextPath}/product_group/list.html&t=%23main"><i class="icon-th-large"></i> 产品聚合</a></li>
-					<li class="hide" data-m="site" data-n="dict.list"><a href="#m=site&n=dict.list&u=${ContextPath}/dict/list.html?type%3Dtag&t=%23main"><i class="icon-book"></i> 数据字典</a></li>
-					<li class="hide" data-m="site" data-n="account.list"><a href="#m=site&n=account.list&u=${ContextPath}/account/list.html&t=%23main"><i class="icon-github"></i> 账号管理</a></li>
-					<li class="hide" data-m="site" data-n="advertorial.list"><a href="#m=site&n=advertorial.list&u=${ContextPath}/advertorial/list.html&t=%23main"><i class="icon-file"></i> 软文管理</a></li>
-					<li class="hide" data-m="site" data-n="site.template1"><a href="#m=site&n=site.template1&u=${ContextPath}/template1/template.html&t=%23main"><i class="icon-edit"></i> 模板一</a></li>
-					<li class="hide" data-m="user" data-n="user.fit"><a href="#m=user&n=user.fit&u=${ContextPath}/user/fit.html&t=%23main"><i class="icon-user"></i> 普通用户</a></li>
-					<li class="hide" data-m="user" data-n="user.group"><a href="#m=user&n=user.group&u=${ContextPath}/user/group.html&t=%23main"><i class="icon-group"></i> 团体</a></li>
-					<li class="hide" data-m="user" data-n="user.agency"><a href="#m=user&n=user.agency&u=${ContextPath}/user/agency.html&t=%23main"><i class="icon-group"></i> 旅行社</a></li>
-					<li class="hide" data-m="user" data-n="user.admin"><a href="#m=user&n=user.admin&u=${ContextPath}/user/admin.html&t=%23main"><i class="icon-user-md"></i> 管理员</a></li>
-					<li class="hide" data-m="sms" data-n="sms.list"><a href="#m=sms&n=sms.list&u=${ContextPath}/sms/list.html&t=%23main"><i class="icon-comment"></i> 短信历史</a></li>
+					<li class="hide" data-m="site" data-n="productgroup.list"><a href="#m=site&n=productgroup.list&u=${ContextPath}/product_group/list.do&t=%23main"><i class="icon-th-large"></i> 产品聚合</a></li>
+					<li class="hide" data-m="site" data-n="dict.list"><a href="#m=site&n=dict.list&u=${ContextPath}/dict/list.do?type%3Dtag&t=%23main"><i class="icon-book"></i> 数据字典</a></li>
+					<li class="hide" data-m="site" data-n="account.list"><a href="#m=site&n=account.list&u=${ContextPath}/account/list.do&t=%23main"><i class="icon-github"></i> 账号管理</a></li>
+					<li class="hide" data-m="site" data-n="advertorial.list"><a href="#m=site&n=advertorial.list&u=${ContextPath}/advertorial/list.do&t=%23main"><i class="icon-file"></i> 软文管理</a></li>
+					<li class="hide" data-m="site" data-n="site.template1"><a href="#m=site&n=site.template1&u=${ContextPath}/template1/template.do&t=%23main"><i class="icon-edit"></i> 模板一</a></li>
+					<li class="hide" data-m="user" data-n="user.fit"><a href="#m=user&n=user.fit&u=${ContextPath}/user/fit.do&t=%23main"><i class="icon-user"></i> 普通用户</a></li>
+					<li class="hide" data-m="user" data-n="user.group"><a href="#m=user&n=user.group&u=${ContextPath}/user/group.do&t=%23main"><i class="icon-group"></i> 团体</a></li>
+					<li class="hide" data-m="user" data-n="user.agency"><a href="#m=user&n=user.agency&u=${ContextPath}/user/agency.do&t=%23main"><i class="icon-group"></i> 旅行社</a></li>
+					<li class="hide" data-m="user" data-n="user.admin"><a href="#m=user&n=user.admin&u=${ContextPath}/user/admin.do&t=%23main"><i class="icon-user-md"></i> 管理员</a></li>
+					<li class="hide" data-m="sms" data-n="sms.list"><a href="#m=sms&n=sms.list&u=${ContextPath}/sms/list.do&t=%23main"><i class="icon-comment"></i> 短信历史</a></li>
 				</ul>
 				<div class="clearfix"></div>
 			</div>

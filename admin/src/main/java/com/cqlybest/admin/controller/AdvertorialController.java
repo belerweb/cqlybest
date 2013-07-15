@@ -17,38 +17,38 @@ public class AdvertorialController {
   @Autowired
   private AdvertorialService advertorialService;
 
-  @RequestMapping("/advertorial/list.html")
+  @RequestMapping("/advertorial/list.do")
   public void list(Model model) {
     model.addAttribute("advertorials", advertorialService.getAdvertorials());
   }
 
-  @RequestMapping(method = RequestMethod.GET, value = "/advertorial/add.html")
+  @RequestMapping(method = RequestMethod.GET, value = "/advertorial/add.do")
   public void add() {}
 
-  @RequestMapping(method = RequestMethod.POST, value = "/advertorial/add.html")
+  @RequestMapping(method = RequestMethod.POST, value = "/advertorial/add.do")
   @ResponseBody
   public void add(Advertorial advertorial) {
     advertorialService.add(advertorial);
   }
 
-  @RequestMapping("/advertorial/delete.html")
+  @RequestMapping("/advertorial/delete.do")
   @ResponseBody
   public void delete(@RequestParam Integer id) {
     advertorialService.delete(id);
   }
 
-  @RequestMapping(method = RequestMethod.GET, value = "/advertorial/modify.html")
+  @RequestMapping(method = RequestMethod.GET, value = "/advertorial/modify.do")
   public void modify(@RequestParam Integer id, Model model) {
     model.addAttribute("advertorial", advertorialService.getAdvertorial(id));
   }
 
-  @RequestMapping(method = RequestMethod.POST, value = "/advertorial/modify.html")
+  @RequestMapping(method = RequestMethod.POST, value = "/advertorial/modify.do")
   @ResponseBody
   public void modify(Advertorial advertorial) {
     advertorialService.modify(advertorial);
   }
 
-  @RequestMapping("/advertorial/view.html")
+  @RequestMapping("/advertorial/view.do")
   public void view(@RequestParam Integer id, Model model) {
     model.addAttribute("advertorial", advertorialService.getAdvertorial(id));
   }

@@ -1,7 +1,6 @@
 package com.cqlybest.common.bean;
 
 import java.util.Collection;
-import java.util.Collections;
 import java.util.Set;
 import java.util.UUID;
 
@@ -145,7 +144,7 @@ public class LoginUser implements UserDetails {
 
   @Override
   public Collection<? extends GrantedAuthority> getAuthorities() {
-    return Collections.emptyList();
+    return roles;
   }
 
   @Override

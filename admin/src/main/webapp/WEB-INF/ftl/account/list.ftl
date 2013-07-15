@@ -4,7 +4,7 @@
 	<div class="pagetitle">
 		<h1>账号</h1>
 		<div class="btn-group">
-			<a href="#m=site&n=account.list&u=${ContextPath}/account/add.html&t=%23mb" class="btn btn-primary">增加新账号</a>
+			<a href="#m=site&n=account.list&u=${ContextPath}/account/add.do&t=%23mb" class="btn btn-primary">增加新账号</a>
 		</div>
 		<div class="clearfix"></div>
 		<hr>
@@ -39,9 +39,9 @@
 						<td>${account.password!}</td>
 						<td>${account.remark!}</td>
 						<td class="action-table">
-							<a href="javascript:void(0);" data-url="${ContextPath}/account/modify.html?id=${account.id}"
+							<a href="javascript:void(0);" data-url="${ContextPath}/account/modify.do?id=${account.id}"
 								class="page-load-btn safe" data-target="#mb" title="修改"><i class="icon-edit"></i></a>
-							<a href="javascript:void(0);" data-url="${ContextPath}/account/delete.html?id=${account.id}"
+							<a href="javascript:void(0);" data-url="${ContextPath}/account/delete.do?id=${account.id}"
 								class="ajax-action-btn danger last" data-confirm="true" data-action="删除"
 								data-title="${account.name!}" title="删除"><i class="icon-remove"></i></a>
 						</td>

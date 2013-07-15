@@ -32,10 +32,10 @@ public class ImageController {
   @Autowired
   private ImageService imageService;
 
-  @RequestMapping("/image/upload.html")
+  @RequestMapping(method = RequestMethod.GET, value = "/image/upload")
   public void upload() {}
 
-  @RequestMapping("/image/upload.do")
+  @RequestMapping(method = RequestMethod.POST, value = "/image/upload")
   @ResponseBody
   public Object upload(@RequestParam MultipartFile file) throws Exception {
     Image image = imageService.multipartFileToImage(file);
@@ -43,7 +43,7 @@ public class ImageController {
     return image;
   }
 
-  @RequestMapping(value = "/image/update.do", method = RequestMethod.POST)
+  @RequestMapping(value = "/image/update", method = RequestMethod.POST)
   @ResponseBody
   public void update(@RequestParam String pk, @RequestParam(required = false) String name,
       @RequestParam(required = false) String value,
@@ -59,7 +59,7 @@ public class ImageController {
     }
   }
 
-  @RequestMapping(value = "/image/delete.do", method = RequestMethod.POST)
+  @RequestMapping(value = "/image/delete", method = RequestMethod.POST)
   @ResponseBody
   public void delete(@RequestParam String id) {
     imageService.delete(id);

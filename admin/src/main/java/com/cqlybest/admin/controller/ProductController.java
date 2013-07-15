@@ -202,7 +202,7 @@ public class ProductController extends ControllerHelper {
     productService.deleteMaldives(id);
   }
 
-  @RequestMapping(value = "/product/list.html", method = RequestMethod.GET)
+  @RequestMapping(value = "/product/list.do", method = RequestMethod.GET)
   public void products(@RequestParam(required = false) Boolean hot,
       @RequestParam(required = false) Boolean red, @RequestParam(required = false) Boolean spe,
       @RequestParam(required = false) Boolean pub, @RequestParam(required = false) String name,
@@ -222,37 +222,37 @@ public class ProductController extends ControllerHelper {
     model.addAttribute("paramName", name);
   }
 
-  @RequestMapping("/product/toggle.html")
+  @RequestMapping("/product/toggle.do")
   @ResponseBody
   public void toggle(@RequestParam String id, @RequestParam boolean published) {
     productService.update(id, "published", published);
   }
 
-  @RequestMapping("/product/hot.html")
+  @RequestMapping("/product/hot.do")
   @ResponseBody
   public void hot(@RequestParam(value = "ids[]") String[] ids, @RequestParam boolean hot) {
     productService.update(ids, "popular", hot);
   }
 
-  @RequestMapping("/product/recommend.html")
+  @RequestMapping("/product/recommend.do")
   @ResponseBody
   public void recommend(@RequestParam(value = "ids[]") String[] ids, @RequestParam boolean red) {
     productService.update(ids, "recommend", red);
   }
 
-  @RequestMapping("/product/special.html")
+  @RequestMapping("/product/special.do")
   @ResponseBody
   public void special(@RequestParam(value = "ids[]") String[] ids, @RequestParam boolean special) {
     productService.update(ids, "specialOffer", special);
   }
 
-  @RequestMapping("/product/pub.html")
+  @RequestMapping("/product/pub.do")
   @ResponseBody
   public void pub(@RequestParam(value = "ids[]") String[] ids, @RequestParam boolean pub) {
     productService.update(ids, "published", pub);
   }
 
-  @RequestMapping("/product/delete.html")
+  @RequestMapping("/product/delete.do")
   @ResponseBody
   public void del(@RequestParam(value = "ids[]") String[] ids) {
     productService.delete(ids);

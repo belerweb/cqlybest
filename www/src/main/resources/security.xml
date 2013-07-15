@@ -25,7 +25,9 @@ http://www.springframework.org/schema/beans http://www.springframework.org/schem
 		<intercept-url pattern="/" access="permitAll" />
 		<intercept-url pattern="/**/*.html" access="permitAll" />
 		<intercept-url pattern="/connector/**" access="permitAll" />
-		<intercept-url pattern="/image/**" access="permitAll" />
+		<intercept-url pattern="/image/*.jpg" access="permitAll" />
+		<intercept-url pattern="/image/*.gif" access="permitAll" />
+		<intercept-url pattern="/image/*.png" access="permitAll" />
 		<intercept-url pattern="/user/phone_validation" access="permitAll" />
 		<intercept-url pattern="/user/register" access="permitAll" />
 		<intercept-url pattern="/**" access="isAuthenticated()" />

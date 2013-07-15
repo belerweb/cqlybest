@@ -19,12 +19,12 @@ public class SiteController {
   @Autowired
   private OptionService optionService;
 
-  @RequestMapping(value = "/site/config.html", method = RequestMethod.GET)
+  @RequestMapping(value = "/site/config.do", method = RequestMethod.GET)
   public void config(Model model) {
     model.addAttribute("options", optionService.getOptions());
   }
 
-  @RequestMapping(value = "/site/config.html", method = RequestMethod.POST)
+  @RequestMapping(value = "/site/config.do", method = RequestMethod.POST)
   @ResponseBody
   public void config(@RequestParam String name, @RequestParam(required = false) String value,
       @RequestParam(required = false, value = "value[]") List<String> values) {

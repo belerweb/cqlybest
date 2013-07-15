@@ -4,12 +4,12 @@
 	<div class="pagetitle">
 		<h1>数据字典</h1>
 		<div class="pull-right" style="margin-top:15px;">
-			<a href="#m=site&n=dict.list&u=${ContextPath}/dict/list.html%3Ftype%3Dtag&t=%23main" class="btn btn-primary">关键词</a>
-			<a href="#m=site&n=dict.list&u=${ContextPath}/dict/list.html%3Ftype%3Ddeparture-city&t=%23main" class="btn btn-primary">出发城市</a>
-			<a href="#m=site&n=dict.list&u=${ContextPath}/dict/list.html%3Ftype%3Ddestination&t=%23main" class="btn btn-primary">目的地</a>
-			<a href="#m=site&n=dict.list&u=${ContextPath}/dict/list.html%3Ftype%3Dtraffic&t=%23main" class="btn btn-primary">交通方式</a>
-			<a href="#m=site&n=dict.list&u=${ContextPath}/dict/list.html%3Ftype%3Dproduct-type&t=%23main" class="btn btn-primary">产品类型</a>
-			<a href="#m=site&n=dict.list&u=${ContextPath}/dict/list.html%3Ftype%3Dproduct-grade&t=%23main" class="btn btn-primary">产品等级</a>
+			<a href="#m=site&n=dict.list&u=${ContextPath}/dict/list.do%3Ftype%3Dtag&t=%23main" class="btn btn-primary">关键词</a>
+			<a href="#m=site&n=dict.list&u=${ContextPath}/dict/list.do%3Ftype%3Ddeparture-city&t=%23main" class="btn btn-primary">出发城市</a>
+			<a href="#m=site&n=dict.list&u=${ContextPath}/dict/list.do%3Ftype%3Ddestination&t=%23main" class="btn btn-primary">目的地</a>
+			<a href="#m=site&n=dict.list&u=${ContextPath}/dict/list.do%3Ftype%3Dtraffic&t=%23main" class="btn btn-primary">交通方式</a>
+			<a href="#m=site&n=dict.list&u=${ContextPath}/dict/list.do%3Ftype%3Dproduct-type&t=%23main" class="btn btn-primary">产品类型</a>
+			<a href="#m=site&n=dict.list&u=${ContextPath}/dict/list.do%3Ftype%3Dproduct-grade&t=%23main" class="btn btn-primary">产品等级</a>
 		</div>
 		<div class="clearfix"></div>
 		<hr>
@@ -73,7 +73,7 @@ $('input,textarea,select', '#main-content-form').jqBootstrapValidation({
 		$form.ajaxSubmit({
 			success : function(response) {
 				cqlybest.success(null, null, function(){
-					$('#mb').load('${ContextPath}/dict/list.html?type=${type}');
+					$('#mb').load('${ContextPath}/dict/list.do?type=${type}');
 				});
 			},
 			error : function() {

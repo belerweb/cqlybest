@@ -35,7 +35,7 @@ public class Template1Controller {
   @Autowired
   private OptionService optionService;
 
-  @RequestMapping(value = "/template1/template.html", method = RequestMethod.GET)
+  @RequestMapping(value = "/template1/template.do", method = RequestMethod.GET)
   public void template(Model model) {
     model.addAttribute("posters", template1Service.getPosters());
     model.addAttribute("menus", template1Service.getAllMenus());
@@ -44,43 +44,43 @@ public class Template1Controller {
     model.addAttribute("options", optionService.getOptions());
   }
 
-  @RequestMapping("/template1/poster.html")
+  @RequestMapping("/template1/poster.do")
   public void list(Model model) {
     model.addAttribute("posters", template1Service.getPosters());
   }
 
-  @RequestMapping(method = RequestMethod.GET, value = "/template1/poster/add.html")
+  @RequestMapping(method = RequestMethod.GET, value = "/template1/poster/add.do")
   public void add() {}
 
-  @RequestMapping(method = RequestMethod.POST, value = "/template1/poster/add.html")
+  @RequestMapping(method = RequestMethod.POST, value = "/template1/poster/add.do")
   @ResponseBody
   public void add(Template1IndexPoster poster) {
     template1Service.add(poster);
   }
 
-  @RequestMapping("/template1/poster/delete.html")
+  @RequestMapping("/template1/poster/delete.do")
   @ResponseBody
   public void delete(@RequestParam Integer id) {
     template1Service.delete(id);
   }
 
-  @RequestMapping("/template1/poster/toggle.html")
+  @RequestMapping("/template1/poster/toggle.do")
   @ResponseBody
   public void toggle(@RequestParam Integer id, @RequestParam boolean published) {
     template1Service.togglePublished(id, published);
   }
 
-  @RequestMapping(value = "/template1/menu.html", method = RequestMethod.GET)
+  @RequestMapping(value = "/template1/menu.do", method = RequestMethod.GET)
   public void menu(Model model) {
     model.addAttribute("menus", template1Service.getAllMenus());
   }
 
-  @RequestMapping(value = "/template1/menu/add.html", method = RequestMethod.GET)
+  @RequestMapping(value = "/template1/menu/add.do", method = RequestMethod.GET)
   public void add(Model model) {
     model.addAttribute("productGroups", productGroupService.getAllProductGroup());
   }
 
-  @RequestMapping(value = "/template1/menu/add.html", method = RequestMethod.POST)
+  @RequestMapping(value = "/template1/menu/add.do", method = RequestMethod.POST)
   @ResponseBody
   public void add(Template1Menu menu, @RequestParam(required = false) List<Integer> _menuTypes,
       @RequestParam(required = false) List<String> _menuValues,
@@ -101,13 +101,13 @@ public class Template1Controller {
     template1Service.add(menu);
   }
 
-  @RequestMapping("/template1/menu/delete.html")
+  @RequestMapping("/template1/menu/delete.do")
   @ResponseBody
   public void delete(String id) {
     template1Service.delete(id);
   }
 
-  @RequestMapping(value = "/template1/menu/modify.html", method = RequestMethod.GET)
+  @RequestMapping(value = "/template1/menu/modify.do", method = RequestMethod.GET)
   public void modify(@RequestParam String id, Model model) {
     model.addAttribute("productGroups", productGroupService.getAllProductGroup());
     model.addAttribute("menu", template1Service.get(id));
@@ -120,7 +120,7 @@ public class Template1Controller {
     model.addAttribute("destinations", dictService.getDict(Constant.DICT_DESTINATION));
   }
 
-  @RequestMapping(value = "/template1/menu/modify.html", method = RequestMethod.POST)
+  @RequestMapping(value = "/template1/menu/modify.do", method = RequestMethod.POST)
   @ResponseBody
   public void modify(Template1Menu menu, @RequestParam(required = false) List<Integer> _menuTypes,
       @RequestParam(required = false) List<String> _menuValues,
@@ -142,43 +142,43 @@ public class Template1Controller {
     template1Service.modify(menu);
   }
 
-  @RequestMapping("/template1/menu/toggle.html")
+  @RequestMapping("/template1/menu/toggle.do")
   @ResponseBody
   public void toggle(@RequestParam String id, @RequestParam boolean published) {
     template1Service.togglePublished(id, published);
   }
 
-  @RequestMapping("/template1/menu/up.html")
+  @RequestMapping("/template1/menu/up.do")
   @ResponseBody
   public void up(@RequestParam String id) {
     template1Service.moveUp(id);
   }
 
-  @RequestMapping("/template1/menu/down.html")
+  @RequestMapping("/template1/menu/down.do")
   @ResponseBody
   public void down(@RequestParam String id) {
     template1Service.moveDown(id);
   }
 
-  @RequestMapping(value = "/template1/product_group.html", method = RequestMethod.GET)
+  @RequestMapping(value = "/template1/product_group.do", method = RequestMethod.GET)
   public void productGroup(Model model) {
     model.addAttribute("productGroups", productGroupService.getAllProductGroup());
     model.addAttribute("template1ProductGroups", template1Service.getAllIndexProductGroups());
   }
 
-  @RequestMapping(value = "/template1/product_group/add.html", method = RequestMethod.POST)
+  @RequestMapping(value = "/template1/product_group/add.do", method = RequestMethod.POST)
   @ResponseBody
   public void addProductGroup(Template1ProductGroup group) {
     template1Service.add(group);
   }
 
-  @RequestMapping(value = "/template1/product_group/delete.html", method = RequestMethod.GET)
+  @RequestMapping(value = "/template1/product_group/delete.do", method = RequestMethod.GET)
   @ResponseBody
   public void deleteProductGroup(Template1ProductGroup group) {
     template1Service.delete(group);
   }
 
-  @RequestMapping(value = "/template1/product_group/order.html", method = RequestMethod.POST)
+  @RequestMapping(value = "/template1/product_group/order.do", method = RequestMethod.POST)
   @ResponseBody
   public void orderProductGroup(@RequestParam(value = "ids[]") Integer[] ids,
       @RequestParam(value = "orders[]") Integer[] orders) {

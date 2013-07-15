@@ -54,7 +54,7 @@
 		$('#uploader').pluploadQueue({
 			multipart: true,
 			runtimes : 'html4',
-			url : '${ContextPath}/image/upload.do',
+			url : '${ContextPath}/image/upload',
 			filters : [{title : '图片', extensions : 'jpg,gif,png'}],
 			init : {
 				FileUploaded: function(up, file, info) {

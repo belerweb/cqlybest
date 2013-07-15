@@ -17,7 +17,7 @@ public class SmsController {
   @Autowired
   private SmsService smsService;
 
-  @RequestMapping(value = "/sms/list.html", method = RequestMethod.GET)
+  @RequestMapping(value = "/sms/list.do", method = RequestMethod.GET)
   public void list(@RequestParam(defaultValue = "0") int page, Model model) {
     page = Math.max(1, page);
     int pageSize = 20;
@@ -27,7 +27,7 @@ public class SmsController {
     model.addAttribute("smss", smsService.querySmss(page, pageSize));
   }
 
-  @RequestMapping(value = "/sms/send.html", method = RequestMethod.POST)
+  @RequestMapping(value = "/sms/send.do", method = RequestMethod.POST)
   public void send(@RequestParam String phone, @RequestParam String content, Model model) {
     LoginUser user =
         (LoginUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal();

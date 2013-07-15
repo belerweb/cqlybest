@@ -4,7 +4,7 @@
 	<div class="pagetitle">
 		<h1>软文</h1>
 		<div class="btn-group">
-			<a href="#m=site&n=advertorial.list&u=${ContextPath}/advertorial/add.html&t=%23mb" class="btn btn-primary">增加新软文</a>
+			<a href="#m=site&n=advertorial.list&u=${ContextPath}/advertorial/add.do&t=%23mb" class="btn btn-primary">增加新软文</a>
 		</div>
 		<div class="clearfix"></div>
 		<hr>
@@ -33,10 +33,10 @@
 						<td>${advertorial.title!}</td>
 						<td>${advertorial.summary!}</td>
 						<td class="action-table">
-							<a href="${ContextPath}/advertorial/view.html?id=${advertorial.id!}" target="_blank" class="safe" title="查看"><i class="icon-eye-open"></i></a>
-							<a href="javascript:void(0);" data-url="${ContextPath}/advertorial/modify.html?id=${advertorial.id}"
+							<a href="${ContextPath}/advertorial/view.do?id=${advertorial.id!}" target="_blank" class="safe" title="查看"><i class="icon-eye-open"></i></a>
+							<a href="javascript:void(0);" data-url="${ContextPath}/advertorial/modify.do?id=${advertorial.id}"
 								class="page-load-btn safe" data-target="#mb" title="修改"><i class="icon-edit"></i></a>
-							<a href="javascript:void(0);" data-url="${ContextPath}/advertorial/delete.html?id=${advertorial.id}"
+							<a href="javascript:void(0);" data-url="${ContextPath}/advertorial/delete.do?id=${advertorial.id}"
 								class="ajax-action-btn danger last" data-confirm="true" data-action="删除"
 								data-title="${advertorial.name!}" title="删除"><i class="icon-remove"></i></a>
 						</td>

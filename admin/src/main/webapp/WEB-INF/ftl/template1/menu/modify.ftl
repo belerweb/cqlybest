@@ -37,7 +37,7 @@
 	</div>
 	<div class="grid-content">
 		<#if menu.menuType==0>
-		<form action="${ContextPath}/template1/menu/modify.html" method="post" class="template1-tab1-form form-horizontal">
+		<form action="${ContextPath}/template1/menu/modify.do" method="post" class="template1-tab1-form form-horizontal">
 			<input type="hidden" name="id" value="${menu.id}">
 			<input type="hidden" name="displayOrder" value="${menu.displayOrder}">
 			<input type="hidden" name="menuType" value="0">
@@ -117,7 +117,7 @@
 			<div class="clearfix"></div>
 		</div>
 		<#elseif menu.menuType==1>
-		<form action="${ContextPath}/template1/menu/modify.html" method="post" class="template1-tab1-form form-horizontal">
+		<form action="${ContextPath}/template1/menu/modify.do" method="post" class="template1-tab1-form form-horizontal">
 			<input type="hidden" name="id" value="${menu.id}">
 			<input type="hidden" name="displayOrder" value="${menu.displayOrder}">
 			<input type="hidden" name="menuType" value="1">
@@ -151,7 +151,7 @@
 			</div>
 		</form>
 		<#elseif menu.menuType==2>
-		<form action="${ContextPath}/template1/menu/modify.html" method="post" class="template1-tab1-form form-horizontal">
+		<form action="${ContextPath}/template1/menu/modify.do" method="post" class="template1-tab1-form form-horizontal">
 			<input type="hidden" name="id" value="${menu.id}">
 			<input type="hidden" name="displayOrder" value="${menu.displayOrder}">
 			<input type="hidden" name="menuType" value="2">
@@ -202,21 +202,21 @@ $('input,textarea,select', '.template1-tab1-form').not('input[name=_titles]').no
 $('#product-keyword').cqlybestTag({
 	hiddenTagListName: 'keywordIds',
 	typeahead: true,
-	typeaheadAjaxSource: '/data/dict.html?action=dict&type=keyword',
+	typeaheadAjaxSource: '/data/dict.do?action=dict&type=keyword',
 	typeaheadAjaxPolling: true,
-	AjaxPush: '/data/dict/add_keyword.html'
+	AjaxPush: '/data/dict/add_keyword.do'
 });
 $('#product-departure-city').cqlybestTag({
 	hiddenTagListName: 'departureCityIds',
 	typeahead: true,
-	typeaheadAjaxSource: '/data/dict.html?action=dict&type=departure-city',
+	typeaheadAjaxSource: '/data/dict.do?action=dict&type=departure-city',
 	typeaheadAjaxPolling: true,
-	AjaxPush: '/data/dict/add_departure_city.html'
+	AjaxPush: '/data/dict/add_departure_city.do'
 });
 $('#product-destination').cqlybestTag({
 	hiddenTagListName: 'destIds',
 	typeahead: true,
-	typeaheadAjaxSource: '/data/dict.html?action=dict&type=destination',
+	typeaheadAjaxSource: '/data/dict.do?action=dict&type=destination',
 	typeaheadAjaxPolling: true
 });
 

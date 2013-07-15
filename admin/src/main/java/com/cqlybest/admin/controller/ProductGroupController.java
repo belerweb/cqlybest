@@ -55,18 +55,18 @@ public class ProductGroupController {
     productGroupService.update(pk, name, _value);
   }
 
-  @RequestMapping(value = "/product_group/list.html", method = RequestMethod.GET)
+  @RequestMapping(value = "/product_group/list.do", method = RequestMethod.GET)
   public void list(Model model) {
     model.addAttribute("groups", productGroupService.getAllProductGroup());
   }
 
-  @RequestMapping("/product_group/delete.html")
+  @RequestMapping("/product_group/delete.do")
   @ResponseBody
   public void delete(@RequestParam String id) {
     productGroupService.delete(id);
   }
 
-  @RequestMapping("/product_group/toggle.html")
+  @RequestMapping("/product_group/toggle.do")
   @ResponseBody
   public void toggle(@RequestParam String id, @RequestParam boolean published) {
     productGroupService.update(id, "published", published);

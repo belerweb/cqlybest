@@ -8,7 +8,7 @@
 		</div>
 		<div class="pull-right">
 			<div class="icon-title">
-				<a href="javascript:void(0);" class="page-load-btn" data-target="#template1-tab1" data-url="${ContextPath}/template1/menu/add.html" title="添加">
+				<a href="javascript:void(0);" class="page-load-btn" data-target="#template1-tab1" data-url="${ContextPath}/template1/menu/add.do" title="添加">
 					<i class="icon-plus"></i>
 				</a>
 			</div>
@@ -65,24 +65,24 @@
 						</#if>
 					</td>
 					<td class="action-table">
-						<a href="javascript:void(0);" data-url="${ContextPath}/template1/menu/up.html?id=${menu.id}"
+						<a href="javascript:void(0);" data-url="${ContextPath}/template1/menu/up.do?id=${menu.id}"
 							class="<#if menu_index==0>gray<#else>ajax-action-btn blue</#if>" data-confirm="true" data-action="上移" data-title="${menu.name!}"
 							title="上移"><i class="icon-arrow-up"></i></a>
-						<a href="javascript:void(0);" data-url="${ContextPath}/template1/menu/down.html?id=${menu.id}"
+						<a href="javascript:void(0);" data-url="${ContextPath}/template1/menu/down.do?id=${menu.id}"
 							class="<#if menu_index==menus?size-1>gray<#else>ajax-action-btn blue</#if>" data-confirm="true" data-action="下移" data-title="${menu.name!}"
 							title="下移"><i class="icon-arrow-down"></i></a>
 						<#if menu.published>
-						<a href="javascript:void(0);" data-url="${ContextPath}/template1/menu/toggle.html?id=${menu.id}&published=false"
+						<a href="javascript:void(0);" data-url="${ContextPath}/template1/menu/toggle.do?id=${menu.id}&published=false"
 							class="ajax-action-btn gray" data-confirm="true" data-action="取消发布" data-title="${menu.name!}"
 							title="取消发布"><i class="icon-download-alt"></i></a>
 						<#else>
-						<a href="javascript:void(0);" data-url="${ContextPath}/template1/menu/toggle.html?id=${menu.id}&published=true"
+						<a href="javascript:void(0);" data-url="${ContextPath}/template1/menu/toggle.do?id=${menu.id}&published=true"
 							class="ajax-action-btn blue" data-confirm="true" data-action="发布" data-title="${menu.name!}"
 							title="发布"><i class="icon-upload-alt"></i></a>
 						</#if>
-						<a href="javascript:void(0);" data-target="#template1-tab1" data-url="${ContextPath}/template1/menu/modify.html?id=${menu.id}"
+						<a href="javascript:void(0);" data-target="#template1-tab1" data-url="${ContextPath}/template1/menu/modify.do?id=${menu.id}"
 							class="page-load-btn safe" title="修改"><i class="icon-edit"></i></a>
-						<a href="javascript:void(0);" data-url="${ContextPath}/template1/menu/delete.html?id=${menu.id}"
+						<a href="javascript:void(0);" data-url="${ContextPath}/template1/menu/delete.do?id=${menu.id}"
 							class="ajax-action-btn danger last" data-confirm="true" data-action="删除" data-title="${menu.name!}"
 							title="删除"><i class="icon-remove"></i></a>
 					</td>

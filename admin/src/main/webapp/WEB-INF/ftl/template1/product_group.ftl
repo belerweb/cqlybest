@@ -1,6 +1,6 @@
 <#assign ContextPath=springMacroRequestContext.getContextPath() />
 <div class="text-right">
-	<form id="template1-tab3-form" action="${ContextPath}/template1/product_group/add.html" method="post" class="control-group form-inline" novalidate="novalidate">
+	<form id="template1-tab3-form" action="${ContextPath}/template1/product_group/add.do" method="post" class="control-group form-inline" novalidate="novalidate">
 		<label>产品聚合：</label>
 		<select name="productGroup.id" required="true" data-validation-required-message="请选择">
 			<option value="">请选择</option>
@@ -44,7 +44,7 @@
 					<td>${obj.productGroup.name!}</td>
 					<td><input type="text" class="input" value="${obj.displayOrder!}" data-id="${obj.id}" style="height: 10px; width: 30px; margin: 0px;"></td>
 					<td class="action-table">
-						<a href="javascript:void(0);" data-url="${ContextPath}/template1/product_group/delete.html?id=${obj.id}"
+						<a href="javascript:void(0);" data-url="${ContextPath}/template1/product_group/delete.do?id=${obj.id}"
 							class="ajax-action-btn danger last" data-confirm="true" data-action="删除" data-title="${obj.productGroup.name!}"
 							title="删除" data-target="#template1-tab3"><i class="icon-remove"></i></a>
 					</td>
@@ -66,7 +66,7 @@ $('input,textarea,select', '#template1-tab3-form').jqBootstrapValidation({
 		$form.ajaxSubmit({
 			success : function(response) {
 				cqlybest.success(null, null, function(){
-					$('#template1-tab3').load('${ContextPath}/template1/product_group.html');
+					$('#template1-tab3').load('${ContextPath}/template1/product_group.do');
 				});
 			},
 			error : function() {
@@ -91,9 +91,9 @@ $('#template1-tab3-save-order').click(function(){
 		cqlybest.error('显示顺序只能是0~999');
 		return;
 	}
-	$.post('${ContextPath}/template1/product_group/order.html', {ids:ids, orders:orders}, function(){
+	$.post('${ContextPath}/template1/product_group/order.do', {ids:ids, orders:orders}, function(){
 		cqlybest.success(false, false, function(){
-			$('#template1-tab3').load('${ContextPath}/template1/product_group.html');
+			$('#template1-tab3').load('${ContextPath}/template1/product_group.do');
 		});
 	});
 });

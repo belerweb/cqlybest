@@ -168,7 +168,7 @@ window.cqlybest = {
 		winParam.push('resizable=no');
 		winParam.push('status=no');
 		winParam.push('scroll=no');
-		return window.showModalDialog(context + '/image/upload.html',null,winParam.join(';'));
+		return window.showModalDialog(context + '/image/upload',null,winParam.join(';'));
 	},
 	parseHash : function(hash) {
 		var _hash = hash;

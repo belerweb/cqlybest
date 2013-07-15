@@ -25,7 +25,7 @@ public class UserController {
   /**
    * 散客列表
    */
-  @RequestMapping(value = "/user/fit.html", method = RequestMethod.GET)
+  @RequestMapping(value = "/user/fit.do", method = RequestMethod.GET)
   public void fit(@RequestParam(defaultValue = "1") Integer page, Model model) {
     Integer pageSize = 10;
     model.addAttribute("page", page);
@@ -37,7 +37,7 @@ public class UserController {
   /**
    * 团体列表
    */
-  @RequestMapping(value = "/user/group.html", method = RequestMethod.GET)
+  @RequestMapping(value = "/user/group.do", method = RequestMethod.GET)
   public void group(@RequestParam(defaultValue = "1") Integer page, Model model) {
     Integer pageSize = 10;
     model.addAttribute("page", page);
@@ -49,7 +49,7 @@ public class UserController {
   /**
    * 旅行社列表
    */
-  @RequestMapping(value = "/user/agency.html", method = RequestMethod.GET)
+  @RequestMapping(value = "/user/agency.do", method = RequestMethod.GET)
   public void agency(@RequestParam(defaultValue = "1") Integer page, Model model) {
     Integer pageSize = 10;
     model.addAttribute("page", page);
@@ -61,7 +61,7 @@ public class UserController {
   /**
    * 管理员列表
    */
-  @RequestMapping(value = "/user/admin.html", method = RequestMethod.GET)
+  @RequestMapping(value = "/user/admin.do", method = RequestMethod.GET)
   public void admin(@RequestParam(defaultValue = "1") Integer page, Model model) {
     Integer pageSize = 10;
     model.addAttribute("page", page);

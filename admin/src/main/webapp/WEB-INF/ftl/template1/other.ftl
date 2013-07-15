@@ -19,7 +19,7 @@
 		<div class="control-group">
 			<label class="control-label">登录页海报链接：</label>
 			<div class="controls">
-				<a href="#" class="editable" data-name="template1-login-poster-link" data-type="text" data-url="${ContextPath}/site/config.html" data-value="${options['template1-login-poster-link']!}"></a>
+				<a href="#" class="editable" data-name="template1-login-poster-link" data-type="text" data-url="${ContextPath}/site/config.do" data-value="${options['template1-login-poster-link']!}"></a>
 			</div>
 		</div>
 	</div>
@@ -36,12 +36,12 @@ $('#template1 .site-logo').click(function(e) {
 		var el = $(this).parent().next();
 		var oid = el.attr('data-id');
 		var image = images[0].id + '.' + images[0].imageType;
-		$.post('${ContextPath}/site/config.html', {
+		$.post('${ContextPath}/site/config.do', {
 			name: 'template1-logo',
 			value: image
 		}, function() {
 			if (oid && oid.length) {
-				$.post('${ContextPath}/image/delete.do', {
+				$.post('${ContextPath}/image/delete', {
 					id: oid
 				});
 			}
@@ -57,12 +57,12 @@ $('#template1 .login-poster').click(function(e) {
 		var el = $(this).parent().next();
 		var oid = el.attr('data-id');
 		var image = images[0].id + '.' + images[0].imageType;
-		$.post('${ContextPath}/site/config.html', {
+		$.post('${ContextPath}/site/config.do', {
 			name: 'template1-login-poster',
 			value: image
 		}, function() {
 			if (oid && oid.length) {
-				$.post('${ContextPath}/image/delete.do', {
+				$.post('${ContextPath}/image/delete', {
 					id: oid
 				});
 			}

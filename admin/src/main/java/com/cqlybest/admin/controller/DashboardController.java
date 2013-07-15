@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @Controller
 public class DashboardController {
 
-  @RequestMapping(value = "/dashboard.html", method = RequestMethod.GET)
+  @RequestMapping(value = "/dashboard.do", method = RequestMethod.GET)
   public void list(Model model) {}
 
 

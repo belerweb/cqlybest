@@ -45,17 +45,17 @@
 						</td>
 						<td class="action-table">
 							<#if group.published>
-							<a href="javascript:void(0);" data-url="${ContextPath}/product_group/toggle.html?id=${group.id}&published=false"
+							<a href="javascript:void(0);" data-url="${ContextPath}/product_group/toggle.do?id=${group.id}&published=false"
 								class="ajax-action-btn gray" data-confirm="true" data-action="取消发布" data-title="${group.name!}"
 								title="取消发布"><i class="icon-download-alt"></i></a>
 							<#else>
-							<a href="javascript:void(0);" data-url="${ContextPath}/product_group/toggle.html?id=${group.id}&published=true"
+							<a href="javascript:void(0);" data-url="${ContextPath}/product_group/toggle.do?id=${group.id}&published=true"
 								class="ajax-action-btn blue" data-confirm="true" data-action="发布" data-title="${group.name!}"
 								title="发布"><i class="icon-upload-alt"></i></a>
 							</#if>
 							<a href="javascript:void(0);" data-url="${ContextPath}/product_group/update.do?id=${group.id}"
 								class="page-load-btn safe" data-target="#mb" title="修改"><i class="icon-edit"></i></a>
-							<a href="javascript:void(0);" data-url="${ContextPath}/product_group/delete.html?id=${group.id}"
+							<a href="javascript:void(0);" data-url="${ContextPath}/product_group/delete.do?id=${group.id}"
 								class="ajax-action-btn danger last" data-confirm="true" data-action="删除"
 								data-title="${group.name!}" title="删除"><i class="icon-remove"></i></a>
 						</td>

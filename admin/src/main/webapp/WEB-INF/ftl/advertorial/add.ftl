@@ -11,7 +11,7 @@
 			<div class="clearfix"></div>   
 		</div>
 		<!-- novalidate -->
-		<form id="main-content-form" action="${ContextPath}/advertorial/add.html" method="post" class="form-horizontal">
+		<form id="main-content-form" action="${ContextPath}/advertorial/add.do" method="post" class="form-horizontal">
 			<div class="grid-content">
 				<div class="control-group">
 					<label class="control-label">标题：</label>

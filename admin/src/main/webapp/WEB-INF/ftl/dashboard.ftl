@@ -9,7 +9,7 @@
 			</div>
 		</div>
 		<div class="grid-content overflow">
-			<form id="dash-sms-send-form" action="${ContextPath}/sms/send.html" method="post">
+			<form id="dash-sms-send-form" action="${ContextPath}/sms/send.do" method="post">
 				<div class="control-group">
 					<label>收信人：</label>
 					<input type="text" class="span input" name="phone" required="true" data-validation-required-message="请填写手机号"
