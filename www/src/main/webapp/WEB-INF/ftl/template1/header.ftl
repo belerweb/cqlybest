@@ -9,7 +9,7 @@
 	</div>
 	<#if (Options.site_400)?has_content>
 	<div class="pull-right">
-		<div class="phone"><span><img src="${ContextPath}/template1/img/contact.png">${Options.site_400}</span></div>
+		<div class="phone"><span><img src="${ContextPath}/template1/img/contact.png" width="24" height="24">${Options.site_400}</span></div>
 		<div class="phone-tip"><i>7x24 小时，用心为您服务</i></div>
 	</div>
 	</#if>
