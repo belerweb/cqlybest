@@ -14,6 +14,12 @@
 				</div>
 			</div>
 			<div class="control-group">
+				<label class="control-label">别名：</label>
+				<div class="controls">
+					<a href="#" class="editable" data-pk="${id}" data-name="byName" data-type="select2" data-url="${url}" data-value="${island.byName!}"></a>
+				</div>
+			</div>
+			<div class="control-group">
 				<label class="control-label">岛屿级别：</label>
 				<div class="controls">
 					<a href="#" class="editable" data-pk="${id}" data-name="level" data-type="text" data-url="${url}" data-value="${island.level!}"></a>
@@ -63,3 +69,12 @@
 	<div class="row-fluid">
 	</div>
 </div>
+
+<script type="text/javascript">
+$('#island-base-tab .editable[data-name=byName]').editable({
+	select2: {
+		tags: [],
+		tokenSeparators: [',']
+	}
+});
+</script>

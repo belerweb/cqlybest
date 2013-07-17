@@ -11,6 +11,7 @@
 
 		<property name="zhName" column="ZH_NAME" length="64" />
 		<property name="enName" column="EN_NAME" length="128" />
+		<property name="byName" column="BY_NAME" length="128" />
 		<property name="level" column="LEVEL" length="32" />
 		<property name="way" column="WAY" length="32" />
 		<property name="area" column="AREA" length="32" />

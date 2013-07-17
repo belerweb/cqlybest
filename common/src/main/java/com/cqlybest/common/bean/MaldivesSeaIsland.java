@@ -11,6 +11,7 @@ public class MaldivesSeaIsland {
   private String id;
   private String zhName; // 中文名称
   private String enName; // 英文名称
+  private String byName; // 别名
   private String level; // 岛屿级别
   private String way; // 上岛方式
   private String area; // 岛屿大小
@@ -246,6 +247,14 @@ public class MaldivesSeaIsland {
 
   public void setPlays(List<Image> plays) {
     this.plays = plays;
+  }
+
+  public String getByName() {
+    return byName;
+  }
+
+  public void setByName(String byName) {
+    this.byName = byName;
   }
 
 }
