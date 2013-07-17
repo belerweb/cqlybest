@@ -8,7 +8,7 @@
 		<id name="id" column="ID" type="string" length="36">
 			<generator class="assigned" />
 		</id>
-		<property name="name" column="NAME" length="64" />
+		<property name="name" column="NAME" length="128" />
 		<property name="code" column="CODE" length="16" />
 		<property name="productType" column="PRODUCT_TYPE" />
 		<property name="days" column="DAYS" />

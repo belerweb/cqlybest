@@ -10,7 +10,7 @@
 		</id>
 		<property name="islandId" column="ISLAND_ID" length="36" />
 		<property name="zhName" column="ZH_NAME" length="64" />
-		<property name="enName" column="EN_NAME" length="64" />
+		<property name="enName" column="EN_NAME" length="128" />
 		<property name="description" column="DESCRIPTION" length="102400" />
 
 		<property name="style" column="STYLE" length="32" />

@@ -10,7 +10,7 @@
 		</id>
 
 		<property name="zhName" column="ZH_NAME" length="64" />
-		<property name="enName" column="EN_NAME" length="64" />
+		<property name="enName" column="EN_NAME" length="128" />
 		<property name="level" column="LEVEL" length="32" />
 		<property name="way" column="WAY" length="32" />
 		<property name="area" column="AREA" length="32" />
@@ -26,8 +26,8 @@
 		<property name="hotelTel" column="HOTEL_TEL" length="32" />
 		<property name="hotelFax" column="HOTEL_FAX" length="32" />
 		<property name="hotelChinese" column="HOTEL_CHINESE" />
-		<property name="hotelAirport" column="HOTEL_AIRPORT" />
-		<property name="hotelDescription" column="HOTEL_DESCRIPTION" />
+		<property name="hotelAirport" column="HOTEL_AIRPORT" length="32" />
+		<property name="hotelDescription" column="HOTEL_DESCRIPTION" length="102400" />
 
 		<property name="createdTime" column="CREATED_TIME" />
 		<property name="lastUpdated" column="LAST_UPDATED" />
