@@ -359,8 +359,8 @@ $('#product-add').click(function(){
 		callback: function(){
 			var name = $.trim($('input[name=name]', dialog).val());
 			var type = $.trim($('input[name=type]:checked', dialog).val());
-			if (!/^.{1,32}$/.test(name)) {
-				bootbox.alert('请输入产品名称，且长度不超过32位');
+			if (!/^.{1,128}$/.test(name)) {
+				bootbox.alert('请输入产品名称，且长度不超过128位');
 				return false;
 			}
 			$.post('${ContextPath}/product/add.do', {

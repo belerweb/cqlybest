@@ -132,12 +132,12 @@ $('#maldives-add').click(function(){
 		callback: function(){
 			var zhName = $.trim($('input[name=zhName]', dialog).val());
 			var enName = $.trim($('input[name=enName]', dialog).val());
-			if (!/^.{1,32}$/.test(zhName)) {
-				bootbox.alert('请输入海岛中文名称，且长度不超过32位');
+			if (!/^.{1,64}$/.test(zhName)) {
+				bootbox.alert('请输入海岛中文名称，且长度不超过64位');
 				return false;
 			}
-			if (!/^.{1,32}$/.test(enName)) {
-				bootbox.alert('请输入海岛英文名称，且长度不超过32位');
+			if (!/^.{1,128}$/.test(enName)) {
+				bootbox.alert('请输入海岛英文名称，且长度不超过128位');
 				return false;
 			}
 			$.post('${ContextPath}/maldives/add.do', {
