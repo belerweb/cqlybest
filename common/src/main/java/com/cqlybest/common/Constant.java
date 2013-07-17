@@ -8,6 +8,7 @@ public class Constant {
   public static final String OPTION_SITE_COPYRIGHT = "site_copyright";// 网页版权说明文字
   public static final String OPTION_SITE_STATISTICAL_CODE = "site_statistical_code";// 统计代码
   public static final String OPTION_SITE_ICP = "site_icp";// 备案号
+  public static final String OPTION_WATERMARK_POSITION = "watermark_position";// 水印位置
 
   public static final String IMAGE_MALDIVES_ISLAND_POSTER = "maldives-island-poster";// 马尔代夫海岛海报
   public static final String IMAGE_MALDIVES_ROOM_PICTURE = "maldives-room-picture";// 马尔代夫房间图片
@@ -17,6 +18,8 @@ public class Constant {
 
   public static final String IMAGE_PRODUCT_POSTER = "product-poster";// 产品海报
   public static final String IMAGE_PRODUCT_PHOTO = "product-photo";// 产品图片
+
+  public static final String IMAGE_WATERMARK_IMAGE_ID = "watermark-image-id";// 水印图片ID
 
   public static final String DICT_DEPARTURE_CITY = "departure-city";// 出发城市
   public static final String DICT_DESTINATION = "destination";// 目的地

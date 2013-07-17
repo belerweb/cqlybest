@@ -1,10 +1,12 @@
 package com.cqlybest.common.controller;
 
+import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.util.List;
+import java.util.Map;
 
 import javax.imageio.ImageIO;
 
@@ -23,14 +25,18 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.cqlybest.common.Constant;
 import com.cqlybest.common.bean.Image;
 import com.cqlybest.common.service.ImageService;
+import com.cqlybest.common.service.OptionService;
 
 @Controller
 public class ImageController {
 
   @Autowired
   private ImageService imageService;
+  @Autowired
+  private OptionService optionService;
 
   @RequestMapping(method = RequestMethod.GET, value = "/image/upload")
   public void upload() {}
@@ -92,8 +98,64 @@ public class ImageController {
     }
 
     if (width == null || height == null) {
+      Map<String, String> options = optionService.getOptions();
+      String watermarkId = options.get(Constant.IMAGE_WATERMARK_IMAGE_ID);
+      String watermarkPosition = options.get(Constant.OPTION_WATERMARK_POSITION);
+
+      if (watermarkId != null && watermarkPosition != null) {
+        // 水印
+        BufferedImage bufferedImage = ImageIO.read(new ByteArrayInputStream(image.getImageData()));
+        int oWidth = bufferedImage.getWidth();
+        int oHeight = bufferedImage.getHeight();
+        Image watermark = imageService.get(watermarkId);
+        BufferedImage watermarkImage =
+            ImageIO.read(new ByteArrayInputStream(watermark.getImageData()));
+        int mWidth = watermarkImage.getWidth();
+        int mHeight = watermarkImage.getHeight();
+
+        if (oWidth > mWidth && oHeight > mHeight) {
+          Graphics graphics = bufferedImage.getGraphics();
+          if (watermarkPosition.equals("tl")) {// 左上角
+            graphics.drawImage(watermarkImage, 0, 0, mWidth, mHeight, null);
+          }
+          if (watermarkPosition.equals("tc")) {// 顶部居中
+            graphics.drawImage(watermarkImage, (oWidth - mWidth) / 2, 0, mWidth, mHeight, null);
+          }
+          if (watermarkPosition.equals("tr")) {// 右上角
+            graphics.drawImage(watermarkImage, oWidth - mWidth, 0, mWidth, mHeight, null);
+          }
+          if (watermarkPosition.equals("cr")) {// 右侧居中
+            graphics.drawImage(watermarkImage, oWidth - mWidth, (oHeight - mHeight) / 2, mWidth,
+                mHeight, null);
+          }
+          if (watermarkPosition.equals("br")) {// 右下角
+            graphics.drawImage(watermarkImage, oWidth - mWidth, oHeight - mHeight, mWidth, mHeight,
+                null);
+          }
+          if (watermarkPosition.equals("bc")) {// 底部居中
+            graphics.drawImage(watermarkImage, (oWidth - mWidth) / 2, oHeight - mHeight, mWidth,
+                mHeight, null);
+          }
+          if (watermarkPosition.equals("bl")) {// 左下角
+            graphics.drawImage(watermarkImage, 0, oHeight - mHeight, mWidth, mHeight, null);
+          }
+          if (watermarkPosition.equals("cl")) {// 左侧居中
+            graphics.drawImage(watermarkImage, 0, (oHeight - mHeight) / 2, mWidth, mHeight, null);
+          }
+          if (watermarkPosition.equals("cc")) {// 正中
+            graphics.drawImage(watermarkImage, (oWidth - mWidth) / 2, (oHeight - mHeight) / 2,
+                mWidth, mHeight, null);
+          }
+          graphics.dispose();
+          ByteArrayOutputStream out = new ByteArrayOutputStream();
+          ImageIO.write(bufferedImage, image.getImageType(), out);
+          return new ResponseEntity<byte[]>(out.toByteArray(), headers, HttpStatus.OK);
+        }
+      }
       return new ResponseEntity<byte[]>(image.getImageData(), headers, HttpStatus.OK);
     }
+
+    // 缩放
     BufferedImage bufferedImage = ImageIO.read(new ByteArrayInputStream(image.getImageData()));
     int oWidth = bufferedImage.getWidth();
     int oHeight = bufferedImage.getHeight();

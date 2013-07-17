@@ -10,10 +10,9 @@
 			</div>
 			<div class="clearfix"></div>   
 		</div>
-		<!-- novalidate -->
 		<#assign URL='${ContextPath}/site/config.do'>
-		<form class="form-horizontal">
-			<div class="grid-content">
+		<div class="grid-content row-fluid form-horizontal">
+			<div class="span6">
 				<div class="control-group">
 					<label class="control-label">网站名称：</label>
 					<div class="controls">
@@ -74,13 +73,63 @@
 						<a href="#" class="editable" data-name="weibo_url" data-type="text" data-url="${URL}" data-value="${options.weibo_url!}"></a>
 					</div>
 				</div>
-				<div class="clearfix"></div>
 			</div>
-		</form>
+			<div class="span6">
+				<div class="control-group">
+					<label class="control-label"><a href="#" class="watermark">水印图片：</a></label>
+					<div class="controls" data-id="<#if watermark?has_content>${watermark.id}</#if>">
+						<#if watermark?has_content>
+						<img src="${ContextPath}/image/${watermark.id}.${watermark.imageType}">
+						</#if>
+					</div>
+				</div>
+				<div class="control-group">
+					<label class="control-label">水印位置：</label>
+					<div class="controls">
+						<a href="#" class="editable" data-name="watermark_position" data-type="select" data-url="${URL}" data-value="${options.watermark_position!}"></a>
+					</div>
+				</div>
+			</div>
+			<div class="clearfix"></div>
+		</div>
 	</div>
 </div>
 
 <script type="text/javascript">
-$('#mb a.editable').not('[data-type=select2]').editable();
+$('#mb a.editable').not('[data-type=select]').not('[data-type=select2]').editable();
 cqlybest.editableTag('a[data-name=site_meta_keyword]');
+$('#mb a.editable[data-name=watermark_position]').editable({
+	source: [
+		{value:'tl', text:'左上角'},
+		{value:'tc', text:'顶部居中'},
+		{value:'tr', text:'右上角'},
+		{value:'cr', text:'右侧居中'},
+		{value:'br', text:'右下角'},
+		{value:'bc', text:'底部居中'},
+		{value:'bl', text:'左下角'},
+		{value:'cl', text:'左侧居中'},
+		{value:'cc', text:'正中'}
+	]
+});
+
+$('#mb .watermark').click(function(e) {
+	e.stopPropagation();
+	e.preventDefault();
+	var images = cqlybest.uploadImage('${ContextPath}');
+	if (images) {
+		var el = $(this).parent().next();
+		var oid = el.attr('data-id');
+		$.post('${ContextPath}/site/config.do', {
+			name: 'watermark-image-id',
+			value: images[0].id
+		}, function() {
+			if (oid && oid.length) {
+				$.post('${ContextPath}/image/delete', {
+					id: oid
+				});
+			}
+			el.attr('data-id', images[0].id).empty().append('<img src="${ContextPath}/image/' + images[0].id + '.' + images[0].imageType + '">');
+		});
+	}
+});
 </script>
