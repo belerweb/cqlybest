@@ -1,7 +1,6 @@
 package com.cqlybest.common.auth;
 
 import java.util.Collection;
-import java.util.Collections;
 
 import org.springframework.security.authentication.AbstractAuthenticationToken;
 import org.springframework.security.core.GrantedAuthority;
@@ -15,7 +14,7 @@ public class QQAuthToken extends AbstractAuthenticationToken {
   private LoginUser user;
 
   public QQAuthToken(LoginUser user) {
-    this(Collections.<GrantedAuthority>emptyList());
+    this(user.getAuthorities());
     this.user = user;
   }
 
