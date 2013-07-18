@@ -18,6 +18,7 @@ public class MaldivesDining {
   private String openTime;// 开放时间
   private String location;// 就餐地点
   private Boolean reservation;// 是否预约
+  private Integer displayOrder;
 
   private List<Image> pictures;// 图片
 
@@ -107,6 +108,14 @@ public class MaldivesDining {
 
   public void setPictures(List<Image> pictures) {
     this.pictures = pictures;
+  }
+
+  public Integer getDisplayOrder() {
+    return displayOrder;
+  }
+
+  public void setDisplayOrder(Integer displayOrder) {
+    this.displayOrder = displayOrder;
   }
 
 }

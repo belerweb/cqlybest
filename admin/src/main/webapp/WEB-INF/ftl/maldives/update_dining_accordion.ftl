@@ -64,6 +64,12 @@
 								<a href="#" class="editable" data-pk="${diningId}" data-name="reservation" data-type="select" data-url="${diningUrl}" data-value="<#if island.reservation?has_content><#if island.reservation>True<#else>False</#if></#if>"></a>
 							</div>
 						</div>
+						<div class="control-group">
+							<label class="control-label">显示顺序：</label>
+							<div class="controls">
+								<a href="#" class="editable" data-pk="${diningId}" data-name="displayOrder" data-type="text" data-url="${diningUrl}" data-value="${dining.displayOrder!}"></a>
+							</div>
+						</div>
 					</div>
 				</div>
 				<div class="row-fluid">

@@ -81,6 +81,7 @@ public class MaldivesDao extends AbstractDao<MaldivesSeaIsland, String> {
   public List<MaldivesDining> getDinings(String islandId) {
     Criteria criteria = getCurrentSession().createCriteria(MaldivesDining.class);
     criteria.add(Restrictions.eq("islandId", islandId));
+    criteria.addOrder(Order.asc("displayOrder"));
     return criteria.list();
   }
 }

@@ -18,5 +18,6 @@
 		<property name="openTime" column="OPEN_TIME" length="32" />
 		<property name="location" column="LOCATION" length="32" />
 		<property name="reservation" column="RESERVATION" />
+		<property name="displayOrder" column="DISPLAY_ORDER" />
 	</class>
 </hibernate-mapping>
