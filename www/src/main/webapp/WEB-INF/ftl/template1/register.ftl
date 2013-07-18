@@ -53,8 +53,8 @@
 			<h2>合作账户免注册， 直接登录</h2>
 			<hr>
 			<ul>
-				<li><a href="${ContextPath}/connector/qq_login" class="mg"><img alt="QQ登录" src="${ContextPath}/img/connector/Connect_logo_7.png" width="63" height="24"></a></li>
-				<li><a href="${ContextPath}/connector/weibo_login" class="mg"><img alt="用微博登录" src="${ContextPath}/img/connector/loginButton_24.png" width="102" height="24"></a></li>
+				<li><a href="${ContextPath}/connector/qq_login" class="mg"><img alt="QQ登录" src="${ContextPath}/template1/img/connector/Connect_logo_7.png" width="63" height="24"></a></li>
+				<li><a href="${ContextPath}/connector/weibo_login" class="mg"><img alt="用微博登录" src="${ContextPath}/template1/img/connector/loginButton_24.png" width="102" height="24"></a></li>
 			</ul>
 		</div>
 	</div>

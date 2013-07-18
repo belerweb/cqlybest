@@ -42,8 +42,8 @@ body {
 						<div class="clearfix"></div>
 					</form>
 					<hr>
-					<a href="${ContextPath}/connector/qq_login"><img alt="QQ登录" src="${ContextPath}/img/connector/Connect_logo_7.png" width="63" height="24"></a>
-					<a href="${ContextPath}/connector/weibo_login" class="pull-right"><img alt="用微博登录" src="${ContextPath}/img/connector/loginButton_24.png" width="102" height="24"></a>
+					<a href="${ContextPath}/connector/qq_login"><img alt="QQ登录" src="${ContextPath}/template1/img/connector/Connect_logo_7.png" width="63" height="24"></a>
+					<a href="${ContextPath}/connector/weibo_login" class="pull-right"><img alt="用微博登录" src="${ContextPath}/template1/img/connector/loginButton_24.png" width="102" height="24"></a>
 					<div class="clearfix"></div>
 				</div>
 			</div>
