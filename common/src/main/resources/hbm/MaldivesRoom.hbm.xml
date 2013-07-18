@@ -15,5 +15,6 @@
 		<property name="num" column="NUM" />
 		<property name="requirements" column="REQUIREMENTS" length="32" />
 		<property name="roomFacility" column="ROOM_FACILITY" length="512" />
+		<property name="displayOrder" column="DISPLAY_ORDER" />
 	</class>
 </hibernate-mapping>

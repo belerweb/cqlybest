@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.hibernate.Criteria;
 import org.hibernate.Query;
+import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Repository;
 
@@ -60,6 +61,7 @@ public class MaldivesDao extends AbstractDao<MaldivesSeaIsland, String> {
   public List<MaldivesRoom> getRooms(String islandId) {
     Criteria criteria = getCurrentSession().createCriteria(MaldivesRoom.class);
     criteria.add(Restrictions.eq("islandId", islandId));
+    criteria.addOrder(Order.asc("displayOrder"));
     return criteria.list();
   }
 

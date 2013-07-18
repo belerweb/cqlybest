@@ -99,7 +99,7 @@ public class MaldivesController {
   public void updateRoom(@RequestParam Integer pk, @RequestParam String name,
       @RequestParam String value) {
     Object _value = value;
-    if ("num".equals(name)) {
+    if ("num".equals(name) || "displayOrder".equals(name)) {
       _value = StringUtils.isEmpty(value) ? null : Integer.valueOf(value);
     }
     maldivesService.updateRoom(pk, name, _value);
@@ -138,6 +138,9 @@ public class MaldivesController {
     Object _value = value;
     if ("reservation".equals(name)) {
       _value = StringUtils.isEmpty(value) ? null : Boolean.valueOf(value);
+    }
+    if ("displayOrder".equals(name)) {
+      _value = StringUtils.isEmpty(value) ? null : Integer.valueOf(value);
     }
     maldivesService.updateDining(pk, name, _value);
   }

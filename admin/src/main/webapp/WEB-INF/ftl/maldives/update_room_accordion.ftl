@@ -45,11 +45,19 @@
 					</div>
 				</div>
 				<div class="row-fluid">
-					<div class="span12">
+					<div class="span8">
 						<div class="control-group">
 							<label class="control-label">入住要求：</label>
 							<div class="controls">
 								<a href="#" class="editable" data-pk="${roomId}" data-name="requirements" data-type="textarea" data-url="${roomUrl}" data-value="${room.requirements!}"></a>
+							</div>
+						</div>
+					</div>
+					<div class="span4">
+						<div class="control-group">
+							<label class="control-label">显示顺序：</label>
+							<div class="controls">
+								<a href="#" class="editable" data-pk="${roomId}" data-name="displayOrder" data-type="text" data-url="${roomUrl}" data-value="${room.displayOrder!}"></a>
 							</div>
 						</div>
 					</div>

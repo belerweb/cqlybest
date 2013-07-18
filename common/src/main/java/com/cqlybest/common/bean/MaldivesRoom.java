@@ -15,6 +15,7 @@ public class MaldivesRoom {
   private Integer num;// 房间数量
   private String requirements;// 入住要求（人数限制等）
   private String roomFacility;// 房间设施
+  private Integer displayOrder;
 
   private List<Image> pictures;// 房型图片
 
@@ -88,6 +89,14 @@ public class MaldivesRoom {
 
   public void setRoomFacility(String roomFacility) {
     this.roomFacility = roomFacility;
+  }
+
+  public Integer getDisplayOrder() {
+    return displayOrder;
+  }
+
+  public void setDisplayOrder(Integer displayOrder) {
+    this.displayOrder = displayOrder;
   }
 
 }
