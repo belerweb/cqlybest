@@ -1,6 +1,5 @@
 package com.cqlybest.common.controller;
 
-import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
@@ -9,6 +8,9 @@ import java.util.List;
 import java.util.Map;
 
 import javax.imageio.ImageIO;
+
+import net.coobird.thumbnailator.filters.Watermark;
+import net.coobird.thumbnailator.geometry.Positions;
 
 import org.imgscalr.Scalr;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -103,50 +105,15 @@ public class ImageController {
       String watermarkPosition = options.get(Constant.OPTION_WATERMARK_POSITION);
 
       if (watermarkId != null && watermarkPosition != null) {
-        // 水印
         BufferedImage bufferedImage = ImageIO.read(new ByteArrayInputStream(image.getImageData()));
-        int oWidth = bufferedImage.getWidth();
-        int oHeight = bufferedImage.getHeight();
-        Image watermark = imageService.get(watermarkId);
         BufferedImage watermarkImage =
-            ImageIO.read(new ByteArrayInputStream(watermark.getImageData()));
-        int mWidth = watermarkImage.getWidth();
-        int mHeight = watermarkImage.getHeight();
-
-        if (oWidth > mWidth && oHeight > mHeight) {
-          Graphics graphics = bufferedImage.getGraphics();
-          if (watermarkPosition.equals("tl")) {// 左上角
-            graphics.drawImage(watermarkImage, 0, 0, mWidth, mHeight, null);
-          }
-          if (watermarkPosition.equals("tc")) {// 顶部居中
-            graphics.drawImage(watermarkImage, (oWidth - mWidth) / 2, 0, mWidth, mHeight, null);
-          }
-          if (watermarkPosition.equals("tr")) {// 右上角
-            graphics.drawImage(watermarkImage, oWidth - mWidth, 0, mWidth, mHeight, null);
-          }
-          if (watermarkPosition.equals("cr")) {// 右侧居中
-            graphics.drawImage(watermarkImage, oWidth - mWidth, (oHeight - mHeight) / 2, mWidth,
-                mHeight, null);
-          }
-          if (watermarkPosition.equals("br")) {// 右下角
-            graphics.drawImage(watermarkImage, oWidth - mWidth, oHeight - mHeight, mWidth, mHeight,
-                null);
-          }
-          if (watermarkPosition.equals("bc")) {// 底部居中
-            graphics.drawImage(watermarkImage, (oWidth - mWidth) / 2, oHeight - mHeight, mWidth,
-                mHeight, null);
-          }
-          if (watermarkPosition.equals("bl")) {// 左下角
-            graphics.drawImage(watermarkImage, 0, oHeight - mHeight, mWidth, mHeight, null);
-          }
-          if (watermarkPosition.equals("cl")) {// 左侧居中
-            graphics.drawImage(watermarkImage, 0, (oHeight - mHeight) / 2, mWidth, mHeight, null);
-          }
-          if (watermarkPosition.equals("cc")) {// 正中
-            graphics.drawImage(watermarkImage, (oWidth - mWidth) / 2, (oHeight - mHeight) / 2,
-                mWidth, mHeight, null);
-          }
-          graphics.dispose();
+            ImageIO.read(new ByteArrayInputStream(imageService.get(watermarkId).getImageData()));
+        if (bufferedImage.getWidth() > watermarkImage.getWidth()
+            && bufferedImage.getHeight() > watermarkImage.getHeight()) {
+          // 水印
+          Watermark watermarkFilter =
+              new Watermark(Positions.valueOf(watermarkPosition), watermarkImage, 1);
+          bufferedImage = watermarkFilter.apply(bufferedImage);
           ByteArrayOutputStream out = new ByteArrayOutputStream();
           ImageIO.write(bufferedImage, image.getImageType(), out);
           return new ResponseEntity<byte[]>(out.toByteArray(), headers, HttpStatus.OK);
@@ -157,20 +124,16 @@ public class ImageController {
 
     // 缩放
     BufferedImage bufferedImage = ImageIO.read(new ByteArrayInputStream(image.getImageData()));
-    int oWidth = bufferedImage.getWidth();
-    int oHeight = bufferedImage.getHeight();
-    BufferedImage scaleImage;
-    if (oWidth / (double) oHeight > width / (double) height) {
-      double rate = oHeight / (double) height;
-      scaleImage = Scalr.resize(bufferedImage, (int) Math.ceil(oWidth / rate), height);
-      int x = (scaleImage.getWidth() - width) / 2;
-      scaleImage = Scalr.crop(scaleImage, x, 0, width, height);
-    } else {
-      double rate = oWidth / (double) width;
-      scaleImage = Scalr.resize(bufferedImage, width, (int) Math.ceil(oHeight / rate));
-      int y = (scaleImage.getHeight() - height) / 2;
-      scaleImage = Scalr.crop(scaleImage, 0, y, width, height);
-    }
+    boolean fixToWidth =
+        (double) bufferedImage.getWidth() / (double) bufferedImage.getHeight() < (double) width
+            / (double) height;
+    BufferedImage scaleImage =
+        Scalr.resize(bufferedImage, Scalr.Method.ULTRA_QUALITY, fixToWidth
+            ? Scalr.Mode.FIT_TO_WIDTH
+            : Scalr.Mode.FIT_TO_HEIGHT, width, height, Scalr.OP_ANTIALIAS);
+    scaleImage =
+        Scalr.crop(scaleImage, (scaleImage.getWidth() - width) / 2,
+            (scaleImage.getHeight() - height) / 2, width, height);
     ByteArrayOutputStream scaleOut = new ByteArrayOutputStream();
     ImageIO.write(scaleImage, image.getImageType(), scaleOut);
     return new ResponseEntity<byte[]>(scaleOut.toByteArray(), headers, HttpStatus.OK);

@@ -100,15 +100,15 @@ $('#mb a.editable').not('[data-type=select]').not('[data-type=select2]').editabl
 cqlybest.editableTag('a[data-name=site_meta_keyword]');
 $('#mb a.editable[data-name=watermark_position]').editable({
 	source: [
-		{value:'tl', text:'左上角'},
-		{value:'tc', text:'顶部居中'},
-		{value:'tr', text:'右上角'},
-		{value:'cr', text:'右侧居中'},
-		{value:'br', text:'右下角'},
-		{value:'bc', text:'底部居中'},
-		{value:'bl', text:'左下角'},
-		{value:'cl', text:'左侧居中'},
-		{value:'cc', text:'正中'}
+		{value:'TOP_LEFT', text:'左上角'},
+		{value:'TOP_CENTER', text:'顶部居中'},
+		{value:'TOP_RIGHT', text:'右上角'},
+		{value:'CENTER_RIGHT', text:'右侧居中'},
+		{value:'BOTTOM_RIGHT', text:'右下角'},
+		{value:'BOTTOM_CENTER', text:'底部居中'},
+		{value:'BOTTOM_LEFT', text:'左下角'},
+		{value:'CENTER_LEFT', text:'左侧居中'},
+		{value:'CENTER', text:'正中'}
 	]
 });
 
