@@ -20,6 +20,18 @@
 					</div>
 				</div>
 				<div class="control-group">
+					<label class="control-label">网站地址：</label>
+					<div class="controls">
+						<a href="#" class="editable" data-name="site_url" data-type="text" data-url="${URL}" data-value="${options.site_url!}"></a>
+					</div>
+				</div>
+				<div class="control-group">
+					<label class="control-label">后台地址：</label>
+					<div class="controls">
+						<a href="#" class="editable" data-name="site_admin_url" data-type="text" data-url="${URL}" data-value="${options.site_admin_url!}"></a>
+					</div>
+				</div>
+				<div class="control-group">
 					<label class="control-label">400电话：</label>
 					<div class="controls">
 						<a href="#" class="editable" data-name="site_400" data-type="text" data-url="${URL}" data-value="${options.site_400!}"></a>
@@ -62,12 +74,6 @@
 					</div>
 				</div>
 				<div class="control-group">
-					<label class="control-label">统计代码：</label>
-					<div class="controls">
-						<a href="#" class="editable" data-name="site_statistical_code" data-type="textarea" data-url="${URL}">${options.site_statistical_code!?html}</a>
-					</div>
-				</div>
-				<div class="control-group">
 					<label class="control-label">微博地址：</label>
 					<div class="controls">
 						<a href="#" class="editable" data-name="weibo_url" data-type="text" data-url="${URL}" data-value="${options.weibo_url!}"></a>
@@ -91,6 +97,16 @@
 				</div>
 			</div>
 			<div class="clearfix"></div>
+		</div>
+		<div class="row-fluid form-horizontal">
+			<div class="span12">
+				<div class="control-group">
+					<label class="control-label">统计代码：</label>
+					<div class="controls">
+						<a href="#" class="editable" data-name="site_statistical_code" data-type="textarea" data-url="${URL}">${options.site_statistical_code!?html}</a>
+					</div>
+				</div>
+			</div>
 		</div>
 	</div>
 </div>

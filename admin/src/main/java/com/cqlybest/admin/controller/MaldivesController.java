@@ -15,12 +15,15 @@ import com.cqlybest.common.bean.MaldivesDining;
 import com.cqlybest.common.bean.MaldivesRoom;
 import com.cqlybest.common.bean.MaldivesSeaIsland;
 import com.cqlybest.common.service.MaldivesService;
+import com.cqlybest.common.service.OptionService;
 
 @Controller
 public class MaldivesController {
 
   @Autowired
   private MaldivesService maldivesService;
+  @Autowired
+  private OptionService optionService;
 
   /**
    * 添加海岛
@@ -62,13 +65,14 @@ public class MaldivesController {
   }
 
   @RequestMapping(value = "/maldives/list.do", method = RequestMethod.GET)
-  public void products(@RequestParam(defaultValue = "0") int page, Model model) {
+  public void list(@RequestParam(defaultValue = "0") int page, Model model) {
     page = Math.max(1, page);
     int pageSize = 10;
     model.addAttribute("page", page);
     model.addAttribute("pageSize", pageSize);
     model.addAttribute("total", maldivesService.total());
     model.addAttribute("islands", maldivesService.list(page, pageSize));
+    model.addAttribute("options", optionService.getOptions());
   }
 
   @RequestMapping("/maldives/delete.do")

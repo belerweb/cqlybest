@@ -26,7 +26,7 @@
 				<colgroup>
 					<col width="40" />
 					<col width="" />
-					<col width="80" />
+					<col width="120" />
 				</colgroup>
 				<thead>
 					<tr>
@@ -41,6 +41,8 @@
 						<td><input type="checkbox" value="${island.id}"></td>
 						<td>${island.zhName!} ${island.enName!}</td>
 						<td class="action-table">
+							<a href="<#if options.site_url?has_content>${options.site_url}/maldives/${island.id}.html<#else>javascript:alert('请先配置网站地址。');</#if>"
+								<#if options.site_url?has_content>target="_blank"</#if> class="page-load-btn safe" title="预览"><i class="icon-external-link"></i></a>
 							<a href="javascript:void(0);" data-url="${ContextPath}/maldives/update.do?id=${island.id}"
 								class="page-load-btn safe" data-target="#mb" title="修改"><i class="icon-edit"></i></a>
 							<a href="javascript:void(0);" data-url="${ContextPath}/maldives/delete.do?ids[]=${island.id}"
