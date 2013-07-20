@@ -18,8 +18,8 @@
 	<link rel="apple-touch-icon-precomposed" sizes="72x72" href="${ContextPath}/asserts/v1/touch-icons/apple-touch-icon-72x72.png">
 	<link rel="apple-touch-icon-precomposed" sizes="57x57" href="${ContextPath}/asserts/v1/touch-icons/apple-touch-icon-57x57.png">
 
-	<link rel="stylesheet" href="${ContextPath}/asserts/v1/css/metro-bootstrap.css">
-	<link rel="stylesheet" href="${ContextPath}/asserts/v1/css/cqlybest.css">
+	<link rel="stylesheet" href="${ContextPath}/asserts/v1/css/metro-bootstrap.css?build=${(Options.build)!}">
+	<link rel="stylesheet" href="${ContextPath}/asserts/v1/css/cqlybest.css?build=${(Options.build)!}">
 </head>
 <body class="metrouicss">
 	<header class="bar-title bg-color-blue">
@@ -331,7 +331,7 @@
 			<li><a data-toggle="tab" href="#i-play">娱乐/设施</a></li>
 		</ul>
 	</div>
-	<script src="${ContextPath}/asserts/v1/js/jquery.js"></script>
-	<script src="${ContextPath}/asserts/v1/js/bootstrap.js"></script>
+	<script src="${ContextPath}/asserts/v1/js/jquery.js?build=${(Options.build)!}"></script>
+	<script src="${ContextPath}/asserts/v1/js/bootstrap.js?build=${(Options.build)!}"></script>
 </body>
 </html>
