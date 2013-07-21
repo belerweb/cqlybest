@@ -1,8 +1,11 @@
 package com.cqlybest.common.bean;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class WeiboAuth {
+public class WeiboAuth implements Serializable {
+
+  private static final long serialVersionUID = -2575016480564569674L;
 
   private String uid;
   private String token;

@@ -1,8 +1,11 @@
 package com.cqlybest.common.bean;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class QQAuth {
+public class QQAuth implements Serializable {
+
+  private static final long serialVersionUID = 5256670895383011254L;
 
   private String openid;
   private String token;
