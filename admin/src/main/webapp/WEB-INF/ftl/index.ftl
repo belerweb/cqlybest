@@ -1,10 +1,11 @@
 <!DOCTYPE html>
 <html lang="zh">
 	<#assign ContextPath=springMacroRequestContext.getContextPath() />
+	<#assign User = securityContextHolder.getContext().getAuthentication().getPrincipal() />
 	<head>
 		<meta charset="utf-8">
 		<meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
-		<title>重庆易游天下国际旅行社</title>
+		<title>${Options.site_name!}后台管理</title>
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<meta name="description" content="">
 		<meta name="author" content="">
@@ -41,15 +42,24 @@
 		<div id="header" role="banner">
 			<a id="menu-link" class="head-button-link menu-hide" href="#menu"><span>菜单</span></a>
 			<!--Logo-->
-			<a href="dashboard.do" class="logo"><h1>重庆易游天下国际旅行社</h1></a>
+			<span class="logo"><h1>${Options.site_name!}后台管理</h1></span>
 			<!--Logo END-->
 			<div class="right">
 				<!--profile box-->
 				<div class="dropdown left profile">
 					<a class="dropdown-toggle" data-toggle="dropdown" href="#">
-						<!-- span class="double-spacer"></span -->
-						<div class="profile-avatar"><img src="${(user.avatar)!}" alt=""></div>
-						<div class="profile-username"><span>你好，</span> ${(user.nickname)!'朋友'}！</div>
+						<#assign avatar='${ContextPath}/img/avatar.gif'>
+						<#if User.avatar?has_content>
+							<#if User.avatar?starts_with('http')>
+								<#assign avatar=User.avatar>
+							<#else>
+								<#assign avatar='${ContextPath}/image/${User.avatar}'>
+							</#if>
+						</#if>
+						<div class="profile-avatar">
+							<img src="${avatar}" width="32" height="32">
+						</div>
+						<div class="profile-username"><span>你好，</span> ${User.nickname!'未设置昵称'}</div>
 						<div class="profile-caret"> <span class="caret"></span></div>
 						<span class="double-spacer"></span>
 					</a>
