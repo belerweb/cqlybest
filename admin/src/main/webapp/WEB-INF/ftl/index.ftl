@@ -81,6 +81,7 @@
 					<li class="hide" data-m="site" data-n="maldives.list"><a href="#m=site&n=maldives.list&u=${ContextPath}/maldives/list.do&t=%23main"><i class="icon-road"></i> 马尔代夫</a></li>
 					<li class="hide" data-m="site" data-n="productgroup.list"><a href="#m=site&n=productgroup.list&u=${ContextPath}/product_group/list.do&t=%23main"><i class="icon-th-large"></i> 产品聚合</a></li>
 					<li class="hide" data-m="site" data-n="dict.list"><a href="#m=site&n=dict.list&u=${ContextPath}/dict/list.do?type%3Dtag&t=%23main"><i class="icon-book"></i> 数据字典</a></li>
+					<li class="hide" data-m="site" data-n="link"><a href="#m=site&n=link&u=${ContextPath}/link/list.do&t=%23main"><i class="icon-book"></i> 友情链接</a></li>
 					<li class="hide" data-m="site" data-n="account.list"><a href="#m=site&n=account.list&u=${ContextPath}/account/list.do&t=%23main"><i class="icon-github"></i> 账号管理</a></li>
 					<li class="hide" data-m="site" data-n="advertorial.list"><a href="#m=site&n=advertorial.list&u=${ContextPath}/advertorial/list.do&t=%23main"><i class="icon-file"></i> 软文管理</a></li>
 					<li class="hide" data-m="site" data-n="site.template1"><a href="#m=site&n=site.template1&u=${ContextPath}/template1/template.do&t=%23main"><i class="icon-edit"></i> 模板一</a></li>
