@@ -70,15 +70,18 @@
 				</ul>
 			</div>
 			<hr>
-			<!-- div class="footer friendly">
+
+			<#if Links?has_content>
+			<div class="footer friendly">
 				<ul>
 					<li><strong>友情链接：</strong></li>
-					<li><a href="#" target="_blank">中国地图</a></li>
-					<li><a href="#" target="_blank">同城网</a></li>
-					<li><a href="#" target="_blank">携程网</a></li>
-					<li><a href="#" target="_blank">12306</a></li>
+					<#list Links as link>
+					<li><a href="${link.link!'#'}" title="${link.title!}" target="_blank">${link.name!}</a></li>
+					</#list>
 				</ul>
-			</div -->
+			</div>
+			</#if>
+
 			<#if Options.site_statistical_code?has_content>
 			<div class="hide">${Options.site_statistical_code}</div>
 			</#if>

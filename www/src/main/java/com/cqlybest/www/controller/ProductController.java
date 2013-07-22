@@ -24,20 +24,14 @@ import com.cqlybest.common.bean.ProductMaldives;
 import com.cqlybest.common.bean.template1.Template1Menu;
 import com.cqlybest.common.service.DictService;
 import com.cqlybest.common.service.MaldivesService;
-import com.cqlybest.common.service.OptionService;
 import com.cqlybest.common.service.ProductService;
-import com.cqlybest.common.service.Template1Service;
 import com.cqlybest.common.service.TemplateService;
 
 @Controller
-public class ProductController {
+public class ProductController extends ControllerHelper {
 
   @Autowired
-  private Template1Service template1Service;
-  @Autowired
   private TemplateService templateService;
-  @Autowired
-  private OptionService optionService;
   @Autowired
   private ProductService productService;
   @Autowired
@@ -141,11 +135,6 @@ public class ProductController {
     model.addAttribute("product", product);
     setCommonData(model);
     return templateService.getTemplate() + "/product_" + product.getProductType();
-  }
-
-  private void setCommonData(Model model) {
-    model.addAttribute("Options", optionService.getOptions());
-    model.addAttribute("Menu", template1Service.getPublishedMenus());
   }
 
   private void addToFilterSet(Set<ProductFilterItem> set, Integer type, Integer id) {

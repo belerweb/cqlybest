@@ -15,14 +15,11 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.cqlybest.common.bean.LoginUser;
 import com.cqlybest.common.bean.PhoneValidationCode;
-import com.cqlybest.common.controller.ControllerHelper;
 import com.cqlybest.common.service.DictService;
 import com.cqlybest.common.service.MaldivesService;
-import com.cqlybest.common.service.OptionService;
 import com.cqlybest.common.service.PhoneValidationService;
 import com.cqlybest.common.service.ProductService;
 import com.cqlybest.common.service.SmsService;
-import com.cqlybest.common.service.Template1Service;
 import com.cqlybest.common.service.TemplateService;
 import com.cqlybest.common.service.UserService;
 
@@ -30,11 +27,7 @@ import com.cqlybest.common.service.UserService;
 public class UserController extends ControllerHelper {
 
   @Autowired
-  private Template1Service template1Service;
-  @Autowired
   private TemplateService templateService;
-  @Autowired
-  private OptionService optionService;
   @Autowired
   private ProductService productService;
   @Autowired
@@ -120,11 +113,6 @@ public class UserController extends ControllerHelper {
     }
     // userService.update(pk, name, value);
     return ok();
-  }
-
-  private void setCommonData(Model model) {
-    model.addAttribute("Options", optionService.getOptions());
-    model.addAttribute("Menu", template1Service.getPublishedMenus());
   }
 
 }

@@ -10,19 +10,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.cqlybest.common.bean.MaldivesSeaIsland;
 import com.cqlybest.common.service.MaldivesService;
-import com.cqlybest.common.service.OptionService;
-import com.cqlybest.common.service.Template1Service;
 import com.cqlybest.common.service.TemplateService;
 
 @Controller
-public class MaldivesController {
+public class MaldivesController extends ControllerHelper {
 
   @Autowired
-  private Template1Service template1Service;
-  @Autowired
   private TemplateService templateService;
-  @Autowired
-  private OptionService optionService;
   @Autowired
   private MaldivesService maldivesService;
 
@@ -35,11 +29,6 @@ public class MaldivesController {
     model.addAttribute("island", island);
     setCommonData(model);
     return templateService.getTemplate() + "/maldives";
-  }
-
-  private void setCommonData(Model model) {
-    model.addAttribute("Options", optionService.getOptions());
-    model.addAttribute("Menu", template1Service.getPublishedMenus());
   }
 
 }

@@ -24,21 +24,15 @@ import com.cqlybest.common.bean.template1.Template1Menu;
 import com.cqlybest.common.bean.template1.Template1ProductGroup;
 import com.cqlybest.common.service.DictService;
 import com.cqlybest.common.service.MaldivesService;
-import com.cqlybest.common.service.OptionService;
 import com.cqlybest.common.service.ProductService;
-import com.cqlybest.common.service.Template1Service;
 import com.cqlybest.common.service.TemplateService;
 
 @Controller
-public class IndexController {
+public class IndexController extends ControllerHelper {
 
 
-  @Autowired
-  private Template1Service template1Service;
   @Autowired
   private TemplateService templateService;
-  @Autowired
-  private OptionService optionService;
   @Autowired
   private ProductService productService;
   @Autowired
@@ -117,11 +111,6 @@ public class IndexController {
     model.addAttribute("page", menu);
     setCommonData(model);
     return templateService.getTemplate() + "/page";
-  }
-
-  private void setCommonData(Model model) {
-    model.addAttribute("Options", optionService.getOptions());
-    model.addAttribute("Menu", template1Service.getPublishedMenus());
   }
 
 }
