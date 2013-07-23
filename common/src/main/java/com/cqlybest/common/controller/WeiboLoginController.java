@@ -14,11 +14,11 @@ import weibo4j.http.AccessToken;
 import weibo4j.model.WeiboException;
 import weibo4j.util.WeiboConfig;
 
+import com.cqlybest.common.Constant;
 import com.cqlybest.common.auth.WeiboAuthToken;
 import com.cqlybest.common.bean.LoginUser;
 import com.cqlybest.common.bean.WeiboAuth;
 import com.cqlybest.common.service.UserService;
-import com.cqlybest.common.service.WeiboInitService;
 
 @Controller
 public class WeiboLoginController {
@@ -35,11 +35,9 @@ public class WeiboLoginController {
       String redirectURI =
           request.getScheme() + "://" + request.getServerName() + request.getContextPath()
               + "/connector/weibo";
-      WeiboConfig.updateProperties(WeiboInitService.REDIRECT_URI, redirectURI);
+      WeiboConfig.updateProperties(Constant.REDIRECT_URI, redirectURI);
       redirect =
-          "redirect:"
-              + WEIBO_OAUTH.authorize(WeiboInitService.RESPONSE_TYPE_CODE,
-                  WeiboInitService.SCOPE_ALL);
+          "redirect:" + WEIBO_OAUTH.authorize(Constant.RESPONSE_TYPE_CODE, Constant.SCOPE_ALL);
     } catch (WeiboException e) {
       e.printStackTrace();
     }
@@ -69,4 +67,9 @@ public class WeiboLoginController {
     }
     return redirect;
   }
+
+  static {
+    Constant.checkWeiboConfig(Constant.WEIBO_APP_KEY, Constant.WEIBO_APP_SECRET);
+  }
+
 }
