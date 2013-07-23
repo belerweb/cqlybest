@@ -15,6 +15,7 @@ public class WeiboInitService implements InitializingBean {
   public static final String CLIENT_SECRET = "client_SERCRET";
   public static final String REDIRECT_URI = "redirect_URI";
   public static final String SCOPE = "scope";
+  public static final String SCOPE_ALL = "all";
   public static final String SCOPE_EMAIL = "email";// 用户的联系邮箱
   public static final String SCOPE_DIRECT_MESSAGES_WRITE = "direct_messages_write";// 私信发送接口
   public static final String SCOPE_DIRECT_MESSAGES_READ = "direct_messages_read";// 私信读取接口

@@ -16,6 +16,7 @@ import weibo4j.model.User;
 import com.cqlybest.common.bean.LoginUser;
 import com.cqlybest.common.bean.QQAuth;
 import com.cqlybest.common.bean.Role;
+import com.cqlybest.common.bean.WeiboAppAuth;
 import com.cqlybest.common.bean.WeiboAuth;
 import com.cqlybest.common.dao.UserDao;
 import com.qq.connect.javabeans.qzone.UserInfoBean;
@@ -96,26 +97,64 @@ public class UserService {
    */
   @Transactional
   public LoginUser register(WeiboAuth auth, User weiboUser) {
-    WeiboAuth _auth = userDao.findById(WeiboAuth.class, auth.getUid());
-    if (_auth == null) {
-      _auth = auth;
-      _auth.setCreatedTime(new Date());
-    } else {
-      _auth.setToken(auth.getToken());
-      _auth.setExpireIn(auth.getExpireIn());
-    }
-    _auth.setLastUpdate(new Date());
-    userDao.saveOrUpdate(_auth);
+    if (auth instanceof WeiboAppAuth) {
+      // 新浪微博APP登录
+      WeiboAppAuth weiboAppAuth =
+          userDao.find(((WeiboAppAuth) auth).getAppId(), ((WeiboAppAuth) auth).getCid(), auth
+              .getUid());
+      if (weiboAppAuth == null) {
+        weiboAppAuth = (WeiboAppAuth) auth;
+        weiboAppAuth.setCreatedTime(new Date());
+      } else {
+        weiboAppAuth.setToken(auth.getToken());
+        weiboAppAuth.setExpireIn(auth.getExpireIn());
+      }
+      weiboAppAuth.setLastUpdate(new Date());
+      userDao.saveOrUpdate(weiboAppAuth);
 
-    LoginUser user = userDao.findOne(Restrictions.eq("weiboAuth", auth));
-    if (user == null) {
-      user = new LoginUser(auth);
+      WeiboAuth weiboAuth = userDao.findById(WeiboAuth.class, auth.getUid());
+      if (weiboAuth == null) {
+        weiboAuth = new WeiboAuth(auth.getUid(), null, 0);
+        weiboAuth.setCreatedTime(new Date());
+      }
+      weiboAuth.setLastUpdate(new Date());
+      userDao.saveOrUpdate(weiboAuth);
+
+      LoginUser user = userDao.findOne(Restrictions.eq("weiboAuth", weiboAuth));
+      if (user == null) {
+        user = new LoginUser(weiboAuth);
+      }
+
+      user.setWeiboAppAuth(weiboAppAuth);
+      user.setNickname(weiboUser.getScreenName());
+      user.setAvatar(weiboUser.getProfileImageUrl());
+      userDao.saveOrUpdate(weiboUser);
+      userDao.saveOrUpdate(user);
+      return user;
+    } else {
+      // 新浪微博网站登录
+      WeiboAuth weiboAuth = userDao.findById(WeiboAuth.class, auth.getUid());
+      if (weiboAuth == null) {
+        weiboAuth = auth;
+        weiboAuth.setCreatedTime(new Date());
+      } else {
+        weiboAuth.setToken(auth.getToken());
+        weiboAuth.setExpireIn(auth.getExpireIn());
+      }
+      weiboAuth.setLastUpdate(new Date());
+      userDao.saveOrUpdate(weiboAuth);
+
+      LoginUser user = userDao.findOne(Restrictions.eq("weiboAuth", weiboAuth));
+      if (user == null) {
+        user = new LoginUser(weiboAuth);
+      }
+
+      user.setNickname(weiboUser.getScreenName());
+      user.setAvatar(weiboUser.getProfileImageUrl());
+      userDao.saveOrUpdate(weiboUser);
+      userDao.saveOrUpdate(user);
+      return user;
     }
-    user.setNickname(weiboUser.getScreenName());
-    user.setAvatar(weiboUser.getProfileImageUrl());
-    userDao.saveOrUpdate(weiboUser);
-    userDao.saveOrUpdate(user);
-    return user;
   }
 
   public Long getUserListTotal(Role role) {

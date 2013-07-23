@@ -25,6 +25,7 @@ public class LoginUser implements UserDetails {
 
   private QQAuth qqAuth;// QQ 授权
   private WeiboAuth weiboAuth;// 新浪微博授权
+  private WeiboAppAuth weiboAppAuth;// 新浪微博APP授权
 
   private Set<Role> roles;// 角色
 
@@ -42,7 +43,12 @@ public class LoginUser implements UserDetails {
   }
 
   public LoginUser(WeiboAuth auth) {
-    this.weiboAuth = auth;
+    if (auth instanceof WeiboAppAuth) {
+      this.weiboAppAuth = (WeiboAppAuth) auth;
+      this.weiboAuth = new WeiboAuth(auth.getUid(), null, 0);
+    } else {
+      this.weiboAuth = auth;
+    }
     this.id = UUID.randomUUID().toString();
   }
 
@@ -132,6 +138,14 @@ public class LoginUser implements UserDetails {
 
   public void setWeiboAuth(WeiboAuth weiboAuth) {
     this.weiboAuth = weiboAuth;
+  }
+
+  public WeiboAppAuth getWeiboAppAuth() {
+    return weiboAppAuth;
+  }
+
+  public void setWeiboAppAuth(WeiboAppAuth weiboAppAuth) {
+    this.weiboAppAuth = weiboAppAuth;
   }
 
   public Set<Role> getRoles() {

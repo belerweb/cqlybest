@@ -39,7 +39,7 @@ public class WeiboLoginController {
       redirect =
           "redirect:"
               + WEIBO_OAUTH.authorize(WeiboInitService.RESPONSE_TYPE_CODE,
-                  WeiboInitService.SCOPE_FOLLOW_APP_OFFICIAL_MICROBLOG);
+                  WeiboInitService.SCOPE_ALL);
     } catch (WeiboException e) {
       e.printStackTrace();
     }
