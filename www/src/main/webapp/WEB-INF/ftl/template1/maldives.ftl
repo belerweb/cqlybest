@@ -58,7 +58,7 @@
 					<li><a href="#maldives-island-hotel－tab">酒店详情</a></li>
 					<li><a href="#maldives-island-room－tab">房型介绍</a></li>
 					<li><a href="#maldives-island-dining－tab">餐饮设施</a></li>
-					<li><a href="#maldives-island-play－tab">娱乐设施</a></li>
+					<li><a href="#maldives-island-play－tab">活动与娱乐设施</a></li>
 				</ul>
 			</div>
 			<#include "maldives_info.ftl">

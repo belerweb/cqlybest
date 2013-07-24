@@ -62,7 +62,6 @@ public class MaldivesService {
 
     island.setPictures(imageDao.queryImages(Constant.IMAGE_MALDIVES_ISLAND_POSTER, id));
     island.setHotelPictures(imageDao.queryImages(Constant.IMAGE_MALDIVES_HOTEL_PICTURE, id));
-    island.setPlays(imageDao.queryImages(Constant.IMAGE_MALDIVES_ISLAND_PLAY, id));
     return island;
   }
 

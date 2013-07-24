@@ -1,14 +1,12 @@
-<div id="maldives-island-play－tab" class="maldives-island-section maldives-play-gallery">
-	<div class="title">
-		<h4>活动与娱乐设施</h4>
-		<hr>
-	</div>
-	<div>
-		<#macro playOption index name>
-		<#if island.plays?has_content && island.plays?substring(index,index+1)=='1'>
-		<span class="label label-success">${name}</span>
-		</#if>
-		</#macro>
+<style>
+#island-play-tab ul {margin-left:0;}
+#island-play-tab li {float:left; display:block; width:180px;}
+</style>
+<#macro playOption index name>
+<li><label class="checkbox"><input <#if island.plays?has_content && island.plays?substring(index,index+1)=='1'>checked="checked"</#if> type="checkbox"> ${name}</label></li>
+</#macro>
+<div id="island-play-tab" class="tab-pane">
+	<ul class="form-inline">
 		<@playOption 0 '无线网络' />
 		<@playOption 1 '迷你酒吧' />
 		<@playOption 2 '空调房' />
@@ -62,5 +60,22 @@
 		<@playOption 50 '迪斯科' />
 		<@playOption 51 '文化习俗展示会' />
 		<@playOption 52 '现场乐队' />
-	</div>
+	</ul>
+	<div class="clearfix"></div>   
+	<div class="text-center"><button type="button" class="btn btn-primary action action-save">保存</button></div>
 </div>
+<script type="text/javascript">
+$('#island-play-tab button.action-save').click(function(){
+	var plays = [];
+	$('#island-play-tab input').each(function(i, obj){
+		plays.push(obj.checked ? 1 : 0);
+	});
+	$.post('${ContextPath}/maldives/update.do', {
+		pk: '${island.id}',
+		name: 'plays',
+		value: plays.join('')
+	}).fail(function() {
+		cqlybest.error();
+	});
+});
+</script>
