@@ -20,6 +20,7 @@ public class Product {
   private Integer marketPrice; // 市场价
   private Integer price; // 参考价格
   private String priceDescription; // 费用说明
+  private String priceExclusive; // 费用不包含
   private Date effectiveDate; // 产品生效日期
   private Date expiryDate; // 产品失效日期
   private Date departureDate; // 准确的出发日期
@@ -351,6 +352,14 @@ public class Product {
 
   public void setMaldives(List<ProductMaldives> maldives) {
     this.maldives = maldives;
+  }
+
+  public String getPriceExclusive() {
+    return priceExclusive;
+  }
+
+  public void setPriceExclusive(String priceExclusive) {
+    this.priceExclusive = priceExclusive;
   }
 
 }

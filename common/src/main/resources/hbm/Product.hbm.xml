@@ -17,6 +17,7 @@
 		<property name="marketPrice" column="MARKET_PRICE" />
 		<property name="price" column="PRICE" />
 		<property name="priceDescription" column="PRICE_DESCRIPTION" length="2048" />
+		<property name="priceExclusive" column="PRICE_EXCLUSIVE" length="2048" />
 		<property name="effectiveDate" column="EFFECTIVE_DATE" />
 		<property name="expiryDate" column="EXPIRY_DATE" />
 		<property name="departureDate" column="DEPARTURE_DATE" />
