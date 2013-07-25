@@ -80,7 +80,7 @@ public class ProductController extends ControllerHelper {
       @RequestParam(required = false) String value,
       @RequestParam(required = false, value = "value[]") List<String> values) throws Exception {
     Object _value = value == null ? StringUtils.join(values, ",") : value;
-    if ("days".equals(name)) {
+    if ("days".equals(name) || "nights".equals(name)) {
       _value = Integer.parseInt(value);
     }
     if ("price".equals(name) || "marketPrice".equals(name)) {

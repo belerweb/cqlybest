@@ -12,7 +12,7 @@
 		<property name="code" column="CODE" length="16" />
 		<property name="productType" column="PRODUCT_TYPE" />
 		<property name="days" column="DAYS" />
-		<property name="daysUnit" column="DAYS_UNIT" />
+		<property name="nights" column="NIGHTS" />
 		<property name="description" column="DESCRIPTION" type="text" />
 		<property name="marketPrice" column="MARKET_PRICE" />
 		<property name="price" column="PRICE" />

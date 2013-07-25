@@ -42,7 +42,7 @@
 			<div class="control-group">
 				<label class="control-label">用餐：</label>
 				<div class="controls">
-					<a href="#" class="editable" data-pk="${maldives.id}" data-name="maldives.meal" data-type="text" data-url="${PMURL}" value="${maldives.meal!}"></a>
+					<a href="#" class="editable" data-pk="${maldives.id}" data-name="maldives.meal" data-type="text" data-url="${PMURL}" data-value="${maldives.meal!}"></a>
 				</div>
 			</div>
 		</div>

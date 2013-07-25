@@ -99,12 +99,9 @@
 				<label class="control-label">行程天数：</label>
 				<div class="controls">
 					<a href="#" class="editable" data-pk="${ID}" data-name="days" data-type="text" data-url="${URL}" data-value="${(product.days!)?html}"></a>
-				</div>
-			</div>
-			<div class="control-group">
-				<label class="control-label">行程天数单位：</label>
-				<div class="controls">
-					<a href="#" class="editable" data-pk="${ID}" data-name="daysUnit" data-type="select" data-url="${URL}" data-value="${(product.daysUnit!)?html}"></a>
+					<span>天</span>
+					<a href="#" class="editable" data-pk="${ID}" data-name="nights" data-type="text" data-url="${URL}" data-value="${(product.nights!)?html}"></a>
+					<span>晚</span>
 				</div>
 			</div>
 			<div class="control-group">
@@ -156,9 +153,6 @@ $('#product-base-tab a.editable[data-type=textarea]').editable();
 $('#product-base-tab a.editable[data-type=textarea]').editable();
 $('#product-base-tab a.editable[data-name=effectiveDate]').editable();
 $('#product-base-tab a.editable[data-name=expiryDate]').editable();
-$('#product-base-tab a.editable[data-name=daysUnit]').editable({
-	source: [{value:'天',text:'天'},{value:'月',text:'月'},{value:'年',text:'年'}]
-});
 cqlybest.editableTag('#product-base-tab a[data-name=departureCities]');
 cqlybest.editableTag('#product-base-tab a[data-name=destinations]');
 cqlybest.editableTag('#product-base-tab a[data-name=keywords]');
