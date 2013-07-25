@@ -18,6 +18,7 @@ import com.cqlybest.common.Constant;
 import com.cqlybest.common.bean.Product;
 import com.cqlybest.common.bean.ProductCalendar;
 import com.cqlybest.common.bean.ProductComment;
+import com.cqlybest.common.bean.ProductDetailMaldives;
 import com.cqlybest.common.bean.ProductFilterItem;
 import com.cqlybest.common.bean.ProductGroup;
 import com.cqlybest.common.bean.ProductMaldives;
@@ -87,8 +88,8 @@ public class ProductService {
     product.setComments(productDao.getComments(id));
     product.setTrafficList(productDao.getTraffic(id));
     if (product.getProductType() == Product.MALDIVES) {
-      List<ProductMaldives> maldives = productDao.getMaldives(id);
-      product.setMaldives(maldives);
+      product.setMaldives(productDao.getMaldives(id));
+      product.setDetail(productDao.findById(ProductDetailMaldives.class, id));
     } else {
       product.setTravels(productDao.getTravels(id));
     }
@@ -126,6 +127,17 @@ public class ProductService {
       // 修改海岛时需要将房间置空
       productDao.updateMaldives(id, "roomId", null);
     }
+  }
+
+  @Transactional
+  public void updateMaldivesDetail(String id, String name, Object value) {
+    ProductDetailMaldives detail = productDao.findById(ProductDetailMaldives.class, id);
+    if (detail == null) {
+      detail = new ProductDetailMaldives();
+      detail.setId(id);
+      productDao.saveOrUpdate(detail);
+    }
+    productDao.updateMaldivesDetail(id, name, value);
   }
 
   @Transactional

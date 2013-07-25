@@ -1,6 +1,23 @@
 <div id="product-detail-tab" class="tab-pane">
-	<div class="text-right"><button type="button" class="btn btn-primary add">添加</button></div>
 	<#assign PMURL="${ContextPath}/product/maldives/update.do">
+	<div class="row-fluid">
+		<div class="span10">
+			<div class="control-group">
+				<label class="control-label">简要行程（如2沙2水）：</label>
+				<div class="controls">
+					<a href="#" class="editable" data-pk="${(product.detail.id)!}" data-name="detail.room1" data-type="text" data-url="${PMURL}" data-value="${(product.detail.room1)!}"></a>
+					<a href="#" class="editable" data-pk="${(product.detail.id)!}" data-name="detail.room1Unit" data-type="text" data-url="${PMURL}" data-value="${(product.detail.room1Unit)!}"></a>
+					<a href="#" class="editable" data-pk="${(product.detail.id)!}" data-name="detail.room2" data-type="text" data-url="${PMURL}" data-value="${(product.detail.room2)!}"></a>
+					<a href="#" class="editable" data-pk="${(product.detail.id)!}" data-name="detail.room2Unit" data-type="text" data-url="${PMURL}" data-value="${(product.detail.room2Unit)!}"></a>
+					<a href="#" class="editable" data-pk="${(product.detail.id)!}" data-name="detail.room3" data-type="text" data-url="${PMURL}" data-value="${(product.detail.room3)!}"></a>
+					<a href="#" class="editable" data-pk="${(product.detail.id)!}" data-name="detail.room3Unit" data-type="text" data-url="${PMURL}" data-value="${(product.detail.room3Unit)!}"></a>
+				</div>
+			</div>
+		</div>
+		<div class="span2 text-right">
+			<button type="button" class="btn btn-primary add">添加详细</button>
+		</div>
+	</div>
 	<#if product.maldives?has_content>
 	<#list product.maldives as maldives>
 	<div class="row-fluid">

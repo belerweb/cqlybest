@@ -165,14 +165,25 @@ public class ProductController extends ControllerHelper {
    */
   @RequestMapping(value = "/product/maldives/update.do", method = RequestMethod.POST)
   @ResponseBody
-  public void updateMaldives(@RequestParam Integer pk, @RequestParam String name,
+  public void updateMaldives(@RequestParam String pk, @RequestParam String name,
       @RequestParam String value) {
-    String _name = name.substring(9);
-    Object _value = value;
-    if (_name.equals("roomId")) {
-      _value = Integer.parseInt(value);
+    if (name.startsWith("maldives.")) {
+      String _name = name.substring(9);
+      Object _value = value;
+      if (_name.equals("roomId")) {
+        _value = Integer.parseInt(value);
+      }
+      productService.updateMaldives(Integer.valueOf(pk), _name, _value);
     }
-    productService.updateMaldives(pk, _name, _value);
+
+    if (name.startsWith("detail.")) {
+      String _name = name.substring(7);
+      Object _value = value;
+      if (_name.equals("room1") || _name.equals("room2") || _name.equals("room3")) {
+        _value = Integer.parseInt(value);
+      }
+      productService.updateMaldivesDetail(pk, _name, _value);
+    }
   }
 
   /**

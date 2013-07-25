@@ -71,6 +71,14 @@ public class ProductDao extends AbstractDao<Product, String> {
     return query.executeUpdate();
   }
 
+  public int updateMaldivesDetail(String id, String name, Object value) {
+    String hql = "UPDATE ProductDetailMaldives SET " + name + " = ? WHERE id = ?";
+    Query query = getCurrentSession().createQuery(hql);
+    query.setParameter(0, value);
+    query.setParameter(1, id);
+    return query.executeUpdate();
+  }
+
   public void delete(String[] ids) {
     getCurrentSession().createQuery("DELETE FROM Product WHERE id IN (:ids)").setParameterList(
         "ids", ids).executeUpdate();

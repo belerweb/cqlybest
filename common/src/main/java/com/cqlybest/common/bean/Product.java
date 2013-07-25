@@ -50,6 +50,8 @@ public class Product {
   private List<ProductCalendar> calendar;// 日历
   private List<ProductMaldives> maldives;// 马尔代夫行程
 
+  private ProductDetail detail; // 产品独立信息（马代、塞舌尔...）
+
   public String getId() {
     return id;
   }
@@ -360,6 +362,14 @@ public class Product {
 
   public void setNights(Integer nights) {
     this.nights = nights;
+  }
+
+  public ProductDetail getDetail() {
+    return detail;
+  }
+
+  public void setDetail(ProductDetail detail) {
+    this.detail = detail;
   }
 
 }
