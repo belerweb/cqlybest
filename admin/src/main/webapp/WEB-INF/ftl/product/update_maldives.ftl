@@ -5,12 +5,12 @@
 			<div class="control-group">
 				<label class="control-label">简要行程（如2沙2水）：</label>
 				<div class="controls">
-					<a href="#" class="editable" data-pk="${(product.detail.id)!}" data-name="detail.room1" data-type="text" data-url="${PMURL}" data-value="${(product.detail.room1)!}"></a>
-					<a href="#" class="editable" data-pk="${(product.detail.id)!}" data-name="detail.room1Unit" data-type="text" data-url="${PMURL}" data-value="${(product.detail.room1Unit)!}"></a>
-					<a href="#" class="editable" data-pk="${(product.detail.id)!}" data-name="detail.room2" data-type="text" data-url="${PMURL}" data-value="${(product.detail.room2)!}"></a>
-					<a href="#" class="editable" data-pk="${(product.detail.id)!}" data-name="detail.room2Unit" data-type="text" data-url="${PMURL}" data-value="${(product.detail.room2Unit)!}"></a>
-					<a href="#" class="editable" data-pk="${(product.detail.id)!}" data-name="detail.room3" data-type="text" data-url="${PMURL}" data-value="${(product.detail.room3)!}"></a>
-					<a href="#" class="editable" data-pk="${(product.detail.id)!}" data-name="detail.room3Unit" data-type="text" data-url="${PMURL}" data-value="${(product.detail.room3Unit)!}"></a>
+					<a href="#" class="editable" data-pk="${product.id}" data-name="detail.room1" data-type="text" data-url="${PMURL}" data-value="${(product.detail.room1)!}"></a>
+					<a href="#" class="editable" data-pk="${product.id}" data-name="detail.room1Unit" data-type="text" data-url="${PMURL}" data-value="${(product.detail.room1Unit)!}"></a>
+					<a href="#" class="editable" data-pk="${product.id}" data-name="detail.room2" data-type="text" data-url="${PMURL}" data-value="${(product.detail.room2)!}"></a>
+					<a href="#" class="editable" data-pk="${product.id}" data-name="detail.room2Unit" data-type="text" data-url="${PMURL}" data-value="${(product.detail.room2Unit)!}"></a>
+					<a href="#" class="editable" data-pk="${product.id}" data-name="detail.room3" data-type="text" data-url="${PMURL}" data-value="${(product.detail.room3)!}"></a>
+					<a href="#" class="editable" data-pk="${product.id}" data-name="detail.room3Unit" data-type="text" data-url="${PMURL}" data-value="${(product.detail.room3Unit)!}"></a>
 				</div>
 			</div>
 		</div>
