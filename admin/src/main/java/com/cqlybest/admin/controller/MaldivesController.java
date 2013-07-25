@@ -106,6 +106,9 @@ public class MaldivesController {
     if ("num".equals(name) || "displayOrder".equals(name)) {
       _value = StringUtils.isEmpty(value) ? null : Integer.valueOf(value);
     }
+    if ("containPool".equals(name)) {
+      _value = StringUtils.isEmpty(value) ? null : Boolean.valueOf(value);
+    }
     maldivesService.updateRoom(pk, name, _value);
   }
 

@@ -52,18 +52,18 @@
 								<a href="#" class="editable" data-pk="${roomId}" data-name="requirements" data-type="textarea" data-url="${roomUrl}" data-value="${room.requirements!}"></a>
 							</div>
 						</div>
-					</div>
-					<div class="span4">
 						<div class="control-group">
-							<label class="control-label">显示顺序：</label>
+							<label class="control-label">房间大小：</label>
 							<div class="controls">
-								<a href="#" class="editable" data-pk="${roomId}" data-name="displayOrder" data-type="text" data-url="${roomUrl}" data-value="${room.displayOrder!}"></a>
+								<a href="#" class="editable" data-pk="${roomId}" data-name="roomSize" data-type="text" data-url="${roomUrl}" data-value="${room.roomSize!}"></a>
 							</div>
 						</div>
-					</div>
-				</div>
-				<div class="row-fluid">
-					<div class="span12">
+						<div class="control-group">
+							<label class="control-label">包含泳池：</label>
+							<div class="controls">
+								<a href="#" class="editable" data-pk="${roomId}" data-name="containPool" data-type="select" data-url="${roomUrl}" data-value="<#if room.containPool?has_content><#if room.containPool>True<#else>False</#if></#if>"></a>
+							</div>
+						</div>
 						<div class="control-group">
 							<label class="control-label"><a herf="#" class="editable-wysihtml5">房间设施：</a></label>
 							<div class="controls">
@@ -72,16 +72,20 @@
 								</div>
 							</div>
 						</div>
-					</div>
-				</div>
-				<div class="row-fluid">
-					<div class="span12">
 						<div class="control-group">
 							<label class="control-label"><a herf="#" class="editable-wysihtml5">说明：</a></label>
 							<div class="controls">
 								<div data-pk="${roomId}" data-name="description" data-type="wysihtml5" data-url="${roomUrl}" data-toggle="manual" data-original-title="编辑房型说明">
 									${room.description!}
 								</div>
+							</div>
+						</div>
+					</div>
+					<div class="span4">
+						<div class="control-group">
+							<label class="control-label">显示顺序：</label>
+							<div class="controls">
+								<a href="#" class="editable" data-pk="${roomId}" data-name="displayOrder" data-type="text" data-url="${roomUrl}" data-value="${room.displayOrder!}"></a>
 							</div>
 						</div>
 					</div>
@@ -141,5 +145,9 @@ $('#island-room-accordion .accordion-heading button.delete').click(function(e) {
 			});
 		}
 	});
+});
+$('#island-room-tab a[data-name="containPool"]').editable({
+	prepend: '',
+	source: [{value:'True',text:'是'},{value:'False',text:'否'}]
 });
 </script>

@@ -14,6 +14,8 @@ public class MaldivesRoom {
   private String description; // 说明
   private Integer num;// 房间数量
   private String requirements;// 入住要求（人数限制等）
+  private String roomSize; // 房间大小
+  private Boolean containPool;// 是否包含泳池
   private String roomFacility;// 房间设施
   private Integer displayOrder;
 
@@ -97,6 +99,22 @@ public class MaldivesRoom {
 
   public void setDisplayOrder(Integer displayOrder) {
     this.displayOrder = displayOrder;
+  }
+
+  public String getRoomSize() {
+    return roomSize;
+  }
+
+  public void setRoomSize(String roomSize) {
+    this.roomSize = roomSize;
+  }
+
+  public Boolean getContainPool() {
+    return containPool;
+  }
+
+  public void setContainPool(Boolean containPool) {
+    this.containPool = containPool;
   }
 
 }

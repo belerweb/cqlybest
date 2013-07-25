@@ -27,7 +27,6 @@
 					<#include "update_hotel.ftl">
 					<#include "update_room.ftl">
 					<#include "update_dining.ftl">
-					<#include "update_dining.ftl">
 					<#include "update_play.ftl">
 					<div id="island-poster-tab" class="image-gallery tab-pane">
 						<div class="text-right"><button type="button" data-extra="maldives-island-poster" data-extra-key="${id}" class="btn btn-primary action action-add picture">添加</button></div>
