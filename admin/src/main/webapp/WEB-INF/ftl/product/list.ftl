@@ -114,7 +114,21 @@
 					<#list products as product>
 					<tr>
 						<td><input type="checkbox" value="${product.id}"></td>
-						<td>${product.name!}</td>
+						<td>
+							<#if product.productType==0>
+							<span class="label label-success">普通产品</span>
+							<#elseif product.productType==1>
+							<span class="label label-success">马尔代夫</span>
+							</#if>
+							${product.name!}
+							<#if product.productType==1>
+								<#if product.days?has_content>${product.days}天</#if>
+								<#if product.nights?has_content>${product.nights}晚</#if>
+								<#if (product.detail.room1)?has_content && (product.detail.room1Unit)?has_content>${product.detail.room1}${product.detail.room1Unit}</#if>
+								<#if (product.detail.room2)?has_content && (product.detail.room2Unit)?has_content>${product.detail.room2}${product.detail.room2Unit}</#if>
+								<#if (product.detail.room3)?has_content && (product.detail.room3Unit)?has_content>${product.detail.room3}${product.detail.room3Unit}</#if>
+							</#if>
+						</td>
 						<td>
 							<#if product.popular?exists && product.popular>
 							<span class="s_green">热门</span>
@@ -138,6 +152,8 @@
 							</#if>
 						</td>
 						<td class="action-table">
+							<a href="<#if options.site_url?has_content>${options.site_url}/product/${product.id}.html<#else>javascript:alert('请先配置网站地址。');</#if>"
+								<#if options.site_url?has_content>target="_blank"</#if> class="page-load-btn safe" title="预览"><i class="icon-external-link"></i></a>
 							<#if product.published?exists && product.published>
 							<a href="javascript:void(0);" data-url="${ContextPath}/product/toggle.do?id=${product.id}&published=false"
 								class="ajax-action-btn gray" data-confirm="true" data-action="取消发布" data-title="${product.name!}"

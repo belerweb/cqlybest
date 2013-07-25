@@ -30,6 +30,7 @@ import com.cqlybest.common.service.DictService;
 import com.cqlybest.common.service.ImageService;
 import com.cqlybest.common.service.JsonService;
 import com.cqlybest.common.service.MaldivesService;
+import com.cqlybest.common.service.OptionService;
 import com.cqlybest.common.service.ProductService;
 
 @Controller
@@ -45,6 +46,8 @@ public class ProductController extends ControllerHelper {
   private ImageService imageService;
   @Autowired
   private MaldivesService maldivesService;
+  @Autowired
+  private OptionService optionService;
 
   /**
    * 添加产品
@@ -225,6 +228,7 @@ public class ProductController extends ControllerHelper {
     model.addAttribute("total", productService.queryProductTotal(hot, red, spe, pub, name));
     model.addAttribute("products", productService.queryProduct(hot, red, spe, pub, name, page,
         pageSize));
+    model.addAttribute("options", optionService.getOptions());
 
     model.addAttribute("paramHot", hot);
     model.addAttribute("paramRed", red);

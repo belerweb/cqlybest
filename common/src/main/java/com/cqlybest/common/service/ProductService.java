@@ -176,7 +176,13 @@ public class ProductService {
 
   public List<Product> queryProduct(Boolean hot, Boolean red, Boolean spe, Boolean pub,
       String name, int page, int pageSize) {
-    return productDao.findProductTotal(hot, red, spe, pub, name, page, pageSize);
+    List<Product> products = productDao.findProductTotal(hot, red, spe, pub, name, page, pageSize);
+    for (Product product : products) {
+      if (product.getProductType() == Product.MALDIVES) {
+        product.setDetail(productDao.findById(ProductDetailMaldives.class, product.getId()));
+      }
+    }
+    return products;
   }
 
   public List<Product> queryProducts(ProductGroup productGroup, Set<ProductFilterItem> filterItems,
