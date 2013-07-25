@@ -17,9 +17,7 @@
 	margin: -15px 0 10px 0;
 }
 .room-gallery a{
-	display: inline-block;
-	height:100px;
-	width:100px;
+	float: left;
 }
 </style>
 <div id="maldives-island" class="container">
