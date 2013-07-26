@@ -1,12 +1,54 @@
+<style>
+#maldives-island-play－tab .metro .tile {
+  background-clip: padding-box;
+    color: #FFFFFF;
+    cursor: pointer;
+    display: block;
+    float: left;
+    height: 50px;
+    margin: 2px;
+    overflow: hidden;
+    padding: 8px;
+    text-decoration: none;
+    width: 50px;
+	-webkit-background-clip: padding;
+	-moz-background-clip: padding;
+}
+
+#maldives-island-play－tab .metro .tile.rectangle {
+    width: 120px;
+}
+
+#maldives-island-play－tab .metro .tile .text-wrapper {
+	display: table;
+    height: 50px;
+    width: 50px;
+}
+
+#maldives-island-play－tab .metro .tile.rectangle .text-wrapper {
+    width: 120px;
+}
+
+#maldives-island-play－tab .metro .tile .text-wrapper .text {
+	display: table-cell;
+    font-size: 16px;
+    line-height: 25px;
+    text-align: center;
+    vertical-align: middle;
+}
+</style>
 <div id="maldives-island-play－tab" class="maldives-island-section maldives-play-gallery">
 	<div class="title">
 		<h4>活动与娱乐设施</h4>
 		<hr>
 	</div>
-	<div>
+	<div class="metro">
+		<#assign colors=['#87C116','#00AFF1','#0BA6FF','#FC8E00','#04B1E0','#FFC400','#1D86C9']>
+		<#assign ExistOptionIndex=0>
 		<#macro playOption index name>
 		<#if island.plays?has_content && island.plays?substring(index,index+1)=='1'>
-		<span class="label label-success">${name}</span>
+		<a class="tile <#if ExistOptionIndex%3==0>rectangle</#if>" style="background-color:${colors[springx.rand(0,colors?size-1)]}"><div class="text-wrapper"><div class="text">${name}</div></div></a>
+		<#assign ExistOptionIndex=ExistOptionIndex+1>
 		</#if>
 		</#macro>
 		<@playOption 0 '无线网络' />

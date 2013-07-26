@@ -27,7 +27,7 @@ del {
 	margin-left: 5px;
 }
 
-#top-nav .avatar{
+#top-nav .avatar {
 	width: 32px;
 	height: 32px;
 }
@@ -189,8 +189,8 @@ del {
 	margin-bottom: 10px;
 }
 
-.controls > .control-label {
-	text-align: left; 
+.controls>.control-label {
+	text-align: left;
 }
 
 .box {
@@ -598,6 +598,8 @@ del {
 	font-size: 14px;
 	color: #333333;
 }
+
 .nav-sidebar .divider {
 	margin: 0;
 }
+
