@@ -1,40 +1,40 @@
 <style>
 #maldives-island-play－tab .metro .tile {
-  background-clip: padding-box;
-    color: #FFFFFF;
-    cursor: pointer;
-    display: block;
-    float: left;
-    height: 50px;
-    margin: 2px;
-    overflow: hidden;
-    padding: 8px;
-    text-decoration: none;
-    width: 50px;
+	background-clip: padding-box;
+	color: #FFFFFF;
+	cursor: pointer;
+	display: block;
+	float: left;
+	height: 50px;
+	margin: 2px;
+	overflow: hidden;
+	padding: 8px;
+	text-decoration: none;
+	width: 50px;
 	-webkit-background-clip: padding;
 	-moz-background-clip: padding;
 }
 
 #maldives-island-play－tab .metro .tile.rectangle {
-    width: 120px;
+	width: 120px;
 }
 
 #maldives-island-play－tab .metro .tile .text-wrapper {
 	display: table;
-    height: 50px;
-    width: 50px;
+	height: 50px;
+	width: 50px;
 }
 
 #maldives-island-play－tab .metro .tile.rectangle .text-wrapper {
-    width: 120px;
+	width: 120px;
 }
 
 #maldives-island-play－tab .metro .tile .text-wrapper .text {
 	display: table-cell;
-    font-size: 16px;
-    line-height: 25px;
-    text-align: center;
-    vertical-align: middle;
+	font-size: 16px;
+	line-height: 25px;
+	text-align: center;
+	vertical-align: middle;
 }
 </style>
 <div id="maldives-island-play－tab" class="maldives-island-section maldives-play-gallery">

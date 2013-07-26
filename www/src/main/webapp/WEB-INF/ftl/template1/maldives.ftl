@@ -1,6 +1,11 @@
 <#assign Title=(island.zhName!)+(island.enName!) />
 <#include "/template1/header.ftl">
 <style type="text/css">
+#maldives-island-sidebar.affix{
+	width: 220px;
+	top: 41px;
+	background: #FFF;
+}
 #maldives-island-info-nav.affix{
 	width: 700px;
 	top: 41px;
@@ -66,6 +71,8 @@
 			<#include "maldives_play.ftl">
 		</div>
 		<div class="span3">
+			<div id="maldives-island-sidebar">
+			</div>
 		</div>
 	</div>
 </div>
@@ -79,6 +86,11 @@
 			$('#maldives-island-info-nav').affix({
 				offset: {
 					top: $('#maldives-island-info-nav').offset().top - 50
+				}
+			});
+			$('#maldives-island-sidebar').affix({
+				offset: {
+					top: $('#maldives-island-sidebar').offset().top - 50
 				}
 			});
 		}

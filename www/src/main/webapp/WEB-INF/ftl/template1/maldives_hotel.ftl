@@ -11,38 +11,54 @@
 						<th style="width: 75px;">酒店集团：</th>
 						<td>${island.hotelName!}</td>
 					</tr>
+					<#if island.hotelLevel?has_content>
 					<tr>
 						<th>酒店星级：</th>
 						<td>${island.hotelLevel!}</td>
 					</tr>
+					</#if>
+					<#if island.hotelStart?has_content>
 					<tr>
 						<th>开始营业：</th>
 						<td>${island.hotelStart!}</td>
 					</tr>
+					</#if>
+					<#if island.hotelRoomNum?has_content>
 					<tr>
 						<th>房间总数：</th>
 						<td>${island.hotelRoomNum!}</td>
 					</tr>
+					</#if>
+					<#if island.hotelSite?has_content>
 					<tr>
 						<th>官方网址：</th>
 						<td>${island.hotelSite!}</td>
 					</tr>
+					</#if>
+					<#if island.hotelTel?has_content>
 					<tr>
 						<th>电话：</th>
 						<td>${island.hotelTel!}</td>
 					</tr>
+					</#if>
+					<#if island.hotelFax?has_content>
 					<tr>
 						<th>传真：</th>
 						<td>${island.hotelFax!}</td>
 					</tr>
+					</#if>
+					<#if island.hotelChinese?has_content>
 					<tr>
 						<th>中文服务：</th>
-						<td><#if island.hotelChinese?has_content && island.hotelChinese>有</#if></td>
+						<td><#if island.hotelChinese>有<#else>无</#if></td>
 					</tr>
+					</#if>
+					<#if island.hotelAirport?has_content>
 					<tr>
-						<th>机场柜台号：</th>
+						<th>机场柜台：</th>
 						<td>${island.hotelAirport!}</td>
 					</tr>
+					</#if>
 				</tbody>
 			</table>
 		</div>

@@ -16,7 +16,7 @@ del {
 }
 
 #top-nav .navbar-inner {
-	min-height: auto;
+	min-height: 30px;
 }
 
 #top-nav .container {
