@@ -603,3 +603,10 @@ del {
 	margin: 0;
 }
 
+.sidebar .phone {
+	background-color:#0BA6FF;
+	color:#FFFFFF;
+	font-family: Georgia;
+	font-size: 25px;
+	padding:15px 0;
+}

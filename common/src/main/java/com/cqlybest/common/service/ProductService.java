@@ -1,5 +1,6 @@
 package com.cqlybest.common.service;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Set;
@@ -178,11 +179,21 @@ public class ProductService {
       String name, int page, int pageSize) {
     List<Product> products = productDao.findProductTotal(hot, red, spe, pub, name, page, pageSize);
     for (Product product : products) {
-      if (product.getProductType() == Product.MALDIVES) {
-        product.setDetail(productDao.findById(ProductDetailMaldives.class, product.getId()));
-      }
+      setProducTypeDetail(product);
     }
     return products;
+  }
+
+  public List<Product> getMaldivesProductByIsland(String islandId, int num) {
+    List<String> productIds = productDao.getMaldivesProductIds(islandId, num);
+    List<Product> result = new ArrayList<>();
+    for (String id : productIds) {
+      Product product = productDao.findById(id);
+      setProducTypeDetail(product);
+      product.setPosters(imageDao.queryImages(Constant.IMAGE_PRODUCT_POSTER, id));
+      result.add(product);
+    }
+    return result;
   }
 
   public List<Product> queryProducts(ProductGroup productGroup, Set<ProductFilterItem> filterItems,
@@ -211,6 +222,12 @@ public class ProductService {
       for (String value : values.split(",")) {
         condition.add(Restrictions.like(property, value, MatchMode.ANYWHERE));
       }
+    }
+  }
+
+  private void setProducTypeDetail(Product product) {
+    if (product.getProductType() == Product.MALDIVES) {
+      product.setDetail(productDao.findById(ProductDetailMaldives.class, product.getId()));
     }
   }
 

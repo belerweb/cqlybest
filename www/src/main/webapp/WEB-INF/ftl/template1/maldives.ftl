@@ -24,6 +24,21 @@
 .room-gallery a{
 	float: left;
 }
+
+#island-product-accordion .accordion-group {
+	border-top: 0;
+	border-radius: 0;
+	margin: 0;
+}
+#island-product-accordion .accordion-heading {
+	background-color:#DFF0D8;
+}
+#island-product-accordion .accordion-heading a{
+	color:#333333;
+}
+#island-product-accordion .accordion-inner {
+	padding: 0;
+}
 </style>
 <div id="maldives-island" class="container">
 	<h3 class="name">${island.zhName!} <span>${island.enName!}</span></h3>
@@ -70,8 +85,50 @@
 			<#include "maldives_dining.ftl">
 			<#include "maldives_play.ftl">
 		</div>
-		<div class="span3">
+		<div class="span3 sidebar">
 			<div id="maldives-island-sidebar">
+				<#if (Options.site_400)?has_content>
+				<div class="phone text-center">
+					☎${Options.site_400}
+				</div>
+				</#if>
+				<#if islandProducts?has_content>
+				<div class="maldives-island-section">
+					<div class="title">
+						<h4>本岛行程</h4>
+						<hr>
+					</div>
+					<div id="island-product-accordion" class="accordion">
+						<#list islandProducts as product>
+						<div class="accordion-group">
+							<div class="accordion-heading">
+								<a href="#island-product-${product.id}" data-parent="#island-product-accordion" data-toggle="collapse" class="accordion-toggle">
+									<#if (product.detail.room1)?has_content && (product.detail.room1Unit)?has_content><#assign room1=product.detail.room1 + product.detail.room1Unit></#if>
+									<#if (product.detail.room2)?has_content && (product.detail.room2Unit)?has_content><#assign room2=product.detail.room2 + product.detail.room2Unit></#if>
+									<#if (product.detail.room3)?has_content && (product.detail.room3Unit)?has_content><#assign room3=product.detail.room3 + product.detail.room3Unit></#if>
+									<#if product.days?has_content>${product.days}天</#if><#if product.nights?has_content>${product.nights}晚</#if> ${room1!}${room2!}${room3!}
+									<#if product.price?has_content><span style="color:#F89406">¥${(product.price/100)?string('0.00')}起</span></#if>
+								</a>
+							</div>
+							<div id="island-product-${product.id}" class="accordion-body collapse <#if product_index==0>in</#if>">
+								<div class="accordion-inner">
+									<a href="${ContextPath}/product/${product.id}.html" target="_blank"
+										title="点击查看详情并预定 ${product.name!} <#if product.days?has_content>${product.days}天</#if><#if product.nights?has_content>${product.nights}晚</#if> ${room1!}${room2!}${room3!} <#if product.price?has_content>¥${(product.price/100)?string('0.00')}起</#if>">
+									<#if product.posters?has_content>
+									<#assign image = product.posters[springx.rand(0,product.posters?size-1)] />
+									<img alt="${product.title!}" src="${ContextPath}/image/${image.id}.${image.imageType}?width=218&height=163">
+									<#else>
+									点击查看详情并预定 ${product.name!} <#if product.days?has_content>${product.days}天</#if><#if product.nights?has_content>${product.nights}晚</#if>
+									${room1!}${room2!}${room3!} <#if product.price?has_content>¥${(product.price/100)?string('0.00')}起</#if>
+									</#if>
+									</a>
+								</div>
+							</div>
+						</div>
+						</#list>
+					</div>
+				</div>
+				</#if>
 			</div>
 		</div>
 	</div>

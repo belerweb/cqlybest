@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.cqlybest.common.bean.MaldivesSeaIsland;
 import com.cqlybest.common.service.MaldivesService;
+import com.cqlybest.common.service.ProductService;
 import com.cqlybest.common.service.TemplateService;
 
 @Controller
@@ -19,6 +20,8 @@ public class MaldivesController extends ControllerHelper {
   private TemplateService templateService;
   @Autowired
   private MaldivesService maldivesService;
+  @Autowired
+  private ProductService productService;
 
   @RequestMapping("/maldives/{id}.html")
   public Object maldives(@PathVariable String id, Model model) {
@@ -26,7 +29,10 @@ public class MaldivesController extends ControllerHelper {
     if (island == null) {
       return new ResponseEntity<Object>(HttpStatus.NOT_FOUND);
     }
+
     model.addAttribute("island", island);
+    model.addAttribute("islandProducts", productService.getMaldivesProductByIsland(id, 5));
+
     setCommonData(model);
     return templateService.getTemplate() + "/maldives";
   }

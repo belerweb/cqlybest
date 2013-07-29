@@ -161,6 +161,14 @@ public class ProductDao extends AbstractDao<Product, String> {
     return criteria.list();
   }
 
+  public List<String> getMaldivesProductIds(String islandId, int num) {
+    Criteria criteria = getCurrentSession().createCriteria(ProductMaldives.class);
+    criteria.add(Restrictions.eq("islandId", islandId));
+    criteria.setProjection(Projections.distinct(Projections.property("productId")));
+    criteria.setMaxResults(num);
+    return criteria.list();
+  }
+
   public List<ProductTravel> getTravels(String id) {
     Criteria criteria = getCurrentSession().createCriteria(ProductTravel.class);
     criteria.add(Restrictions.eq("productId", id));
