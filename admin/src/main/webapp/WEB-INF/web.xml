@@ -20,6 +20,10 @@
 	</filter-mapping>
 	<filter-mapping>
 		<filter-name>hibernateFilter</filter-name>
+		<url-pattern>/error</url-pattern>
+	</filter-mapping>
+	<filter-mapping>
+		<filter-name>hibernateFilter</filter-name>
 		<url-pattern>*.do</url-pattern>
 	</filter-mapping>
 	<filter>
@@ -37,6 +41,10 @@
 	<filter-mapping>
 		<filter-name>springSecurityFilterChain</filter-name>
 		<url-pattern>/image/*</url-pattern>
+	</filter-mapping>
+	<filter-mapping>
+		<filter-name>springSecurityFilterChain</filter-name>
+		<url-pattern>/error</url-pattern>
 	</filter-mapping>
 	<filter-mapping>
 		<filter-name>springSecurityFilterChain</filter-name>
@@ -59,6 +67,10 @@
 	<servlet-mapping>
 		<servlet-name>springmvc</servlet-name>
 		<url-pattern>/image/*</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>springmvc</servlet-name>
+		<url-pattern>/error</url-pattern>
 	</servlet-mapping>
 	<servlet-mapping>
 		<servlet-name>springmvc</servlet-name>

@@ -24,6 +24,7 @@ http://www.springframework.org/schema/beans http://www.springframework.org/schem
 		<logout logout-url="/logout.do" />
 		<intercept-url pattern="/index.do" access="permitAll" />
 		<intercept-url pattern="/connector/**" access="permitAll" />
+		<intercept-url pattern="/error" access="permitAll" />
 		<intercept-url pattern="/**" access="hasRole('ROLE_ADMIN')" />
 	</http>
 
