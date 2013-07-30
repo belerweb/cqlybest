@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -112,5 +113,9 @@ public class IndexController extends ControllerHelper {
     setCommonData(model);
     return templateService.getTemplate() + "/page";
   }
+
+
+  @RequestMapping("/error.html")
+  public void error(HttpServletRequest request, Model model) {}
 
 }
