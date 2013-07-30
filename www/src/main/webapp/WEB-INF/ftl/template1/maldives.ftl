@@ -23,6 +23,7 @@
 }
 .room-gallery a{
 	float: left;
+	margin: 0 0 2px 2px;
 }
 
 #island-product-accordion .accordion-group {
