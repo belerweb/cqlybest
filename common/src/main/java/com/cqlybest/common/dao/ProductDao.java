@@ -84,6 +84,31 @@ public class ProductDao extends AbstractDao<Product, String> {
         "ids", ids).executeUpdate();
   }
 
+  public void deleteTravelByProduct(String[] ids) {
+    getCurrentSession().createQuery("DELETE FROM ProductTravel WHERE productId IN (:ids)")
+        .setParameterList("ids", ids).executeUpdate();
+  }
+
+  public void deleteTrafficByProduct(String[] ids) {
+    getCurrentSession().createQuery("DELETE FROM ProductTraffic WHERE productId IN (:ids)")
+        .setParameterList("ids", ids).executeUpdate();
+  }
+
+  public void deleteMaldivesByProduct(String[] ids) {
+    getCurrentSession().createQuery("DELETE FROM ProductMaldives WHERE productId IN (:ids)")
+        .setParameterList("ids", ids).executeUpdate();
+  }
+
+  public void deleteCommentByProduct(String[] ids) {
+    getCurrentSession().createQuery("DELETE FROM ProductComment WHERE productId IN (:ids)")
+        .setParameterList("ids", ids).executeUpdate();
+  }
+
+  public void deleteCalendarByProduct(String[] ids) {
+    getCurrentSession().createQuery("DELETE FROM ProductCalendar WHERE productId IN (:ids)")
+        .setParameterList("ids", ids).executeUpdate();
+  }
+
   public void deleteTravel(Integer id) {
     getCurrentSession().createQuery("DELETE FROM ProductTravel WHERE id=?").setParameter(0, id)
         .executeUpdate();

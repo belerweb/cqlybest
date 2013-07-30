@@ -143,7 +143,16 @@ public class ProductService {
 
   @Transactional
   public void delete(String[] ids) {
-    productDao.delete(ids);
+    productDao.delete(ids); // 删除产品
+    productDao.deleteTravelByProduct(ids);
+    productDao.deleteTrafficByProduct(ids);
+    productDao.deleteMaldivesByProduct(ids);
+    productDao.deleteCommentByProduct(ids);
+    productDao.deleteCalendarByProduct(ids);
+    for (String id : ids) {
+      imageDao.deleteByExtra(Constant.IMAGE_PRODUCT_PHOTO, id);
+      imageDao.deleteByExtra(Constant.IMAGE_PRODUCT_POSTER, id);
+    }
   }
 
   @Transactional
@@ -189,9 +198,11 @@ public class ProductService {
     List<Product> result = new ArrayList<>();
     for (String id : productIds) {
       Product product = productDao.findById(id);
-      setProducTypeDetail(product);
-      product.setPosters(imageDao.queryImages(Constant.IMAGE_PRODUCT_POSTER, id));
-      result.add(product);
+      if (product != null) {
+        setProducTypeDetail(product);
+        product.setPosters(imageDao.queryImages(Constant.IMAGE_PRODUCT_POSTER, id));
+        result.add(product);
+      }
     }
     return result;
   }
