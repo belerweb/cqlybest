@@ -20,7 +20,7 @@
 		<dependency.slf4j.version>1.7.2</dependency.slf4j.version>
 		<dependency.cglib.version>2.2.2</dependency.cglib.version>
 		<dependency.jackson.version>1.9.12</dependency.jackson.version>
-		<dependency.dbcp.version>1.4</dependency.dbcp.version>
+		<dependency.c3p0.version>0.9.1.2</dependency.c3p0.version>
 		<dependency.dbutils.version>1.5</dependency.dbutils.version>
 		<dependency.commons-lang.version>2.6</dependency.commons-lang.version>
 		<dependency.pinyin4j.version>2.5.0</dependency.pinyin4j.version>
@@ -176,9 +176,9 @@
 			<version>${dependency.jackson.version}</version>
 		</dependency>
 		<dependency>
-			<groupId>commons-dbcp</groupId>
-			<artifactId>commons-dbcp</artifactId>
-			<version>${dependency.dbcp.version}</version>
+			<groupId>c3p0</groupId>
+			<artifactId>c3p0</artifactId>
+			<version>${dependency.c3p0.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>commons-dbutils</groupId>

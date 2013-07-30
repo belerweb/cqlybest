@@ -15,14 +15,12 @@
 	</bean>
 	<bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver" />
 
-	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource">
-		<property name="driverClassName" value="#{T(System).getProperty('cqlybest.db.driver', T(System).getenv('cqlybest.db.driver'))}" />
-		<property name="url" value="#{T(System).getProperty('cqlybest.db.url', T(System).getenv('cqlybest.db.url'))}" />
-		<property name="username" value="#{T(System).getProperty('cqlybest.db.username', T(System).getenv('cqlybest.db.username'))}" />
+	<bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource">
+		<property name="driverClass" value="#{T(System).getProperty('cqlybest.db.driver', T(System).getenv('cqlybest.db.driver'))}" />
+		<property name="jdbcUrl" value="#{T(System).getProperty('cqlybest.db.url', T(System).getenv('cqlybest.db.url'))}" />
+		<property name="user" value="#{T(System).getProperty('cqlybest.db.username', T(System).getenv('cqlybest.db.username'))}" />
 		<property name="password" value="#{T(System).getProperty('cqlybest.db.password', T(System).getenv('cqlybest.db.password'))}" />
-		<property name="testWhileIdle" value="true" />
-		<property name="validationQuery"
-			value="#{T(System).getProperty('cqlybest.db.validation', T(System).getenv('cqlybest.db.validation'))}" />
+		<property name="idleConnectionTestPeriod" value="60" />
 	</bean>
 
 	<bean id="sessionFactory" class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
