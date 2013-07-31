@@ -12,7 +12,6 @@ public class Role implements GrantedAuthority {
 
   private static final long serialVersionUID = -7470701733684274372L;
 
-  public static final Role FIT = new Role("ROLE_FIT", "散客");// 散客
   public static final Role GROUP = new Role("ROLE_GROUP", "团体");// 团体
   public static final Role AGENCY = new Role("ROLE_AGENCY", "旅行社");// 旅行社
   public static final Role ADMIN = new Role("ROLE_ADMIN", "管理员");// 管理员

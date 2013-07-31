@@ -22,52 +22,20 @@ public class UserController {
   @Autowired
   private UserService userService;
 
-  /**
-   * 散客列表
-   */
-  @RequestMapping(value = "/user/fit.do", method = RequestMethod.GET)
-  public void fit(@RequestParam(defaultValue = "1") Integer page, Model model) {
+  @RequestMapping(value = "/user/list.do", method = RequestMethod.GET)
+  public void list(@RequestParam(defaultValue = "1") Integer page, Model model) {
+    int _page = Math.max(page, 1);
     Integer pageSize = 10;
-    model.addAttribute("page", page);
+    model.addAttribute("page", _page);
     model.addAttribute("pageSize", pageSize);
-    model.addAttribute("total", userService.getUserListTotal(Role.FIT));
-    model.addAttribute("users", userService.getUserList(Role.FIT, page, pageSize));
+    model.addAttribute("total", userService.getUserListTotal());
+    model.addAttribute("users", userService.getUserList(page, pageSize));
   }
 
-  /**
-   * 团体列表
-   */
-  @RequestMapping(value = "/user/group.do", method = RequestMethod.GET)
-  public void group(@RequestParam(defaultValue = "1") Integer page, Model model) {
-    Integer pageSize = 10;
-    model.addAttribute("page", page);
-    model.addAttribute("pageSize", pageSize);
-    model.addAttribute("total", userService.getUserListTotal(Role.GROUP));
-    model.addAttribute("users", userService.getUserList(Role.GROUP, page, pageSize));
-  }
-
-  /**
-   * 旅行社列表
-   */
-  @RequestMapping(value = "/user/agency.do", method = RequestMethod.GET)
-  public void agency(@RequestParam(defaultValue = "1") Integer page, Model model) {
-    Integer pageSize = 10;
-    model.addAttribute("page", page);
-    model.addAttribute("pageSize", pageSize);
-    model.addAttribute("total", userService.getUserListTotal(Role.AGENCY));
-    model.addAttribute("users", userService.getUserList(Role.AGENCY, page, pageSize));
-  }
-
-  /**
-   * 管理员列表
-   */
-  @RequestMapping(value = "/user/admin.do", method = RequestMethod.GET)
-  public void admin(@RequestParam(defaultValue = "1") Integer page, Model model) {
-    Integer pageSize = 10;
-    model.addAttribute("page", page);
-    model.addAttribute("pageSize", pageSize);
-    model.addAttribute("total", userService.getUserListTotal(Role.ADMIN));
-    model.addAttribute("users", userService.getUserList(Role.ADMIN, page, pageSize));
+  @RequestMapping("/user/toggleadmin.do")
+  @ResponseBody
+  public void toggleadmin(@RequestParam String id) {
+    userService.toggleadmin(id);
   }
 
   /**
@@ -77,15 +45,12 @@ public class UserController {
   @ResponseBody
   public String add(@RequestParam String role, @RequestParam String name) {
     Set<Role> roles = new HashSet<>();
-    if ("fit".equals(role)) {
-      roles.add(Role.FIT);
-    } else if ("group".equals(role)) {
+    if (Role.GROUP.getRole().equals(role)) {
       roles.add(Role.GROUP);
-    } else if ("agency".equals(role)) {
+    } else if (Role.AGENCY.getRole().equals(role)) {
       roles.add(Role.AGENCY);
-    } else if ("admin".equals(role)) {
-      roles.add(Role.ADMIN);
     }
+
     LoginUser user = new LoginUser();
     user.setFullname(name);
     user.setRoles(roles);
@@ -93,90 +58,15 @@ public class UserController {
     return user.getId();
   }
 
-  /**
-   * 修改散客资料
-   */
-  @RequestMapping(value = "/user/fit/update.do", method = RequestMethod.GET)
+  @RequestMapping(value = "/user/update.do", method = RequestMethod.GET)
   public void fit(@RequestParam String id, Model model) {
     LoginUser user = userService.getUser(id);
     model.addAttribute("user", user);
   }
 
-  /**
-   * 修改散客资料
-   */
-  @RequestMapping(value = "/user/fit/update.do", method = RequestMethod.POST)
+  @RequestMapping(value = "/user/update.do", method = RequestMethod.POST)
   @ResponseBody
   public void fit(@RequestParam String pk, @RequestParam String name, @RequestParam String value,
-      Model model) {
-    Object _value = value;
-    if ("password".equals(name)) {
-      _value = new ShaPasswordEncoder(256).encodePassword(value, null);
-    }
-    userService.update(pk, name, _value);
-  }
-
-  /**
-   * 修改团体资料
-   */
-  @RequestMapping(value = "/user/group/update.do", method = RequestMethod.GET)
-  public void group(@RequestParam String id, Model model) {
-    LoginUser user = userService.getUser(id);
-    model.addAttribute("user", user);
-  }
-
-  /**
-   * 修改团体资料
-   */
-  @RequestMapping(value = "/user/group/update.do", method = RequestMethod.POST)
-  @ResponseBody
-  public void group(@RequestParam String pk, @RequestParam String name, @RequestParam String value,
-      Model model) {
-    Object _value = value;
-    if ("password".equals(name)) {
-      _value = new ShaPasswordEncoder(256).encodePassword(value, null);
-    }
-    userService.update(pk, name, _value);
-  }
-
-  /**
-   * 修改旅行社资料
-   */
-  @RequestMapping(value = "/user/agency/update.do", method = RequestMethod.GET)
-  public void agency(@RequestParam String id, Model model) {
-    LoginUser user = userService.getUser(id);
-    model.addAttribute("user", user);
-  }
-
-  /**
-   * 修改旅行社资料
-   */
-  @RequestMapping(value = "/user/agency/update.do", method = RequestMethod.POST)
-  @ResponseBody
-  public void agency(@RequestParam String pk, @RequestParam String name,
-      @RequestParam String value, Model model) {
-    Object _value = value;
-    if ("password".equals(name)) {
-      _value = new ShaPasswordEncoder(256).encodePassword(value, null);
-    }
-    userService.update(pk, name, _value);
-  }
-
-  /**
-   * 修改管理员资料
-   */
-  @RequestMapping(value = "/user/admin/update.do", method = RequestMethod.GET)
-  public void admin(@RequestParam String id, Model model) {
-    LoginUser user = userService.getUser(id);
-    model.addAttribute("user", user);
-  }
-
-  /**
-   * 修改管理员资料
-   */
-  @RequestMapping(value = "/user/admin/update.do", method = RequestMethod.POST)
-  @ResponseBody
-  public void admin(@RequestParam String pk, @RequestParam String name, @RequestParam String value,
       Model model) {
     Object _value = value;
     if ("password".equals(name)) {

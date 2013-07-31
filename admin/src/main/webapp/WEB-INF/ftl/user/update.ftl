@@ -5,13 +5,13 @@
 		<div class="grid-title">
 			<div class="pull-left">
 				<div class="icon-title"><i class="icon-edit"></i></div>
-				<span>修改散客</span>
+				<span>修改用户信息</span>
 				<div class="clearfix"></div>
 			</div>
 			<div class="clearfix"></div>
 		</div>
 		<#assign id="${user.id}">
-		<#assign url="${ContextPath}/user/fit/update.do" />
+		<#assign url="${ContextPath}/user/update.do" />
 		<form class="form-horizontal">
 			<div class="grid-content">
 				<div class="control-group">

@@ -35,6 +35,17 @@ public abstract class AbstractDao<E, I extends Serializable> extends SqlSessionD
     getCurrentSession().delete(e);
   }
 
+  public int addUserRole(String userId, String role) {
+    return getCurrentSession().createSQLQuery("INSERT INTO LOGIN_USER_ROLE(ID, ROLE) VALUE(?, ?)")
+        .setParameter(0, userId).setParameter(1, role).executeUpdate();
+  }
+
+  public int deleteUserRole(String userId, String role) {
+    return getCurrentSession().createSQLQuery(
+        "DELETE FROM LOGIN_USER_ROLE WHERE ID = ? AND ROLE = ?").setParameter(0, userId)
+        .setParameter(1, role).executeUpdate();
+  }
+
   public Long total() {
     Criteria criteria = getCurrentSession().createCriteria(entityClass);
     criteria.setProjection(Projections.rowCount());

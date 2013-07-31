@@ -157,12 +157,12 @@ public class UserService {
     }
   }
 
-  public Long getUserListTotal(Role role) {
-    return userDao.findUserTotal(role.getRole());
+  public Long getUserListTotal() {
+    return userDao.total();
   }
 
-  public List<LoginUser> getUserList(Role role, int page, int pageSize) {
-    return userDao.findUser(role.getRole(), page, pageSize);
+  public List<LoginUser> getUserList(int page, int pageSize) {
+    return userDao.find(page, pageSize);
   }
 
   public LoginUser getUser(String id) {
@@ -178,6 +178,16 @@ public class UserService {
   @Transactional
   public void delete(LoginUser user) {
     userDao.delete(user);
+  }
+
+  /**
+   * 设置或取消管理员
+   */
+  @Transactional
+  public void toggleadmin(String id) {
+    if (userDao.deleteUserRole(id, Role.ADMIN.getRole()) == 0) {
+      userDao.addUserRole(id, Role.ADMIN.getRole());
+    }
   }
 
 }
