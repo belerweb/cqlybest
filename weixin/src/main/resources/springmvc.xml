@@ -16,10 +16,10 @@ http://www.springframework.org/schema/mvc http://www.springframework.org/schema/
 			</list>
 		</property>
 	</bean>
-	<bean class="org.springframework.http.converter.json.MappingJacksonHttpMessageConverter">
+	<bean class="org.springframework.http.converter.StringHttpMessageConverter">
 		<property name="supportedMediaTypes">
 			<list>
-				<value>application/json; charset=UTF-8</value>
+				<value>text/xml; charset=UTF-8</value>
 				<value>*; charset=UTF-8</value>
 			</list>
 		</property>
@@ -29,7 +29,7 @@ http://www.springframework.org/schema/mvc http://www.springframework.org/schema/
 			<list>
 				<ref bean="org.springframework.http.converter.ResourceHttpMessageConverter" />
 				<ref bean="org.springframework.http.converter.ByteArrayHttpMessageConverter" />
-				<ref bean="org.springframework.http.converter.json.MappingJacksonHttpMessageConverter" />
+				<ref bean="org.springframework.http.converter.StringHttpMessageConverter" />
 			</list>
 		</property>
 	</bean>

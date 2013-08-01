@@ -21,6 +21,7 @@
 		<dependency.slf4j.version>1.7.2</dependency.slf4j.version>
 		<dependency.cglib.version>2.2.2</dependency.cglib.version>
 		<dependency.jackson.version>1.9.12</dependency.jackson.version>
+		<dependency.jackson-xml.version>2.2.2</dependency.jackson-xml.version>
 		<dependency.c3p0.version>0.9.1.2</dependency.c3p0.version>
 		<dependency.dbutils.version>1.5</dependency.dbutils.version>
 		<dependency.commons-lang.version>2.6</dependency.commons-lang.version>
@@ -188,6 +189,12 @@
 			<groupId>org.codehaus.jackson</groupId>
 			<artifactId>jackson-mapper-asl</artifactId>
 			<version>${dependency.jackson.version}</version>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>com.fasterxml.jackson.dataformat</groupId>
+			<artifactId>jackson-dataformat-xml</artifactId>
+			<version>${dependency.jackson-xml.version}</version>
 			<scope>provided</scope>
 		</dependency>
 		<dependency>
@@ -363,6 +370,9 @@
 				<groupId>org.eclipse.jetty</groupId>
 				<artifactId>jetty-maven-plugin</artifactId>
 				<version>${dependency.jetty.version}</version>
+				<configuration>
+					<useProvidedScope>true</useProvidedScope>
+				</configuration>
 			</plugin>
 		</plugins>
 		<pluginManagement>
