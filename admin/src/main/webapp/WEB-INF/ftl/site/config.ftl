@@ -85,6 +85,14 @@
 						<a href="#" class="editable" data-name="weibo_nickname" data-type="text" data-url="${URL}" data-value="${options.weibo_nickname!}"></a>
 					</div>
 				</div>
+				<div class="control-group">
+					<label class="control-label"><a herf="#" class="editable-wysihtml5">微信公众平台欢迎词：</a></label>
+					<div class="controls">
+						<div data-name="weixin_welcome_message" data-type="wysihtml5" data-url="${URL}" data-toggle="manual" data-original-title="编辑微博公众平台欢迎词">
+							${options.weixin_welcome_message!}
+						</div>
+					</div>
+				</div>
 			</div>
 			<div class="span6">
 				<div class="control-group">
@@ -107,7 +115,7 @@
 		<div class="row-fluid form-horizontal">
 			<div class="span12">
 				<div class="control-group">
-					<label class="control-label">统计代码：</label>
+					<label class="control-label">底部代码 (统计/客服...)：</label>
 					<div class="controls">
 						<a href="#" class="editable" data-name="site_statistical_code" data-type="textarea" data-url="${URL}">${options.site_statistical_code!?html}</a>
 					</div>
@@ -153,5 +161,11 @@ $('#mb .watermark').click(function(e) {
 			el.attr('data-id', images[0].id).empty().append('<img src="${ContextPath}/image/' + images[0].id + '.' + images[0].imageType + '">');
 		});
 	}
+});
+
+$('.editable-wysihtml5').click(function(e) {
+	e.stopPropagation();
+	e.preventDefault();
+	$(this).parent().next().children().editable('toggle');
 });
 </script>

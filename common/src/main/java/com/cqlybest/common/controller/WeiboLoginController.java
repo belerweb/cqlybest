@@ -72,7 +72,7 @@ public class WeiboLoginController {
       // 关注官方微博
       String official = optionService.getOptions().get(Constant.OPTION_WEIBO_NICKNAME);
       try {
-        if (StringUtils.isNotEmpty(official)) {
+        if (StringUtils.isNotBlank(official)) {
           Friendships friendships = new Friendships();
           friendships.setToken(token);
           friendships.createFriendshipsByName(official);

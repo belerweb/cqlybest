@@ -1,4 +1,4 @@
-package com.cqlybest.weibo.bean;
+package com.cqlybest.weixin.bean;
 
 import java.util.List;
 
