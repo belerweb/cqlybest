@@ -2,12 +2,16 @@ package com.cqlybest.common.controller;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.apache.commons.lang.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import weibo4j.Friendships;
 import weibo4j.Oauth;
 import weibo4j.Users;
 import weibo4j.http.AccessToken;
@@ -18,15 +22,19 @@ import com.cqlybest.common.Constant;
 import com.cqlybest.common.auth.WeiboAuthToken;
 import com.cqlybest.common.bean.LoginUser;
 import com.cqlybest.common.bean.WeiboAuth;
+import com.cqlybest.common.service.OptionService;
 import com.cqlybest.common.service.UserService;
 
 @Controller
 public class WeiboLoginController {
 
+  private static final Logger LOGGER = LoggerFactory.getLogger(WeiboLoginController.class);
   private static final Oauth WEIBO_OAUTH = new Oauth();
 
   @Autowired
   private UserService userService;
+  @Autowired
+  private OptionService optionService;
 
   @RequestMapping("/connector/weibo_login")
   public String weiboLogin(HttpServletRequest request) {
@@ -59,8 +67,21 @@ public class WeiboLoginController {
       Users api = new Users();
       api.setToken(token);
       LoginUser user = userService.register(auth, api.showUserById(accessToken.getUid()));
-
       SecurityContextHolder.getContext().setAuthentication(new WeiboAuthToken(user));
+
+      // 关注官方微博
+      String official = optionService.getOptions().get(Constant.OPTION_WEIBO_NICKNAME);
+      try {
+        if (StringUtils.isNotEmpty(official)) {
+          Friendships friendships = new Friendships();
+          friendships.setToken(token);
+          friendships.createFriendshipsByName(official);
+          LOGGER.info("{} followed {}.", user.getNickname(), official);
+        }
+      } catch (WeiboException e) {
+        LOGGER.warn("{} follow {} failed: {}", user.getNickname(), official, e.getMessage());
+        e.printStackTrace();
+      }
     } catch (WeiboException e) {
       // TODO Auto-generated catch block
       e.printStackTrace();

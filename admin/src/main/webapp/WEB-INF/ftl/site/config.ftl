@@ -79,6 +79,12 @@
 						<a href="#" class="editable" data-name="weibo_url" data-type="text" data-url="${URL}" data-value="${options.weibo_url!}"></a>
 					</div>
 				</div>
+				<div class="control-group">
+					<label class="control-label">微博昵称：</label>
+					<div class="controls">
+						<a href="#" class="editable" data-name="weibo_nickname" data-type="text" data-url="${URL}" data-value="${options.weibo_nickname!}"></a>
+					</div>
+				</div>
 			</div>
 			<div class="span6">
 				<div class="control-group">
