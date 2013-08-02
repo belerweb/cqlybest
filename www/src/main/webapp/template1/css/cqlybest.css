@@ -1,5 +1,5 @@
 body {
-	padding-top: 31px;
+	/*padding-top: 31px;*/
 	font-size: 12px;
 }
 
@@ -15,12 +15,19 @@ del {
 	text-decoration: line-through;
 }
 
+#top-nav{
+	margin-bottom: 0;
+}
+
 #top-nav .navbar-inner {
 	min-height: 30px;
+	border-radius: 0;
+	border-top: 0;
 }
 
 #top-nav .container {
 	padding: 3px 0;
+	width: 940px;
 }
 
 #top-nav .pull-right a.mg {

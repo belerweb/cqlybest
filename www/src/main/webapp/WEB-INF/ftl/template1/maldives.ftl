@@ -3,16 +3,22 @@
 <style type="text/css">
 #maldives-island-sidebar.affix{
 	width: 220px;
-	top: 41px;
+	top: 0;
 	background: #FFF;
 }
 #maldives-island-info-nav.affix{
 	width: 700px;
-	top: 41px;
+	top: 0;
 	background: #FFF;
 }
 #maldives-island-info-nav .nav{
 	margin: 5px 0 0 0;
+}
+.maldives-island-section {
+	padding-top: 20px;
+}
+.maldives-island-section .title h4 {
+	margin-top: 0;
 }
 .maldives-island-section .title hr {
 	border-color: #309100;
@@ -24,6 +30,9 @@
 .room-gallery a{
 	float: left;
 	margin: 0 0 2px 2px;
+}
+.maldives-island-section table {
+	margin-bottom: 0;
 }
 
 #island-product-accordion .accordion-group {
@@ -140,15 +149,15 @@
 <script type="text/javascript">
 	var PageContext = {
 		init: function() {
-			$(document.body).scrollspy({target: '#maldives-island-info-nav'});
+			$(document.body).scrollspy({target: '#maldives-island-info-nav', offset: 45});
 			$('#maldives-island-info-nav').affix({
 				offset: {
-					top: $('#maldives-island-info-nav').offset().top - 50
+					top: $('#maldives-island-info-nav').offset().top - 5
 				}
 			});
 			$('#maldives-island-sidebar').affix({
 				offset: {
-					top: $('#maldives-island-sidebar').offset().top - 50
+					top: $('#maldives-island-sidebar').offset().top
 				}
 			});
 		}
