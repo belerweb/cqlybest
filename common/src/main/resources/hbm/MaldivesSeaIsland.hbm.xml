@@ -17,6 +17,8 @@
 		<property name="area" column="AREA" length="32" />
 		<property name="snorkeling" column="SNORKELING" length="32" />
 		<property name="price" column="PRICE" length="32" />
+		<property name="tags" column="TAGS" length="128" />
+		<property name="ad" column="AD" length="64" />
 		<property name="description" column="DESCRIPTION" length="102400" />
 
 		<property name="hotelName" column="HOTEL_NAME" length="64" />

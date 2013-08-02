@@ -17,6 +17,8 @@ public class MaldivesSeaIsland {
   private String area; // 岛屿大小
   private String snorkeling; // 浮潜等级
   private String price; // 参考价格
+  private String tags; // 标签
+  private String ad; // 一句话广告
   private String description;
 
   private String hotelName;// 酒店集团
@@ -255,6 +257,22 @@ public class MaldivesSeaIsland {
 
   public void setPlays(String plays) {
     this.plays = plays;
+  }
+
+  public String getTags() {
+    return tags;
+  }
+
+  public void setTags(String tags) {
+    this.tags = tags;
+  }
+
+  public String getAd() {
+    return ad;
+  }
+
+  public void setAd(String ad) {
+    this.ad = ad;
   }
 
 }

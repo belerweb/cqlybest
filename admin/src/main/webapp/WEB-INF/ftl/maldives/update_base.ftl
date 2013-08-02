@@ -25,6 +25,12 @@
 					<a href="#" class="editable" data-pk="${id}" data-name="level" data-type="text" data-url="${url}" data-value="${island.level!}"></a>
 				</div>
 			</div>
+			<div class="control-group">
+				<label class="control-label">标签：</label>
+				<div class="controls">
+					<a href="#" class="editable" data-dict="tag" data-pk="${id}" data-name="tags" data-type="select2" data-url="${url}" data-value="${island.tags!}">${island.tags!}</a>
+				</div>
+			</div>
 		</div>
 		<div class="span6">
 			<div class="control-group">
@@ -51,6 +57,12 @@
 					<a href="#" class="editable" data-pk="${id}" data-name="price" data-type="text" data-url="${url}" data-value="${island.price!}"></a>
 				</div>
 			</div>
+			<div class="control-group">
+				<label class="control-label">一句话广告词：</label>
+				<div class="controls">
+					<a href="#" class="editable" data-pk="${id}" data-name="ad" data-type="text" data-url="${url}" data-value="${island.ad!}"></a>
+				</div>
+			</div>
 		</div>
 	</div>
 	<div class="row-fluid">
@@ -71,6 +83,7 @@
 </div>
 
 <script type="text/javascript">
+cqlybest.editableTag('#island-base-tab a[data-name=tags]');
 $('#island-base-tab .editable[data-name=byName]').editable({
 	select2: {
 		tags: [],

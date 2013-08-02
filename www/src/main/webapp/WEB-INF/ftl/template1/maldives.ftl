@@ -22,6 +22,15 @@
 						<img alt="" src="<@getOneImageUrl island.pictures />?width=290&height=150">
 					</a>
 					<div class="caption">
+						<#if island.tags?has_content>
+						<#assign colors=['#87C116','#00AFF1','#0BA6FF','#FC8E00','#04B1E0','#FFC400','#1D86C9']>
+						<ul class="tags">
+						<#list island.tags?split(',') as tag>
+							<li style="background-color:${colors[tag_index%colors?size]}">${tag}</li>
+						</#list>
+						</ul>
+						<div class="clearfix"> </div>
+						</#if>
 					</div>
 				</div>
 			</li>

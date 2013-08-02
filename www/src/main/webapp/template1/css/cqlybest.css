@@ -648,3 +648,16 @@ del {
 	display: block;
 	position: relative;
 }
+.row-fluid.islands .thumbnail .caption{
+	padding: 9px 0;
+}
+.row-fluid.islands .thumbnail .tags{
+	margin: 0;
+}
+.row-fluid.islands .thumbnail .tags li{
+	float: left;
+	color: #FFFFFF;
+	padding: 0 4px;
+	/*margin: 0 4px 4px 0;*/
+	margin-right: 4px;
+}
