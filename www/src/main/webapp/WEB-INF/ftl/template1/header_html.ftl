@@ -1,5 +1,5 @@
 <!doctype html>
-<html>
+<html xmlns:wb=“http://open.weibo.com/wb”>
 	<#import "/springx.ftl" as springx>
 	<#assign ContextPath = springMacroRequestContext.getContextPath() />
 	<#assign Authentication = securityContextHolder.getContext().getAuthentication() />
@@ -26,6 +26,7 @@
 		</#if>
 		<!--[if lt IE 7]><link rel="stylesheet" href="${ContextPath}/template1/css/bootstrap-ie6.css"><![endif]-->
 		<link rel="shortcut icon" href="${ContextPath}/template1/favicon.ico">
+		<script src="http://tjs.sjs.sinajs.cn/open/api/js/wb.js" type="text/javascript" charset="utf-8"></script>
 	</head>
 
 	<body>

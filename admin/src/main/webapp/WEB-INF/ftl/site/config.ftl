@@ -74,7 +74,7 @@
 					</div>
 				</div>
 				<div class="control-group">
-					<label class="control-label">微博地址：</label>
+					<label class="control-label">微博号码（数字）：</label>
 					<div class="controls">
 						<a href="#" class="editable" data-name="weibo_url" data-type="text" data-url="${URL}" data-value="${options.weibo_url!}"></a>
 					</div>

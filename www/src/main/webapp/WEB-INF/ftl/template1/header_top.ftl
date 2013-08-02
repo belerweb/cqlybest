@@ -2,9 +2,9 @@
 <div id="top-nav" class="navbar navbar-fixed-top">
 	<div class="navbar-inner">
 		<div class="container">
-			<div class="pull-left">
+			<div class="pull-left" style="height:24px;">
 				<#if Options.weibo_url?has_content>
-				<a href="${Options.weibo_url}" target="_blank"><img alt="微博加关注" src="${ContextPath}/template1/img/weibo.png" width="24" height="24"> 加关注</a>
+				<wb:follow-button uid="${Options.weibo_url}" type="red_1" width="67" height="24" ></wb:follow-button>
 				</#if>
 			</div>
 			<div class="pull-right dropdown">
@@ -28,9 +28,9 @@
 					<li><a href="${ContextPath}/user/logout">退出</a></li>
 				</ul>
 				<#else>
-				<span>亲，欢迎访问${(Options.site_name)!}！请</span>
-				<a href="${ContextPath}/login.html">登录</a>
-				<a href="${ContextPath}/register.html" class="mg">免费注册</a>
+				<span>亲，欢迎访问${(Options.site_name)!}！</span>
+				<!-- a href="${ContextPath}/login.html">登录</a -->
+				<!-- a href="${ContextPath}/register.html" class="mg">免费注册</a -->
 				<a href="${ContextPath}/connector/qq_login" class="mg"><img alt="QQ登录" src="${ContextPath}/template1/img/connector/Connect_logo_7.png" width="63" height="24"></a>
 				<a href="${ContextPath}/connector/weibo_login" class="mg" title="使用新浪微博登录并关注我们的官方微博"><img alt="用微博登录" src="${ContextPath}/template1/img/connector/loginButton_24.png" width="102" height="24"></a>
 				</#if>
