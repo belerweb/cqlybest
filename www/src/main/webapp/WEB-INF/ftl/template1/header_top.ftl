@@ -1,5 +1,5 @@
 <#include "/template1/header_html.ftl">
-<div id="top-nav" class="navbar navbar-fixed-top">
+<div id="top-nav" class="navbar">
 	<div class="navbar-inner">
 		<div class="container">
 			<div class="pull-left" style="height:24px;">

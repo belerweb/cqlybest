@@ -24,8 +24,8 @@
 		<link rel="stylesheet" href="${ContextPath}/template1/css/wysiwyg-color.css?build=${(Options.build)!}">
 		<link rel="stylesheet" href="${ContextPath}/template1/css/cqlybest.css?build=${(Options.build)!}">
 		</#if>
-		<!--[if lt IE 7]><link rel="stylesheet" href="${ContextPath}/template1/css/bootstrap-ie6.css"><![endif]-->
-		<link rel="shortcut icon" href="${ContextPath}/template1/favicon.ico">
+		<!--[if lt IE 7]><link rel="stylesheet" href="${ContextPath}/template1/css/bootstrap-ie6.css?build=${(Options.build)!}"><![endif]-->
+		<link rel="shortcut icon" href="${ContextPath}/template1/favicon.ico?build=${(Options.build)!}">
 		<script src="http://tjs.sjs.sinajs.cn/open/api/js/wb.js" type="text/javascript" charset="utf-8"></script>
 	</head>
 
