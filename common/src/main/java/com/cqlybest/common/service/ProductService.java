@@ -207,6 +207,37 @@ public class ProductService {
     return result;
   }
 
+  public List<Product> getSpecialProduct(int number) {
+    return getProductWithTrueProperty("specialOffer", number);// 特价
+  }
+
+  public List<Product> getRecommendedProduct(int number) {
+    return getProductWithTrueProperty("recommend", number);// 推荐
+  }
+
+  public List<Product> getHotProduct(int number) {
+    return getProductWithTrueProperty("popular", number);// 热门
+  }
+
+  private List<Product> getProductWithTrueProperty(String property, int number) {
+    Conjunction condition = Restrictions.conjunction();
+    condition.add(Restrictions.eq(property, true));
+    condition.add(Restrictions.eq("published", true));// 已发布
+    List<Product> products = null;
+    if (number > 0) {
+      products = productDao.find(condition, 0, number);
+    } else {
+      products = productDao.find(condition);
+    }
+
+    for (Product product : products) {
+      product.setPosters(imageDao.queryImages(Constant.IMAGE_PRODUCT_POSTER, product.getId()));
+      setProducTypeDetail(product);
+    }
+
+    return products;
+  }
+
   public List<Product> queryProducts(ProductGroup productGroup, Set<ProductFilterItem> filterItems,
       Integer page, Integer pageSize) {
     Disjunction or = Restrictions.disjunction();
@@ -223,6 +254,7 @@ public class ProductService {
     if (pageSize != null) {
       for (Product product : products) {
         product.setPosters(imageDao.queryImages(Constant.IMAGE_PRODUCT_POSTER, product.getId()));
+        setProducTypeDetail(product);
       }
     }
     return products;

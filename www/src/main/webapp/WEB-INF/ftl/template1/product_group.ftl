@@ -1,4 +1,5 @@
 <#include "/template1/header.ftl">
+<#include "/template1/macro/product.ftl">
 <div class="container margin-menu">
 	<div class="row">
 		<div class="span9">
@@ -41,7 +42,7 @@
 								<#assign image = product.posters[springx.rand(0,product.posters?size-1)] />
 								<img alt="${product.title!}" src="${ContextPath}/image/${image.id}.${image.imageType}?width=154&height=99">
 								</#if>
-								<a class="title" href="${ContextPath}/product/${product.id}.html" target="_blank">${product.name!}</a>
+								<a class="title" href="${ContextPath}/product/${product.id}.html" target="_blank"><@composeProductName product /></a>
 							</div>
 						</div>
 					</li>

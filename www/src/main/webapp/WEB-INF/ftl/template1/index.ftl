@@ -1,4 +1,5 @@
 <#include "/template1/header.ftl">
+<#include "/template1/macro/product.ftl">
 <div class="container margin-menu">
 	<div class="row">
 		<div class="span9">
@@ -41,9 +42,9 @@
 							<div class="caption">
 								<#if product.posters?has_content>
 								<#assign image = product.posters[springx.rand(0,product.posters?size-1)] />
-								<img alt="${product.name!}" src="${ContextPath}/image/${image.id}.${image.imageType}?width=154&height=99">
+								<img alt="<@composeProductName product />" src="${ContextPath}/image/${image.id}.${image.imageType}?width=154&height=99">
 								</#if>
-								<a class="title" href="${ContextPath}/product/${product.id}.html" target="_blank">${product.name!}</a>
+								<a class="title" href="${ContextPath}/product/${product.id}.html" target="_blank"><@composeProductName product /></a>
 								<p>
 									<span><#if (product.specialPrice)?exists>¥${(product.specialPrice/100)?string('0.00')}<#else>特价</#if></span>
 									<#if (product.price)?exists><del>原价：¥${(product.price/100)?string('0.00')}</del></#if>
@@ -69,9 +70,9 @@
 							<div class="caption">
 								<#if product.posters?has_content>
 								<#assign image = product.posters[springx.rand(0,product.posters?size-1)] />
-								<img alt="${product.name!}" src="${ContextPath}/image/${image.id}.${image.imageType}?width=154&height=99">
+								<img alt="<@composeProductName product />" src="${ContextPath}/image/${image.id}.${image.imageType}?width=154&height=99">
 								</#if>
-								<a class="title" href="${ContextPath}/product/${product.id}.html" target="_blank">${product.name!}</a>
+								<a class="title" href="${ContextPath}/product/${product.id}.html" target="_blank"><@composeProductName product /></a>
 							</div>
 						</div>
 					</li>
@@ -91,9 +92,9 @@
 						<div class="caption">
 							<#if product.posters?has_content>
 							<#assign image = product.posters[springx.rand(0,product.posters?size-1)] />
-							<img alt="${product.name!}" src="${ContextPath}/image/${image.id}.${image.imageType}?width=196&height=99">
+							<img alt="<@composeProductName product />" src="${ContextPath}/image/${image.id}.${image.imageType}?width=196&height=99">
 							</#if>
-							<a class="title" href="${ContextPath}/product/${product.id}.html" target="_blank">${product.name!}</a>
+							<a class="title" href="${ContextPath}/product/${product.id}.html" target="_blank"><@composeProductName product /></a>
 						</div>
 					</div>
 					</#list>
@@ -107,7 +108,7 @@
 						<#list hots as product>
 						<li>
 							<span class="badge badge-warning">${product_index+1}</span>
-							<a href="${ContextPath}/product/${product.id}.html" target="_blank">${product.name!}</a>
+							<a href="${ContextPath}/product/${product.id}.html" target="_blank"><@composeProductName product /></a>
 						</li>
 						</#list>
 					</ul>

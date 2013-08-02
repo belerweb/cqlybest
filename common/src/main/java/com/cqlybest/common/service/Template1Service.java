@@ -2,15 +2,12 @@ package com.cqlybest.common.service;
 
 import java.util.List;
 
-import org.hibernate.criterion.Conjunction;
 import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.cqlybest.common.Constant;
-import com.cqlybest.common.bean.Product;
 import com.cqlybest.common.bean.template1.Template1IndexPoster;
 import com.cqlybest.common.bean.template1.Template1Menu;
 import com.cqlybest.common.bean.template1.Template1ProductGroup;
@@ -165,36 +162,6 @@ public class Template1Service {
     for (int i = 0; i < ids.length; i++) {
       template1Dao.updateProductGroupOrder(ids[i], orders[i]);
     }
-  }
-
-  public List<Product> getSpecialProduct(int number) {
-    return getProductWithTrueProperty("specialOffer", number);// 特价
-  }
-
-  public List<Product> getRecommendedProduct(int number) {
-    return getProductWithTrueProperty("recommend", number);// 推荐
-  }
-
-  public List<Product> getHotProduct(int number) {
-    return getProductWithTrueProperty("popular", number);// 热门
-  }
-
-  private List<Product> getProductWithTrueProperty(String property, int number) {
-    Conjunction condition = Restrictions.conjunction();
-    condition.add(Restrictions.eq(property, true));
-    condition.add(Restrictions.eq("published", true));// 已发布
-    List<Product> products = null;
-    if (number > 0) {
-      products = productDao.find(condition, 0, number);
-    } else {
-      products = productDao.find(condition);
-    }
-
-    for (Product product : products) {
-      product.setPosters(imageDao.queryImages(Constant.IMAGE_PRODUCT_POSTER, product.getId()));
-    }
-
-    return products;
   }
 
 }
