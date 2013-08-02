@@ -617,3 +617,34 @@ del {
 	font-size: 25px;
 	padding:15px 0;
 }
+
+.row-fluid.islands {
+}
+.row-fluid.islands .thumbnail{
+	position: relative;
+}
+.row-fluid.islands .thumbnail .start{
+	font-size: 20px;
+	padding: 5px;
+	position: absolute;
+	right: 10px;
+	top: 15px;
+	color:#FF770D;
+	font-weight:bold;
+}
+.row-fluid.islands .thumbnail .zh{
+	color: #555555;
+	margin-bottom: 0;
+}
+.row-fluid.islands .thumbnail .en{
+	color: #AAAAAA;
+	font-size: 12px;
+	margin-top: 0;
+}
+.row-fluid.islands .thumbnail a:HOVER, .row-fluid.islands .thumbnail a:FOCUS{
+	text-decoration: none;
+}
+.row-fluid.islands .thumbnail a.img{
+	display: block;
+	position: relative;
+}

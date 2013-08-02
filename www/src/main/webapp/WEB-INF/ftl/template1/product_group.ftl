@@ -1,5 +1,5 @@
 <#include "/template1/header.ftl">
-<#include "/template1/macro/product.ftl">
+<#include "/template1/macro/macro.ftl">
 <div class="container margin-menu">
 	<div class="row">
 		<div class="span9">

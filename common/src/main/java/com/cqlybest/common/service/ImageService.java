@@ -2,6 +2,7 @@ package com.cqlybest.common.service;
 
 import java.io.IOException;
 import java.util.Date;
+import java.util.List;
 import java.util.UUID;
 
 import org.json.JSONException;
@@ -74,6 +75,10 @@ public class ImageService {
     image.setImageData(file.getBytes());
     image.setImageType(MimeUtil.getFileExtension(name).toLowerCase());
     return image;
+  }
+
+  public List<Image> getImages(String extra, String extraKey) {
+    return imageDao.queryImages(extra, extraKey);
   }
 
 }

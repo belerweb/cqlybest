@@ -1,5 +1,5 @@
 <#include "/template1/header.ftl">
-<#include "/template1/macro/product.ftl">
+<#include "/template1/macro/macro.ftl">
 <div class="container margin-menu">
 	<div class="row">
 		<div class="span9">
@@ -41,8 +41,7 @@
 						<div class="thumbnail">
 							<div class="caption">
 								<#if product.posters?has_content>
-								<#assign image = product.posters[springx.rand(0,product.posters?size-1)] />
-								<img alt="<@composeProductName product />" src="${ContextPath}/image/${image.id}.${image.imageType}?width=154&height=99">
+								<img alt="<@composeProductName product />" src="<@getOneImageUrl product.posters />?width=154&height=99">
 								</#if>
 								<a class="title" href="${ContextPath}/product/${product.id}.html" target="_blank"><@composeProductName product /></a>
 								<p>
@@ -69,8 +68,7 @@
 						<div class="thumbnail">
 							<div class="caption">
 								<#if product.posters?has_content>
-								<#assign image = product.posters[springx.rand(0,product.posters?size-1)] />
-								<img alt="<@composeProductName product />" src="${ContextPath}/image/${image.id}.${image.imageType}?width=154&height=99">
+								<img alt="<@composeProductName product />" src="<@getOneImageUrl product.posters />?width=154&height=99">
 								</#if>
 								<a class="title" href="${ContextPath}/product/${product.id}.html" target="_blank"><@composeProductName product /></a>
 							</div>
@@ -91,8 +89,7 @@
 					<div class="thumbnail">
 						<div class="caption">
 							<#if product.posters?has_content>
-							<#assign image = product.posters[springx.rand(0,product.posters?size-1)] />
-							<img alt="<@composeProductName product />" src="${ContextPath}/image/${image.id}.${image.imageType}?width=196&height=99">
+							<img alt="<@composeProductName product />" src="<@getOneImageUrl product.posters />?width=196&height=99">
 							</#if>
 							<a class="title" href="${ContextPath}/product/${product.id}.html" target="_blank"><@composeProductName product /></a>
 						</div>
