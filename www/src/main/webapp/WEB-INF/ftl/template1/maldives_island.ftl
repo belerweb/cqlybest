@@ -1,56 +1,56 @@
 <#assign Title=(island.zhName!)+(island.enName!) />
 <#include "/template1/header.ftl">
-<style type="text/css">
-#maldives-island-sidebar.affix{
-	width: 220px;
-	top: 0;
-	background: #FFF;
-}
-#maldives-island-info-nav.affix{
-	width: 700px;
-	top: 0;
-	background: #FFF;
-}
-#maldives-island-info-nav .nav{
-	margin: 5px 0 0 0;
-}
-.maldives-island-section {
-	padding-top: 20px;
-}
-.maldives-island-section .title h4 {
-	margin-top: 0;
-}
-.maldives-island-section .title hr {
-	border-color: #309100;
-	margin: 2px 0 4px;
-}
-.room-gallery{
-	margin: -15px 0 10px 0;
-}
-.room-gallery a{
-	float: left;
-	margin: 0 0 2px 2px;
-}
-.maldives-island-section table {
-	margin-bottom: 0;
-}
-
-#island-product-accordion .accordion-group {
-	border-top: 0;
-	border-radius: 0;
-	margin: 0;
-}
-#island-product-accordion .accordion-heading {
-	background-color:#DFF0D8;
-}
-#island-product-accordion .accordion-heading a{
-	color:#333333;
-}
-#island-product-accordion .accordion-inner {
-	padding: 0;
-}
-</style>
 <div id="maldives-island" class="container">
+	<style type="text/css">
+	#maldives-island-sidebar.affix{
+		width: 220px;
+		top: 0;
+		background: #FFF;
+	}
+	#maldives-island-info-nav.affix{
+		width: 700px;
+		top: 0;
+		background: #FFF;
+	}
+	#maldives-island-info-nav .nav{
+		margin: 5px 0 0 0;
+	}
+	.maldives-island-section {
+		padding-top: 20px;
+	}
+	.maldives-island-section .title h4 {
+		margin-top: 0;
+	}
+	.maldives-island-section .title hr {
+		border-color: #309100;
+		margin: 2px 0 4px;
+	}
+	.room-gallery{
+		margin: 0 0 10px 0;
+	}
+	.room-gallery a{
+		float: left;
+		margin: 0 0 2px 2px;
+	}
+	.maldives-island-section table {
+		margin-bottom: 0;
+	}
+	
+	#island-product-accordion .accordion-group {
+		border-top: 0;
+		border-radius: 0;
+		margin: 0;
+	}
+	#island-product-accordion .accordion-heading {
+		background-color:#DFF0D8;
+	}
+	#island-product-accordion .accordion-heading a{
+		color:#333333;
+	}
+	#island-product-accordion .accordion-inner {
+		padding: 0;
+	}
+	</style>
 	<h3 class="name">${island.zhName!} <span>${island.enName!}</span></h3>
 	<#if island.pictures?has_content>
 	<div class="row">
