@@ -98,6 +98,11 @@
 		<param-name>org.eclipse.jetty.servlet.Default.welcomeServlets</param-name>
 		<param-value>true</param-value>
 	</context-param>
+	<!-- Remove jsessionid from url -->
+	<context-param>
+		<param-name>org.eclipse.jetty.servlet.SessionIdPathParameterName</param-name>
+		<param-value>null</param-value>
+	</context-param>
 
 	<welcome-file-list>
 		<welcome-file>index.html</welcome-file>
