@@ -62,8 +62,8 @@ public class Constant {
 
 
   public static void checkWeiboConfig(String appKeyConfig, String appSecretConfig) {
-    String appKey = System.getProperty(appKeyConfig, appKeyConfig);
-    String appSecret = System.getProperty(appSecretConfig, Constant.WEIBO_APP_SECRET);
+    String appKey = System.getProperty(appKeyConfig, System.getenv(appKeyConfig));
+    String appSecret = System.getProperty(appSecretConfig, System.getenv(appSecretConfig));
     if (StringUtils.isEmpty(appKey) || StringUtils.isEmpty(appSecret)) {
       LOGGER.warn("Weibo app key & secret not exixt, weibo login will be disabled.");
       return;

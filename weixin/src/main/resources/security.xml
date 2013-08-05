@@ -18,7 +18,8 @@ http://www.springframework.org/schema/beans http://www.springframework.org/schem
 		</authentication-provider>
 	</authentication-manager>
 
-	<http auto-config="true" access-decision-manager-ref="accessDecisionManager" use-expressions="true">
+	<http auto-config="true" access-decision-manager-ref="accessDecisionManager" use-expressions="true"
+		disable-url-rewriting="true">
 		<intercept-url pattern="/**" access="permitAll" />
 	</http>
 
