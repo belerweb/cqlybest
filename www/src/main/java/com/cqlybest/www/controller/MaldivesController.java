@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.cqlybest.common.Constant;
-import com.cqlybest.common.bean.MaldivesSeaIsland;
+import com.cqlybest.common.bean.maldives.MaldivesSeaIsland;
 import com.cqlybest.common.service.ImageService;
 import com.cqlybest.common.service.MaldivesService;
 import com.cqlybest.common.service.ProductService;

@@ -15,12 +15,12 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.cqlybest.common.Constant;
-import com.cqlybest.common.bean.MaldivesRoom;
-import com.cqlybest.common.bean.MaldivesSeaIsland;
 import com.cqlybest.common.bean.Product;
 import com.cqlybest.common.bean.ProductFilterItem;
 import com.cqlybest.common.bean.ProductGroup;
 import com.cqlybest.common.bean.ProductMaldives;
+import com.cqlybest.common.bean.maldives.MaldivesRoom;
+import com.cqlybest.common.bean.maldives.MaldivesSeaIsland;
 import com.cqlybest.common.bean.template1.Template1Menu;
 import com.cqlybest.common.service.DictService;
 import com.cqlybest.common.service.MaldivesService;

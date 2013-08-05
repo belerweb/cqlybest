@@ -10,9 +10,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.cqlybest.common.Constant;
-import com.cqlybest.common.bean.MaldivesDining;
-import com.cqlybest.common.bean.MaldivesRoom;
-import com.cqlybest.common.bean.MaldivesSeaIsland;
+import com.cqlybest.common.bean.maldives.MaldivesDining;
+import com.cqlybest.common.bean.maldives.MaldivesRoom;
+import com.cqlybest.common.bean.maldives.MaldivesSeaIsland;
 import com.cqlybest.common.dao.ImageDao;
 import com.cqlybest.common.dao.MaldivesDao;
 

@@ -1,7 +1,9 @@
-package com.cqlybest.common.bean;
+package com.cqlybest.common.bean.maldives;
 
 import java.util.Date;
 import java.util.List;
+
+import com.cqlybest.common.bean.Image;
 
 /**
  * 马尔代夫海岛

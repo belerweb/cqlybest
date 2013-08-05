@@ -9,9 +9,9 @@ import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Repository;
 
-import com.cqlybest.common.bean.MaldivesDining;
-import com.cqlybest.common.bean.MaldivesRoom;
-import com.cqlybest.common.bean.MaldivesSeaIsland;
+import com.cqlybest.common.bean.maldives.MaldivesDining;
+import com.cqlybest.common.bean.maldives.MaldivesRoom;
+import com.cqlybest.common.bean.maldives.MaldivesSeaIsland;
 
 @Repository
 @SuppressWarnings("unchecked")

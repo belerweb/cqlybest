@@ -18,13 +18,13 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.cqlybest.common.bean.MaldivesRoom;
 import com.cqlybest.common.bean.Product;
 import com.cqlybest.common.bean.ProductCalendar;
 import com.cqlybest.common.bean.ProductComment;
 import com.cqlybest.common.bean.ProductMaldives;
 import com.cqlybest.common.bean.ProductTraffic;
 import com.cqlybest.common.bean.ProductTravel;
+import com.cqlybest.common.bean.maldives.MaldivesRoom;
 import com.cqlybest.common.controller.ControllerHelper;
 import com.cqlybest.common.service.DictService;
 import com.cqlybest.common.service.ImageService;

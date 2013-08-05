@@ -11,9 +11,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.cqlybest.common.bean.MaldivesDining;
-import com.cqlybest.common.bean.MaldivesRoom;
-import com.cqlybest.common.bean.MaldivesSeaIsland;
+import com.cqlybest.common.bean.maldives.MaldivesDining;
+import com.cqlybest.common.bean.maldives.MaldivesRoom;
+import com.cqlybest.common.bean.maldives.MaldivesSeaIsland;
 import com.cqlybest.common.service.MaldivesService;
 import com.cqlybest.common.service.OptionService;
 
