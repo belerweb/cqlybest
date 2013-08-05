@@ -66,6 +66,7 @@ del {
 	background: url("../img/menu-bg.png") repeat-x scroll 0 0 transparent;
 	border-bottom: 1px solid #C54021;
 	border-radius: 0;
+	filter: none;
 }
 
 #menu a.brand {
