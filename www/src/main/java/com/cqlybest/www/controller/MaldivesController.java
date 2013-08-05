@@ -33,7 +33,7 @@ public class MaldivesController extends ControllerHelper {
   public Object maldives(Model model) {
     List<MaldivesSeaIsland> islands = maldivesService.list(1, Integer.MAX_VALUE);
     for (MaldivesSeaIsland island : islands) {
-      island.setPictures(imageService.getImages(Constant.IMAGE_MALDIVES_ISLAND_POSTER, island
+      island.setHotelPictures(imageService.getImages(Constant.IMAGE_MALDIVES_HOTEL_PICTURE, island
           .getId()));
     }
     model.addAttribute("islands", islands);
