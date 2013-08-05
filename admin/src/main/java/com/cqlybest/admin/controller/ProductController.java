@@ -183,7 +183,7 @@ public class ProductController extends ControllerHelper {
       String _name = name.substring(7);
       Object _value = value;
       if (_name.equals("room1") || _name.equals("room2") || _name.equals("room3")) {
-        _value = Integer.parseInt(value);
+        _value = value.isEmpty() ? null : Integer.parseInt(value);
       }
       productService.updateMaldivesDetail(pk, _name, _value);
     }
