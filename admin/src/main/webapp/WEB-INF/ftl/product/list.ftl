@@ -65,7 +65,16 @@
 				<label class="checkbox inline"><strong>名称：</strong></label>
 				<input type="text" class="input-small" placeholder="关键词" name="product-name" value="${paramName!}">
 			</div>
-			<div class="span4"><button type="button" class="btn s">搜索</button></div>
+			<div class="span4">
+				<label class="checkbox inline"><strong>产品类型：</strong></label>
+				<select name="product-type" class="input-small">
+					<option value="">全部</option>
+					<option <#if paramType?exists && paramType==0>selected="selected"</#if> value="0">常规</option>
+					<option <#if paramType?exists && paramType==1>selected="selected"</#if> value="1">马尔代夫</option>
+					<option <#if paramType?exists && paramType==2>selected="selected"</#if> value="2">毛里求斯</option>
+				</select>
+				<button type="button" class="btn s">搜索</button>
+			</div>
 		</div>
 	</div>
 	<div class="grid" style="margin-top:5px;">
@@ -119,6 +128,8 @@
 							<span class="label label-success">普通产品</span>
 							<#elseif product.productType==1>
 							<span class="label label-success">马尔代夫</span>
+							<#elseif product.productType==2>
+							<span class="label label-success">毛里求斯</span>
 							</#if>
 							${product.name!}
 							<#if product.productType==1>
@@ -366,7 +377,8 @@ $('#product-add').click(function(){
 	form.push('<div class="controls"><input type="text" name="name"></div></div>');
 	form.push('<div class="control-group"><label class="control-label">类型：</label>');
 	form.push('<div class="controls"><label class="radio inline"><input type="radio" name="type" value="0" checked="checked">普通产品</label>');
-	form.push('<label class="radio inline"><input type="radio" name="type" value="1"> 马尔代夫</lavel>');
+	form.push('<label class="radio inline"><input type="radio" name="type" value="1"> 马尔代夫</label>');
+	form.push('<label class="radio inline"><input type="radio" name="type" value="2"> 毛里求斯</label>');
 	form.push('</div></div></form>');
 	var dialog = bootbox.dialog(form.join(''), [{
 		label: '取消'
@@ -406,10 +418,12 @@ $('#search-form button.s').click(function(){
 	var spe = $('#search-form input[name=product-spe]:checked').val();
 	var pub = $('#search-form input[name=product-pub]:checked').val();
 	var name = $.trim($('#search-form input[name=product-name]').val());
+	var type = $.trim($('#search-form select[name=product-type]').val());
 	if (hot!='-1') p.push('hot=' + hot);
 	if (red!='-1') p.push('red=' + red);
 	if (spe!='-1') p.push('spe=' + spe);
 	if (pub!='-1') p.push('pub=' + pub);
+	if (type!='') p.push('type=' + type);
 	if (!/^\s*$/.test(name)) p.push('name=' + name);
 	hash['u'] = '${ContextPath}/product/list.do?' + p.join('&');
 	hash['_t'] = new Date().getTime();

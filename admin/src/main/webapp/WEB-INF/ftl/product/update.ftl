@@ -28,10 +28,12 @@
 				<div class="tab-content">
 					<#include "update_base.ftl">
 					<#include "update_traffic.ftl">
-					<#if product.productType==1>
-					<#include "update_maldives.ftl">
-					<#else>
-					<#include "update_detail.ftl">
+					<#if product.productType==0>
+						<#include "update_detail.ftl">
+					<#elseif product.productType==1>
+						<#include "update_maldives.ftl">
+					<#elseif product.productType==2>
+						<#include "update_mauritius.ftl">
 					</#if>
 					<#include "update_calendar.ftl">
 					<#include "update_poster_photo.ftl">

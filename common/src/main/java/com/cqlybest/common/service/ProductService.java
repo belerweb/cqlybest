@@ -3,10 +3,12 @@ package com.cqlybest.common.service;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 import java.util.UUID;
 
 import org.hibernate.criterion.Conjunction;
+import org.hibernate.criterion.Criterion;
 import org.hibernate.criterion.Disjunction;
 import org.hibernate.criterion.Junction;
 import org.hibernate.criterion.MatchMode;
@@ -180,17 +182,36 @@ public class ProductService {
     productDao.deleteCalendar(productId, start, end);
   }
 
-  public Long queryProductTotal(Boolean hot, Boolean red, Boolean spe, Boolean pub, String name) {
-    return productDao.findProductTotal(hot, red, spe, pub, name);
+  public Long queryProductTotal(Map<String, Object> param) {
+    return productDao.findProductTotal(createQueryProductCondition(param));
   }
 
-  public List<Product> queryProduct(Boolean hot, Boolean red, Boolean spe, Boolean pub,
-      String name, int page, int pageSize) {
-    List<Product> products = productDao.findProductTotal(hot, red, spe, pub, name, page, pageSize);
+  public List<Product> queryProduct(Map<String, Object> param, int page, int pageSize) {
+    List<Product> products =
+        productDao.findProductTotal(createQueryProductCondition(param), page, pageSize);
     for (Product product : products) {
       setProducTypeDetail(product);
     }
     return products;
+  }
+
+  private List<Criterion> createQueryProductCondition(Map<String, Object> param) {
+    List<Criterion> propertyConditions = new ArrayList<>();
+    for (String property : param.keySet()) {
+      Object value = param.get(property);
+      if ("name".equals(property)) {
+        propertyConditions.add(Restrictions.like(property, (String) value, MatchMode.ANYWHERE));
+      } else if ("popular".equals(property) || "recommend".equals(property)
+          || "specialOffer".equals(property) || "published".equals(property)) {
+        propertyConditions.add(((Boolean) value)
+            ? Restrictions.eq(property, Boolean.TRUE)
+            : Restrictions.or(Restrictions.eq(property, Boolean.FALSE),
+                Restrictions.isNull(property)));
+      } else {
+        propertyConditions.add(Restrictions.eq(property, value));
+      }
+    }
+    return propertyConditions;
   }
 
   public List<Product> getMaldivesProductByIsland(String islandId, int num) {

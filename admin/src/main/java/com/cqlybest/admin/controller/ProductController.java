@@ -220,14 +220,34 @@ public class ProductController extends ControllerHelper {
   public void products(@RequestParam(required = false) Boolean hot,
       @RequestParam(required = false) Boolean red, @RequestParam(required = false) Boolean spe,
       @RequestParam(required = false) Boolean pub, @RequestParam(required = false) String name,
-      @RequestParam(defaultValue = "0") int page, Model model) {
+      @RequestParam(required = false) Integer type, @RequestParam(defaultValue = "0") int page,
+      Model model) {
     page = Math.max(1, page);
     int pageSize = 10;
     model.addAttribute("page", page);
     model.addAttribute("pageSize", pageSize);
-    model.addAttribute("total", productService.queryProductTotal(hot, red, spe, pub, name));
-    model.addAttribute("products", productService.queryProduct(hot, red, spe, pub, name, page,
-        pageSize));
+    Map<String, Object> param = new HashMap<>();
+    if (hot != null) {
+      param.put("popular", hot);
+    }
+    if (red != null) {
+      param.put("recommend", red);
+    }
+    if (spe != null) {
+      param.put("specialOffer", spe);
+    }
+    if (pub != null) {
+      param.put("published", pub);
+    }
+    if (StringUtils.isNotBlank(name)) {
+      param.put("name", name.trim());
+    }
+    if (type != null) {
+      param.put("productType", type);
+    }
+
+    model.addAttribute("total", productService.queryProductTotal(param));
+    model.addAttribute("products", productService.queryProduct(param, page, pageSize));
     model.addAttribute("options", optionService.getOptions());
 
     model.addAttribute("paramHot", hot);
@@ -235,6 +255,7 @@ public class ProductController extends ControllerHelper {
     model.addAttribute("paramSpe", spe);
     model.addAttribute("paramPub", pub);
     model.addAttribute("paramName", name);
+    model.addAttribute("paramType", type);
   }
 
   @RequestMapping("/product/toggle.do")

@@ -7,6 +7,7 @@ public class Product {
 
   public static final int NORMAL = 0;// 普通产品
   public static final int MALDIVES = 1;// 马尔代夫
+  public static final int MAURITIUS = 2;// 毛里求斯
 
   private String id;
   private String name;// 产品名称
