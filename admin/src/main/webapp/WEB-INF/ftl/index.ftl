@@ -88,7 +88,8 @@
 					<li class="hide" data-m="dash" data-n="dash.dash"><a href="#m=dash&n=dash.dash&u=${ContextPath}/dashboard.do&t=%23main"><i class="icon-dashboard"></i> 工作台</a></li>
 					<li class="hide" data-m="site" data-n="site.config"><a href="#m=site&n=site.config&u=${ContextPath}/site/config.do&t=%23main"><i class="icon-cogs"></i> 网站配置</a></li>
 					<li class="hide" data-m="site" data-n="product.list"><a href="#m=site&n=product.list&u=${ContextPath}/product/list.do&t=%23main"><i class="icon-road"></i> 旅游产品</a></li>
-					<li class="hide" data-m="site" data-n="maldives.list"><a href="#m=site&n=maldives.list&u=${ContextPath}/maldives/list.do&t=%23main"><i class="icon-road"></i> 马尔代夫</a></li>
+					<li class="hide" data-m="site" data-n="maldives.list"><a href="#m=site&n=maldives.list&u=${ContextPath}/maldives/list.do&t=%23main"><i class="icon-road"></i> 马代海岛</a></li>
+					<li class="hide" data-m="site" data-n="mauritius.list"><a href="#m=site&n=mauritius.list&u=${ContextPath}/mauritius/list.do&t=%23main"><i class="icon-road"></i> 毛求酒店</a></li>
 					<li class="hide" data-m="site" data-n="productgroup.list"><a href="#m=site&n=productgroup.list&u=${ContextPath}/product_group/list.do&t=%23main"><i class="icon-th-large"></i> 产品聚合</a></li>
 					<li class="hide" data-m="site" data-n="dict.list"><a href="#m=site&n=dict.list&u=${ContextPath}/dict/list.do?type%3Dtag&t=%23main"><i class="icon-book"></i> 数据字典</a></li>
 					<li class="hide" data-m="site" data-n="link"><a href="#m=site&n=link&u=${ContextPath}/link/list.do&t=%23main"><i class="icon-book"></i> 友情链接</a></li>

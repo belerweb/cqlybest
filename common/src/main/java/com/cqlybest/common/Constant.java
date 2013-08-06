@@ -27,6 +27,11 @@ public class Constant {
   public static final String IMAGE_MALDIVES_HOTEL_PICTURE = "maldives-hotel-picture";// 马尔代夫酒店图片
   public static final String IMAGE_MALDIVES_DINING_PICTURE = "maldives-dining-picture";// 马尔代夫房间设施
 
+  public static final String IMAGE_MAURITIUS_HOTEL_POSTER = "mauritius-hotel-poster";// 毛里求斯酒店海报
+  public static final String IMAGE_MAURITIUS_ROOM_PICTURE = "mauritius-room-picture";// 毛里求斯房间图片
+  public static final String IMAGE_MAURITIUS_HOTEL_PICTURE = "mauritius-hotel-picture";// 毛里求斯酒店图片
+  public static final String IMAGE_MAURITIUS_DINING_PICTURE = "mauritius-dining-picture";// 毛里求斯房间设施
+
   public static final String IMAGE_PRODUCT_POSTER = "product-poster";// 产品海报
   public static final String IMAGE_PRODUCT_PHOTO = "product-photo";// 产品图片
 

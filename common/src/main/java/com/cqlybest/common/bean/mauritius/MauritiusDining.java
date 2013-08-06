@@ -10,7 +10,7 @@ import com.cqlybest.common.bean.Image;
 public class MauritiusDining {
 
   private Integer id;
-  private String islandId;
+  private String hotelId;
   private String zhName; // 中文名称
   private String enName; // 英文名称
   private String description; // 说明
@@ -32,12 +32,12 @@ public class MauritiusDining {
     this.id = id;
   }
 
-  public String getIslandId() {
-    return islandId;
+  public String getHotelId() {
+    return hotelId;
   }
 
-  public void setIslandId(String islandId) {
-    this.islandId = islandId;
+  public void setHotelId(String hotelId) {
+    this.hotelId = hotelId;
   }
 
   public String getZhName() {
