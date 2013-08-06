@@ -1,10 +1,15 @@
 package com.cqlybest.weibo.controller;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.AnonymousAuthenticationToken;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -19,9 +24,12 @@ import weibo4j.util.WeiboConfig;
 
 import com.cqlybest.common.Constant;
 import com.cqlybest.common.auth.WeiboAuthToken;
+import com.cqlybest.common.bean.Image;
 import com.cqlybest.common.bean.LoginUser;
 import com.cqlybest.common.bean.WeiboAppAuth;
+import com.cqlybest.common.bean.maldives.MaldivesSeaIsland;
 import com.cqlybest.common.service.DictService;
+import com.cqlybest.common.service.ImageService;
 import com.cqlybest.common.service.MaldivesService;
 import com.cqlybest.common.service.ProductService;
 import com.cqlybest.common.service.UserService;
@@ -39,6 +47,8 @@ public class IndexController extends ControllerHelper {
   private DictService dictService;
   @Autowired
   private UserService userService;
+  @Autowired
+  private ImageService imageService;
 
   @RequestMapping("/security/proxy")
   public String securityProxy(HttpServletRequest request) {
@@ -87,12 +97,33 @@ public class IndexController extends ControllerHelper {
   /**
    * 首页
    */
-  @RequestMapping("/index.html")
-  public String index(@RequestParam(required = false) String cid,
+  @RequestMapping({"/", "/index.html"})
+  public Object index(@RequestParam(required = false) String cid,
       @RequestParam(required = false) String sub_appkey, HttpServletRequest request, Model model) {
-    HttpSession session = request.getSession();
-    session.setAttribute("cid", StringUtils.isEmpty(cid) ? null : cid);
-    session.setAttribute("sub_appkey", StringUtils.isEmpty(sub_appkey) ? null : sub_appkey);
+    Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+    if (authentication == null || authentication instanceof AnonymousAuthenticationToken) {
+      if (StringUtils.isBlank(cid) || StringUtils.isBlank(sub_appkey)) {
+        return illegal();
+      }
+
+      HttpSession session = request.getSession();
+      session.setAttribute("cid", StringUtils.isEmpty(cid) ? null : cid);
+      session.setAttribute("sub_appkey", StringUtils.isEmpty(sub_appkey) ? null : sub_appkey);
+      return "redirect:/security/proxy";
+    }
+
+    List<MaldivesSeaIsland> islands = maldivesService.list(1, Integer.MAX_VALUE);
+    List<MaldivesSeaIsland> result = new ArrayList<>();
+    for (MaldivesSeaIsland island : islands) {
+      List<Image> images =
+          imageService.getImages(Constant.IMAGE_MALDIVES_HOTEL_PICTURE, island.getId());
+      if (!images.isEmpty()) {
+        island.setHotelPictures(images);
+        result.add(island);
+      }
+    }
+    model.addAttribute("islands", result);
+    setCommonData(model);
     return "/v1/index";
   }
 

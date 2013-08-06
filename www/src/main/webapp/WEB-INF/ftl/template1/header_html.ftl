@@ -1,5 +1,5 @@
 <!doctype html>
-<html xmlns:wb=“http://open.weibo.com/wb”>
+<html xmlns:wb="http://open.weibo.com/wb">
 	<#import "/springx.ftl" as springx>
 	<#assign ContextPath = springMacroRequestContext.getContextPath() />
 	<#assign Authentication = securityContextHolder.getContext().getAuthentication() />

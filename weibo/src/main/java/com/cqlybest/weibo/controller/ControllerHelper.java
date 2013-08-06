@@ -19,8 +19,6 @@ public abstract class ControllerHelper extends com.cqlybest.common.controller.Co
 
   protected void setCommonData(Model model) {
     model.addAttribute("Options", optionService.getOptions());
-    model.addAttribute("Menu", template1Service.getPublishedMenus());
-    model.addAttribute("Links", friendlyLinkService.list(1, Integer.MAX_VALUE));
   }
 
 }
