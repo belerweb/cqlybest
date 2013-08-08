@@ -87,6 +87,6 @@
 		<#if Options.site_statistical_code?has_content>
 		<div class="hide">${Options.site_statistical_code}</div>
 		</#if>
-		<script src="http://tjs.sjs.sinajs.cn/t35/apps/opent/js/frames/client.js" type="text/javascript" charset="utf-8"></script>
+		<script src="http://js.t.sinajs.cn/t4/enterprise/js/public/appframe/client.js" type="text/javascript" charset="utf-8"></script>
 	</body>
 </html>
