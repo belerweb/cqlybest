@@ -145,7 +145,7 @@ public class IndexController extends ControllerHelper {
         response.setToUserName(message.getFromUserName());
         response.setContent(welcomeMessage);
         response.setCreateTime(System.currentTimeMillis());
-        model.addAttribute("message", response);
+        model.addAttribute("data", response);
         ConnectOpenidFakeid.connect(weixinUserService, message.getFromUserName());// 设置OpenID与FakeID
         return "/text";
       }
