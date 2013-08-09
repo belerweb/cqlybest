@@ -23,7 +23,10 @@ import com.cqlybest.common.service.OptionService;
 import com.cqlybest.common.service.WeixinUserService;
 import com.cqlybest.weixin.ConnectOpenidFakeid;
 import com.cqlybest.weixin.bean.RequestMessage;
+import com.cqlybest.weixin.bean.ResponseMessage;
+import com.cqlybest.weixin.bean.ResponseNewsMessage;
 import com.cqlybest.weixin.bean.ResponseTextMessage;
+import com.cqlybest.weixin.service.SmartResponseService;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.dataformat.xml.XmlMapper;
 
@@ -39,6 +42,8 @@ public class IndexController extends ControllerHelper {
   private OptionService optionService;
   @Autowired
   private WeixinUserService weixinUserService;
+  @Autowired
+  private SmartResponseService smartResponseService;
 
   @RequestMapping(method = RequestMethod.GET, value = "/")
   public Object root(@RequestParam String signature, @RequestParam String timestamp,
@@ -104,13 +109,17 @@ public class IndexController extends ControllerHelper {
   }
 
   private Object text(Model model, RequestMessage message) throws Exception {
-    ResponseTextMessage response = new ResponseTextMessage();
-    response.setFromUserName(message.getToUserName());
-    response.setToUserName(message.getFromUserName());
-    response.setContent("智能应答功能开发中，敬请继续关注我们。");
-    response.setCreateTime(System.currentTimeMillis());
-    model.addAttribute("message", response);
-    return "/text";
+    ResponseMessage response = smartResponseService.smartResponse(message);
+    if (response != null) {
+      model.addAttribute("data", response);
+      if (response instanceof ResponseTextMessage) {
+        return "/text";
+      }
+      if (response instanceof ResponseNewsMessage) {
+        return "/news";
+      }
+    }
+    return ok();
   }
 
   private Object image(Model model, RequestMessage message) throws Exception {

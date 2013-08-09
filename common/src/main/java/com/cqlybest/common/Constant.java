@@ -20,7 +20,10 @@ public class Constant {
   public static final String OPTION_SITE_ICP = "site_icp";// 备案号
   public static final String OPTION_WATERMARK_POSITION = "watermark_position";// 水印位置
   public static final String OPTION_WEIBO_NICKNAME = "weibo_nickname";// 官方微博昵称
-  public static final String OPTION_WEIXIN_WELCOME_MESSAGE = "weixin_welcome_message";// 微博昵称
+  public static final String OPTION_WEIXIN_WELCOME_MESSAGE = "weixin_welcome_message";// 微信关注欢迎消息
+  public static final String OPTION_WEIXIN_DO_NOT_UNDERSTAND = "weixin_do_not_understand";// 微信不可理解的消息
+  public static final String OPTION_WWW_URL = "site_url";// www网站地址
+  public static final String OPTION_MOBILE_URL = "site_mobile_url";// mobile网站地址
 
   public static final String IMAGE_MALDIVES_ISLAND_POSTER = "maldives-island-poster";// 马尔代夫海岛海报
   public static final String IMAGE_MALDIVES_ROOM_PICTURE = "maldives-room-picture";// 马尔代夫房间图片
