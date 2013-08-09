@@ -20,6 +20,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.cqlybest.common.Constant;
 import com.cqlybest.common.service.OptionService;
+import com.cqlybest.common.service.WeixinUserService;
+import com.cqlybest.weixin.ConnectOpenIDThread;
 import com.cqlybest.weixin.bean.RequestMessage;
 import com.cqlybest.weixin.bean.ResponseTextMessage;
 import com.fasterxml.jackson.databind.DeserializationFeature;
@@ -35,6 +37,8 @@ public class IndexController extends ControllerHelper {
 
   @Autowired
   private OptionService optionService;
+  @Autowired
+  private WeixinUserService weixinUserService;
 
   @RequestMapping(method = RequestMethod.GET, value = "/")
   public Object root(@RequestParam String signature, @RequestParam String timestamp,
@@ -61,6 +65,7 @@ public class IndexController extends ControllerHelper {
       System.out.println(XML.writeValueAsString(message));
       String type = message.getMsgType();
       if ("text".equals(type)) {// 文本消息
+        checkOpenID(message);
         return text(model, message);
       }
       if ("image".equals(type)) {// 图片消息
@@ -80,6 +85,10 @@ public class IndexController extends ControllerHelper {
     }
 
     return ok();
+  }
+
+  private void checkOpenID(RequestMessage message) {
+    new ConnectOpenIDThread(weixinUserService, message.getFromUserName()).start();// 设置OpenID与FakeID
   }
 
   private boolean auth(String signature, String timestamp, String nonce) {
@@ -132,6 +141,7 @@ public class IndexController extends ControllerHelper {
         response.setContent(welcomeMessage);
         response.setCreateTime(System.currentTimeMillis());
         model.addAttribute("message", response);
+        new ConnectOpenIDThread(weixinUserService, message.getFromUserName()).start();// 设置OpenID与FakeID
         return "/text";
       }
       LOGGER.warn("Due no weixin_welcome_message set, system don't send ");
