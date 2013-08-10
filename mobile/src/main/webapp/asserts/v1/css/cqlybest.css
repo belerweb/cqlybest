@@ -1,0 +1,13 @@
+#index-top-slider {
+	height: auto;
+	background: transparent;
+	position: relative;
+}
+
+#index-top-slider.slider .slide-text {
+	position: absolute;
+	right: 10px;
+	top: 10px;
+	color: #fff;
+	text-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+}
