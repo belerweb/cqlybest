@@ -26,6 +26,10 @@
 		<filter-name>hibernateFilter</filter-name>
 		<url-pattern>*.html</url-pattern>
 	</filter-mapping>
+	<filter-mapping>
+		<filter-name>hibernateFilter</filter-name>
+		<url-pattern>*.xml</url-pattern>
+	</filter-mapping>
 	<filter>
 		<filter-name>springSecurityFilterChain</filter-name>
 		<filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
@@ -49,6 +53,10 @@
 	<filter-mapping>
 		<filter-name>springSecurityFilterChain</filter-name>
 		<url-pattern>*.html</url-pattern>
+	</filter-mapping>
+	<filter-mapping>
+		<filter-name>springSecurityFilterChain</filter-name>
+		<url-pattern>*.xml</url-pattern>
 	</filter-mapping>
 
 	<servlet>
@@ -75,6 +83,10 @@
 	<servlet-mapping>
 		<servlet-name>springmvc</servlet-name>
 		<url-pattern>*.html</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>springmvc</servlet-name>
+		<url-pattern>*.xml</url-pattern>
 	</servlet-mapping>
 
 	<listener>

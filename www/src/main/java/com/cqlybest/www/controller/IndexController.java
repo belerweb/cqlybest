@@ -1,6 +1,7 @@
 package com.cqlybest.www.controller;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -40,6 +41,15 @@ public class IndexController extends ControllerHelper {
   private MaldivesService maldivesService;
   @Autowired
   private DictService dictService;
+
+  /**
+   * 百度开放适配 PC页－手机页对应关系
+   */
+  @RequestMapping("/m.xml")
+  public void m(Model model) {
+    model.addAttribute("now", new Date());
+    setCommonData(model);
+  }
 
   /**
    * 首页

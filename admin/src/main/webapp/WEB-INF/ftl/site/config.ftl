@@ -26,6 +26,12 @@
 					</div>
 				</div>
 				<div class="control-group">
+					<label class="control-label">移动网站地址：</label>
+					<div class="controls">
+						<a href="#" class="editable" data-name="site_mobile_url" data-type="text" data-url="${URL}" data-value="${options.site_mobile_url!}"></a>
+					</div>
+				</div>
+				<div class="control-group">
 					<label class="control-label">后台地址：</label>
 					<div class="controls">
 						<a href="#" class="editable" data-name="site_admin_url" data-type="text" data-url="${URL}" data-value="${options.site_admin_url!}"></a>

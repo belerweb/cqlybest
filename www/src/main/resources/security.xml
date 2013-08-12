@@ -25,6 +25,7 @@ http://www.springframework.org/schema/beans http://www.springframework.org/schem
 		<logout logout-url="/user/logout" />
 		<intercept-url pattern="/" access="permitAll" />
 		<intercept-url pattern="/**/*.html" access="permitAll" />
+		<intercept-url pattern="/**/*.xml" access="permitAll" />
 		<intercept-url pattern="/connector/**" access="permitAll" />
 		<intercept-url pattern="/image/*.jpg" access="permitAll" />
 		<intercept-url pattern="/image/*.gif" access="permitAll" />
