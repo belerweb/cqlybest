@@ -1,4 +1,6 @@
 <#assign Title=(island.zhName!)+(island.enName!) />
+<#assign Description=island.description! />
+<#assign Keywords=island.zhName! />
 <#include "/template1/header.ftl">
 <div id="maldives-island" class="container">
 	<style type="text/css">
