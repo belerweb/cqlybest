@@ -1,9 +1,12 @@
 package com.cqlybest.common.service;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
+import org.hibernate.criterion.Criterion;
+import org.hibernate.criterion.MatchMode;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -82,6 +85,16 @@ public class MaldivesService {
       return maldivesDao.find(page, pageSize);
     }
     return maldivesDao.findAll();
+  }
+
+  public List<MaldivesSeaIsland> searchIslandByKeyword(String keyword, int page, int pageSize) {
+    List<Criterion> propertyConditions = new ArrayList<>();
+    propertyConditions.add(Restrictions.disjunction()
+        .add(Restrictions.like("zhName", keyword, MatchMode.ANYWHERE))
+        .add(Restrictions.like("enName", keyword, MatchMode.ANYWHERE))
+        .add(Restrictions.like("byName", keyword, MatchMode.ANYWHERE)));
+    List<MaldivesSeaIsland> islands = maldivesDao.findIslands(propertyConditions, page, pageSize);
+    return islands;
   }
 
   @Transactional

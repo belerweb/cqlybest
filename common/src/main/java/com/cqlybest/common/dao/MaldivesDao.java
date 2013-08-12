@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.hibernate.Criteria;
 import org.hibernate.Query;
+import org.hibernate.criterion.Criterion;
 import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Repository;
@@ -82,6 +83,17 @@ public class MaldivesDao extends AbstractDao<MaldivesSeaIsland, String> {
     Criteria criteria = getCurrentSession().createCriteria(MaldivesDining.class);
     criteria.add(Restrictions.eq("islandId", islandId));
     criteria.addOrder(Order.asc("displayOrder"));
+    return criteria.list();
+  }
+
+  public List<MaldivesSeaIsland> findIslands(List<Criterion> propertyConditions, int page,
+      int pageSize) {
+    Criteria criteria = getCurrentSession().createCriteria(entityClass);
+    for (Criterion condition : propertyConditions) {
+      criteria.add(condition);
+    }
+    criteria.setFirstResult((Math.max(page, 1) - 1) * pageSize);
+    criteria.setMaxResults(pageSize);
     return criteria.list();
   }
 }
