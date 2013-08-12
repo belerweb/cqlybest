@@ -8,7 +8,7 @@
 		<data>
 			<display>
 				<pc_url_pattern>${Options.site_url!}/(.*)</pc_url_pattern>
-				<html5_url_pattern>${Options.site_mobile_url!}/${1}</html5_url_pattern>
+				<html5_url_pattern>${Options.site_mobile_url!}/${r"$"}{1}</html5_url_pattern>
 			</display>
 		</data>
 	</url>
