@@ -99,6 +99,22 @@
 						</div>
 					</div>
 				</div>
+				<div class="control-group">
+					<label class="control-label"><a herf="#" class="editable-wysihtml5">微信公众平台帮助：</a></label>
+					<div class="controls">
+						<div data-name="weixin_help" data-type="wysihtml5" data-url="${URL}" data-toggle="manual" data-original-title="编辑微博公众平台帮助">
+							${options.weixin_help!}
+						</div>
+					</div>
+				</div>
+				<div class="control-group">
+					<label class="control-label"><a herf="#" class="editable-wysihtml5">微信公众平台不理解：</a></label>
+					<div class="controls">
+						<div data-name="weixin_do_not_understand" data-type="wysihtml5" data-url="${URL}" data-toggle="manual" data-original-title="微信公众平台不理解">
+							${options.weixin_do_not_understand!}
+						</div>
+					</div>
+				</div>
 			</div>
 			<div class="span6">
 				<div class="control-group">
