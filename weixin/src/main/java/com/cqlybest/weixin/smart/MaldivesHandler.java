@@ -31,7 +31,7 @@ public class MaldivesHandler implements Handler {
   public boolean support(RequestMessage request) {
     String content = request.getContent();
     return content != null && "text".equals(request.getMsgType())
-        && content.matches("(.*马尔代夫.*)|(.*马代.*)|(.*[mM]aldives.*)");
+        && content.matches("(.*马尔代夫.*)|(.*馬爾代夫.*)|(.*马代.*)|(.*馬代.*)|(.*maldives.*)|(md)");
   }
 
   @Override
@@ -43,7 +43,7 @@ public class MaldivesHandler implements Handler {
     response.setCreateTime(System.currentTimeMillis());
 
     List<Article> articles = new ArrayList<>();
-    List<MaldivesSeaIsland> islands = maldivesService.list(1, 10);
+    List<MaldivesSeaIsland> islands = maldivesService.list(1, 5);
     for (MaldivesSeaIsland island : islands) {
       List<Image> images =
           imageService.getImages(Constant.IMAGE_MALDIVES_HOTEL_PICTURE, island.getId());
