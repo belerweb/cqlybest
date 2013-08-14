@@ -1,3 +1,244 @@
+.metrouicss .fg-color-blue {
+	color: #2d89ef !important;
+}
+
+.metrouicss .fg-color-blueLight {
+	color: #eff4ff !important;
+}
+
+.metrouicss .fg-color-blueDark {
+	color: #2b5797 !important;
+}
+
+.metrouicss .fg-color-green {
+	color: #00a300 !important;
+}
+
+.metrouicss .fg-color-greenLight {
+	color: #99b433 !important;
+}
+
+.metrouicss .fg-color-greenDark {
+	color: #1e7145 !important;
+}
+
+.metrouicss .fg-color-red {
+	color: #b91d47 !important;
+}
+
+.metrouicss .fg-color-yellow {
+	color: #ffc40d !important;
+}
+
+.metrouicss .fg-color-orange {
+	color: #e3a21a !important;
+}
+
+.metrouicss .fg-color-orangeDark {
+	color: #da532c !important;
+}
+
+.metrouicss .fg-color-pink {
+	color: #9f00a7 !important;
+}
+
+.metrouicss .fg-color-pinkDark {
+	color: #7e3878 !important;
+}
+
+.metrouicss .fg-color-purple {
+	color: #603cba !important;
+}
+
+.metrouicss .fg-color-darken {
+	color: #1d1d1d !important;
+}
+
+.metrouicss .fg-color-lighten {
+	color: #d5e7ec !important;
+}
+
+.metrouicss .fg-color-white {
+	color: #ffffff !important;
+}
+
+.metrouicss .fg-color-grayDark {
+	color: #525252 !important;
+}
+
+.metrouicss .fg-color-magenta {
+	color: #ff0097 !important;
+}
+
+.metrouicss .fg-color-teal {
+	color: #00aba9 !important;
+}
+
+.metrouicss .fg-color-redLight {
+	color: #ee1111 !important;
+}
+
+.metrouicss .bg-color-blue {
+	background-color: #2d89ef !important;
+}
+
+.metrouicss .bg-color-blueLight {
+	background-color: #eff4ff !important;
+}
+
+.metrouicss .bg-color-blueDark {
+	background-color: #2b5797 !important;
+}
+
+.metrouicss .bg-color-green {
+	background-color: #00a300 !important;
+}
+
+.metrouicss .bg-color-greenLight {
+	background-color: #99b433 !important;
+}
+
+.metrouicss .bg-color-greenDark {
+	background-color: #1e7145 !important;
+}
+
+.metrouicss .bg-color-red {
+	background-color: #b91d47 !important;
+}
+
+.metrouicss .bg-color-yellow {
+	background-color: #ffc40d !important;
+}
+
+.metrouicss .bg-color-orange {
+	background-color: #e3a21a !important;
+}
+
+.metrouicss .bg-color-orangeDark {
+	background-color: #da532c !important;
+}
+
+.metrouicss .bg-color-pink {
+	background-color: #9f00a7 !important;
+}
+
+.metrouicss .bg-color-pinkDark {
+	background-color: #7e3878 !important;
+}
+
+.metrouicss .bg-color-purple {
+	background-color: #603cba !important;
+}
+
+.metrouicss .bg-color-darken {
+	background-color: #1d1d1d !important;
+}
+
+.metrouicss .bg-color-lighten {
+	background-color: #d5e7ec !important;
+}
+
+.metrouicss .bg-color-white {
+	background-color: #ffffff !important;
+}
+
+.metrouicss .bg-color-grayDark {
+	background-color: #525252 !important;
+}
+
+.metrouicss .bg-color-magenta {
+	background-color: #ff0097 !important;
+}
+
+.metrouicss .bg-color-teal {
+	background-color: #00aba9 !important;
+}
+
+.metrouicss .bg-color-redLight {
+	background-color: #ee1111 !important;
+}
+
+.p-l-r-5 {
+	padding-left: 5px;
+	padding-right: 5px;
+}
+
+.m-b-5 {
+	margin-bottom: 5px;
+}
+
+.no-margin {
+	margin: 0;
+}
+
+.no-padding {
+	padding: 0;
+}
+
+.bar-title {
+	color: #FFFFFF;
+	font-size: 18px;
+	line-height: 35px;
+	padding: 5px;
+	position: relative;
+	text-align: center;
+	position: fixed;
+	top: 0;
+	left: 0;
+	right: 0;
+}
+
+.bar-nav-bottom {
+	position: fixed;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	padding-bottom: 2px;
+	margin: 0;
+	background: #FFF;
+}
+
+.metro {
+	text-align: center;
+}
+
+.metro .tile {
+	background-clip: padding-box;
+	color: #FFFFFF;
+	cursor: pointer;
+	display: inline-block;
+	height: 50px;
+	margin: 2px;
+	overflow: hidden;
+	padding: 8px;
+	text-decoration: none;
+	width: 50px;
+	-webkit-background-clip: padding;
+	-moz-background-clip: padding;
+}
+
+.metro .tile.rectangle {
+	width: 120px;
+}
+
+.metro .tile .text-wrapper {
+	display: table;
+	height: 50px;
+	width: 50px;
+}
+
+.metro .tile.rectangle .text-wrapper {
+	width: 120px;
+}
+
+.metro .tile .text-wrapper .text {
+	display: table-cell;
+	font-size: 16px;
+	line-height: 25px;
+	text-align: center;
+	vertical-align: middle;
+}
+
 #index-top-slider {
 	height: auto;
 	background: transparent;
