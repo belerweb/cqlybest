@@ -61,7 +61,7 @@ public class MaldivesIslandHandler implements Handler {
 
   @Override
   public ResponseMessage handle(RequestMessage request) {
-    String siteUrl = optionService.getOptions().get(Constant.OPTION_WWW_URL);
+    String siteUrl = optionService.getOptions().get(Constant.OPTION_MOBILE_URL);
     ResponseNewsMessage response = new ResponseNewsMessage();
     response.setFromUserName(request.getToUserName());
     response.setToUserName(request.getFromUserName());
