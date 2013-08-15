@@ -7,7 +7,11 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 
+import javax.imageio.IIOImage;
 import javax.imageio.ImageIO;
+import javax.imageio.ImageWriteParam;
+import javax.imageio.ImageWriter;
+import javax.imageio.stream.ImageOutputStream;
 
 import net.coobird.thumbnailator.filters.Watermark;
 import net.coobird.thumbnailator.geometry.Positions;
@@ -33,7 +37,7 @@ import com.cqlybest.common.service.ImageService;
 import com.cqlybest.common.service.OptionService;
 
 @Controller
-public class ImageController {
+public class ImageController extends ControllerHelper {
 
   @Autowired
   private ImageService imageService;
@@ -74,7 +78,7 @@ public class ImageController {
   }
 
   @RequestMapping(value = "/image/{imageId}.{imageType:jpg|png|gif}", method = RequestMethod.GET)
-  public ResponseEntity<byte[]> view(@PathVariable String imageId, @PathVariable String imageType,
+  public Object view(@PathVariable String imageId, @PathVariable String imageType,
       @RequestParam(required = false) Integer width,
       @RequestParam(required = false) Integer height,
       @RequestHeader(value = "If-Modified-Since", required = false) String ifModifiedSince)
@@ -115,7 +119,7 @@ public class ImageController {
               new Watermark(Positions.valueOf(watermarkPosition), watermarkImage, 1);
           bufferedImage = watermarkFilter.apply(bufferedImage);
           ByteArrayOutputStream out = new ByteArrayOutputStream();
-          ImageIO.write(bufferedImage, image.getImageType(), out);
+          write(imageType, bufferedImage, out);
           return new ResponseEntity<byte[]>(out.toByteArray(), headers, HttpStatus.OK);
         }
       }
@@ -128,14 +132,24 @@ public class ImageController {
         (double) bufferedImage.getWidth() / (double) bufferedImage.getHeight() < (double) width
             / (double) height;
     BufferedImage scaleImage =
-        Scalr.resize(bufferedImage, Scalr.Method.ULTRA_QUALITY, fixToWidth
+        Scalr.resize(bufferedImage, Scalr.Method.QUALITY, fixToWidth
             ? Scalr.Mode.FIT_TO_WIDTH
             : Scalr.Mode.FIT_TO_HEIGHT, width, height, Scalr.OP_ANTIALIAS);
     scaleImage =
         Scalr.crop(scaleImage, (scaleImage.getWidth() - width) / 2,
             (scaleImage.getHeight() - height) / 2, width, height);
     ByteArrayOutputStream scaleOut = new ByteArrayOutputStream();
-    ImageIO.write(scaleImage, image.getImageType(), scaleOut);
+    write(imageType, scaleImage, scaleOut);
     return new ResponseEntity<byte[]>(scaleOut.toByteArray(), headers, HttpStatus.OK);
+  }
+
+  private void write(String type, BufferedImage in, ByteArrayOutputStream out) throws IOException {
+    ImageWriter writer = ImageIO.getImageWritersBySuffix(type).next();
+    ImageWriteParam param = writer.getDefaultWriteParam();
+    param.setCompressionMode(ImageWriteParam.MODE_EXPLICIT);
+    param.setCompressionQuality(1.0F);
+    ImageOutputStream ios = ImageIO.createImageOutputStream(out);
+    writer.setOutput(ios);
+    writer.write(null, new IIOImage(in, null, null), param);
   }
 }
