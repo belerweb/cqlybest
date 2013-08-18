@@ -8,6 +8,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.cqlybest.common.mongo.dao.MongoDao;
 import com.cqlybest.common.service.OptionService;
 
 @Controller
@@ -15,6 +16,9 @@ public class IndexController {
 
   @Autowired
   private OptionService optionService;
+
+  @Autowired
+  private MongoDao mongoDao;
 
   @RequestMapping("/index.do")
   public String index() {

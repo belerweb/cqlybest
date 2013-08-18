@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<descriptors>
+
+	<object class="com.cqlybest.common.mongo.bean.Product">
+		<property name="id" id="true" />
+		<property name="name" />
+	</object>
+
+</descriptors>

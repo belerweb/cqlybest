@@ -15,6 +15,25 @@
 	</bean>
 	<bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver" />
 
+	<!-- Mongodb start -->
+	<bean id="mongo" class="com.googlecode.mjorm.spring.MongoFactoryBean">
+		<property name="uri" value="#{T(System).getProperty('cqlybest.mongo.uri', T(System).getenv('cqlybest.mongo.uri'))}" />
+		<property name="closeOnDestroy" value="true" />
+	</bean>
+	<bean id="mongoObjectMapper" class="com.cqlybest.common.mongo.XmlDescriptorObjectMapperFactoryBean">
+		<property name="xmlResources">
+			<list>
+				<value>classpath*:mongo/**/*.xml</value>
+			</list>
+		</property>
+	</bean>
+	<bean id="mongoDao" class="com.cqlybest.common.mongo.dao.MongoDao">
+		<property name="mongo" ref="mongo" />
+		<property name="dbName" value="#{T(System).getProperty('cqlybest.mongo.dbName', T(System).getenv('cqlybest.mongo.dbName'))}" />
+		<property name="objectMapper" ref="mongoObjectMapper" />
+	</bean>
+	<!-- Mongodb end -->
+
 	<bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource">
 		<property name="driverClass" value="#{T(System).getProperty('cqlybest.db.driver', T(System).getenv('cqlybest.db.driver'))}" />
 		<property name="jdbcUrl" value="#{T(System).getProperty('cqlybest.db.url', T(System).getenv('cqlybest.db.url'))}" />
