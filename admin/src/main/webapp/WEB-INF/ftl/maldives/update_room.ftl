@@ -1,7 +1,6 @@
 <div id="island-room-tab" class="tab-pane">
 	<div class="text-right"><button id="island-room-add" type="button" class="btn btn-primary">添加</button></div>
 	<div id="island-room-accordion-container" style="margin-top:5px;">
-		<#assign rooms=island.rooms>
 		<#include "update_room_accordion.ftl">
 	</div>
 </div>

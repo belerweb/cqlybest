@@ -5,8 +5,8 @@
 }
 </style>
 <div id="island-dining-accordion" class="accordion">
-	<#if dinings?exists>
-	<#list dinings as dining>
+	<#if island.dinings?exists>
+	<#list island.dinings as dining>
 	<div class="accordion-group">
 		<div class="accordion-heading" style="position:relative;">
 			<a class="accordion-toggle" data-toggle="collapse" data-parent="#island-dining-accordion" href="#island-dining-accordion-${dining_index}">

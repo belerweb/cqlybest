@@ -26,8 +26,14 @@
 				<value>classpath*:mongo/**/*.xml</value>
 			</list>
 		</property>
+		<property name="typeConverters">
+			<list>
+				<bean class="com.cqlybest.common.mongo.ByteArrayToBinary" />
+				<bean class="com.cqlybest.common.mongo.BinaryToByteArray" />
+			</list>
+		</property>
 	</bean>
-	<bean id="mongoDao" class="com.cqlybest.common.mongo.dao.MongoDao">
+	<bean id="mongoDb" class="com.cqlybest.common.mongo.dao.MongoDb">
 		<property name="mongo" ref="mongo" />
 		<property name="dbName" value="#{T(System).getProperty('cqlybest.mongo.dbName', T(System).getenv('cqlybest.mongo.dbName'))}" />
 		<property name="objectMapper" ref="mongoObjectMapper" />

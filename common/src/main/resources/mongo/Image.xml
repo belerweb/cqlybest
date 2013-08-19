@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<descriptors>
+
+	<object class="com.cqlybest.common.mongo.bean.Image">
+		<property name="id" />
+		<property name="extension" />
+		<property name="contentType" />
+		<property name="title" />
+		<property name="description" />
+		<property name="data" storageClass="org.bson.types.Binary" />
+		<property name="extra" />
+		<property name="extraKey" />
+		<property name="createdTime" />
+		<property name="lastUpdated" />
+	</object>
+
+	<object class="com.cqlybest.common.mongo.bean.ImageMeta">
+		<property name="id" />
+		<property name="extension" />
+		<property name="title" />
+		<property name="description" />
+	</object>
+
+</descriptors>

@@ -29,14 +29,14 @@
 					<#include "update_dining.ftl">
 					<#include "update_play.ftl">
 					<div id="island-poster-tab" class="image-gallery tab-pane">
-						<div class="text-right"><button type="button" data-extra="maldives-island-poster" data-extra-key="${id}" class="btn btn-primary action action-add picture">添加</button></div>
+						<div class="text-right"><button type="button" class="btn btn-primary action action-add picture">添加</button></div>
 						<#if island.pictures?has_content>
 						<div class="row-fluid">
 							<ul class="thumbnails">
 							<#list island.pictures as image>
 								<li class="span3">
 									<div class="thumbnail">
-										<img src="${ContextPath}/image/${image.id}.${image.imageType}">
+										<img src="${ContextPath}/image/${image.id}.${image.extension}">
 										<div class="caption">
 											<p><a href="#" class="title editable-click <#if !image.title?has_content>editable-empty</#if>" data-pk="${image.id}" data-name="title" data-type="text" data-value="${image.title!}">${image.title!'标题：未设置'}</a></p>
 											<p><a href="#" class="description editable-click <#if !image.description?has_content>editable-empty</#if>" data-pk="${image.id}" data-name="description" data-type="textarea">${(image.description!'描述：未设置')?html}</a></p>
@@ -66,7 +66,7 @@ var arrangeImags = function(el, images) {
 	$('.row-fluid', el).remove();
 	if (images) {
 		$.each(images, function(i, obj){
-			var image = $('<li class="span3"><div class="thumbnail"><img src="${ContextPath}/image/'+obj.id+'.'+obj.imageType+'"><div class="caption"></div></div></li>');
+			var image = $('<li class="span3"><div class="thumbnail"><img src="${ContextPath}/image/'+obj.id+'.'+obj.extension+'"><div class="caption"></div></div></li>');
 			$('.caption', image).append('<p><a href="#" class="title editable-click editable-empty" data-pk="'+obj.id+'" data-name="title" data-type="text">标题：未设置</a></p>');
 			$('.caption', image).append('<p><a href="#" class="description editable-click editable-empty" data-pk="'+obj.id+'" data-name="description" data-type="textarea">描述：未设置</a></p>');
 			$('.caption', image).append('<button class="delete btn btn-danger" data-id="'+obj.id+'">刪除</button>');
@@ -85,18 +85,17 @@ var arrangeImags = function(el, images) {
 $('button.picture.action-add').click(function(){
 	var images = cqlybest.uploadImage('${ContextPath}');
 	if (images) {
-		var gallery = $(this).closest('.image-gallery');
-		var extra = $(this).attr('data-extra');
-		var extraKey = $(this).attr('data-extra-key');
+		var _images = [];
 		$.each(images, function(i, obj) {
-			$.post('${ContextPath}/image/update', {
-				pk: obj.id,
-				name: ['extra', 'extraKey'],
-				value: [extra, extraKey]
-			}, function(){
-				// TODO
-			});
+			_images.push(obj.id + '.' + obj.extension);
 		});
+		$.post('${ContextPath}/maldives/picture/add.do', {
+			islandId: '${island.id}',
+			images: _images
+		}, function(){
+			// TODO
+		});
+		var gallery = $(this).closest('.image-gallery');
 		arrangeImags(gallery, images);
 	}
 });

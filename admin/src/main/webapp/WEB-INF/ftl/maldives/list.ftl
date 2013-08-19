@@ -36,7 +36,7 @@
 					</tr>
 				</thead>
 				<tbody>
-					<#list islands as island>
+					<#list result.items as island>
 					<tr>
 						<td><input type="checkbox" value="${island.id}"></td>
 						<td>${island.zhName!} ${island.enName!}</td>
@@ -59,9 +59,9 @@
 </div>
 <script>
 $('#main-list-table').dataTable({
-	iDeferLoading: ${total},
-	iDisplayStart: ${(page-1)*pageSize},
-	iDisplayLength: ${pageSize},
+	iDeferLoading: ${result.total},
+	iDisplayStart: ${result.start},
+	iDisplayLength: ${result.pageSize},
 	bLengthChange: false,
 	bFilter: false,
 	bServerSide: true,
@@ -71,7 +71,7 @@ $('#main-list-table').dataTable({
 			p[obj.name] = obj.value;
 		});
 		var q = {};
-		q.page = p.iDisplayStart / p.iDisplayLength + 1;
+		q.page = p.iDisplayStart / p.iDisplayLength;
 		var u = '${ContextPath}/maldives/list.do?' + $.param(q);
 		var hash  = {
 			m: 'site',

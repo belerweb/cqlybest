@@ -1,4 +1,4 @@
-package com.cqlybest.common.controller;
+package com.cqlybest.common.mongo.controller;
 
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayInputStream;
@@ -17,11 +17,13 @@ import net.coobird.thumbnailator.filters.Watermark;
 import net.coobird.thumbnailator.geometry.Positions;
 
 import org.imgscalr.Scalr;
+import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -31,14 +33,18 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.cqlybest.common.Constant;
-import com.cqlybest.common.bean.Image;
-import com.cqlybest.common.service.ImageService;
+import com.cqlybest.common.controller.ControllerHelper;
+import com.cqlybest.common.mongo.bean.Image;
+import com.cqlybest.common.mongo.service.ImageService;
 import com.cqlybest.common.service.OptionService;
 
+import eu.medsea.util.MimeUtil;
+
+@Controller
 public class ImageController extends ControllerHelper {
 
   @Autowired
-  private ImageService imageService;
+  private ImageService mongoImageService;
   @Autowired
   private OptionService optionService;
 
@@ -48,9 +54,28 @@ public class ImageController extends ControllerHelper {
   @RequestMapping(method = RequestMethod.POST, value = "/image/upload")
   @ResponseBody
   public Object upload(@RequestParam MultipartFile file) throws Exception {
-    Image image = imageService.multipartFileToImage(file);
-    imageService.add(image);
-    return image;
+    JSONObject result = new JSONObject();
+    result.put("code", 0);
+    if (file == null) {
+      result.put("code", 11);
+      result.put("message", "Image is must.");
+      return result;
+    }
+
+    String extention = MimeUtil.getFileExtension(file.getOriginalFilename()).toLowerCase();
+    if (!"gif".equals(extention) && !"jpg".equals(extention) && !"png".equals(extention)) {
+      result.put("code", 12);
+      result.put("message", "Unsupported file.");
+      return result;
+    }
+
+    if (file.getSize() > 32000 * 1024) {
+      result.put("code", 13);
+      result.put("message", "File is too big (over 32M).");
+      return result;
+    }
+
+    return mongoImageService.upload(file);
   }
 
   @RequestMapping(value = "/image/update", method = RequestMethod.POST)
@@ -60,11 +85,11 @@ public class ImageController extends ControllerHelper {
       @RequestParam(required = false, value = "name[]") List<String> names,
       @RequestParam(required = false, value = "value[]") List<String> values) {
     if (name != null && value != null) {
-      imageService.update(pk, name, value);
+      // TODO imageService.update(pk, name, value);
     }
     if (names != null && values != null && names.size() == values.size()) {
       for (int i = 0; i < names.size(); i++) {
-        imageService.update(pk, names.get(i), values.get(i));
+        // TODO imageService.update(pk, names.get(i), values.get(i));
       }
     }
   }
@@ -72,11 +97,11 @@ public class ImageController extends ControllerHelper {
   @RequestMapping(value = "/image/delete", method = RequestMethod.POST)
   @ResponseBody
   public void delete(@RequestParam String id) {
-    imageService.delete(id);
+  // TODO imageService.delete(id);
   }
 
-  @RequestMapping(value = "/image/{imageId}.{imageType:jpg|png|gif}", method = RequestMethod.GET)
-  public Object view(@PathVariable String imageId, @PathVariable String imageType,
+  @RequestMapping(value = "/image/{imageId}.{extention:jpg|png|gif}", method = RequestMethod.GET)
+  public Object view(@PathVariable String imageId, @PathVariable String extention,
       @RequestParam(required = false) Integer width,
       @RequestParam(required = false) Integer height,
       @RequestHeader(value = "If-Modified-Since", required = false) String ifModifiedSince)
@@ -84,8 +109,9 @@ public class ImageController extends ControllerHelper {
     if (ifModifiedSince != null) {
       return new ResponseEntity<>(HttpStatus.NOT_MODIFIED);
     }
-    Image image = imageService.get(imageId);
-    if (!imageType.equals(image.getImageType())) {
+
+    Image image = mongoImageService.getImage(imageId);
+    if (!extention.equals(image.getExtension())) {
       return new ResponseEntity<byte[]>(null, null, HttpStatus.NOT_FOUND);
     }
     HttpHeaders headers = new HttpHeaders();
@@ -93,13 +119,7 @@ public class ImageController extends ControllerHelper {
     headers.setLastModified(0);
     headers.setExpires(System.currentTimeMillis() + 31536000000L);
     headers.setCacheControl("max-age=31536000000");
-    if (imageType.equals("jpg")) {
-      headers.setContentType(MediaType.IMAGE_JPEG);
-    } else if (imageType.equals("png")) {
-      headers.setContentType(MediaType.IMAGE_PNG);
-    } else if (imageType.equals("gif")) {
-      headers.setContentType(MediaType.IMAGE_GIF);
-    }
+    headers.setContentType(MediaType.valueOf(image.getContentType()));
 
     if (width == null || height == null) {
       Map<String, String> options = optionService.getOptions();
@@ -107,9 +127,10 @@ public class ImageController extends ControllerHelper {
       String watermarkPosition = options.get(Constant.OPTION_WATERMARK_POSITION);
 
       if (watermarkId != null && watermarkPosition != null) {
-        BufferedImage bufferedImage = ImageIO.read(new ByteArrayInputStream(image.getImageData()));
+        BufferedImage bufferedImage = ImageIO.read(new ByteArrayInputStream(image.getData()));
         BufferedImage watermarkImage =
-            ImageIO.read(new ByteArrayInputStream(imageService.get(watermarkId).getImageData()));
+            ImageIO
+                .read(new ByteArrayInputStream(mongoImageService.getImage(watermarkId).getData()));
         if (bufferedImage.getWidth() > watermarkImage.getWidth()
             && bufferedImage.getHeight() > watermarkImage.getHeight()) {
           // 水印
@@ -117,15 +138,15 @@ public class ImageController extends ControllerHelper {
               new Watermark(Positions.valueOf(watermarkPosition), watermarkImage, 1);
           bufferedImage = watermarkFilter.apply(bufferedImage);
           ByteArrayOutputStream out = new ByteArrayOutputStream();
-          write(imageType, bufferedImage, out);
+          write(extention, bufferedImage, out);
           return new ResponseEntity<byte[]>(out.toByteArray(), headers, HttpStatus.OK);
         }
       }
-      return new ResponseEntity<byte[]>(image.getImageData(), headers, HttpStatus.OK);
+      return new ResponseEntity<byte[]>(image.getData(), headers, HttpStatus.OK);
     }
 
     // 缩放
-    BufferedImage bufferedImage = ImageIO.read(new ByteArrayInputStream(image.getImageData()));
+    BufferedImage bufferedImage = ImageIO.read(new ByteArrayInputStream(image.getData()));
     boolean fixToWidth =
         (double) bufferedImage.getWidth() / (double) bufferedImage.getHeight() < (double) width
             / (double) height;
@@ -137,17 +158,21 @@ public class ImageController extends ControllerHelper {
         Scalr.crop(scaleImage, (scaleImage.getWidth() - width) / 2,
             (scaleImage.getHeight() - height) / 2, width, height);
     ByteArrayOutputStream scaleOut = new ByteArrayOutputStream();
-    write(imageType, scaleImage, scaleOut);
+    write(extention, scaleImage, scaleOut);
     return new ResponseEntity<byte[]>(scaleOut.toByteArray(), headers, HttpStatus.OK);
   }
 
   private void write(String type, BufferedImage in, ByteArrayOutputStream out) throws IOException {
     ImageWriter writer = ImageIO.getImageWritersBySuffix(type).next();
-    ImageWriteParam param = writer.getDefaultWriteParam();
-    param.setCompressionMode(ImageWriteParam.MODE_EXPLICIT);
-    param.setCompressionQuality(1.0F);
     ImageOutputStream ios = ImageIO.createImageOutputStream(out);
     writer.setOutput(ios);
-    writer.write(null, new IIOImage(in, null, null), param);
+    if ("jpg".equals(type)) {
+      ImageWriteParam param = writer.getDefaultWriteParam();
+      param.setCompressionMode(ImageWriteParam.MODE_EXPLICIT);
+      param.setCompressionQuality(1.0F);
+      writer.write(null, new IIOImage(in, null, null), param);
+    } else {
+      writer.write(in);
+    }
   }
 }

@@ -5,8 +5,8 @@
 }
 </style>
 <div id="island-room-accordion" class="accordion">
-	<#if rooms?exists>
-	<#list rooms as room>
+	<#if island.rooms?has_content>
+	<#list island.rooms as room>
 	<div class="accordion-group">
 		<div class="accordion-heading" style="position:relative;">
 			<a class="accordion-toggle" data-toggle="collapse" data-parent="#island-room-accordion" href="#island-room-accordion-${room_index}">

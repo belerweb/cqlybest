@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<descriptors>
+
+	<object class="com.cqlybest.common.mongo.bean.MaldivesIsland">
+		<property name="id" />
+		<property name="zhName" />
+		<property name="enName" />
+		<property name="byName" />
+		<property name="level" />
+		<property name="way" />
+		<property name="area" />
+		<property name="snorkeling" />
+		<property name="price" />
+		<property name="tags" />
+		<property name="ad" />
+		<property name="description" />
+		<property name="hotelName" />
+		<property name="hotelLevel" />
+		<property name="hotelStart" />
+		<property name="hotelRoomNum" />
+		<property name="hotelSite" />
+		<property name="hotelTel" />
+		<property name="hotelFax" />
+		<property name="hotelChinese" />
+		<property name="hotelAirport" />
+		<property name="hotelDescription" />
+		<property name="plays" />
+		<property name="createdTime" />
+		<property name="lastUpdated" />
+		<property name="rooms" />
+		<property name="dinings" />
+		<property name="pictures" />
+		<property name="hotelPictures" />
+	</object>
+
+	<object class="com.cqlybest.common.mongo.bean.MaldivesRoom">
+		<property name="id" />
+		<property name="zhName" />
+		<property name="enName" />
+		<property name="description" />
+		<property name="num" />
+		<property name="requirements" />
+		<property name="roomSize" />
+		<property name="containPool" />
+		<property name="roomFacility" />
+		<property name="displayOrder" />
+	</object>
+
+	<object class="com.cqlybest.common.mongo.bean.MaldivesDining">
+		<property name="id" />
+		<property name="zhName" />
+		<property name="enName" />
+		<property name="description" />
+		<property name="style" />
+		<property name="food" />
+		<property name="openTime" />
+		<property name="location" />
+		<property name="reservation" />
+		<property name="displayOrder" />
+	</object>
+
+</descriptors>

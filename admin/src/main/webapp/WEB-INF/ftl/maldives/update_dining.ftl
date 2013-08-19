@@ -1,7 +1,6 @@
 <div id="island-dining-tab" class="tab-pane">
 	<div class="text-right"><button id="island-dining-add" type="button" class="btn btn-primary">添加</button></div>
 	<div id="island-dining-accordion-container" style="margin-top:5px;">
-		<#assign dinings=island.dinings>
 		<#include "update_dining_accordion.ftl">
 	</div>
 </div>

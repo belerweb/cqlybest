@@ -121,7 +121,7 @@
 					<label class="control-label"><a href="#" class="watermark">水印图片：</a></label>
 					<div class="controls" data-id="<#if watermark?has_content>${watermark.id}</#if>">
 						<#if watermark?has_content>
-						<img src="${ContextPath}/image/${watermark.id}.${watermark.imageType}">
+						<img src="${ContextPath}/image/${watermark.id}.${watermark.extension}">
 						</#if>
 					</div>
 				</div>
@@ -180,7 +180,7 @@ $('#mb .watermark').click(function(e) {
 					id: oid
 				});
 			}
-			el.attr('data-id', images[0].id).empty().append('<img src="${ContextPath}/image/' + images[0].id + '.' + images[0].imageType + '">');
+			el.attr('data-id', images[0].id).empty().append('<img src="${ContextPath}/image/' + images[0].id + '.' + images[0].extension + '">');
 		});
 	}
 });
