@@ -125,12 +125,11 @@ public class ImageController extends ControllerHelper {
       Map<String, String> options = optionService.getOptions();
       String watermarkId = options.get(Constant.IMAGE_WATERMARK_IMAGE_ID);
       String watermarkPosition = options.get(Constant.OPTION_WATERMARK_POSITION);
+      Image watermark = mongoImageService.getImage(watermarkId);
 
-      if (watermarkId != null && watermarkPosition != null) {
+      if (watermark != null && watermarkPosition != null) {
         BufferedImage bufferedImage = ImageIO.read(new ByteArrayInputStream(image.getData()));
-        BufferedImage watermarkImage =
-            ImageIO
-                .read(new ByteArrayInputStream(mongoImageService.getImage(watermarkId).getData()));
+        BufferedImage watermarkImage = ImageIO.read(new ByteArrayInputStream(watermark.getData()));
         if (bufferedImage.getWidth() > watermarkImage.getWidth()
             && bufferedImage.getHeight() > watermarkImage.getHeight()) {
           // 水印

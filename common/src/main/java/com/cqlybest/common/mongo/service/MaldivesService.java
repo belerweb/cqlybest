@@ -40,8 +40,8 @@ public class MaldivesService {
 
   public int updateIsland(String islandId, String property, Object value) {
     WriteResult result =
-        mongoDb.createQuery("MaldivesIsland").eq("id", islandId).modify().set(property, value).set(
-            "lastUpdated", new Date()).update();
+        mongoDb.createQuery("MaldivesIsland").eq("_id", islandId).modify().set(property, value)
+            .set("lastUpdated", new Date()).update();
     return result.getN();
   }
 
@@ -58,7 +58,7 @@ public class MaldivesService {
   }
 
   public MaldivesIsland getIsland(String id) {
-    return mongoDb.createQuery("MaldivesIsland").eq("id", id).findObject(MaldivesIsland.class);
+    return mongoDb.createQuery("MaldivesIsland").eq("_id", id).findObject(MaldivesIsland.class);
   }
 
   public void addRoom(String islandId, String zhName, String enName) {
@@ -66,7 +66,7 @@ public class MaldivesService {
     room.setId(UUID.randomUUID().toString());
     room.setZhName(zhName);
     room.setEnName(enName);
-    mongoDb.createQuery("MaldivesIsland").eq("id", islandId).modify().addToSet("rooms",
+    mongoDb.createQuery("MaldivesIsland").eq("_id", islandId).modify().push("rooms",
         mongoDb.unmap(room)).update();
   }
 
@@ -80,7 +80,7 @@ public class MaldivesService {
     dining.setId(UUID.randomUUID().toString());
     dining.setZhName(zhName);
     dining.setEnName(enName);
-    mongoDb.createQuery("MaldivesIsland").eq("id", islandId).modify().addToSet("dinings",
+    mongoDb.createQuery("MaldivesIsland").eq("_id", islandId).modify().push("dinings",
         mongoDb.unmap(dining)).update();
   }
 
@@ -101,10 +101,10 @@ public class MaldivesService {
       images.add(mongoDb.unmap(image));
     }
     // 保存图片
-    mongoDb.createQuery("MaldivesIsland").eq("id", islandId).modify()
-        .addToSetEach("pictures", images).update();
+    mongoDb.createQuery("MaldivesIsland").eq("_id", islandId).modify().pushAll("pictures", images)
+        .update();
     // 更新原始图片的信息
-    mongoDb.createQuery("Image").in("id", imageIds).modify()
+    mongoDb.createQuery("Image").in("_id", imageIds).modify()
         .set("extra", Constant.IMAGE_MALDIVES_ISLAND_POSTER).set("extraKey", islandId)
         .updateMulti();
   }
@@ -113,7 +113,7 @@ public class MaldivesService {
     mongoDb.createQuery("MaldivesIsland").eq("pictures.id", imageId).modify().set(
         "pictures.$." + property, value).update();
     // 更新原始图片的信息
-    mongoDb.createQuery("Image").eq("id", imageId).modify().set(property, value).update();
+    mongoDb.createQuery("Image").eq("_id", imageId).modify().set(property, value).update();
   }
 
   public void deletePicture(String imageId) {
@@ -121,6 +121,110 @@ public class MaldivesService {
     image.put("id", imageId);
     mongoDb.createQuery("MaldivesIsland").eq("pictures.id", imageId).modify()
         .pull("pictures", image).update();
-    mongoDb.createQuery("Image").eq("id", imageId).modify().delete();
+    mongoDb.createQuery("Image").eq("_id", imageId).modify().delete();
+  }
+
+  public void addHotelPicture(String islandId, List<String> filenames) {
+    List<Object> images = new ArrayList<>();
+    List<String> imageIds = new ArrayList<>();
+    for (String fileName : filenames) {
+      String[] tmp = fileName.split("\\.");
+      imageIds.add(tmp[0]);
+      ImageMeta image = new ImageMeta();
+      image.setId(tmp[0]);
+      image.setExtension(tmp[1]);
+      images.add(mongoDb.unmap(image));
+    }
+    // 保存图片
+    mongoDb.createQuery("MaldivesIsland").eq("_id", islandId).modify()
+        .pushAll("hotelPictures", images).update();
+    // 更新原始图片的信息
+    mongoDb.createQuery("Image").in("_id", imageIds).modify()
+        .set("extra", Constant.IMAGE_MALDIVES_HOTEL_PICTURE).set("extraKey", islandId)
+        .updateMulti();
+  }
+
+  public void updateHotelPicture(String imageId, String property, String value) {
+    mongoDb.createQuery("MaldivesIsland").eq("hotelPictures.id", imageId).modify().set(
+        "hotelPictures.$." + property, value).update();
+    // 更新原始图片的信息
+    mongoDb.createQuery("Image").eq("_id", imageId).modify().set(property, value).update();
+  }
+
+  public void deleteHotelPicture(String imageId) {
+    Map<String, String> image = new HashMap<>();
+    image.put("id", imageId);
+    mongoDb.createQuery("MaldivesIsland").eq("hotelPictures.id", imageId).modify()
+        .pull("hotelPictures", image).update();
+    mongoDb.createQuery("Image").eq("_id", imageId).modify().delete();
+  }
+
+  public void addRoomPicture(String roomId, List<String> filenames) {
+    List<Object> images = new ArrayList<>();
+    List<String> imageIds = new ArrayList<>();
+    for (String fileName : filenames) {
+      String[] tmp = fileName.split("\\.");
+      imageIds.add(tmp[0]);
+      ImageMeta image = new ImageMeta();
+      image.setId(tmp[0]);
+      image.setExtension(tmp[1]);
+      images.add(mongoDb.unmap(image));
+    }
+    // 保存图片
+    mongoDb.createQuery("MaldivesIsland").eq("rooms.id", roomId).modify()
+        .pushAll("rooms.$.pictures", images).update();
+    // 更新原始图片的信息
+    mongoDb.createQuery("Image").in("_id", imageIds).modify()
+        .set("extra", Constant.IMAGE_MALDIVES_ROOM_PICTURE).set("extraKey", roomId).updateMulti();
+  }
+
+  public void updateRoomPicture(String index, String imageId, String property, String value) {
+    mongoDb.createQuery("MaldivesIsland").eq("rooms.pictures.id", imageId).modify().set(
+        "rooms.$.pictures." + index + "." + property, value).update();
+    // 更新原始图片的信息
+    mongoDb.createQuery("Image").eq("_id", imageId).modify().set(property, value).update();
+  }
+
+  public void deleteRoomPicture(String imageId) {
+    Map<String, String> image = new HashMap<>();
+    image.put("id", imageId);
+    mongoDb.createQuery("MaldivesIsland").eq("rooms.pictures.id", imageId).modify()
+        .pull("rooms.$.pictures", image).update();
+    mongoDb.createQuery("Image").eq("_id", imageId).modify().delete();
+  }
+
+  public void addDiningPicture(String diningId, List<String> filenames) {
+    List<Object> images = new ArrayList<>();
+    List<String> imageIds = new ArrayList<>();
+    for (String fileName : filenames) {
+      String[] tmp = fileName.split("\\.");
+      imageIds.add(tmp[0]);
+      ImageMeta image = new ImageMeta();
+      image.setId(tmp[0]);
+      image.setExtension(tmp[1]);
+      images.add(mongoDb.unmap(image));
+    }
+    // 保存图片
+    mongoDb.createQuery("MaldivesIsland").eq("dinings.id", diningId).modify()
+        .pushAll("dinings.$.pictures", images).update();
+    // 更新原始图片的信息
+    mongoDb.createQuery("Image").in("_id", imageIds).modify()
+        .set("extra", Constant.IMAGE_MALDIVES_DINING_PICTURE).set("extraKey", diningId)
+        .updateMulti();
+  }
+
+  public void updateDiningPicture(String index, String imageId, String property, String value) {
+    mongoDb.createQuery("MaldivesIsland").eq("dinings.pictures.id", imageId).modify().set(
+        "dinings.$.pictures." + index + "." + property, value).update();
+    // 更新原始图片的信息
+    mongoDb.createQuery("Image").eq("_id", imageId).modify().set(property, value).update();
+  }
+
+  public void deleteDiningPicture(String imageId) {
+    Map<String, String> image = new HashMap<>();
+    image.put("id", imageId);
+    mongoDb.createQuery("MaldivesIsland").eq("dinings.pictures.id", imageId).modify()
+        .pull("dinings.$.pictures", image).update();
+    mongoDb.createQuery("Image").eq("_id", imageId).modify().delete();
   }
 }

@@ -29,7 +29,7 @@
 					<#include "update_dining.ftl">
 					<#include "update_play.ftl">
 					<div id="island-poster-tab" class="image-gallery tab-pane">
-						<div class="text-right"><button type="button" class="btn btn-primary action action-add picture">添加</button></div>
+						<div class="text-right"><button type="button" class="btn btn-primary action action-add picture" data-name="islandId" data-value="${island.id}" data-url="${ContextPath}/maldives/picture/add.do">添加</button></div>
 						<#if island.pictures?has_content>
 						<div class="row-fluid">
 							<ul class="thumbnails">
@@ -63,16 +63,15 @@
 <script type="text/javascript">
 $('button.picture.action-add').click(function(){
 	var tab = $(this).closest('.tab-pane').attr('id');
+	var url = $(this).attr('data-url');
 	var images = cqlybest.uploadImage('${ContextPath}');
 	if (images) {
-		var _images = [];
+		var param = {images:[]};
+		param[$(this).attr('data-name')] = $(this).attr('data-value');
 		$.each(images, function(i, obj) {
-			_images.push(obj.id + '.' + obj.extension);
+			param.images.push(obj.id + '.' + obj.extension);
 		});
-		$.post('${ContextPath}/maldives/picture/add.do', {
-			islandId: '${island.id}',
-			images: _images
-		}, function(){
+		$.post(url, param, function(){
 			$('#mb').load('${ContextPath}/maldives/update.do?id=${island.id}', function() {
 				$('#island-update-tabs a[data-target="#' + tab + '"]').tab('show');
 			});

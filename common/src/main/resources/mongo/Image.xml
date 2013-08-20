@@ -2,7 +2,7 @@
 <descriptors>
 
 	<object class="com.cqlybest.common.mongo.bean.Image">
-		<property name="id" />
+		<property name="id" id="true" />
 		<property name="extension" />
 		<property name="contentType" />
 		<property name="title" />

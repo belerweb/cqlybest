@@ -61,7 +61,7 @@
 						<div class="control-group">
 							<label class="control-label">是否预约：</label>
 							<div class="controls">
-								<a href="#" class="editable" data-pk="${diningId}" data-name="reservation" data-type="select" data-url="${diningUrl}" data-value="<#if island.reservation?has_content><#if island.reservation>True<#else>False</#if></#if>"></a>
+								<a href="#" class="editable" data-pk="${diningId}" data-name="reservation" data-type="select" data-url="${diningUrl}" data-value="<#if dining.reservation?has_content><#if dining.reservation>True<#else>False</#if></#if>"></a>
 							</div>
 						</div>
 						<div class="control-group">
@@ -89,18 +89,18 @@
 						<div class="control-group">
 							<label class="control-label">图片：</label>
 							<div class="controls image-gallery">
-								<button type="button" data-extra="maldives-dining-picture" data-extra-key="${diningId}" class="btn btn-primary action action-add picture">添加</button>
+								<button type="button" class="btn btn-primary action action-add picture" data-name="diningId" data-value="${diningId}" data-url="${ContextPath}/maldives/dining/picture/add.do">添加</button>
 								<#if dining.pictures?has_content>
 								<div class="row-fluid">
 									<ul class="thumbnails">
 									<#list dining.pictures as image>
 										<li class="span3">
 											<div class="thumbnail">
-												<img src="${ContextPath}/image/${image.id}.${image.imageType}">
+												<img src="${ContextPath}/image/${image.id}.${image.extension}">
 												<div class="caption">
-													<p><a href="#" class="title editable-click <#if !image.title?has_content>editable-empty</#if>" data-pk="${image.id}" data-name="title" data-type="text" data-value="${image.title!}">${image.title!'标题：未设置'}</a></p>
-													<p><a href="#" class="description editable-click <#if !image.description?has_content>editable-empty</#if>" data-pk="${image.id}" data-name="description" data-type="textarea">${image.description!'描述：未设置'}</a></p>
-													<button class="delete btn btn-danger" type="button" data-id="${image.id}">刪除</button>
+													<p><a href="#" class="editable" data-pk="${image_index}|${image.id}" data-name="title" data-type="text" data-value="${image.title!}" data-url="${ContextPath}/maldives/dining/picture/update.do"></a></p>
+													<p><a href="#" class="editable" data-pk="${image_index}|${image.id}" data-name="description" data-type="textarea" data-url="${ContextPath}/maldives/dining/picture/update.do">${image.description!?html}</a></p>
+													<button class="delete btn btn-danger" type="button" data-id="${image.id}" data-url="${ContextPath}/maldives/dining/picture/delete.do">刪除</button>
 												</div>
 											</div>
 										</li>

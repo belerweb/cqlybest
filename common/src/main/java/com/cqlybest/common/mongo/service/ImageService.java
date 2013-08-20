@@ -35,7 +35,7 @@ public class ImageService {
   }
 
   public Image getImage(String imageId) {
-    return mongoDb.createQuery("Image").eq("id", imageId).findObject(Image.class);
+    return mongoDb.createQuery("Image").eq("_id", imageId).findObject(Image.class);
   }
 
 }

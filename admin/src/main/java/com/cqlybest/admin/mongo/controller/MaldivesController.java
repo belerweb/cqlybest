@@ -98,7 +98,6 @@ public class MaldivesController {
     mongoMaldivesService.updateRoom(pk, name, _value);
   }
 
-
   /**
    * 添加餐饮设施
    */
@@ -137,7 +136,7 @@ public class MaldivesController {
   }
 
   /**
-   * 增加海岛海报
+   * 修改海岛海报
    */
   @RequestMapping(value = "/maldives/picture/update.do", method = RequestMethod.POST)
   @ResponseBody
@@ -153,5 +152,94 @@ public class MaldivesController {
   @ResponseBody
   public void deletePicture(@RequestParam String imageId) {
     mongoMaldivesService.deletePicture(imageId);
+  }
+
+  /**
+   * 增加酒店图片
+   */
+  @RequestMapping(value = "/maldives/hotel/picture/add.do", method = RequestMethod.POST)
+  @ResponseBody
+  public void addHotelPicture(@RequestParam String islandId,
+      @RequestParam("images[]") List<String> filenames) {
+    mongoMaldivesService.addHotelPicture(islandId, filenames);
+  }
+
+  /**
+   * 修改酒店图片
+   */
+  @RequestMapping(value = "/maldives/hotel/picture/update.do", method = RequestMethod.POST)
+  @ResponseBody
+  public void updateHotelPicture(@RequestParam String pk, @RequestParam String name,
+      @RequestParam String value) {
+    mongoMaldivesService.updateHotelPicture(pk, name, value);
+  }
+
+  /**
+   * 删除酒店图片
+   */
+  @RequestMapping(value = "/maldives/hotel/picture/delete.do", method = RequestMethod.POST)
+  @ResponseBody
+  public void deleteHotelPicture(@RequestParam String imageId) {
+    mongoMaldivesService.deleteHotelPicture(imageId);
+  }
+
+  /**
+   * 增加房型图片
+   */
+  @RequestMapping(value = "/maldives/room/picture/add.do", method = RequestMethod.POST)
+  @ResponseBody
+  public void addRoomPicture(@RequestParam String roomId,
+      @RequestParam("images[]") List<String> filenames) {
+    mongoMaldivesService.addRoomPicture(roomId, filenames);
+  }
+
+  /**
+   * 修改房型图片
+   */
+  @RequestMapping(value = "/maldives/room/picture/update.do", method = RequestMethod.POST)
+  @ResponseBody
+  public void updateRoomPicture(@RequestParam String pk, @RequestParam String name,
+      @RequestParam String value) {
+    String[] tmp = pk.split("\\|");
+    mongoMaldivesService.updateRoomPicture(tmp[0], tmp[1], name, value);
+  }
+
+  /**
+   * 删除房型图片
+   */
+  @RequestMapping(value = "/maldives/room/picture/delete.do", method = RequestMethod.POST)
+  @ResponseBody
+  public void deleteRoomPicture(@RequestParam String imageId) {
+    mongoMaldivesService.deleteRoomPicture(imageId);
+  }
+
+  /**
+   * 增加餐厅图片
+   */
+  @RequestMapping(value = "/maldives/dining/picture/add.do", method = RequestMethod.POST)
+  @ResponseBody
+  public void addDiningPicture(@RequestParam String diningId,
+      @RequestParam("images[]") List<String> filenames) {
+    mongoMaldivesService.addDiningPicture(diningId, filenames);
+  }
+
+  /**
+   * 修改餐厅图片
+   */
+  @RequestMapping(value = "/maldives/dining/picture/update.do", method = RequestMethod.POST)
+  @ResponseBody
+  public void updateDiningPicture(@RequestParam String pk, @RequestParam String name,
+      @RequestParam String value) {
+    String[] tmp = pk.split("\\|");
+    mongoMaldivesService.updateDiningPicture(tmp[0], tmp[1], name, value);
+  }
+
+  /**
+   * 删除餐厅图片
+   */
+  @RequestMapping(value = "/maldives/dining/picture/delete.do", method = RequestMethod.POST)
+  @ResponseBody
+  public void deleteDiningPicture(@RequestParam String imageId) {
+    mongoMaldivesService.deleteDiningPicture(imageId);
   }
 }

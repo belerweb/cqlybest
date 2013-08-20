@@ -79,18 +79,18 @@
 			<div class="control-group">
 				<label class="control-label">图片：</label>
 				<div class="controls image-gallery">
-					<button type="button" class="btn btn-primary action action-add picture">添加</button>
+					<button type="button" class="btn btn-primary action action-add picture" data-name="islandId" data-value="${island.id}" data-url="${ContextPath}/maldives/hotel/picture/add.do">添加</button>
 					<#if island.hotelPictures?has_content>
 					<div class="row-fluid">
 						<ul class="thumbnails">
 						<#list island.hotelPictures as image>
 							<li class="span3">
 								<div class="thumbnail">
-									<img src="${ContextPath}/image/${image.id}.${image.imageType}">
+									<img src="${ContextPath}/image/${image.id}.${image.extension}">
 									<div class="caption">
-										<p><a href="#" class="title editable-click <#if !image.title?has_content>editable-empty</#if>" data-pk="${image.id}" data-name="title" data-type="text" data-value="${image.title!}">${image.title!'标题：未设置'}</a></p>
-										<p><a href="#" class="description editable-click <#if !image.description?has_content>editable-empty</#if>" data-pk="${image.id}" data-name="description" data-type="textarea">${image.description!'描述：未设置'}</a></p>
-										<button class="delete btn btn-danger" type="button" data-id="${image.id}">刪除</button>
+										<p><a href="#" class="editable" data-pk="${image.id}" data-name="title" data-type="text" data-value="${image.title!}" data-url="${ContextPath}/maldives/hotel/picture/update.do"></a></p>
+										<p><a href="#" class="editable" data-pk="${image.id}" data-name="description" data-type="textarea" data-url="${ContextPath}/maldives/hotel/picture/update.do">${image.description!?html}</a></p>
+										<button class="delete btn btn-danger" type="button" data-id="${image.id}" data-url="${ContextPath}/maldives/hotel/picture/delete.do">刪除</button>
 									</div>
 								</div>
 							</li>

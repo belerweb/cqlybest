@@ -2,7 +2,7 @@
 <descriptors>
 
 	<object class="com.cqlybest.common.mongo.bean.MaldivesIsland">
-		<property name="id" />
+		<property name="id" id="true" />
 		<property name="zhName" />
 		<property name="enName" />
 		<property name="byName" />
@@ -44,6 +44,7 @@
 		<property name="containPool" />
 		<property name="roomFacility" />
 		<property name="displayOrder" />
+		<property name="pictures" />
 	</object>
 
 	<object class="com.cqlybest.common.mongo.bean.MaldivesDining">
@@ -57,6 +58,7 @@
 		<property name="location" />
 		<property name="reservation" />
 		<property name="displayOrder" />
+		<property name="pictures" />
 	</object>
 
 </descriptors>
