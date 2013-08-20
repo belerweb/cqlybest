@@ -135,4 +135,23 @@ public class MaldivesController {
       @RequestParam("images[]") List<String> filenames) {
     mongoMaldivesService.addPicture(islandId, filenames);
   }
+
+  /**
+   * 增加海岛海报
+   */
+  @RequestMapping(value = "/maldives/picture/update.do", method = RequestMethod.POST)
+  @ResponseBody
+  public void updatePicture(@RequestParam String pk, @RequestParam String name,
+      @RequestParam String value) {
+    mongoMaldivesService.updatePicture(pk, name, value);
+  }
+
+  /**
+   * 删除海岛海报
+   */
+  @RequestMapping(value = "/maldives/picture/delete.do", method = RequestMethod.POST)
+  @ResponseBody
+  public void deletePicture(@RequestParam String imageId) {
+    mongoMaldivesService.deletePicture(imageId);
+  }
 }

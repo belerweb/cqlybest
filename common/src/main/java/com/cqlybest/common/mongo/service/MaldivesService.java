@@ -2,7 +2,9 @@ package com.cqlybest.common.mongo.service;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -103,6 +105,22 @@ public class MaldivesService {
         .addToSetEach("pictures", images).update();
     // 更新原始图片的信息
     mongoDb.createQuery("Image").in("id", imageIds).modify()
-        .set("extra", Constant.IMAGE_MALDIVES_ISLAND_POSTER).set("extraKey", islandId).update();
+        .set("extra", Constant.IMAGE_MALDIVES_ISLAND_POSTER).set("extraKey", islandId)
+        .updateMulti();
+  }
+
+  public void updatePicture(String imageId, String property, String value) {
+    mongoDb.createQuery("MaldivesIsland").eq("pictures.id", imageId).modify().set(
+        "pictures.$." + property, value).update();
+    // 更新原始图片的信息
+    mongoDb.createQuery("Image").eq("id", imageId).modify().set(property, value).update();
+  }
+
+  public void deletePicture(String imageId) {
+    Map<String, String> image = new HashMap<>();
+    image.put("id", imageId);
+    mongoDb.createQuery("MaldivesIsland").eq("pictures.id", imageId).modify()
+        .pull("pictures", image).update();
+    mongoDb.createQuery("Image").eq("id", imageId).modify().delete();
   }
 }

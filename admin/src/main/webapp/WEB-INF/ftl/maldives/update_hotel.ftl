@@ -79,7 +79,7 @@
 			<div class="control-group">
 				<label class="control-label">图片：</label>
 				<div class="controls image-gallery">
-					<button type="button" data-extra="maldives-hotel-picture" data-extra-key="${island.id}" class="btn btn-primary action action-add picture">添加</button>
+					<button type="button" class="btn btn-primary action action-add picture">添加</button>
 					<#if island.hotelPictures?has_content>
 					<div class="row-fluid">
 						<ul class="thumbnails">

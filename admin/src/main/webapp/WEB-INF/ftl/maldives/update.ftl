@@ -38,9 +38,9 @@
 									<div class="thumbnail">
 										<img src="${ContextPath}/image/${image.id}.${image.extension}">
 										<div class="caption">
-											<p><a href="#" class="title editable-click <#if !image.title?has_content>editable-empty</#if>" data-pk="${image.id}" data-name="title" data-type="text" data-value="${image.title!}">${image.title!'标题：未设置'}</a></p>
-											<p><a href="#" class="description editable-click <#if !image.description?has_content>editable-empty</#if>" data-pk="${image.id}" data-name="description" data-type="textarea">${(image.description!'描述：未设置')?html}</a></p>
-											<button class="delete btn btn-danger" type="button" data-id="${image.id}">刪除</button>
+											<p><a href="#" class="editable" data-pk="${image.id}" data-name="title" data-type="text" data-value="${image.title!}" data-url="${ContextPath}/maldives/picture/update.do"></a></p>
+											<p><a href="#" class="editable" data-pk="${image.id}" data-name="description" data-type="textarea" data-url="${ContextPath}/maldives/picture/update.do">${image.description!?html}</a></p>
+											<button class="delete btn btn-danger" type="button" data-id="${image.id}" data-url="${ContextPath}/maldives/picture/delete.do">刪除</button>
 										</div>
 									</div>
 								</li>
@@ -61,28 +61,8 @@
 	</div>
 </div>
 <script type="text/javascript">
-var arrangeImags = function(el, images) {
-	var imgs = $('li', el).detach();
-	$('.row-fluid', el).remove();
-	if (images) {
-		$.each(images, function(i, obj){
-			var image = $('<li class="span3"><div class="thumbnail"><img src="${ContextPath}/image/'+obj.id+'.'+obj.extension+'"><div class="caption"></div></div></li>');
-			$('.caption', image).append('<p><a href="#" class="title editable-click editable-empty" data-pk="'+obj.id+'" data-name="title" data-type="text">标题：未设置</a></p>');
-			$('.caption', image).append('<p><a href="#" class="description editable-click editable-empty" data-pk="'+obj.id+'" data-name="description" data-type="textarea">描述：未设置</a></p>');
-			$('.caption', image).append('<button class="delete btn btn-danger" data-id="'+obj.id+'">刪除</button>');
-			imgs.push(image);
-		});
-	}
-	var row;
-	for (var i=0;i<imgs.length;i++) {
-		if (i%4==0) {
-			row = $('<div class="row-fluid"><ul class="thumbnails"></ul></div>');
-			el.append(row);
-		}
-		$('ul', row).append(imgs[i]);
-	}
-};
 $('button.picture.action-add').click(function(){
+	var tab = $(this).closest('.tab-pane').attr('id');
 	var images = cqlybest.uploadImage('${ContextPath}');
 	if (images) {
 		var _images = [];
@@ -93,27 +73,24 @@ $('button.picture.action-add').click(function(){
 			islandId: '${island.id}',
 			images: _images
 		}, function(){
-			// TODO
+			$('#mb').load('${ContextPath}/maldives/update.do?id=${island.id}', function() {
+				$('#island-update-tabs a[data-target="#' + tab + '"]').tab('show');
+			});
 		});
-		var gallery = $(this).closest('.image-gallery');
-		arrangeImags(gallery, images);
 	}
 });
-$('.image-gallery').editable({
-	selector: 'a.title,a.description',
-	url: '${ContextPath}/image/update'
-});
 $('.image-gallery button.delete').die('click').live('click', function() {
+	var tab = $(this).closest('.tab-pane').attr('id');
 	var id = $(this).attr('data-id');
-	var image = $(this).closest('li');
-	var el = $(this).closest('.image-gallery');
+	var url = $(this).attr('data-url');
 	bootbox.confirm('确认删除图片?', '取消', '确认', function(result) {
 		if (result) {
-			$.post('${ContextPath}/image/delete', {
-				id: id
+			$.post(url, {
+				imageId: id
 			}).done(function(){
-				image.remove();
-				arrangeImags(el);
+				$('#mb').load('${ContextPath}/maldives/update.do?id=${island.id}', function() {
+					$('#island-update-tabs a[data-target="#' + tab + '"]').tab('show');
+				});
 			}).fail(function() {
 				cqlybest.error();
 			});
