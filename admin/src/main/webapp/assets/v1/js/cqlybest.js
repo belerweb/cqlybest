@@ -108,6 +108,19 @@ $.fn.editable.defaults.emptytext = '未设置';
 $.fn.editable.defaults.send  = 'always';
 
 window.cqlybest = {
+	fixed : function(fixed) {
+		if(fixed) {
+			// fixed top
+			$(".navbar").addClass("navbar-fixed-top");
+			$(document.body).addClass("navbar-fixed");
+			$("#sidebar").addClass("fixed"); // fixed sidebar
+		} else {
+			// unfixed top
+			$(".navbar").removeClass("navbar-fixed-top");
+			$(document.body).removeClass("navbar-fixed");
+			$("#sidebar").removeClass("fixed"); // unfixed sidebar
+		}
+	},
 	go : function(el, url) {
 		var history = $(el).data('history')||[];
 		if (!!url) { // load

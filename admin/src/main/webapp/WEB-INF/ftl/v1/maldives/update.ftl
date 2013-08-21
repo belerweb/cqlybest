@@ -105,7 +105,11 @@ $('.image-gallery button.delete').click(function() {
 
 $('.editable[data-type=text]').editable();
 $('.editable[data-type=textarea]').editable();
-$('div[data-type=wysihtml5]').editable({
+$('div[data-type=wysihtml5]').on('shown', function(){
+	cqlybest.fixed(false);
+}).on('hidden', function(){
+	cqlybest.fixed(true);
+}).editable({
 	wysihtml5: {
 		stylesheets: ['${ContextPath}/css/wysiwyg-color.css']
 	}
