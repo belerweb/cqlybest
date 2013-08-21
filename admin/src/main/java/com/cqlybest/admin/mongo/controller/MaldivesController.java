@@ -24,6 +24,14 @@ public class MaldivesController {
   private OptionService optionService;
 
   /**
+   * 马尔代夫管理页面
+   */
+  @RequestMapping("/maldives.do")
+  public String maldives() {
+    return "/v1/maldives";
+  }
+
+  /**
    * 添加海岛
    */
   @RequestMapping(value = "/maldives/add.do", method = RequestMethod.POST)
@@ -38,8 +46,9 @@ public class MaldivesController {
    * 修改海岛
    */
   @RequestMapping(value = "/maldives/update.do", method = RequestMethod.GET)
-  public void update(@RequestParam String id, Model model) {
+  public String update(@RequestParam String id, Model model) {
     model.addAttribute("island", mongoMaldivesService.getIsland(id));
+    return "/v1/maldives/update";
   }
 
   /**
@@ -64,10 +73,11 @@ public class MaldivesController {
    * 海岛列表
    */
   @RequestMapping(value = "/maldives/list.do", method = RequestMethod.GET)
-  public void list(@RequestParam(defaultValue = "0") int page, Model model) {
+  public String list(@RequestParam(defaultValue = "0") int page, Model model) {
     int pageSize = 10;
     model.addAttribute("result", mongoMaldivesService.queryIsland(page, pageSize));
     model.addAttribute("options", optionService.getOptions());
+    return "/v1/maldives/list";
   }
 
 
