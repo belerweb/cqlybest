@@ -13,7 +13,7 @@ http://www.springframework.org/schema/beans http://www.springframework.org/schem
 	</beans:bean>
 
 	<authentication-manager>
-		<authentication-provider user-service-ref="loginComponent">
+		<authentication-provider user-service-ref="mongoUserService">
 			<password-encoder hash="sha-256" />
 		</authentication-provider>
 	</authentication-manager>
@@ -26,7 +26,8 @@ http://www.springframework.org/schema/beans http://www.springframework.org/schem
 		<intercept-url pattern="/index.do" access="permitAll" />
 		<intercept-url pattern="/connector/**" access="permitAll" />
 		<intercept-url pattern="/error" access="permitAll" />
-		<intercept-url pattern="/**" access="hasRole('ROLE_ADMIN')" />
+		<!-- intercept-url pattern="/**" access="hasRole('ROLE_ADMIN')" / -->
+		<intercept-url pattern="/**" access="isAuthenticated()" />
 	</http>
 
 </beans:beans>

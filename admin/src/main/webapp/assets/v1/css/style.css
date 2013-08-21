@@ -1,0 +1,28 @@
+.page-header button.action {
+	float: right;
+	margin-top: -40px;
+	/* position: absolute;
+	right: 0;
+	top: 0;*/
+}
+
+.editable-input input[type="checkbox"],.editable-input input[type="radio"]
+	{
+	opacity: 1;
+	position: relative;
+}
+
+.editable-container.popover {
+	z-index: 9999;
+}
+
+#sidebar .tree .tree-item,#sidebar .tree .tree-folder {
+	border: none;
+}
+#sidebar .tree .tree-folder .tree-folder-header, #sidebar .tree .tree-item {
+	height: auto;
+}
+
+#page-content {
+	padding-bottom: 0;
+}

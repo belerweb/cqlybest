@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<descriptors>
+
+	<object class="com.cqlybest.common.mongo.bean.User">
+		<property name="id" id="true" />
+		<property name="mobile" />
+		<property name="email" />
+		<property name="username" />
+		<property name="password" />
+		<property name="fullname" />
+		<property name="nickname" />
+		<property name="avatar" />
+		<property name="source" />
+		<property name="createdTime" />
+		<property name="lastUpdated" />
+	</object>
+
+</descriptors>
