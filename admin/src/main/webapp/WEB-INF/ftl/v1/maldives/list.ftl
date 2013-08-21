@@ -51,14 +51,7 @@ $('#main-list-table').dataTable({
 		});
 		var q = {};
 		q.page = p.iDisplayStart / p.iDisplayLength;
-		var u = '${ContextPath}/maldives/list.do?' + $.param(q);
-		var hash  = {
-			m: 'site',
-			n: 'maldives.list',
-			t: '#main',
-			u: u
-		};
-		location.hash = cqlybest.buildHash(hash);
+		$('#main-content').load('${ContextPath}/maldives/list.do?' + $.param(q));
 	}
 });
 $('#main-list-table thead input:checkbox').click(function(){

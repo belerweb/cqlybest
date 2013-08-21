@@ -1,5 +1,6 @@
 package com.cqlybest.admin.mongo.controller;
 
+import java.util.Date;
 import java.util.List;
 
 import org.apache.commons.lang.StringUtils;
@@ -11,6 +12,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.cqlybest.common.Constant;
+import com.cqlybest.common.mongo.bean.MaldivesFlight;
 import com.cqlybest.common.mongo.bean.MaldivesIsland;
 import com.cqlybest.common.mongo.service.MaldivesService;
 import com.cqlybest.common.service.OptionService;
@@ -79,7 +82,6 @@ public class MaldivesController {
     model.addAttribute("options", optionService.getOptions());
     return "/v1/maldives/list";
   }
-
 
   /**
    * 添加房型
@@ -251,5 +253,49 @@ public class MaldivesController {
   @ResponseBody
   public void deleteDiningPicture(@RequestParam String imageId) {
     mongoMaldivesService.deleteDiningPicture(imageId);
+  }
+
+  /**
+   * 航班信息
+   */
+  @RequestMapping(value = "/maldives/flight/update.do", method = RequestMethod.GET)
+  public String updateFlight(@RequestParam(required = false) String flightId, Model model) {
+    if (flightId != null) {
+      model.addAttribute("flight", mongoMaldivesService.getFlight(flightId));
+    }
+    return "/v1/maldives/flight/update";
+  }
+
+  @RequestMapping(value = "/maldives/flight/update.do", method = RequestMethod.POST)
+  @ResponseBody
+  public void updateFlight(@RequestParam(required = false) String id, @RequestParam String number,
+      @RequestParam String airline, @RequestParam String airlineCode, @RequestParam String from,
+      @RequestParam String to, @RequestParam String departuresAirportCode,
+      @RequestParam String arrivalsAirportCode, @RequestParam long departuresTime,
+      @RequestParam long arrivalsTime) {
+    MaldivesFlight flight = new MaldivesFlight();
+    flight.setId(id);
+    flight.setNumber(number);
+    flight.setAirline(airline);
+    flight.setAirlineCode(airlineCode);
+    flight.setFrom(from);
+    flight.setTo(to);
+    flight.setDeparturesAirportCode(departuresAirportCode);
+    flight.setArrivalsAirportCode(arrivalsAirportCode);
+    flight.setDeparturesTime(new Date(departuresTime));
+    flight.setArrivalsTime(new Date(arrivalsTime));
+    flight.setLineType(Constant.FLIGHT_LINE_TYPE_MALDIVES);
+    mongoMaldivesService.updateFlight(flight);
+  }
+
+  /**
+   * 航班列表
+   */
+  @RequestMapping(value = "/maldives/flight.do", method = RequestMethod.GET)
+  public String flight(@RequestParam(defaultValue = "0") int page, Model model) {
+    int pageSize = 10;
+    model.addAttribute("result", mongoMaldivesService.queryFlight(
+        Constant.FLIGHT_LINE_TYPE_MALDIVES, page, pageSize));
+    return "/v1/maldives/flight";
   }
 }

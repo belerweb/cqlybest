@@ -99,6 +99,8 @@
 		<script src="${ContextPath}/assets/v1/js/select2.js"></script>
 		<script src="${ContextPath}/assets/v1/js/bootstrap-editable.js"></script>
 		<script src="${ContextPath}/assets/v1/js/wysihtml5.js"></script>
+		<script src="${ContextPath}/assets/v1/js/jquery.form.js"></script>
+		<script src="${ContextPath}/assets/v1/js/spinner.js"></script>
 		<script src="${ContextPath}/assets/v1/js/ace-elements.js"></script>
 		<script src="${ContextPath}/assets/v1/js/ace.js"></script>
 		<script src="${ContextPath}/assets/v1/js/cqlybest.js"></script>

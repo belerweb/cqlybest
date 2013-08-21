@@ -61,4 +61,19 @@
 		<property name="pictures" />
 	</object>
 
+	<object class="com.cqlybest.common.mongo.bean.MaldivesFlight">
+		<property name="id" id="true"/>
+		<property name="number" />
+		<property name="airline" />
+		<property name="airlineCode" />
+		<property name="from" />
+		<property name="to" />
+		<property name="departuresAirportCode" />
+		<property name="arrivalsAirportCode" />
+		<property name="departuresTime" />
+		<property name="arrivalsTime" />
+		<property name="lineType" />
+		<property name="extra" />
+	</object>
+
 </descriptors>
