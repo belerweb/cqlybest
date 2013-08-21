@@ -1,7 +1,12 @@
 <#assign ContextPath=springMacroRequestContext.getContextPath() />
 <div id="page-content" class="clearfix">
 	<div class="row-fluid">
-		<h3 class="header smaller lighter blue">马尔代夫航班信息</h3>
+		<h3 class="header smaller lighter blue">
+			马尔代夫航班信息
+			<button type="button" class="btn btn-mini btn-primary pull-right" onclick="cqlybest.go('#main-content');">
+				<i class="icon-mail-reply"></i> 返回
+			</button>
+		</h3>
 		<form id="ajax-form" method="POST" action="${ContextPath}/maldives/flight/update.do" class="form-horizontal">
 			<input name="id" type="hidden" value="${(flight.id)!}">
 			<div class="control-group">
@@ -57,6 +62,9 @@
 				<button type="submit" class="btn btn-info">
 					<i class="icon-ok bigger-110"></i> 保存
 				</button>
+				<button type="button" class="btn" onclick="cqlybest.go('#main-content');">
+					<i class="icon-mail-reply bigger-110"></i> 返回
+				</button>
 			</div>
 		</form>
 	</div>
@@ -73,7 +81,11 @@ $('#ajax-form').submit(function() {
 
 	$(this).ajaxSubmit({
 		success: function(response, status, xhr, form) {
-			$('#main-content').load('${ContextPath}/maldives/flight.do');
+			cqlybest.success("航班保存成功，可继续添加。返回航班列表请点 [返回] 按钮。");
+			form.clearForm();
+			$('#ajax-form input[name=id]').val('');
+			$('#ajax-form input[name=departuresTime]').val('');
+			$('#ajax-form input[name=arrivalsTime]').val('');
 		},
 		error: function(xhr, status, response, form) {
 			cqlybest.error();

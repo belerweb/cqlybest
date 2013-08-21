@@ -107,18 +107,32 @@ jQuery('input[placeholder], textarea[placeholder]').placeholder();
 $.fn.editable.defaults.emptytext = '未设置';
 $.fn.editable.defaults.send  = 'always';
 
-$(function() {
-	var h = $(document.body).height() - $('#header').height();
-	$('#wrap').height(h);
-	$('#mb').height(h - 20);//.css('overflow', 'auto');
-	$(window).on('resize', function() {
-		var h = $(document.body).height() - $('#header').height();
-		$('#wrap').height(h);
-		$('#mb').height(h - 20);//.css('overflow', 'auto');
-	});
-});
-
 window.cqlybest = {
+	go : function(el, url) {
+		var history = $(el).data('history')||[];
+		if (!!url) { // load
+			history.push(url);
+			$(el).data('history', history);
+			$(el).load(url);
+		} else { // history.go(-1);
+			history.pop();
+			var url = history.pop();
+			if (!!url) {
+				history.push(url);
+				$(el).data('history', history);
+				$(el).load(url);
+			}
+		}
+	},
+	reload : function(el, func) {
+		var history = $(el).data('history')||[];
+		var url = history.pop();
+		if (!!url) {
+			history.push(url);
+			$(el).data('history', history);
+			$(el).load(url, func||function(){});
+		}
+	},
 	editableTag : function(el) {
 		$(el).each(function(i, obj){
 			var type = $(obj).attr('data-dict');
@@ -193,7 +207,7 @@ window.cqlybest = {
 		var _message = '<div class="alert alert-success">' + (message ? message : '操作成功') + '</div>';
 		var _label = label ? label : '确定';
 		var _func = func ? func : function() {
-			history.go(-1);
+			// TODO
 		};
 		bootbox.alert(_message, _label, _func);
 	},

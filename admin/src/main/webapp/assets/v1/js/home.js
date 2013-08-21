@@ -20,7 +20,8 @@ $(function() {
 			 if ($(this).is(".dropdown-toggle")) {
 				 // TODO
 			 } else {
-				 $('#main-content').load($(this).attr('href'));
+				 cqlybest.go('#main-content', $(this).attr('href'));
+				 
 			 }
 		});
 	})();

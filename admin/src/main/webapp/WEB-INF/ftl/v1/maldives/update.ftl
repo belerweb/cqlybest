@@ -7,7 +7,9 @@
 				<i class="icon-double-angle-right"></i>
 				${island.zhName!}
 			</small>
-			<button type="button" class="btn btn-mini btn-primary pull-right">返回</button>
+			<button type="button" class="btn btn-mini btn-primary pull-right" onclick="cqlybest.go('#main-content');">
+				<i class="icon-mail-reply"></i> 返回
+			</button>
 		</h3>
 		<div class="tabbable">
 			<#assign id=island.id>
@@ -76,7 +78,7 @@ $('button.picture.action-add').click(function(){
 			param.images.push(obj.id + '.' + obj.extension);
 		});
 		$.post(url, param, function(){
-			$('#main-content').load('${ContextPath}/maldives/update.do?id=${island.id}', function() {
+			cqlybest.reload('#main-content', function() {
 				$('#island-update-tabs a[data-target="#' + tab + '"]').tab('show');
 			});
 		});
@@ -91,7 +93,7 @@ $('.image-gallery button.delete').click(function() {
 			$.post(url, {
 				imageId: id
 			}).done(function(){
-				$('#main-content').load('${ContextPath}/maldives/update.do?id=${island.id}', function() {
+				cqlybest.reload('#main-content', function() {
 					$('#island-update-tabs a[data-target="#' + tab + '"]').tab('show');
 				});
 			}).fail(function() {

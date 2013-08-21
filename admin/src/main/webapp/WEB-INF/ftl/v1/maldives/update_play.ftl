@@ -79,6 +79,8 @@ $('#island-play-tab button.action-save').click(function(){
 		pk: '${island.id}',
 		name: 'plays',
 		value: plays.join('')
+	}).done(function(){
+		cqlybest.success();
 	}).fail(function() {
 		cqlybest.error();
 	});

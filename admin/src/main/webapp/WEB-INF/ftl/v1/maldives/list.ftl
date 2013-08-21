@@ -1,7 +1,9 @@
 <#assign ContextPath=springMacroRequestContext.getContextPath() />
 <div id="page-content" class="clearfix">
 	<div class="row-fluid">
-		<h3 class="header smaller lighter blue">马尔代夫海岛/酒店<a id="maldives-add" href="javascript:void(0);" class="btn btn-mini btn-primary pull-right">增加新岛</a></h3>
+		<h3 class="header smaller lighter blue">马尔代夫海岛/酒店
+			<button type="button" id="maldives-add" class="btn btn-mini btn-primary pull-right">增加新岛</button>
+		</h3>
 		<table id="main-list-table" class="table table-striped table-bordered table-hover">
 			<thead>
 				<tr>
@@ -34,8 +36,35 @@
 	</div>
 </div>
 <script>
-$('#main-list-table button.btn-action-edit').click(function(){
-	$('#main-content').load('${ContextPath}/maldives/update.do?id=' + $(this).data('id'));
+$('#maldives-add').click(function(){
+	var action = $(this).parent();
+	var form = ['<form class="form-horizontal"><legend>添加海岛</legend>'];
+	form.push('<div class="control-group"><label class="control-label">中文名称：</label>');
+	form.push('<div class="controls"><input type="text" name="zhName"></div></div>');
+	form.push('<div class="control-group"><label class="control-label">英文名称：</label>');
+	form.push('<div class="controls"><input type="text" name="enName"></div></div>');
+	form.push('</form>');
+	var dialog = bootbox.dialog(form.join(''), [{
+		label: '取消'
+	}, {
+		label: '确定',
+		callback: function(){
+			var zhName = $.trim($('input[name=zhName]', dialog).val());
+			var enName = $.trim($('input[name=enName]', dialog).val());
+			$.post('${ContextPath}/maldives/add.do', {
+				zhName: zhName,
+				enName: enName
+			}).done(function(data){
+				cqlybest.go('#main-content', '${ContextPath}/maldives/update.do?id=' + data);
+			}).fail(function() {
+				cqlybest.error();
+			});
+		}
+	}]);
+	$('form', dialog).on('submit', function(e) {
+		e.preventDefault();
+		dialog.find(".btn-primary").click();
+	});
 });
 $('#main-list-table').dataTable({
 	iDeferLoading: ${result.total},
@@ -51,8 +80,11 @@ $('#main-list-table').dataTable({
 		});
 		var q = {};
 		q.page = p.iDisplayStart / p.iDisplayLength;
-		$('#main-content').load('${ContextPath}/maldives/list.do?' + $.param(q));
+		cqlybest.go('#main-content', '${ContextPath}/maldives/list.do?' + $.param(q));
 	}
+});
+$('#main-list-table button.btn-action-edit').click(function(){
+	cqlybest.go('#main-content', '${ContextPath}/maldives/update.do?id=' + $(this).data('id'));
 });
 $('#main-list-table thead input:checkbox').click(function(){
 	$('#main-list-table tbody input:checkbox').attr('checked', this.checked);
@@ -85,48 +117,10 @@ $('#maldives-marke-del').click(function(){
 				$.post('${ContextPath}/maldives/delete.do', {
 					ids: items
 				}, function(){
-					cqlybest.reload();
+					cqlybest.reload('#main-content');
 				});
 			}
 		});
 	}
-});
-$('#maldives-add').click(function(){
-	var action = $(this).parent();
-	var form = ['<form class="form-horizontal"><legend>添加海岛</legend>'];
-	form.push('<div class="control-group"><label class="control-label">中文名称：</label>');
-	form.push('<div class="controls"><input type="text" name="zhName"></div></div>');
-	form.push('<div class="control-group"><label class="control-label">英文名称：</label>');
-	form.push('<div class="controls"><input type="text" name="enName"></div></div>');
-	form.push('</form>');
-	var dialog = bootbox.dialog(form.join(''), [{
-		label: '取消'
-	}, {
-		label: '确定',
-		callback: function(){
-			var zhName = $.trim($('input[name=zhName]', dialog).val());
-			var enName = $.trim($('input[name=enName]', dialog).val());
-			if (!/^.{1,64}$/.test(zhName)) {
-				bootbox.alert('请输入海岛中文名称，且长度不超过64位');
-				return false;
-			}
-			if (!/^.{1,128}$/.test(enName)) {
-				bootbox.alert('请输入海岛英文名称，且长度不超过128位');
-				return false;
-			}
-			$.post('${ContextPath}/maldives/add.do', {
-				zhName: zhName,
-				enName: enName
-			}).done(function(data){
-				$('#main-content').load('${ContextPath}/maldives/update.do?id=' + data);
-			}).fail(function() {
-				cqlybest.error();
-			});
-		}
-	}]);
-	$('form', dialog).on('submit', function(e) {
-		e.preventDefault();
-		dialog.find(".btn-primary").click();
-	});
 });
 </script>

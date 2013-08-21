@@ -1,7 +1,10 @@
 <#assign ContextPath=springMacroRequestContext.getContextPath() />
 <div id="page-content" class="clearfix">
 	<div class="row-fluid">
-		<h3 class="header smaller lighter blue">马尔代夫航班<button type="button" id="flight-add" class="btn btn-mini btn-primary pull-right">增加航班</button></h3>
+		<h3 class="header smaller lighter blue">
+			马尔代夫航班
+			<button type="button" class="btn btn-mini btn-primary pull-right" onclick="cqlybest.go('#main-content', '${ContextPath}/maldives/flight/update.do');">增加航班</button>
+		</h3>
 		<table id="main-list-table" class="table table-striped table-bordered table-hover">
 			<thead>
 				<tr>
@@ -40,10 +43,7 @@
 </div>
 <script>
 $('#main-list-table button.btn-action-edit').click(function(){
-	$('#main-content').load('${ContextPath}/maldives/flight/update.do?flightId=' + $(this).data('id'));
-});
-$('#flight-add').click(function(){
-	$('#main-content').load('${ContextPath}/maldives/flight/update.do');
+	cqlybest.go('#main-content', '${ContextPath}/maldives/flight/update.do?flightId=' + $(this).data('id'));
 });
 $('#main-list-table').dataTable({
 	iDeferLoading: ${result.total},
@@ -59,7 +59,7 @@ $('#main-list-table').dataTable({
 		});
 		var q = {};
 		q.page = p.iDisplayStart / p.iDisplayLength;
-		$('#main-content').load('${ContextPath}/maldives/flight.do?' + $.param(q));
+		cqlybest.go('#main-content', '${ContextPath}/maldives/flight.do?' + $.param(q));
 	}
 });
 </script>

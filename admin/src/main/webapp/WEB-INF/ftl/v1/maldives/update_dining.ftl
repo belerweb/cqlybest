@@ -34,7 +34,7 @@ $('#island-dining-add').click(function(){
 				zhName: zhName,
 				enName: enName
 			}).done(function(data){
-				$('#main-content').load('${ContextPath}/maldives/update.do?id=${island.id}', function() {
+				cqlybest.reload('#main-content', function() {
 					$('#island-update-tabs a[data-target="#island-dining-tab"]').tab('show');
 				});
 			}).fail(function() {
