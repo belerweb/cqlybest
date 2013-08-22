@@ -20,8 +20,14 @@
 		<script src="${ContextPath}/assets/v1/js/cqlybest.js"></script>
 		<script src="${ContextPath}/assets/v1/js/home.js"></script>
 		<script type="text/javascript">
+		$(function(){
 			cqlybest.go('#main-content', $('#main-content').data('init'));
 			document.title = '${Title!''}';
+			var page = window.PageContext||{};
+			if (page.init && $.isFunction(page.init)) {
+				page.init();
+			}
+		});
 		</script>
 	</body>
 </html>

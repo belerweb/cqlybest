@@ -1,3 +1,13 @@
+<#assign TopNav=[{
+	'name':'工作台',
+	'url':'/home.do'
+},'divider',{
+	'name':'马尔代夫',
+	'url':'/maldives.do'
+},'divider',{
+	'name':'客户关系',
+	'url':'/crm.do'
+}] />
 <div class="navbar navbar-inverse navbar-fixed-top">
 	<div class="navbar-inner">
 		<div class="container-fluid">

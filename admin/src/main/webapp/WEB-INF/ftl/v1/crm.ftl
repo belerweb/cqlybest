@@ -1,9 +1,5 @@
 <#include "header.ftl">
 <#assign Title='客户关系' />
-<#assign TopNav=[{
-	'name':'马尔代夫',
-	'url':'/maldives.do'
-}] />
 <#include "header_top.ftl">
 <#assign Menu=[{
 	'name':'登录帐号',

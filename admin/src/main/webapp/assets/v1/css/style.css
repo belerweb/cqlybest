@@ -19,7 +19,9 @@
 #sidebar .tree .tree-item,#sidebar .tree .tree-folder {
 	border: none;
 }
-#sidebar .tree .tree-folder .tree-folder-header, #sidebar .tree .tree-item {
+
+#sidebar .tree .tree-folder .tree-folder-header,#sidebar .tree .tree-item
+	{
 	height: auto;
 }
 
@@ -33,4 +35,22 @@
 
 .collapse.in {
 	display: block;
+}
+
+.column {
+}
+
+.column .widget-box {
+	margin-bottom: 20px;
+}
+
+.column .ui-sortable-placeholder {
+	border: 1px solid #D6E9C6;
+	background: #DFF0D8;
+	visibility: visible !important;
+	height: 200px !important;
+}
+
+.column .ui-sortable-placeholder * {
+	visibility: hidden;
 }

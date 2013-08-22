@@ -23,8 +23,7 @@ public class IndexController {
 
   @RequestMapping("/home.do")
   public String home(Model model) {
-    model.addAttribute("Options", optionService.getOptions());
-    return "index";
+    return "/v1/home";
   }
 
   @RequestMapping("/error")
