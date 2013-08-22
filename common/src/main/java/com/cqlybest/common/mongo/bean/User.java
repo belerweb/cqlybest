@@ -192,6 +192,7 @@ public class User implements Serializable {
 
     public UserWrapper(String username, User user) {
       super(username, user.getPassword(), user.getRoles());
+      this.user = user;
     }
 
     public User getDetail() {

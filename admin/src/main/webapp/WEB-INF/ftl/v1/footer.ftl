@@ -1,0 +1,27 @@
+		</div><!--/.fluid-container#main-container-->
+		<script src="${ContextPath}/assets/v1/js/jquery.js"></script>
+		<script src="${ContextPath}/assets/v1/js/bootstrap.js"></script>
+		<script src="${ContextPath}/assets/v1/js/bootstrap-editable.js"></script>
+		<script src="${ContextPath}/assets/v1/js/jquery-ui-1.10.3.custom.js"></script>
+		<script src="${ContextPath}/assets/v1/js/jquery.ui.touch-punch.js"></script>
+		<script src="${ContextPath}/assets/v1/js/jquery.slimscroll.js"></script>
+		<script src="${ContextPath}/assets/v1/js/jquery.dataTables.js"></script>
+		<script src="${ContextPath}/assets/v1/js/jquery.dataTables.bootstrap.js"></script>
+		<script src="${ContextPath}/assets/v1/js/bootbox.js"></script>
+		<script src="${ContextPath}/assets/v1/js/wysihtml5-0.3.0.js"></script>
+		<script src="${ContextPath}/assets/v1/js/bootstrap-wysihtml5-0.0.2.js"></script>
+		<script src="${ContextPath}/assets/v1/js/select2.js"></script>
+		<script src="${ContextPath}/assets/v1/js/bootstrap-editable.js"></script>
+		<script src="${ContextPath}/assets/v1/js/wysihtml5.js"></script>
+		<script src="${ContextPath}/assets/v1/js/jquery.form.js"></script>
+		<script src="${ContextPath}/assets/v1/js/spinner.js"></script>
+		<script src="${ContextPath}/assets/v1/js/ace-elements.js"></script>
+		<script src="${ContextPath}/assets/v1/js/ace.js"></script>
+		<script src="${ContextPath}/assets/v1/js/cqlybest.js"></script>
+		<script src="${ContextPath}/assets/v1/js/home.js"></script>
+		<script type="text/javascript">
+			cqlybest.go('#main-content', $('#main-content').data('init'));
+			document.title = '${Title!''}';
+		</script>
+	</body>
+</html>

@@ -6,14 +6,28 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
+import com.cqlybest.common.mongo.bean.QueryResult;
 import com.cqlybest.common.mongo.bean.User;
 import com.cqlybest.common.mongo.dao.MongoDb;
+import com.googlecode.mjorm.query.DaoQuery;
 
 @Service("mongoUserService")
 public class UserService implements UserDetailsService {
 
   @Autowired
   private MongoDb mongoDb;
+
+  public QueryResult<User> queryUser(int page, int pageSize) {
+    QueryResult<User> result = new QueryResult<>(page, pageSize);
+    DaoQuery query = mongoDb.createQuery("User");
+    result.setTotal(query.countObjects());
+
+    query.setFirstDocument(result.getStart());
+    query.setMaxDocuments(result.getPageSize());
+    result.setItems(query.findObjects(User.class).readAll());
+
+    return result;
+  }
 
   @Override
   public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
