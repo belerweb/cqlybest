@@ -69,9 +69,6 @@ public class Constant {
 
   public static final String RESPONSE_TYPE_CODE = "code";
 
-  public static final int FLIGHT_LINE_TYPE_MALDIVES = 1;// 马尔代夫航班
-
-
   public static void checkWeiboConfig(String appKeyConfig, String appSecretConfig) {
     String appKey = System.getProperty(appKeyConfig, System.getenv(appKeyConfig));
     String appSecret = System.getProperty(appSecretConfig, System.getenv(appSecretConfig));

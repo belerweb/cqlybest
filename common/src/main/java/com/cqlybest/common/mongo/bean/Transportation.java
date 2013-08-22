@@ -2,9 +2,15 @@ package com.cqlybest.common.mongo.bean;
 
 import java.util.Date;
 
-public class MaldivesFlight {
+public class Transportation {
+
+  public static final String TYPE_FLIGHT = "flight";// 航班
+  public static final String TYPE_TRAIN = "train";// 火车
+
+  public static final String LINE_TYPE_MALDIVES = "maldives";// 马代线路
 
   private String id;
+  private String type;// 类型：航班，火车
   private String number;// 航班号
   private String airline;// 航空公司
   private String airlineCode;// 航空公司代码
@@ -14,7 +20,7 @@ public class MaldivesFlight {
   private String arrivalsAirportCode;// 到达机场三字码
   private Date departuresTime;// 起飞时间（当地）
   private Date arrivalsTime;// 到达时间（当地）
-  private int lineType; // 线路类型，如马代
+  private String lineType; // 线路类型，如马代
   private String extra;// 补充信息
 
   public String getId() {
@@ -23,6 +29,14 @@ public class MaldivesFlight {
 
   public void setId(String id) {
     this.id = id;
+  }
+
+  public String getType() {
+    return type;
+  }
+
+  public void setType(String type) {
+    this.type = type;
   }
 
   public String getNumber() {
@@ -97,11 +111,11 @@ public class MaldivesFlight {
     this.arrivalsTime = arrivalsTime;
   }
 
-  public int getLineType() {
+  public String getLineType() {
     return lineType;
   }
 
-  public void setLineType(int lineType) {
+  public void setLineType(String lineType) {
     this.lineType = lineType;
   }
 

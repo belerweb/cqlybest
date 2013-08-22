@@ -15,6 +15,7 @@
 					<th>出发时间</th>
 					<th>到达时间</th>
 					<th>航空公司</th>
+					<th>补充信息</th>
 					<th class="center" style="width:80px;">操作</th>
 				</tr>
 			</thead>
@@ -26,8 +27,9 @@
 					<td>${flight.from!}${flight.departuresAirportCode!}</td>
 					<td>${flight.to!}${flight.arrivalsAirportCode!}</td>
 					<td><#if flight.departuresTime?has_content>${flight.departuresTime?string('HH:mm')}</#if></td>
-					<td><#if flight.arrivalsTime?has_content>${flight.arrivalsTime?string('HH:mm')}</#if></td>
+					<td><#if flight.arrivalsTime?has_content>${flight.arrivalsTime?string('HH:mm')} <span class="label label-success">＋${flight.arrivalsTime?string('d')}</span></#if></td>
 					<td>${flight.airline!}（${flight.airlineCode!}）</td>
+					<td>${flight.extra!}</td>
 					<td class="td-actions center">
 						<div class="btn-group">
 							<button type="button" data-id="${flight.id}" class="btn btn-mini btn-info btn-action-edit" title="修改">

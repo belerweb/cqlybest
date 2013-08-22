@@ -12,10 +12,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.cqlybest.common.Constant;
-import com.cqlybest.common.mongo.bean.MaldivesFlight;
 import com.cqlybest.common.mongo.bean.MaldivesIsland;
+import com.cqlybest.common.mongo.bean.Transportation;
 import com.cqlybest.common.mongo.service.MaldivesService;
+import com.cqlybest.common.mongo.service.TransportationService;
 import com.cqlybest.common.service.OptionService;
 
 @Controller("mongoMaldivesController")
@@ -23,6 +23,8 @@ public class MaldivesController {
 
   @Autowired
   private MaldivesService mongoMaldivesService;
+  @Autowired
+  private TransportationService transportationService;
   @Autowired
   private OptionService optionService;
 
@@ -261,7 +263,7 @@ public class MaldivesController {
   @RequestMapping(value = "/maldives/flight/update.do", method = RequestMethod.GET)
   public String updateFlight(@RequestParam(required = false) String flightId, Model model) {
     if (flightId != null) {
-      model.addAttribute("flight", mongoMaldivesService.getFlight(flightId));
+      model.addAttribute("flight", transportationService.getTransportation(flightId));
     }
     return "/v1/maldives/flight/update";
   }
@@ -272,8 +274,8 @@ public class MaldivesController {
       @RequestParam String airline, @RequestParam String airlineCode, @RequestParam String from,
       @RequestParam String to, @RequestParam String departuresAirportCode,
       @RequestParam String arrivalsAirportCode, @RequestParam long departuresTime,
-      @RequestParam long arrivalsTime) {
-    MaldivesFlight flight = new MaldivesFlight();
+      @RequestParam long arrivalsTime, @RequestParam String extra) {
+    Transportation flight = new Transportation();
     flight.setId(id);
     flight.setNumber(number);
     flight.setAirline(airline);
@@ -284,8 +286,10 @@ public class MaldivesController {
     flight.setArrivalsAirportCode(arrivalsAirportCode);
     flight.setDeparturesTime(new Date(departuresTime));
     flight.setArrivalsTime(new Date(arrivalsTime));
-    flight.setLineType(Constant.FLIGHT_LINE_TYPE_MALDIVES);
-    mongoMaldivesService.updateFlight(flight);
+    flight.setType(Transportation.TYPE_FLIGHT);
+    flight.setExtra(extra);
+    flight.setLineType(Transportation.LINE_TYPE_MALDIVES);
+    transportationService.updateTransportation(flight);
   }
 
   /**
@@ -294,8 +298,8 @@ public class MaldivesController {
   @RequestMapping(value = "/maldives/flight.do", method = RequestMethod.GET)
   public String flight(@RequestParam(defaultValue = "0") int page, Model model) {
     int pageSize = 10;
-    model.addAttribute("result", mongoMaldivesService.queryFlight(
-        Constant.FLIGHT_LINE_TYPE_MALDIVES, page, pageSize));
+    model.addAttribute("result", transportationService.queryTransportation(
+        Transportation.LINE_TYPE_MALDIVES, page, pageSize));
     return "/v1/maldives/flight";
   }
 }

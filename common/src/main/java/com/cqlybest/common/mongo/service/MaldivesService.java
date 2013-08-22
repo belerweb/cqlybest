@@ -7,14 +7,12 @@ import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
-import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.cqlybest.common.Constant;
 import com.cqlybest.common.mongo.bean.ImageMeta;
 import com.cqlybest.common.mongo.bean.MaldivesDining;
-import com.cqlybest.common.mongo.bean.MaldivesFlight;
 import com.cqlybest.common.mongo.bean.MaldivesIsland;
 import com.cqlybest.common.mongo.bean.MaldivesRoom;
 import com.cqlybest.common.mongo.bean.QueryResult;
@@ -228,32 +226,5 @@ public class MaldivesService {
     mongoDb.createQuery("MaldivesIsland").eq("dinings.pictures.id", imageId).modify()
         .pull("dinings.$.pictures", image).update();
     mongoDb.createQuery("Image").eq("_id", imageId).modify().delete();
-  }
-
-  public void updateFlight(MaldivesFlight flight) {
-    String flightId = flight.getId();
-    if (StringUtils.isBlank(flightId)) {
-      flight.setId(UUID.randomUUID().toString());
-      mongoDb.createObject("MaldivesFlight", flight);
-    } else {
-      mongoDb.getMongoDao().updateObject("MaldivesFlight", flightId, flight);
-    }
-  }
-
-  public MaldivesFlight getFlight(String flightId) {
-    return mongoDb.findById("MaldivesFlight", MaldivesFlight.class, flightId);
-  }
-
-  public QueryResult<MaldivesFlight> queryFlight(int lineType, int page, int pageSize) {
-    QueryResult<MaldivesFlight> result = new QueryResult<>(page, pageSize);
-    DaoQuery query = mongoDb.createQuery("MaldivesFlight");
-    query.eq("lineType", lineType);
-    result.setTotal(query.countObjects());
-
-    query.setFirstDocument(result.getStart());
-    query.setMaxDocuments(result.getPageSize());
-    result.setItems(query.findObjects(MaldivesFlight.class).readAll());
-
-    return result;
   }
 }

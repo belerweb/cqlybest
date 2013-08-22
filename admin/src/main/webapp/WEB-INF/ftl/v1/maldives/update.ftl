@@ -29,7 +29,7 @@
 				<#include "update_dining.ftl">
 				<#include "update_play.ftl">
 				<div id="island-poster-tab" class="image-gallery tab-pane">
-					<div class="text-right"><button type="button" class="btn btn-primary action action-add picture" data-name="islandId" data-value="${island.id}" data-url="${ContextPath}/maldives/picture/add.do">添加</button></div>
+					<div class="text-right"><button type="button" class="btn btn-primary btn-mini action action-add picture" data-name="islandId" data-value="${island.id}" data-url="${ContextPath}/maldives/picture/add.do">添加</button></div>
 					<#if island.pictures?has_content>
 					<div class="row-fluid">
 						<ul class="thumbnails">

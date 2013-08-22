@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<descriptors>
+
+	<object class="com.cqlybest.common.mongo.bean.Transportation">
+		<property name="id" id="true"/>
+		<property name="type" />
+		<property name="number" />
+		<property name="airline" />
+		<property name="airlineCode" />
+		<property name="from" />
+		<property name="to" />
+		<property name="departuresAirportCode" />
+		<property name="arrivalsAirportCode" />
+		<property name="departuresTime" />
+		<property name="arrivalsTime" />
+		<property name="lineType" />
+		<property name="extra" />
+	</object>
+
+</descriptors>
