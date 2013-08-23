@@ -1,3 +1,33 @@
+/**
+ * Date formate
+ */
+Date.prototype.format = function(format) {
+	/*
+	 * eg:format="yyyy-MM-dd hh:mm:ss";
+	 */
+	var o = {
+		"M+" : this.getMonth() + 1, // month
+		"d+" : this.getDate(), // day
+		"h+" : this.getHours(), // hour
+		"m+" : this.getMinutes(), // minute
+		"s+" : this.getSeconds(), // second
+		"q+" : Math.floor((this.getMonth() + 3) / 3), // quarter
+		"S" : this.getMilliseconds()
+	// millisecond
+	}
+
+	if (/(y+)/.test(format)) {
+		format = format.replace(RegExp.$1, (this.getFullYear() + "").substr(4 - RegExp.$1.length));
+	}
+
+	for ( var k in o) {
+		if (new RegExp("(" + k + ")").test(format)) {
+			format = format.replace(RegExp.$1, RegExp.$1.length == 1 ? o[k] : ("00" + o[k]).substr(("" + o[k]).length));
+		}
+	}
+	return format;
+};
+
 /* Placeholder IE */
 (function($) {
 	function Placeholder(input) {
@@ -14,9 +44,11 @@
 	}
 	Placeholder.prototype = {
 		show : function(loading) {
-			// FF and IE saves values when you refresh the page. If the user refreshes
+			// FF and IE saves values when you refresh the page. If the user
+			// refreshes
 			// the page with
-			// the placeholders showing they will be the default values and the input
+			// the placeholders showing they will be the default values and the
+			// input
 			// fields won't be empty.
 			if (this.input[0].value === '' || (loading && this.valueIsPlaceholder())) {
 				if (this.isPassword) {
@@ -105,11 +137,11 @@
 jQuery('input[placeholder], textarea[placeholder]').placeholder();
 
 $.fn.editable.defaults.emptytext = '未设置';
-$.fn.editable.defaults.send  = 'always';
+$.fn.editable.defaults.send = 'always';
 
 window.cqlybest = {
 	fixed : function(fixed) {
-		if(fixed) {
+		if (fixed) {
 			// fixed top
 			$(".navbar").addClass("navbar-fixed-top");
 			$(document.body).addClass("navbar-fixed");
@@ -122,7 +154,7 @@ window.cqlybest = {
 		}
 	},
 	go : function(el, url) {
-		var history = $(el).data('history')||[];
+		var history = $(el).data('history') || [];
 		if (!!url) { // load
 			history.push(url);
 			$(el).data('history', history);
@@ -138,41 +170,49 @@ window.cqlybest = {
 		}
 	},
 	reload : function(el, func) {
-		var history = $(el).data('history')||[];
+		var history = $(el).data('history') || [];
 		var url = history.pop();
 		if (!!url) {
 			history.push(url);
 			$(el).data('history', history);
-			$(el).load(url, func||function(){});
+			$(el).load(url, func || function() {
+			});
 		}
 	},
 	editableTag : function(el) {
-		$(el).each(function(i, obj){
+		$(el).each(function(i, obj) {
 			var type = $(obj).attr('data-dict');
 			$(obj).editable({
-				inputclass: 'input-large',
-				select2: {
-					multiple: true,
-					ajax: {
-						url: '/dict/search.do?type=' + type,
-						data: function (term, page) {
-							return {q:term};
+				inputclass : 'input-large',
+				select2 : {
+					multiple : true,
+					ajax : {
+						url : '/dict/search.do?type=' + type,
+						data : function(term, page) {
+							return {
+								q : term
+							};
 						},
-						results: function(response) {
+						results : function(response) {
 							var result = [];
-							$.each(response.tags, function(i, obj){
-								result.push({id:obj.name,text:obj.name});
+							$.each(response.tags, function(i, obj) {
+								result.push({
+									id : obj.name,
+									text : obj.name
+								});
 							});
-							return {results:result};
+							return {
+								results : result
+							};
 						}
 					},
-					formatNoMatches: function(term) {
-						setTimeout(function(){
+					formatNoMatches : function(term) {
+						setTimeout(function() {
 							$('.select2-no-results button').off('click').on('click', function() {
 								var btn = $(this);
 								$.post('/dict/add.do', {
-									type: type,
-									name: term
+									type : type,
+									name : term
 								}, function() {
 									btn.prev().text('保存成功，重新选择即可');
 									btn.remove();
@@ -181,26 +221,31 @@ window.cqlybest = {
 						}, 1000);
 						return '<span>没有找到匹配项</span><button type="button">保存 [' + term + ']</button>';
 					},
-					initSelection: function(el, callback) {
-						callback(cqlybest.v2ss(el.val()||$(el).data('value')));
+					initSelection : function(el, callback) {
+						callback(cqlybest.v2ss(el.val() || $(el).data('value')));
 					}
 				}
 			});
 		});
 	},
 	uploadImage : function(context) {
-		var winParam = ['dialogWidth=650px;dialogHeight=380px'];
+		var winParam = [ 'dialogWidth=650px;dialogHeight=380px' ];
 		winParam.push('center=yes');
 		winParam.push('help=no');
 		winParam.push('resizable=no');
 		winParam.push('status=no');
 		winParam.push('scroll=no');
-		return window.showModalDialog(context + '/image/upload',null,winParam.join(';'));
+		return window.showModalDialog(context + '/image/upload', null, winParam.join(';'));
 	},
 	v2ss : function(values) {
 		var result = [];
-		$.each((values||'').split(','), function(i, obj){
-			if (obj.length) {result.push({id:obj, text:obj});}
+		$.each((values || '').split(','), function(i, obj) {
+			if (obj.length) {
+				result.push({
+					id : obj,
+					text : obj
+				});
+			}
 		});
 		return result;
 	},

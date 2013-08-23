@@ -13,6 +13,7 @@
 		<link rel="stylesheet" href="${ContextPath}/assets/v1/css/bootstrap-editable.css" />
 		<link rel="stylesheet" href="${ContextPath}/assets/v1/css/bootstrap-wysihtml5-0.0.2.css" />
 		<link rel="stylesheet" href="${ContextPath}/assets/v1/css/wysiwyg-color.css" />
+		<link rel="stylesheet" href="${ContextPath}/assets/v1/css/fullcalendar.css" />
 		<link rel="stylesheet" href="${ContextPath}/assets/v1/css/ace.css" />
 		<link rel="stylesheet" href="${ContextPath}/assets/v1/css/ace-skins.css" />
 		<link href="${ContextPath}/assets/v1/css/style.css" rel="stylesheet" />

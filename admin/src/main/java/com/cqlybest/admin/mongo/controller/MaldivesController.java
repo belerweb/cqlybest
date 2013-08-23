@@ -1,7 +1,10 @@
 package com.cqlybest.admin.mongo.controller;
 
+import java.text.NumberFormat;
+import java.text.ParseException;
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.cqlybest.common.Constant;
 import com.cqlybest.common.mongo.bean.MaldivesIsland;
 import com.cqlybest.common.mongo.bean.Product;
 import com.cqlybest.common.mongo.bean.Transportation;
@@ -436,6 +440,34 @@ public class MaldivesController {
   @ResponseBody
   public void deleteProductRoom(@RequestParam String id) {
     mongoProductService.deleteMaldivesDetail(id);
+  }
+
+  /**
+   * 价格日历
+   */
+  @RequestMapping(value = "/maldives/product/price.do", method = RequestMethod.POST)
+  @ResponseBody
+  public void price(@RequestParam String productId, @RequestParam String start,
+      @RequestParam(required = false) String end, @RequestParam(required = false) String price,
+      @RequestParam(required = false) String childPrice,
+      @RequestParam(defaultValue = "false") boolean special,
+      @RequestParam(defaultValue = "false") boolean delete) throws ParseException {
+    Date startDate = Constant.YYYYMMDD_FORMAT.parse(start);
+    Date endDate = StringUtils.isNotBlank(end) ? Constant.YYYYMMDD_FORMAT.parse(end) : startDate;
+    NumberFormat numberFormat = NumberFormat.getNumberInstance(Locale.US);
+    Integer _price =
+        StringUtils.isNotBlank(price)
+            ? (int) (numberFormat.parse(price).doubleValue() * 100)
+            : null;
+    Integer _childPrice =
+        StringUtils.isNotBlank(childPrice)
+            ? (int) (numberFormat.parse(childPrice).doubleValue() * 100)
+            : null;
+    if (!delete && _price == null) {
+      throw new RuntimeException("必须设置价格");
+    }
+    mongoProductService.updatePrice(productId, startDate, endDate, _price, _childPrice, special,
+        delete);
   }
 
 }

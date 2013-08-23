@@ -1,5 +1,8 @@
 package com.cqlybest.common;
 
+import java.text.SimpleDateFormat;
+import java.util.TimeZone;
+
 import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -69,6 +72,9 @@ public class Constant {
 
   public static final String RESPONSE_TYPE_CODE = "code";
 
+  public static final SimpleDateFormat YYYYMMDD_FORMAT = new SimpleDateFormat("yyyy-MM-dd");
+
+
   public static void checkWeiboConfig(String appKeyConfig, String appSecretConfig) {
     String appKey = System.getProperty(appKeyConfig, System.getenv(appKeyConfig));
     String appSecret = System.getProperty(appSecretConfig, System.getenv(appSecretConfig));
@@ -80,4 +86,7 @@ public class Constant {
     WeiboConfig.updateProperties(Constant.CLIENT_SECRET, appSecret);
   }
 
+  static {
+    // YYYYMMDD_FORMAT.setTimeZone(TimeZone.getTimeZone("GMT"));
+  }
 }

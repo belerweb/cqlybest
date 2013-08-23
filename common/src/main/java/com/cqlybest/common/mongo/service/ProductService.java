@@ -1,16 +1,21 @@
 package com.cqlybest.common.mongo.service;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Properties;
 import java.util.UUID;
 
+import org.apache.commons.lang.time.DateUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.cqlybest.common.Constant;
 import com.cqlybest.common.mongo.bean.Product;
 import com.cqlybest.common.mongo.bean.ProductMaldives;
+import com.cqlybest.common.mongo.bean.ProductPriceCalendar;
 import com.cqlybest.common.mongo.bean.ProductTransportation;
 import com.cqlybest.common.mongo.bean.QueryResult;
 import com.cqlybest.common.mongo.dao.MongoDb;
@@ -113,5 +118,40 @@ public class ProductService {
     detail.put("id", id);
     mongoDb.createQuery("Product").eq("maldivesDetails.id", id).modify()
         .pull("maldivesDetails", detail).update();
+  }
+
+  public void updatePrice(String productId, Date startDate, Date endDate, Integer price,
+      Integer childPrice, boolean special, boolean delete) {
+    Date date = startDate;
+    List<String> toDeleteds = new ArrayList<>();
+    List<DBObject> toAdds = new ArrayList<>();
+    while (date.getTime() <= endDate.getTime()) {
+      String dateString = Constant.YYYYMMDD_FORMAT.format(date);
+      Map<String, String> toDeleted = new HashMap<>();
+      toDeleted.put("date", dateString);
+      toDeleteds.add(dateString);
+
+      if (!delete) {
+        ProductPriceCalendar toAdd = new ProductPriceCalendar();
+        toAdd.setDate(dateString);
+        toAdd.setPrice(price);
+        toAdd.setChildPrice(childPrice);
+        toAdd.setSpecial(special);
+        toAdds.add(mongoDb.unmap(toAdd));
+      }
+
+      date = DateUtils.addDays(date, 1);
+    }
+
+    Map<String, Object> in = new HashMap<>();
+    in.put("$in", toDeleteds);
+    Map<String, Object> subQuery = new HashMap<>();
+    subQuery.put("date", in);
+    mongoDb.createQuery("Product").eq("_id", productId).modify().pull("priceCalendar", subQuery)
+        .update();
+    if (!delete) {
+      mongoDb.createQuery("Product").eq("_id", productId).modify().pushAll("priceCalendar", toAdds)
+          .update();
+    }
   }
 }
