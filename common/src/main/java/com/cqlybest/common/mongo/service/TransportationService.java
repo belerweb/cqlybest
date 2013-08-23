@@ -1,5 +1,6 @@
 package com.cqlybest.common.mongo.service;
 
+import java.util.List;
 import java.util.UUID;
 
 import org.apache.commons.lang.StringUtils;
@@ -42,5 +43,14 @@ public class TransportationService {
     result.setItems(query.findObjects(Transportation.class).readAll());
 
     return result;
+  }
+
+  public List<Transportation> queryTransportation(String lineType, String keyword, int pageSize) {
+    DaoQuery query = mongoDb.createQuery("Transportation");
+    query.eq("lineType", lineType);
+    query.regex("number", ".*" + keyword + ".*");
+    query.addSort("number", 1);
+    query.setMaxDocuments(pageSize);
+    return query.findObjects(Transportation.class).readAll();
   }
 }

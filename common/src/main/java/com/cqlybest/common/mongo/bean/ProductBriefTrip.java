@@ -24,4 +24,9 @@ public class ProductBriefTrip {
     this.unit = unit;
   }
 
+  @Override
+  public String toString() {
+    return num + unit;
+  }
+
 }

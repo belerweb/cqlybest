@@ -19,14 +19,16 @@
 					<td>${island.zhName!} ${island.enName!}</td>
 					<td class="td-actions center">
 						<div class="btn-group">
-							<button href="<#if options.site_url?has_content>${options.site_url}/maldives/${island.id}.html<#else>javascript:alert('请先配置网站地址。');</#if>"
-								<#if options.site_url?has_content>target="_blank"</#if> class="btn btn-mini btn-success" title="预览"><i class="icon-external-link bigger-120"></i></a>
-							<button type="button" data-id="${island.id}" class="btn btn-mini btn-info btn-action-edit" title="修改">
+							<button type="button" class="btn btn-mini btn-success" title="预览">
+								<i class="icon-external-link bigger-120"></i>
+							</button>
+							<button type="button" class="btn btn-mini btn-info btn-action-edit" title="修改"
+								data-id="${island.id}">
 								<i class="icon-edit bigger-120"></i>
 							</button>
-							<button href="javascript:void(0);" data-url="${ContextPath}/maldives/delete.do?ids[]=${island.id}"
-								class="btn btn-mini btn-danger" data-confirm="true" data-action="删除" data-title="${island.zhName!}"
-								title="删除"><i class="icon-trash bigger-120"></i></a>
+							<button type="button" class="btn btn-mini btn-danger" title="删除">
+								<i class="icon-trash bigger-120"></i>
+							</button>
 						</div>
 					</td>
 				</tr>

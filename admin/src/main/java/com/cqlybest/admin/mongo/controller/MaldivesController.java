@@ -13,8 +13,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.cqlybest.common.mongo.bean.MaldivesIsland;
+import com.cqlybest.common.mongo.bean.Product;
 import com.cqlybest.common.mongo.bean.Transportation;
 import com.cqlybest.common.mongo.service.MaldivesService;
+import com.cqlybest.common.mongo.service.ProductService;
 import com.cqlybest.common.mongo.service.TransportationService;
 import com.cqlybest.common.service.OptionService;
 
@@ -25,6 +27,8 @@ public class MaldivesController {
   private MaldivesService mongoMaldivesService;
   @Autowired
   private TransportationService transportationService;
+  @Autowired
+  private ProductService mongoProductService;
   @Autowired
   private OptionService optionService;
 
@@ -81,7 +85,6 @@ public class MaldivesController {
   public String list(@RequestParam(defaultValue = "0") int page, Model model) {
     int pageSize = 10;
     model.addAttribute("result", mongoMaldivesService.queryIsland(page, pageSize));
-    model.addAttribute("options", optionService.getOptions());
     return "/v1/maldives/list";
   }
 
@@ -302,4 +305,91 @@ public class MaldivesController {
         Transportation.LINE_TYPE_MALDIVES, page, pageSize));
     return "/v1/maldives/flight";
   }
+
+  /**
+   * Ajax 获取航班列表
+   */
+  @RequestMapping("/maldives/flight/ajax.do")
+  @ResponseBody
+  public List<Transportation> flight(@RequestParam String q) {
+    return transportationService.queryTransportation(Transportation.LINE_TYPE_MALDIVES, q, 10);
+  }
+
+  /**
+   * 添加产品
+   */
+  @RequestMapping(value = "/maldives/product/add.do", method = RequestMethod.POST)
+  @ResponseBody
+  public String addProduct(@RequestParam String name) {
+    // TODO validate name
+    Product product = mongoProductService.addProduct(Product.TYPE_MALDIVES, name);
+    return product.getId();
+  }
+
+  /**
+   * 修改产品
+   */
+  @RequestMapping(value = "/maldives/product/update.do", method = RequestMethod.GET)
+  public String updateProduct(@RequestParam String id, Model model) {
+    model.addAttribute("product", mongoProductService.getProduct(id));
+    return "/v1/maldives/product/update";
+  }
+
+  /**
+   * 修改产品
+   */
+  @RequestMapping(value = "/maldives/product/update.do", method = RequestMethod.POST)
+  @ResponseBody
+  public void updateProduct(@RequestParam String pk, @RequestParam String name,
+      @RequestParam(required = false) String value,
+      @RequestParam(required = false, value = "value[]") List<String> values) throws Exception {
+    Object _value = value == null ? StringUtils.join(values, ",") : value;
+    if (name.equals("hotelLevel") || name.equals("hotelRoomNum")) {
+      _value = StringUtils.isEmpty(value) ? null : Integer.valueOf(value);
+    }
+    if (name.equals("hotelChinese")) {
+      _value = StringUtils.isEmpty(value) ? null : Boolean.valueOf(value);
+    }
+    mongoMaldivesService.updateIsland(pk, name, _value);
+  }
+
+  /**
+   * 产品列表
+   */
+  @RequestMapping(value = "/maldives/product.do", method = RequestMethod.GET)
+  public String product(@RequestParam(defaultValue = "0") int page, Model model) {
+    int pageSize = 10;
+    model.addAttribute("result", mongoProductService.queryProduct(page, pageSize));
+    return "/v1/maldives/product";
+  }
+
+
+  /**
+   * 添加产品交通
+   */
+  @RequestMapping(value = "/maldives/product/transportation/add.do", method = RequestMethod.POST)
+  @ResponseBody
+  public void addProductTransportation(@RequestParam String productId, @RequestParam String name) {
+    mongoProductService.addTransportation(productId, name);
+  }
+
+  /**
+   * 修改产品交通
+   */
+  @RequestMapping(value = "/maldives/product/transportation/update.do", method = RequestMethod.POST)
+  @ResponseBody
+  public void updateProductTransportation(@RequestParam String pk, @RequestParam String name,
+      @RequestParam String value) {
+    mongoProductService.updateTransportation(pk, name, value);
+  }
+
+  /**
+   * 删除产品交通
+   */
+  @RequestMapping(value = "/maldives/product/transportation/delete.do", method = RequestMethod.POST)
+  @ResponseBody
+  public void deleteProductTransportation(@RequestParam String id) {
+    mongoProductService.deleteTransportation(id);
+  }
+
 }

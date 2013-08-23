@@ -58,13 +58,6 @@
 			</div>
 		</div>
 	</div>
-	<div class="clearfix"></div>
-	<div class="grid">
-		<form class="form-horizontal grid-content">
-			<div class="tabbable">
-			</div>
-		</form>
-	</div>
 </div>
 <script type="text/javascript">
 $('button.picture.action-add').click(function(){

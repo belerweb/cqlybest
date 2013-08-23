@@ -4,6 +4,68 @@
 	<object class="com.cqlybest.common.mongo.bean.Product">
 		<property name="id" id="true" />
 		<property name="name" />
+		<property name="code" />
+		<property name="type" />
+		<property name="marketPrice" />
+		<property name="price" />
+		<property name="priceDescription" />
+		<property name="priceExclusive" />
+		<property name="priceCalendar" />
+		<property name="briefTrip" />
+		<property name="transportations" />
+		<property name="keywords" />
+		<property name="popular" />
+		<property name="recommend" />
+		<property name="special" />
+		<property name="effectiveDate" />
+		<property name="expiryDate" />
+		<property name="departureDate" />
+		<property name="recommendedMonths" />
+		<property name="description" />
+		<property name="tripCharacteristic" />
+		<property name="serviceStandard" />
+		<property name="friendlyReminder" />
+		<property name="recommendedItem" />
+		<property name="departureCities" />
+		<property name="destinations" />
+		<property name="crowds" />
+		<property name="traffics" />
+		<property name="types" />
+		<property name="grades" />
+		<property name="posters" />
+		<property name="photos" />
+		<property name="maldivesDetails" />
+		<property name="published" />
+		<property name="createdTime" />
+		<property name="lastUpdated" />
+	</object>
+
+	<object class="com.cqlybest.common.mongo.bean.ProductBriefTrip">
+		<property name="num" />
+		<property name="unit" />
+	</object>
+
+	<object class="com.cqlybest.common.mongo.bean.ProductPriceCalendar">
+		<property name="date" />
+		<property name="price" />
+		<property name="childPrice" />
+		<property name="special" />
+	</object>
+
+	<object class="com.cqlybest.common.mongo.bean.ProductTransportation">
+		<property name="id" />
+		<property name="name" />
+		<property name="extra" />
+		<property name="detail" />
+	</object>
+
+	<object class="com.cqlybest.common.mongo.bean.ProductMaldives">
+		<property name="id" />
+		<property name="name" />
+		<property name="detail" />
+		<property name="island" />
+		<property name="room" />
+		<property name="meals" />
 	</object>
 
 </descriptors>

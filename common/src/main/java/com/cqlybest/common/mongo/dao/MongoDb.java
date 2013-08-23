@@ -18,6 +18,10 @@ public class MongoDb extends MongoDBDaoSupport {
     return createQuery(collection).eq("_id", id).findObject(cls);
   }
 
+  public DBObject findById(String collection, String id) {
+    return createQuery(collection).eq("_id", id).findObject();
+  }
+
   public <T> DBObject unmap(T object) {
     return getObjectMapper().unmap(object);
   }

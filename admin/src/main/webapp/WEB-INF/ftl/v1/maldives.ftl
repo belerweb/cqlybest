@@ -7,6 +7,9 @@
 },{
 	'name':'航班',
 	'url':'/maldives/flight.do'
+},{
+	'name':'产品',
+	'url':'/maldives/product.do'
 }] />
 <#include "sidebar.ftl">
 <div id="main-content" class="clearfix" data-init="${ContextPath}/maldives/list.do">

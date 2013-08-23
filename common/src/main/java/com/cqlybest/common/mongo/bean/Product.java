@@ -6,8 +6,8 @@ import java.util.List;
 
 public class Product {
 
-  public static final String MALDIVES = "maldives";// 马尔代夫
-  public static final String MAURITIUS = "mauritius";// 毛里求斯
+  public static final String TYPE_MALDIVES = "maldives";// 马尔代夫
+  public static final String TYPE_MAURITIUS = "mauritius";// 毛里求斯
 
   private String id;
   private String name;// 产品名称
@@ -20,14 +20,14 @@ public class Product {
   private String priceExclusive; // 费用不包含
   private List<ProductPriceCalendar> priceCalendar = new ArrayList<>();// 价格日历
 
-  private List<ProductBriefTrip> briefTrip; // 简要行程
-  private List<ProductTransportation> transportations; // 详细交通
+  private List<ProductBriefTrip> briefTrip = new ArrayList<>(); // 简要行程
+  private List<ProductTransportation> transportations = new ArrayList<>(); // 详细交通
 
   private List<String> keywords = new ArrayList<>();// 关键词
 
-  private Boolean popular;// 是否热门
-  private Boolean recommend;// 是否推荐
-  private Boolean special;// 是否特价
+  private Boolean popular = Boolean.FALSE;// 是否热门
+  private Boolean recommend = Boolean.FALSE;// 是否推荐
+  private Boolean special = Boolean.FALSE;// 是否特价
 
   private Date effectiveDate; // 产品生效日期
   private Date expiryDate; // 产品失效日期
@@ -51,9 +51,9 @@ public class Product {
   private List<ImageMeta> posters = new ArrayList<>();// 海报图片
   private List<ImageMeta> photos = new ArrayList<>();// 相册图片
 
-  private List<ProductMaldives> maldivesDetails; // 马代详细
+  private List<ProductMaldives> maldivesDetails = new ArrayList<>(); // 马代详细
 
-  private Boolean published; // 是否发布
+  private Boolean published = Boolean.FALSE; // 是否发布
   private Date createdTime;// 产品创建时间
   private Date lastUpdated;// 最后更新时间
 
