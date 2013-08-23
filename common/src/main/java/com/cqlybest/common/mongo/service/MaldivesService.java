@@ -5,8 +5,10 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Properties;
 import java.util.UUID;
 
+import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -18,6 +20,7 @@ import com.cqlybest.common.mongo.bean.MaldivesRoom;
 import com.cqlybest.common.mongo.bean.QueryResult;
 import com.cqlybest.common.mongo.dao.MongoDb;
 import com.googlecode.mjorm.query.DaoQuery;
+import com.googlecode.mjorm.query.Query;
 import com.mongodb.WriteResult;
 
 @Service("mongoMaldivesService")
@@ -57,6 +60,17 @@ public class MaldivesService {
     return result;
   }
 
+  public List<Properties> queryIsland(String q, int pageSize) {
+    DaoQuery query = mongoDb.createQuery("MaldivesIsland");
+    Properties fields = new Properties();
+    fields.put("zhName", Boolean.TRUE);
+    String pattern = ".*" + q + ".*";
+    query.or(Query.start().regex("zhName", pattern), Query.start().regex("enName", pattern), Query
+        .start().regex("byName", pattern));
+    query.setMaxDocuments(pageSize);
+    return mongoDb.map(query.findObjects(mongoDb.unmap(fields)), Properties.class);
+  }
+
   public MaldivesIsland getIsland(String id) {
     return mongoDb.findById("MaldivesIsland", MaldivesIsland.class, id);
   }
@@ -73,6 +87,22 @@ public class MaldivesService {
   public void updateRoom(String roomId, String property, Object value) {
     mongoDb.createQuery("MaldivesIsland").eq("rooms.id", roomId).modify().set(
         "rooms.$." + property, value).update();
+  }
+
+  public List<Properties> queryRoom(String islandId, String q, int pageSize) {
+    DaoQuery query = mongoDb.createQuery("MaldivesIsland");
+    Properties fields = new Properties();
+    fields.put("_id", Boolean.FALSE);
+    fields.put("rooms.id", Boolean.TRUE);
+    fields.put("rooms.zhName", Boolean.TRUE);
+    if (StringUtils.isNotBlank(islandId)) {
+      query.eq("_id", islandId);
+    }
+    // String pattern = ".*" + q + ".*";
+    // query.or(Query.start().regex("rooms.zhName", pattern), Query.start().regex("rooms.enName",
+    // pattern));
+    query.setMaxDocuments(pageSize);
+    return mongoDb.map(query.findObjects(mongoDb.unmap(fields)), Properties.class);
   }
 
   public void addDining(String islandId, String zhName, String enName) {

@@ -89,6 +89,15 @@ public class MaldivesController {
   }
 
   /**
+   * Ajax 获取海岛列表
+   */
+  @RequestMapping(value = "/maldives/island/ajax.do", method = RequestMethod.GET)
+  @ResponseBody
+  public Object list(@RequestParam String q, Model model) {
+    return mongoMaldivesService.queryIsland(q, 10);
+  }
+
+  /**
    * 添加房型
    */
   @RequestMapping(value = "/maldives/room/add.do", method = RequestMethod.POST)
@@ -113,6 +122,15 @@ public class MaldivesController {
       _value = StringUtils.isEmpty(value) ? null : Boolean.valueOf(value);
     }
     mongoMaldivesService.updateRoom(pk, name, _value);
+  }
+
+  /**
+   * Ajax 获取房型列表
+   */
+  @RequestMapping(value = "/maldives/room/ajax.do", method = RequestMethod.GET)
+  @ResponseBody
+  public Object room(@RequestParam String islandId, @RequestParam String q, Model model) {
+    return mongoMaldivesService.queryRoom(islandId, q, 10);
   }
 
   /**
@@ -363,7 +381,6 @@ public class MaldivesController {
     return "/v1/maldives/product";
   }
 
-
   /**
    * 添加产品交通
    */
@@ -390,6 +407,35 @@ public class MaldivesController {
   @ResponseBody
   public void deleteProductTransportation(@RequestParam String id) {
     mongoProductService.deleteTransportation(id);
+  }
+
+  /**
+   * 添加马代住宿（行程）
+   */
+  @RequestMapping(value = "/maldives/product/room/add.do", method = RequestMethod.POST)
+  @ResponseBody
+  public void addProductRoom(@RequestParam String productId, @RequestParam String name) {
+    mongoProductService.addMaldivesDetail(productId, name);
+  }
+
+  /**
+   * 修改马代住宿（行程）
+   */
+  @RequestMapping(value = "/maldives/product/room/update.do", method = RequestMethod.POST)
+  @ResponseBody
+  public void updateProductRoom(@RequestParam String pk, @RequestParam String name,
+      @RequestParam(required = false) String value,
+      @RequestParam(value = "value[]", required = false) List<String> values) {
+    mongoProductService.updateMaldivesDetail(pk, name, value == null ? values : value);
+  }
+
+  /**
+   * 删除马代住宿（行程）
+   */
+  @RequestMapping(value = "/maldives/product/room/delete.do", method = RequestMethod.POST)
+  @ResponseBody
+  public void deleteProductRoom(@RequestParam String id) {
+    mongoProductService.deleteMaldivesDetail(id);
   }
 
 }

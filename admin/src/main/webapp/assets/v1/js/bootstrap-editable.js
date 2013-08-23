@@ -3183,7 +3183,8 @@ $(function(){
         },
        
        value2str: function(value) {
-           return $.isArray(value) ? value.sort().join($.trim(this.options.separator)) : '';
+           // return $.isArray(value) ? value.sort().join($.trim(this.options.separator)) : '';
+    	   return $.isArray(value) ? value.join($.trim(this.options.separator)) : '';
        },  
        
        //parse separated string
@@ -3233,7 +3234,8 @@ $(function(){
                
            if(checked.length) {
                $.each(checked, function(i, v) { html.push($.fn.editableutils.escape(v.text)); });
-               $(element).html(html.join('<br>'));
+               // $(element).html(html.join('<br>'));
+               $(element).html(html.join(this.options.separator));
            } else {
                $(element).empty(); 
            }

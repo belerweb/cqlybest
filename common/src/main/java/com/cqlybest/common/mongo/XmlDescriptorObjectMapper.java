@@ -11,13 +11,11 @@ import javax.xml.xpath.XPathExpressionException;
 import org.w3c.dom.Document;
 import org.xml.sax.SAXException;
 
-import com.googlecode.mjorm.DescriptorObjectMapper;
 import com.googlecode.mjorm.ObjectDescriptor;
 import com.googlecode.mjorm.ObjectMapper;
 
 /**
- * An {@link ObjectMapper} that reads {@link ObjectDescriptor}s
- * from an XML document for mapping.
+ * An {@link ObjectMapper} that reads {@link ObjectDescriptor}s from an XML document for mapping.
  */
 public class XmlDescriptorObjectMapper extends DescriptorObjectMapper {
 
@@ -25,6 +23,7 @@ public class XmlDescriptorObjectMapper extends DescriptorObjectMapper {
 
   /**
    * Adds the given document configuration.
+   * 
    * @param file the {@link File}
    * @throws IOException on error
    * @throws ParserConfigurationException on error
@@ -39,6 +38,7 @@ public class XmlDescriptorObjectMapper extends DescriptorObjectMapper {
 
   /**
    * Adds the given document configuration.
+   * 
    * @param inputStream the {@link InputStream}
    * @throws IOException on error
    * @throws ParserConfigurationException on error
@@ -53,6 +53,7 @@ public class XmlDescriptorObjectMapper extends DescriptorObjectMapper {
 
   /**
    * Adds the given document configuration.
+   * 
    * @param doc the document
    * @throws XPathExpressionException on error
    * @throws ClassNotFoundException on error
@@ -64,6 +65,7 @@ public class XmlDescriptorObjectMapper extends DescriptorObjectMapper {
 
   /**
    * Assimilates {@link ObjectDescriptor}s.
+   * 
    * @param descriptors the {@link ObjectDescriptor}s
    */
   private void assimilateObjectDescriptors(Collection<ObjectDescriptor> descriptors) {

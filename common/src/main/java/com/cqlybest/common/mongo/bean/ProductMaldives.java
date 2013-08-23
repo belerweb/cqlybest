@@ -1,5 +1,6 @@
 package com.cqlybest.common.mongo.bean;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class ProductMaldives {
@@ -9,7 +10,7 @@ public class ProductMaldives {
   private String detail;// 详细
   private MaldivesIsland island;// 岛
   private MaldivesRoom room;// 房
-  private List<String> meals;// 餐
+  private List<String> meals =new ArrayList<>();// 餐
 
   public String getId() {
     return id;

@@ -24,7 +24,7 @@
 			<div class="tab-content form-horizontal" style="min-height:400px;overflow:visible;z-index:13;">
 				<#include "update_base.ftl">
 				<#include "update_traffic.ftl">
-				<#include "update_maldives.ftl">
+				<#include "update_room.ftl">
 				<#include "update_calendar.ftl">
 				<#include "update_poster_photo.ftl">
 				<#include "update_comment.ftl">
@@ -33,5 +33,9 @@
 	</div>
 </div>
 <script type="text/javascript">
-$('#page-content a[data-type=text],#page-content a[data-type=textarea]').editable();
+$('#page-content a[data-type=text],#page-content a[data-type=textarea]').on('shown', function(){
+	cqlybest.fixed(false);
+}).on('hidden', function(){
+	cqlybest.fixed(true);
+}).editable();
 </script>

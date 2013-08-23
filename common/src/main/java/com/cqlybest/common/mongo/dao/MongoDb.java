@@ -1,7 +1,13 @@
 package com.cqlybest.common.mongo.dao;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Properties;
+
+import com.googlecode.mjorm.ObjectMapper;
 import com.googlecode.mjorm.query.DaoQuery;
 import com.googlecode.mjorm.spring.MongoDBDaoSupport;
+import com.mongodb.DBCursor;
 import com.mongodb.DBObject;
 
 public class MongoDb extends MongoDBDaoSupport {
@@ -22,8 +28,26 @@ public class MongoDb extends MongoDBDaoSupport {
     return createQuery(collection).eq("_id", id).findObject();
   }
 
+  public DBObject findById(String collection, String id, Properties fields) {
+    return createQuery(collection).eq("_id", id).findObject(unmap(fields));
+  }
+
   public <T> DBObject unmap(T object) {
     return getObjectMapper().unmap(object);
   }
+
+  public <T> T map(DBObject dbObject, Class<T> cls) {
+    return getObjectMapper().map(dbObject, cls);
+  }
+
+  public <T> List<T> map(DBCursor dbCursor, Class<T> cls) {
+    ObjectMapper objectMapper = getObjectMapper();
+    List<T> result = new ArrayList<T>();
+    while (dbCursor.hasNext()) {
+      result.add(objectMapper.map(dbCursor.next(), cls));
+    }
+    return result;
+  }
+
 
 }

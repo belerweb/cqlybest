@@ -30,6 +30,7 @@
 			<list>
 				<bean class="com.cqlybest.common.mongo.ByteArrayToBinary" />
 				<bean class="com.cqlybest.common.mongo.BinaryToByteArray" />
+				<bean class="com.cqlybest.common.mongo.MongoToMapTypeConverter" />
 			</list>
 		</property>
 	</bean>
