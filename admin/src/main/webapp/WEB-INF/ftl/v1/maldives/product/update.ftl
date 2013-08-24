@@ -19,7 +19,6 @@
 				<li><a href="javascript:void(0);" data-toggle="tab" data-target="#product-calendar-tab">日历</a></li>
 				<li><a href="javascript:void(0);" data-toggle="tab" data-target="#product-poster-tab">海报图片 </a></li>
 				<li><a href="javascript:void(0);" data-toggle="tab" data-target="#product-photo-tab">相册图片</a></li>
-				<li><a href="javascript:void(0);" data-toggle="tab" data-target="#product-comment-tab">评论</a></li>
 			</ul>
 			<div class="tab-content form-horizontal" style="min-height:400px;overflow:visible;z-index:13;">
 				<#include "update_base.ftl">
@@ -27,7 +26,6 @@
 				<#include "update_room.ftl">
 				<#include "update_calendar.ftl">
 				<#include "update_poster_photo.ftl">
-				<#include "update_comment.ftl">
 			</div>
 		</div>
 	</div>
