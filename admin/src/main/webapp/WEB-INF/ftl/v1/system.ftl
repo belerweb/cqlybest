@@ -22,6 +22,9 @@
 		'name':'产品等级',
 		'url':'/datadict/list.do?type=product-grade'
 	}]
+},{
+	'name':'系统信息',
+	'url':'/system/info.do'
 }] />
 <#include "sidebar.ftl">
 <div id="main-content" class="clearfix" data-init="${ContextPath}/datadict/list.do?type=tag">
