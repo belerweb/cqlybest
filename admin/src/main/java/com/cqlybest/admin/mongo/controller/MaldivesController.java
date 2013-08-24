@@ -365,14 +365,14 @@ public class MaldivesController {
   public void updateProduct(@RequestParam String pk, @RequestParam String name,
       @RequestParam(required = false) String value,
       @RequestParam(required = false, value = "value[]") List<String> values) throws Exception {
-    Object _value = value == null ? StringUtils.join(values, ",") : value;
-    if (name.equals("hotelLevel") || name.equals("hotelRoomNum")) {
-      _value = StringUtils.isEmpty(value) ? null : Integer.valueOf(value);
+    Object _value = value == null ? values : value;
+    if ("price".equals(name) || "marketPrice".equals(name)) {
+      _value = (int) (Double.parseDouble(value) * 100);
     }
-    if (name.equals("hotelChinese")) {
-      _value = StringUtils.isEmpty(value) ? null : Boolean.valueOf(value);
+    if ("effectiveDate".equals(name) || "expiryDate".equals(name) || "departureDate".equals(name)) {
+      _value = Constant.YYYYMMDD_FORMAT.parse(value);
     }
-    mongoMaldivesService.updateIsland(pk, name, _value);
+    mongoProductService.updateProduct(pk, name, _value);
   }
 
   /**

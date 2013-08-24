@@ -33,7 +33,7 @@ public class Product {
   private Date expiryDate; // 产品失效日期
   private Date departureDate; // 准确的出发日期
 
-  private List<Integer> recommendedMonths = new ArrayList<>();// 推荐月份
+  private List<String> recommendedMonths = new ArrayList<>();// 推荐月份
 
   private String description; // 产品介绍
   private String tripCharacteristic;// 行程特色
@@ -201,11 +201,11 @@ public class Product {
     this.departureDate = departureDate;
   }
 
-  public List<Integer> getRecommendedMonths() {
+  public List<String> getRecommendedMonths() {
     return recommendedMonths;
   }
 
-  public void setRecommendedMonths(List<Integer> recommendedMonths) {
+  public void setRecommendedMonths(List<String> recommendedMonths) {
     this.recommendedMonths = recommendedMonths;
   }
 

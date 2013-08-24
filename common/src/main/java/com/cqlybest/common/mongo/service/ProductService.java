@@ -7,7 +7,10 @@ import java.util.List;
 import java.util.Map;
 import java.util.Properties;
 import java.util.UUID;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
+import org.apache.commons.lang.StringUtils;
 import org.apache.commons.lang.time.DateUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -15,6 +18,7 @@ import org.springframework.stereotype.Service;
 import com.cqlybest.common.Constant;
 import com.cqlybest.common.mongo.bean.ImageMeta;
 import com.cqlybest.common.mongo.bean.Product;
+import com.cqlybest.common.mongo.bean.ProductBriefTrip;
 import com.cqlybest.common.mongo.bean.ProductMaldives;
 import com.cqlybest.common.mongo.bean.ProductPriceCalendar;
 import com.cqlybest.common.mongo.bean.ProductTransportation;
@@ -23,6 +27,7 @@ import com.cqlybest.common.mongo.dao.MongoDb;
 import com.googlecode.mjorm.query.DaoQuery;
 import com.mongodb.BasicDBList;
 import com.mongodb.DBObject;
+import com.mongodb.WriteResult;
 
 @Service("mongoProductService")
 public class ProductService {
@@ -40,6 +45,27 @@ public class ProductService {
     product.setCreatedTime(now);
     product.setLastUpdated(now);
     return mongoDb.createObject("Product", product);
+  }
+
+  public int updateProduct(String productId, String property, Object value) {
+    Object _value = value;
+    if ("briefTrip".equals(property)) {
+      if (StringUtils.isNotBlank(value.toString())) {
+        List<Object> trips = new ArrayList<>();
+        Matcher matcher = Pattern.compile("(\\d+)([^\\d]+)").matcher(value.toString());
+        while (matcher.find()) {
+          ProductBriefTrip trip = new ProductBriefTrip();
+          trip.setNum(Integer.valueOf(matcher.group(1)));
+          trip.setUnit(matcher.group(2));
+          trips.add(mongoDb.unmap(trip));
+        }
+        _value = trips;
+      }
+    }
+    WriteResult result =
+        mongoDb.createQuery("Product").eq("_id", productId).modify().set(property, _value)
+            .set("published", Boolean.FALSE).set("lastUpdated", new Date()).update();
+    return result.getN();
   }
 
   public Product getProduct(String id) {
