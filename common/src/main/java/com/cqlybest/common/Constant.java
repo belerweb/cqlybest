@@ -1,7 +1,6 @@
 package com.cqlybest.common;
 
 import java.text.SimpleDateFormat;
-import java.util.TimeZone;
 
 import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;

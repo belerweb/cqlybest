@@ -470,4 +470,63 @@ public class MaldivesController {
         delete);
   }
 
+
+  /**
+   * 增加产品海报
+   */
+  @RequestMapping(value = "/maldives/product/poster/add.do", method = RequestMethod.POST)
+  @ResponseBody
+  public void addProductPoster(@RequestParam String productId,
+      @RequestParam("images[]") List<String> filenames) {
+    mongoProductService.addPoster(productId, filenames);
+  }
+
+  /**
+   * 修改产品海报
+   */
+  @RequestMapping(value = "/maldives/product/poster/update.do", method = RequestMethod.POST)
+  @ResponseBody
+  public void updateProductPoster(@RequestParam String pk, @RequestParam String name,
+      @RequestParam String value) {
+    mongoProductService.updatePoster(pk, name, value);
+  }
+
+  /**
+   * 删除产品海报
+   */
+  @RequestMapping(value = "/maldives/product/poster/delete.do", method = RequestMethod.POST)
+  @ResponseBody
+  public void deleteProductPoster(@RequestParam String imageId) {
+    mongoProductService.deletePoster(imageId);
+  }
+
+  /**
+   * 增加产品图片
+   */
+  @RequestMapping(value = "/maldives/product/photo/add.do", method = RequestMethod.POST)
+  @ResponseBody
+  public void addProductPhoto(@RequestParam String productId,
+      @RequestParam("images[]") List<String> filenames) {
+    mongoProductService.addPhoto(productId, filenames);
+  }
+
+  /**
+   * 修改产品图片
+   */
+  @RequestMapping(value = "/maldives/product/photo/update.do", method = RequestMethod.POST)
+  @ResponseBody
+  public void updateProductPhoto(@RequestParam String pk, @RequestParam String name,
+      @RequestParam String value) {
+    mongoProductService.updatePhoto(pk, name, value);
+  }
+
+  /**
+   * 删除产品图片
+   */
+  @RequestMapping(value = "/maldives/product/photo/delete.do", method = RequestMethod.POST)
+  @ResponseBody
+  public void deleteProductPhoto(@RequestParam String imageId) {
+    mongoProductService.deletePhoto(imageId);
+  }
+
 }

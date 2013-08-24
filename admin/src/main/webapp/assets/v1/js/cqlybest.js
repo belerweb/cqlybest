@@ -228,14 +228,14 @@ window.cqlybest = {
 			});
 		});
 	},
-	uploadImage : function(context) {
+	uploadImage : function() {
 		var winParam = [ 'dialogWidth=650px;dialogHeight=380px' ];
 		winParam.push('center=yes');
 		winParam.push('help=no');
 		winParam.push('resizable=no');
 		winParam.push('status=no');
 		winParam.push('scroll=no');
-		return window.showModalDialog(context + '/image/upload', null, winParam.join(';'));
+		return window.showModalDialog(window.ContextPath + '/image/upload', null, winParam.join(';'));
 	},
 	v2ss : function(values) {
 		var result = [];

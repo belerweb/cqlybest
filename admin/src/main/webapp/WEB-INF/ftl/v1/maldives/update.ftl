@@ -63,7 +63,7 @@
 $('button.picture.action-add').click(function(){
 	var tab = $(this).closest('.tab-pane').attr('id');
 	var url = $(this).attr('data-url');
-	var images = cqlybest.uploadImage('${ContextPath}');
+	var images = cqlybest.uploadImage();
 	if (images) {
 		var param = {images:[]};
 		param[$(this).attr('data-name')] = $(this).attr('data-value');
