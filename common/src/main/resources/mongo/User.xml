@@ -11,6 +11,39 @@
 		<property name="nickname" />
 		<property name="avatar" />
 		<property name="source" />
+		<property name="lastLoginIP" />
+		<property name="roles" />
+		<property name="weibo" />
+		<property name="qzone" />
+		<property name="createdTime" />
+		<property name="lastUpdated" />
+	</object>
+
+	<object class="com.cqlybest.common.mongo.bean.WeiboUser">
+		<property name="id" />
+		<property name="tokens" />
+	</object>
+
+	<object class="com.cqlybest.common.mongo.bean.WeiboAccessToken">
+		<property name="appKey" />
+		<property name="appId" />
+		<property name="cid" />
+		<property name="subAppkey" />
+		<property name="token" />
+		<property name="expireIn" />
+		<property name="createdTime" />
+		<property name="lastUpdated" />
+	</object>
+
+	<object class="com.cqlybest.common.mongo.bean.QQUser">
+		<property name="id" />
+		<property name="tokens" />
+	</object>
+
+	<object class="com.cqlybest.common.mongo.bean.QQAccessToken">
+		<property name="appId" />
+		<property name="token" />
+		<property name="expireIn" />
 		<property name="createdTime" />
 		<property name="lastUpdated" />
 	</object>

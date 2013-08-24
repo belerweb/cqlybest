@@ -1,4 +1,6 @@
-package com.cqlybest.common.controller;
+package com.cqlybest.common.mongo.controller;
+
+import java.util.Date;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -7,6 +9,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -18,19 +21,21 @@ import weibo4j.model.WeiboException;
 import weibo4j.util.WeiboConfig;
 
 import com.cqlybest.common.Constant;
-import com.cqlybest.common.auth.WeiboAuthToken;
-import com.cqlybest.common.bean.LoginUser;
-import com.cqlybest.common.bean.WeiboAuth;
+import com.cqlybest.common.mongo.bean.User;
+import com.cqlybest.common.mongo.bean.WeiboAccessToken;
+import com.cqlybest.common.mongo.bean.WeiboAuthToken;
+import com.cqlybest.common.mongo.bean.WeiboUser;
+import com.cqlybest.common.mongo.service.UserService;
 import com.cqlybest.common.service.OptionService;
-import com.cqlybest.common.service.UserService;
 
+@Controller
 public class WeiboLoginController {
 
   private static final Logger LOGGER = LoggerFactory.getLogger(WeiboLoginController.class);
   private static final Oauth WEIBO_OAUTH = new Oauth();
 
   @Autowired
-  private UserService userService;
+  private UserService mongoUserService;
   @Autowired
   private OptionService optionService;
 
@@ -57,14 +62,26 @@ public class WeiboLoginController {
     String redirect = "redirect:/index.html";
     try {
       AccessToken accessToken = WEIBO_OAUTH.getAccessTokenByCode(code);
-      String token = accessToken.getAccessToken();
-      WeiboAuth auth =
-          new WeiboAuth(accessToken.getUid(), token, Long.parseLong(accessToken.getExpireIn()));
+      WeiboUser weiboUser = new WeiboUser();
+      weiboUser.setId(accessToken.getUid());
+      WeiboAccessToken token = new WeiboAccessToken();
+      // token.setAppKey(appKey);
+      // token.setAppId(appId);
+      // token.setCid(cid);
+      // token.setSubAppkey(subAppkey);
+      token.setToken(accessToken.getAccessToken());
+      token.setExpireIn(Long.valueOf(accessToken.getExpireIn()));
+      Date current = new Date();
+      token.setCreatedTime(current);
+      token.setLastUpdated(current);
+      weiboUser.getTokens().add(token);
 
       // 读取用户详细信息
       Users api = new Users();
-      api.setToken(token);
-      LoginUser user = userService.register(auth, api.showUserById(accessToken.getUid()));
+      api.setToken(accessToken.getAccessToken());
+
+
+      User user = mongoUserService.register(weiboUser, api.showUserById(accessToken.getUid()));
       SecurityContextHolder.getContext().setAuthentication(new WeiboAuthToken(user));
 
       // 关注官方微博
@@ -72,7 +89,7 @@ public class WeiboLoginController {
       try {
         if (StringUtils.isNotBlank(official)) {
           Friendships friendships = new Friendships();
-          friendships.setToken(token);
+          friendships.setToken(accessToken.getAccessToken());
           friendships.createFriendshipsByName(official);
           LOGGER.info("{} followed {}.", user.getNickname(), official);
         }

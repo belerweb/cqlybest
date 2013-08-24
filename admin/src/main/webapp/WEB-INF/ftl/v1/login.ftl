@@ -39,8 +39,7 @@
 										<div class="widget-body">
 											<div class="widget-main">
 												<h4 class="header blue lighter bigger">
-													<i class="icon-coffee green"></i>
-													输入用户名和密码登录系统
+													<i class="icon-coffee green"></i> 输入用户名和密码登录系统
 												</h4>
 												<div class="space-6"></div>
 												<form action="${ContextPath}/login.do" method="post">
@@ -64,13 +63,26 @@
 																<span class="lbl"> 记住我</span -->
 															</label>
 															<button type="submit" class="span4 btn btn-small btn-primary">
-																<i class="icon-key"></i>
-																登录
+																<i class="icon-key"></i> 登录
 															</button>
 														</div>
 													</fieldset>
 												</form>
 											</div><!--/widget-main-->
+											<div class="toolbar clearfix">
+												<div>
+													<a href="${ContextPath}/connector/weibo_login">
+														<img src="${ContextPath}/assets/v1/img/connector/loginButton_24.png"
+															width="102" height="24" alt="用微博帐号登录">
+													</a>
+												</div>
+												<div>
+													<a href="${ContextPath}/connector/qq_login">
+														<img src="${ContextPath}/assets/v1/img/connector/Connect_logo_7.png"
+															width="63" height="24" alt="用帐号登录">
+													</a>
+												</div>
+											</div>
 										</div><!--/widget-body-->
 									</div><!--/login-box-->
 								</div><!--/position-relative-->

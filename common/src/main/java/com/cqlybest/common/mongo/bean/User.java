@@ -1,15 +1,11 @@
 package com.cqlybest.common.mongo.bean;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
-import java.util.HashSet;
-import java.util.Set;
-import java.util.UUID;
+import java.util.List;
 
-import com.cqlybest.common.bean.QQAuth;
-import com.cqlybest.common.bean.Role;
-import com.cqlybest.common.bean.WeiboAppAuth;
-import com.cqlybest.common.bean.WeiboAuth;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 
 
 public class User implements Serializable {
@@ -29,34 +25,10 @@ public class User implements Serializable {
   private Date createdTime;// 注册时间
   private Date lastUpdated;// 最后更新时间
 
-  private QQAuth qqAuth;// QQ 授权
-  private WeiboAuth weiboAuth;// 新浪微博授权
-  private WeiboAppAuth weiboAppAuth;// 新浪微博APP授权
+  private WeiboUser weibo;// 新浪微博用户
+  private QQUser qzone;// QQ登录用户
 
-  private Set<Role> roles = new HashSet<>();// 角色
-
-  public User() {}
-
-  public User(String mobile, String password) {
-    this.mobile = mobile;
-    this.password = password;
-    this.id = UUID.randomUUID().toString();
-  }
-
-  public User(QQAuth auth) {
-    this.qqAuth = auth;
-    this.id = UUID.randomUUID().toString();
-  }
-
-  public User(WeiboAuth auth) {
-    if (auth instanceof WeiboAppAuth) {
-      this.weiboAppAuth = (WeiboAppAuth) auth;
-      this.weiboAuth = new WeiboAuth(auth.getUid(), null, 0);
-    } else {
-      this.weiboAuth = auth;
-    }
-    this.id = UUID.randomUUID().toString();
-  }
+  private List<String> roles = new ArrayList<>();// 角色
 
   public String getId() {
     return id;
@@ -154,44 +126,46 @@ public class User implements Serializable {
     this.lastUpdated = lastUpdated;
   }
 
-  public QQAuth getQqAuth() {
-    return qqAuth;
-  }
-
-  public void setQqAuth(QQAuth qqAuth) {
-    this.qqAuth = qqAuth;
-  }
-
-  public WeiboAuth getWeiboAuth() {
-    return weiboAuth;
-  }
-
-  public void setWeiboAuth(WeiboAuth weiboAuth) {
-    this.weiboAuth = weiboAuth;
-  }
-
-  public WeiboAppAuth getWeiboAppAuth() {
-    return weiboAppAuth;
-  }
-
-  public void setWeiboAppAuth(WeiboAppAuth weiboAppAuth) {
-    this.weiboAppAuth = weiboAppAuth;
-  }
-
-  public Set<Role> getRoles() {
+  public List<SimpleGrantedAuthority> getWrapperRoles() {
+    List<SimpleGrantedAuthority> roles = new ArrayList<>();
+    for (String role : this.roles) {
+      roles.add(new SimpleGrantedAuthority(role));
+    }
     return roles;
   }
 
-  public void setRoles(Set<Role> roles) {
+  public List<String> getRoles() {
+    return roles;
+  }
+
+  public void setRoles(List<String> roles) {
     this.roles = roles;
   }
+
+  public WeiboUser getWeibo() {
+    return weibo;
+  }
+
+  public void setWeibo(WeiboUser weibo) {
+    this.weibo = weibo;
+  }
+
+  public QQUser getQzone() {
+    return qzone;
+  }
+
+  public void setQzone(QQUser qzone) {
+    this.qzone = qzone;
+  }
+
+
 
   public static class UserWrapper extends org.springframework.security.core.userdetails.User {
     private static final long serialVersionUID = -2466927911565414318L;
     private User user;
 
     public UserWrapper(String username, User user) {
-      super(username, user.getPassword(), user.getRoles());
+      super(username, user.getPassword(), user.getWrapperRoles());
       this.user = user;
     }
 

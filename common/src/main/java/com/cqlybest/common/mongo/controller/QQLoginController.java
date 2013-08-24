@@ -1,16 +1,20 @@
-package com.cqlybest.common.controller;
+package com.cqlybest.common.mongo.controller;
+
+import java.util.Date;
 
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.cqlybest.common.auth.QQAuthToken;
-import com.cqlybest.common.bean.LoginUser;
-import com.cqlybest.common.bean.QQAuth;
+import com.cqlybest.common.mongo.bean.QQAccessToken;
+import com.cqlybest.common.mongo.bean.QQAuthToken;
+import com.cqlybest.common.mongo.bean.QQUser;
+import com.cqlybest.common.mongo.bean.User;
+import com.cqlybest.common.mongo.service.UserService;
 import com.cqlybest.common.service.QQConnectInitService;
-import com.cqlybest.common.service.UserService;
 import com.qq.connect.QQConnectException;
 import com.qq.connect.api.OpenID;
 import com.qq.connect.api.qzone.UserInfo;
@@ -18,12 +22,13 @@ import com.qq.connect.javabeans.AccessToken;
 import com.qq.connect.oauth.Oauth;
 import com.qq.connect.utils.QQConnectConfig;
 
+@Controller
 public class QQLoginController {
 
   private static final Oauth OAUTH = new Oauth();
 
   @Autowired
-  private UserService userService;
+  private UserService mongoUserService;
 
   @RequestMapping("/connector/qq_login")
   public String qqLogin(HttpServletRequest request) {
@@ -46,13 +51,21 @@ public class QQLoginController {
     String redirect = "redirect:/index.html";
     try {
       AccessToken accessToken = OAUTH.getAccessTokenByRequest(request);
-      OpenID openId = new OpenID(accessToken.getAccessToken());
-      // TODO validate accessToken
-      QQAuth auth =
-          new QQAuth(openId.getUserOpenID(), accessToken.getAccessToken(), accessToken
-              .getExpireIn());
-      UserInfo userInfo = new UserInfo(accessToken.getAccessToken(), openId.getUserOpenID());
-      LoginUser user = userService.register(auth, userInfo.getUserInfo());
+      String id = new OpenID(accessToken.getAccessToken()).getUserOpenID();
+      QQUser qqUser = new QQUser();
+      qqUser.setId(id);
+      QQAccessToken token = new QQAccessToken();
+      // token.setAppId(appId);
+      token.setToken(accessToken.getAccessToken());
+      token.setExpireIn(accessToken.getExpireIn());
+      Date current = new Date();
+      token.setCreatedTime(current);
+      token.setLastUpdated(current);
+      qqUser.getTokens().add(token);
+
+      User user =
+          mongoUserService.register(qqUser, new UserInfo(accessToken.getAccessToken(), id)
+              .getUserInfo());
       SecurityContextHolder.getContext().setAuthentication(new QQAuthToken(user));
     } catch (QQConnectException e) {
       // TODO Auto-generated catch block
@@ -60,5 +73,4 @@ public class QQLoginController {
     }
     return redirect;
   }
-
 }

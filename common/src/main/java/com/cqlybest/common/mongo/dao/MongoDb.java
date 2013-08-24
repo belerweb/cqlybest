@@ -21,6 +21,10 @@ public class MongoDb extends MongoDBDaoSupport {
     return getMongoDao().createObject(collection, obj);
   }
 
+  public void updateObject(String collection, Object id, Object o) {
+    getMongoDao().updateObject(collection, id, o);
+  }
+
   public WriteResult deleteObject(String collection, Object id) {
     return createQuery(collection).eq("_id", id).modify().delete();
   }
