@@ -18,8 +18,16 @@ $(function() {
 			event.preventDefault();
 			event.stopPropagation();
 			 if ($(this).is(".dropdown-toggle")) {
-				 // TODO
+				 var submenu = $(this).next().get(0);
+				 if ($(submenu).is(':visible')) {
+					 $(submenu).slideUp(200).parent().removeClass("open")
+				 } else {
+					 $(submenu).slideToggle(200).parent().toggleClass('open');
+				 }
 			 } else {
+				 $('#sidebar .active').removeClass('active');
+				 $(this).parent().addClass('active');
+				 $(this).closest('.submenu').parent().addClass('active');
 				 cqlybest.go('#main-content', $(this).attr('href'));
 				 
 			 }
