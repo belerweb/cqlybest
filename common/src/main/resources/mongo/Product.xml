@@ -69,7 +69,7 @@
 	</object>
 
 	<object class="com.cqlybest.common.mongo.bean.ProductComment">
-		<property name="id" id="true" auto="true" />
+		<property name="id" id="true" />
 		<property name="productId" />
 		<property name="nickname" />
 		<property name="content" />

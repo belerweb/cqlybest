@@ -187,30 +187,26 @@ window.cqlybest = {
 				select2 : {
 					multiple : true,
 					ajax : {
-						url : '/dict/search.do?type=' + type,
+						url : window.ContextPath + '/datadict/ajax.do?type=' + type,
 						data : function(term, page) {
-							return {
-								q : term
-							};
+							return {q : term};
 						},
 						results : function(response) {
-							var result = [];
-							$.each(response.tags, function(i, obj) {
-								result.push({
-									id : obj.name,
-									text : obj.name
-								});
+							var result = {results:[]};
+							$.each(response.items, function(i, obj) {
+								result.results.push({id:obj.name,text:obj.name});
 							});
-							return {
-								results : result
-							};
+							return result;
 						}
 					},
 					formatNoMatches : function(term) {
 						setTimeout(function() {
+							if ($.trim(term).length==0) {
+								return;
+							}
 							$('.select2-no-results button').off('click').on('click', function() {
 								var btn = $(this);
-								$.post('/dict/add.do', {
+								$.post(window.ContextPath + '/datadict/add.do', {
 									type : type,
 									name : term
 								}, function() {
@@ -219,7 +215,7 @@ window.cqlybest = {
 								});
 							});
 						}, 1000);
-						return '<span>没有找到匹配项</span><button type="button">保存 [' + term + ']</button>';
+						return '<span class="clearfix">没有找到匹配项</span><button type="button" class="btn btn-primary btn-mini" style="width:100%;">保存 [' + term + ']</button>';
 					},
 					initSelection : function(el, callback) {
 						callback(cqlybest.v2ss(el.val() || $(el).data('value')));

@@ -9,6 +9,7 @@ import com.googlecode.mjorm.query.DaoQuery;
 import com.googlecode.mjorm.spring.MongoDBDaoSupport;
 import com.mongodb.DBCursor;
 import com.mongodb.DBObject;
+import com.mongodb.WriteResult;
 
 public class MongoDb extends MongoDBDaoSupport {
 
@@ -18,6 +19,10 @@ public class MongoDb extends MongoDBDaoSupport {
 
   public <T> T createObject(String collection, T obj) {
     return getMongoDao().createObject(collection, obj);
+  }
+
+  public WriteResult deleteObject(String collection, Object id) {
+    return createQuery(collection).eq("_id", id).modify().delete();
   }
 
   public <T> T findById(String collection, Class<T> cls, String id) {

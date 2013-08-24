@@ -7,6 +7,9 @@
 },'divider',{
 	'name':'客户关系',
 	'url':'/crm.do'
+},'divider',{
+	'name':'系统管理',
+	'url':'/system.do'
 }] />
 <div class="navbar navbar-inverse navbar-fixed-top">
 	<div class="navbar-inner">
@@ -47,6 +50,7 @@
 						</#if>
 						</#list>
 						</#if>
+						<li class="divider"></li>
 						<li><a href="${ContextPath}/logout.do"><i class="icon-off"></i> 退出</a></li>
 					</ul>
 				</li>

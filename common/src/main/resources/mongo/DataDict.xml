@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<descriptors>
+
+	<object class="com.cqlybest.common.mongo.bean.DataDict">
+		<property name="id" id="true" />
+		<property name="name" />
+		<property name="pinyin" />
+		<property name="py" />
+		<property name="type" />
+	</object>
+
+</descriptors>
