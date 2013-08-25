@@ -5,7 +5,6 @@ import java.util.Map;
 
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -16,7 +15,6 @@ import com.cqlybest.common.Constant;
 import com.cqlybest.common.service.ImageService;
 import com.cqlybest.common.service.OptionService;
 
-@Controller
 public class SiteController {
 
   @Autowired

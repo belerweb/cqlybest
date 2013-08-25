@@ -81,4 +81,8 @@ public class ImageService {
     return imageDao.queryImages(extra, extraKey);
   }
 
+  public List<Image> all() {
+    return imageDao.findAll();
+  }
+
 }

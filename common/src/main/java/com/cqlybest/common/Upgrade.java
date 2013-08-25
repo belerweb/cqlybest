@@ -1,7 +1,9 @@
 package com.cqlybest.common;
 
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -12,6 +14,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.transaction.support.TransactionSynchronizationManager;
 
 import com.cqlybest.common.bean.Dict;
+import com.cqlybest.common.bean.Image;
 import com.cqlybest.common.bean.LoginUser;
 import com.cqlybest.common.bean.QQAuth;
 import com.cqlybest.common.bean.Role;
@@ -26,7 +29,10 @@ import com.cqlybest.common.mongo.bean.WeiboUser;
 import com.cqlybest.common.mongo.dao.MongoDb;
 import com.cqlybest.common.mongo.service.SettingsService;
 import com.cqlybest.common.service.DictService;
+import com.cqlybest.common.service.ImageService;
+import com.cqlybest.common.service.OptionService;
 import com.cqlybest.common.service.UserService;
+import com.googlecode.mjorm.query.DaoModifier;
 
 @Component
 public class Upgrade implements InitializingBean {
@@ -40,6 +46,10 @@ public class Upgrade implements InitializingBean {
   @Autowired
   private DictService dictService;
   @Autowired
+  private ImageService imageService;
+  @Autowired
+  private OptionService optionService;
+  @Autowired
   private MongoDb mongoDb;
 
   @Override
@@ -49,7 +59,60 @@ public class Upgrade implements InitializingBean {
     TransactionSynchronizationManager.bindResource(sessionFactory, sessionHolder);
     upgradeUser();
     updateDataDict();
+    updateImage();
+    updateSettings();
     session.close();
+  }
+
+  private void updateSettings() {
+    Map<String, String> options = optionService.getOptions();
+    mongoDb.createObject("Settings", new HashMap<>());
+    DaoModifier modifier = mongoDb.createQuery("Settings").modify();
+    modifier.set("basic.siteName", options.get("site_name"));
+    modifier.set("basic.siteUrl", options.get("site_url"));
+    modifier.set("basic.logo", options.get("template1.logo"));
+    modifier.set("basic.mobileSiteUrl", options.get("site_mobile_url"));
+    modifier.set("basic.adminSiteUrl", options.get("site_admin_url"));
+    modifier.set("basic.hotline", options.get("site_400"));
+    modifier.set("basic.meta", options.get("site_meta"));
+    modifier.set("basic.keywords", options.get("site_meta_keyword").split(","));
+    modifier.set("basic.description", options.get("site_meta_description"));
+    modifier.set("basic.icp", options.get("site_icp"));
+    modifier.set("basic.icpLicense", options.get("site_icp_license"));
+    modifier.set("basic.copyright", options.get("site_copyright"));
+    modifier.set("basic.weibo.id", options.get("weibo_url"));
+    modifier.set("basic.weibo.nickname", options.get("weibo_nickname"));
+    modifier.set("basic.statistical", options.get("site_statistical_code"));
+    modifier.set("watermark.img.id", options.get("watermark-image-id"));
+    modifier.set("watermark.img.extension", "png");
+    modifier.set("watermark.position", options.get("watermark_position"));
+    modifier.set("mp.message.welcome", options.get("weixin_welcome_message"));
+    modifier.set("mp.message.help", options.get("weixin_help"));
+    modifier.set("mp.message.unknown", options.get("weixin_do_not_understand"));
+    modifier.update();
+  }
+
+  private void updateImage() {
+    List<Image> images = imageService.all();
+    com.cqlybest.common.mongo.bean.Image[] mongoImages =
+        new com.cqlybest.common.mongo.bean.Image[images.size()];
+    for (int i = 0; i < images.size(); i++) {
+      Image image = images.get(i);
+      com.cqlybest.common.mongo.bean.Image newImage = new com.cqlybest.common.mongo.bean.Image();
+      newImage.setId(image.getId());
+      String type = image.getImageType();
+      newImage.setExtension(type);
+      newImage.setContentType(type.equals("jpg") ? "image/jpeg" : "image/" + type);
+      newImage.setTitle(image.getTitle());
+      newImage.setDescription(image.getDescription());
+      newImage.setData(image.getImageData());
+      newImage.setExtra(image.getExtra());
+      newImage.setExtraKey(image.getExtraKey());
+      newImage.setCreatedTime(new Date(image.getCreatedTime().getTime()));
+      newImage.setLastUpdated(new Date(image.getLastUpdated().getTime()));
+      mongoImages[i] = newImage;
+    }
+    mongoDb.getMongoDao().createObjects("Image", mongoImages);
   }
 
   private void updateDataDict() {
