@@ -46,6 +46,10 @@ public class DictService {
     return result;
   }
 
+  public List<Dict> getDicts() {
+    return dictDao.findAll();
+  }
+
   public List<Dict> getDict(String type, String keyword) {
     return dictDao.findDict(type, keyword);
   }

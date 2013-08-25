@@ -11,11 +11,13 @@ import org.springframework.orm.hibernate4.SessionHolder;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.support.TransactionSynchronizationManager;
 
+import com.cqlybest.common.bean.Dict;
 import com.cqlybest.common.bean.LoginUser;
 import com.cqlybest.common.bean.QQAuth;
 import com.cqlybest.common.bean.Role;
 import com.cqlybest.common.bean.WeiboAppAuth;
 import com.cqlybest.common.bean.WeiboAuth;
+import com.cqlybest.common.mongo.bean.DataDict;
 import com.cqlybest.common.mongo.bean.QQAccessToken;
 import com.cqlybest.common.mongo.bean.QQUser;
 import com.cqlybest.common.mongo.bean.User;
@@ -23,6 +25,7 @@ import com.cqlybest.common.mongo.bean.WeiboAccessToken;
 import com.cqlybest.common.mongo.bean.WeiboUser;
 import com.cqlybest.common.mongo.dao.MongoDb;
 import com.cqlybest.common.mongo.service.SettingsService;
+import com.cqlybest.common.service.DictService;
 import com.cqlybest.common.service.UserService;
 
 @Component
@@ -35,6 +38,8 @@ public class Upgrade implements InitializingBean {
   @Autowired
   private UserService userService;
   @Autowired
+  private DictService dictService;
+  @Autowired
   private MongoDb mongoDb;
 
   @Override
@@ -43,7 +48,24 @@ public class Upgrade implements InitializingBean {
     SessionHolder sessionHolder = new SessionHolder(session);
     TransactionSynchronizationManager.bindResource(sessionFactory, sessionHolder);
     upgradeUser();
+    updateDataDict();
     session.close();
+  }
+
+  private void updateDataDict() {
+    List<Dict> dicts = dictService.getDicts();
+    DataDict[] dataDicts = new DataDict[dicts.size()];
+    for (int i = 0; i < dicts.size(); i++) {
+      Dict dict = dicts.get(i);
+      DataDict dataDict = new DataDict();
+      dataDict.setId(dict.getId().toString());
+      dataDict.setName(dict.getName());
+      dataDict.setPinyin(dict.getPinyin());
+      dataDict.setPy(dict.getPy());
+      dataDict.setType(dict.getType());
+      dataDicts[i] = dataDict;
+    }
+    mongoDb.getMongoDao().createObjects("DataDict", dataDicts);
   }
 
   private void upgradeUser() {
