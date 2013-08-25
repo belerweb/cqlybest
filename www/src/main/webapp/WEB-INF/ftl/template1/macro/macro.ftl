@@ -5,3 +5,7 @@ ${product.name!}<#if product.productType==1><#if product.days?has_content>${prod
 <#macro getOneImageUrl images>
 <#assign image = images[springx.rand(0, images?size-1)] />
 ${ContextPath}/image/${image.id}.${image.imageType}</#macro>
+
+<#macro getOneImageUrl2 images>
+<#assign image = images[springx.rand(0, images?size-1)] />
+${ContextPath}/image/${image.id}.${image.extension}</#macro>

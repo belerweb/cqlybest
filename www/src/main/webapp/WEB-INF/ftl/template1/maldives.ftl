@@ -2,7 +2,7 @@
 <#include "/template1/macro/macro.ftl">
 <div class="container margin-menu">
 	<#assign island_index_with_pictures=0>
-	<#list islands as island>
+	<#list result.items as island>
 	<#if island.hotelPictures?has_content>
 	<#if island_index_with_pictures%3==0>
 	<div class="row-fluid islands">
@@ -19,7 +19,7 @@
 						<h4 class="en">${island.enName!}</h4>
 					</a>
 					<a title="${island.zhName!}|${island.enName!}" href="${link}" class="img">
-						<img alt="" src="<@getOneImageUrl island.hotelPictures />?width=290&height=150">
+						<img alt="" src="<@getOneImageUrl2 island.hotelPictures />?width=290&height=150">
 					</a>
 					<div class="caption">
 						<#if island.tags?has_content>

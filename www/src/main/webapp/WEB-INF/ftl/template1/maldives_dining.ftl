@@ -59,8 +59,8 @@
 			<#if dining.pictures?has_content>
 			<#assign rand = springx.rand(0,dining.pictures?size-1) />
 			<#list dining.pictures as image>
-			<img alt="${image.title!}" src="${ContextPath}/image/${image.id}.${image.imageType}?width=343&height=280"
-				 data-href="${ContextPath}/image/${image.id}.${image.imageType}"
+			<img alt="${image.title!}" src="${ContextPath}/image/${image.id}.${image.extension}?width=343&height=280"
+				 data-href="${ContextPath}/image/${image.id}.${image.extension}"
 				 class="<#if image_index!=rand>hide</#if>">
 			</#list>
 			</#if>

@@ -79,6 +79,9 @@ public class Upgrade implements InitializingBean {
 
   @Override
   public void afterPropertiesSet() throws Exception {
+    if (!"true".equals(System.getProperty("upgrade"))) {
+      return;
+    }
     Session session = sessionFactory.openSession();
     SessionHolder sessionHolder = new SessionHolder(session);
     TransactionSynchronizationManager.bindResource(sessionFactory, sessionHolder);

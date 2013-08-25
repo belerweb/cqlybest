@@ -66,8 +66,8 @@
 			<#if island.hotelPictures?has_content>
 			<#assign rand = springx.rand(0,island.hotelPictures?size-1) />
 			<#list island.hotelPictures as image>
-			<img alt="${image.title!}" src="${ContextPath}/image/${image.id}.${image.imageType}?width=343&height=280"
-				 data-href="${ContextPath}/image/${image.id}.${image.imageType}"
+			<img alt="${image.title!}" src="${ContextPath}/image/${image.id}.${image.extension}?width=343&height=280"
+				 data-href="${ContextPath}/image/${image.id}.${image.extension}"
 				 class="<#if image_index!=rand>hide</#if>">
 			</#list>
 			</#if>
