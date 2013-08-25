@@ -295,4 +295,8 @@ public class ProductService {
     }
   }
 
+  public List<Product> all() {
+    return productDao.findAll();
+  }
+
 }

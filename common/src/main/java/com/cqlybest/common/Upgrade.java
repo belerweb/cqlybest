@@ -1,11 +1,15 @@
 package com.cqlybest.common;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Properties;
 
+import org.apache.commons.lang.StringUtils;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.InitializingBean;
@@ -17,6 +21,9 @@ import org.springframework.transaction.support.TransactionSynchronizationManager
 import com.cqlybest.common.bean.Dict;
 import com.cqlybest.common.bean.Image;
 import com.cqlybest.common.bean.LoginUser;
+import com.cqlybest.common.bean.Product;
+import com.cqlybest.common.bean.ProductCalendar;
+import com.cqlybest.common.bean.ProductDetailMaldives;
 import com.cqlybest.common.bean.QQAuth;
 import com.cqlybest.common.bean.Role;
 import com.cqlybest.common.bean.WeiboAppAuth;
@@ -27,6 +34,10 @@ import com.cqlybest.common.mongo.bean.ImageMeta;
 import com.cqlybest.common.mongo.bean.MaldivesDining;
 import com.cqlybest.common.mongo.bean.MaldivesIsland;
 import com.cqlybest.common.mongo.bean.MaldivesRoom;
+import com.cqlybest.common.mongo.bean.ProductBriefTrip;
+import com.cqlybest.common.mongo.bean.ProductMaldives;
+import com.cqlybest.common.mongo.bean.ProductPriceCalendar;
+import com.cqlybest.common.mongo.bean.ProductTransportation;
 import com.cqlybest.common.mongo.bean.QQAccessToken;
 import com.cqlybest.common.mongo.bean.QQUser;
 import com.cqlybest.common.mongo.bean.User;
@@ -38,8 +49,11 @@ import com.cqlybest.common.service.DictService;
 import com.cqlybest.common.service.ImageService;
 import com.cqlybest.common.service.MaldivesService;
 import com.cqlybest.common.service.OptionService;
+import com.cqlybest.common.service.ProductService;
 import com.cqlybest.common.service.UserService;
 import com.googlecode.mjorm.query.DaoModifier;
+import com.mongodb.BasicDBList;
+import com.mongodb.DBObject;
 
 @Component
 public class Upgrade implements InitializingBean {
@@ -59,6 +73,8 @@ public class Upgrade implements InitializingBean {
   @Autowired
   private MaldivesService maldivesService;
   @Autowired
+  private ProductService productService;
+  @Autowired
   private MongoDb mongoDb;
 
   @Override
@@ -71,7 +87,143 @@ public class Upgrade implements InitializingBean {
     updateImage();
     updateSettings();
     updateMaldives();
+    updateProduct();
     session.close();
+  }
+
+  private void updateProduct() {
+    List<Product> products = productService.all();
+    com.cqlybest.common.mongo.bean.Product[] newProducts =
+        new com.cqlybest.common.mongo.bean.Product[products.size()];
+    for (int i = 0; i < products.size(); i++) {
+      Product product = products.get(i);
+      com.cqlybest.common.mongo.bean.Product newProduct =
+          new com.cqlybest.common.mongo.bean.Product();
+      newProduct.setId(product.getId());
+      newProduct.setName(product.getName());
+      newProduct.setCode(product.getCode());
+      newProduct.setType(product.getProductType() == 1
+          ? com.cqlybest.common.mongo.bean.Product.TYPE_MALDIVES
+          : null);
+      newProduct.setMarketPrice(product.getMarketPrice());
+      newProduct.setPrice(product.getPrice());
+      newProduct.setPriceDescription(product.getPriceDescription());
+      newProduct.setPriceExclusive(product.getPriceExclusive());
+      newProduct.setPopular(product.getPopular());
+      newProduct.setRecommend(product.getRecommend());
+      newProduct.setSpecial(product.getSpecialOffer());
+      newProduct.setEffectiveDate(product.getEffectiveDate() == null ? null : new Date(product
+          .getEffectiveDate().getTime()));
+      newProduct.setExpiryDate(product.getExpiryDate() == null ? null : new Date(product
+          .getExpiryDate().getTime()));
+      newProduct.setDepartureDate(product.getDepartureDate() == null ? null : new Date(product
+          .getDepartureDate().getTime()));
+      newProduct.setDescription(product.getDescription());
+      newProduct.setTripCharacteristic(product.getTripCharacteristic());
+      newProduct.setServiceStandard(product.getServiceStandard());
+      newProduct.setFriendlyReminder(product.getFriendlyReminder());
+      newProduct.setRecommendedItem(product.getRecommendedItem());
+      newProduct.setPublished(product.getPublished());
+      newProduct.setCreatedTime(new Date(product.getCreatedTime().getTime()));
+      newProduct.setLastUpdated(new Date(product.getLastUpdated().getTime()));
+
+      newProduct.setKeywords(convertString(product.getKeywords()));
+      newProduct.setRecommendedMonths(convertString(product.getRecommendedMonths()));
+      newProduct.setDepartureCities(convertString(product.getDepartureCities()));
+      newProduct.setDestinations(convertString(product.getDestinations()));
+      newProduct.setCrowds(convertString(product.getCrowds()));
+      newProduct.setTraffics(convertString(product.getTraffics()));
+      newProduct.setTypes(convertString(product.getTypes()));
+      newProduct.setGrades(convertString(product.getGrades()));
+
+      product = productService.get(product.getId());
+
+      newProduct.setPhotos(convertImages(product.getPhotos()));
+      newProduct.setPosters(convertImages(product.getPosters()));
+
+      List<ProductPriceCalendar> priceCalendar = new ArrayList<>();
+      List<ProductCalendar> calendarList = productService.getCalendar(product.getId());
+      for (ProductCalendar productCalendar : calendarList) {
+        ProductPriceCalendar price = new ProductPriceCalendar();
+        price.setDate(Constant.YYYYMMDD_FORMAT.format(productCalendar.getDate()));
+        price.setPrice(productCalendar.getPrice());
+        price.setChildPrice(productCalendar.getChildPrice());
+        price.setSpecial(productCalendar.isSpecial());
+        priceCalendar.add(price);
+      }
+      newProduct.setPriceCalendar(priceCalendar);
+
+      List<ProductTransportation> transportations = new ArrayList<>();
+      newProduct.setTransportations(transportations);
+
+      if (product.getProductType() == 1) {
+        ProductDetailMaldives detail = (ProductDetailMaldives) product.getDetail();
+        List<ProductBriefTrip> briefTrip = new ArrayList<>();
+        if (detail.getRoom1() != null && detail.getRoom1Unit() != null) {
+          ProductBriefTrip b = new ProductBriefTrip();
+          b.setNum(detail.getRoom1());
+          b.setUnit(detail.getRoom1Unit());
+          briefTrip.add(b);
+        }
+        if (detail.getRoom2() != null && detail.getRoom2Unit() != null) {
+          ProductBriefTrip b = new ProductBriefTrip();
+          b.setNum(detail.getRoom2());
+          b.setUnit(detail.getRoom2Unit());
+          briefTrip.add(b);
+        }
+        if (detail.getRoom3() != null && detail.getRoom3Unit() != null) {
+          ProductBriefTrip b = new ProductBriefTrip();
+          b.setNum(detail.getRoom3());
+          b.setUnit(detail.getRoom3Unit());
+          briefTrip.add(b);
+        }
+        newProduct.setBriefTrip(briefTrip);
+
+        List<ProductMaldives> maldivesDetails = new ArrayList<>();
+        List<com.cqlybest.common.bean.ProductMaldives> maldives = product.getMaldives();
+        for (com.cqlybest.common.bean.ProductMaldives productMaldives : maldives) {
+          ProductMaldives md = new ProductMaldives();
+          md.setId(productMaldives.getId().toString());
+          md.setName(productMaldives.getName());
+          md.setDetail(productMaldives.getExtra());
+          md.setMeals(convertString(productMaldives.getMeal()));
+
+          if (productMaldives.getIslandId() != null) {
+            Properties fields = new Properties();
+            fields.put("rooms", Boolean.FALSE); // 不包含房型
+            fields.put("dinings", Boolean.FALSE); // 不包含餐饮设施
+            md.setIsland(mongoDb.map(
+                mongoDb.findById("MaldivesIsland", productMaldives.getIslandId(), fields),
+                MaldivesIsland.class));
+
+            if (productMaldives.getRoomId() != null) {
+              fields = new Properties();
+              fields.put("rooms.$", Boolean.TRUE); // 只查询房型
+              DBObject result =
+                  mongoDb.createQuery("MaldivesIsland")
+                      .eq("rooms.id", productMaldives.getRoomId().toString())
+                      .findObject(mongoDb.unmap(fields));
+              Object room = ((BasicDBList) result.get("rooms")).get(0);
+              md.setRoom(mongoDb.map((DBObject) room, MaldivesRoom.class));
+            }
+          }
+
+          maldivesDetails.add(md);
+        }
+        newProduct.setMaldivesDetails(maldivesDetails);
+      }
+
+      newProducts[i] = newProduct;
+    }
+    mongoDb.getMongoDao().createObjects("Product", newProducts);
+  }
+
+  private List<String> convertString(String string) {
+    if (StringUtils.isBlank(string)) {
+      return Collections.emptyList();
+    }
+
+    return Arrays.asList(string.split(","));
   }
 
   private void updateMaldives() {

@@ -21,11 +21,11 @@
 				<#list result.items as product>
 				<tr>
 					<td class="center"><input type="checkbox" value="${product.id}"><span class="lbl"></span></td>
-					<td>${product.name!}</td>
-					<td class="center"><#if product.popular><span class="label label-success">是</span><#else><span class="label label-warning">否</span></#if></td>
-					<td class="center"><#if product.recommend><span class="label label-success">是</span><#else><span class="label label-warning">否</span></#if></td>
-					<td class="center"><#if product.special><span class="label label-success">是</span><#else><span class="label label-warning">否</span></#if></td>
-					<td class="center"><#if product.published><span class="label label-success">是</span><#else><span class="label label-warning">否</span></#if></td>
+					<td>${product.name!} ${product.briefTrip?join('')}</td>
+					<td class="center"><#if product.popular!false><span class="label label-success">是</span><#else><span class="label label-warning">否</span></#if></td>
+					<td class="center"><#if product.recommend!false><span class="label label-success">是</span><#else><span class="label label-warning">否</span></#if></td>
+					<td class="center"><#if product.special!false><span class="label label-success">是</span><#else><span class="label label-warning">否</span></#if></td>
+					<td class="center"><#if product.published!false><span class="label label-success">是</span><#else><span class="label label-warning">否</span></#if></td>
 					<td class="td-actions center">
 						<div class="btn-group">
 							<button type="button" class="btn btn-mini btn-success" title="预览">
