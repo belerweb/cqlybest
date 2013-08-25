@@ -1,5 +1,6 @@
 package com.cqlybest.common;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -20,7 +21,12 @@ import com.cqlybest.common.bean.QQAuth;
 import com.cqlybest.common.bean.Role;
 import com.cqlybest.common.bean.WeiboAppAuth;
 import com.cqlybest.common.bean.WeiboAuth;
+import com.cqlybest.common.bean.maldives.MaldivesSeaIsland;
 import com.cqlybest.common.mongo.bean.DataDict;
+import com.cqlybest.common.mongo.bean.ImageMeta;
+import com.cqlybest.common.mongo.bean.MaldivesDining;
+import com.cqlybest.common.mongo.bean.MaldivesIsland;
+import com.cqlybest.common.mongo.bean.MaldivesRoom;
 import com.cqlybest.common.mongo.bean.QQAccessToken;
 import com.cqlybest.common.mongo.bean.QQUser;
 import com.cqlybest.common.mongo.bean.User;
@@ -30,6 +36,7 @@ import com.cqlybest.common.mongo.dao.MongoDb;
 import com.cqlybest.common.mongo.service.SettingsService;
 import com.cqlybest.common.service.DictService;
 import com.cqlybest.common.service.ImageService;
+import com.cqlybest.common.service.MaldivesService;
 import com.cqlybest.common.service.OptionService;
 import com.cqlybest.common.service.UserService;
 import com.googlecode.mjorm.query.DaoModifier;
@@ -50,6 +57,8 @@ public class Upgrade implements InitializingBean {
   @Autowired
   private OptionService optionService;
   @Autowired
+  private MaldivesService maldivesService;
+  @Autowired
   private MongoDb mongoDb;
 
   @Override
@@ -61,7 +70,98 @@ public class Upgrade implements InitializingBean {
     updateDataDict();
     updateImage();
     updateSettings();
+    updateMaldives();
     session.close();
+  }
+
+  private void updateMaldives() {
+    List<MaldivesSeaIsland> islands = maldivesService.list(null, null);
+    MaldivesIsland[] newIslands = new MaldivesIsland[islands.size()];
+    for (int i = 0; i < islands.size(); i++) {
+      MaldivesSeaIsland island = islands.get(i);
+      MaldivesIsland newIsland = new MaldivesIsland();
+      newIsland.setId(island.getId());
+      newIsland.setZhName(island.getZhName());
+      newIsland.setEnName(island.getEnName());
+      newIsland.setByName(island.getByName());
+      newIsland.setLevel(island.getLevel());
+      newIsland.setWay(island.getWay());
+      newIsland.setArea(island.getArea());
+      newIsland.setSnorkeling(island.getSnorkeling());
+      newIsland.setPrice(island.getPrice());
+      newIsland.setTags(island.getTags());
+      newIsland.setAd(island.getAd());
+      newIsland.setDescription(island.getDescription());
+      newIsland.setHotelName(island.getHotelName());
+      newIsland.setHotelLevel(island.getHotelLevel());
+      newIsland.setHotelStart(island.getHotelStart());
+      newIsland.setHotelRoomNum(island.getHotelRoomNum());
+      newIsland.setHotelSite(island.getHotelSite());
+      newIsland.setHotelTel(island.getHotelTel());
+      newIsland.setHotelFax(island.getHotelFax());
+      newIsland.setHotelChinese(island.getHotelChinese());
+      newIsland.setHotelAirport(island.getHotelAirport());
+      newIsland.setHotelDescription(island.getHotelDescription());
+      newIsland.setPlays(island.getPlays());
+      newIsland.setCreatedTime(new Date(island.getCreatedTime().getTime()));
+      newIsland.setLastUpdated(new Date(island.getLastUpdated().getTime()));
+
+      island = maldivesService.get(island.getId());
+      newIsland.setHotelPictures(convertImages(island.getHotelPictures()));
+      newIsland.setPictures(convertImages(island.getPictures()));
+
+      List<MaldivesRoom> rooms = new ArrayList<>();
+      for (com.cqlybest.common.bean.maldives.MaldivesRoom room : island.getRooms()) {
+        MaldivesRoom newRoom = new MaldivesRoom();
+        newRoom.setId(room.getId().toString());
+        newRoom.setZhName(room.getZhName());
+        newRoom.setEnName(room.getEnName());
+        newRoom.setDescription(room.getDescription());
+        newRoom.setNum(room.getNum());
+        newRoom.setRequirements(room.getRequirements());
+        newRoom.setRoomSize(room.getRoomSize());
+        newRoom.setContainPool(room.getContainPool());
+        newRoom.setRoomFacility(room.getRoomFacility());
+        newRoom.setDisplayOrder(room.getDisplayOrder());
+        newRoom.setPictures(convertImages(room.getPictures()));
+        rooms.add(newRoom);
+      }
+      newIsland.setRooms(rooms);
+
+      List<MaldivesDining> dinings = new ArrayList<>();
+      for (com.cqlybest.common.bean.maldives.MaldivesDining dining : island.getDinings()) {
+        MaldivesDining newDining = new MaldivesDining();
+        newDining.setId(dining.getId().toString());
+        newDining.setZhName(dining.getZhName());
+        newDining.setEnName(dining.getEnName());
+        newDining.setDescription(dining.getDescription());
+        newDining.setStyle(dining.getStyle());
+        newDining.setFood(dining.getFood());
+        newDining.setLocation(dining.getLocation());
+        newDining.setReservation(dining.getReservation());
+        newDining.setOpenTime(dining.getOpenTime());
+        newDining.setDisplayOrder(newDining.getDisplayOrder());
+        newDining.setPictures(convertImages(dining.getPictures()));
+        dinings.add(newDining);
+      }
+      newIsland.setDinings(dinings);
+
+      newIslands[i] = newIsland;
+    }
+    mongoDb.getMongoDao().createObjects("MaldivesIsland", newIslands);
+  }
+
+  private List<ImageMeta> convertImages(List<Image> images) {
+    List<ImageMeta> result = new ArrayList<>();
+    for (Image image : images) {
+      ImageMeta meta = new ImageMeta();
+      meta.setId(image.getId());
+      meta.setExtension(image.getImageType());
+      meta.setTitle(image.getTitle());
+      meta.setDescription(image.getDescription());
+      result.add(meta);
+    }
+    return result;
   }
 
   private void updateSettings() {

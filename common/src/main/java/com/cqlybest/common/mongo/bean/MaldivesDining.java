@@ -9,7 +9,6 @@ import java.util.List;
 public class MaldivesDining {
 
   private String id;
-  private String islandId;
   private String zhName; // 中文名称
   private String enName; // 英文名称
   private String description; // 说明
@@ -29,14 +28,6 @@ public class MaldivesDining {
 
   public void setId(String id) {
     this.id = id;
-  }
-
-  public String getIslandId() {
-    return islandId;
-  }
-
-  public void setIslandId(String islandId) {
-    this.islandId = islandId;
   }
 
   public String getZhName() {
