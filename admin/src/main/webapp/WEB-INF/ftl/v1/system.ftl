@@ -2,6 +2,9 @@
 <#assign Title='系统管理' />
 <#include "header_top.ftl">
 <#assign Menu=[{
+	'name':'系统设置',
+	'url':'/system/settings.do'
+},{
 	'name':'数据字典',
 	'sub':[{
 		'name':'标签',
