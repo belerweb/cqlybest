@@ -1,4 +1,4 @@
-package com.cqlybest.common;
+package com.cqlybest.admin;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -18,6 +18,7 @@ import org.springframework.orm.hibernate4.SessionHolder;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.support.TransactionSynchronizationManager;
 
+import com.cqlybest.common.Constant;
 import com.cqlybest.common.bean.Dict;
 import com.cqlybest.common.bean.Image;
 import com.cqlybest.common.bean.LoginUser;
