@@ -52,14 +52,14 @@
 				<a title="可信网站" target="_blank" rel="nofollow" href="＃"><img src="${ContextPath}/template1/img/trust.png"></a>
 			</div -->
 			<div class="footer text-center copyright">
-				<#if Options.site_copyright?has_content>
-				<span>${Options.site_copyright}</span>
+				<#if (Settings.basic.copyright)?has_content>
+				<span>${Settings.basic.copyright}</span>
 				</#if>
-				<#if Options.site_icp_license?has_content>
-				<span>${Options.site_icp_license}</span>
+				<#if (Settings.basic.icpLicense)?has_content>
+				<span>${Settings.basic.icpLicense}</span>
 				</#if>
-				<#if Options.site_icp?has_content>
-				<span>${Options.site_icp}</span>
+				<#if (Settings.basic.icp)?has_content>
+				<span>${Settings.basic.icp}</span>
 				</#if>
 			</div>
 			<div class="footer text-center link">
@@ -82,25 +82,25 @@
 			</div>
 			</#if>
 
-			<#if Options.site_statistical_code?has_content>
-			<div class="hide">${Options.site_statistical_code}</div>
+			<#if (Settings.basic.statistical)?has_content>
+			<div class="hide">${Settings.basic.statistical}</div>
 			</#if>
 		</div>
-		<#if Options.release?has_content>
-		<script src="${ContextPath}/template1/js/application.min.js?build=${Options.build!}"></script>
+		<#if Settings.release?has_content>
+		<script src="${ContextPath}/template1/js/application.min.js?build=${Settings.build!}"></script>
 		<#else>
-		<script src="${ContextPath}/template1/js/jquery.js?build=${Options.build!}"></script>
-		<script src="${ContextPath}/template1/js/bootstrap.js?build=${Options.build!}"></script>
-		<script src="${ContextPath}/template1/js/jquery.cookie.js?build=${Options.build!}"></script>
-		<script src="${ContextPath}/template1/js/twitter-bootstrap-hover-dropdown.js?build=${Options.build!}"></script>
-		<script src="${ContextPath}/template1/js/jqBootstrapValidation.js?build=${Options.build!}"></script>
-		<script src="${ContextPath}/template1/js/jquery.form.js?build=${Options.build!}"></script>
-		<script src="${ContextPath}/template1/js/jquery.ad-gallery.js?build=${Options.build!}"></script>
-		<script src="${ContextPath}/template1/js/load-image.js?build=${Options.build!}"></script>
-		<script src="${ContextPath}/template1/js/bootstrap-image-gallery.js?build=${Options.build!}"></script>
-		<script src="${ContextPath}/template1/js/bootstrap.calendar.js?build=${Options.build!}"></script>
-		<script src="${ContextPath}/template1/js/bootstrap-editable.js?build=${Options.build!}"></script>
-		<script src="${ContextPath}/template1/js/cqlybest.js?build=${Options.build!}"></script>
+		<script src="${ContextPath}/template1/js/jquery.js?build=${Settings.build!}"></script>
+		<script src="${ContextPath}/template1/js/bootstrap.js?build=${Settings.build!}"></script>
+		<script src="${ContextPath}/template1/js/jquery.cookie.js?build=${Settings.build!}"></script>
+		<script src="${ContextPath}/template1/js/twitter-bootstrap-hover-dropdown.js?build=${Settings.build!}"></script>
+		<script src="${ContextPath}/template1/js/jqBootstrapValidation.js?build=${Settings.build!}"></script>
+		<script src="${ContextPath}/template1/js/jquery.form.js?build=${Settings.build!}"></script>
+		<script src="${ContextPath}/template1/js/jquery.ad-gallery.js?build=${Settings.build!}"></script>
+		<script src="${ContextPath}/template1/js/load-image.js?build=${Settings.build!}"></script>
+		<script src="${ContextPath}/template1/js/bootstrap-image-gallery.js?build=${Settings.build!}"></script>
+		<script src="${ContextPath}/template1/js/bootstrap.calendar.js?build=${Settings.build!}"></script>
+		<script src="${ContextPath}/template1/js/bootstrap-editable.js?build=${Settings.build!}"></script>
+		<script src="${ContextPath}/template1/js/cqlybest.js?build=${Settings.build!}"></script>
 		</#if>
 	</body>
 

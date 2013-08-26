@@ -1,6 +1,7 @@
 package com.cqlybest.common.mongo.controller;
 
 import java.util.Date;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -25,8 +26,8 @@ import com.cqlybest.common.mongo.bean.User;
 import com.cqlybest.common.mongo.bean.WeiboAccessToken;
 import com.cqlybest.common.mongo.bean.WeiboAuthToken;
 import com.cqlybest.common.mongo.bean.WeiboUser;
+import com.cqlybest.common.mongo.service.SettingsService;
 import com.cqlybest.common.mongo.service.UserService;
-import com.cqlybest.common.service.OptionService;
 
 @Controller
 public class WeiboLoginController {
@@ -37,7 +38,7 @@ public class WeiboLoginController {
   @Autowired
   private UserService mongoUserService;
   @Autowired
-  private OptionService optionService;
+  private SettingsService settingsService;
 
   @RequestMapping("/connector/weibo_login")
   public String weiboLogin(HttpServletRequest request) {
@@ -85,7 +86,9 @@ public class WeiboLoginController {
       SecurityContextHolder.getContext().setAuthentication(new WeiboAuthToken(user));
 
       // 关注官方微博
-      String official = optionService.getOptions().get(Constant.OPTION_WEIBO_NICKNAME);
+      String official =
+          (String) ((Map<?, ?>) ((Map<?, ?>) settingsService.getSettings().get("basic"))
+              .get("weibo")).get("id");
       try {
         if (StringUtils.isNotBlank(official)) {
           Friendships friendships = new Friendships();

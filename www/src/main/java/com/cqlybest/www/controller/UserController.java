@@ -15,13 +15,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.cqlybest.common.bean.LoginUser;
 import com.cqlybest.common.bean.PhoneValidationCode;
-import com.cqlybest.common.service.DictService;
-import com.cqlybest.common.service.MaldivesService;
 import com.cqlybest.common.service.PhoneValidationService;
-import com.cqlybest.common.service.ProductService;
 import com.cqlybest.common.service.SmsService;
 import com.cqlybest.common.service.TemplateService;
-import com.cqlybest.common.service.UserService;
 
 @Controller
 public class UserController extends ControllerHelper {
@@ -29,17 +25,9 @@ public class UserController extends ControllerHelper {
   @Autowired
   private TemplateService templateService;
   @Autowired
-  private ProductService productService;
-  @Autowired
-  private MaldivesService maldivesService;
-  @Autowired
-  private DictService dictService;
-  @Autowired
   private PhoneValidationService phoneValidationService;
   @Autowired
   private SmsService smsService;
-  @Autowired
-  private UserService userService;
 
   @RequestMapping(method = RequestMethod.POST, value = "/user/phone_validation")
   @ResponseBody
@@ -66,10 +54,7 @@ public class UserController extends ControllerHelper {
     if (code == null || !validationCode.equalsIgnoreCase(code.getCode())) {
       return "验证码不正确";
     }
-    if (userService.getUserByCellPhone(cellPhone) != null) {
-      return "手机号已注册，您可以用此手机号登录。如果忘记，可以使用找回密码功能。";
-    }
-    userService.addUser(new LoginUser(cellPhone, password));
+    // TODO
     session.removeAttribute("PHONE_VALIDATION_CODE");
     return null;
   }

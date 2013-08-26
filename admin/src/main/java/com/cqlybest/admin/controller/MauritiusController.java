@@ -12,18 +12,15 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.cqlybest.common.bean.mauritius.MauritiusDining;
-import com.cqlybest.common.bean.mauritius.MauritiusRoom;
 import com.cqlybest.common.bean.mauritius.MauritiusHotel;
+import com.cqlybest.common.bean.mauritius.MauritiusRoom;
 import com.cqlybest.common.service.MauritiusService;
-import com.cqlybest.common.service.OptionService;
 
 @Controller
 public class MauritiusController {
 
   @Autowired
   private MauritiusService mauritiusService;
-  @Autowired
-  private OptionService optionService;
 
   /**
    * 添加酒店
@@ -72,7 +69,6 @@ public class MauritiusController {
     model.addAttribute("pageSize", pageSize);
     model.addAttribute("total", mauritiusService.total());
     model.addAttribute("hotels", mauritiusService.list(page, pageSize));
-    model.addAttribute("options", optionService.getOptions());
   }
 
   @RequestMapping("/mauritius/delete.do")

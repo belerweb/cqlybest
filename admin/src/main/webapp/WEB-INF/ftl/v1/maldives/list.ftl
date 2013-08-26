@@ -2,9 +2,9 @@
 <div id="page-content" class="clearfix">
 	<div class="row-fluid">
 		<h3 class="header smaller lighter blue">马尔代夫海岛/酒店
-			<button type="button" id="maldives-add" class="btn btn-mini btn-primary pull-right">增加新岛</button>
+			<button type="button" class="btn btn-mini btn-primary pull-right" data-action="add">增加新岛</button>
 		</h3>
-		<table id="main-list-table" class="table table-striped table-bordered table-hover">
+		<table class="table table-striped table-bordered table-hover">
 			<thead>
 				<tr>
 					<th class="center" style="width:40px;"><input type="checkbox"><span class="lbl"></span></th>
@@ -19,14 +19,14 @@
 					<td>${island.zhName!} ${island.enName!}</td>
 					<td class="td-actions center">
 						<div class="btn-group">
-							<button type="button" class="btn btn-mini btn-success" title="预览">
+							<button type="button" class="btn btn-mini btn-success" title="预览" data-id="${island.id}" data-action="preview">
 								<i class="icon-external-link bigger-120"></i>
 							</button>
-							<button type="button" class="btn btn-mini btn-info btn-action-edit" title="修改"
-								data-id="${island.id}">
+							<button type="button" class="btn btn-mini btn-info" title="修改"
+								data-id="${island.id}" data-action="edit">
 								<i class="icon-edit bigger-120"></i>
 							</button>
-							<button type="button" class="btn btn-mini btn-danger" title="删除">
+							<button type="button" class="btn btn-mini btn-danger" title="删除" data-action="delete">
 								<i class="icon-trash bigger-120"></i>
 							</button>
 						</div>
@@ -38,7 +38,7 @@
 	</div>
 </div>
 <script>
-$('#maldives-add').click(function(){
+$('#page-content button[data-action=add]').click(function(){
 	var action = $(this).parent();
 	var form = ['<form class="form-horizontal"><legend>添加海岛</legend>'];
 	form.push('<div class="control-group"><label class="control-label">中文名称：</label>');
@@ -68,7 +68,7 @@ $('#maldives-add').click(function(){
 		dialog.find(".btn-primary").click();
 	});
 });
-$('#main-list-table').dataTable({
+$('#page-content table').dataTable({
 	iDeferLoading: ${result.total},
 	iDisplayStart: ${result.start},
 	iDisplayLength: ${result.pageSize},
@@ -85,44 +85,17 @@ $('#main-list-table').dataTable({
 		cqlybest.go('#main-content', '${ContextPath}/maldives/list.do?' + $.param(q));
 	}
 });
-$('#main-list-table button.btn-action-edit').click(function(){
+$('#page-content button[data-action=preview]').click(function(){
+	<#if (settings.basic.siteUrl)?has_content>
+	window.open('${settings.basic.siteUrl}/maldives/' + $(this).data('id')  + '.html');
+	<#else>
+	cqlybest.error('请先配置网站地址。');
+	</#if>
+});
+$('#page-content button[data-action=edit]').click(function(){
 	cqlybest.go('#main-content', '${ContextPath}/maldives/update.do?id=' + $(this).data('id'));
 });
-$('#main-list-table thead input:checkbox').click(function(){
-	$('#main-list-table tbody input:checkbox').attr('checked', this.checked);
-});
-var getCheckedItems = function() {
-	var result = [];
-	$('#main-list-table tbody input:checkbox:checked').each(function(i, obj){
-		result.push(obj.value);
-	});
-	return result;
-};
-var validateChecked = function(items, length) {
-	var message = false;
-	if (items.length == 0) {
-		message = '请选择海岛';
-	}
-	if (length && items.length != length) {
-		message = '请选择一个海岛';
-	}
-	if (message) {
-		cqlybest.error(message);
-	}
-	return !message;
-};
-$('#maldives-marke-del').click(function(){
-	var items = getCheckedItems();
-	if (validateChecked(items)) {
-		bootbox.confirm('确认要删除选择的海岛吗？', '取消', '确认', function(result) {
-			if (result) {
-				$.post('${ContextPath}/maldives/delete.do', {
-					ids: items
-				}, function(){
-					cqlybest.reload('#main-content');
-				});
-			}
-		});
-	}
+$('#page-content button[data-action=delete]').click(function(){
+	cqlybest.error('暂时不能删除数据。');
 });
 </script>

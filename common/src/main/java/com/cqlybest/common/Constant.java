@@ -8,11 +8,9 @@ import org.slf4j.LoggerFactory;
 
 import weibo4j.util.WeiboConfig;
 
-import com.cqlybest.common.controller.WeiboLoginController;
-
 public class Constant {
 
-  private static final Logger LOGGER = LoggerFactory.getLogger(WeiboLoginController.class);
+  private static final Logger LOGGER = LoggerFactory.getLogger(Constant.class);
 
   public static final String OPTION_SITE_NAME = "site_name";// 网站名称
   public static final String OPTION_SITE_META_KEYWORD = "site_meta_keyword";// 网页 meta keyword

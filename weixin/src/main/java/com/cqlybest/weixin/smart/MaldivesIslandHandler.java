@@ -11,13 +11,10 @@ import org.springframework.stereotype.Component;
 
 import com.cqlybest.common.Constant;
 import com.cqlybest.common.bean.Image;
-import com.cqlybest.common.bean.Product;
-import com.cqlybest.common.bean.ProductDetailMaldives;
 import com.cqlybest.common.bean.maldives.MaldivesSeaIsland;
+import com.cqlybest.common.mongo.service.MaldivesService;
+import com.cqlybest.common.mongo.service.SettingsService;
 import com.cqlybest.common.service.ImageService;
-import com.cqlybest.common.service.MaldivesService;
-import com.cqlybest.common.service.OptionService;
-import com.cqlybest.common.service.ProductService;
 import com.cqlybest.weixin.bean.RequestMessage;
 import com.cqlybest.weixin.bean.ResponseMessage;
 import com.cqlybest.weixin.bean.ResponseNewsMessage;
@@ -27,13 +24,11 @@ import com.cqlybest.weixin.bean.ResponseNewsMessage.Article;
 public class MaldivesIslandHandler implements Handler {
 
   @Autowired
-  private MaldivesService maldivesService;
-  @Autowired
-  private ProductService productService;
+  private MaldivesService mongoMaldivesService;
   @Autowired
   private ImageService imageService;
   @Autowired
-  private OptionService optionService;
+  private SettingsService settingsService;
 
   private Map<RequestMessage, MaldivesSeaIsland> cached =
       new HashMap<RequestMessage, MaldivesSeaIsland>();
@@ -50,18 +45,14 @@ public class MaldivesIslandHandler implements Handler {
       return false;
     }
 
-    List<MaldivesSeaIsland> islands = maldivesService.searchIslandByKeyword(content, 1, 1);
-    if (islands.isEmpty()) {
-      return false;
-    }
-
-    cached.put(request, islands.get(0));
-    return true;
+    // TODO
+    return false;
   }
 
   @Override
   public ResponseMessage handle(RequestMessage request) {
-    String siteUrl = optionService.getOptions().get(Constant.OPTION_MOBILE_URL);
+    String siteUrl =
+        (String) ((Map<?, ?>) settingsService.getSettings().get("basic")).get("mobileSiteUrl");
     ResponseNewsMessage response = new ResponseNewsMessage();
     response.setFromUserName(request.getToUserName());
     response.setToUserName(request.getFromUserName());
@@ -83,20 +74,7 @@ public class MaldivesIslandHandler implements Handler {
       articles.add(article);
     }
 
-    for (Product product : productService.getMaldivesProductByIsland(island.getId(), 5)) {
-      images = product.getPosters();
-      if (!images.isEmpty()) {
-        Article article = new Article();
-        article.setTitle(getTitle(product));
-        article.setDescription(product.getDescription());
-        if (siteUrl != null) {
-          article.setPicUrl(siteUrl + "/image/" + images.get(0).getId() + "."
-              + images.get(0).getImageType());
-          article.setUrl(siteUrl + "/product/" + product.getId() + ".html");
-        }
-        articles.add(article);
-      }
-    }
+    // TODO 返回相关产品
 
     response.setArticles(articles);
     response.setCount(articles.size());
@@ -106,29 +84,6 @@ public class MaldivesIslandHandler implements Handler {
   @Override
   public int priority() {
     return 0;
-  }
-
-  private String getTitle(Product product) {
-    StringBuilder sb = new StringBuilder(product.getName());
-    if (product.getDays() != null) {
-      sb.append(product.getDays() + "天");
-    }
-    if (product.getNights() != null) {
-      sb.append(product.getNights() + "晚");
-    }
-    ProductDetailMaldives detail = (ProductDetailMaldives) product.getDetail();
-    if (detail != null) {
-      if (detail.getRoom1() != null && detail.getRoom1Unit() != null) {
-        sb.append(detail.getRoom1() + detail.getRoom1Unit());
-      }
-      if (detail.getRoom2() != null && detail.getRoom2Unit() != null) {
-        sb.append(detail.getRoom2() + detail.getRoom2Unit());
-      }
-      if (detail.getRoom3() != null && detail.getRoom3Unit() != null) {
-        sb.append(detail.getRoom3() + detail.getRoom3Unit());
-      }
-    }
-    return sb.toString();
   }
 
 }

@@ -3,18 +3,12 @@ package com.cqlybest.admin.mongo.controller;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.http.HttpServletRequest;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.cqlybest.common.service.OptionService;
-
 @Controller
 public class IndexController {
-
-  @Autowired
-  private OptionService optionService;
 
   @RequestMapping("/index.do")
   public String index() {

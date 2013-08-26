@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.cqlybest.common.bean.ProductGroup;
-import com.cqlybest.common.service.DictService;
 import com.cqlybest.common.service.ProductGroupService;
 
 @Controller
@@ -20,8 +19,6 @@ public class ProductGroupController {
 
   @Autowired
   private ProductGroupService productGroupService;
-  @Autowired
-  private DictService dictService;
 
   /**
    * 添加产品聚合

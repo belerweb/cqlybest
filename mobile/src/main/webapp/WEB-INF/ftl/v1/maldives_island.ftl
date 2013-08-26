@@ -4,7 +4,7 @@
 	<#import "/springx.ftl" as springx>
 	<#assign ContextPath=springMacroRequestContext.getContextPath() />
 	<meta charset="utf-8">
-	<title><#if Title?has_content>${Title}<#else>${(Options.site_name)!}</#if></title>
+	<title><#if Title?has_content>${Title}<#else>${(Settings.basic.siteName)!}</#if></title>
 
 	<!-- Sets initial viewport load and disables zooming  -->
 	<meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no">
@@ -18,8 +18,8 @@
 	<link rel="apple-touch-icon-precomposed" sizes="72x72" href="${ContextPath}/asserts/v1/touch-icons/apple-touch-icon-72x72.png">
 	<link rel="apple-touch-icon-precomposed" sizes="57x57" href="${ContextPath}/asserts/v1/touch-icons/apple-touch-icon-57x57.png">
 
-	<link rel="stylesheet" href="${ContextPath}/asserts/v1/css/metro-bootstrap.css?build=${(Options.build)!}">
-	<link rel="stylesheet" href="${ContextPath}/asserts/v1/css/cqlybest.css?build=${(Options.build)!}">
+	<link rel="stylesheet" href="${ContextPath}/asserts/v1/css/metro-bootstrap.css?build=${(Settings.build)!}">
+	<link rel="stylesheet" href="${ContextPath}/asserts/v1/css/cqlybest.css?build=${(Settings.build)!}">
 </head>
 <body class="metrouicss">
 	<header class="bar-title bg-color-blue">
@@ -39,7 +39,7 @@
 				<#if island.pictures?has_content>
 				<div class="row-fluid">
 					<#assign img=island.pictures[0]>
-					<div class="span12"><img alt="${island.zhName}" src="${ContextPath}/image/${img.id}.${img.imageType}?width=480&height=200" width="100%"></div>
+					<div class="span12"><img alt="${island.zhName}" src="${ContextPath}/image/${img.id}.${img.extension}?width=480&height=200" width="100%"></div>
 				</div>
 				</#if>
 				<div class="p-l-r-5">
@@ -169,10 +169,10 @@
 				<div class="row-fluid m-b-5">
 					<#assign imgs=room.pictures?chunk(4)[0]>
 					<#list imgs as img>
-					<div class="span${12/imgs?size}"><img alt="${room.zhName}" src="${ContextPath}/image/${img.id}.${img.imageType}?width=${480/imgs?size}&height=${(400/imgs?size)?string('0')}" width="100%"></div>
+					<div class="span${12/imgs?size}"><img alt="${room.zhName}" src="${ContextPath}/image/${img.id}.${img.extension}?width=${480/imgs?size}&height=${(400/imgs?size)?string('0')}" width="100%"></div>
 					</#list>
 				</div>
-				<div class="alert alert-success">图片已优化，适合移动设备访问，省流量，请放心浏览。欢迎使用电脑访问我们网站(${Options.site_url!})浏览精美图片信息。<br>如须出行，欢迎致电<a href="tel:${Options.site_400!}">${Options.site_400!}</a>咨询。</div>
+				<div class="alert alert-success">图片已优化，适合移动设备访问，省流量，请放心浏览。欢迎使用电脑访问我们网站(${Settings.basic.siteUrl!})浏览精美图片信息。<br>如须出行，欢迎致电<a href="tel:${Settings.basic.hotline!}">${Settings.basic.hotline!}</a>咨询。</div>
 				</#if>
 				<!-- 房间介绍 -->
 				<div>${room.description!}</div>
@@ -206,10 +206,10 @@
 				<div class="row-fluid m-b-5">
 					<#assign imgs=dining.pictures?chunk(4)[0]>
 					<#list imgs as img>
-					<div class="span${12/imgs?size}"><img alt="${dining.zhName}" src="${ContextPath}/image/${img.id}.${img.imageType}?width=${480/imgs?size}&height=${(400/imgs?size)?string('0')}" width="100%"></div>
+					<div class="span${12/imgs?size}"><img alt="${dining.zhName}" src="${ContextPath}/image/${img.id}.${img.extension}?width=${480/imgs?size}&height=${(400/imgs?size)?string('0')}" width="100%"></div>
 					</#list>
 				</div>
-				<div class="alert alert-success">图片已优化，适合移动设备访问，省流量，请放心浏览。欢迎使用电脑访问我们网站(${Options.site_url!})浏览精美图片信息。<br>如须出行，欢迎致电<a href="tel:${Options.site_400!}">${Options.site_400!}</a>咨询。</div>
+				<div class="alert alert-success">图片已优化，适合移动设备访问，省流量，请放心浏览。欢迎使用电脑访问我们网站(${Settings.basic.siteUrl!})浏览精美图片信息。<br>如须出行，欢迎致电<a href="tel:${Settings.basic.hotline!}">${Settings.basic.hotline!}</a>咨询。</div>
 				</#if>
 				<!-- 餐厅介绍 -->
 				<div>${dining.description!}</div>
@@ -331,7 +331,7 @@
 			<li><a data-toggle="tab" href="#i-play">娱乐/设施</a></li>
 		</ul>
 	</div>
-	<script src="${ContextPath}/asserts/v1/js/jquery.js?build=${(Options.build)!}"></script>
-	<script src="${ContextPath}/asserts/v1/js/bootstrap.js?build=${(Options.build)!}"></script>
+	<script src="${ContextPath}/asserts/v1/js/jquery.js?build=${(Settings.build)!}"></script>
+	<script src="${ContextPath}/asserts/v1/js/bootstrap.js?build=${(Settings.build)!}"></script>
 </body>
 </html>

@@ -13,13 +13,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.cqlybest.common.Constant;
 import com.cqlybest.common.bean.template1.Template1IndexPoster;
 import com.cqlybest.common.bean.template1.Template1Menu;
 import com.cqlybest.common.bean.template1.Template1ProductGroup;
 import com.cqlybest.common.bean.template1.Template1SubMenu;
-import com.cqlybest.common.service.DictService;
-import com.cqlybest.common.service.OptionService;
 import com.cqlybest.common.service.ProductGroupService;
 import com.cqlybest.common.service.Template1Service;
 
@@ -30,10 +27,6 @@ public class Template1Controller {
   private Template1Service template1Service;
   @Autowired
   private ProductGroupService productGroupService;
-  @Autowired
-  private DictService dictService;
-  @Autowired
-  private OptionService optionService;
 
   @RequestMapping(value = "/template1/template.do", method = RequestMethod.GET)
   public void template(Model model) {
@@ -41,7 +34,6 @@ public class Template1Controller {
     model.addAttribute("menus", template1Service.getAllMenus());
     model.addAttribute("productGroups", productGroupService.getAllProductGroup());
     model.addAttribute("template1ProductGroups", template1Service.getAllIndexProductGroups());
-    model.addAttribute("options", optionService.getOptions());
   }
 
   @RequestMapping("/template1/poster.do")
@@ -111,13 +103,6 @@ public class Template1Controller {
   public void modify(@RequestParam String id, Model model) {
     model.addAttribute("productGroups", productGroupService.getAllProductGroup());
     model.addAttribute("menu", template1Service.get(id));
-
-    model.addAttribute("traffics", dictService.getDict(Constant.DICT_TRAFFIC));
-    model.addAttribute("types", dictService.getDict(Constant.DICT_PRODUCT_TYPE));
-    model.addAttribute("grades", dictService.getDict(Constant.DICT_PRODUCT_GRADE));
-    model.addAttribute("keywords", dictService.getDict(Constant.DICT_TAG));
-    model.addAttribute("departureCities", dictService.getDict(Constant.DICT_DEPARTURE_CITY));
-    model.addAttribute("destinations", dictService.getDict(Constant.DICT_DESTINATION));
   }
 
   @RequestMapping(value = "/template1/menu/modify.do", method = RequestMethod.POST)

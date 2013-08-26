@@ -2,16 +2,16 @@ package com.cqlybest.weixin.smart;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import com.cqlybest.common.Constant;
-import com.cqlybest.common.bean.Image;
-import com.cqlybest.common.bean.maldives.MaldivesSeaIsland;
+import com.cqlybest.common.mongo.bean.ImageMeta;
+import com.cqlybest.common.mongo.bean.MaldivesIsland;
+import com.cqlybest.common.mongo.service.MaldivesService;
+import com.cqlybest.common.mongo.service.SettingsService;
 import com.cqlybest.common.service.ImageService;
-import com.cqlybest.common.service.MaldivesService;
-import com.cqlybest.common.service.OptionService;
 import com.cqlybest.weixin.bean.RequestMessage;
 import com.cqlybest.weixin.bean.ResponseMessage;
 import com.cqlybest.weixin.bean.ResponseNewsMessage;
@@ -21,11 +21,11 @@ import com.cqlybest.weixin.bean.ResponseNewsMessage.Article;
 public class MaldivesHandler implements Handler {
 
   @Autowired
-  private MaldivesService maldivesService;
+  private MaldivesService mongoMaldivesService;
   @Autowired
   private ImageService imageService;
   @Autowired
-  private OptionService optionService;
+  private SettingsService settingsService;
 
   @Override
   public boolean support(RequestMessage request) {
@@ -36,24 +36,24 @@ public class MaldivesHandler implements Handler {
 
   @Override
   public ResponseMessage handle(RequestMessage request) {
-    String siteUrl = optionService.getOptions().get(Constant.OPTION_MOBILE_URL);
+    String siteUrl =
+        (String) ((Map<?, ?>) settingsService.getSettings().get("basic")).get("siteUrl");
     ResponseNewsMessage response = new ResponseNewsMessage();
     response.setFromUserName(request.getToUserName());
     response.setToUserName(request.getFromUserName());
     response.setCreateTime(System.currentTimeMillis());
 
     List<Article> articles = new ArrayList<>();
-    List<MaldivesSeaIsland> islands = maldivesService.list(1, 5);
-    for (MaldivesSeaIsland island : islands) {
-      List<Image> images =
-          imageService.getImages(Constant.IMAGE_MALDIVES_HOTEL_PICTURE, island.getId());
+    List<MaldivesIsland> islands = mongoMaldivesService.queryIsland(0, 10).getItems();
+    for (MaldivesIsland island : islands) {
+      List<ImageMeta> images = island.getHotelPictures();
       if (!images.isEmpty()) {
         Article article = new Article();
         article.setTitle(island.getZhName() + "|" + island.getEnName());
         article.setDescription(island.getAd());
         if (siteUrl != null) {
           article.setPicUrl(siteUrl + "/image/" + images.get(0).getId() + "."
-              + images.get(0).getImageType());
+              + images.get(0).getExtension());
           article.setUrl(siteUrl + "/maldives/" + island.getId() + ".html");
         }
         articles.add(article);

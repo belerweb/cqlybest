@@ -1,6 +1,7 @@
 package com.cqlybest.weibo.controller;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -23,16 +24,14 @@ import weibo4j.model.WeiboException;
 import weibo4j.util.WeiboConfig;
 
 import com.cqlybest.common.Constant;
-import com.cqlybest.common.auth.WeiboAuthToken;
-import com.cqlybest.common.bean.Image;
-import com.cqlybest.common.bean.LoginUser;
-import com.cqlybest.common.bean.WeiboAppAuth;
-import com.cqlybest.common.bean.maldives.MaldivesSeaIsland;
-import com.cqlybest.common.service.DictService;
+import com.cqlybest.common.mongo.bean.MaldivesIsland;
+import com.cqlybest.common.mongo.bean.User;
+import com.cqlybest.common.mongo.bean.WeiboAccessToken;
+import com.cqlybest.common.mongo.bean.WeiboAuthToken;
+import com.cqlybest.common.mongo.bean.WeiboUser;
+import com.cqlybest.common.mongo.service.MaldivesService;
+import com.cqlybest.common.mongo.service.UserService;
 import com.cqlybest.common.service.ImageService;
-import com.cqlybest.common.service.MaldivesService;
-import com.cqlybest.common.service.ProductService;
-import com.cqlybest.common.service.UserService;
 
 @Controller
 public class IndexController extends ControllerHelper {
@@ -40,13 +39,9 @@ public class IndexController extends ControllerHelper {
   private static final Oauth WEIBO_OAUTH = new Oauth();
 
   @Autowired
-  private ProductService productService;
+  private MaldivesService mongoMaldivesService;
   @Autowired
-  private MaldivesService maldivesService;
-  @Autowired
-  private DictService dictService;
-  @Autowired
-  private UserService userService;
+  private UserService mongoUserService;
   @Autowired
   private ImageService imageService;
 
@@ -68,22 +63,29 @@ public class IndexController extends ControllerHelper {
   @RequestMapping("/security/auth")
   public String securityAuth(@RequestParam(required = false) String state,
       @RequestParam String code, HttpServletRequest request) {
+    HttpSession session = request.getSession();
     try {
       AccessToken accessToken = WEIBO_OAUTH.getAccessTokenByCode(code);
-      String token = accessToken.getAccessToken();
-
-      String appId = WeiboConfig.getValue(Constant.CLIENT_ID);
-      HttpSession session = request.getSession();
-      String cid = (String) session.getAttribute("cid");
-      String sub_appkey = (String) session.getAttribute("sub_appkey");
-      WeiboAppAuth auth =
-          new WeiboAppAuth(appId, cid, sub_appkey, accessToken.getUid(), token, Long
-              .parseLong(accessToken.getExpireIn()));
+      WeiboUser weiboUser = new WeiboUser();
+      weiboUser.setId(accessToken.getUid());
+      WeiboAccessToken token = new WeiboAccessToken();
+      // token.setAppKey(appKey);
+      token.setAppId((String) session.getAttribute("appId"));
+      token.setCid((String) session.getAttribute("cid"));
+      token.setSubAppkey((String) session.getAttribute("sub_appkey"));
+      token.setToken(accessToken.getAccessToken());
+      token.setExpireIn(Long.valueOf(accessToken.getExpireIn()));
+      Date current = new Date();
+      token.setCreatedTime(current);
+      token.setLastUpdated(current);
+      weiboUser.getTokens().add(token);
 
       // 读取用户详细信息
       Users api = new Users();
-      api.setToken(token);
-      LoginUser user = userService.register(auth, api.showUserById(accessToken.getUid()));
+      api.setToken(accessToken.getAccessToken());
+
+
+      User user = mongoUserService.register(weiboUser, api.showUserById(accessToken.getUid()));
 
       SecurityContextHolder.getContext().setAuthentication(new WeiboAuthToken(user));
     } catch (WeiboException e) {
@@ -112,13 +114,11 @@ public class IndexController extends ControllerHelper {
       return "redirect:/security/proxy";
     }
 
-    List<MaldivesSeaIsland> islands = maldivesService.list(1, Integer.MAX_VALUE);
-    List<MaldivesSeaIsland> result = new ArrayList<>();
-    for (MaldivesSeaIsland island : islands) {
-      List<Image> images =
-          imageService.getImages(Constant.IMAGE_MALDIVES_HOTEL_PICTURE, island.getId());
-      if (!images.isEmpty()) {
-        island.setHotelPictures(images);
+    List<MaldivesIsland> islands =
+        mongoMaldivesService.queryIsland(1, Integer.MAX_VALUE).getItems();
+    List<MaldivesIsland> result = new ArrayList<>();
+    for (MaldivesIsland island : islands) {
+      if (!island.getHotelPictures().isEmpty()) {
         result.add(island);
       }
     }

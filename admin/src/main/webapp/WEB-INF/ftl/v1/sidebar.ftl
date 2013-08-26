@@ -7,7 +7,7 @@
 			<a class="btn btn-small btn-info" href="${ContextPath}/maldives.do" title="马尔代夫">
 				<i class="icon-anchor"></i>
 			</a>
-			<a class="btn btn-small btn-danger" href="${ContextPath}/maldives.do" title="客户关系">
+			<a class="btn btn-small btn-danger" href="${ContextPath}/crm.do" title="客户关系">
 				<i class="icon-group"></i>
 			</a>
 		</div>

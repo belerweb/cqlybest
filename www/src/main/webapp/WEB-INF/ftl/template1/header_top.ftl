@@ -3,8 +3,8 @@
 	<div class="navbar-inner">
 		<div class="container">
 			<div class="pull-left" style="height:24px;">
-				<#if Options.weibo_url?has_content>
-				<wb:follow-button uid="${Options.weibo_url}" type="red_1" width="67" height="24" ></wb:follow-button>
+				<#if (Settings.basic.weibo.id)?has_content>
+				<wb:follow-button uid="${Settings.basic.weibo.id}" type="red_1" width="67" height="24" ></wb:follow-button>
 				</#if>
 			</div>
 			<div class="pull-right dropdown">

@@ -1,11 +1,12 @@
 package com.cqlybest.weixin.smart;
 
+import java.util.Map;
+
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import com.cqlybest.common.Constant;
-import com.cqlybest.common.service.OptionService;
+import com.cqlybest.common.mongo.service.SettingsService;
 import com.cqlybest.weixin.bean.RequestMessage;
 import com.cqlybest.weixin.bean.ResponseMessage;
 import com.cqlybest.weixin.bean.ResponseTextMessage;
@@ -14,7 +15,7 @@ import com.cqlybest.weixin.bean.ResponseTextMessage;
 public class AnyHandler implements Handler {
 
   @Autowired
-  private OptionService optionService;
+  private SettingsService settingsService;
 
   @Override
   public boolean support(RequestMessage request) {
@@ -23,7 +24,9 @@ public class AnyHandler implements Handler {
 
   @Override
   public ResponseMessage handle(RequestMessage request) {
-    String content = optionService.getOptions().get(Constant.OPTION_WEIXIN_DO_NOT_UNDERSTAND);
+    String content =
+        (String) ((Map<?, ?>) ((Map<?, ?>) settingsService.getSettings().get("mp")).get("message"))
+            .get("unknow");
     if (StringUtils.isBlank(content)) {
       content = "系统暂时不能理解您的请求，请等候人工应答。";
     }

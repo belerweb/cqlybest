@@ -1,6 +1,7 @@
 package com.cqlybest.weixin.controller;
 
 import java.util.Arrays;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -18,8 +19,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.cqlybest.common.Constant;
-import com.cqlybest.common.service.OptionService;
+import com.cqlybest.common.mongo.service.SettingsService;
 import com.cqlybest.common.service.WeixinUserService;
 import com.cqlybest.weixin.ConnectOpenidFakeid;
 import com.cqlybest.weixin.bean.RequestMessage;
@@ -39,7 +39,7 @@ public class IndexController extends ControllerHelper {
   private static final XmlMapper XML = new XmlMapper();
 
   @Autowired
-  private OptionService optionService;
+  private SettingsService settingsService;
   @Autowired
   private WeixinUserService weixinUserService;
   @Autowired
@@ -138,7 +138,8 @@ public class IndexController extends ControllerHelper {
     String type = message.getEvent();
     if ("subscribe".equals(type)) {// 订阅
       String welcomeMessage =
-          optionService.getOptions().get(Constant.OPTION_WEIXIN_WELCOME_MESSAGE);
+          (String) ((Map<?, ?>) ((Map<?, ?>) settingsService.getSettings().get("mp"))
+              .get("message")).get("welcome");
       if (StringUtils.isNotBlank(welcomeMessage)) {
         ResponseTextMessage response = new ResponseTextMessage();
         response.setFromUserName(message.getToUserName());

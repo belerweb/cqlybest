@@ -85,6 +85,7 @@
 			<div class="index-recommend-box box">
 				<div class="title title-success"><strong>推荐产品</strong></div>
 				<div class="content">
+					<#if recommendeds?has_content>
 					<#list recommendeds as product>
 					<div class="thumbnail">
 						<div class="caption">
@@ -95,6 +96,7 @@
 						</div>
 					</div>
 					</#list>
+					</#if>
 				</div>
 			</div>
 			<!-- 热门 -->
@@ -102,12 +104,14 @@
 				<div class="title title-important"><strong>热门线路</strong></div>
 				<div class="content">
 					<ul>
+						<#if hots?has_content>
 						<#list hots as product>
 						<li>
 							<span class="badge badge-warning">${product_index+1}</span>
 							<a href="${ContextPath}/product/${product.id}.html" target="_blank"><@composeProductName product /></a>
 						</li>
 						</#list>
+						</#if>
 					</ul>
 				</div>
 			</div>

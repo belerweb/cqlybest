@@ -1,13 +1,13 @@
 package com.cqlybest.weixin.smart;
 
+import java.util.Map;
+
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import com.cqlybest.common.Constant;
+import com.cqlybest.common.mongo.service.SettingsService;
 import com.cqlybest.common.service.ImageService;
-import com.cqlybest.common.service.MaldivesService;
-import com.cqlybest.common.service.OptionService;
 import com.cqlybest.weixin.bean.RequestMessage;
 import com.cqlybest.weixin.bean.ResponseMessage;
 import com.cqlybest.weixin.bean.ResponseTextMessage;
@@ -16,11 +16,9 @@ import com.cqlybest.weixin.bean.ResponseTextMessage;
 public class HelpHandler implements Handler {
 
   @Autowired
-  private MaldivesService maldivesService;
-  @Autowired
   private ImageService imageService;
   @Autowired
-  private OptionService optionService;
+  private SettingsService settingsService;
 
   @Override
   public boolean support(RequestMessage request) {
@@ -31,7 +29,9 @@ public class HelpHandler implements Handler {
 
   @Override
   public ResponseMessage handle(RequestMessage request) {
-    String content = optionService.getOptions().get(Constant.OPTION_WEIXIN_HELP);
+    String content =
+        (String) ((Map<?, ?>) ((Map<?, ?>) settingsService.getSettings().get("mp")).get("message"))
+            .get("help");
     if (StringUtils.isBlank(content)) {
       return null;
     }

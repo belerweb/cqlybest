@@ -3,9 +3,9 @@
 	<div class="row-fluid">
 		<h3 class="header smaller lighter blue">
 			马代产品
-			<button type="button" id="maldives-add" class="btn btn-mini btn-primary pull-right">增加产品</button>
+			<button type="button" class="btn btn-mini btn-primary pull-right" data-action="add">增加产品</button>
 		</h3>
-		<table id="main-list-table" class="table table-striped table-bordered table-hover">
+		<table class="table table-striped table-bordered table-hover">
 			<thead>
 				<tr>
 					<th class="center" style="width:40px;"><input type="checkbox"><span class="lbl"></span></th>
@@ -28,14 +28,14 @@
 					<td class="center"><#if product.published!false><span class="label label-success">是</span><#else><span class="label label-warning">否</span></#if></td>
 					<td class="td-actions center">
 						<div class="btn-group">
-							<button type="button" class="btn btn-mini btn-success" title="预览">
+							<button type="button" class="btn btn-mini btn-success" title="预览" data-id="${product.id}" data-action="preview">
 								<i class="icon-external-link bigger-120"></i>
 							</button>
-							<button type="button" class="btn btn-mini btn-info btn-action-edit" title="修改"
-								data-id="${product.id}">
+							<button type="button" class="btn btn-mini btn-info" title="修改"
+								data-id="${product.id}" data-action="edit">
 								<i class="icon-edit bigger-120"></i>
 							</button>
-							<button type="button" class="btn btn-mini btn-danger" title="删除">
+							<button type="button" class="btn btn-mini btn-danger" title="删除" data-action="delete">
 								<i class="icon-trash bigger-120"></i>
 							</button>
 						</div>
@@ -47,7 +47,7 @@
 	</div>
 </div>
 <script>
-$('#maldives-add').click(function(){
+$('#page-content button[data-action=add]').click(function(){
 	var action = $(this).parent();
 	var form = ['<form class="form-horizontal"><legend>添加马代产品</legend>'];
 	form.push('<div class="control-group"><label class="control-label">名称：</label>');
@@ -73,7 +73,7 @@ $('#maldives-add').click(function(){
 		dialog.find(".btn-primary").click();
 	});
 });
-$('#main-list-table').dataTable({
+$('#page-content table').dataTable({
 	iDeferLoading: ${result.total},
 	iDisplayStart: ${result.start},
 	iDisplayLength: ${result.pageSize},
@@ -90,7 +90,17 @@ $('#main-list-table').dataTable({
 		cqlybest.go('#main-content', '${ContextPath}/maldives/product.do?' + $.param(q));
 	}
 });
-$('#main-list-table button.btn-action-edit').click(function(){
+$('#page-content button[data-action=preview]').click(function(){
+	<#if (settings.basic.siteUrl)?has_content>
+	window.open('${settings.basic.siteUrl}/product/' + $(this).data('id')  + '.html');
+	<#else>
+	cqlybest.error('请先配置网站地址。');
+	</#if>
+});
+$('#page-content button[data-action=edit]').click(function(){
 	cqlybest.go('#main-content', '${ContextPath}/maldives/product/update.do?id=' + $(this).data('id'));
+});
+$('#page-content button[data-action=delete]').click(function(){
+	cqlybest.error('暂时不能删除数据。');
 });
 </script>

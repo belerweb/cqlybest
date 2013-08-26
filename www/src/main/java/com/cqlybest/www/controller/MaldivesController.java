@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import com.cqlybest.common.mongo.bean.MaldivesIsland;
 import com.cqlybest.common.mongo.service.MaldivesService;
 import com.cqlybest.common.service.ImageService;
-import com.cqlybest.common.service.ProductService;
 import com.cqlybest.common.service.TemplateService;
 
 @Controller
@@ -21,8 +20,6 @@ public class MaldivesController extends ControllerHelper {
   private TemplateService templateService;
   @Autowired
   private MaldivesService mongoMaldivesService;
-  @Autowired
-  private ProductService productService;
   @Autowired
   private ImageService imageService;
 

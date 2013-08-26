@@ -21,8 +21,8 @@ import com.cqlybest.common.mongo.bean.Product;
 import com.cqlybest.common.mongo.bean.Transportation;
 import com.cqlybest.common.mongo.service.MaldivesService;
 import com.cqlybest.common.mongo.service.ProductService;
+import com.cqlybest.common.mongo.service.SettingsService;
 import com.cqlybest.common.mongo.service.TransportationService;
-import com.cqlybest.common.service.OptionService;
 
 @Controller("mongoMaldivesController")
 public class MaldivesController {
@@ -34,7 +34,7 @@ public class MaldivesController {
   @Autowired
   private ProductService mongoProductService;
   @Autowired
-  private OptionService optionService;
+  private SettingsService settingsService;
 
   /**
    * 马尔代夫管理页面
@@ -89,6 +89,7 @@ public class MaldivesController {
   public String list(@RequestParam(defaultValue = "0") int page, Model model) {
     int pageSize = 10;
     model.addAttribute("result", mongoMaldivesService.queryIsland(page, pageSize));
+    model.addAttribute("settings", settingsService.getSettings());
     return "/v1/maldives/list";
   }
 
@@ -381,6 +382,7 @@ public class MaldivesController {
   @RequestMapping(value = "/maldives/product.do", method = RequestMethod.GET)
   public String product(@RequestParam(defaultValue = "0") int page, Model model) {
     int pageSize = 10;
+    model.addAttribute("settings", settingsService.getSettings());
     model.addAttribute("result", mongoProductService.queryProduct(page, pageSize));
     return "/v1/maldives/product";
   }

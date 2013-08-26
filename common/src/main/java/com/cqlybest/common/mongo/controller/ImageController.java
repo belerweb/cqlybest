@@ -32,11 +32,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.cqlybest.common.Constant;
 import com.cqlybest.common.controller.ControllerHelper;
 import com.cqlybest.common.mongo.bean.Image;
 import com.cqlybest.common.mongo.service.ImageService;
-import com.cqlybest.common.service.OptionService;
+import com.cqlybest.common.mongo.service.SettingsService;
 
 import eu.medsea.util.MimeUtil;
 
@@ -46,7 +45,7 @@ public class ImageController extends ControllerHelper {
   @Autowired
   private ImageService mongoImageService;
   @Autowired
-  private OptionService optionService;
+  private SettingsService settingsService;
 
   @RequestMapping(method = RequestMethod.GET, value = "/image/upload")
   public void upload() {}
@@ -122,14 +121,14 @@ public class ImageController extends ControllerHelper {
     headers.setContentType(MediaType.valueOf(image.getContentType()));
 
     if (width == null || height == null) {
-      Map<String, String> options = optionService.getOptions();
-      String watermarkId = options.get(Constant.IMAGE_WATERMARK_IMAGE_ID);
-      String watermarkPosition = options.get(Constant.OPTION_WATERMARK_POSITION);
-      Image watermark = mongoImageService.getImage(watermarkId);
+      Map<?, ?> watermark = (Map<?, ?>) settingsService.getSettings().get("watermark");
+      String watermarkId = (String) ((Map<?, ?>) watermark.get("img")).get("id");
+      String watermarkPosition = (String) watermark.get("position");
+      Image img = mongoImageService.getImage(watermarkId);
 
       if (watermark != null && watermarkPosition != null) {
         BufferedImage bufferedImage = ImageIO.read(new ByteArrayInputStream(image.getData()));
-        BufferedImage watermarkImage = ImageIO.read(new ByteArrayInputStream(watermark.getData()));
+        BufferedImage watermarkImage = ImageIO.read(new ByteArrayInputStream(img.getData()));
         if (bufferedImage.getWidth() > watermarkImage.getWidth()
             && bufferedImage.getHeight() > watermarkImage.getHeight()) {
           // 水印

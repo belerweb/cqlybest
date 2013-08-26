@@ -12,7 +12,6 @@ import com.cqlybest.common.bean.template1.Template1IndexPoster;
 import com.cqlybest.common.bean.template1.Template1Menu;
 import com.cqlybest.common.bean.template1.Template1ProductGroup;
 import com.cqlybest.common.dao.ImageDao;
-import com.cqlybest.common.dao.ProductDao;
 import com.cqlybest.common.dao.Template1Dao;
 
 @Service
@@ -20,8 +19,6 @@ public class Template1Service {
 
   @Autowired
   private Template1Dao template1Dao;
-  @Autowired
-  private ProductDao productDao;
   @Autowired
   private ImageDao imageDao;
 

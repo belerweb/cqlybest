@@ -3,7 +3,7 @@
 <head>
 	<#assign ContextPath=springMacroRequestContext.getContextPath() />
 	<meta charset="utf-8">
-	<title><#if Title?has_content>${Title}<#else>${(Options.site_name)!}</#if></title>
+	<title><#if Title?has_content>${Title}<#else>${(Settings.basic.siteName)!}</#if></title>
 
 	<!-- Sets initial viewport load and disables zooming  -->
 	<meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no">
@@ -17,10 +17,10 @@
 	<link rel="apple-touch-icon-precomposed" sizes="72x72" href="${ContextPath}/asserts/v1/touch-icons/apple-touch-icon-72x72.png">
 	<link rel="apple-touch-icon-precomposed" sizes="57x57" href="${ContextPath}/asserts/v1/touch-icons/apple-touch-icon-57x57.png">
 
-	<link rel="stylesheet" href="${ContextPath}/asserts/v1/css/ratchet.css?build=${(Options.build)!}">
-	<link rel="stylesheet" href="${ContextPath}/asserts/v1/css/cqlybest.css?build=${(Options.build)!}">
+	<link rel="stylesheet" href="${ContextPath}/asserts/v1/css/ratchet.css?build=${(Settings.build)!}">
+	<link rel="stylesheet" href="${ContextPath}/asserts/v1/css/cqlybest.css?build=${(Settings.build)!}">
 
-	<script src="${ContextPath}/asserts/v1/js/ratchet.js?build=${(Options.build)!}"></script>
+	<script src="${ContextPath}/asserts/v1/js/ratchet.js?build=${(Settings.build)!}"></script>
 </head>
 <body>
 	<!-- header class="bar-title">
@@ -46,7 +46,7 @@
 		<div id="index-maldives" class="index-section">
 			<ul class="list">
 				<li class="list-divider">马尔代夫 <!-- a href="${ContextPath}/maldives.html">更多</a --></li>
-				<#list maldivesIslands as island>
+				<#list result.items as island>
 				<li>
 					<a href="${ContextPath}/maldives/${island.id}.html">${island.zhName!}|${island.enName!}</a>
 				</li>
