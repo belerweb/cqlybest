@@ -1,10 +1,12 @@
 package com.cqlybest.common.controller;
 
+import java.lang.reflect.Method;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.context.SecurityContextHolder;
 
-import com.cqlybest.common.bean.LoginUser;
+import com.cqlybest.common.mongo.bean.User;
 
 public abstract class ControllerHelper {
 
@@ -20,8 +22,15 @@ public abstract class ControllerHelper {
     return error("非法请求");
   }
 
-  protected LoginUser getUser() {
-    return (LoginUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+  protected User getUser() {
+    try {
+      Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+      Method getDetail = principal.getClass().getMethod("getDetail");
+      return (User) getDetail.invoke(principal);
+    } catch (Exception e) {
+      e.printStackTrace();
+      throw new RuntimeException(e);
+    }
   }
 
 }

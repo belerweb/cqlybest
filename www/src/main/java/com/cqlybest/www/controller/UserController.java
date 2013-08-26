@@ -13,8 +13,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.cqlybest.common.bean.LoginUser;
 import com.cqlybest.common.bean.PhoneValidationCode;
+import com.cqlybest.common.mongo.bean.User;
 import com.cqlybest.common.service.PhoneValidationService;
 import com.cqlybest.common.service.SmsService;
 import com.cqlybest.common.service.TemplateService;
@@ -67,24 +67,23 @@ public class UserController extends ControllerHelper {
 
   @RequestMapping("/user/info")
   public String info(Model model) {
-    LoginUser user = getUser();
-    model.addAttribute("user", user);
+    model.addAttribute("user", getUser());
     return templateService.getTemplate() + "/user/info";
   }
 
   @RequestMapping("/user/update")
   public ResponseEntity<Object> update(@RequestParam String pk, @RequestParam String name,
       @RequestParam String value) {
-    LoginUser user = getUser();
+    User user = getUser();
     if (!user.getId().equals(pk)) {
       return illegal();
     }
-    if (name.equals("loginUsername")) {
-      if (StringUtils.isNotEmpty(user.getLoginUsername())) {
+    if (name.equals("username")) {
+      if (StringUtils.isNotEmpty(user.getUsername())) {
         return illegal();
       }
     }
-    if (name.equals("cellPhone")) {
+    if (name.equals("mobile")) {
 
     }
     if (name.equals("email")) {
