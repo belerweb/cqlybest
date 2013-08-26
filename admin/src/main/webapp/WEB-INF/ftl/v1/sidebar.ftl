@@ -1,4 +1,23 @@
 <div id="sidebar" class="fixed">
+	<div id="sidebar-shortcuts">
+		<div id="sidebar-shortcuts-large">
+			<a class="btn btn-small btn-success" href="${ContextPath}/home.do" title="首页">
+				<i class="icon-home"></i>
+			</a>
+			<a class="btn btn-small btn-info" href="${ContextPath}/maldives.do" title="马尔代夫">
+				<i class="icon-anchor"></i>
+			</a>
+			<a class="btn btn-small btn-danger" href="${ContextPath}/maldives.do" title="客户关系">
+				<i class="icon-group"></i>
+			</a>
+		</div>
+
+		<div id="sidebar-shortcuts-mini">
+			<span class="btn btn-success"></span>
+			<span class="btn btn-info"></span>
+			<span class="btn btn-danger"></span>
+		</div>
+	</div>
 	<ul class="nav nav-list">
 		<#if Menu?has_content>
 		<#list Menu as menu>

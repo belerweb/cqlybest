@@ -6,7 +6,9 @@
 		<meta charset="utf-8" />
 		<meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		<link href="${ContextPath}/assets/v1/css/bootstrap.css" rel="stylesheet" />
+		<link rel="stylesheet" href="${ContextPath}/assets/v1/css/introjs.css" />
+		<link rel="stylesheet" href="${ContextPath}/assets/v1/css/bootstrap-tour.css" />
+		<link rel="stylesheet" href="${ContextPath}/assets/v1/css/bootstrap.css" />
 		<link rel="stylesheet" href="${ContextPath}/assets/v1/css/font-awesome.css" />
 		<link rel="stylesheet" href="${ContextPath}/assets/v1/css/OpenSans.css" />
 		<link rel="stylesheet" href="${ContextPath}/assets/v1/css/select2.css" />
@@ -16,7 +18,7 @@
 		<link rel="stylesheet" href="${ContextPath}/assets/v1/css/fullcalendar.css" />
 		<link rel="stylesheet" href="${ContextPath}/assets/v1/css/ace.css" />
 		<link rel="stylesheet" href="${ContextPath}/assets/v1/css/ace-skins.css" />
-		<link href="${ContextPath}/assets/v1/css/style.css" rel="stylesheet" />
+		<link rel="stylesheet" href="${ContextPath}/assets/v1/css/style.css"/>
 		<!--[if IE 7]>
 		  <link rel="stylesheet" href="${ContextPath}/assets/v1/css/font-awesome-ie7.css" />
 		<![endif]-->
