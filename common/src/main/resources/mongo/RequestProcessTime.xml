@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<descriptors>
+
+	<object class="com.cqlybest.common.mongo.bean.RequestProcessTime">
+		<property name="start" />
+		<property name="end" />
+		<property name="time" />
+		<property name="method" />
+		<property name="request" />
+		<property name="query" />
+		<property name="post" />
+	</object>
+
+</descriptors>

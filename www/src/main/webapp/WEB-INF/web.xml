@@ -3,6 +3,14 @@
 	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd">
 
 	<filter>
+		<filter-name>Cqlybest</filter-name>
+		<filter-class>com.cqlybest.common.web.CqlybestFilter</filter-class>
+	</filter>
+	<filter-mapping>
+		<filter-name>Cqlybest</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
+	<filter>
 		<filter-name>hibernateFilter</filter-name>
 		<filter-class>org.springframework.orm.hibernate4.support.OpenSessionInViewFilter</filter-class>
 	</filter>
