@@ -12,6 +12,9 @@ public class Constant {
 
   private static final Logger LOGGER = LoggerFactory.getLogger(Constant.class);
 
+
+  public static final String CONFIG_CACHE_DIR = "cqlybest.cache.dir";
+
   public static final String OPTION_SITE_NAME = "site_name";// 网站名称
   public static final String OPTION_SITE_META_KEYWORD = "site_meta_keyword";// 网页 meta keyword
   public static final String OPTION_SITE_META_DESC = "site_meta_description";// meta description

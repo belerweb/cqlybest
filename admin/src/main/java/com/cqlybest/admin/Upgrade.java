@@ -29,6 +29,7 @@ public class Upgrade implements InitializingBean {
     Session session = sessionFactory.openSession();
     SessionHolder sessionHolder = new SessionHolder(session);
     TransactionSynchronizationManager.bindResource(sessionFactory, sessionHolder);
+    settingsService.updateSettings("cache.enabled", true);
     // TODO
     session.close();
   }

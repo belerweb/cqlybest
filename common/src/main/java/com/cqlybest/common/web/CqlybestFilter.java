@@ -21,6 +21,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.web.context.WebApplicationContext;
 import org.springframework.web.context.support.WebApplicationContextUtils;
 
+import com.cqlybest.common.Constant;
 import com.cqlybest.common.mongo.bean.RequestProcessTime;
 import com.cqlybest.common.mongo.dao.MongoDb;
 import com.cqlybest.common.mongo.service.SettingsService;
@@ -46,7 +47,7 @@ public class CqlybestFilter implements Filter {
     settingsService = applicationContext.getBean(SettingsService.class);
     mongdoDb = applicationContext.getBean(MongoDb.class);
     String cacheDirPath =
-        System.getProperty("cqlybest.cache.dir", System.getenv("cqlybest.cache.dir"));
+        System.getProperty(Constant.CONFIG_CACHE_DIR, System.getenv(Constant.CONFIG_CACHE_DIR));
     if (cacheDirPath == null) {
       throw new ServletException("请配置缓存文件夹");
     }

@@ -5,6 +5,9 @@
 	'name':'系统设置',
 	'url':'/system/settings.do'
 },{
+	'name':'文件缓存',
+	'url':'/system/cache.do'
+},{
 	'name':'数据字典',
 	'sub':[{
 		'name':'标签',
