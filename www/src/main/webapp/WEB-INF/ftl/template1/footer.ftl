@@ -87,20 +87,20 @@
 			</#if>
 		</div>
 		<#if Settings.release?has_content>
-		<script src="${ContextPath}/template1/js/application.min.js?build=${Settings.build!}"></script>
+		<script src="${ContextPath}/template1/js/application.min.js?build=${Settings.version.buildTime!}"></script>
 		<#else>
-		<script src="${ContextPath}/template1/js/jquery.js?build=${Settings.build!}"></script>
-		<script src="${ContextPath}/template1/js/bootstrap.js?build=${Settings.build!}"></script>
-		<script src="${ContextPath}/template1/js/jquery.cookie.js?build=${Settings.build!}"></script>
-		<script src="${ContextPath}/template1/js/twitter-bootstrap-hover-dropdown.js?build=${Settings.build!}"></script>
-		<script src="${ContextPath}/template1/js/jqBootstrapValidation.js?build=${Settings.build!}"></script>
-		<script src="${ContextPath}/template1/js/jquery.form.js?build=${Settings.build!}"></script>
-		<script src="${ContextPath}/template1/js/jquery.ad-gallery.js?build=${Settings.build!}"></script>
-		<script src="${ContextPath}/template1/js/load-image.js?build=${Settings.build!}"></script>
-		<script src="${ContextPath}/template1/js/bootstrap-image-gallery.js?build=${Settings.build!}"></script>
-		<script src="${ContextPath}/template1/js/bootstrap.calendar.js?build=${Settings.build!}"></script>
-		<script src="${ContextPath}/template1/js/bootstrap-editable.js?build=${Settings.build!}"></script>
-		<script src="${ContextPath}/template1/js/cqlybest.js?build=${Settings.build!}"></script>
+		<script src="${ContextPath}/template1/js/jquery.js?build=${Settings.version.buildTime!}"></script>
+		<script src="${ContextPath}/template1/js/bootstrap.js?build=${Settings.version.buildTime!}"></script>
+		<script src="${ContextPath}/template1/js/jquery.cookie.js?build=${Settings.version.buildTime!}"></script>
+		<script src="${ContextPath}/template1/js/twitter-bootstrap-hover-dropdown.js?build=${Settings.version.buildTime!}"></script>
+		<script src="${ContextPath}/template1/js/jqBootstrapValidation.js?build=${Settings.version.buildTime!}"></script>
+		<script src="${ContextPath}/template1/js/jquery.form.js?build=${Settings.version.buildTime!}"></script>
+		<script src="${ContextPath}/template1/js/jquery.ad-gallery.js?build=${Settings.version.buildTime!}"></script>
+		<script src="${ContextPath}/template1/js/load-image.js?build=${Settings.version.buildTime!}"></script>
+		<script src="${ContextPath}/template1/js/bootstrap-image-gallery.js?build=${Settings.version.buildTime!}"></script>
+		<script src="${ContextPath}/template1/js/bootstrap.calendar.js?build=${Settings.version.buildTime!}"></script>
+		<script src="${ContextPath}/template1/js/bootstrap-editable.js?build=${Settings.version.buildTime!}"></script>
+		<script src="${ContextPath}/template1/js/cqlybest.js?build=${Settings.version.buildTime!}"></script>
 		</#if>
 	</body>
 

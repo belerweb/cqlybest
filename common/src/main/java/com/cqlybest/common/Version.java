@@ -2,23 +2,24 @@ package com.cqlybest.common;
 
 public class Version {
 
-  private String version;
-  private String buildTime;
+  private String name;
+  private Long buildTime;
 
-  public String getVersion() {
-    return version;
+  public String getName() {
+    return name;
   }
 
-  public void setVersion(String version) {
-    this.version = version;
+  public void setName(String name) {
+    this.name = name;
   }
 
-  public String getBuildTime() {
+  public Long getBuildTime() {
     return buildTime;
   }
 
-  public void setBuildTime(String buildTime) {
+  public void setBuildTime(Long buildTime) {
     this.buildTime = buildTime;
   }
+
 
 }

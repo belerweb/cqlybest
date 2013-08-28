@@ -8,12 +8,15 @@ import org.springframework.orm.hibernate4.SessionHolder;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.support.TransactionSynchronizationManager;
 
+import com.cqlybest.common.Version;
 import com.cqlybest.common.mongo.dao.MongoDb;
 import com.cqlybest.common.mongo.service.SettingsService;
 
 @Component
 public class Upgrade implements InitializingBean {
 
+  @Autowired
+  Version version;
   @Autowired
   private SessionFactory sessionFactory;
   @Autowired
@@ -23,16 +26,15 @@ public class Upgrade implements InitializingBean {
 
   @Override
   public void afterPropertiesSet() throws Exception {
-    if (!"true".equals(System.getProperty("upgrade"))) {
-      return;
-    }
     Session session = sessionFactory.openSession();
     SessionHolder sessionHolder = new SessionHolder(session);
     TransactionSynchronizationManager.bindResource(sessionFactory, sessionHolder);
+
     settingsService.updateSettings("cache.enabled", true);
-    // TODO
+    settingsService.updateSettings("version.name", version.getName());
+    settingsService.updateSettings("version.buildTime", version.getBuildTime());
+
     session.close();
   }
-
 
 }

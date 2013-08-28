@@ -14,15 +14,15 @@
 		<meta name="Description" content="<#if Description?has_content>${Description}<#else>${(Settings.basic.description)!}</#if>"/>
 		${(Options.site_meta)!}
 		<#if (Options.release)?exists>
-		<link rel="stylesheet" href="${ContextPath}/template1/css/application.min.css?build=${(Settings.build)!}">
+		<link rel="stylesheet" href="${ContextPath}/template1/css/application.min.css?build=${(Settings.version.buildTime)!}">
 		<#else>
-		<link rel="stylesheet" href="${ContextPath}/template1/css/bootstrap.css?build=${(Settings.build)!}">
-		<link rel="stylesheet" href="${ContextPath}/template1/css/jquery.ad-gallery.css?build=${(Settings.build)!}">
-		<link rel="stylesheet" href="${ContextPath}/template1/css/bootstrap-image-gallery.css?build=${(Settings.build)!}">
-		<link rel="stylesheet" href="${ContextPath}/template1/css/bootstrap.calendar.css?build=${(Settings.build)!}">
-		<link rel="stylesheet" href="${ContextPath}/template1/css/bootstrap-editable.css?build=${(Settings.build)!}">
-		<link rel="stylesheet" href="${ContextPath}/template1/css/wysiwyg-color.css?build=${(Settings.build)!}">
-		<link rel="stylesheet" href="${ContextPath}/template1/css/cqlybest.css?build=${(Settings.build)!}">
+		<link rel="stylesheet" href="${ContextPath}/template1/css/bootstrap.css?build=${(Settings.version.buildTime)!}">
+		<link rel="stylesheet" href="${ContextPath}/template1/css/jquery.ad-gallery.css?build=${(Settings.version.buildTime)!}">
+		<link rel="stylesheet" href="${ContextPath}/template1/css/bootstrap-image-gallery.css?build=${(Settings.version.buildTime)!}">
+		<link rel="stylesheet" href="${ContextPath}/template1/css/bootstrap.calendar.css?build=${(Settings.version.buildTime)!}">
+		<link rel="stylesheet" href="${ContextPath}/template1/css/bootstrap-editable.css?build=${(Settings.version.buildTime)!}">
+		<link rel="stylesheet" href="${ContextPath}/template1/css/wysiwyg-color.css?build=${(Settings.version.buildTime)!}">
+		<link rel="stylesheet" href="${ContextPath}/template1/css/cqlybest.css?build=${(Settings.version.buildTime)!}">
 		</#if>
 		<!--[if lt IE 7]><link rel="stylesheet" href="${ContextPath}/template1/css/bootstrap-ie6.css?build=${(Options.build)!}"><![endif]-->
 		<link rel="shortcut icon" href="${ContextPath}/template1/favicon.ico?build=${(Options.build)!}">
