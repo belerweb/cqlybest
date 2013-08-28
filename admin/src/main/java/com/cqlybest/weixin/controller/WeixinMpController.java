@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.cqlybest.common.controller.ControllerHelper;
 import com.cqlybest.common.mongo.service.SettingsService;
 import com.cqlybest.common.service.WeixinUserService;
 import com.cqlybest.weixin.ConnectOpenidFakeid;
@@ -31,9 +32,9 @@ import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.dataformat.xml.XmlMapper;
 
 @Controller
-public class IndexController extends ControllerHelper {
+public class WeixinMpController extends ControllerHelper {
 
-  private static final Logger LOGGER = LoggerFactory.getLogger(IndexController.class);
+  private static final Logger LOGGER = LoggerFactory.getLogger(WeixinMpController.class);
 
   private static final String TOKEN_CONFIG = "weixin.token";
   private static final XmlMapper XML = new XmlMapper();
@@ -45,7 +46,7 @@ public class IndexController extends ControllerHelper {
   @Autowired
   private SmartResponseService smartResponseService;
 
-  @RequestMapping(method = RequestMethod.GET, value = "/")
+  @RequestMapping(method = RequestMethod.GET, value = "/weixin/mp.do")
   public Object root(@RequestParam String signature, @RequestParam String timestamp,
       @RequestParam String nonce, @RequestParam String echostr, HttpServletRequest request) {
     if (auth(signature, timestamp, nonce)) {
@@ -55,7 +56,7 @@ public class IndexController extends ControllerHelper {
     return ok();
   }
 
-  @RequestMapping(method = RequestMethod.POST, value = "/")
+  @RequestMapping(method = RequestMethod.POST, value = "/weixin/mp.do")
   public Object root(@RequestParam String signature, @RequestParam String timestamp,
       @RequestParam String nonce, @RequestBody String data, HttpServletRequest request, Model model) {
     if (!auth(signature, timestamp, nonce)) {
@@ -113,10 +114,10 @@ public class IndexController extends ControllerHelper {
     if (response != null) {
       model.addAttribute("data", response);
       if (response instanceof ResponseTextMessage) {
-        return "/text";
+        return "/weixin/mp/text";
       }
       if (response instanceof ResponseNewsMessage) {
-        return "/news";
+        return "/weixin/mp/news";
       }
     }
     return ok();

@@ -45,7 +45,6 @@
 		<module>admin</module>
 		<module>www</module>
 		<module>weibo</module>
-		<module>weixin</module>
 		<module>mobile</module>
 	</modules>
 

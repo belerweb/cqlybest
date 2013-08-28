@@ -21,6 +21,7 @@ import com.cqlybest.common.mongo.bean.QueryResult;
 import com.cqlybest.common.mongo.dao.MongoDb;
 import com.googlecode.mjorm.query.DaoQuery;
 import com.googlecode.mjorm.query.Query;
+import com.googlecode.mjorm.query.criteria.DocumentCriterion;
 import com.mongodb.WriteResult;
 
 @Service("mongoMaldivesService")
@@ -69,6 +70,31 @@ public class MaldivesService {
         .start().regex("byName", pattern));
     query.setMaxDocuments(pageSize);
     return mongoDb.map(query.findObjects(mongoDb.unmap(fields)), Properties.class);
+  }
+
+  public MaldivesIsland queryIsland(List<DocumentCriterion> conditions) {
+    DaoQuery query = mongoDb.createQuery("MaldivesIsland");
+    for (DocumentCriterion cnd : conditions) {
+      query.add(cnd);
+    }
+    return query.findObject(MaldivesIsland.class);
+  }
+
+  public QueryResult<MaldivesIsland> queryIsland(List<DocumentCriterion> conditions, int page,
+      int pageSize) {
+    QueryResult<MaldivesIsland> result = new QueryResult<>(page, pageSize);
+
+    DaoQuery query = mongoDb.createQuery("MaldivesIsland");
+    for (DocumentCriterion cnd : conditions) {
+      query.add(cnd);
+    }
+    result.setTotal(query.countObjects());
+
+    query.setFirstDocument(result.getStart());
+    query.setMaxDocuments(result.getPageSize());
+    result.setItems(query.findObjects(MaldivesIsland.class).readAll());
+
+    return result;
   }
 
   public MaldivesIsland getIsland(String id) {

@@ -25,6 +25,7 @@ import com.cqlybest.common.mongo.bean.ProductTransportation;
 import com.cqlybest.common.mongo.bean.QueryResult;
 import com.cqlybest.common.mongo.dao.MongoDb;
 import com.googlecode.mjorm.query.DaoQuery;
+import com.googlecode.mjorm.query.criteria.DocumentCriterion;
 import com.mongodb.BasicDBList;
 import com.mongodb.DBObject;
 import com.mongodb.WriteResult;
@@ -75,6 +76,31 @@ public class ProductService {
   public QueryResult<Product> queryProduct(int page, int pageSize) {
     QueryResult<Product> result = new QueryResult<>(page, pageSize);
     DaoQuery query = mongoDb.createQuery("Product");
+    result.setTotal(query.countObjects());
+
+    query.setFirstDocument(result.getStart());
+    query.setMaxDocuments(result.getPageSize());
+    result.setItems(query.findObjects(Product.class).readAll());
+
+    return result;
+  }
+
+  public Product queryProduct(List<DocumentCriterion> conditions) {
+    DaoQuery query = mongoDb.createQuery("Product");
+    for (DocumentCriterion cnd : conditions) {
+      query.add(cnd);
+    }
+    return query.findObject(Product.class);
+  }
+
+  public QueryResult<Product> queryProduct(List<DocumentCriterion> conditions, int page,
+      int pageSize) {
+    QueryResult<Product> result = new QueryResult<>(page, pageSize);
+
+    DaoQuery query = mongoDb.createQuery("Product");
+    for (DocumentCriterion cnd : conditions) {
+      query.add(cnd);
+    }
     result.setTotal(query.countObjects());
 
     query.setFirstDocument(result.getStart());
