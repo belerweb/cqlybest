@@ -10,11 +10,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 public class IndexController {
 
-  @RequestMapping("/index.do")
-  public String index() {
-    return "/v1/login";
-  }
-
   @RequestMapping("/home.do")
   public String home(Model model) {
     return "/v1/home";

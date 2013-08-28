@@ -28,6 +28,7 @@ http://www.springframework.org/schema/beans http://www.springframework.org/schem
 		<intercept-url pattern="/connector/**" access="permitAll" />
 		<intercept-url pattern="/error" access="permitAll" />
 		<intercept-url pattern="/weixin/mp.do" access="permitAll" />
+		<intercept-url pattern="/weibo/**" access="permitAll" />
 		<intercept-url pattern="/image/*.jpg" access="permitAll" />
 		<intercept-url pattern="/image/*.gif" access="permitAll" />
 		<intercept-url pattern="/image/*.png" access="permitAll" />

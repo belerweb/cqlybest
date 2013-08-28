@@ -1,19 +1,30 @@
 package com.cqlybest.site.controller;
 
-import javax.servlet.http.HttpServletRequest;
+import java.util.ArrayList;
+import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
+import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.AnonymousAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
+import com.cqlybest.common.controller.ControllerHelper;
+import com.cqlybest.common.mongo.bean.MaldivesIsland;
 import com.cqlybest.common.mongo.service.MaldivesService;
 import com.cqlybest.common.mongo.service.SettingsService;
 import com.cqlybest.common.service.FriendlyLinkService;
 import com.cqlybest.common.service.Template1Service;
 
 @Controller("siteIndexController")
-public class IndexController {
+public class IndexController extends ControllerHelper {
 
   @Autowired
   protected Template1Service template1Service;
@@ -24,11 +35,12 @@ public class IndexController {
   @Autowired
   private MaldivesService mongoMaldivesService;
 
-  @RequestMapping( {"/", "/index.html"})
-  public Object index(HttpServletRequest request, Model model) {
+  @RequestMapping({"/", "/index.html"})
+  public Object index(@RequestParam(required = false) String cid,
+      @RequestParam(required = false) String sub_appkey, HttpServletRequest request, Model model) {
     String host = request.getServerName();
     if (host.startsWith("admin.")) {
-
+      return "/v1/login";
     }
     if (host.startsWith("m.")) {
       model.addAttribute("posters", template1Service.getPublishedPosters());// 海报
@@ -40,10 +52,29 @@ public class IndexController {
     }
 
     if (host.startsWith("weibo.")) {
+      Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+      if (authentication == null || authentication instanceof AnonymousAuthenticationToken) {
+        if (StringUtils.isBlank(cid) || StringUtils.isBlank(sub_appkey)) {
+          return illegal();
+        }
 
-    }
-    if (host.startsWith("weixin.")) {
+        HttpSession session = request.getSession();
+        session.setAttribute("cid", StringUtils.isEmpty(cid) ? null : cid);
+        session.setAttribute("sub_appkey", StringUtils.isEmpty(sub_appkey) ? null : sub_appkey);
+        return "redirect:/weibo/security/proxy";
+      }
 
+      List<MaldivesIsland> islands =
+          mongoMaldivesService.queryIsland(0, Integer.MAX_VALUE).getItems();
+      List<MaldivesIsland> result = new ArrayList<>();
+      for (MaldivesIsland island : islands) {
+        if (!island.getHotelPictures().isEmpty()) {
+          result.add(island);
+        }
+      }
+      model.addAttribute("islands", result);
+      model.addAttribute("Settings", settingsService.getSettings());
+      return "/v4/index";
     }
 
     model.addAttribute("posters", template1Service.getPublishedPosters());// 海报
@@ -52,5 +83,4 @@ public class IndexController {
     model.addAttribute("Links", friendlyLinkService.list(1, Integer.MAX_VALUE));
     return "/v2/index";
   }
-
 }
