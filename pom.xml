@@ -45,7 +45,6 @@
 		<module>admin</module>
 		<module>www</module>
 		<module>weibo</module>
-		<module>mobile</module>
 	</modules>
 
 	<dependencies>

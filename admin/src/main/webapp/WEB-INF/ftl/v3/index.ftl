@@ -13,14 +13,14 @@
 	<meta name="apple-mobile-web-app-status-bar-style" content="black">
 
 	<!-- Set Apple icons for when prototype is saved to home screen -->
-	<link rel="apple-touch-icon-precomposed" sizes="114x114" href="${ContextPath}/asserts/v1/touch-icons/apple-touch-icon-114x114.png">
-	<link rel="apple-touch-icon-precomposed" sizes="72x72" href="${ContextPath}/asserts/v1/touch-icons/apple-touch-icon-72x72.png">
-	<link rel="apple-touch-icon-precomposed" sizes="57x57" href="${ContextPath}/asserts/v1/touch-icons/apple-touch-icon-57x57.png">
+	<link rel="apple-touch-icon-precomposed" sizes="114x114" href="${ContextPath}/assets/v3/touch-icons/apple-touch-icon-114x114.png">
+	<link rel="apple-touch-icon-precomposed" sizes="72x72" href="${ContextPath}/assets/v3/touch-icons/apple-touch-icon-72x72.png">
+	<link rel="apple-touch-icon-precomposed" sizes="57x57" href="${ContextPath}/assets/v3/touch-icons/apple-touch-icon-57x57.png">
 
-	<link rel="stylesheet" href="${ContextPath}/asserts/v1/css/ratchet.css?build=${(Settings.version.buildTime)!}">
-	<link rel="stylesheet" href="${ContextPath}/asserts/v1/css/cqlybest.css?build=${(Settings.version.buildTime)!}">
+	<link rel="stylesheet" href="${ContextPath}/assets/v3/css/ratchet.css?build=${(Settings.version.buildTime)!}">
+	<link rel="stylesheet" href="${ContextPath}/assets/v3/css/cqlybest.css?build=${(Settings.version.buildTime)!}">
 
-	<script src="${ContextPath}/asserts/v1/js/ratchet.js?build=${(Settings.version.buildTime)!}"></script>
+	<script src="${ContextPath}/assets/v3/js/ratchet.js?build=${(Settings.version.buildTime)!}"></script>
 </head>
 <body>
 	<!-- header class="bar-title">

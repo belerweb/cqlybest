@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.cqlybest.common.mongo.service.MaldivesService;
 import com.cqlybest.common.mongo.service.SettingsService;
 import com.cqlybest.common.service.FriendlyLinkService;
 import com.cqlybest.common.service.Template1Service;
@@ -20,6 +21,8 @@ public class IndexController {
   protected SettingsService settingsService;
   @Autowired
   protected FriendlyLinkService friendlyLinkService;
+  @Autowired
+  private MaldivesService mongoMaldivesService;
 
   @RequestMapping( {"/", "/index.html"})
   public Object index(HttpServletRequest request, Model model) {
@@ -28,8 +31,14 @@ public class IndexController {
 
     }
     if (host.startsWith("m.")) {
-
+      model.addAttribute("posters", template1Service.getPublishedPosters());// 海报
+      model.addAttribute("result", mongoMaldivesService.queryIsland(0, Integer.MAX_VALUE));
+      model.addAttribute("Settings", settingsService.getSettings());
+      model.addAttribute("Menu", template1Service.getPublishedMenus());
+      model.addAttribute("Links", friendlyLinkService.list(1, Integer.MAX_VALUE));
+      return "/v3/index";
     }
+
     if (host.startsWith("weibo.")) {
 
     }

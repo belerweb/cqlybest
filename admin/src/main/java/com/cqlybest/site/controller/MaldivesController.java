@@ -1,5 +1,7 @@
 package com.cqlybest.site.controller;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -31,7 +33,7 @@ public class MaldivesController extends ControllerHelper {
   protected FriendlyLinkService friendlyLinkService;
 
   @RequestMapping("/maldives.html")
-  public Object maldives(Model model) {
+  public Object maldives(HttpServletRequest request, Model model) {
     model.addAttribute("result", mongoMaldivesService.queryIsland(0, Integer.MAX_VALUE));
     model.addAttribute("Settings", settingsService.getSettings());
     model.addAttribute("Menu", template1Service.getPublishedMenus());
@@ -40,12 +42,24 @@ public class MaldivesController extends ControllerHelper {
   }
 
   @RequestMapping("/maldives/{id}.html")
-  public Object maldives(@PathVariable String id, Model model) {
+  public Object maldives(@PathVariable String id, HttpServletRequest request, Model model) {
+    String host = request.getServerName();
+    if (host.startsWith("m.")) {
+      MaldivesIsland island = mongoMaldivesService.getIsland(id);
+      if (island == null) {
+        return new ResponseEntity<Object>(HttpStatus.NOT_FOUND);
+      }
+      model.addAttribute("island", island);
+      model.addAttribute("Settings", settingsService.getSettings());
+      model.addAttribute("Menu", template1Service.getPublishedMenus());
+      model.addAttribute("Links", friendlyLinkService.list(1, Integer.MAX_VALUE));
+      return "/v3/maldives_island";
+    }
+
     MaldivesIsland island = mongoMaldivesService.getIsland(id);
     if (island == null) {
       return new ResponseEntity<Object>(HttpStatus.NOT_FOUND);
     }
-
     model.addAttribute("island", island);
     model.addAttribute("Settings", settingsService.getSettings());
     model.addAttribute("Menu", template1Service.getPublishedMenus());
