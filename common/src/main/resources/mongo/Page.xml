@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<descriptors>
+
+	<object class="com.cqlybest.common.mongo.bean.Page">
+		<property name="id" id="true" />
+		<property name="contents" />
+		<property name="sidebars" />
+	</object>
+
+	<object class="com.cqlybest.common.mongo.bean.page.Section">
+		<property name="id" />
+		<property name="name" />
+		<property name="type" />
+		<property name="margin" />
+		<property name="padding" />
+		<property name="code" />
+		<property name="img" />
+		<property name="conditions" />
+		<property name="number" />
+		<property name="more" />
+	</object>
+
+	<object class="com.cqlybest.common.mongo.bean.page.Margin">
+		<property name="top" />
+		<property name="right" />
+		<property name="bottom" />
+		<property name="left" />
+	</object>
+
+	<object class="com.cqlybest.common.mongo.bean.page.Padding">
+		<property name="top" />
+		<property name="right" />
+		<property name="bottom" />
+		<property name="left" />
+	</object>
+
+	<object class="com.cqlybest.common.mongo.bean.page.Image">
+		<property name="id" />
+		<property name="extension" />
+		<property name="title" />
+		<property name="description" />
+		<property name="url" />
+		<property name="target" />
+	</object>
+
+	<object class="com.cqlybest.common.mongo.bean.page.Condition">
+		<property name="id" />
+		<property name="property" />
+		<property name="type" />
+		<property name="value" />
+	</object>
+
+</descriptors>

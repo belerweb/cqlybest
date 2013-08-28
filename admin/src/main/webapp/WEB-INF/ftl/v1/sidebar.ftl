@@ -7,8 +7,11 @@
 			<a class="btn btn-small btn-info" href="${ContextPath}/maldives.do" title="马尔代夫">
 				<i class="icon-anchor"></i>
 			</a>
-			<a class="btn btn-small btn-danger" href="${ContextPath}/crm.do" title="客户关系">
+			<a class="btn btn-small btn-danger" href="${ContextPath}/crm.do" title="客户关系管理">
 				<i class="icon-group"></i>
+			</a>
+			<a class="btn btn-small btn-warning" href="${ContextPath}/www.do" title="PC 版网站管理">
+				<i class="icon-globe"></i>
 			</a>
 		</div>
 
@@ -16,6 +19,7 @@
 			<span class="btn btn-success"></span>
 			<span class="btn btn-info"></span>
 			<span class="btn btn-danger"></span>
+			<span class="btn btn-warning"></span>
 		</div>
 	</div>
 	<ul class="nav nav-list">
