@@ -91,7 +91,7 @@ public class SystemManagement {
       @RequestParam(required = false) String value,
       @RequestParam(value = "value[]", required = false) List<String> values) throws IOException {
     Object _value = value == null ? values : value;
-    if ("watermark.img".equals(name)) {
+    if ("watermark.img".equals(name) || "basic.logo".equals(name)) {
       Map<String, String> img = new HashMap<>();
       img.put("id", values.get(0));
       img.put("extension", values.get(1));
@@ -102,6 +102,7 @@ public class SystemManagement {
       FileUtils.cleanDirectory(new File(System.getProperty(Constant.CONFIG_CACHE_DIR,
           System.getenv(Constant.CONFIG_CACHE_DIR))));
     }
+
     settingsService.updateSettings(name, _value);
   }
 

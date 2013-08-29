@@ -29,6 +29,16 @@
 							</div>
 						</div>
 						<div class="control-group">
+							<label class="control-label"><a href="#" data-name="basic.logo" data-action="logo">LOGO：</a></label>
+							<div class="controls">
+								<#if (settings.basic.logo)?has_content>
+								<img src="${ContextPath}/image/${settings.basic.logo.id}.${settings.basic.logo.extension}">
+								<#else>
+								<a class="editable editable-empty">未设置</a>
+								</#if>
+							</div>
+						</div>
+						<div class="control-group">
 							<label class="control-label">网站地址：</label>
 							<div class="controls">
 								<a href="#" class="editable" data-name="basic.siteUrl" data-type="text"
@@ -124,7 +134,7 @@
 							</div>
 						</div>
 						<div class="control-group">
-							<label class="control-label"><a href="#" class="watermark">水印图片：</a></label>
+							<label class="control-label"><a href="#" data-name="watermark.img" data-action="watermark">水印图片：</a></label>
 							<div class="controls">
 								<#if (settings.watermark.img)?has_content>
 								<img src="${ContextPath}/image/${settings.watermark.img.id}.${settings.watermark.img.extension}">
@@ -173,20 +183,21 @@
 $('#page-content a.editable[data-type=text]').editable();
 $('#page-content a.editable[data-type=textarea]').editable();
 cqlybest.editableTag('#page-content a.editable[data-name="basic.keywords"]');
-$('#page-content .watermark').click(function(e) {
+$('a[data-action=logo],a[data-action=watermark]', '#page-content').click(function(e) {
 	e.stopPropagation();
 	e.preventDefault();
 	var images = cqlybest.uploadImage();
 	if (images) {
 		var el = $(this).parent().next();
 		$.post('${ContextPath}/system/settings/update.do', {
-			name: 'watermark.img',
+			name: $(this).data('name'),
 			value: [images[0].id, images[0].extension]
-		}, function() {
-			el.empty().append('<img src="${ContextPath}/image/' + images[0].id + '.' + images[0].extension + '">');
+		}).done(function(){
+			cqlybest.reload('#main-content');
 		});
 	}
 });
+
 $('#page-content a.editable[data-name="watermark.position"]').editable({
 	source: [
 		{value:'TOP_LEFT', text:'左上角'},

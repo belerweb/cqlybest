@@ -33,10 +33,10 @@
 			<ul>
 				<#list posters as poster>
 				<li>
-					<img alt="${poster.title!}" src="${poster.imageUrl!}?width=700&height=300" width="100%">
+					<img alt="${poster.title!}" src="${ContextPath}/image/${poster.image.id!}.${poster.image.extension}?width=700&height=300" width="100%">
 				</li>
 				<li>
-					<img alt="${poster.title!}" src="${poster.imageUrl!}?width=700&height=300" width="100%">
+					<img alt="${poster.title!}" src="${ContextPath}/image/${poster.image.id!}.${poster.image.extension}?width=700&height=300" width="100%">
 				</li>
 				</#list>
 			</ul>

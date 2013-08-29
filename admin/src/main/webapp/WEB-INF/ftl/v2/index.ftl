@@ -3,19 +3,19 @@
 <div class="container margin-menu">
 	<div class="row">
 		<div class="span9">
-			<#if posters?has_content>
+			<#if Page.posters?has_content>
 			<div class="row-fluid">
 				<div class="span12">
 					<div id="index-top-carousel" class="carousel slide" data-interval="3000">
 						<ol class="carousel-indicators">
-							<#list 0..posters?size-1 as i>
+							<#list 0..Page.posters?size-1 as i>
 							<li data-target="#index-top-carousel" data-slide-to="i" class="<#if i=0>active</#if>"></li>
 							</#list>
 						</ol>
 						<div class="carousel-inner">
-							<#list posters as poster>
+							<#list Page.posters as poster>
 							<div class="<#if poster_index=0>active</#if> item">
-								<img alt="${poster.title!}" src="${poster.imageUrl!}?width=700&height=300">
+								<img alt="${poster.title!}" src="${ContextPath}/image/${poster.image.id!}.${poster.image.extension}?width=700&height=300">
 								<div class="carousel-caption">
 									<h4>${poster.title!}</h4>
 									<p>${poster.description!}</p>

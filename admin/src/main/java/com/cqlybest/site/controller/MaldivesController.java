@@ -16,7 +16,6 @@ import com.cqlybest.common.mongo.service.FriendlyLinkService;
 import com.cqlybest.common.mongo.service.MaldivesService;
 import com.cqlybest.common.mongo.service.SettingsService;
 import com.cqlybest.common.service.ImageService;
-import com.cqlybest.common.service.Template1Service;
 
 @Controller("siteMaldivesController")
 public class MaldivesController extends ControllerHelper {
@@ -26,8 +25,6 @@ public class MaldivesController extends ControllerHelper {
   @Autowired
   private ImageService imageService;
   @Autowired
-  protected Template1Service template1Service;
-  @Autowired
   protected SettingsService settingsService;
   @Autowired
   protected FriendlyLinkService friendlyLinkService;
@@ -36,7 +33,6 @@ public class MaldivesController extends ControllerHelper {
   public Object maldives(HttpServletRequest request, Model model) {
     model.addAttribute("result", mongoMaldivesService.queryIsland(0, Integer.MAX_VALUE));
     model.addAttribute("Settings", settingsService.getSettings());
-    model.addAttribute("Menu", template1Service.getPublishedMenus());
     model.addAttribute("Links", friendlyLinkService.queryLink(0, Integer.MAX_VALUE));
     return "/v2/maldives";
   }
@@ -51,7 +47,6 @@ public class MaldivesController extends ControllerHelper {
       }
       model.addAttribute("island", island);
       model.addAttribute("Settings", settingsService.getSettings());
-      model.addAttribute("Menu", template1Service.getPublishedMenus());
       model.addAttribute("Links", friendlyLinkService.queryLink(0, Integer.MAX_VALUE));
       return "/v3/maldives_island";
     }
@@ -62,7 +57,6 @@ public class MaldivesController extends ControllerHelper {
     }
     model.addAttribute("island", island);
     model.addAttribute("Settings", settingsService.getSettings());
-    model.addAttribute("Menu", template1Service.getPublishedMenus());
     model.addAttribute("Links", friendlyLinkService.queryLink(0, Integer.MAX_VALUE));
     return "/v2/maldives_island";
   }

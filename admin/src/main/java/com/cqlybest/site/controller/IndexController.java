@@ -20,18 +20,18 @@ import com.cqlybest.common.controller.ControllerHelper;
 import com.cqlybest.common.mongo.bean.MaldivesIsland;
 import com.cqlybest.common.mongo.service.FriendlyLinkService;
 import com.cqlybest.common.mongo.service.MaldivesService;
+import com.cqlybest.common.mongo.service.PageService;
 import com.cqlybest.common.mongo.service.SettingsService;
-import com.cqlybest.common.service.Template1Service;
 
 @Controller("siteIndexController")
 public class IndexController extends ControllerHelper {
 
   @Autowired
-  protected Template1Service template1Service;
+  private SettingsService settingsService;
   @Autowired
-  protected SettingsService settingsService;
+  private PageService pageService;
   @Autowired
-  protected FriendlyLinkService friendlyLinkService;
+  private FriendlyLinkService friendlyLinkService;
   @Autowired
   private MaldivesService mongoMaldivesService;
 
@@ -43,10 +43,9 @@ public class IndexController extends ControllerHelper {
       return "/v1/login";
     }
     if (host.startsWith("m.")) {
-      model.addAttribute("posters", template1Service.getPublishedPosters());// 海报
+      model.addAttribute("posters", pageService.getPage("www.index").getPosters());// 海报
       model.addAttribute("result", mongoMaldivesService.queryIsland(0, Integer.MAX_VALUE));
       model.addAttribute("Settings", settingsService.getSettings());
-      model.addAttribute("Menu", template1Service.getPublishedMenus());
       model.addAttribute("Links", friendlyLinkService.queryLink(0, Integer.MAX_VALUE));
       return "/v3/index";
     }
@@ -77,9 +76,8 @@ public class IndexController extends ControllerHelper {
       return "/v4/index";
     }
 
-    model.addAttribute("posters", template1Service.getPublishedPosters());// 海报
+    model.addAttribute("Page", pageService.getPage("www.index"));// 海报
     model.addAttribute("Settings", settingsService.getSettings());
-    model.addAttribute("Menu", template1Service.getPublishedMenus());
     model.addAttribute("Links", friendlyLinkService.queryLink(0, Integer.MAX_VALUE));
     return "/v2/index";
   }
