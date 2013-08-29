@@ -76,7 +76,8 @@ public class CqlybestFilter implements Filter {
 
     final byte[] data = outstr.toByteArray();
     String requestURI = httpRequest.getRequestURI();
-    if (requestURI.matches(".*\\.(html|js|css|jpg|png|gif)$")) {
+    if (requestURI.matches(".*\\.(html|js|css|jpg|png|gif)$")
+        && httpResponse.getStatus() == HttpServletResponse.SC_OK) {
       File cacheFile = new File(cacheDir, "/" + httpRequest.getServerName() + requestURI);
       new CacheThread(cacheFile, data).start();
     }

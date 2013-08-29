@@ -22,7 +22,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.cqlybest.common.controller.ControllerHelper;
 import com.cqlybest.common.mongo.service.SettingsService;
 import com.cqlybest.common.service.WeixinUserService;
-import com.cqlybest.weixin.ConnectOpenidFakeid;
 import com.cqlybest.weixin.bean.RequestMessage;
 import com.cqlybest.weixin.bean.ResponseMessage;
 import com.cqlybest.weixin.bean.ResponseNewsMessage;
@@ -56,7 +55,7 @@ public class WeixinMpController extends ControllerHelper {
     return ok();
   }
 
-  @RequestMapping(method = RequestMethod.POST, value = "/weixin/mp.do")
+  @RequestMapping(method = RequestMethod.POST, value = "/mp")
   public Object root(@RequestParam String signature, @RequestParam String timestamp,
       @RequestParam String nonce, @RequestBody String data, HttpServletRequest request, Model model) {
     if (!auth(signature, timestamp, nonce)) {
@@ -71,7 +70,7 @@ public class WeixinMpController extends ControllerHelper {
       System.out.println(XML.writeValueAsString(message));
       String type = message.getMsgType();
       if ("text".equals(type)) {// 文本消息
-        ConnectOpenidFakeid.connect(weixinUserService, message);
+        // ConnectOpenidFakeid.connect(weixinUserService, message);
         return text(model, message);
       }
       if ("image".equals(type)) {// 图片消息
@@ -148,8 +147,9 @@ public class WeixinMpController extends ControllerHelper {
         response.setContent(welcomeMessage);
         response.setCreateTime(System.currentTimeMillis());
         model.addAttribute("data", response);
-        ConnectOpenidFakeid.connect(weixinUserService, message.getFromUserName());// 设置OpenID与FakeID
-        return "/text";
+        // ConnectOpenidFakeid.connect(weixinUserService, message.getFromUserName());//
+        // 设置OpenID与FakeID
+        return "/weixin/mp/text";
       }
       LOGGER.warn("Due no weixin_welcome_message set, system don't send ");
     }

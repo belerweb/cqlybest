@@ -37,7 +37,7 @@ public class MaldivesHandler implements Handler {
   @Override
   public ResponseMessage handle(RequestMessage request) {
     String siteUrl =
-        (String) ((Map<?, ?>) settingsService.getSettings().get("basic")).get("siteUrl");
+        (String) ((Map<?, ?>) settingsService.getSettings().get("basic")).get("mobileSiteUrl");
     ResponseNewsMessage response = new ResponseNewsMessage();
     response.setFromUserName(request.getToUserName());
     response.setToUserName(request.getFromUserName());

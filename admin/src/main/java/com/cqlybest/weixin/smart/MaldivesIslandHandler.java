@@ -1,6 +1,7 @@
 package com.cqlybest.weixin.smart;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
@@ -18,10 +19,13 @@ import com.cqlybest.weixin.bean.RequestMessage;
 import com.cqlybest.weixin.bean.ResponseMessage;
 import com.cqlybest.weixin.bean.ResponseNewsMessage;
 import com.cqlybest.weixin.bean.ResponseNewsMessage.Article;
+import com.googlecode.mjorm.query.Query;
+import com.googlecode.mjorm.query.QueryGroup;
 import com.googlecode.mjorm.query.criteria.DocumentCriterion;
 import com.googlecode.mjorm.query.criteria.EqualsCriterion;
 import com.googlecode.mjorm.query.criteria.FieldCriterion;
-import com.googlecode.mjorm.query.criteria.RegexCriterion;
+import com.googlecode.mjorm.query.criteria.GroupedQueryCriterion;
+import com.googlecode.mjorm.query.criteria.GroupedQueryCriterion.Group;
 
 @Component
 public class MaldivesIslandHandler implements Handler {
@@ -58,11 +62,12 @@ public class MaldivesIslandHandler implements Handler {
     response.setCreateTime(System.currentTimeMillis());
 
     String query = ".*" + request.getContent().replaceAll("岛", StringUtils.EMPTY) + ".*";
-    RegexCriterion like = new RegexCriterion(query);
     List<DocumentCriterion> conditions = new ArrayList<>();
-    conditions.add(new FieldCriterion("zhName", like));
-    conditions.add(new FieldCriterion("enName", like));
-    conditions.add(new FieldCriterion("byName", like));
+    QueryGroup queryGroup =
+        new QueryGroup(Arrays.asList(new Query[] {Query.start().regex("zhName", query),
+            Query.start().regex("enName", query), Query.start().regex("byName", query)}));
+    conditions.add(new GroupedQueryCriterion(Group.OR, queryGroup));
+
     List<Article> articles = new ArrayList<>();
 
     MaldivesIsland island = mongoMaldivesService.queryIsland(conditions);
