@@ -2,10 +2,13 @@ package com.cqlybest.common.mongo.service;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.UUID;
 
+import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.cqlybest.common.mongo.bean.Link;
 import com.cqlybest.common.mongo.bean.Page;
 import com.cqlybest.common.mongo.bean.page.Section;
 import com.cqlybest.common.mongo.dao.MongoDb;
@@ -49,5 +52,31 @@ public class PageService {
     Map<String, String> delete = new HashMap<>();
     delete.put("id", sectionId);
     mongoDb.createQuery("Page").eq(in + ".id", sectionId).modify().pull(in, delete).update();
+  }
+
+  public void addPoster(String pageId, Link poster) {
+    poster.setId(UUID.randomUUID().toString());
+    mongoDb.createQuery("Page").eq("_id", pageId).modify().push("posters", mongoDb.unmap(poster))
+        .update();
+  }
+
+  public void updatePoster(String posterId, String property, String value) {
+    Object _value = value;
+    if ("displayOrder".equals(property)) {
+      _value = StringUtils.isBlank(value) ? null : Integer.valueOf(value);
+    }
+    if ("published".equals(property)) {
+      _value = Boolean.valueOf(value);
+    }
+
+    mongoDb.createQuery("Page").eq("posters.id", posterId).modify().set("posters.$." + property,
+        _value).update();
+  }
+
+  public void deletePoster(String posterId) {
+    Map<String, String> delete = new HashMap<>();
+    delete.put("id", posterId);
+    mongoDb.createQuery("Page").eq("posters.id", posterId).modify().pull("posters", delete)
+        .update();
   }
 }

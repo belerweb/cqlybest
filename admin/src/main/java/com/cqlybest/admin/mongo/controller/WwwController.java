@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.cqlybest.common.controller.ControllerHelper;
 import com.cqlybest.common.mongo.bean.FriendlyLink;
 import com.cqlybest.common.mongo.bean.ImageMeta;
+import com.cqlybest.common.mongo.bean.Link;
 import com.cqlybest.common.mongo.bean.Page;
 import com.cqlybest.common.mongo.bean.page.Image;
 import com.cqlybest.common.mongo.bean.page.Section;
@@ -46,6 +47,54 @@ public class WwwController extends ControllerHelper {
 
     model.addAttribute("page", page);
     return "/v1/www/index";
+  }
+
+
+  @RequestMapping(value = "/www/index/poster/add.do", method = RequestMethod.POST)
+  public Object addIndexPoster(@RequestParam(required = false) String name,
+      @RequestParam(required = false) String title,
+      @RequestParam(required = false) String description,
+      @RequestParam(required = false) String url, @RequestParam(required = false) String target,
+      @RequestParam(required = false) String image,
+      @RequestParam(required = false) Integer displayOrder) {
+    if (StringUtils.isBlank(name)) {
+      return error("请填写名称");
+    }
+    if (StringUtils.isBlank(image)) {
+      return error("请上传图片");
+    }
+
+    Link link = new Link();
+    link.setName(name);
+    link.setTitle(title);
+    link.setDescription(description);;
+    link.setLink(url);
+    if (StringUtils.isNotBlank(target)) {
+      link.setTarget(target);
+    }
+
+    String[] imgStr = image.split("\\.");
+    ImageMeta img = new ImageMeta();
+    img.setId(imgStr[0]);
+    img.setExtension(imgStr[1]);
+    link.setImage(img);
+
+    link.setDisplayOrder(displayOrder);
+    pageService.addPoster("www.index", link);
+    return ok();
+  }
+
+  @RequestMapping(value = "/www/index/poster/update.do", method = RequestMethod.POST)
+  @ResponseBody
+  public void updateIndexPoster(@RequestParam String pk, @RequestParam String name,
+      @RequestParam String value) {
+    pageService.updatePoster(pk, name, value);
+  }
+
+  @RequestMapping("/www/index/poster/delete.do")
+  @ResponseBody
+  public void deleteIndexPoster(@RequestParam String posterId) {
+    pageService.deletePoster(posterId);
   }
 
   @RequestMapping("/www/index/section/add.do")
@@ -140,7 +189,6 @@ public class WwwController extends ControllerHelper {
     }
 
     FriendlyLink friendlyLink = new FriendlyLink();
-    friendlyLink.setId(link);
     friendlyLink.setName(name);
     friendlyLink.setTitle(title);
     friendlyLink.setLink(link);

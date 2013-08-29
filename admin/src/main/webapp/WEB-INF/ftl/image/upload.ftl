@@ -4,16 +4,16 @@
 	<head>
 		<meta charset="utf-8">
 		<meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
-		<link href="${ContextPath}/css/bootstrap.css" rel="stylesheet">
-		<link href="${ContextPath}/js/plupload/jquery.plupload.queue/css/jquery.plupload.queue.css" rel="stylesheet">
+		<link href="${ContextPath}/assets/v1/css/bootstrap.css" rel="stylesheet">
+		<link href="${ContextPath}/assets/v1/css/jquery.plupload.queue.css" rel="stylesheet">
 	</head>
 	<body>
 		<div id="uploader"></div>
 		<div class="text-center"><button id="callback-btn" type="button" class="btn btn-primary">确定</button></div>
-		<script type="text/javascript" src="${ContextPath}/js/jquery.js"></script>
-		<script type="text/javascript" src="${ContextPath}/js/plupload/plupload.js"></script>
-		<script type="text/javascript" src="${ContextPath}/js/plupload/plupload.html4.js"></script>
-		<script type="text/javascript" src="${ContextPath}/js/plupload/jquery.plupload.queue/jquery.plupload.queue.js"></script>
+		<script type="text/javascript" src="${ContextPath}/assets/v1/js/jquery.js"></script>
+		<script type="text/javascript" src="${ContextPath}/assets/v1/js/plupload.js"></script>
+		<script type="text/javascript" src="${ContextPath}/assets/v1/js/plupload.html4.js"></script>
+		<script type="text/javascript" src="${ContextPath}/assets/v1/js/jquery.plupload.queue.js"></script>
 		<script type="text/javascript">
 		var files = [];
 		plupload.addI18n({

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<descriptors>
+
+	<object class="com.cqlybest.common.mongo.bean.Link">
+		<property name="id" />
+		<property name="name" />
+		<property name="title" />
+		<property name="description" />
+		<property name="link" />
+		<property name="target" />
+		<property name="image" />
+		<property name="displayOrder" />
+		<property name="published" />
+	</object>
+
+</descriptors>

@@ -3,6 +3,7 @@
 
 	<object class="com.cqlybest.common.mongo.bean.Page">
 		<property name="id" id="true" />
+		<property name="posters" />
 		<property name="contents" />
 		<property name="sidebars" />
 	</object>

@@ -11,6 +11,7 @@ import com.cqlybest.common.mongo.bean.page.Section;
 public class Page {
 
   private String id;
+  private List<Link> posters = new ArrayList<>();// 海报
   private List<Section> contents = new ArrayList<>(); // 主内容
   private List<Section> sidebars = new ArrayList<>(); // 侧边栏
 
@@ -36,6 +37,14 @@ public class Page {
 
   public void setSidebars(List<Section> sidebars) {
     this.sidebars = sidebars;
+  }
+
+  public List<Link> getPosters() {
+    return posters;
+  }
+
+  public void setPosters(List<Link> posters) {
+    this.posters = posters;
   }
 
 }
