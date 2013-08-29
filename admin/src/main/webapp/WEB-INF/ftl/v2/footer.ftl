@@ -71,11 +71,11 @@
 			</div>
 			<hr>
 
-			<#if Links?has_content>
+			<#if (Links.items)?has_content>
 			<div class="footer friendly">
 				<ul>
 					<li><strong>友情链接：</strong></li>
-					<#list Links as link>
+					<#list Links.items as link>
 					<li><a href="${link.link!'#'}" title="${link.title!}" target="_blank">${link.name!}</a></li>
 					</#list>
 				</ul>

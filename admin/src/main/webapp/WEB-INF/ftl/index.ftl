@@ -66,7 +66,7 @@
 					<div class="dropdown-menu pull-right profile-box">
 						<div class="triangle-3"></div>
 						<ul class="profile-navigation">
-							<li><a href="${ContextPath}/logout.do"><i class="icon-off"></i> 退出</a></li>
+							<li><a href="${ContextPath}/logout"><i class="icon-off"></i> 退出</a></li>
 						</ul>
 					</div>
 				</div>

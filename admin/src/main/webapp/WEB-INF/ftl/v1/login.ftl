@@ -42,7 +42,7 @@
 													<i class="icon-coffee green"></i> 输入用户名和密码登录系统
 												</h4>
 												<div class="space-6"></div>
-												<form action="${ContextPath}/login.do" method="post">
+												<form action="${ContextPath}/login" method="post">
 													<fieldset>
 														<label>
 															<span class="block input-icon input-icon-right">

@@ -46,7 +46,7 @@ public class WeixinMpController extends ControllerHelper {
   @Autowired
   private SmartResponseService smartResponseService;
 
-  @RequestMapping(method = RequestMethod.GET, value = "/weixin/mp.do")
+  @RequestMapping(method = RequestMethod.GET, value = "/mp")
   public Object root(@RequestParam String signature, @RequestParam String timestamp,
       @RequestParam String nonce, @RequestParam String echostr, HttpServletRequest request) {
     if (auth(signature, timestamp, nonce)) {

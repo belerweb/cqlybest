@@ -51,7 +51,7 @@
 						</#list>
 						</#if>
 						<li class="divider"></li>
-						<li><a href="${ContextPath}/logout.do"><i class="icon-off"></i> 退出</a></li>
+						<li><a href="${ContextPath}/logout"><i class="icon-off"></i> 退出</a></li>
 					</ul>
 				</li>
 			</ul><!--/.ace-nav-->

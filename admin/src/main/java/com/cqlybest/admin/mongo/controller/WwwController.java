@@ -7,13 +7,17 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.cqlybest.common.controller.ControllerHelper;
+import com.cqlybest.common.mongo.bean.FriendlyLink;
+import com.cqlybest.common.mongo.bean.ImageMeta;
 import com.cqlybest.common.mongo.bean.Page;
 import com.cqlybest.common.mongo.bean.page.Image;
 import com.cqlybest.common.mongo.bean.page.Section;
+import com.cqlybest.common.mongo.service.FriendlyLinkService;
 import com.cqlybest.common.mongo.service.PageService;
 
 /**
@@ -25,6 +29,8 @@ public class WwwController extends ControllerHelper {
 
   @Autowired
   private PageService pageService;
+  @Autowired
+  private FriendlyLinkService friendlyLinkService;
 
   @RequestMapping("/www.do")
   public String www() {
@@ -107,6 +113,73 @@ public class WwwController extends ControllerHelper {
   @ResponseBody
   public void deleteIndexSection(@RequestParam String in, @RequestParam String sectionId) {
     pageService.deleteSection(in, sectionId);
+  }
+
+
+  /**
+   * 友情链接
+   */
+  @RequestMapping(value = "/www/friendlylink/add.do", method = RequestMethod.GET)
+  public String addFriendlyLink(@RequestParam(required = false) String linkId, Model model) {
+    if (linkId != null) {
+      model.addAttribute("flight", friendlyLinkService.getLink(linkId));
+    }
+    return "/v1/www/friendlylink/add";
+  }
+
+  @RequestMapping(value = "/www/friendlylink/add.do", method = RequestMethod.POST)
+  public Object addFriendlyLink(@RequestParam(required = false) String name,
+      @RequestParam(required = false) String title, @RequestParam(required = false) String link,
+      @RequestParam(required = false) String target, @RequestParam(required = false) String image,
+      @RequestParam(required = false) Integer displayOrder) {
+    if (StringUtils.isBlank(name)) {
+      return error("请填写名称");
+    }
+    if (StringUtils.isBlank(link)) {
+      return error("请填写链接地址");
+    }
+
+    FriendlyLink friendlyLink = new FriendlyLink();
+    friendlyLink.setId(link);
+    friendlyLink.setName(name);
+    friendlyLink.setTitle(title);
+    friendlyLink.setLink(link);
+    if (StringUtils.isNotBlank(target)) {
+      friendlyLink.setTarget(target);
+    }
+    if (StringUtils.isNotBlank(image)) {
+      String[] imgStr = image.split("\\.");
+      ImageMeta img = new ImageMeta();
+      img.setId(imgStr[0]);
+      img.setExtension(imgStr[1]);
+      friendlyLink.setImage(img);
+    }
+    friendlyLink.setDisplayOrder(displayOrder);
+    friendlyLinkService.addLink(friendlyLink);
+    return ok();
+  }
+
+  @RequestMapping(value = "/www/friendlylink/update.do", method = RequestMethod.POST)
+  @ResponseBody
+  public void updateFriendlyLink(@RequestParam String pk, @RequestParam String name,
+      @RequestParam String value) {
+    friendlyLinkService.updateLink(pk, name, value);
+  }
+
+  /**
+   * 友情链接列表
+   */
+  @RequestMapping(value = "/www/friendlylink.do", method = RequestMethod.GET)
+  public String friendlylink(@RequestParam(defaultValue = "0") int page, Model model) {
+    int pageSize = 10;
+    model.addAttribute("result", friendlyLinkService.queryLink(page, pageSize));
+    return "/v1/www/friendlylink";
+  }
+
+  @RequestMapping("/www/friendlylink/delete.do")
+  @ResponseBody
+  public void deleteFriendlyLink(@RequestParam String linkId) {
+    friendlyLinkService.deleteLink(linkId);
   }
 
 }

@@ -12,9 +12,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.cqlybest.common.controller.ControllerHelper;
 import com.cqlybest.common.mongo.bean.MaldivesIsland;
+import com.cqlybest.common.mongo.service.FriendlyLinkService;
 import com.cqlybest.common.mongo.service.MaldivesService;
 import com.cqlybest.common.mongo.service.SettingsService;
-import com.cqlybest.common.service.FriendlyLinkService;
 import com.cqlybest.common.service.ImageService;
 import com.cqlybest.common.service.Template1Service;
 
@@ -37,7 +37,7 @@ public class MaldivesController extends ControllerHelper {
     model.addAttribute("result", mongoMaldivesService.queryIsland(0, Integer.MAX_VALUE));
     model.addAttribute("Settings", settingsService.getSettings());
     model.addAttribute("Menu", template1Service.getPublishedMenus());
-    model.addAttribute("Links", friendlyLinkService.list(1, Integer.MAX_VALUE));
+    model.addAttribute("Links", friendlyLinkService.queryLink(0, Integer.MAX_VALUE));
     return "/v2/maldives";
   }
 
@@ -52,7 +52,7 @@ public class MaldivesController extends ControllerHelper {
       model.addAttribute("island", island);
       model.addAttribute("Settings", settingsService.getSettings());
       model.addAttribute("Menu", template1Service.getPublishedMenus());
-      model.addAttribute("Links", friendlyLinkService.list(1, Integer.MAX_VALUE));
+      model.addAttribute("Links", friendlyLinkService.queryLink(0, Integer.MAX_VALUE));
       return "/v3/maldives_island";
     }
 
@@ -63,7 +63,7 @@ public class MaldivesController extends ControllerHelper {
     model.addAttribute("island", island);
     model.addAttribute("Settings", settingsService.getSettings());
     model.addAttribute("Menu", template1Service.getPublishedMenus());
-    model.addAttribute("Links", friendlyLinkService.list(1, Integer.MAX_VALUE));
+    model.addAttribute("Links", friendlyLinkService.queryLink(0, Integer.MAX_VALUE));
     return "/v2/maldives_island";
   }
 

@@ -25,7 +25,7 @@
 				<ul class="dropdown-menu">
 					<li><a href="${ContextPath}/user/home">用户中心</a></li>
 					<li class="divider"></li>
-					<li><a href="${ContextPath}/user/logout">退出</a></li>
+					<li><a href="${ContextPath}/logout">退出</a></li>
 				</ul>
 				<#else>
 				<span>亲，欢迎访问${(Options.site_name)!}！</span>

@@ -4,6 +4,9 @@
 <#assign Menu=[{
 	'name':'首页',
 	'url':'/www/index.do'
+},{
+	'name':'友情链接',
+	'url':'/www/friendlylink.do'
 }] />
 <#include "sidebar.ftl">
 <div id="main-content" class="clearfix" data-init="${ContextPath}/www/index.do">

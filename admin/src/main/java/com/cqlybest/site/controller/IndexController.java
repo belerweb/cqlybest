@@ -18,9 +18,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.cqlybest.common.controller.ControllerHelper;
 import com.cqlybest.common.mongo.bean.MaldivesIsland;
+import com.cqlybest.common.mongo.service.FriendlyLinkService;
 import com.cqlybest.common.mongo.service.MaldivesService;
 import com.cqlybest.common.mongo.service.SettingsService;
-import com.cqlybest.common.service.FriendlyLinkService;
 import com.cqlybest.common.service.Template1Service;
 
 @Controller("siteIndexController")
@@ -47,7 +47,7 @@ public class IndexController extends ControllerHelper {
       model.addAttribute("result", mongoMaldivesService.queryIsland(0, Integer.MAX_VALUE));
       model.addAttribute("Settings", settingsService.getSettings());
       model.addAttribute("Menu", template1Service.getPublishedMenus());
-      model.addAttribute("Links", friendlyLinkService.list(1, Integer.MAX_VALUE));
+      model.addAttribute("Links", friendlyLinkService.queryLink(0, Integer.MAX_VALUE));
       return "/v3/index";
     }
 
@@ -80,7 +80,28 @@ public class IndexController extends ControllerHelper {
     model.addAttribute("posters", template1Service.getPublishedPosters());// 海报
     model.addAttribute("Settings", settingsService.getSettings());
     model.addAttribute("Menu", template1Service.getPublishedMenus());
-    model.addAttribute("Links", friendlyLinkService.list(1, Integer.MAX_VALUE));
+    model.addAttribute("Links", friendlyLinkService.queryLink(0, Integer.MAX_VALUE));
     return "/v2/index";
   }
+
+  @RequestMapping("/login.html")
+  public Object login(HttpServletRequest request, Model model) {
+    String host = request.getServerName();
+    if (host.startsWith("admin.")) {
+      return "/v1/login";
+    }
+
+    return "/v2/login";
+  }
+
+  @RequestMapping("/redirect")
+  public Object redirect(HttpServletRequest request, Model model) {
+    String host = request.getServerName();
+    if (host.startsWith("admin.")) {
+      return "redirect:/home.do";
+    }
+
+    return "redirect:/index.html";
+  }
+
 }
