@@ -1,23 +1,23 @@
-package com.cqlybest.common.bean;
+package com.cqlybest.common.mongo.bean;
 
 /**
  * 友情链接
  */
 public class FriendlyLink {
 
-  private Integer id;
+  private String id;
   private String name;
   private String title;
   private String link;
-  private String imageId;
-  private String image;
+  private String target;
+  private ImageMeta image;
   private Integer displayOrder;
 
-  public Integer getId() {
+  public String getId() {
     return id;
   }
 
-  public void setId(Integer id) {
+  public void setId(String id) {
     this.id = id;
   }
 
@@ -45,19 +45,19 @@ public class FriendlyLink {
     this.link = link;
   }
 
-  public String getImageId() {
-    return imageId;
+  public String getTarget() {
+    return target;
   }
 
-  public void setImageId(String imageId) {
-    this.imageId = imageId;
+  public void setTarget(String target) {
+    this.target = target;
   }
 
-  public String getImage() {
+  public ImageMeta getImage() {
     return image;
   }
 
-  public void setImage(String image) {
+  public void setImage(ImageMeta image) {
     this.image = image;
   }
 
@@ -68,5 +68,6 @@ public class FriendlyLink {
   public void setDisplayOrder(Integer displayOrder) {
     this.displayOrder = displayOrder;
   }
+
 
 }

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<descriptors>
+
+	<object class="com.cqlybest.common.mongo.bean.FriendlyLink">
+		<property name="id" id="true"/>
+		<property name="name" />
+		<property name="title" />
+		<property name="link" />
+		<property name="target" />
+		<property name="image" />
+		<property name="displayOrder" />
+	</object>
+
+</descriptors>
