@@ -74,7 +74,12 @@ public class CqlybestFilter implements Filter {
     chain.doFilter(request, wrapper);
     wrapper.flushBuffer();
 
-    byte[] data = outstr.toByteArray();
+    final byte[] data = outstr.toByteArray();
+    String requestURI = httpRequest.getRequestURI();
+    if (requestURI.matches(".*\\.(html|js|css|jpg|png|gif)$")) {
+      File cacheFile = new File(cacheDir, "/" + httpRequest.getServerName() + requestURI);
+      new CacheThread(cacheFile, data).start();
+    }
     response.getOutputStream().write(data);
 
     long end = System.currentTimeMillis();
@@ -86,27 +91,38 @@ public class CqlybestFilter implements Filter {
     rpt.setRequest(httpRequest.getRequestURL().toString());
     rpt.setQuery(httpRequest.getQueryString());
     mongdoDb.createObject("RequestProcessTime", rpt);
-
-    String requestURI = httpRequest.getRequestURI();
-    if (requestURI.matches(".*\\.(html|js|css|jpg|png|gif)$")) {
-      try {
-        Map<?, ?> cacheConfig = (Map<?, ?>) settingsService.getSettings().get("cache");
-        if (Boolean.TRUE.equals(cacheConfig.get("enabled"))) {
-          File cacheFile = new File(cacheDir, "/" + httpRequest.getServerName() + requestURI);
-          FileUtils.forceMkdir(cacheFile.getParentFile());
-          FileUtils.writeByteArrayToFile(cacheFile, data);
-        }
-      } catch (Exception e) {
-        LOGGER.error("缓存文件失败");
-        e.printStackTrace();
-      }
-    }
   }
 
   @Override
   public void destroy() {
     applicationContext = null;
     servletContext = null;
+  }
+
+  private class CacheThread extends Thread {
+    private File file;
+    private byte[] data;
+
+    private CacheThread(File file, byte[] data) {
+      this.file = file;
+      this.data = data;
+    }
+
+    @Override
+    public void run() {
+      try {
+        Map<?, ?> cacheConfig = (Map<?, ?>) settingsService.getSettings().get("cache");
+        if (Boolean.TRUE.equals(cacheConfig.get("enabled"))) {
+          FileUtils.forceMkdir(file.getParentFile());
+          FileUtils.writeByteArrayToFile(file, data);
+        }
+      } catch (Exception e) {
+        LOGGER.error("缓存文件失败");
+        FileUtils.deleteQuietly(file);
+        e.printStackTrace();
+      }
+    }
+
   }
 
 }
