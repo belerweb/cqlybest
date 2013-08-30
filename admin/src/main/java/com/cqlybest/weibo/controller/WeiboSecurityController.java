@@ -24,7 +24,6 @@ import com.cqlybest.common.mongo.bean.WeiboAuthToken;
 import com.cqlybest.common.mongo.bean.WeiboUser;
 import com.cqlybest.common.mongo.service.MaldivesService;
 import com.cqlybest.common.mongo.service.UserService;
-import com.cqlybest.common.service.ImageService;
 
 @Controller
 public class WeiboSecurityController {
@@ -35,8 +34,6 @@ public class WeiboSecurityController {
   private MaldivesService mongoMaldivesService;
   @Autowired
   private UserService mongoUserService;
-  @Autowired
-  private ImageService imageService;
 
   @RequestMapping("/weibo/security/proxy")
   public String securityProxy(HttpServletRequest request) {

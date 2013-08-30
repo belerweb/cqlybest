@@ -15,15 +15,12 @@ import com.cqlybest.common.mongo.bean.MaldivesIsland;
 import com.cqlybest.common.mongo.service.FriendlyLinkService;
 import com.cqlybest.common.mongo.service.MaldivesService;
 import com.cqlybest.common.mongo.service.SettingsService;
-import com.cqlybest.common.service.ImageService;
 
 @Controller("siteMaldivesController")
 public class MaldivesController extends ControllerHelper {
 
   @Autowired
   private MaldivesService mongoMaldivesService;
-  @Autowired
-  private ImageService imageService;
   @Autowired
   protected SettingsService settingsService;
   @Autowired

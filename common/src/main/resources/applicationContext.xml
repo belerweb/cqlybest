@@ -41,42 +41,6 @@
 	</bean>
 	<!-- Mongodb end -->
 
-	<bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource">
-		<property name="driverClass" value="#{T(System).getProperty('cqlybest.db.driver', T(System).getenv('cqlybest.db.driver'))}" />
-		<property name="jdbcUrl" value="#{T(System).getProperty('cqlybest.db.url', T(System).getenv('cqlybest.db.url'))}" />
-		<property name="user" value="#{T(System).getProperty('cqlybest.db.username', T(System).getenv('cqlybest.db.username'))}" />
-		<property name="password" value="#{T(System).getProperty('cqlybest.db.password', T(System).getenv('cqlybest.db.password'))}" />
-		<property name="idleConnectionTestPeriod" value="60" />
-	</bean>
-
-	<bean id="sessionFactory" class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
-		<property name="dataSource" ref="dataSource" />
-		<property name="mappingLocations">
-			<list>
-				<value>classpath*:hbm/**/*.hbm.xml</value>
-			</list>
-		</property>
-		<property name="hibernateProperties">
-			<props>
-				<prop key="hibernate.dialect">#{T(System).getProperty('cqlybest.db.dialect', T(System).getenv('cqlybest.db.dialect'))}</prop>
-				<prop key="hibernate.show_sql">true</prop>
-				<prop key="hibernate.hbm2ddl.auto">update</prop>
-			</props>
-
-		</property>
-	</bean>
-
-	<bean class="org.mybatis.spring.SqlSessionFactoryBean">
-		<property name="dataSource" ref="dataSource" />
-		<property name="typeAliasesPackage" value="com.cqlybest.common.bean" />
-		<property name="mapperLocations" value="classpath*:mapper/**/*.xml" />
-	</bean>
-
-	<tx:annotation-driven transaction-manager="transactionManager" />
-	<bean id="transactionManager" class="org.springframework.orm.hibernate4.HibernateTransactionManager">
-		<property name="sessionFactory" ref="sessionFactory" />
-	</bean>
-
 	<bean id="securityContextHolder" class="org.springframework.security.core.context.SecurityContextHolder" />
 
 </beans>

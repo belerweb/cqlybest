@@ -11,7 +11,6 @@ import com.cqlybest.common.mongo.bean.ImageMeta;
 import com.cqlybest.common.mongo.bean.MaldivesIsland;
 import com.cqlybest.common.mongo.service.MaldivesService;
 import com.cqlybest.common.mongo.service.SettingsService;
-import com.cqlybest.common.service.ImageService;
 import com.cqlybest.weixin.bean.RequestMessage;
 import com.cqlybest.weixin.bean.ResponseMessage;
 import com.cqlybest.weixin.bean.ResponseNewsMessage;
@@ -22,8 +21,6 @@ public class MaldivesHandler implements Handler {
 
   @Autowired
   private MaldivesService mongoMaldivesService;
-  @Autowired
-  private ImageService imageService;
   @Autowired
   private SettingsService settingsService;
 

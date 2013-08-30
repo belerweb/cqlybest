@@ -21,7 +21,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.cqlybest.common.controller.ControllerHelper;
 import com.cqlybest.common.mongo.service.SettingsService;
-import com.cqlybest.common.service.WeixinUserService;
 import com.cqlybest.weixin.bean.RequestMessage;
 import com.cqlybest.weixin.bean.ResponseMessage;
 import com.cqlybest.weixin.bean.ResponseNewsMessage;
@@ -40,8 +39,6 @@ public class WeixinMpController extends ControllerHelper {
 
   @Autowired
   private SettingsService settingsService;
-  @Autowired
-  private WeixinUserService weixinUserService;
   @Autowired
   private SmartResponseService smartResponseService;
 

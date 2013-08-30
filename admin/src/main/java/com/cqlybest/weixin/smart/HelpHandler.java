@@ -7,7 +7,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.cqlybest.common.mongo.service.SettingsService;
-import com.cqlybest.common.service.ImageService;
 import com.cqlybest.weixin.bean.RequestMessage;
 import com.cqlybest.weixin.bean.ResponseMessage;
 import com.cqlybest.weixin.bean.ResponseTextMessage;
@@ -15,8 +14,6 @@ import com.cqlybest.weixin.bean.ResponseTextMessage;
 @Component
 public class HelpHandler implements Handler {
 
-  @Autowired
-  private ImageService imageService;
   @Autowired
   private SettingsService settingsService;
 
