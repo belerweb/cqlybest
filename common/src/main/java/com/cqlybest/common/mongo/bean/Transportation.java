@@ -8,6 +8,7 @@ public class Transportation {
   public static final String TYPE_TRAIN = "train";// 火车
 
   public static final String LINE_TYPE_MALDIVES = "maldives";// 马代线路
+  public static final String LINE_TYPE_MAURITIUS = "mauritius";// 毛求线路
 
   private String id;
   private String type;// 类型：航班，火车

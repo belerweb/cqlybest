@@ -1,9 +1,9 @@
 <#assign TopNav=[{
-	'name':'工作台',
-	'url':'/home.do'
-},'divider',{
 	'name':'马尔代夫',
 	'url':'/maldives.do'
+},'divider',{
+	'name':'毛里求斯',
+	'url':'/mauritius.do'
 },'divider',{
 	'name':'客户关系',
 	'url':'/crm.do'
