@@ -24,6 +24,7 @@ http://www.springframework.org/schema/beans http://www.springframework.org/schem
 			authentication-failure-url="/login.html" default-target-url="/redirect" />
 		<logout logout-url="/logout" />
 		<intercept-url pattern="/assets/**" access="permitAll" />
+		<intercept-url pattern="/favicon.ico" access="permitAll" />
 		<intercept-url pattern="/" access="permitAll" />
 		<intercept-url pattern="/index.do" access="permitAll" />
 		<intercept-url pattern="/connector/**" access="permitAll" />
