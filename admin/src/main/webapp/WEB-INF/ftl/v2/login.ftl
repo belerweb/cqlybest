@@ -8,13 +8,10 @@ body {
 	<div class="pull-left"><img src="${ContextPath}/assets/v2/img/logo.png"></div>
 	<div class="clearfix"></div>
 </div>
-<div id="login-slider" style="background:#bFE5FA url('${ContextPath}/image/${Options['template1-login-poster']!}') center;">
+<div id="login-slider" style="background:#bFE5FA center;">
 	<div class="container">
 		<div class="row">
 			<div class="span8">
-				<#if Options['template1-login-poster-link']?has_content>
-				<a id="login-poster" href="${Options['template1-login-poster-link']}" target="_blank"></a>
-				</#if>
 			</div>
 			<div class="span4">
 				<div id="login-box" class="well well-small">

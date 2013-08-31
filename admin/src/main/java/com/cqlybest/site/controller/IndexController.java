@@ -35,6 +35,15 @@ public class IndexController extends ControllerHelper {
   @Autowired
   private MaldivesService mongoMaldivesService;
 
+  @RequestMapping("/robots.txt")
+  public Object robots(HttpServletRequest request) {
+    String host = request.getServerName();
+    if (host.startsWith("admin.")) {
+      return notFound();
+    }
+    return "/robots";
+  }
+
   @RequestMapping({"/", "/index.html"})
   public Object index(@RequestParam(required = false) String cid,
       @RequestParam(required = false) String sub_appkey, HttpServletRequest request, Model model) {
@@ -89,6 +98,7 @@ public class IndexController extends ControllerHelper {
       return "/v1/login";
     }
 
+    model.addAttribute("Settings", settingsService.getSettings());
     return "/v2/login";
   }
 

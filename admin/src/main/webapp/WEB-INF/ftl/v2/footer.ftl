@@ -86,7 +86,7 @@
 			<div class="hide">${Settings.basic.statistical}</div>
 			</#if>
 		</div>
-		<#if Settings.release?has_content>
+		<#if (Settings.release)?has_content>
 		<script src="${ContextPath}/assets/v2/js/application.min.js?build=${Settings.version.buildTime!}"></script>
 		<#else>
 		<script src="${ContextPath}/assets/v2/js/jquery.js?build=${Settings.version.buildTime!}"></script>
