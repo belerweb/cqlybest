@@ -29,9 +29,9 @@
 						<div class="gallery-item <#if image_index==0> first</#if><#if image_index%5==1> row-first</#if><#if image_index gt 10> hide</#if>"
 							data-href="${ContextPath}/image/${image.id}.${image.imageType}" title="${image.title!}">
 							<#if image_index==0>
-							<img src="${ContextPath}/image/${image.id}.${image.imageType}?width=341&height=260">
+							<img src="${ContextPath}/image/341/260/${image.id}.${image.imageType}">
 							<#else>
-							<img src="${ContextPath}/image/${image.id}.${image.imageType}?width=63&height=50">
+							<img src="${ContextPath}/image/63/50/${image.id}.${image.imageType}">
 							</#if>
 						</div>
 						</#list>

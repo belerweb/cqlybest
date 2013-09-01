@@ -19,7 +19,7 @@
 						<h4 class="en">${island.enName!}</h4>
 					</a>
 					<a title="${island.zhName!}|${island.enName!}" href="${link}" class="img">
-						<img alt="" src="<@getOneImageUrl2 island.hotelPictures />?width=290&height=150">
+						<img alt="" src="<@getOneImageUrl2 island.hotelPictures 290 150 />">
 					</a>
 					<div class="caption">
 						<#if island.tags?has_content>

@@ -13,7 +13,7 @@
 				<#if User.avatar?starts_with('http')>
 				<img src="${User.avatar}" class="avatar">
 				<#else>
-				<img src="${ContextPath}/image/${User.avatar}?width=32&height=32" class="avatar">
+				<img src="${ContextPath}/image/32/32/${User.avatar}" class="avatar">
 				</#if>
 				<#else>
 				<img src="${ContextPath}/assets/v2/img/avatar.gif" class="avatar">

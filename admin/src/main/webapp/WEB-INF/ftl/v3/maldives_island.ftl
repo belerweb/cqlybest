@@ -39,7 +39,7 @@
 				<#if island.pictures?has_content>
 				<div class="row-fluid">
 					<#assign img=island.pictures[0]>
-					<div class="span12"><img alt="${island.zhName}" src="${ContextPath}/image/${img.id}.${img.extension}?width=480&height=200" width="100%"></div>
+					<div class="span12"><img alt="${island.zhName}" src="${ContextPath}/image/480/200/${img.id}.${img.extension}" width="100%"></div>
 				</div>
 				</#if>
 				<div class="p-l-r-5">
@@ -169,7 +169,7 @@
 				<div class="row-fluid m-b-5">
 					<#assign imgs=room.pictures?chunk(4)[0]>
 					<#list imgs as img>
-					<div class="span${12/imgs?size}"><img alt="${room.zhName}" src="${ContextPath}/image/${img.id}.${img.extension}?width=${480/imgs?size}&height=${(400/imgs?size)?string('0')}" width="100%"></div>
+					<div class="span${12/imgs?size}"><img alt="${room.zhName}" src="${ContextPath}/image/${480/imgs?size}/${(400/imgs?size)?string('0')}/${img.id}.${img.extension}" width="100%"></div>
 					</#list>
 				</div>
 				<div class="alert alert-success">图片已优化，适合移动设备访问，省流量，请放心浏览。欢迎使用电脑访问我们网站(${Settings.basic.siteUrl!})浏览精美图片信息。<br>如须出行，欢迎致电<a href="tel:${Settings.basic.hotline!}">${Settings.basic.hotline!}</a>咨询。</div>
@@ -206,7 +206,7 @@
 				<div class="row-fluid m-b-5">
 					<#assign imgs=dining.pictures?chunk(4)[0]>
 					<#list imgs as img>
-					<div class="span${12/imgs?size}"><img alt="${dining.zhName}" src="${ContextPath}/image/${img.id}.${img.extension}?width=${480/imgs?size}&height=${(400/imgs?size)?string('0')}" width="100%"></div>
+					<div class="span${12/imgs?size}"><img alt="${dining.zhName}" src="${ContextPath}/image/${480/imgs?size}/${(400/imgs?size)?string('0')}/${img.id}.${img.extension}" width="100%"></div>
 					</#list>
 				</div>
 				<div class="alert alert-success">图片已优化，适合移动设备访问，省流量，请放心浏览。欢迎使用电脑访问我们网站(${Settings.basic.siteUrl!})浏览精美图片信息。<br>如须出行，欢迎致电<a href="tel:${Settings.basic.hotline!}">${Settings.basic.hotline!}</a>咨询。</div>

@@ -60,8 +60,7 @@
 			<#if room.pictures?has_content>
 			<div class="room-gallery" data-toggle="modal-gallery" data-target="#product-gallery">
 				<#list room.pictures as image>
-				<#assign imageUrl='${ContextPath}/image/${image.id}.${image.imageType}'>
-				<a data-gallery="gallery" href="${imageUrl}" title="${image.title!}"><img src="${imageUrl}?width=100&height=100"></a>
+				<a data-gallery="gallery" href="${ContextPath}/image/${image.id}.${image.extension}" title="${image.title!}"><img src="${ContextPath}/image/100/100/${image.id}.${image.extension}"></a>
 			</#list>
 			</div>
 			</#if>

@@ -15,7 +15,7 @@
 						<div class="carousel-inner">
 							<#list Page.posters as poster>
 							<div class="<#if poster_index=0>active</#if> item">
-								<img alt="${poster.title!}" src="${ContextPath}/image/${poster.image.id!}.${poster.image.extension}?width=700&height=300">
+								<img alt="${poster.title!}" src="${ContextPath}/image/700/300/${poster.image.id!}.${poster.image.extension}">
 								<div class="carousel-caption">
 									<h4>${poster.title!}</h4>
 									<p>${poster.description!}</p>
@@ -41,7 +41,7 @@
 						<div class="thumbnail">
 							<div class="caption">
 								<#if product.posters?has_content>
-								<img alt="<@composeProductName product />" src="<@getOneImageUrl product.posters />?width=154&height=99">
+								<img alt="<@composeProductName product />" src="<@getOneImageUrl product.posters 154 99/>">
 								</#if>
 								<a class="title" href="${ContextPath}/product/${product.id}.html" target="_blank"><@composeProductName product /></a>
 								<p>
@@ -68,7 +68,7 @@
 						<div class="thumbnail">
 							<div class="caption">
 								<#if product.posters?has_content>
-								<img alt="<@composeProductName product />" src="<@getOneImageUrl product.posters />?width=154&height=99">
+								<img alt="<@composeProductName product />" src="<@getOneImageUrl product.posters 154 99/>">
 								</#if>
 								<a class="title" href="${ContextPath}/product/${product.id}.html" target="_blank"><@composeProductName product /></a>
 							</div>
@@ -90,7 +90,7 @@
 					<div class="thumbnail">
 						<div class="caption">
 							<#if product.posters?has_content>
-							<img alt="<@composeProductName product />" src="<@getOneImageUrl product.posters />?width=196&height=99">
+							<img alt="<@composeProductName product />" src="<@getOneImageUrl product.posters 196 99 />">
 							</#if>
 							<a class="title" href="${ContextPath}/product/${product.id}.html" target="_blank"><@composeProductName product /></a>
 						</div>

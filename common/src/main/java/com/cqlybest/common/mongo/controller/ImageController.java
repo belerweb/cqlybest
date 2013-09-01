@@ -101,8 +101,6 @@ public class ImageController extends ControllerHelper {
 
   @RequestMapping(value = "/image/{imageId}.{extention:jpg|png|gif}", method = RequestMethod.GET)
   public Object view(@PathVariable String imageId, @PathVariable String extention,
-      @RequestParam(required = false) Integer width,
-      @RequestParam(required = false) Integer height,
       @RequestHeader(value = "If-Modified-Since", required = false) String ifModifiedSince)
       throws IOException {
     if (ifModifiedSince != null) {
@@ -120,28 +118,47 @@ public class ImageController extends ControllerHelper {
     headers.setCacheControl("max-age=31536000000");
     headers.setContentType(MediaType.valueOf(image.getContentType()));
 
-    if (width == null || height == null) {
-      Map<?, ?> watermark = (Map<?, ?>) settingsService.getSettings().get("watermark");
-      String watermarkId = (String) ((Map<?, ?>) watermark.get("img")).get("id");
-      String watermarkPosition = (String) watermark.get("position");
-      Image img = mongoImageService.getImage(watermarkId);
+    Map<?, ?> watermark = (Map<?, ?>) settingsService.getSettings().get("watermark");
+    String watermarkId = (String) ((Map<?, ?>) watermark.get("img")).get("id");
+    String watermarkPosition = (String) watermark.get("position");
+    Image img = mongoImageService.getImage(watermarkId);
 
-      if (watermark != null && watermarkPosition != null) {
-        BufferedImage bufferedImage = ImageIO.read(new ByteArrayInputStream(image.getData()));
-        BufferedImage watermarkImage = ImageIO.read(new ByteArrayInputStream(img.getData()));
-        if (bufferedImage.getWidth() > watermarkImage.getWidth()
-            && bufferedImage.getHeight() > watermarkImage.getHeight()) {
-          // 水印
-          Watermark watermarkFilter =
-              new Watermark(Positions.valueOf(watermarkPosition), watermarkImage, 1);
-          bufferedImage = watermarkFilter.apply(bufferedImage);
-          ByteArrayOutputStream out = new ByteArrayOutputStream();
-          write(extention, bufferedImage, out);
-          return new ResponseEntity<byte[]>(out.toByteArray(), headers, HttpStatus.OK);
-        }
+    if (watermark != null && watermarkPosition != null) {
+      BufferedImage bufferedImage = ImageIO.read(new ByteArrayInputStream(image.getData()));
+      BufferedImage watermarkImage = ImageIO.read(new ByteArrayInputStream(img.getData()));
+      if (bufferedImage.getWidth() > watermarkImage.getWidth()
+          && bufferedImage.getHeight() > watermarkImage.getHeight()) {
+        // 水印
+        Watermark watermarkFilter =
+            new Watermark(Positions.valueOf(watermarkPosition), watermarkImage, 1);
+        bufferedImage = watermarkFilter.apply(bufferedImage);
+        ByteArrayOutputStream out = new ByteArrayOutputStream();
+        write(extention, bufferedImage, out);
+        return new ResponseEntity<byte[]>(out.toByteArray(), headers, HttpStatus.OK);
       }
-      return new ResponseEntity<byte[]>(image.getData(), headers, HttpStatus.OK);
     }
+    return new ResponseEntity<byte[]>(image.getData(), headers, HttpStatus.OK);
+  }
+
+  @RequestMapping(value = "/image/{width}/{height}/{imageId}.{extention:jpg|png|gif}", method = RequestMethod.GET)
+  public Object view(@PathVariable String imageId, @PathVariable String extention,
+      @PathVariable Integer width, @PathVariable Integer height,
+      @RequestHeader(value = "If-Modified-Since", required = false) String ifModifiedSince)
+      throws IOException {
+    if (ifModifiedSince != null) {
+      return new ResponseEntity<>(HttpStatus.NOT_MODIFIED);
+    }
+
+    Image image = mongoImageService.getImage(imageId);
+    if (!extention.equals(image.getExtension())) {
+      return new ResponseEntity<byte[]>(null, null, HttpStatus.NOT_FOUND);
+    }
+    HttpHeaders headers = new HttpHeaders();
+    headers.setDate(System.currentTimeMillis());
+    headers.setLastModified(0);
+    headers.setExpires(System.currentTimeMillis() + 31536000000L);
+    headers.setCacheControl("max-age=31536000000");
+    headers.setContentType(MediaType.valueOf(image.getContentType()));
 
     // 缩放
     BufferedImage bufferedImage = ImageIO.read(new ByteArrayInputStream(image.getData()));

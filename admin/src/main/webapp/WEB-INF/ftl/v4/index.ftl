@@ -21,7 +21,7 @@
 						<#assign items=[islands[i*6], islands[i*6+1]]>
 						<#list items as item>
 						<a href="<#if (Settings.basic.siteUrl)?has_content>${Settings.basic.siteUrl}/maldives/${item.id}.html<#else>#</#if>" class="tile wide imagetext wideimage" style="background-color:${colors[springx.rand(0, colors?size-1)]};" target="_blank">
-							<img alt="" src="<@getOneImageUrl2 item.hotelPictures />?width=489&height=200">
+							<img alt="" src="<@getOneImageUrl2 item.hotelPictures 489 200 />">
 							<div class="textover-wrapper transparent">
 								<div class="text2"><strong>${item.zhName!}</strong><br>${item.enName!}</div>
 							</div>
@@ -33,7 +33,7 @@
 					<#assign item=islands[i*6+2]>
 					<div>
 						<a href="<#if (Settings.basic.siteUrl)?has_content>${Settings.basic.siteUrl}/maldives/${item.id}.html<#else>#</#if>" class="tile squarepeek" style="background-color:${colors[springx.rand(0, colors?size-1)]};" target="_blank">
-							<img alt="" src="<@getOneImageUrl2 item.hotelPictures />?width=231&height=200">
+							<img alt="" src="<@getOneImageUrl2 item.hotelPictures 231 200 />">
 							<div class="text-inner">
 								<div class="text4"><strong>${item.zhName!}</strong><br>${item.enName!}</div>
 							</div>
@@ -45,7 +45,7 @@
 					<#assign item=islands[i*6+2]>
 					<div>
 						<a href="<#if (Settings.basic.siteUrl)?has_content>${Settings.basic.siteUrl}/maldives/${item.id}.html<#else>#</#if>" class="tile squarepeek" style="background-color:${colors[springx.rand(0, colors?size-1)]};" target="_blank">
-							<img alt="" src="<@getOneImageUrl2 item.hotelPictures />?width=231&height=200">
+							<img alt="" src="<@getOneImageUrl2 item.hotelPictures 231 200 />">
 							<div class="text-inner">
 								<div class="text4"><strong>${item.zhName!}</strong><br>${item.enName!}</div>
 							</div>
@@ -57,7 +57,7 @@
 						<#assign items=[islands[i*6], islands[i*6+1]]>
 						<#list items as item>
 						<a href="<#if (Settings.basic.siteUrl)?has_content>${Settings.basic.siteUrl}/maldives/${item.id}.html<#else>#</#if>" class="tile wide imagetext wideimage" style="background-color:${colors[springx.rand(0, colors?size-1)]};" target="_blank">
-							<img alt="" src="<@getOneImageUrl2 item.hotelPictures />?width=489&height=200">
+							<img alt="" src="<@getOneImageUrl2 item.hotelPictures 489 200 />">
 							<div class="textover-wrapper transparent">
 								<div class="text2"><strong>${item.zhName!}</strong><br>${item.enName!}</div>
 							</div>
@@ -73,7 +73,7 @@
 				<div class="span4">
 					<div>
 						<a href="<#if (Settings.basic.siteUrl)?has_content>${Settings.basic.siteUrl}/maldives/${item.id}.html<#else>#</#if>" class="tile square image" style="background-color:${colors[springx.rand(0, colors?size-1)]};" target="_blank">
-							<img alt="" src="<@getOneImageUrl2 item.hotelPictures />?width=231&height=150">
+							<img alt="" src="<@getOneImageUrl2 item.hotelPictures 231 150 />">
 							<div class="textover-wrapper transparent">
 								<div class="text2"><strong>${item.zhName!}</strong><br>${item.enName!}</div>
 							</div>

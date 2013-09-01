@@ -42,6 +42,7 @@ public class MaldivesHandler implements Handler {
 
     List<Article> articles = new ArrayList<>();
     List<MaldivesIsland> islands = mongoMaldivesService.queryIsland(0, 10).getItems();
+    boolean first = true;
     for (MaldivesIsland island : islands) {
       List<ImageMeta> images = island.getHotelPictures();
       if (!images.isEmpty()) {
@@ -49,11 +50,12 @@ public class MaldivesHandler implements Handler {
         article.setTitle(island.getZhName() + "|" + island.getEnName());
         article.setDescription(island.getAd());
         if (siteUrl != null) {
-          article.setPicUrl(siteUrl + "/image/" + images.get(0).getId() + "."
-              + images.get(0).getExtension());
+          article.setPicUrl(siteUrl + (first ? "/image/640/320/" : "/image/80/80/")
+              + images.get(0).getId() + "." + images.get(0).getExtension());
           article.setUrl(siteUrl + "/maldives/" + island.getId() + ".html");
         }
         articles.add(article);
+        first = false;
       }
     }
     response.setArticles(articles);

@@ -77,7 +77,7 @@ public class MaldivesIslandHandler implements Handler {
       article.setTitle(island.getZhName() + "|" + island.getEnName());
       article.setDescription(island.getAd());
       if (siteUrl != null) {
-        article.setPicUrl(siteUrl + "/image/" + image.getId() + "." + image.getExtension());
+        article.setPicUrl(siteUrl + "/image/640/320/" + image.getId() + "." + image.getExtension());
         article.setUrl(siteUrl + "/maldives/" + island.getId() + ".html");
       }
       articles.add(article);
@@ -93,7 +93,7 @@ public class MaldivesIslandHandler implements Handler {
               + StringUtils.join(product.getBriefTrip(), StringUtils.EMPTY));
           article.setDescription(product.getDescription());
           if (siteUrl != null) {
-            article.setPicUrl(siteUrl + "/image/" + image.getId() + "." + image.getExtension());
+            article.setPicUrl(siteUrl + "/image/80/80/" + image.getId() + "." + image.getExtension());
             article.setUrl(siteUrl + "/product/" + product.getId() + ".html");
           }
           articles.add(article);
