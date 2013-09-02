@@ -1,5 +1,5 @@
-<#assign Title=(island.zhName!)+(island.enName!) />
-<#assign Description=island.description! />
+<#assign Title='${island.zhName!}${island.enName!} 马代 马尔代夫 海岛 自由行' />
+<#assign Description=island.description!?html />
 <#assign Keywords=island.zhName! />
 <#include "/v2/header.ftl">
 <div id="maldives-island" class="container">

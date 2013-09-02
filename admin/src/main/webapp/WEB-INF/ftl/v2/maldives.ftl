@@ -12,13 +12,13 @@
 				<#assign link="${ContextPath}/maldives/${island.id}.html">
 				<div class="thumbnail">
 					<#if island.hotelLevel?has_content><span class="start start-${island.hotelLevel}">${island.hotelLevel}星</span></#if>
-					<a title="${island.zhName!}|${island.enName!}" href="${link}">
+					<a title="${island.zhName!}|${island.enName!} 马代 马尔代夫 海岛 自由行" href="${link}">
 						<h4 class="zh">${island.zhName!}</h4>
 					</a>
-					<a title="${island.zhName!}|${island.enName!}" href="${link}">
+					<a title="${island.zhName!}|${island.enName!} 马代 马尔代夫 海岛 自由行" href="${link}">
 						<h4 class="en">${island.enName!}</h4>
 					</a>
-					<a title="${island.zhName!}|${island.enName!}" href="${link}" class="img">
+					<a title="${island.zhName!}|${island.enName!} 马代 马尔代夫 海岛 自由行" href="${link}" class="img">
 						<img alt="" src="<@getOneImageUrl2 island.hotelPictures 290 150 />">
 					</a>
 					<div class="caption">
