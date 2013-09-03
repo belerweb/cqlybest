@@ -1,7 +1,5 @@
 package com.cqlybest.common.mongo.bean.page;
 
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * 页面的一部分
@@ -25,9 +23,10 @@ public class Section {
   // TYPE: IMAGE
   private Image img = new Image();// 图片
 
-  private List<Condition> conditions = new ArrayList<>();
-  private Integer number;// 结果集数量
+  // TYPE: MALDIVES
+  private MaldivesIslandCondition mdc; // 马儿代夫查询条件
 
+  private Integer number;// 结果集数量
   private Boolean more = Boolean.FALSE;// 是否显示更多
 
   public String getId() {
@@ -86,12 +85,12 @@ public class Section {
     this.img = img;
   }
 
-  public List<Condition> getConditions() {
-    return conditions;
+  public MaldivesIslandCondition getMdc() {
+    return mdc;
   }
 
-  public void setConditions(List<Condition> conditions) {
-    this.conditions = conditions;
+  public void setMdc(MaldivesIslandCondition mdc) {
+    this.mdc = mdc;
   }
 
   public Integer getNumber() {

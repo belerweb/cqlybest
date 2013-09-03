@@ -57,6 +57,46 @@
 					<label class="lbl"> 新窗口打开链接</label>
 				</div>
 			</div>
+			<div class="control-group hide" data-select="type" data-for="maldives">
+				<label class="control-label">岛屿级别:</label>
+				<div class="controls">
+					<select name="mdc.level.conditionType">
+						<option value="0">等于</option>
+						<option value="1">包含</option>
+					</select>
+					<input name="mdc.level.value" type="text" placeholder="">
+				</div>
+			</div>
+			<div class="control-group hide" data-select="type" data-for="maldives">
+				<label class="control-label">酒店星级:</label>
+				<div class="controls">
+					<select name="mdc.hotelLevel.conditionType">
+						<option value="0">等于</option>
+						<option value="2">大于</option>
+						<option value="3">小于</option>
+					</select>
+					<select name="mdc.hotelLevel.value">
+						<option value="">选择</option>
+						<#list 1..10 as i>
+						<option value="${i}">${i}</option>
+						</#list>
+					</select>
+				</div>
+			</div>
+			<div class="control-group hide" data-select="type" data-for="product maldives">
+				<label class="control-label">显示数量:</label>
+				<div class="controls">
+					<input name="number" type="text" value="0">
+					<span class="help-inline">正整数，0 表示所有满足条件的数据</span>
+				</div>
+			</div>
+			<div class="control-group hide" data-select="type" data-for="product maldives">
+				<label class="control-label">显示［更多］链接:</label>
+				<div class="controls">
+					<input name="more" type="checkbox" value="true">
+					<label class="lbl"> 是</label>
+				</div>
+			</div>
 			<div class="control-group">
 				<div class="controls">
 					<button type="submit" class="btn btn-primary">确定</button>
@@ -115,6 +155,48 @@
 					<input name="img.url" type="text" placeholder="" value="${(section.img.url)!}">
 					<input name="img.target" type="checkbox" <#if (section.img.target)?has_content && section.img.target=="_blank">checked="checked"</#if> value="_blank">
 					<label class="lbl"> 新窗口打开链接</label>
+				</div>
+			</div>
+			</#if>
+			<#if section.type=="maldives">
+			<div class="control-group">
+				<label class="control-label">岛屿级别:</label>
+				<div class="controls">
+					<select name="mdc.level.conditionType">
+						<option <#if (section.mdc.level.conditionType)?exists && section.mdc.level.conditionType==0>selected="selected"</#if> value="0">等于</option>
+						<option <#if (section.mdc.level.conditionType)?exists && section.mdc.level.conditionType==1>selected="selected"</#if> value="1">包含</option>
+					</select>
+					<input name="mdc.level.value" type="text" value="${(section.mdc.level.value)!}" placeholder="">
+				</div>
+			</div>
+			<div class="control-group">
+				<label class="control-label">酒店星级:</label>
+				<div class="controls">
+					<select name="mdc.hotelLevel.conditionType">
+						<option <#if (section.mdc.hotelLevel.conditionType)?exists && section.mdc.hotelLevel.conditionType==0>selected="selected"</#if> value="0">等于</option>
+						<option <#if (section.mdc.hotelLevel.conditionType)?exists && section.mdc.hotelLevel.conditionType==2>selected="selected"</#if> value="2">大于</option>
+						<option <#if (section.mdc.hotelLevel.conditionType)?exists && section.mdc.hotelLevel.conditionType==3>selected="selected"</#if> value="3">小于</option>
+					</select>
+					<select name="mdc.hotelLevel.value">
+						<option value="">选择</option>
+						<#list 1..10 as i>
+						<option <#if (section.mdc.hotelLevel.value)?exists && section.mdc.hotelLevel.value=='${i}'>selected="selected"</#if> value="${i}">${i}</option>
+						</#list>
+					</select>
+				</div>
+			</div>
+			<div class="control-group">
+				<label class="control-label">显示数量:</label>
+				<div class="controls">
+					<input name="number" type="text" value="${section.number!'0'}">
+					<span class="help-inline">正整数，0 表示所有满足条件的数据</span>
+				</div>
+			</div>
+			<div class="control-group">
+				<label class="control-label">显示［更多］链接:</label>
+				<div class="controls">
+					<input name="more" type="checkbox" <#if section.more?exists && section.more>checked="checked"</#if> value="true">
+					<label class="lbl"> 是</label>
 				</div>
 			</div>
 			</#if>

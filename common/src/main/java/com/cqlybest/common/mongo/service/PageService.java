@@ -39,6 +39,11 @@ public class PageService {
         in + ".$.code", code).update();
   }
 
+  public void updateSection(String in, String sectionId, Section section) {
+    mongoDb.createQuery("Page").eq(in + ".id", sectionId).modify().set(in + ".$",
+        mongoDb.unmap(section)).update();
+  }
+
   public void updateImageSection(String in, String sectionId, String name, String img,
       String imgTitle, String imgDescription, String imgUrl, String imgTarget) {
     String[] imgStr = img.split("\\.");

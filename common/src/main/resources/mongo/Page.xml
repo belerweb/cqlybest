@@ -16,7 +16,7 @@
 		<property name="padding" />
 		<property name="code" />
 		<property name="img" />
-		<property name="conditions" />
+		<property name="mdc" />
 		<property name="number" />
 		<property name="more" />
 	</object>
@@ -45,10 +45,14 @@
 	</object>
 
 	<object class="com.cqlybest.common.mongo.bean.page.Condition">
-		<property name="id" />
-		<property name="property" />
-		<property name="type" />
+		<property name="conditionType" />
+		<property name="valueType" />
 		<property name="value" />
+	</object>
+
+	<object class="com.cqlybest.common.mongo.bean.page.MaldivesIslandCondition">
+		<property name="hotelLevel" />
+		<property name="level" />
 	</object>
 
 </descriptors>

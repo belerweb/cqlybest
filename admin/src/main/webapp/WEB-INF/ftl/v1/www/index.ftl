@@ -218,7 +218,7 @@ $('#page-content button[data-action=upload]').click(function(){
 $('#page-content form select[name=type]').change(function(){
 	var type = this.value;
 	$('#page-content form .control-group[data-select=type]').hide();
-	$('#page-content form .control-group[data-select=type][data-for=' + type + ']').show();
+	$('#page-content form .control-group[data-select=type][data-for~=' + type + ']').show();
 });
 
 $('#page-content button[data-action=update]').click(function(){

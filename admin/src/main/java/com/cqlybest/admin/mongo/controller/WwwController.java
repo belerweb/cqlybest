@@ -16,7 +16,9 @@ import com.cqlybest.common.mongo.bean.FriendlyLink;
 import com.cqlybest.common.mongo.bean.ImageMeta;
 import com.cqlybest.common.mongo.bean.Link;
 import com.cqlybest.common.mongo.bean.Page;
+import com.cqlybest.common.mongo.bean.page.Condition;
 import com.cqlybest.common.mongo.bean.page.Image;
+import com.cqlybest.common.mongo.bean.page.MaldivesIslandCondition;
 import com.cqlybest.common.mongo.bean.page.Section;
 import com.cqlybest.common.mongo.service.FriendlyLinkService;
 import com.cqlybest.common.mongo.service.PageService;
@@ -98,13 +100,21 @@ public class WwwController extends ControllerHelper {
   }
 
   @RequestMapping("/www/index/section/add.do")
-  public Object addIndexSection(@RequestParam String in, @RequestParam String name,
-      @RequestParam String type, @RequestParam(required = false) String code,
+  public Object addIndexSection(
+      @RequestParam String in,
+      @RequestParam String name,
+      @RequestParam String type,
+      @RequestParam(required = false) String code,
       @RequestParam(required = false) String img,
       @RequestParam(value = "img.title", required = false) String imgTitle,
       @RequestParam(value = "img.description", required = false) String imgDescription,
       @RequestParam(value = "img.url", required = false) String imgUrl,
-      @RequestParam(value = "img.target", required = false) String imgTarget) {
+      @RequestParam(value = "img.target", required = false) String imgTarget,
+      @RequestParam(value = "mdc.level.conditionType", required = false) String mdcLevelCndType,
+      @RequestParam(value = "mdc.level.value", required = false) String mdcLevelValue,
+      @RequestParam(value = "mdc.hotelLevel.conditionType", required = false) String mdcHotelLevelCndType,
+      @RequestParam(value = "mdc.hotelLevel.value", required = false) String mdcHotelLevelValue,
+      @RequestParam(required = false) Integer number, @RequestParam(required = false) Boolean more) {
     if (StringUtils.isBlank(type)) {
       return error("请选择类型");
     }
@@ -131,7 +141,27 @@ public class WwwController extends ControllerHelper {
       image.setTarget(imgTarget);
       section.setImg(image);
     }
+    if (Section.TYPE_MALDIVES.equals(type)) {
+      MaldivesIslandCondition mdc = new MaldivesIslandCondition();
+      if (StringUtils.isNotBlank(mdcLevelValue)) {
+        Condition level = new Condition();
+        level.setConditionType(Integer.valueOf(mdcLevelCndType));
+        level.setValue(mdcLevelValue);
+        level.setValueType(Condition.VALUE_TYPE_STRING);
+        mdc.setLevel(level);
+      }
+      if (StringUtils.isNotBlank(mdcHotelLevelValue)) {
+        Condition hotelLevel = new Condition();
+        hotelLevel.setConditionType(Integer.valueOf(mdcHotelLevelCndType));
+        hotelLevel.setValue(mdcHotelLevelValue);
+        hotelLevel.setValueType(Condition.VALUE_TYPE_INTEGER);
+        mdc.setHotelLevel(hotelLevel);
+      }
+      section.setMdc(mdc);
+    }
 
+    section.setNumber(number);
+    section.setMore(more);
     pageService.addSection("www.index", in, section);
     return ok();
   }
@@ -155,6 +185,43 @@ public class WwwController extends ControllerHelper {
     }
     pageService.updateImageSection(in, sectionId, name, img, imgTitle, imgDescription, imgUrl,
         imgTarget);
+    return ok();
+  }
+
+  @RequestMapping("/www/index/section/maldives/update.do")
+  public Object updateIndexMdSection(
+      @RequestParam String in,
+      @RequestParam String sectionId,
+      @RequestParam(required = false) String name,
+      @RequestParam(value = "mdc.level.conditionType", required = false) String mdcLevelCndType,
+      @RequestParam(value = "mdc.level.value", required = false) String mdcLevelValue,
+      @RequestParam(value = "mdc.hotelLevel.conditionType", required = false) String mdcHotelLevelCndType,
+      @RequestParam(value = "mdc.hotelLevel.value", required = false) String mdcHotelLevelValue,
+      @RequestParam(required = false) Integer number, @RequestParam(required = false) Boolean more) {
+    Section section = new Section();
+    section.setId(sectionId);
+    section.setName(name);
+    section.setType(Section.TYPE_MALDIVES);
+    section.setNumber(number);
+    section.setMore(more);
+
+    MaldivesIslandCondition mdc = new MaldivesIslandCondition();
+    if (StringUtils.isNotBlank(mdcLevelValue)) {
+      Condition level = new Condition();
+      level.setConditionType(Integer.valueOf(mdcLevelCndType));
+      level.setValue(mdcLevelValue);
+      level.setValueType(Condition.VALUE_TYPE_STRING);
+      mdc.setLevel(level);
+    }
+    if (StringUtils.isNotBlank(mdcHotelLevelValue)) {
+      Condition hotelLevel = new Condition();
+      hotelLevel.setConditionType(Integer.valueOf(mdcHotelLevelCndType));
+      hotelLevel.setValue(mdcHotelLevelValue);
+      hotelLevel.setValueType(Condition.VALUE_TYPE_INTEGER);
+      mdc.setHotelLevel(hotelLevel);
+    }
+    section.setMdc(mdc);
+    pageService.updateSection(in, sectionId, section);
     return ok();
   }
 
