@@ -239,7 +239,11 @@ $('#page-content button[data-action=delete]').click(function(){
 $('#page-content form').submit(function(){
 	$(this).ajaxSubmit({
 		success: function(response, status, xhr, form) {
-			cqlybest.reload('#main-content');
+			if (form.is('[data-action=add]')) {
+				cqlybest.reload('#main-content');
+			} else {
+				cqlybest.success();
+			}
 		},
 		error: function(xhr, status, response, form) {
 			cqlybest.error(eval(xhr.responseText));

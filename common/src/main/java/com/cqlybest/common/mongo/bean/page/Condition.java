@@ -7,27 +7,22 @@ public class Condition {
   public static final int CONDITION_TYPE_GT = 2; // 大于
   public static final int CONDITION_TYPE_LT = 3; // 小于
 
-  public static final int VALUE_TYPE_STRING = 0; // 字符串
-  public static final int VALUE_TYPE_INTEGER = 1; // 整数
+  public Condition() {}
 
-  private Integer conditionType;
-  private Integer valueType;
+  public Condition(Integer type, String value) {
+    this.type = type;
+    this.value = value;
+  }
+
+  private Integer type;
   private String value;
 
-  public Integer getConditionType() {
-    return conditionType;
+  public Integer getType() {
+    return type;
   }
 
-  public void setConditionType(Integer conditionType) {
-    this.conditionType = conditionType;
-  }
-
-  public Integer getValueType() {
-    return valueType;
-  }
-
-  public void setValueType(Integer valueType) {
-    this.valueType = valueType;
+  public void setType(Integer type) {
+    this.type = type;
   }
 
   public String getValue() {
@@ -37,5 +32,7 @@ public class Condition {
   public void setValue(String value) {
     this.value = value;
   }
+
+
 
 }

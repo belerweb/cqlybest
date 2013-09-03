@@ -16,6 +16,7 @@
 		<property name="padding" />
 		<property name="code" />
 		<property name="img" />
+		<property name="pc" />
 		<property name="mdc" />
 		<property name="number" />
 		<property name="more" />
@@ -45,14 +46,33 @@
 	</object>
 
 	<object class="com.cqlybest.common.mongo.bean.page.Condition">
-		<property name="conditionType" />
-		<property name="valueType" />
+		<property name="type" />
+		<property name="value" />
+	</object>
+
+	<object class="com.cqlybest.common.mongo.bean.page.BooleanCondition">
+		<property name="type" />
+		<property name="value" />
+	</object>
+
+	<object class="com.cqlybest.common.mongo.bean.page.IntegerCondition">
+		<property name="type" />
 		<property name="value" />
 	</object>
 
 	<object class="com.cqlybest.common.mongo.bean.page.MaldivesIslandCondition">
 		<property name="hotelLevel" />
 		<property name="level" />
+	</object>
+
+	<object class="com.cqlybest.common.mongo.bean.page.ProductCondition">
+		<property name="type" />
+		<property name="name" />
+		<property name="popular" />
+		<property name="recommend" />
+		<property name="special" />
+		<property name="departureCity" />
+		<property name="recommendedMonth" />
 	</object>
 
 </descriptors>

@@ -16,9 +16,12 @@ import com.cqlybest.common.mongo.bean.FriendlyLink;
 import com.cqlybest.common.mongo.bean.ImageMeta;
 import com.cqlybest.common.mongo.bean.Link;
 import com.cqlybest.common.mongo.bean.Page;
+import com.cqlybest.common.mongo.bean.page.BooleanCondition;
 import com.cqlybest.common.mongo.bean.page.Condition;
 import com.cqlybest.common.mongo.bean.page.Image;
+import com.cqlybest.common.mongo.bean.page.IntegerCondition;
 import com.cqlybest.common.mongo.bean.page.MaldivesIslandCondition;
+import com.cqlybest.common.mongo.bean.page.ProductCondition;
 import com.cqlybest.common.mongo.bean.page.Section;
 import com.cqlybest.common.mongo.service.FriendlyLinkService;
 import com.cqlybest.common.mongo.service.PageService;
@@ -100,20 +103,25 @@ public class WwwController extends ControllerHelper {
   }
 
   @RequestMapping("/www/index/section/add.do")
-  public Object addIndexSection(
-      @RequestParam String in,
-      @RequestParam String name,
-      @RequestParam String type,
-      @RequestParam(required = false) String code,
+  public Object addIndexSection(@RequestParam String in, @RequestParam String name,
+      @RequestParam String type, @RequestParam(required = false) String code,
       @RequestParam(required = false) String img,
       @RequestParam(value = "img.title", required = false) String imgTitle,
       @RequestParam(value = "img.description", required = false) String imgDescription,
       @RequestParam(value = "img.url", required = false) String imgUrl,
       @RequestParam(value = "img.target", required = false) String imgTarget,
-      @RequestParam(value = "mdc.level.conditionType", required = false) String mdcLevelCndType,
+      @RequestParam(value = "mdc.level.type", required = false) String mdcLevelType,
       @RequestParam(value = "mdc.level.value", required = false) String mdcLevelValue,
-      @RequestParam(value = "mdc.hotelLevel.conditionType", required = false) String mdcHotelLevelCndType,
+      @RequestParam(value = "mdc.hotelLevel.type", required = false) String mdcHotelLevelType,
       @RequestParam(value = "mdc.hotelLevel.value", required = false) String mdcHotelLevelValue,
+      @RequestParam(value = "pc.type.value", required = false) String pcTypeValue,
+      @RequestParam(value = "pc.name.type", required = false) String pcNameType,
+      @RequestParam(value = "pc.name.value", required = false) String pcNameValue,
+      @RequestParam(value = "pc.popular.value", required = false) String pcPopularValue,
+      @RequestParam(value = "pc.recommend.value", required = false) String pcRecommendValue,
+      @RequestParam(value = "pc.special.value", required = false) String pcSpecialValue,
+      @RequestParam(value = "pc.dcity.value", required = false) String pcDcityValue,
+      @RequestParam(value = "pc.rmonth.value", required = false) String pcRmonthValue,
       @RequestParam(required = false) Integer number, @RequestParam(required = false) Boolean more) {
     if (StringUtils.isBlank(type)) {
       return error("请选择类型");
@@ -141,21 +149,18 @@ public class WwwController extends ControllerHelper {
       image.setTarget(imgTarget);
       section.setImg(image);
     }
+    if (Section.TYPE_PRODUCT.equals(type)) {
+      section.setPc(makeProductCondition(pcTypeValue, pcNameType, pcNameValue, pcPopularValue,
+          pcRecommendValue, pcSpecialValue, pcDcityValue, pcRmonthValue));
+    }
     if (Section.TYPE_MALDIVES.equals(type)) {
       MaldivesIslandCondition mdc = new MaldivesIslandCondition();
       if (StringUtils.isNotBlank(mdcLevelValue)) {
-        Condition level = new Condition();
-        level.setConditionType(Integer.valueOf(mdcLevelCndType));
-        level.setValue(mdcLevelValue);
-        level.setValueType(Condition.VALUE_TYPE_STRING);
-        mdc.setLevel(level);
+        mdc.setLevel(new Condition(Integer.valueOf(mdcLevelType), mdcLevelValue));
       }
       if (StringUtils.isNotBlank(mdcHotelLevelValue)) {
-        Condition hotelLevel = new Condition();
-        hotelLevel.setConditionType(Integer.valueOf(mdcHotelLevelCndType));
-        hotelLevel.setValue(mdcHotelLevelValue);
-        hotelLevel.setValueType(Condition.VALUE_TYPE_INTEGER);
-        mdc.setHotelLevel(hotelLevel);
+        mdc.setHotelLevel(new IntegerCondition(Integer.valueOf(mdcHotelLevelType), Integer
+            .valueOf(mdcHotelLevelValue)));
       }
       section.setMdc(mdc);
     }
@@ -164,6 +169,39 @@ public class WwwController extends ControllerHelper {
     section.setMore(more);
     pageService.addSection("www.index", in, section);
     return ok();
+  }
+
+  private ProductCondition makeProductCondition(String typeValue, String nameType,
+      String nameValue, String popularValue, String recommendValue, String specialValue,
+      String dcityValue, String rmonthValue) {
+    ProductCondition pc = new ProductCondition();
+    if (StringUtils.isNotBlank(typeValue)) {
+      pc.setType(new Condition(Condition.CONDITION_TYPE_EQ, typeValue));
+    }
+    if (StringUtils.isNotBlank(nameValue)) {
+      pc.setName(new Condition(Integer.valueOf(nameType), nameValue));
+    }
+    if (StringUtils.isNotBlank(popularValue)) {
+      pc
+          .setPopular(new BooleanCondition(Condition.CONDITION_TYPE_EQ, Boolean
+              .valueOf(popularValue)));
+    }
+    if (StringUtils.isNotBlank(recommendValue)) {
+      pc.setRecommend(new BooleanCondition(Condition.CONDITION_TYPE_EQ, Boolean
+          .valueOf(recommendValue)));
+    }
+    if (StringUtils.isNotBlank(specialValue)) {
+      pc
+          .setSpecial(new BooleanCondition(Condition.CONDITION_TYPE_EQ, Boolean
+              .valueOf(specialValue)));
+    }
+    if (StringUtils.isNotBlank(dcityValue)) {
+      pc.setDepartureCity(new Condition(Condition.CONDITION_TYPE_IN, dcityValue));
+    }
+    if (StringUtils.isNotBlank(rmonthValue)) {
+      pc.setRecommendedMonth(new Condition(Condition.CONDITION_TYPE_IN, rmonthValue));
+    }
+    return pc;
   }
 
   @RequestMapping("/www/index/section/code/update.do")
@@ -189,13 +227,11 @@ public class WwwController extends ControllerHelper {
   }
 
   @RequestMapping("/www/index/section/maldives/update.do")
-  public Object updateIndexMdSection(
-      @RequestParam String in,
-      @RequestParam String sectionId,
+  public Object updateIndexMdSection(@RequestParam String in, @RequestParam String sectionId,
       @RequestParam(required = false) String name,
-      @RequestParam(value = "mdc.level.conditionType", required = false) String mdcLevelCndType,
+      @RequestParam(value = "mdc.level.type", required = false) String mdcLevelType,
       @RequestParam(value = "mdc.level.value", required = false) String mdcLevelValue,
-      @RequestParam(value = "mdc.hotelLevel.conditionType", required = false) String mdcHotelLevelCndType,
+      @RequestParam(value = "mdc.hotelLevel.type", required = false) String mdcHotelLevelType,
       @RequestParam(value = "mdc.hotelLevel.value", required = false) String mdcHotelLevelValue,
       @RequestParam(required = false) Integer number, @RequestParam(required = false) Boolean more) {
     Section section = new Section();
@@ -207,20 +243,38 @@ public class WwwController extends ControllerHelper {
 
     MaldivesIslandCondition mdc = new MaldivesIslandCondition();
     if (StringUtils.isNotBlank(mdcLevelValue)) {
-      Condition level = new Condition();
-      level.setConditionType(Integer.valueOf(mdcLevelCndType));
-      level.setValue(mdcLevelValue);
-      level.setValueType(Condition.VALUE_TYPE_STRING);
-      mdc.setLevel(level);
+      mdc.setLevel(new Condition(Integer.valueOf(mdcLevelType), mdcLevelValue));
     }
     if (StringUtils.isNotBlank(mdcHotelLevelValue)) {
-      Condition hotelLevel = new Condition();
-      hotelLevel.setConditionType(Integer.valueOf(mdcHotelLevelCndType));
-      hotelLevel.setValue(mdcHotelLevelValue);
-      hotelLevel.setValueType(Condition.VALUE_TYPE_INTEGER);
-      mdc.setHotelLevel(hotelLevel);
+      mdc.setHotelLevel(new IntegerCondition(Integer.valueOf(mdcHotelLevelType), Integer
+          .valueOf(mdcHotelLevelValue)));
     }
     section.setMdc(mdc);
+    pageService.updateSection(in, sectionId, section);
+    return ok();
+  }
+
+  @RequestMapping("/www/index/section/product/update.do")
+  public Object updateIndexProductSection(@RequestParam String in, @RequestParam String sectionId,
+      @RequestParam(required = false) String name,
+      @RequestParam(value = "pc.type.value", required = false) String pcTypeValue,
+      @RequestParam(value = "pc.name.type", required = false) String pcNameType,
+      @RequestParam(value = "pc.name.value", required = false) String pcNameValue,
+      @RequestParam(value = "pc.popular.value", required = false) String pcPopularValue,
+      @RequestParam(value = "pc.recommend.value", required = false) String pcRecommendValue,
+      @RequestParam(value = "pc.special.value", required = false) String pcSpecialValue,
+      @RequestParam(value = "pc.dcity.value", required = false) String pcDcityValue,
+      @RequestParam(value = "pc.rmonth.value", required = false) String pcRmonthValue,
+      @RequestParam(required = false) Integer number, @RequestParam(required = false) Boolean more) {
+    Section section = new Section();
+    section.setId(sectionId);
+    section.setName(name);
+    section.setType(Section.TYPE_PRODUCT);
+    section.setNumber(number);
+    section.setMore(more);
+
+    section.setPc(makeProductCondition(pcTypeValue, pcNameType, pcNameValue, pcPopularValue,
+        pcRecommendValue, pcSpecialValue, pcDcityValue, pcRmonthValue));
     pageService.updateSection(in, sectionId, section);
     return ok();
   }

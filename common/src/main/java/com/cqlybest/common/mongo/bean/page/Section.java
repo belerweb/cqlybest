@@ -23,6 +23,9 @@ public class Section {
   // TYPE: IMAGE
   private Image img = new Image();// 图片
 
+  // TYPE: PRODUCT
+  private ProductCondition pc; // 产品查询条件
+
   // TYPE: MALDIVES
   private MaldivesIslandCondition mdc; // 马儿代夫查询条件
 
@@ -107,6 +110,14 @@ public class Section {
 
   public void setMore(Boolean more) {
     this.more = more;
+  }
+
+  public ProductCondition getPc() {
+    return pc;
+  }
+
+  public void setPc(ProductCondition pc) {
+    this.pc = pc;
   }
 
 }

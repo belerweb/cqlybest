@@ -2,14 +2,14 @@ package com.cqlybest.common.mongo.bean.page;
 
 public class MaldivesIslandCondition {
 
-  private Condition hotelLevel; // 酒店星级
+  private IntegerCondition hotelLevel; // 酒店星级
   private Condition level;// 岛屿级别
 
-  public Condition getHotelLevel() {
+  public IntegerCondition getHotelLevel() {
     return hotelLevel;
   }
 
-  public void setHotelLevel(Condition hotelLevel) {
+  public void setHotelLevel(IntegerCondition hotelLevel) {
     this.hotelLevel = hotelLevel;
   }
 

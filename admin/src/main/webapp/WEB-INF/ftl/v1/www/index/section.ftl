@@ -57,10 +57,71 @@
 					<label class="lbl"> 新窗口打开链接</label>
 				</div>
 			</div>
+			<div class="control-group hide" data-select="type" data-for="product">
+				<label class="control-label">类型:</label>
+				<div class="controls">
+					<select name="pc.type.value">
+						<option value=""></option>
+						<option value="maldives">马尔代夫</option>
+					</select>
+				</div>
+			</div>
+			<div class="control-group hide" data-select="type" data-for="product">
+				<label class="control-label">名称:</label>
+				<div class="controls">
+					<select name="pc.name.type">
+						<option value="1">包含</option>
+						<option value="0">等于</option>
+					</select>
+					<input name="mdc.name.value" type="text" placeholder="">
+				</div>
+			</div>
+			<div class="control-group hide" data-select="type" data-for="product">
+				<label class="control-label">热门:</label>
+				<div class="controls">
+					<select name="pc.popular.value">
+						<option value=""></option>
+						<option value="true">是</option>
+						<option value="false">否</option>
+					</select>
+				</div>
+			</div>
+			<div class="control-group hide" data-select="type" data-for="product">
+				<label class="control-label">推荐:</label>
+				<div class="controls">
+					<select name="pc.recommend.value">
+						<option value=""></option>
+						<option value="true">是</option>
+						<option value="false">否</option>
+					</select>
+				</div>
+			</div>
+			<div class="control-group hide" data-select="type" data-for="product">
+				<label class="control-label">特价:</label>
+				<div class="controls">
+					<select name="pc.special.value">
+						<option value=""></option>
+						<option value="true">是</option>
+						<option value="false">否</option>
+					</select>
+				</div>
+			</div>
+			<div class="control-group hide" data-select="type" data-for="product">
+				<label class="control-label">出发城市:</label>
+				<div class="controls">
+					<input name="pc.dcity.value" type="text" placeholder="">
+				</div>
+			</div>
+			<div class="control-group hide" data-select="type" data-for="product">
+				<label class="control-label">推荐月份:</label>
+				<div class="controls">
+					<input name="pc.rmonth.value" type="text" placeholder="">
+				</div>
+			</div>
 			<div class="control-group hide" data-select="type" data-for="maldives">
 				<label class="control-label">岛屿级别:</label>
 				<div class="controls">
-					<select name="mdc.level.conditionType">
+					<select name="mdc.level.type">
 						<option value="0">等于</option>
 						<option value="1">包含</option>
 					</select>
@@ -70,7 +131,7 @@
 			<div class="control-group hide" data-select="type" data-for="maldives">
 				<label class="control-label">酒店星级:</label>
 				<div class="controls">
-					<select name="mdc.hotelLevel.conditionType">
+					<select name="mdc.hotelLevel.type">
 						<option value="0">等于</option>
 						<option value="2">大于</option>
 						<option value="3">小于</option>
@@ -158,13 +219,76 @@
 				</div>
 			</div>
 			</#if>
+			<#if section.type=="product">
+			<div class="control-group">
+				<label class="control-label">类型:</label>
+				<div class="controls">
+					<select name="pc.type.value">
+						<option value=""></option>
+						<option <#if (section.pc.type.value)?exists && section.pc.type.value=='maldives'>selected="selected"</#if> value="maldives">马尔代夫</option>
+					</select>
+				</div>
+			</div>
+			<div class="control-group">
+				<label class="control-label">名称:</label>
+				<div class="controls">
+					<select name="pc.name.type">
+						<option <#if (section.pc.name.type)?exists && section.pc.name.type==1>selected="selected"</#if> value="1">包含</option>
+						<option <#if (section.pc.name.type)?exists && section.pc.name.type==0>selected="selected"</#if> value="0">等于</option>
+					</select>
+					<input name="mdc.name.value" type="text" value="${(section.pc.name.value)!}" placeholder="">
+				</div>
+			</div>
+			<div class="control-group">
+				<label class="control-label">热门:</label>
+				<div class="controls">
+					<select name="pc.popular.value">
+						<option value=""></option>
+						<option <#if (section.pc.popular.value)?exists && section.pc.popular.value>selected="selected"</#if> value="true">是</option>
+						<option <#if (section.pc.popular.value)?exists && !section.pc.popular.value>selected="selected"</#if> value="false">否</option>
+					</select>
+				</div>
+			</div>
+			<div class="control-group">
+				<label class="control-label">推荐:</label>
+				<div class="controls">
+					<select name="pc.recommend.value">
+						<option value=""></option>
+						<option <#if (section.pc.recommend.value)?exists && section.pc.recommend.value>selected="selected"</#if> value="true">是</option>
+						<option <#if (section.pc.recommend.value)?exists && !section.pc.recommend.value>selected="selected"</#if> value="false">否</option>
+					</select>
+				</div>
+			</div>
+			<div class="control-group">
+				<label class="control-label">特价:</label>
+				<div class="controls">
+					<select name="pc.special.value">
+						<option value=""></option>
+						<option <#if (section.pc.special.value)?exists && section.pc.special.value>selected="selected"</#if> value="true">是</option>
+						<option <#if (section.pc.special.value)?exists && !section.pc.special.value>selected="selected"</#if> value="false">否</option>
+					</select>
+				</div>
+			</div>
+			<div class="control-group">
+				<label class="control-label">出发城市:</label>
+				<div class="controls">
+					<input name="pc.dcity.value" type="text" value="${(section.pc.departureCity.value)!}" placeholder="">
+				</div>
+			</div>
+			<div class="control-group">
+				<label class="control-label">推荐月份:</label>
+				<div class="controls">
+					<input name="pc.rmonth.value" type="text" value="${(section.pc.recommendedMonth.value)!}" placeholder="">
+				</div>
+			</div>
+			</#if>
 			<#if section.type=="maldives">
 			<div class="control-group">
 				<label class="control-label">岛屿级别:</label>
 				<div class="controls">
-					<select name="mdc.level.conditionType">
-						<option <#if (section.mdc.level.conditionType)?exists && section.mdc.level.conditionType==0>selected="selected"</#if> value="0">等于</option>
-						<option <#if (section.mdc.level.conditionType)?exists && section.mdc.level.conditionType==1>selected="selected"</#if> value="1">包含</option>
+					<select name="mdc.level.type">
+						<option <#if (section.mdc.level.type)?exists && section.mdc.level.type==0>selected="selected"</#if> value="0">等于</option>
+						<option <#if (section.mdc.level.type)?exists && section.mdc.level.type==1>selected="selected"</#if> value="1">包含</option>
 					</select>
 					<input name="mdc.level.value" type="text" value="${(section.mdc.level.value)!}" placeholder="">
 				</div>
@@ -172,15 +296,15 @@
 			<div class="control-group">
 				<label class="control-label">酒店星级:</label>
 				<div class="controls">
-					<select name="mdc.hotelLevel.conditionType">
-						<option <#if (section.mdc.hotelLevel.conditionType)?exists && section.mdc.hotelLevel.conditionType==0>selected="selected"</#if> value="0">等于</option>
-						<option <#if (section.mdc.hotelLevel.conditionType)?exists && section.mdc.hotelLevel.conditionType==2>selected="selected"</#if> value="2">大于</option>
-						<option <#if (section.mdc.hotelLevel.conditionType)?exists && section.mdc.hotelLevel.conditionType==3>selected="selected"</#if> value="3">小于</option>
+					<select name="mdc.hotelLevel.type">
+						<option <#if (section.mdc.hotelLevel.type)?exists && section.mdc.hotelLevel.type==0>selected="selected"</#if> value="0">等于</option>
+						<option <#if (section.mdc.hotelLevel.type)?exists && section.mdc.hotelLevel.type==2>selected="selected"</#if> value="2">大于</option>
+						<option <#if (section.mdc.hotelLevel.type)?exists && section.mdc.hotelLevel.type==3>selected="selected"</#if> value="3">小于</option>
 					</select>
 					<select name="mdc.hotelLevel.value">
 						<option value="">选择</option>
 						<#list 1..10 as i>
-						<option <#if (section.mdc.hotelLevel.value)?exists && section.mdc.hotelLevel.value=='${i}'>selected="selected"</#if> value="${i}">${i}</option>
+						<option <#if (section.mdc.hotelLevel.value)?exists && section.mdc.hotelLevel.value==i>selected="selected"</#if> value="${i}">${i}</option>
 						</#list>
 					</select>
 				</div>
