@@ -29,92 +29,57 @@
 				</div>
 			</div>
 			</#if>
-			<#if specials?has_content>
-			<div class="index-brand-section row-fluid">
-				<div class="span12">
-					<h4>特价产品<span class="more"><a href="${ContextPath}/special.html" target="_blank">更多</a></span></h4>
-					<hr>
-				</div>
-				<ul class="thumbnails">
-					<#list specials as product>
-					<li class="span3">
-						<div class="thumbnail">
-							<div class="caption">
-								<#if product.posters?has_content>
-								<img alt="<@composeProductName product />" src="<@getOneImageUrl product.posters 154 99/>">
-								</#if>
-								<a class="title" href="${ContextPath}/product/${product.id}.html" target="_blank"><@composeProductName product /></a>
-								<p>
-									<span><#if (product.specialPrice)?exists>¥${(product.specialPrice/100)?string('0.00')}<#else>特价</#if></span>
-									<#if (product.price)?exists><del>原价：¥${(product.price/100)?string('0.00')}</del></#if>
-								</p>
-							</div>
-						</div>
-					</li>
-					</#list>
-				</ul>
+			<#list Page.contents as section>
+			<#if section.type=="code">${section.code!}</#if>
+			<#if section.type=="img">
+			<div class="row-fluid">
+				<a <#if section.img.url?has_content>href="${section.img.url}"</#if>>
+					<img src="${ContextPath}/image/${section.img.id}.${section.img.extension}">
+				</a>
 			</div>
 			</#if>
-			<#if groups?has_content>
-			<#list groups as group>
-			<div class="index-brand-section row-fluid">
-				<div class="span12">
-					<h4>${(group.group.name)!}<span class="more"><a href="${ContextPath}/group/${(group.group.id)!}.html" target="_blank">更多</a></span></h4>
-					<hr>
+			<#if section.type=="product" && section.queryResult.items?has_content>
+			<div class="widget-box transparent">
+				<div class="widget-header widget-header-flat">
+					<h4 class="lighter">
+						${section.name!}
+					</h4>
 				</div>
-				<ul class="thumbnails">
-					<#list group.products as product>
-					<li class="span3">
-						<div class="thumbnail">
-							<div class="caption">
-								<#if product.posters?has_content>
-								<img alt="<@composeProductName product />" src="<@getOneImageUrl product.posters 154 99/>">
-								</#if>
-								<a class="title" href="${ContextPath}/product/${product.id}.html" target="_blank"><@composeProductName product /></a>
-							</div>
-						</div>
-					</li>
-					</#list>
-				</ul>
-			</div>
-			</#list>
-			</#if>
-		</div>
-		<div class="span3">
-			<!-- 特价 -->
-			<div class="index-recommend-box box">
-				<div class="title title-success"><strong>推荐产品</strong></div>
-				<div class="content">
-					<#if recommendeds?has_content>
-					<#list recommendeds as product>
-					<div class="thumbnail">
-						<div class="caption">
-							<#if product.posters?has_content>
-							<img alt="<@composeProductName product />" src="<@getOneImageUrl product.posters 196 99 />">
-							</#if>
-							<a class="title" href="${ContextPath}/product/${product.id}.html" target="_blank"><@composeProductName product /></a>
+				<div class="widget-body">
+					<div class="widget-body-inner">
+						<div class="widget-main no-padding">
+							<#list section.queryResult.items as product>
+							${product.name!}
+							</#list>
 						</div>
 					</div>
-					</#list>
-					</#if>
 				</div>
 			</div>
-			<!-- 热门 -->
-			<div class="box">
-				<div class="title title-important"><strong>热门线路</strong></div>
-				<div class="content">
-					<ul>
-						<#if hots?has_content>
-						<#list hots as product>
-						<li>
-							<span class="badge badge-warning">${product_index+1}</span>
-							<a href="${ContextPath}/product/${product.id}.html" target="_blank"><@composeProductName product /></a>
-						</li>
-						</#list>
-						</#if>
-					</ul>
+			</#if>
+			<#if section.type=="maldives"&& section.queryResult.items?has_content>
+			<div class="widget-box transparent">
+				<div class="widget-header widget-header-flat">
+					<h4 class="lighter">
+						${section.name!}
+					</h4>
+				</div>
+				<div class="widget-body">
+					<div class="widget-body-inner">
+						<div class="widget-main no-padding">
+							<#list section.queryResult.items as island>
+							${island.zhName!}
+							</#list>
+						</div>
+					</div>
 				</div>
 			</div>
+			</#if>
+			</#list>
+		</div>
+		<div class="span3">
+			<#list Page.sidebars as section>
+			<#if section.type=="code">${section.code!}</#if>
+			</#list>
 		</div>
 	</div>
 </div>

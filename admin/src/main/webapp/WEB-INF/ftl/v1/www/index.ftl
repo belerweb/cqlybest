@@ -232,6 +232,7 @@ $('#page-content button[data-action=delete]').click(function(){
 		if (result) {
 			form.attr('action', form.data('delete'));
 			form.submit();
+			form.parent().remove();
 		}
 	});
 });
@@ -246,7 +247,7 @@ $('#page-content form').submit(function(){
 			}
 		},
 		error: function(xhr, status, response, form) {
-			cqlybest.error(eval(xhr.responseText));
+			cqlybest.error(xhr.responseText);
 		}
 	});
 	return false;

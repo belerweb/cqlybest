@@ -18,6 +18,9 @@ import com.cqlybest.common.mongo.bean.MaldivesDining;
 import com.cqlybest.common.mongo.bean.MaldivesIsland;
 import com.cqlybest.common.mongo.bean.MaldivesRoom;
 import com.cqlybest.common.mongo.bean.QueryResult;
+import com.cqlybest.common.mongo.bean.page.Condition;
+import com.cqlybest.common.mongo.bean.page.IntegerCondition;
+import com.cqlybest.common.mongo.bean.page.MaldivesIslandCondition;
 import com.cqlybest.common.mongo.dao.MongoDb;
 import com.googlecode.mjorm.query.DaoQuery;
 import com.googlecode.mjorm.query.Query;
@@ -282,5 +285,33 @@ public class MaldivesService {
     mongoDb.createQuery("MaldivesIsland").eq("dinings.pictures.id", imageId).modify()
         .pull("dinings.$.pictures", image).update();
     mongoDb.createQuery("Image").eq("_id", imageId).modify().delete();
+  }
+
+  public QueryResult<MaldivesIsland> queryIsland(MaldivesIslandCondition mdc, int page, int pageSize) {
+    QueryResult<MaldivesIsland> result = new QueryResult<>(page, pageSize);
+    DaoQuery query = mongoDb.createQuery("MaldivesIsland");
+    Condition cnd = mdc.getLevel();
+    if (cnd != null) {
+      if (cnd.getType() == Condition.CONDITION_TYPE_EQ) {
+        query.eq("level", cnd.getValue());
+      } else if (cnd.getType() == Condition.CONDITION_TYPE_IN) {
+        query.regex("level", ".*" + cnd.getValue() + ".*");
+      }
+    }
+    IntegerCondition iCnd = mdc.getHotelLevel();
+    if (iCnd != null) {
+      if (iCnd.getType() == Condition.CONDITION_TYPE_EQ) {
+        query.eq("hotelLevel", iCnd.getValue());
+      } else if (iCnd.getType() == Condition.CONDITION_TYPE_GT) {
+        query.gt("hotelLevel", iCnd.getValue());
+      } else if (iCnd.getType() == Condition.CONDITION_TYPE_LT) {
+        query.lt("hotelLevel", iCnd.getValue());
+      }
+    }
+    result.setTotal(query.countObjects());
+    query.setFirstDocument(result.getStart());
+    query.setMaxDocuments(result.getPageSize());
+    result.setItems(query.findObjects(MaldivesIsland.class).readAll());
+    return result;
   }
 }

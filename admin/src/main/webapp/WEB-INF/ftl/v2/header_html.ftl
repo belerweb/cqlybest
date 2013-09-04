@@ -22,7 +22,9 @@
 		<link rel="stylesheet" href="${ContextPath}/assets/v2/css/bootstrap.calendar.css?build=${(Settings.version.buildTime)!}">
 		<link rel="stylesheet" href="${ContextPath}/assets/v2/css/bootstrap-editable.css?build=${(Settings.version.buildTime)!}">
 		<link rel="stylesheet" href="${ContextPath}/assets/v2/css/wysiwyg-color.css?build=${(Settings.version.buildTime)!}">
-		<link rel="stylesheet" href="${ContextPath}/assets/v2/css/cqlybest.css?build=${(Settings.version.buildTime)!}">
+		<link rel="stylesheet" href="${ContextPath}/assets/v1/css/ace.css" />
+		<link rel="stylesheet" href="${ContextPath}/assets/v1/css/ace-skins.css" />
+		<link rel="stylesheet" href="${ContextPath}/assets/v2/css/application.css?build=${(Settings.version.buildTime)!}">
 		</#if>
 		<!--[if lt IE 7]><link rel="stylesheet" href="${ContextPath}/assets/v2/css/bootstrap-ie6.css?build=${(Options.build)!}"><![endif]-->
 		<link rel="shortcut icon" href="${ContextPath}/v2/favicon.ico?build=${(Options.build)!}">

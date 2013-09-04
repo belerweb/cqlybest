@@ -18,9 +18,12 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.cqlybest.common.controller.ControllerHelper;
 import com.cqlybest.common.mongo.bean.MaldivesIsland;
+import com.cqlybest.common.mongo.bean.Page;
+import com.cqlybest.common.mongo.bean.page.Section;
 import com.cqlybest.common.mongo.service.FriendlyLinkService;
 import com.cqlybest.common.mongo.service.MaldivesService;
 import com.cqlybest.common.mongo.service.PageService;
+import com.cqlybest.common.mongo.service.ProductService;
 import com.cqlybest.common.mongo.service.SettingsService;
 
 @Controller("siteIndexController")
@@ -34,6 +37,8 @@ public class IndexController extends ControllerHelper {
   private FriendlyLinkService friendlyLinkService;
   @Autowired
   private MaldivesService mongoMaldivesService;
+  @Autowired
+  private ProductService mongoProductService;
 
   @RequestMapping("/robots.txt")
   public Object robots(HttpServletRequest request) {
@@ -52,7 +57,8 @@ public class IndexController extends ControllerHelper {
       return "/v1/login";
     }
     if (host.startsWith("m.")) {
-      model.addAttribute("posters", pageService.getPage("www.index").getPosters());// 海报
+      Page page = pageService.getPage("www.index");
+      model.addAttribute("posters", page.getPosters());// 海报
       model.addAttribute("result", mongoMaldivesService.queryIsland(0, Integer.MAX_VALUE));
       model.addAttribute("Settings", settingsService.getSettings());
       model.addAttribute("Links", friendlyLinkService.queryLink(0, Integer.MAX_VALUE));
@@ -85,7 +91,32 @@ public class IndexController extends ControllerHelper {
       return "/v4/index";
     }
 
-    model.addAttribute("Page", pageService.getPage("www.index"));// 海报
+    Page page = pageService.getPage("www.index");
+    for (Section section : page.getContents()) {
+      int pageSize = Integer.MAX_VALUE;
+      if (section.getNumber() != null && section.getNumber() > 0) {
+        pageSize = section.getNumber();
+      }
+      if (Section.TYPE_PRODUCT.equals(section.getType())) {
+        section.setQueryResult(mongoProductService.queryProduct(section.getPc(), 0, pageSize));
+      }
+      if (Section.TYPE_MALDIVES.equals(section.getType())) {
+        section.setQueryResult(mongoMaldivesService.queryIsland(section.getMdc(), 0, pageSize));
+      }
+    }
+    for (Section section : page.getSidebars()) {
+      int pageSize = Integer.MAX_VALUE;
+      if (section.getNumber() != null && section.getNumber() > 0) {
+        pageSize = section.getNumber();
+      }
+      if (Section.TYPE_PRODUCT.equals(section.getType())) {
+        section.setQueryResult(mongoProductService.queryProduct(section.getPc(), 0, pageSize));
+      }
+      if (Section.TYPE_MALDIVES.equals(section.getType())) {
+        section.setQueryResult(mongoMaldivesService.queryIsland(section.getMdc(), 0, pageSize));
+      }
+    }
+    model.addAttribute("Page", page);
     model.addAttribute("Settings", settingsService.getSettings());
     model.addAttribute("Links", friendlyLinkService.queryLink(0, Integer.MAX_VALUE));
     return "/v2/index";

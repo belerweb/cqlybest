@@ -1,0 +1,679 @@
+body {
+	/*padding-top: 31px;*/
+	font-size: 12px;
+}
+
+body a {
+	outline: none;
+}
+
+ul,li {
+	list-style: none;
+}
+
+del {
+	text-decoration: line-through;
+}
+
+#top-nav {
+	margin-bottom: 0;
+}
+
+#top-nav .navbar-inner {
+	min-height: 30px;
+	border-radius: 0;
+	border-top: 0;
+	background-color: #FAFAFA;
+	background-image: linear-gradient(to bottom, #FFFFFF, #F2F2F2);
+	background-repeat: repeat-x;
+}
+
+#top-nav .container {
+	padding: 3px 0;
+	width: 940px;
+}
+
+#top-nav .pull-right a.mg {
+	margin-left: 5px;
+}
+
+#top-nav .avatar {
+	width: 32px;
+	height: 32px;
+}
+
+#top-logo {
+	padding: 10px 0;
+}
+
+#top-logo .phone {
+	padding-top: 10px;
+}
+
+#top-logo .phone span {
+	font-size: 25px;
+	font-family: Georgia;
+	color: #FF770D;
+}
+
+#top-logo .phone-tip {
+	color: gray;
+	font-size: 12px;
+}
+
+#menu {
+	margin-bottom: 0;
+}
+
+#menu .navbar-inner {
+	background: url("../img/menu-bg.png") repeat-x scroll 0 0 transparent;
+	border-bottom: 1px solid #C54021;
+	border-radius: 0;
+	filter: none;
+	min-height: 0;
+}
+
+#menu a.brand {
+	background: url("../img/menu-brand-bg.png") repeat-x scroll 0 0
+		transparent;
+	color: #FFF;
+	font-size: 14px;
+	font-weight: bold;
+	text-shadow: none;
+	padding: 10px 20px 10px 50px;
+	width: 90px;
+}
+
+#menu .nav>li>a {
+	font-size: 14px;
+	font-weight: bold;
+	text-shadow: none;
+	color: #FFF;
+	padding: 10px 20px;
+	border-right: 1px solid #D44E19;
+}
+
+#menu .nav>.active>a,#menu .nav>li>a:hover,#menu .nav>.active>a:focus {
+	box-shadow: none;
+	background: url("../img/menu-active-bg.png") repeat-x scroll 0 0
+		transparent;
+}
+
+#menu .container {
+	width: 940px;
+}
+
+.margin-menu {
+	margin-top: 20px;
+}
+
+#full-slider {
+	background: green;
+	height: 300px;
+}
+
+#left-menu {
+	background: url("../img/left-menu-bg.png") repeat scroll 0 0 transparent;
+	/*增加透明度*/
+	position: relative;
+}
+
+#left-menu>ul {
+	margin: 0;
+}
+
+#left-menu>ul>li {
+	border-bottom: 1px solid #F1F3ED;
+	height: 49px;
+}
+
+#left-menu>ul>li.open {
+	height: 48px;
+	background: #FFF;
+	border: 1px solid gray;
+	border-right: none;
+}
+
+#left-menu>ul>li>a {
+	display: block;
+	height: 24px;
+	padding: 13px 0 12px 10px;
+}
+
+#left-menu>ul>li.open>a {
+	display: block;
+	height: 24px;
+	padding: 12px 0 12px 10px;
+}
+
+#left-menu div.dropdown-menu {
+	position: absolute;
+	top: 0px;
+	left: 140px;
+	margin: 0;
+	padding: 0;
+	border-radius: 0;
+	width: 798px;
+	height: 299px;
+	border: 1px solid #999999;
+	border-top: none;
+	border-radius: 0;
+	background: #FFF;
+}
+
+#register-or-login {
+	margin-top: 20px;
+	margin-bottom: 20px;
+}
+
+#register-or-login  h2 {
+	background: url("../img/T1rasSXk4dXXcufgfr-5-5.jpg") no-repeat scroll 0
+		50% transparent;
+	padding-left: 10px;
+	font: 20px/1.6 "微软雅黑", "华文细黑", "黑体";
+	color: #666666;
+	margin: 25px 0 0 10px;
+}
+
+#register-or-login li {
+	margin-bottom: 10px;
+}
+
+#login-box {
+	margin-top: 20px;
+	padding-bottom: 20px;
+}
+
+#login-box input[type="text"],#login-box  input[type="password"] {
+	width: 260px;
+}
+
+#login-box .btn {
+	padding-left: 30px;
+	padding-right: 30px;
+}
+
+#diy-page-content {
+	margin: 20px 0;
+}
+
+.form-horizontal .control-group {
+	margin-bottom: 10px;
+}
+
+.controls>.control-label {
+	text-align: left;
+}
+
+.box {
+	border: 1px solid #DDDDDD;
+	margin-bottom: 10px;
+	border-radius: 3px;
+}
+
+.box>div.title {
+	padding: 4px 10px;
+	border-bottom: 1px solid #DDDDDD;
+	background: #CCCCCC;
+	color: #FFF;
+}
+
+.box>div.title-success {
+	background: #468847;
+}
+
+.box>div.title-warning {
+	background: #F89406;
+}
+
+.box>div.title-important {
+	background: #B94A48;
+}
+
+.box>div.title-info {
+	background: #3A87AD;
+}
+
+.box>div.title-inverse {
+	background: #333333;
+}
+
+.box>div.content {
+	padding: 4px 10px;
+}
+
+.box>div.content>ul {
+	margin: 0;
+}
+
+.box>div.content .badge {
+	margin-right: 5px;
+}
+
+#index-top-carousel .carousel-inner .item img {
+	width: 700px;
+	height: 300px;
+}
+
+.index-brand-section .thumbnails li {
+	
+}
+
+.index-brand-section .thumbnail {
+	padding: 2px;
+}
+
+.index-brand-section .thumbnail .caption {
+	padding: 2px;
+}
+
+.index-brand-section .thumbnail .caption a.title {
+	color: #666666;
+	font-size: 14px;
+	font-weight: bold;
+}
+
+.index-brand-section .thumbnail .caption a.title:hover {
+	color: #FF9900;
+}
+
+.index-brand-section .thumbnail .caption p {
+	margin: 0;
+}
+
+.index-brand-section .thumbnail .caption p span {
+	color: #FF6600;
+	font-size: 16px;
+}
+
+.index-brand-section .thumbnail .caption p del {
+	float: right;
+}
+
+.index-brand-section h4 {
+	margin: 0;
+}
+
+.index-brand-section hr {
+	margin: 2px 0 4px;
+	border-color: #309100;
+}
+
+.index-brand-section span.more {
+	float: right;
+}
+
+.index-recommend-box .thumbnail {
+	padding: 0;
+	margin-bottom: 5px;
+}
+
+.index-recommend-box .thumbnail.last {
+	margin-bottom: 0;
+}
+
+.index-recommend-box .thumbnail .caption {
+	padding: 0;
+}
+
+.index-recommend-box .thumbnail .caption>img {
+	width: 100%;
+	height: 99px;
+}
+
+.index-recommend-box .thumbnail .caption>a {
+	display: block;
+	padding: 5px;
+}
+
+.footer {
+	margin: 10px 0;
+}
+
+.footer ul {
+	margin: 0;
+}
+
+.footer.trust a {
+	margin: 0 5px;
+}
+
+.footer.copyright span {
+	margin: 0 5px;
+}
+
+.footer.link li {
+	border-right: 1px solid gray;
+	display: inline;
+	padding: 0 10px;
+}
+
+.footer.link li.last {
+	border-right: none;
+}
+
+.footer.friendly li {
+	display: inline;
+	padding: 0 5px;
+}
+
+#footer-help h4 {
+	margin: 0 0 10px;
+}
+
+.filter-box {
+	margin-bottom: 10px;
+}
+
+.filter-box .filter-main {
+	border: 1px solid #CECECE;
+	padding: 10px;
+}
+
+.filter-box .filter-main ul {
+	margin: 0;
+}
+
+.filter-box .filter-main label {
+	display: inline-block;
+	margin-right: 10px;
+}
+
+.filter-box .filter-main a {
+	display: inline:block;
+	line-height: 22px;
+	margin: 0 10px 10px 0;
+	padding: 3px 5px;
+	line-height: 22px;
+}
+
+.filter-box .filter-main a.active {
+	background: none repeat scroll 0 0 #669835;
+	color: #FFFFFF;
+}
+
+#product-name {
+	margin-bottom: 10px;
+}
+
+#product-name>span {
+	margin-right: 10px;
+}
+
+#product-name span.name {
+	font-size: 20px;
+	font-weight: bold;
+}
+
+#product-gallery.ad-gallery {
+	border: 1px solid #EEEEEE;
+	padding: 5px;
+	width: 608px;
+	position: relative;
+}
+
+#product-gallery.ad-gallery .ad-image-wrapper {
+	height: 400px;
+}
+
+#product-gallery.ad-gallery .ad-controls {
+	height: auto;
+}
+
+#product-gallery.ad-gallery .ad-info {
+	position: absolute;
+	top: 15px;
+	right: 15px;
+	background: #EEEEEE;
+	padding: 5px 8px;
+	z-index: 10;
+}
+
+#product-gallery.ad-gallery .ad-slideshow-controls {
+	display: none;
+}
+
+#product-gallery.ad-gallery .ad-nav .ad-thumbs {
+	margin: 0 15px;
+	width: auto;
+}
+
+#product-gallery.ad-gallery .ad-nav {
+	height: 64px;
+}
+
+#product-gallery.ad-gallery .ad-back {
+	left: 0;
+	height: 64px;
+}
+
+#product-gallery.ad-gallery .ad-forward {
+	right: 0;
+	height: 64px;
+}
+
+#product-gallery.ad-gallery .ad-thumbs li a img {
+	width: 90px;
+	height: 60px;
+	border: 2px solid #CECECE;
+}
+
+#product-gallery.ad-gallery .ad-thumbs li a.ad-active img {
+	border: 2px solid #616161;
+}
+
+#product-info p {
+	margin-bottom: 5px;
+}
+
+#product-info  span {
+	font-size: 14px;
+}
+
+#product-info  span.lname {
+	display: inline-block;
+	width: 75px;
+	color: #666666;
+}
+
+#product-info  span.price {
+	font-family: Georgia;
+	color: #FF6600;
+	font-size: 16px;
+}
+
+#product-info del span.price {
+	color: #9D9D9D;
+}
+
+#product-trip {
+	margin-top: 10px;
+	margin-bottom: 10px;
+}
+
+#product-trip .day-icon {
+	height: 100px;
+	width: 100px;
+	line-height: 100px;
+	font-size: 18px;
+}
+
+#product-trip .day {
+	margin-bottom: 10px;
+	border-bottom: 1px dashed #EEEEEE;
+}
+
+#product-trip .day.last {
+	margin-bottom: 10px;
+	border-bottom: none;
+	margin-bottom: 0;
+}
+
+#product-trip .title {
+	margin: 0;
+	border: 1px solid #468847;
+	border-radius: 5px 5px 0 0;
+	padding: 10px;
+	background-color: #DFF0D8;
+}
+
+#product-trip .day-trips {
+	border: 1px solid #468847;
+	border-top: none;
+	padding: 10px;
+	border-radius: 0 0 5px 5px;
+}
+
+#product-trip .nav-tabs,#product-trip .tab-content {
+	margin-bottom: 5px;
+}
+
+.product-gallery .gallery-item {
+	float: left;
+}
+
+.product-gallery .gallery-item img {
+	border: 1px solid #DDDDDD;
+	margin-left: 4px;
+	margin-bottom: 5px;
+}
+
+.product-gallery .gallery-item.first img {
+	border: 1px solid #DDDDDD;
+	margin-left: 0;
+}
+
+.product-gallery .gallery-item.row-first img {
+	margin-left: 0;
+}
+
+.maldives-play-gallery .gallery-item {
+	float: left;
+}
+
+.maldives-play-gallery .gallery-item img {
+	border: 1px solid #DDDDDD;
+	margin-left: 8px;
+	margin-bottom: 8px;
+}
+
+.maldives-play-gallery .gallery-item.row-first img {
+	margin-left: 0;
+}
+
+.product-basic-table {
+	
+}
+
+.product-basic-table th,.product-basic-table td {
+	border: none;
+}
+
+.product-basic-table th.name {
+	color: #F89406;
+	width: 70px;
+}
+
+.product-basic-table td.price {
+	font-family: Georgia;
+	font-size: 16px;
+}
+
+.product-basic-table td.del {
+	text-decoration: line-through;
+	color: #666666;
+}
+
+.product-room {
+	margin: 0 0 10px;
+}
+
+.product-room .table {
+	margin-bottom: 5px;
+}
+
+.product-room .day {
+	background-color: #DFF0D8;
+	font-weight: bold;
+	font-size: 18px;
+	text-align: center;
+	color: #468847;
+}
+
+.product-room th.name {
+	background-color: #DFF0D8;
+	text-align: center;
+}
+
+.nav-sidebar .nav-header {
+	font-weight: bold;
+	font-size: 14px;
+	color: #333333;
+}
+
+.nav-sidebar .divider {
+	margin: 0;
+}
+
+.sidebar .phone {
+	background-color: #0BA6FF;
+	color: #FFFFFF;
+	font-family: Georgia;
+	font-size: 25px;
+	padding: 15px 0;
+}
+
+.row-fluid.islands {
+	
+}
+
+.row-fluid.islands .thumbnail {
+	position: relative;
+}
+
+.row-fluid.islands .thumbnail .start {
+	font-size: 20px;
+	padding: 5px;
+	position: absolute;
+	right: 10px;
+	top: 15px;
+	color: #FF770D;
+	font-weight: bold;
+}
+
+.row-fluid.islands .thumbnail .zh {
+	color: #555555;
+	margin-bottom: 0;
+}
+
+.row-fluid.islands .thumbnail .en {
+	color: #AAAAAA;
+	font-size: 12px;
+	margin-top: 0;
+}
+
+.row-fluid.islands .thumbnail a:HOVER,.row-fluid.islands .thumbnail a:FOCUS
+	{
+	text-decoration: none;
+}
+
+.row-fluid.islands .thumbnail a.img {
+	display: block;
+	position: relative;
+}
+
+.row-fluid.islands .thumbnail .caption {
+	padding: 9px 0;
+}
+
+.row-fluid.islands .thumbnail .tags {
+	margin: 0;
+}
+
+.row-fluid.islands .thumbnail .tags li {
+	float: left;
+	color: #FFFFFF;
+	padding: 0 4px;
+	/*margin: 0 4px 4px 0;*/
+	margin-right: 4px;
+}

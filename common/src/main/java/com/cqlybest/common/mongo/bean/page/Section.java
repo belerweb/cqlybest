@@ -1,5 +1,7 @@
 package com.cqlybest.common.mongo.bean.page;
 
+import com.cqlybest.common.mongo.bean.QueryResult;
+
 
 /**
  * 页面的一部分
@@ -28,6 +30,8 @@ public class Section {
 
   // TYPE: MALDIVES
   private MaldivesIslandCondition mdc; // 马儿代夫查询条件
+
+  private QueryResult<?> queryResult;
 
   private Integer number;// 结果集数量
   private Boolean more = Boolean.FALSE;// 是否显示更多
@@ -118,6 +122,14 @@ public class Section {
 
   public void setPc(ProductCondition pc) {
     this.pc = pc;
+  }
+
+  public QueryResult<?> getQueryResult() {
+    return queryResult;
+  }
+
+  public void setQueryResult(QueryResult<?> queryResult) {
+    this.queryResult = queryResult;
   }
 
 }

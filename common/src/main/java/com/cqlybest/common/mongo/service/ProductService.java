@@ -23,6 +23,9 @@ import com.cqlybest.common.mongo.bean.ProductMaldives;
 import com.cqlybest.common.mongo.bean.ProductPriceCalendar;
 import com.cqlybest.common.mongo.bean.ProductTransportation;
 import com.cqlybest.common.mongo.bean.QueryResult;
+import com.cqlybest.common.mongo.bean.page.BooleanCondition;
+import com.cqlybest.common.mongo.bean.page.Condition;
+import com.cqlybest.common.mongo.bean.page.ProductCondition;
 import com.cqlybest.common.mongo.dao.MongoDb;
 import com.googlecode.mjorm.query.DaoQuery;
 import com.googlecode.mjorm.query.criteria.DocumentCriterion;
@@ -272,5 +275,60 @@ public class ProductService {
     image.put("id", imageId);
     mongoDb.createQuery("Product").eq("photos.id", imageId).modify().pull("photos", image).update();
     mongoDb.createQuery("Image").eq("_id", imageId).modify().delete();
+  }
+
+  public QueryResult<Product> queryProduct(ProductCondition pc, int page, int pageSize) {
+    QueryResult<Product> result = new QueryResult<>(page, pageSize);
+    DaoQuery query = mongoDb.createQuery("Product");
+    Condition cnd = pc.getType();
+    if (cnd != null) {// 类型
+      query.eq("type", cnd.getValue());
+    }
+    cnd = pc.getName();
+    if (cnd != null) {// 名称
+      if (cnd.getType() == Condition.CONDITION_TYPE_EQ) {
+        query.eq("name", cnd.getValue());
+      } else if (cnd.getType() == Condition.CONDITION_TYPE_IN) {
+        query.regex("name", ".*" + cnd.getValue() + ".*");
+      }
+    }
+    BooleanCondition bcnd = pc.getPopular();
+    if (bcnd != null) {// 热门
+      if (bcnd.getValue()) {
+        query.eq("popular", true);
+      } else {
+        query.ne("popular", true);
+      }
+    }
+    bcnd = pc.getRecommend();
+    if (bcnd != null) {// 推荐
+      if (bcnd.getValue()) {
+        query.eq("recommend", true);
+      } else {
+        query.ne("recommend", true);
+      }
+    }
+    bcnd = pc.getSpecial();
+    if (bcnd != null) {// 特价
+      if (bcnd.getValue()) {
+        query.eq("special", true);
+      } else {
+        query.ne("special", true);
+      }
+    }
+    cnd = pc.getDepartureCity();
+    if (cnd != null) {// 出发城市
+      query.in("departureCities", cnd.getValue());
+    }
+    cnd = pc.getRecommendedMonth();
+    if (cnd != null) {// 推荐月份
+      query.in("recommendedMonth", cnd.getValue());
+    }
+
+    result.setTotal(query.countObjects());
+    query.setFirstDocument(result.getStart());
+    query.setMaxDocuments(result.getPageSize());
+    result.setItems(query.findObjects(Product.class).readAll());
+    return result;
   }
 }
