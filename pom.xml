@@ -241,6 +241,18 @@
 			<version>${dependency.fileupload.version}</version>
 			<scope>provided</scope>
 		</dependency>
+		<dependency>
+			<groupId>org.cometd.java</groupId>
+			<artifactId>cometd-java-server</artifactId>
+			<version>2.6.0</version>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.cometd.java</groupId>
+			<artifactId>cometd-java-client</artifactId>
+			<version>2.6.0</version>
+			<scope>provided</scope>
+		</dependency>
 		<!-- log dependency -->
 		<dependency>
 			<groupId>org.slf4j</groupId>

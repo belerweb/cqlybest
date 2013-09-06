@@ -78,11 +78,11 @@
 <script type="text/javascript">
 $('#ajax-form').submit(function() {
 	var departuresTime = $('#departures-time-hour').val()*3600000 + $('#departures-time-minute').val()*60000;
-	departuresTime = departuresTime - 30600000;
+	departuresTime = departuresTime - 28800000;
 	$('#ajax-form input[name=departuresTime]').val(departuresTime);
 
 	var arrivalsTime = ($('#arrivals-time-day').val()-1)*86400000 + $('#arrivals-time-hour').val()*3600000 + $('#arrivals-time-minute').val()*60000;
-	arrivalsTime = arrivalsTime - 30600000;
+	arrivalsTime = arrivalsTime - 28800000;
 	$('#ajax-form input[name=arrivalsTime]').val(arrivalsTime);
 
 	$(this).ajaxSubmit({
