@@ -27,11 +27,11 @@ import com.cqlybest.common.mongo.bean.page.BooleanCondition;
 import com.cqlybest.common.mongo.bean.page.Condition;
 import com.cqlybest.common.mongo.bean.page.ProductCondition;
 import com.cqlybest.common.mongo.dao.MongoDb;
+import com.googlecode.mjorm.query.DaoModifier;
 import com.googlecode.mjorm.query.DaoQuery;
 import com.googlecode.mjorm.query.criteria.DocumentCriterion;
 import com.mongodb.BasicDBList;
 import com.mongodb.DBObject;
-import com.mongodb.WriteResult;
 
 @Service("mongoProductService")
 public class ProductService {
@@ -66,10 +66,14 @@ public class ProductService {
         _value = trips;
       }
     }
-    WriteResult result =
-        mongoDb.createQuery("Product").eq("_id", productId).modify().set(property, _value)
-            .set("published", Boolean.FALSE).set("lastUpdated", new Date()).update();
-    return result.getN();
+    DaoModifier modify = mongoDb.createQuery("Product").eq("_id", productId).modify();
+    modify.set(property, _value);
+    modify.set("lastUpdated", new Date());
+    if (!("popular".equals(property) || "recommend".equals(property) || "special".equals(property) || "published"
+        .equals(property))) {
+      modify.set("published", Boolean.FALSE);
+    }
+    return modify.update().getN();
   }
 
   public Product getProduct(String id) {

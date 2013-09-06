@@ -27,11 +27,11 @@
 						<#if product.photos?has_content>
 						<#list product.photos as image>
 						<div class="gallery-item <#if image_index==0> first</#if><#if image_index%5==1> row-first</#if><#if image_index gt 10> hide</#if>"
-							data-href="${ContextPath}/image/${image.id}.${image.imageType}" title="${image.title!}">
+							data-href="${ContextPath}/image/${image.id}.${image.extension}" title="${image.title!}">
 							<#if image_index==0>
-							<img src="${ContextPath}/image/341/260/${image.id}.${image.imageType}">
+							<img src="${ContextPath}/image/341/260/${image.id}.${image.extension}">
 							<#else>
-							<img src="${ContextPath}/image/63/50/${image.id}.${image.imageType}">
+							<img src="${ContextPath}/image/63/50/${image.id}.${image.extension}">
 							</#if>
 						</div>
 						</#list>
@@ -55,7 +55,7 @@
 								<th class="name">出发城市：</th>
 								<td>
 									<#if product.departureCities?has_content>
-									<#list product.departureCities?split(",") as item>
+									<#list product.departureCities as item>
 									<span class="label label-info">${item}</span>
 									</#list>
 									</#if>
@@ -97,10 +97,10 @@
 							</#if>
 						</ul>
 					</div>
-					<#if product.trafficList?has_content>
-					<#include "product_1_traffic.ftl">
+					<#if product.transportations?has_content>
+					<#include "product_maldives_transportations.ftl">
 					</#if>
-					<#include "product_1_room.ftl">
+					<#include "product_maldives_room.ftl">
 					<#if product.priceDescription?has_content>
 					<div id="maldives-island-fee－tab" class="maldives-island-section">
 						<div class="title">

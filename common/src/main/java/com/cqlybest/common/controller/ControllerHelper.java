@@ -32,8 +32,7 @@ public abstract class ControllerHelper {
       Method getDetail = principal.getClass().getMethod("getDetail");
       return (User) getDetail.invoke(principal);
     } catch (Exception e) {
-      e.printStackTrace();
-      throw new RuntimeException(e);
+      return null;
     }
   }
 

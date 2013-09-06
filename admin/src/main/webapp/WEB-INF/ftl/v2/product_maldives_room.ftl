@@ -2,26 +2,24 @@
 	<div class="title">
 		<h4>详细行程</h4>
 	</div>
-	<#assign notIslandRoom=0>
-	<#if product.maldives?has_content>
-	<#list product.maldives as maldives>
+	<#if product.maldivesDetails?has_content>
+	<#list product.maldivesDetails as maldives>
 	<div class="row-fluid product-room">
 		<div class="span2">
 			<div class="day well well-small">${maldives.name!}</div>
 		</div>
 		<div class="span10">
-		<#if !(maldives.islandId?has_content && maldives.roomId?has_content)>
-			<#assign notIslandRoom=notIslandRoom+1>
-			${maldives.extra!}
+		<#if !(maldives.island?has_content && maldives.room?has_content)>
+			${maldives.detail!}
 		<#else>
-			<#assign room=rooms[maldives_index-notIslandRoom]>
+			<#assign room=maldives.room>
 			<table class="table table-condensed">
 				<colgroup>
 					<col width="75" />
 					<col width="" />
 				</colgroup>
 				<tbody>
-					<#assign island=islands[maldives_index-notIslandRoom]>
+					<#assign island=maldives.island>
 					<tr>
 						<th colspan="2" class="name">${island.zhName!}${island.enName!} <br> ${room.zhName!}${room.enName!}</th>
 					</tr>
