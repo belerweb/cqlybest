@@ -74,6 +74,9 @@ public class Constant {
 
   public static final SimpleDateFormat YYYYMMDD_FORMAT = new SimpleDateFormat("yyyy-MM-dd");
 
+  public static final int SORT_DESC = -1;//降序
+  public static final int SORT_ASC = 1;//升序
+
 
   public static void checkWeiboConfig(String appKeyConfig, String appSecretConfig) {
     String appKey = System.getProperty(appKeyConfig, System.getenv(appKeyConfig));

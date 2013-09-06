@@ -57,6 +57,7 @@ public class MaldivesService {
     DaoQuery query = mongoDb.createQuery("MaldivesIsland");
     result.setTotal(query.countObjects());
 
+    query.addSort("createdTime", Constant.SORT_DESC);
     query.setFirstDocument(result.getStart());
     query.setMaxDocuments(result.getPageSize());
     result.setItems(query.findObjects(MaldivesIsland.class).readAll());

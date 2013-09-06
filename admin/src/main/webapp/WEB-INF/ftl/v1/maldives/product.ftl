@@ -10,10 +10,10 @@
 				<tr>
 					<th class="center" style="width:40px;"><input type="checkbox"><span class="lbl"></span></th>
 					<th>名称</th>
-					<th class="center" style="width:30px;">热门</th>
-					<th class="center" style="width:30px;">推荐</th>
-					<th class="center" style="width:30px;">特价</th>
-					<th class="center" style="width:30px;">发布</th>
+					<th class="center" style="width:70px;">热门</th>
+					<th class="center" style="width:70px;">推荐</th>
+					<th class="center" style="width:70px;">特价</th>
+					<th class="center" style="width:70px;">发布</th>
 					<th class="center" style="width:100px;">操作</th>
 				</tr>
 			</thead>
@@ -22,10 +22,32 @@
 				<tr>
 					<td class="center"><input type="checkbox" value="${product.id}"><span class="lbl"></span></td>
 					<td>${product.name!} ${product.briefTrip?join('')}</td>
-					<td class="center"><#if product.popular!false><span class="label label-success">是</span><#else><span class="label label-warning">否</span></#if></td>
-					<td class="center"><#if product.recommend!false><span class="label label-success">是</span><#else><span class="label label-warning">否</span></#if></td>
-					<td class="center"><#if product.special!false><span class="label label-success">是</span><#else><span class="label label-warning">否</span></#if></td>
-					<td class="center"><#if product.published!false><span class="label label-success">是</span><#else><span class="label label-warning">否</span></#if></td>
+					<td class="center">
+						<label>
+							<input name="popular" type="checkbox" <#if product.popular!false>checked="checked"</#if> class="ace-switch ace-switch-5"
+								data-id="${product.id}" data-action="toggle-property">
+							<span class="lbl"></span>
+						</label>
+					<td class="center">
+						<label>
+							<input name="recommend" type="checkbox" <#if product.recommend!false>checked="checked"</#if> class="ace-switch ace-switch-5"
+								data-id="${product.id}" data-action="toggle-property">
+							<span class="lbl"></span>
+						</label>
+					<td class="center">
+						<label>
+							<input name="special" type="checkbox" <#if product.special!false>checked="checked"</#if> class="ace-switch ace-switch-5"
+								data-id="${product.id}" data-action="toggle-property">
+							<span class="lbl"></span>
+						</label>
+					</td>
+					<td class="center">
+						<label>
+							<input name="published" type="checkbox" <#if product.published!false>checked="checked"</#if> class="ace-switch ace-switch-5"
+								data-id="${product.id}" data-action="toggle-property">
+							<span class="lbl"></span>
+						</label>
+					</td>
 					<td class="td-actions center">
 						<div class="btn-group">
 							<button type="button" class="btn btn-mini btn-success" title="预览" data-id="${product.id}" data-action="preview">
@@ -102,5 +124,17 @@ $('#page-content button[data-action=edit]').click(function(){
 });
 $('#page-content button[data-action=delete]').click(function(){
 	cqlybest.error('暂时不能删除数据。');
+});
+$('#page-content input[data-action=toggle-property]').click(function(){
+	var input = this;
+	$.post('${ContextPath}/maldives/product/update.do', {
+		pk: $(this).data('id'),
+		name: $(this).attr('name'),
+		value: this.checked
+	}).done(function(data){
+	}).fail(function() {
+		cqlybest.error();
+		input.checked = !input.checked;
+	});
 });
 </script>

@@ -370,6 +370,10 @@ public class MaldivesController {
     if ("price".equals(name) || "marketPrice".equals(name)) {
       _value = (int) (Double.parseDouble(value) * 100);
     }
+    if ("popular".equals(name) || "recommend".equals(name) || "special".equals(name)
+        || "published".equals(name)) {
+      _value = Boolean.valueOf(value);
+    }
     if ("effectiveDate".equals(name) || "expiryDate".equals(name) || "departureDate".equals(name)) {
       _value = Constant.YYYYMMDD_FORMAT.parse(value);
     }

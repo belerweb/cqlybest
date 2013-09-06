@@ -81,6 +81,7 @@ public class ProductService {
     DaoQuery query = mongoDb.createQuery("Product");
     result.setTotal(query.countObjects());
 
+    query.addSort("createdTime", Constant.SORT_DESC);
     query.setFirstDocument(result.getStart());
     query.setMaxDocuments(result.getPageSize());
     result.setItems(query.findObjects(Product.class).readAll());
