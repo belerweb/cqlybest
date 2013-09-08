@@ -1,52 +1,22 @@
-/* Section Poster */
 #section-poster {
-	background: #7f8c8d;
-	-webkit-background-size: 100% auto;
-	-moz-background-size: 100% auto;
-	-o-background-size: 100% auto;
-	background-size: 100% auto;
-	background-repeat: no-repeat;
+	background: none;
 }
 
-/* Media Queries */
-@media screen and (min-width: 1800px) {
-	#section-poster {
-		padding: 300px 0 !important;
-	}
+#section-poster .intro {
+	margin-top: 300px;
+	color: #FFF;
 }
 
-@media screen and (max-width: 1320px) {
-	#section-poster {
-		background-size: 1320px auto;
-	}
+#section-poster .tags {
+	margin: 0;
 }
 
-@media screen and (min-width: 1200px) {
-	#section-poster {
-		padding: 170px 0;
-	}
-	.container-fluid {
-		width: 1024px;
-	}
-}
-
-@media screen and (max-width: 1199px) {
-	.section {
-		margin-left: -50px;
-		padding: 135px 0;
-	}
-	#section-poster {
-		background-size: 1200px auto;
-	}
-	.container-fluid {
-		padding-left: 105px;
-		padding-right: 105px;
-	}
-}
-
-@media screen and (max-width: 979px) {
-	.container-fluid {
-		padding-left: 75px;
-		padding-right: 75px;
-	}
+#section-poster .tags li {
+	list-style: none;
+	float: left;
+	color: #FFFFFF;
+	padding: 0 4px;
+	/*margin: 0 4px 4px 0;*/
+	margin-right: 4px;
+	float: left;
 }

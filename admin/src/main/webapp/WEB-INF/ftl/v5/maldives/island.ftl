@@ -5,7 +5,7 @@
 	<style type="text/css">
 		<#include "island.css">
 	</style>
-	<div id="sidebar">
+	<div id="sidebar" class="fixed">
 		<a class="btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
 			<span class="icon-bar"></span>
 			<span class="icon-bar"></span>
@@ -39,22 +39,227 @@
 	</div><!-- /sidebar -->
 	<div id="container">
 
-		<section id="section-poster" class="section"
-			<#if island.pictures?has_content>
-			<#assign image=island.pictures[0]>
-			style="background-image:url(${ContextPath}/image/1600/1067/${image.id}.${image.extension});"
-			</#if>
-			data-section="1">
-			<div class="container-fluid">	
-				<div class="row-fluid">
-					<div class="span6 intro">
-						<h1>${island.zhName!}</h1>
-						<h3>${island.enName!}</h3>
-						<p>${island.description!}</p>
-					</div>
-				</div><!-- /row-fluid -->
-			</div><!-- /container-fluid -->	
+		<section id="section-poster" class="section" data-section="1">
+			<a id="prevslide" class="load-item"></a>
+			<a id="nextslide" class="load-item"></a>
+			<div class="row-fluid">
+				<div class="span6 offset1 intro">
+					<h2>${island.zhName!}</h2>
+					<h3>${island.enName!}</h3>
+					<p>${island.description!}</p>
+					<ul class="tags">
+						<#if island.level?has_content><li class="bg0">${island.level}</li></#if>
+						<#if island.way?has_content><li class="bg1">${island.way}</li></#if>
+						<#if island.area?has_content><li class="bg2">${island.area}</li></#if>
+						<#if island.snorkeling?has_content><li class="bg3">${island.snorkeling}级浮潜</li></#if>
+						<#if island.tags?has_content>
+						<#list island.tags?split(',') as tag>
+						<li class="bg${springx.rand(0,6)}">${tag}</li>
+						</#list>
+						</#if>
+					</ul>
+				</div>
+			</div><!-- /row-fluid -->
 		</section><!-- /section -->
+		<section id="section-hotel" class="section" data-section="2">
+			<div class="content">
+				<div class="title">
+					<h3>酒店详情</h3>
+					<hr />
+				</div>
+				<div class="row-fluid">
+					<div class="span6">
+						<#if island.hotelDescription?has_content>
+						<p>${island.hotelDescription!}</p>
+						</#if>
+						<table class="table table-bordered table-condensed">
+							<tbody>
+								<tr>
+									<th style="width: 90px;">酒店集团：</th>
+									<td>${island.hotelName!}</td>
+								</tr>
+								<#if island.hotelLevel?has_content>
+								<tr>
+									<th>酒店星级：</th>
+									<td>${island.hotelLevel!}</td>
+								</tr>
+								</#if>
+								<#if island.hotelStart?has_content>
+								<tr>
+									<th>开始营业：</th>
+									<td>${island.hotelStart!}</td>
+								</tr>
+								</#if>
+								<#if island.hotelRoomNum?has_content>
+								<tr>
+									<th>房间总数：</th>
+									<td>${island.hotelRoomNum!}</td>
+								</tr>
+								</#if>
+								<#if island.hotelSite?has_content>
+								<tr>
+									<th>官方网址：</th>
+									<td>${island.hotelSite!}</td>
+								</tr>
+								</#if>
+								<#if island.hotelTel?has_content>
+								<tr>
+									<th>电话：</th>
+									<td>${island.hotelTel!}</td>
+								</tr>
+								</#if>
+								<#if island.hotelFax?has_content>
+								<tr>
+									<th>传真：</th>
+									<td>${island.hotelFax!}</td>
+								</tr>
+								</#if>
+								<#if island.hotelChinese?has_content>
+								<tr>
+									<th>中文服务：</th>
+									<td><#if island.hotelChinese>有<#else>无</#if></td>
+								</tr>
+								</#if>
+								<#if island.hotelAirport?has_content>
+								<tr>
+									<th>机场柜台：</th>
+									<td>${island.hotelAirport!}</td>
+								</tr>
+								</#if>
+							</tbody>
+						</table>
+						<#if (Settings.basic.hotline)?has_content>
+						<div class="alert bg5 big-hotline">
+							24 小时尊贵热线：<span>${Settings.basic.hotline}</span>
+						</div>
+						</#if>
+					</div>
+					<div class="span6" data-toggle="modal-gallery" data-target="#maldives-gallery" data-selector="img">
+						<#if island.hotelPictures?has_content>
+						<#assign rand = springx.rand(0,island.hotelPictures?size-1) />
+						<#list island.hotelPictures as image>
+						<img alt="${image.title!}" src="${ContextPath}/image/343/280/${image.id}.${image.extension}"
+							 data-href="${ContextPath}/image/${image.id}.${image.extension}"
+							 class="<#if image_index!=rand>hide</#if>" style="width:100%;">
+						</#list>
+						</#if>
+					</div>
+				</div>
+			</div>
+		</section><!-- /section -->
+		<#list island.rooms as room>
+		<section id="section-room" class="section style1" data-section="3">
+			<div class="content">
+				<div class="title">
+					<div class="row-fluid">
+						<div class="span3">
+							<h3>房型介绍</h3>
+						</div>
+						<div class="span9">
+							<h3 class="text-right">${room.zhName!} ${room.enName!}</h3>
+						</div>
+					</div>
+					<hr />
+				</div>
+				<div class="row-fluid">
+					<div class="span4">
+					</div>
+					<div class="span8">
+							<ul class="thumbnails">
+								<#list room.pictures as image>
+								<#if image_index%2==0>
+							</ul>
+							<ul class="thumbnails">
+								</#if>
+								<li class="span6">
+									<div class="thumbnail-style thumbnail-kenburn">
+										<div class="overflow-hidden">
+											<img src="${ContextPath}/image/696/400/${image.id}.${image.extension}">
+										</div>
+									</div>
+								</li>
+								</#list>
+							</ul>
+						<div class="clearfix"> </div>
+					</div>
+				</div>
+			</div>
+		</section><!-- /section -->
+		</#list>
+		<#list island.dinings as dining>
+		<section id="section-dining" class="section" data-section="4">
+			<div class="content">
+				<div class="title">
+					<div class="row-fluid">
+						<div class="span3">
+							<h3>餐饮设施</h3>
+						</div>
+						<div class="span9">
+							<h3 class="text-right">${dining.zhName!} ${dining.enName!}</h3>
+						</div>
+					</div>
+					<hr />
+				</div>
+				<div class="row-fluid">
+					<div class="span4">
+					</div>
+					<div class="span8">
+							<ul class="thumbnails">
+								<#list dining.pictures as image>
+								<#if image_index%2==0>
+							</ul>
+							<ul class="thumbnails">
+								</#if>
+								<li class="span6">
+									<div class="thumbnail-style thumbnail-kenburn">
+										<div class="overflow-hidden">
+											<img src="${ContextPath}/image/696/400/${image.id}.${image.extension}">
+										</div>
+									</div>
+								</li>
+								</#list>
+							</ul>
+						<div class="clearfix"> </div>
+					</div>
+				</div>
+			</div>
+		</section><!-- /section -->
+		</#list>
 
 	</div>
+	<script type="text/javascript">
+		window.PageContext = {
+			init: function(){
+				$.supersized({
+					slide_interval: 3000,
+					transition:1,
+					transition_speed:700,
+					slide_links:'blank',
+					slides:[
+						<#list island.pictures as image>
+						<#if image_index gt 0>,</#if>{image : '${ContextPath}/image/${image.id}.${image.extension}'}
+						</#list>
+					]
+				});
+				// $('#section-poster').height($(window).height());
+				$('.navigation li').click(function (e) {
+					e.preventDefault();
+					var datasection = $(this).attr('data-section');
+					var top = $('.section[data-section="' + datasection + '"]').offset().top;
+					$('html,body').animate({
+						scrollTop: datasection==1 ? top : (top+10)
+					}, 500, 'easeOutQuart');
+				});
+				$('section').waypoint(function (direction) {
+					var datasection = $(this).attr('data-section');
+					if (direction === 'down') {
+						$('.navigation li[data-section="' + datasection + '"]').addClass('active').siblings().removeClass('active');
+					} else {
+						var newsection = parseInt(datasection) - 1;
+						$('.navigation li[data-section="' + newsection + '"]').addClass('active').siblings().removeClass('active');
+					}
+				});
+			}
+		};
+	</script>
 <#include "../footer.ftl">
