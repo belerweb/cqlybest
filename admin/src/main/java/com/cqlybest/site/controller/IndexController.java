@@ -119,7 +119,7 @@ public class IndexController extends ControllerHelper {
     model.addAttribute("Page", page);
     model.addAttribute("Settings", settingsService.getSettings());
     model.addAttribute("Links", friendlyLinkService.queryLink(0, Integer.MAX_VALUE));
-    return "/v2/index";
+    return "/v5/index/index";
   }
 
   @RequestMapping("/login.html")

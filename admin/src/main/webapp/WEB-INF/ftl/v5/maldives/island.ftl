@@ -42,7 +42,7 @@
 		<section id="section-poster" class="section" data-section="1">
 			<a id="prevslide" class="load-item"></a>
 			<a id="nextslide" class="load-item"></a>
-			<div class="row-fluid">
+			<div class="row-fluid" style="background: transparent;">
 				<div class="span6 offset1 intro">
 					<h2>${island.zhName!}</h2>
 					<h3>${island.enName!}</h3>
@@ -235,6 +235,7 @@
 					transition:1,
 					transition_speed:700,
 					slide_links:'blank',
+					vertical_center:0,
 					slides:[
 						<#list island.pictures as image>
 						<#if image_index gt 0>,</#if>{image : '${ContextPath}/image/${image.id}.${image.extension}'}
