@@ -143,4 +143,8 @@ public class IndexController extends ControllerHelper {
     return "redirect:/index.html";
   }
 
+  @RequestMapping("/soon.html")
+  public Object comingSoon() {
+    return "/v5/soon";
+  }
 }

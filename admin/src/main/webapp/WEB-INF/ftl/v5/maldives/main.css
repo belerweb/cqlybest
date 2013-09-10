@@ -1,0 +1,17 @@
+.islands .thumbnail-style h3 {
+	
+}
+.islands .thumbnail-style img {
+	width: 100%;
+}
+
+.islands .thumbnail-style h4,.islands .thumbnail-style h4 a {
+	color: #AAAAAA;
+	font-size: 12px;
+	margin-top: 0;
+	font-weight: bold;
+}
+
+.islands .thumbnail-style a.btn-more {
+	background: none repeat scroll 0 0 #FF770D;
+}

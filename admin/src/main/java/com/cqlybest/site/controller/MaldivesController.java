@@ -31,7 +31,8 @@ public class MaldivesController extends ControllerHelper {
     model.addAttribute("result", mongoMaldivesService.queryIsland(0, Integer.MAX_VALUE));
     model.addAttribute("Settings", settingsService.getSettings());
     model.addAttribute("Links", friendlyLinkService.queryLink(0, Integer.MAX_VALUE));
-    return "/v2/maldives";
+    // return "/v2/maldives";
+    return "/v5/maldives/main";
   }
 
   @RequestMapping("/maldives/{id}.html")
@@ -55,7 +56,8 @@ public class MaldivesController extends ControllerHelper {
     model.addAttribute("island", island);
     model.addAttribute("Settings", settingsService.getSettings());
     model.addAttribute("Links", friendlyLinkService.queryLink(0, Integer.MAX_VALUE));
-    return "/v2/maldives_island";
+    // return "/v2/maldives_island";
+    return "/v5/maldives/island";
   }
 
 }
