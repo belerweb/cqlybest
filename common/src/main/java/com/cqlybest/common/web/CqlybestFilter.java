@@ -68,6 +68,7 @@ public class CqlybestFilter implements Filter {
     long start = System.currentTimeMillis();
     HttpServletRequest httpRequest = (HttpServletRequest) request;
     HttpServletResponse httpResponse = (HttpServletResponse) response;
+    httpRequest.setCharacterEncoding("UTF-8");
 
     final ByteArrayOutputStream outstr = new ByteArrayOutputStream();
     final GenericResponseWrapper wrapper = new GenericResponseWrapper(httpResponse, outstr);

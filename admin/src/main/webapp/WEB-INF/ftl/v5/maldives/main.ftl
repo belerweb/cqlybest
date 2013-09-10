@@ -20,8 +20,8 @@
 					</#if>
 					<li class="span4">
 						<div class="thumbnail-style thumbnail-kenburn border">
-							<h3><a class="hover-effect" href="#">${island.zhName!}</a></h3>
-							<h4><a class="hover-effect" href="#">${island.enName!}</a></h4>
+							<h3><a class="hover-effect" href="${ContextPath}/maldives/${island.zhName!island.id}.html" target="_blank">${island.zhName!}</a></h3>
+							<h4><a class="hover-effect" href="${ContextPath}/maldives/${island.enName!island.id}.html" target="_blank">${island.enName!}</a></h4>
 							<div class="thumbnail-img">
 								<div class="overflow-hidden">
 									<a href="${ContextPath}/maldives/${island.id}.html" target="_blank"><img alt="" src="<@randImage island.hotelPictures 290 150 />"></a>

@@ -1,5 +1,9 @@
 package com.cqlybest.site.controller;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +19,11 @@ import com.cqlybest.common.mongo.bean.MaldivesIsland;
 import com.cqlybest.common.mongo.service.FriendlyLinkService;
 import com.cqlybest.common.mongo.service.MaldivesService;
 import com.cqlybest.common.mongo.service.SettingsService;
+import com.googlecode.mjorm.query.Query;
+import com.googlecode.mjorm.query.QueryGroup;
+import com.googlecode.mjorm.query.criteria.DocumentCriterion;
+import com.googlecode.mjorm.query.criteria.GroupedQueryCriterion;
+import com.googlecode.mjorm.query.criteria.GroupedQueryCriterion.Group;
 
 @Controller("siteMaldivesController")
 public class MaldivesController extends ControllerHelper {
@@ -39,7 +48,12 @@ public class MaldivesController extends ControllerHelper {
   public Object maldives(@PathVariable String id, HttpServletRequest request, Model model) {
     String host = request.getServerName();
     if (host.startsWith("m.")) {
-      MaldivesIsland island = mongoMaldivesService.getIsland(id);
+      List<DocumentCriterion> conditions = new ArrayList<>();
+      QueryGroup queryGroup =
+          new QueryGroup(Arrays.asList(new Query[] {Query.start().eq("_id", id),
+              Query.start().eq("zhName", id), Query.start().eq("enName", id)}));
+      conditions.add(new GroupedQueryCriterion(Group.OR, queryGroup));
+      MaldivesIsland island = mongoMaldivesService.queryIsland(conditions);
       if (island == null) {
         return new ResponseEntity<Object>(HttpStatus.NOT_FOUND);
       }
@@ -49,7 +63,12 @@ public class MaldivesController extends ControllerHelper {
       return "/v3/maldives_island";
     }
 
-    MaldivesIsland island = mongoMaldivesService.getIsland(id);
+    List<DocumentCriterion> conditions = new ArrayList<>();
+    QueryGroup queryGroup =
+        new QueryGroup(Arrays.asList(new Query[] {Query.start().eq("_id", id),
+            Query.start().eq("zhName", id), Query.start().eq("enName", id)}));
+    conditions.add(new GroupedQueryCriterion(Group.OR, queryGroup));
+    MaldivesIsland island = mongoMaldivesService.queryIsland(conditions);
     if (island == null) {
       return new ResponseEntity<Object>(HttpStatus.NOT_FOUND);
     }
@@ -59,5 +78,4 @@ public class MaldivesController extends ControllerHelper {
     // return "/v2/maldives_island";
     return "/v5/maldives/island";
   }
-
 }
