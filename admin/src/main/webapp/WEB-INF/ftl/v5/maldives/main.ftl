@@ -20,13 +20,13 @@
 					</#if>
 					<li class="span4">
 						<div class="thumbnail-style thumbnail-kenburn border">
-							<h3><a class="hover-effect" href="${ContextPath}/maldives/${island.zhName!island.id}.html" target="_blank">${island.zhName!}</a></h3>
-							<h4><a class="hover-effect" href="${ContextPath}/maldives/${island.enName!island.id}.html" target="_blank">${island.enName!}</a></h4>
+							<h3><a <@mdlink island 'zhName' /> class="hover-effect">${island.zhName!}</a></h3>
+							<h4><a <@mdlink island 'enName' /> class="hover-effect">${island.enName!}</a></h4>
 							<div class="thumbnail-img">
 								<div class="overflow-hidden">
-									<a href="${ContextPath}/maldives/${island.id}.html" target="_blank"><img alt="" src="<@randImage island.hotelPictures 290 150 />"></a>
+									<a <@mdlink island 'id' /> ><img <@mdalt island /> src="<@randImage island.hotelPictures 290 150 />"></a>
 								</div>
-								<a class="btn-more hover-effect" href="${ContextPath}/maldives/${island.enName!island.id}.html" target="_blank">查看详细 +</a>
+								<a <@mdlink island 'enName' /> class="btn-more hover-effect">查看详细 +</a>
 							</div>
 							<#if island.tags?has_content>
 							<ul class="tags">

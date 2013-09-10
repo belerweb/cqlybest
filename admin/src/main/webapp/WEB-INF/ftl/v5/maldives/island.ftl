@@ -1,6 +1,6 @@
 <#assign Title='${island.zhName!}${island.enName!} 马代 马尔代夫 海岛 自由行' />
 <#assign Description=island.description!?html />
-<#assign Keywords=island.zhName! />
+<#assign Keywords='${island.zhName!} ${island.enName!} 马代 马尔代夫 海岛 自由行' />
 <#include "../header.ftl">
 	<style type="text/css">
 		<#include "island.css">
