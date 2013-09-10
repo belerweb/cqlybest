@@ -2,7 +2,7 @@
 <descriptors>
 
 	<object class="com.cqlybest.common.mongo.bean.Transportation">
-		<property name="id" id="true"/>
+		<property name="id" id="true" />
 		<property name="type" />
 		<property name="number" />
 		<property name="airline" />
@@ -15,6 +15,20 @@
 		<property name="arrivalsTime" />
 		<property name="lineType" />
 		<property name="extra" />
+		<property name="nonStop" />
+		<property name="schedule" />
+	</object>
+
+	<object class="com.cqlybest.common.mongo.bean.TransferComb">
+		<property name="id" id="true" />
+		<property name="type" />
+		<property name="transfers" />
+	</object>
+
+	<object class="com.cqlybest.common.mongo.bean.Transfer">
+		<property name="name" />
+		<property name="day" />
+		<property name="trans" />
 	</object>
 
 </descriptors>

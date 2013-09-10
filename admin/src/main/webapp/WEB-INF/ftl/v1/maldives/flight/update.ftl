@@ -13,6 +13,8 @@
 				<label class="control-label">航班号：</label>
 				<div class="controls">
 					<input name="number" type="text" placeholder="航班号" value="${(flight.number)!}">
+					<input name="nonStop" type="checkbox" <#if flight.nonStop!false>checked="checked"</#if> value="true">
+					<label class="lbl"> 直飞</label>
 				</div>
 			</div>
 			<div class="control-group">
@@ -27,6 +29,25 @@
 				<div class="controls">
 					<input name="to" type="text" placeholder="目的城市" value="${(flight.to)!}" style="width:130px;">
 					<input name="arrivalsAirportCode" type="text" placeholder="三字码" value="${(flight.arrivalsAirportCode)!}" style="width:60px">
+				</div>
+			</div>
+			<div class="control-group">
+				<label class="control-label">班期（星期）：</label>
+				<div class="controls">
+					<input name="schedule" type="checkbox" <#if (flight.schedule![])?seq_contains(1)>checked="checked"</#if> value="1">
+					<label class="lbl"> 一</label>
+					<input name="schedule" type="checkbox" <#if (flight.schedule![])?seq_contains(2)>checked="checked"</#if> value="2">
+					<label class="lbl"> 二</label>
+					<input name="schedule" type="checkbox" <#if (flight.schedule![])?seq_contains(3)>checked="checked"</#if> value="3">
+					<label class="lbl"> 三</label>
+					<input name="schedule" type="checkbox" <#if (flight.schedule![])?seq_contains(4)>checked="checked"</#if> value="4">
+					<label class="lbl"> 四</label>
+					<input name="schedule" type="checkbox" <#if (flight.schedule![])?seq_contains(5)>checked="checked"</#if> value="5">
+					<label class="lbl"> 五</label>
+					<input name="schedule" type="checkbox" <#if (flight.schedule![])?seq_contains(6)>checked="checked"</#if> value="6">
+					<label class="lbl"> 六</label>
+					<input name="schedule" type="checkbox" <#if (flight.schedule![])?seq_contains(7)>checked="checked"</#if> value="7">
+					<label class="lbl"> 日</label>
 				</div>
 			</div>
 			<div class="control-group">

@@ -16,8 +16,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.cqlybest.common.Constant;
+import com.cqlybest.common.controller.ControllerHelper;
 import com.cqlybest.common.mongo.bean.MaldivesIsland;
 import com.cqlybest.common.mongo.bean.Product;
+import com.cqlybest.common.mongo.bean.Transfer;
+import com.cqlybest.common.mongo.bean.TransferComb;
 import com.cqlybest.common.mongo.bean.Transportation;
 import com.cqlybest.common.mongo.service.MaldivesService;
 import com.cqlybest.common.mongo.service.ProductService;
@@ -25,7 +28,7 @@ import com.cqlybest.common.mongo.service.SettingsService;
 import com.cqlybest.common.mongo.service.TransportationService;
 
 @Controller("mongoMaldivesController")
-public class MaldivesController {
+public class MaldivesController extends ControllerHelper {
 
   @Autowired
   private MaldivesService mongoMaldivesService;
@@ -300,7 +303,9 @@ public class MaldivesController {
       @RequestParam String airline, @RequestParam String airlineCode, @RequestParam String from,
       @RequestParam String to, @RequestParam String departuresAirportCode,
       @RequestParam String arrivalsAirportCode, @RequestParam long departuresTime,
-      @RequestParam long arrivalsTime, @RequestParam String extra) {
+      @RequestParam long arrivalsTime, @RequestParam String extra,
+      @RequestParam(required = false) String nonStop,
+      @RequestParam(required = false) List<Integer> schedule) {
     Transportation flight = new Transportation();
     flight.setId(id);
     flight.setNumber(number);
@@ -314,6 +319,12 @@ public class MaldivesController {
     flight.setArrivalsTime(new Date(arrivalsTime));
     flight.setType(Transportation.TYPE_FLIGHT);
     flight.setExtra(extra);
+    if (nonStop != null) {
+      flight.setNonStop(Boolean.valueOf(nonStop));
+    }
+    if (schedule != null) {
+      flight.setSchedule(schedule);
+    }
     flight.setLineType(Transportation.LINE_TYPE_MALDIVES);
     transportationService.updateTransportation(flight);
   }
@@ -336,6 +347,50 @@ public class MaldivesController {
   @ResponseBody
   public List<Transportation> flight(@RequestParam String q) {
     return transportationService.queryTransportation(Transportation.LINE_TYPE_MALDIVES, q, 10);
+  }
+
+  /**
+   * 航班组合信息
+   */
+  @RequestMapping(value = "/maldives/flight/comb_update.do", method = RequestMethod.GET)
+  public String updateFlightComb(@RequestParam(required = false) String combId, Model model) {
+    // TODO
+    return "/v1/maldives/flight/comb_update";
+  }
+
+  /**
+   * 航班组合信息
+   */
+  @RequestMapping(value = "/maldives/flight/comb_update.do", method = RequestMethod.POST)
+  public Object updateFlightComb(@RequestParam(required = false) String id,
+      @RequestParam List<String> transfers, @RequestParam List<Integer> day, Model model) {
+    if (transfers.size() < 2 || day.size() < 2 || transfers.size() != day.size()) {
+      return illegal();
+    }
+    TransferComb comb = new TransferComb();
+    if (StringUtils.isNotBlank(id)) {
+      comb.setId(id);
+    }
+    comb.setType(Transportation.LINE_TYPE_MALDIVES);
+    for (int i = 0; i < transfers.size(); i++) {
+      Transfer transfer = new Transfer();
+      transfer.setDay(day.get(i));
+      transfer.setTrans(transportationService.getTransportation(transfers.get(i)));
+      comb.getTransfers().add(transfer);
+    }
+    transportationService.updateTransferComb(comb);
+    return ok();
+  }
+
+  /**
+   * 航班组合列表
+   */
+  @RequestMapping(value = "/maldives/flight/comb.do", method = RequestMethod.GET)
+  public String flightComb(@RequestParam(defaultValue = "0") int page, Model model) {
+    int pageSize = 10;
+    model.addAttribute("result", transportationService.queryTransferComb(
+        Transportation.LINE_TYPE_MALDIVES, page, pageSize));
+    return "/v1/maldives/flight/comb";
   }
 
   /**

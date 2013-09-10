@@ -2,8 +2,8 @@
 <div id="page-content" class="clearfix">
 	<div class="row-fluid">
 		<h3 class="header smaller lighter blue">
-			马尔代夫航班
-			<button type="button" class="btn btn-mini btn-primary pull-right" onclick="cqlybest.go('#main-content', '${ContextPath}/maldives/flight/update.do');">增加航班</button>
+			马尔代夫航班组合
+			<button type="button" class="btn btn-mini btn-primary pull-right" onclick="cqlybest.go('#main-content', '${ContextPath}/maldives/flight/comb_update.do');">增加航班组合</button>
 		</h3>
 		<table id="main-list-table" class="table table-striped table-bordered table-hover">
 			<thead>
@@ -21,13 +21,34 @@
 				</tr>
 			</thead>
 			<tbody>
-				<#list result.items as flight>
+				<#list result.items as comb>
+				<#assign day=comb.transfers[0].day>
+				<#assign flight=comb.transfers[0].trans>
 				<tr>
-					<td class="center"><input type="checkbox" value="${flight.id}"><span class="lbl"></span></td>
+					<td class="center" rowspan="2"><input type="checkbox" value="${flight.id}"><span class="lbl"></span></td>
 					<td>${flight.number!} <#if flight.nonStop!false><span class="label label-success">直飞</span></#if></td>
 					<td>${flight.from!}${flight.departuresAirportCode!}</td>
 					<td>${flight.to!}${flight.arrivalsAirportCode!}</td>
-					<td>${(flight.schedule![])?join('/')}</td>
+					<td>${day}</td>
+					<td><#if flight.departuresTime?has_content>${flight.departuresTime?string('HH:mm')}</#if></td>
+					<td><#if flight.arrivalsTime?has_content>${flight.arrivalsTime?string('HH:mm')} <span class="label label-success">＋${flight.arrivalsTime?string('d')}</span></#if></td>
+					<td>${flight.airline!}（${flight.airlineCode!}）</td>
+					<td>${flight.extra!}</td>
+					<td class="td-actions center">
+						<div class="btn-group">
+							<button type="button" data-id="${flight.id}" class="btn btn-mini btn-info btn-action-edit" title="修改">
+								<i class="icon-edit bigger-120"></i>
+							</button>
+						</div>
+					</td>
+				</tr>
+				<#assign day=(comb.transfers?last).day>
+				<#assign flight=(comb.transfers?last).trans>
+				<tr>
+					<td>${flight.number!} <#if flight.nonStop!false><span class="label label-success">直飞</span></#if></td>
+					<td>${flight.from!}${flight.departuresAirportCode!}</td>
+					<td>${flight.to!}${flight.arrivalsAirportCode!}</td>
+					<td>${day}</td>
 					<td><#if flight.departuresTime?has_content>${flight.departuresTime?string('HH:mm')}</#if></td>
 					<td><#if flight.arrivalsTime?has_content>${flight.arrivalsTime?string('HH:mm')} <span class="label label-success">＋${flight.arrivalsTime?string('d')}</span></#if></td>
 					<td>${flight.airline!}（${flight.airlineCode!}）</td>

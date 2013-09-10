@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.cqlybest.common.mongo.bean.QueryResult;
+import com.cqlybest.common.mongo.bean.TransferComb;
 import com.cqlybest.common.mongo.bean.Transportation;
 import com.cqlybest.common.mongo.dao.MongoDb;
 import com.googlecode.mjorm.query.DaoQuery;
@@ -52,5 +53,28 @@ public class TransportationService {
     query.addSort("number", 1);
     query.setMaxDocuments(pageSize);
     return query.findObjects(Transportation.class).readAll();
+  }
+
+  public void updateTransferComb(TransferComb comb) {
+    String id = comb.getId();
+    if (StringUtils.isBlank(id)) {
+      comb.setId(UUID.randomUUID().toString());
+      mongoDb.createObject("TransferComb", comb);
+    } else {
+      mongoDb.getMongoDao().updateObject("TransferComb", id, comb);
+    }
+  }
+
+  public QueryResult<TransferComb> queryTransferComb(String lineType, int page, int pageSize) {
+    QueryResult<TransferComb> result = new QueryResult<>(page, pageSize);
+    DaoQuery query = mongoDb.createQuery("TransferComb");
+    query.eq("lineType", lineType);
+    result.setTotal(query.countObjects());
+
+    query.setFirstDocument(result.getStart());
+    query.setMaxDocuments(result.getPageSize());
+    result.setItems(query.findObjects(TransferComb.class).readAll());
+
+    return result;
   }
 }

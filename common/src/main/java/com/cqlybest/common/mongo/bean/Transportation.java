@@ -1,6 +1,8 @@
 package com.cqlybest.common.mongo.bean;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 public class Transportation {
 
@@ -23,6 +25,8 @@ public class Transportation {
   private Date arrivalsTime;// 到达时间（当地）
   private String lineType; // 线路类型，如马代
   private String extra;// 补充信息
+  private Boolean nonStop = false;// 是否直飞
+  private List<Integer> schedule = new ArrayList<>();// 航班班期
 
   public String getId() {
     return id;
@@ -126,6 +130,22 @@ public class Transportation {
 
   public void setExtra(String extra) {
     this.extra = extra;
+  }
+
+  public Boolean getNonStop() {
+    return nonStop;
+  }
+
+  public void setNonStop(Boolean nonStop) {
+    this.nonStop = nonStop;
+  }
+
+  public List<Integer> getSchedule() {
+    return schedule;
+  }
+
+  public void setSchedule(List<Integer> schedule) {
+    this.schedule = schedule;
   }
 
 }

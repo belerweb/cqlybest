@@ -6,7 +6,13 @@
 	'url':'/maldives/list.do'
 },{
 	'name':'航班',
-	'url':'/maldives/flight.do'
+	'sub':[{
+		'name':'航班',
+		'url':'/maldives/flight.do'
+	},{
+		'name':'航班组合',
+		'url':'/maldives/flight/comb.do'
+	}]
 },{
 	'name':'产品',
 	'url':'/maldives/product.do'
