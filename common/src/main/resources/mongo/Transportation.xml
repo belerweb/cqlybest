@@ -16,6 +16,7 @@
 		<property name="lineType" />
 		<property name="extra" />
 		<property name="nonStop" />
+		<property name="day" />
 		<property name="schedule" />
 	</object>
 
@@ -23,12 +24,6 @@
 		<property name="id" id="true" />
 		<property name="type" />
 		<property name="transfers" />
-	</object>
-
-	<object class="com.cqlybest.common.mongo.bean.Transfer">
-		<property name="name" />
-		<property name="day" />
-		<property name="trans" />
 	</object>
 
 </descriptors>

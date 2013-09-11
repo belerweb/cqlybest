@@ -68,7 +68,7 @@ public class TransportationService {
   public QueryResult<TransferComb> queryTransferComb(String lineType, int page, int pageSize) {
     QueryResult<TransferComb> result = new QueryResult<>(page, pageSize);
     DaoQuery query = mongoDb.createQuery("TransferComb");
-    query.eq("lineType", lineType);
+    query.eq("type", lineType);
     result.setTotal(query.countObjects());
 
     query.setFirstDocument(result.getStart());
@@ -77,4 +77,9 @@ public class TransportationService {
 
     return result;
   }
+
+  public void deleteTransferComb(String id) {
+    mongoDb.deleteObject("TransferComb", id);
+  }
+
 }

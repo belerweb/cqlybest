@@ -19,7 +19,6 @@ import com.cqlybest.common.Constant;
 import com.cqlybest.common.controller.ControllerHelper;
 import com.cqlybest.common.mongo.bean.MaldivesIsland;
 import com.cqlybest.common.mongo.bean.Product;
-import com.cqlybest.common.mongo.bean.Transfer;
 import com.cqlybest.common.mongo.bean.TransferComb;
 import com.cqlybest.common.mongo.bean.Transportation;
 import com.cqlybest.common.mongo.service.MaldivesService;
@@ -373,10 +372,9 @@ public class MaldivesController extends ControllerHelper {
     }
     comb.setType(Transportation.LINE_TYPE_MALDIVES);
     for (int i = 0; i < transfers.size(); i++) {
-      Transfer transfer = new Transfer();
-      transfer.setDay(day.get(i));
-      transfer.setTrans(transportationService.getTransportation(transfers.get(i)));
-      comb.getTransfers().add(transfer);
+      Transportation transportation = transportationService.getTransportation(transfers.get(i));
+      transportation.setDay(day.get(i));
+      comb.getTransfers().add(transportation);
     }
     transportationService.updateTransferComb(comb);
     return ok();
@@ -391,6 +389,15 @@ public class MaldivesController extends ControllerHelper {
     model.addAttribute("result", transportationService.queryTransferComb(
         Transportation.LINE_TYPE_MALDIVES, page, pageSize));
     return "/v1/maldives/flight/comb";
+  }
+
+  /**
+   * 航班组合信息
+   */
+  @RequestMapping(value = "/maldives/flight/comb_delete.do", method = RequestMethod.POST)
+  @ResponseBody
+  public void deleteFlightComb(@RequestParam String id) {
+    transportationService.deleteTransferComb(id);
   }
 
   /**

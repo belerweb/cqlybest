@@ -26,6 +26,7 @@ public class Transportation {
   private String lineType; // 线路类型，如马代
   private String extra;// 补充信息
   private Boolean nonStop = false;// 是否直飞
+  private Integer day;// 具体出发班期
   private List<Integer> schedule = new ArrayList<>();// 航班班期
 
   public String getId() {
@@ -138,6 +139,14 @@ public class Transportation {
 
   public void setNonStop(Boolean nonStop) {
     this.nonStop = nonStop;
+  }
+
+  public Integer getDay() {
+    return day;
+  }
+
+  public void setDay(Integer day) {
+    this.day = day;
   }
 
   public List<Integer> getSchedule() {

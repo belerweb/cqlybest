@@ -1,5 +1,6 @@
 package com.cqlybest.common.mongo.bean;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -9,7 +10,7 @@ public class TransferComb {
 
   private String id;
   private String type;
-  private List<Transfer> transfers;
+  private List<Transportation> transfers = new ArrayList<>();
 
   public String getId() {
     return id;
@@ -27,11 +28,11 @@ public class TransferComb {
     this.type = type;
   }
 
-  public List<Transfer> getTransfers() {
+  public List<Transportation> getTransfers() {
     return transfers;
   }
 
-  public void setTransfers(List<Transfer> transfers) {
+  public void setTransfers(List<Transportation> transfers) {
     this.transfers = transfers;
   }
 }

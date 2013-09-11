@@ -67,5 +67,16 @@ $('#page-content input[name=transfers]').on('change', function(e){
 		}
 	}
 });
-
+$('#page-content form').submit(function() {
+	$(this).ajaxSubmit({
+		success: function(response, status, xhr, form) {
+			cqlybest.success("保存成功，可继续添加。返回列表请点 [返回] 按钮。");
+			form.clearForm();
+		},
+		error: function(xhr, status, response, form) {
+			cqlybest.error();
+		}
+	});
+	return false;
+});
 </script>

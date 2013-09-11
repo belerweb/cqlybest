@@ -1,3 +1,5 @@
+bootbox.setLocale('zh_CN');
+
 /**
  * Date formate
  */
