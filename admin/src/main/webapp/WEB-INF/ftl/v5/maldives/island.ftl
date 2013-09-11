@@ -230,6 +230,7 @@
 	<script type="text/javascript">
 		window.PageContext = {
 			init: function(){
+				$('body').append('<div id="supersized-loader"></div><ul id="supersized"></ul>');
 				$.supersized({
 					slide_interval: 3000,
 					transition:1,

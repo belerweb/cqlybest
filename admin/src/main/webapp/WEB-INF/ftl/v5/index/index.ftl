@@ -4,7 +4,7 @@
 <!--=== Slider ===-->
 <div class="fullwidthbanner-container">
 	<div class="fullwidthabnner">
-		<ul>
+		<ul class="hide">
 			<#list Page.posters as poster>
 			<li data-transition="fade" data-masterspeed="1000" data-delay="3000">
 				<img alt="${poster.title!}" src="${ContextPath}/image/1600/300/${poster.image.id!}.${poster.image.extension}">

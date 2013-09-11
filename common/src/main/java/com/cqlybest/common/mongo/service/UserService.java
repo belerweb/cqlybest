@@ -14,6 +14,7 @@ import com.cqlybest.common.mongo.bean.User;
 import com.cqlybest.common.mongo.bean.WeiboUser;
 import com.cqlybest.common.mongo.dao.MongoDb;
 import com.googlecode.mjorm.query.DaoQuery;
+import com.mongodb.BasicDBObject;
 import com.qq.connect.javabeans.qzone.UserInfoBean;
 
 @Service("mongoUserService")
@@ -71,6 +72,12 @@ public class UserService implements UserDetailsService {
       // TODO 更新原Token
     }
     return user;
+  }
+
+  public void subscribe(String type, String id) {
+    BasicDBObject obj = new BasicDBObject();
+    obj.put("type", id);
+    mongoDb.createObject("Subscription", obj);
   }
 
   @Override

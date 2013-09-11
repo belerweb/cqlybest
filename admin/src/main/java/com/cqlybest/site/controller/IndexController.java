@@ -2,6 +2,7 @@ package com.cqlybest.site.controller;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.regex.Pattern;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -14,6 +15,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.cqlybest.common.controller.ControllerHelper;
@@ -25,9 +27,16 @@ import com.cqlybest.common.mongo.service.MaldivesService;
 import com.cqlybest.common.mongo.service.PageService;
 import com.cqlybest.common.mongo.service.ProductService;
 import com.cqlybest.common.mongo.service.SettingsService;
+import com.cqlybest.common.mongo.service.UserService;
 
 @Controller("siteIndexController")
 public class IndexController extends ControllerHelper {
+
+  private static final String ATOM = "[a-z0-9!#$%&'*+/=?^_`{|}~-]";
+  private static final String DOMAIN = ATOM + "+(\\." + ATOM + "+)+";
+  private static final Pattern EMAIL_PATTERN =
+      Pattern
+          .compile("^" + ATOM + "+(\\." + ATOM + "+)*@" + DOMAIN + "$", Pattern.CASE_INSENSITIVE);
 
   @Autowired
   private SettingsService settingsService;
@@ -39,6 +48,8 @@ public class IndexController extends ControllerHelper {
   private MaldivesService mongoMaldivesService;
   @Autowired
   private ProductService mongoProductService;
+  @Autowired
+  private UserService mongoUserService;
 
   @RequestMapping("/robots.txt")
   public Object robots(HttpServletRequest request) {
@@ -143,8 +154,32 @@ public class IndexController extends ControllerHelper {
     return "redirect:/index.html";
   }
 
-  @RequestMapping("/soon.html")
-  public Object comingSoon() {
+  @RequestMapping(method = RequestMethod.GET, value = "/soon.html")
+  public Object comingSoon(Model model) {
+    model.addAttribute("Settings", settingsService.getSettings());
     return "/v5/soon";
   }
+
+  @RequestMapping(method = RequestMethod.POST, value = "/soon.html")
+  public Object comingSoon(@RequestParam String id, Model model) {
+    String type = "mobile";
+    if (StringUtils.isBlank(id)) {
+      return error("请输入邮件地址或手机号。");
+    }
+    String account = id.trim();
+    if (account.contains("@")) {
+      if (!EMAIL_PATTERN.matcher(id).matches()) {
+        return error("请输入正确的邮件地址。");
+      }
+      type = "email";
+    }
+    if (!id
+        .matches("^(139|138|137|136|135|134|147|150|151|152|157|158|159|182|183|184|187|188|130|131|132|155|156|185|186|145|133|153|180|181|189)\\d{8}$")) {
+      return error("请输入正确的手机号码。");
+    }
+
+    mongoUserService.subscribe(type, id);
+    return ok();
+  }
+
 }
