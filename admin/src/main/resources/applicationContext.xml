@@ -11,7 +11,7 @@
 
 	<context:component-scan base-package="com.cqlybest" />
 
-	<!-- bean id="bayeux" class="org.cometd.server.BayeuxServerImpl" init-method="start" destroy-method="stop">
+	<bean id="bayeux" class="org.cometd.server.BayeuxServerImpl" init-method="start" destroy-method="stop">
 		<property name="options">
 			<map>
 				<entry key="logLevel" value="3" />
@@ -28,6 +28,6 @@
 				</entry>
 			</map>
 		</property>
-	</bean -->
+	</bean>
 
 </beans>
