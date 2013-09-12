@@ -19,6 +19,7 @@
 		<script src="${ContextPath}/assets/v1/js/jquery.maskedinput.js"></script>
 		<script src="${ContextPath}/assets/v1/js/jquery.maskMoney.js"></script>
 		<script src="${ContextPath}/assets/v1/js/date.js"></script>
+		<script src="${ContextPath}/assets/v1/js/cometd.js"></script>
 		<script src="${ContextPath}/assets/v1/js/intro.js"></script>
 		<script src="${ContextPath}/assets/v1/js/bootstrap-tour.js"></script>
 		<script src="${ContextPath}/assets/v1/js/ace-elements.js"></script>
