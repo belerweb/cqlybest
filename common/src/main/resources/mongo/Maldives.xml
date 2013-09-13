@@ -37,6 +37,7 @@
 		<property name="id" />
 		<property name="zhName" />
 		<property name="enName" />
+		<property name="type" />
 		<property name="description" />
 		<property name="num" />
 		<property name="requirements" />

@@ -11,6 +11,7 @@ public class MaldivesRoom {
   private String id;
   private String zhName; // 中文名称
   private String enName; // 英文名称
+  private String type;// 房间类型：沙、水、豪沙
   private String description; // 说明
   private Integer num;// 房间数量
   private String requirements;// 入住要求（人数限制等）
@@ -43,6 +44,14 @@ public class MaldivesRoom {
 
   public void setEnName(String enName) {
     this.enName = enName;
+  }
+
+  public String getType() {
+    return type;
+  }
+
+  public void setType(String type) {
+    this.type = type;
   }
 
   public String getDescription() {
