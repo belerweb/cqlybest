@@ -2,9 +2,12 @@ package com.cqlybest.common.controller;
 
 import java.lang.reflect.Method;
 
+import org.codehaus.jackson.map.ObjectMapper;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.util.MultiValueMap;
 
 import com.cqlybest.common.mongo.bean.User;
 
@@ -24,6 +27,18 @@ public abstract class ControllerHelper {
 
   protected ResponseEntity<Object> illegal() {
     return error("非法请求");
+  }
+
+  protected ResponseEntity<Object> json(Object object) {
+    try {
+      MultiValueMap<String, String> headers = new HttpHeaders();
+      headers.add("Content-Type", "application/json; charset=utf-8");
+      return new ResponseEntity<Object>(new ObjectMapper().writeValueAsString(object), headers,
+          HttpStatus.OK);
+    } catch (Exception e) {
+      e.printStackTrace();
+      throw new RuntimeException(e);
+    }
   }
 
   protected User getUser() {

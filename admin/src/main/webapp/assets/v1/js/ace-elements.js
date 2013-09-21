@@ -30,7 +30,7 @@
 					if (b.browser.mozilla) {
 						n.on("click", function() {
 							if (!k.disabled && !m.attr("readonly")) {
-								m.click()
+								// m.click()
 							}
 						})
 					}
@@ -87,70 +87,7 @@
 					}
 					m.on("change.inner_call", function(y, u) {
 						if (u === true) {
-							return
-
-							
-
-														
-
-							
-
-																					
-
-							
-
-														
-
-							
-
-																												
-
-							
-
-														
-
-							
-
-																					
-
-							
-
-														
-
-							
-
-																																			
-
-							
-
-														
-
-							
-
-																					
-
-							
-
-														
-
-							
-
-																												
-
-							
-
-														
-
-							
-
-																					
-
-							
-
-														
-
-							
-
+							return;
 						}
 						var t = true;
 						if (e.before_change) {
@@ -333,12 +270,12 @@
 							.css("width", (d * 10) + "px")
 							.wrap('<div class="ace-spinner">')
 							.after(
-									'<div class="spinner-buttons btn-group btn-group-vertical">						<button type="button" class="btn spinner-up btn-mini '
+									'<div class="spinner-buttons btn-group btn-group-vertical"><button type="button" class="btn spinner-up btn-mini '
 											+ e
-											+ '">						<i class="'
+											+ '"><i class="'
 											+ f
-											+ '"></i>						</button>						<button type="button" class="btn spinner-down btn-mini '
-											+ g + '">						<i class="' + i + '"></i>						</button>						</div>')
+											+ '"></i></button><button type="button" class="btn spinner-down btn-mini '
+											+ g + '"><i class="' + i + '"></i></button></div>')
 							.closest(".ace-spinner").spinner(c).wrapInner("<div class='input-append'></div>");
 					a(this).on("mousewheel DOMMouseScroll", function(k) {
 						var l = k.originalEvent.detail < 0 || k.originalEvent.wheelDelta > 0 ? 1 : -1;
