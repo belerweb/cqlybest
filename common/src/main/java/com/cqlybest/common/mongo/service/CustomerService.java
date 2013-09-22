@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 import com.cqlybest.common.IdcardUtils;
 import com.cqlybest.common.mongo.bean.Customer;
+import com.cqlybest.common.mongo.bean.DateBean;
 import com.cqlybest.common.mongo.dao.MongoDb;
 import com.googlecode.mjorm.query.Query;
 import com.googlecode.mjorm.query.QueryGroup;
@@ -48,8 +49,8 @@ public class CustomerService {
       if (idCard != null) {
         customer.setIdCard(idCard);
         try {
-          customer.setBirth(DateUtils.parseDate(IdcardUtils.getBirthByIdCard(idCard),
-              new String[] {"yyyyMMdd"}));
+          customer.setBirth(new DateBean(DateUtils.parseDate(IdcardUtils.getBirthByIdCard(idCard),
+              new String[] {"yyyyMMdd"})));
         } catch (ParseException e) {
           // TODO Auto-generated catch block
           e.printStackTrace();

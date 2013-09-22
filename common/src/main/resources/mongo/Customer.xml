@@ -19,4 +19,17 @@
 		<property name="modified" />
 	</object>
 
+	<object class="com.cqlybest.common.mongo.bean.DateBean">
+		<property name="dayOfYear" />
+		<property name="dayOfMonth" />
+		<property name="dayOfWeek" />
+		<property name="year" />
+		<property name="month" />
+		<property name="week" />
+		<property name="hour" />
+		<property name="minute" />
+		<property name="second" />
+		<property name="millisecond" />
+	</object>
+
 </descriptors>

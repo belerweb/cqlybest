@@ -10,7 +10,7 @@ public class Customer {
   private String id;
   private String fullname;// 姓名
   private Integer sex;// 性别
-  private Date birth;// 出生日期
+  private DateBean birth;// 出生日期
   private Boolean birthLunar;// 阴历生日
   private String idCard;// 身份证号
   private String idCardImg;// 身份证图片
@@ -47,11 +47,11 @@ public class Customer {
     this.sex = sex;
   }
 
-  public Date getBirth() {
+  public DateBean getBirth() {
     return birth;
   }
 
-  public void setBirth(Date birth) {
+  public void setBirth(DateBean birth) {
     this.birth = birth;
   }
 
