@@ -11,6 +11,8 @@
 					<option value="idCard">身份证</option>
 					<option value="passport">护照</option>
 					<option value="mobile">手机号</option>
+					<option value="email">电子邮件</option>
+					<option value="qq">QQ</option>
 					<option value="delete">删除整列</option>
 				</select>
 			</th>

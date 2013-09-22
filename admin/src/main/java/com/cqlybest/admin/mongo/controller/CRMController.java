@@ -3,12 +3,14 @@ package com.cqlybest.admin.mongo.controller;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.ss.usermodel.WorkbookFactory;
+import org.codehaus.jackson.map.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -18,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.cqlybest.common.controller.ControllerHelper;
+import com.cqlybest.common.mongo.service.CustomerService;
 import com.cqlybest.common.mongo.service.UserService;
 
 @Controller
@@ -25,6 +28,8 @@ public class CRMController extends ControllerHelper {
 
   @Autowired
   private UserService mongoUserService;
+  @Autowired
+  private CustomerService customerService;
 
   @RequestMapping("/crm.do")
   public String crm() {
@@ -105,5 +110,16 @@ public class CRMController extends ControllerHelper {
 
     model.addAttribute("data", data);
     return "/v1/crm/import/customer_step2";
+  }
+
+  /**
+   * 导入客户资料：保存数据
+   */
+  @RequestMapping(method = RequestMethod.POST, value = "/crm/import/customer.do", params = "step=2")
+  public Object importCustomer(@RequestParam String data) throws Exception {
+    @SuppressWarnings("unchecked")
+    List<Map<String, String>> customers = new ObjectMapper().readValue(data, List.class);
+    customerService.importCustomer(customers);
+    return ok();
   }
 }

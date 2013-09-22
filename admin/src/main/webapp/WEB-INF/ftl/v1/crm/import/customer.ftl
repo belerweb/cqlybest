@@ -43,11 +43,14 @@
 			<div class="step-pane" id="import－step2">
 			</div>
 			<div class="step-pane" id="import－step3">
+				<div class="alert alert-success text-center" style="padding:100px 0;">
+					<strong>你已成功导入数据。</strong>
+				</div>
 			</div>
 		</div>
 		<hr />
 		<div class="row-fluid wizard-actions">
-			<button type="button" class="btn btn-success btn-next" data-last="完成">下一步</button>
+			<button type="button" class="btn btn-success btn-next" data-last="继续导入">下一步</button>
 		</div>
 	</div>
 </div>
@@ -87,11 +90,67 @@
 			return !!data;
 		}
 		if(info.step == 2) {
-			// TODO 处理数据
+			var unused = false;
+			$('#data-table thead select').each(function(){
+				if ($(this).val()=='') {
+					unused = true;
+					return false;
+				}
+			});
+			if (unused) {
+				cqlybest.error('请为每一列需要的数据选择其代表的意义并删除不需要列。');
+				return false;
+			}
+
+			var keys = [];
+			$('#data-table thead select').each(function(){
+				var key = $(this).val();
+				if (keys.indexOf(key) == -1) {
+					keys.push(key);
+				}
+			});
+			if (keys.length != $('#data-table thead select').length) {
+				cqlybest.error('每一列的意义不能重复。');
+				return false;
+			}
+			if (keys.indexOf('idCard')==-1 && keys.indexOf('passport')==-1 && keys.indexOf('mobile')==-1 && keys.indexOf('email')==-1) {
+				cqlybest.error('数据中必须包含身份证或护照或电子邮件或手机号。');
+				return false;
+			}
+
+
+			var data = [];
+			$('#data-table tbody tr').each(function(){
+				var row = $(this);
+				var customer = {};
+				$.each(keys, function(i, key){
+					var value = row.find('td:eq(' + i + ')').text();
+					if (key=='mobile') {
+						value = value.match(/(\d+)/)[0];
+					}
+					customer[key] = value;
+				});
+				data.push(customer);
+			});
+
+			var success = false;
+			$.ajax({
+				async:false,
+				method:'post',
+				url:'${ContextPath}/crm/import/customer.do?step=2',
+				data:{
+					data: JSON.stringify(data)
+				}
+			}).done(function(){
+				success = true;
+			}).fail(function(){
+				cqlybest.error();
+			});
+			return success;
 		}
 	}).on('changed', function(e) {
 	}).on('finished', function(e) {
-		// TODO
+		cqlybest.go('#main-content', '${ContextPath}/crm/import/customer.do');
 	});
 })();
 </script>

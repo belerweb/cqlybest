@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<descriptors>
+
+	<object class="com.cqlybest.common.mongo.bean.Customer">
+		<property name="id" id="true" />
+		<property name="fullname" />
+		<property name="sex" />
+		<property name="birth" />
+		<property name="birthLunar" />
+		<property name="idCard" />
+		<property name="idCardImg" />
+		<property name="passport" />
+		<property name="passportImg" />
+		<property name="mobile" />
+		<property name="email" />
+		<property name="qq" />
+		<property name="ancestralLocation" />
+		<property name="created" />
+		<property name="modified" />
+	</object>
+
+</descriptors>
