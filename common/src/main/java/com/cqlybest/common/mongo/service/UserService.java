@@ -13,6 +13,7 @@ import com.cqlybest.common.mongo.bean.QueryResult;
 import com.cqlybest.common.mongo.bean.User;
 import com.cqlybest.common.mongo.bean.WeiboUser;
 import com.cqlybest.common.mongo.dao.MongoDb;
+import com.googlecode.mjorm.query.DaoModifier;
 import com.googlecode.mjorm.query.DaoQuery;
 import com.mongodb.BasicDBObject;
 import com.qq.connect.javabeans.qzone.UserInfoBean;
@@ -80,6 +81,16 @@ public class UserService implements UserDetailsService {
     mongoDb.createObject("Subscription", obj);
   }
 
+  public void toggleRole(String id, String role, boolean toggle) {
+    DaoModifier modify = mongoDb.createQuery("User").eq("_id", id).modify();
+    if (toggle) {
+      modify.push("roles", role);
+    } else {
+      modify.pull("roles", role);
+    }
+    modify.update();
+  }
+
   @Override
   public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
     String property = null;
@@ -96,4 +107,5 @@ public class UserService implements UserDetailsService {
     }
     return new User.UserWrapper(username, user);
   }
+
 }

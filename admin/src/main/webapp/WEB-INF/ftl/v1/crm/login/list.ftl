@@ -13,7 +13,7 @@
 					<th>电子邮件</th>
 					<th>用户名</th>
 					<th>昵称</th>
-					<th style="width:40px;">角色</th>
+					<th class="center" style="width:70px;">管理员</th>
 					<th class="center" style="width:100px;">操作</th>
 				</tr>
 			</thead>
@@ -26,10 +26,12 @@
 					<td>${user.email!}</td>
 					<td>${user.username!}</td>
 					<td>${user.nickname!}</td>
-					<td>
-						<#if user.roles?seq_contains('ROLE_ADMIN')>
-						<span class="label label-warning">管</span>
-						</#if>
+					<td class="center">
+						<label>
+							<input name="admin" type="checkbox" <#if user.roles?seq_contains('ROLE_ADMIN')>checked="checked"</#if> class="ace-switch ace-switch-5"
+								data-id="${user.id}" data-action="toggle-property">
+							<span class="lbl"></span>
+						</label>
 					</td>
 					<td class="td-actions center">
 						<div class="btn-group">
@@ -61,5 +63,17 @@ $('#main-list-table').dataTable({
 		q.page = p.iDisplayStart / p.iDisplayLength;
 		cqlybest.go('#main-content', '${ContextPath}/crm/login/list.do?' + $.param(q));
 	}
+});
+$('#page-content input[data-action=toggle-property]').click(function(){
+	var input = this;
+	$.post('${ContextPath}/crm/login/update.do', {
+		pk: $(this).data('id'),
+		name: $(this).attr('name'),
+		value: this.checked
+	}).done(function(data){
+	}).fail(function() {
+		cqlybest.error();
+		input.checked = !input.checked;
+	});
 });
 </script>
