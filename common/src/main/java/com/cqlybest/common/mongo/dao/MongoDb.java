@@ -21,6 +21,10 @@ public class MongoDb extends MongoDBDaoSupport {
     return getMongoDao().createObject(collection, obj);
   }
 
+  public <T> T[] createObjects(String collection, T[] objects) {
+    return getMongoDao().createObjects(collection, objects);
+  }
+
   public void updateObject(String collection, Object id, Object o) {
     getMongoDao().updateObject(collection, id, o);
   }

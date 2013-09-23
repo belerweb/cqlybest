@@ -7,7 +7,7 @@ import java.util.Date;
  */
 public class Customer {
 
-  private String id;
+  private String id;// 与用户ID相同
   private String fullname;// 姓名
   private Integer sex;// 性别
   private DateBean birth;// 出生日期

@@ -1,6 +1,5 @@
 package com.cqlybest.common.mongo.bean;
 
-import java.util.Date;
 
 /**
  * 客户事件（如生日、结婚纪念日）提醒
@@ -8,11 +7,11 @@ import java.util.Date;
 public class CustomerEvent {
 
   private String id;
+  private String customerId;// 客户ID
   private String name;// 事件名称，如生日
   private String description;// 如：9月10日是张三的生日。
-  private Date eventDate;// 事件日期
-  private Date created;// 此条提醒创建时间
-  private Date expire;// 此条提醒过期时间
+  private DateBean eventDate;// 事件日期
+  private String created;// 此条提醒创建时间
 
   public String getId() {
     return id;
@@ -38,28 +37,28 @@ public class CustomerEvent {
     this.description = description;
   }
 
-  public Date getEventDate() {
+  public DateBean getEventDate() {
     return eventDate;
   }
 
-  public void setEventDate(Date eventDate) {
+  public void setEventDate(DateBean eventDate) {
     this.eventDate = eventDate;
   }
 
-  public Date getCreated() {
+  public String getCreated() {
     return created;
   }
 
-  public void setCreated(Date created) {
+  public void setCreated(String created) {
     this.created = created;
   }
 
-  public Date getExpire() {
-    return expire;
+  public String getCustomerId() {
+    return customerId;
   }
 
-  public void setExpire(Date expire) {
-    this.expire = expire;
+  public void setCustomerId(String customerId) {
+    this.customerId = customerId;
   }
 
 }

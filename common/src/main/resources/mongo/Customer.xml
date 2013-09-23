@@ -32,4 +32,13 @@
 		<property name="millisecond" />
 	</object>
 
+	<object class="com.cqlybest.common.mongo.bean.CustomerEvent">
+		<property name="id" id="true" />
+		<property name="customerId" />
+		<property name="name" />
+		<property name="description" />
+		<property name="eventDate" />
+		<property name="created" />
+	</object>
+
 </descriptors>
