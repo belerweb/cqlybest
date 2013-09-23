@@ -1,12 +1,14 @@
 package com.cqlybest.common.controller;
 
 import java.lang.reflect.Method;
+import java.util.UUID;
 
 import org.codehaus.jackson.map.ObjectMapper;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.ui.Model;
 import org.springframework.util.MultiValueMap;
 
 import com.cqlybest.common.mongo.bean.User;
@@ -39,6 +41,10 @@ public abstract class ControllerHelper {
       e.printStackTrace();
       throw new RuntimeException(e);
     }
+  }
+
+  protected void generatePageId(Model model) {
+    model.addAttribute("pageId", UUID.randomUUID().toString().replaceAll("-", ""));
   }
 
   protected User getUser() {
