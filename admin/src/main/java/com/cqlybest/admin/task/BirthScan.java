@@ -69,7 +69,9 @@ public class BirthScan implements InitializingBean {
         // event.setExpire(expire);
         events.add(event);
       }
-      mongoDb.createObjects("CustomerEvent", events.toArray());
+      if (!events.isEmpty()) {
+        mongoDb.createObjects("CustomerEvent", events.toArray());
+      }
       LOGGER.info("BirthScanTask is finished.");
     }
   }
