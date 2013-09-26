@@ -9,9 +9,11 @@
      http://www.springframework.org/schema/jdbc http://www.springframework.org/schema/jdbc/spring-jdbc-3.2.xsd
      http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.2.xsd">
 
-	<bean id="version" class="com.cqlybest.common.Version">
-		<property name="name" value="${project.version}" />
-		<property name="buildTime" value="${timestamp}" />
+	<bean id="version" class="com.cqlybest.common.mongo.bean.Version">
+		<property name="id" value="1" />
+		<property name="name" value="${project.name}" />
+		<property name="version" value="${project.version}" />
+		<property name="time" value="${timestamp}" />
 	</bean>
 	<bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver" />
 
