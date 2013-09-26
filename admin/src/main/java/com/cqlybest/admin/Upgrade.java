@@ -1,5 +1,6 @@
 package com.cqlybest.admin;
 
+import java.util.Map;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -16,7 +17,17 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.context.ServletContextAware;
 
 import com.cqlybest.common.Constant;
+import com.cqlybest.common.mongo.bean.FriendlyLink;
 import com.cqlybest.common.mongo.bean.Image;
+import com.cqlybest.common.mongo.bean.Link;
+import com.cqlybest.common.mongo.bean.MaldivesDining;
+import com.cqlybest.common.mongo.bean.MaldivesIsland;
+import com.cqlybest.common.mongo.bean.MaldivesRoom;
+import com.cqlybest.common.mongo.bean.MauritiusDining;
+import com.cqlybest.common.mongo.bean.MauritiusHotel;
+import com.cqlybest.common.mongo.bean.MauritiusRoom;
+import com.cqlybest.common.mongo.bean.Page;
+import com.cqlybest.common.mongo.bean.Product;
 import com.cqlybest.common.mongo.bean.Version;
 import com.cqlybest.common.mongo.dao.MongoDb;
 import com.cqlybest.common.mongo.service.SettingsService;
@@ -43,15 +54,18 @@ public class Upgrade implements ServletContextAware {
       @Override
       public void run() {
         try {
-          Upgrade.this.nullToV1();
+          nullToV1();
+          v1ToV2();
+          setNewVersion();
+          LOGGER.info("Upgrade finished");
         } catch (Exception e) {
           e.printStackTrace();
         }
       }
-    }, 60000);
+    }, 5000);
   }
 
-  private void nullToV1() throws Exception {
+  private void nullToV1() throws Exception {// 上传图片到七牛
     Version version = mongoDb.createQuery("Version").findObject(Version.class);
     if (version == null) {
       String accessKey = System.getProperty(Constant.QINIU_AK, System.getenv(Constant.QINIU_AK));
@@ -65,9 +79,11 @@ public class Upgrade implements ServletContextAware {
         Image image =
             mongoDb.createQuery("Image").addSort("_id", 1).setFirstDocument(i).setMaxDocuments(1)
                 .findObject(Image.class);
-        LOGGER.info("Upgrade image {}: {}", i, image.getId());
+        mongoDb.createQuery("Image").eq("_id", image.get_id()).modify().set("id", image.get_id())
+            .update();
         byte[] data = image.getData();
         if (data != null) {
+          LOGGER.info("Upgrade image {}: {}", i, image.getId());
           String key = image.getId() + "." + image.getExtension();
           PutPolicy putPolicy =
               new PutPolicy(System.getProperty("qiniu.bk", System.getenv("qiniu.bk")) + ":" + key);
@@ -97,7 +113,146 @@ public class Upgrade implements ServletContextAware {
         }
       }
     }
+  }
+
+  @SuppressWarnings( {"unchecked", "rawtypes"})
+  private void v1ToV2() throws Exception {// 历史图片数据处理
+    Version version = mongoDb.createQuery("Version").findObject(Version.class);
+    if (version == null || version.getId() < 2) {
+      // 产品
+      long total = mongoDb.createQuery("Product").countObjects();
+      for (int i = 0; i < total; i++) {
+        Product product =
+            mongoDb.createQuery("Product").addSort("_id", 1).setFirstDocument(i).setMaxDocuments(1)
+                .findObject(Product.class);
+        for (Image image : product.getPhotos()) {
+          updateImage(image);
+        }
+        for (Image image : product.getPosters()) {
+          updateImage(image);
+        }
+        mongoDb.updateObject("Product", product.getId(), product);
+      }
+
+      // 毛求
+      total = mongoDb.createQuery("MauritiusHotel").countObjects();
+      for (int i = 0; i < total; i++) {
+        MauritiusHotel hotel =
+            mongoDb.createQuery("MauritiusHotel").addSort("_id", 1).setFirstDocument(i)
+                .setMaxDocuments(1).findObject(MauritiusHotel.class);
+        for (Image image : hotel.getHotelPictures()) {
+          updateImage(image);
+        }
+        for (Image image : hotel.getPictures()) {
+          updateImage(image);
+        }
+        for (MauritiusRoom room : hotel.getRooms()) {
+          for (Image image : room.getPictures()) {
+            updateImage(image);
+          }
+        }
+        for (MauritiusDining dining : hotel.getDinings()) {
+          for (Image image : dining.getPictures()) {
+            updateImage(image);
+          }
+        }
+        mongoDb.updateObject("MauritiusHotel", hotel.getId(), hotel);
+      }
+
+      // 马代
+      total = mongoDb.createQuery("MaldivesIsland").countObjects();
+      for (int i = 0; i < total; i++) {
+        MaldivesIsland island =
+            mongoDb.createQuery("MaldivesIsland").addSort("_id", 1).setFirstDocument(i)
+                .setMaxDocuments(1).findObject(MaldivesIsland.class);
+        for (Image image : island.getHotelPictures()) {
+          updateImage(image);
+        }
+        for (Image image : island.getPictures()) {
+          updateImage(image);
+        }
+        for (MaldivesRoom room : island.getRooms()) {
+          for (Image image : room.getPictures()) {
+            updateImage(image);
+          }
+        }
+        for (MaldivesDining dining : island.getDinings()) {
+          for (Image image : dining.getPictures()) {
+            updateImage(image);
+          }
+        }
+        mongoDb.updateObject("MaldivesIsland", island.getId(), island);
+      }
+
+      // 友情链接
+      total = mongoDb.createQuery("FriendlyLink").countObjects();
+      for (int i = 0; i < total; i++) {
+        FriendlyLink link =
+            mongoDb.createQuery("FriendlyLink").addSort("_id", 1).setFirstDocument(i)
+                .setMaxDocuments(1).findObject(FriendlyLink.class);
+        if (link.getImage() != null) {
+          updateImage(link.getImage());
+        }
+        mongoDb.updateObject("FriendlyLink", link.getId(), link);
+      }
+
+      // 页面
+      total = mongoDb.createQuery("Page").countObjects();
+      for (int i = 0; i < total; i++) {
+        Page page =
+            mongoDb.createQuery("Page").addSort("_id", 1).setFirstDocument(i).setMaxDocuments(1)
+                .findObject(Page.class);
+        for (Link link : page.getPosters()) {
+          if (link.getImage() != null) {
+            updateImage(link.getImage());
+          }
+        }
+        mongoDb.updateObject("Page", page.getId(), page);
+      }
+    }
+
+    // 设置
+    Map settings = mongoDb.createQuery("Settings").findObject(Map.class);
+    Map watermark = (Map) settings.get("watermark");
+    Map watermarkImg = (Map) watermark.get("img");
+    Image newImage = mongoDb.findById("Image", Image.class, (String) watermarkImg.get("id"));
+    watermarkImg.put("contentType", newImage.getContentType());
+    watermarkImg.put("qiniuKey", newImage.getQiniuKey());
+    watermarkImg.put("size", newImage.getSize());
+    watermarkImg.put("width", newImage.getWidth());
+    watermarkImg.put("height", newImage.getHeight());
+
+    Map basic = (Map) settings.get("basic");
+    Map logo = (Map) basic.get("logo");
+    newImage = mongoDb.findById("Image", Image.class, (String) watermarkImg.get("id"));
+    logo.put("contentType", newImage.getContentType());
+    logo.put("qiniuKey", newImage.getQiniuKey());
+    logo.put("size", newImage.getSize());
+    logo.put("width", newImage.getWidth());
+    logo.put("height", newImage.getHeight());
+
+    mongoDb.createQuery("Settings").modify().delete();
+    settings.remove("_id");
+    mongoDb.createObject("Settings", settings);
+  }
+
+  private void setNewVersion() {
     mongoDb.createObject("Version", this.version);
+  }
+
+  private void updateImage(Image old) {
+    Image newImage = mongoDb.findById("Image", Image.class, old.getId());
+    old.set_id(old.get_id());
+    if (newImage != null) {
+      old.setExtension(newImage.getExtension());
+      old.setContentType(newImage.getContentType());
+      old.setQiniuKey(newImage.getQiniuKey());
+      old.setSize(newImage.getSize());
+      old.setWidth(newImage.getWidth());
+      old.setHeight(newImage.getHeight());
+    } else {
+      old.setQiniuKey(old.getId() + "." + old.getExtension());
+    }
   }
 
 }

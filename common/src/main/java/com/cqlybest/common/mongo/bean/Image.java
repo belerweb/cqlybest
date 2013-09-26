@@ -5,6 +5,7 @@ import java.util.Date;
 
 public class Image {
 
+  private String _id;
   private String id;
   private String extension;
   private String contentType;
@@ -24,6 +25,14 @@ public class Image {
   private Integer width;
   private Integer height;
   private Boolean uploaded = Boolean.FALSE;
+
+  public String get_id() {
+    return _id;
+  }
+
+  public void set_id(String _id) {
+    this._id = _id;
+  }
 
   public Long getSize() {
     return size;
