@@ -194,7 +194,7 @@
 			<div class="control-group">
 				<label class="control-label">图片:</label>
 				<div class="controls">
-					<input name="img" type="text" readonly="readonly" placeholder="" value="${(section.img.id)!}.${(section.img.extension)!}">
+					<input name="img" type="text" readonly="readonly" placeholder="" value="${(section.img.id)!}">
 					<button type="button" class="btn btn-info btn-mini" data-action="upload">上传图片</button>
 				</div>
 			</div>

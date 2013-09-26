@@ -19,7 +19,7 @@
 	<div class="container-fluid">
 		<!-- Logo -->
 		<div class="logo">
-			<a href="/"><#if (Settings.basic.logo)?has_content><img src="${ContextPath}/image/${Settings.basic.logo.id}.${Settings.basic.logo.extension}" height="60"><#else>${(Settings.basic.siteName)!}</#if></a>
+			<a href="/"><#if (Settings.basic.logo)?has_content><img src="http://${ImageServer}/${Settings.basic.logo.qiniuKey}" height="60"><#else>${(Settings.basic.siteName)!}</#if></a>
 		</div><!-- /logo -->
 		<!-- Menu -->
 		<div class="navbar">

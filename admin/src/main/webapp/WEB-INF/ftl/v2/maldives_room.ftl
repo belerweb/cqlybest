@@ -32,27 +32,27 @@
 	<div class="room-gallery" data-toggle="modal-gallery" data-target="#maldives-gallery" data-selector="a">
 		<#if room.pictures?size==1>
 		<#list room.pictures as image>
-		<a href="${ContextPath}/image/${image.id}.${image.extension}" title="${image.title!}"><img src="${ContextPath}/image/696/400/${image.id}.${image.extension}"></a>
+		<a href="http://${ImageServer}/${image.qiniuKey}" title="${image.title!}"><img src="http://${ImageServer}/${image.qiniuKey}?696/400"></a>
 		</#list>
 		</#if>
 		<#if room.pictures?size==2>
 		<#list room.pictures as image>
-		<a href="${ContextPath}/image/${image.id}.${image.extension}" title="${image.title!}"><img src="${ContextPath}/image/347/200/${image.id}.${image.extension}"></a>
+		<a href="http://${ImageServer}/${image.qiniuKey}" title="${image.title!}"><img src="http://${ImageServer}/${image.qiniuKey}?347/200"></a>
 		</#list>
 		</#if>
 		<#if room.pictures?size==3>
 		<#list room.pictures as image>
-		<a href="${ContextPath}/image/${image.id}.${image.extension}" title="${image.title!}"><img src="${ContextPath}/image/230/170/${image.id}.${image.extension}"></a>
+		<a href="http://${ImageServer}/${image.qiniuKey}" title="${image.title!}"><img src="http://${ImageServer}/${image.qiniuKey}?230/170"></a>
 		</#list>
 		</#if>
 		<#if room.pictures?size==4>
 		<#list room.pictures as image>
-		<a href="${ContextPath}/image/${image.id}.${image.extension}" title="${image.title!}"><img src="${ContextPath}/image/173/130/${image.id}.${image.extension}"></a>
+		<a href="http://${ImageServer}/${image.qiniuKey}" title="${image.title!}"><img src="http://${ImageServer}/${image.qiniuKey}?173/130"></a>
 		</#list>
 		</#if>
 		<#if room.pictures?size gt 4>
 		<#list room.pictures as image>
-		<a href="${ContextPath}/image/${image.id}.${image.extension}" title="${image.title!}"><img src="${ContextPath}/image/137/105/${image.id}.${image.extension}"></a>
+		<a href="http://${ImageServer}/${image.qiniuKey}" title="${image.title!}"><img src="http://${ImageServer}/${image.qiniuKey}?137/105"></a>
 		</#list>
 		</#if>
 		<div class="clearfix"> </div>

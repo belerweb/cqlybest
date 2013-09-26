@@ -33,10 +33,10 @@
 			<ul>
 				<#list posters as poster>
 				<li>
-					<img alt="${poster.title!}" src="${ContextPath}/image/700/300/${poster.image.id!}.${poster.image.extension}" width="100%">
+					<img alt="${poster.title!}" src="http://${ImageServer}/${poster.image.qiniuKey}?700/300" width="100%">
 				</li>
 				<li>
-					<img alt="${poster.title!}" src="${ContextPath}/image/700/300/${poster.image.id!}.${poster.image.extension}" width="100%">
+					<img alt="${poster.title!}" src="http://${ImageServer}/${image.qiniuKey}?700/300" width="100%">
 				</li>
 				</#list>
 			</ul>

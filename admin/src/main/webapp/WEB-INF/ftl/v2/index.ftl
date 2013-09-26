@@ -15,7 +15,7 @@
 						<div class="carousel-inner">
 							<#list Page.posters as poster>
 							<div class="<#if poster_index=0>active</#if> item">
-								<img alt="${poster.title!}" src="${ContextPath}/image/700/300/${poster.image.id!}.${poster.image.extension}">
+								<img alt="${poster.title!}" src="http://${ImageServer}/${poster.image.qiniuKey}?700*300">
 								<div class="carousel-caption">
 									<h4>${poster.title!}</h4>
 									<p>${poster.description!}</p>
@@ -34,7 +34,7 @@
 			<#if section.type=="img">
 			<div class="row-fluid">
 				<a <#if section.img.url?has_content>href="${section.img.url}"</#if>>
-					<img src="${ContextPath}/image/${section.img.id}.${section.img.extension}">
+					<img src="http://${ImageServer}/${section.img.qiniuKey}">
 				</a>
 			</div>
 			</#if>

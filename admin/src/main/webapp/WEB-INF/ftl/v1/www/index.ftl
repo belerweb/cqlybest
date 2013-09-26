@@ -128,7 +128,7 @@
 											</td>
 											<td class="td-actions center">
 												<div class="btn-group">
-													<a href="${ContextPath}/image/${poster.image.id}.${poster.image.extension}" target="_blank" class="btn btn-mini btn-success" title="查看图片">
+													<a href="http://${ImageServer}/${poster.image.qiniuKey}" target="_blank" class="btn btn-mini btn-success" title="查看图片">
 														<i class="icon-picture bigger-120"></i>
 													</a>
 													<button type="button" class="btn btn-mini btn-danger" title="删除" data-id="${poster.id}" data-action="delete-poster">

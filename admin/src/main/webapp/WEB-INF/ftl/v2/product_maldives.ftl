@@ -27,11 +27,11 @@
 						<#if product.photos?has_content>
 						<#list product.photos as image>
 						<div class="gallery-item <#if image_index==0> first</#if><#if image_index%5==1> row-first</#if><#if image_index gt 10> hide</#if>"
-							data-href="${ContextPath}/image/${image.id}.${image.extension}" title="${image.title!}">
+							data-href="http://${ImageServer}/${image.qiniuKey}" title="${image.title!}">
 							<#if image_index==0>
-							<img src="${ContextPath}/image/341/260/${image.id}.${image.extension}">
+							<img src="http://${ImageServer}/${image.qiniuKey}?341/260">
 							<#else>
-							<img src="${ContextPath}/image/63/50/${image.id}.${image.extension}">
+							<img src="http://${ImageServer}/${image.qiniuKey}?63/50">
 							</#if>
 						</div>
 						</#list>

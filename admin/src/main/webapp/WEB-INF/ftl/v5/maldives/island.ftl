@@ -15,7 +15,7 @@
 		<div id="logo">
 			<a href="/" target="_blank">
 				<#assign image=Settings.basic.logo>
-				<img src="${ContextPath}/image/${image.id}.${image.extension}" width="150">
+				<img src="http://${ImageServer}/${image.qiniuKey}" width="150">
 			</a>
 		</div>
 		</#if>
@@ -138,8 +138,8 @@
 						<#if island.hotelPictures?has_content>
 						<#assign rand = springx.rand(0,island.hotelPictures?size-1) />
 						<#list island.hotelPictures as image>
-						<img alt="${image.title!}" src="${ContextPath}/image/343/280/${image.id}.${image.extension}"
-							 data-href="${ContextPath}/image/${image.id}.${image.extension}"
+						<img alt="${image.title!}" src="http://${ImageServer}/${image.qiniuKey}?343/280"
+							 data-href="http://${ImageServer}/${image.qiniuKey}"
 							 class="<#if image_index!=rand>hide</#if>" style="width:100%;">
 						</#list>
 						</#if>
@@ -174,7 +174,7 @@
 								<li class="span6">
 									<div class="thumbnail-style thumbnail-kenburn">
 										<div class="overflow-hidden">
-											<img src="${ContextPath}/image/696/400/${image.id}.${image.extension}">
+											<img src="http://${ImageServer}/${image.qiniuKey}?696/400">
 										</div>
 									</div>
 								</li>
@@ -213,7 +213,7 @@
 								<li class="span6">
 									<div class="thumbnail-style thumbnail-kenburn">
 										<div class="overflow-hidden">
-											<img src="${ContextPath}/image/696/400/${image.id}.${image.extension}">
+											<img src="http://${ImageServer}/${image.qiniuKey}?696/400">
 										</div>
 									</div>
 								</li>
@@ -239,7 +239,7 @@
 					vertical_center:0,
 					slides:[
 						<#list island.pictures as image>
-						<#if image_index gt 0>,</#if>{image : '${ContextPath}/image/${image.id}.${image.extension}'}
+						<#if image_index gt 0>,</#if>{image : 'http://${ImageServer}/${image.qiniuKey}'}
 						</#list>
 					]
 				});

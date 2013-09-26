@@ -86,7 +86,7 @@
 						<#list hotel.hotelPictures as image>
 							<li class="span3">
 								<div class="thumbnail">
-									<img src="${ContextPath}/image/${image.id}.${image.extension}">
+									<img src="http://${ImageServer}/${image.qiniuKey}">
 									<div class="caption">
 										<p><a href="#" class="editable" data-pk="${image.id}" data-name="title" data-type="text" data-value="${image.title!}" data-url="${ContextPath}/mauritius/hotel/picture/update.do"></a></p>
 										<p><a href="#" class="editable" data-pk="${image.id}" data-name="description" data-type="textarea" data-url="${ContextPath}/mauritius/hotel/picture/update.do">${image.description!?html}</a></p>

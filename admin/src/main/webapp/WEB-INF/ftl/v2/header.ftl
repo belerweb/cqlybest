@@ -2,7 +2,7 @@
 <div id="top-logo" class="container text-right">
 	<div class="pull-left">
 		<#if (Settings.basic.logo)?has_content>
-		<img src="${ContextPath}/image/${Settings.basic.logo.id}.${Settings.basic.logo.extension}">
+		<img src="http://${ImageServer}/${Settings.basic.logo.qiniuKey}">
 		<#else>
 		${(Settings.basic.siteName)!}
 		</#if>

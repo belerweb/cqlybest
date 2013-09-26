@@ -32,7 +32,7 @@
 							<label class="control-label"><a href="#" data-name="basic.logo" data-action="logo">LOGO：</a></label>
 							<div class="controls">
 								<#if (settings.basic.logo)?has_content>
-								<img src="${ContextPath}/image/${settings.basic.logo.id}.${settings.basic.logo.extension}">
+								<img src="http://${ImageServer}/${settings.basic.logo.qiniuKey}">
 								<#else>
 								<a class="editable editable-empty">未设置</a>
 								</#if>
@@ -137,7 +137,7 @@
 							<label class="control-label"><a href="#" data-name="watermark.img" data-action="watermark">水印图片：</a></label>
 							<div class="controls">
 								<#if (settings.watermark.img)?has_content>
-								<img src="${ContextPath}/image/${settings.watermark.img.id}.${settings.watermark.img.extension}">
+								<img src="http://${ImageServer}/${settings.watermark.img.qiniuKey}">
 								<#else>
 								<a class="editable editable-empty">未设置</a>
 								</#if>

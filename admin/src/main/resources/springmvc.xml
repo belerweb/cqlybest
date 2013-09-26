@@ -62,6 +62,8 @@ http://www.springframework.org/schema/mvc http://www.springframework.org/schema/
 		<property name="freemarkerVariables">
 			<map>
 				<entry key="securityContextHolder" value-ref="securityContextHolder" />
+				<entry key="version" value-ref="version" />
+				<entry key="ImageServer" value="#{T(System).getProperty('qiniu.bk', T(System).getenv('qiniu.bk'))}.u.qiniudn.com" />
 			</map>
 		</property>
 	</bean>

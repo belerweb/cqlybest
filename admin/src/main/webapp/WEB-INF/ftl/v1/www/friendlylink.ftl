@@ -29,7 +29,7 @@
 					</td>
 					<td>
 						<#if item.image?has_content>
-						<img src="${ContextPath}/image/${item.image.id}.${item.image.extension}"><br/>
+						<img src="http://${ImageServer}/${item.image.qiniuKey}"><br/>
 						</#if>
 					</td>
 					<td>
