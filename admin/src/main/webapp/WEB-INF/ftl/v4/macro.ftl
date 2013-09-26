@@ -4,8 +4,8 @@ ${product.name!}<#if product.productType==1><#if product.days?has_content>${prod
 
 <#macro getOneImageUrl images width height>
 <#assign image = images[springx.rand(0, images?size-1)] />
-http://${ImageServer}/${image.qiniuKey}?${width}/${height}</#macro>
+http://${ImageServer}/${image.qiniuKey}?imageView/1/w/${width}/h/${height}</#macro>
 
 <#macro getOneImageUrl2 images width height>
 <#assign image = images[springx.rand(0, images?size-1)] />
-http://${ImageServer}/${image.qiniuKey}?${width}/${height}</#macro>
+http://${ImageServer}/${image.qiniuKey}?imageView/1/w/${width}/h/${height}</#macro>

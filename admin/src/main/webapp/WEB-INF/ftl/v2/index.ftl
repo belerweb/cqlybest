@@ -15,7 +15,7 @@
 						<div class="carousel-inner">
 							<#list Page.posters as poster>
 							<div class="<#if poster_index=0>active</#if> item">
-								<img alt="${poster.title!}" src="http://${ImageServer}/${poster.image.qiniuKey}?700*300">
+								<img alt="${poster.title!}" src="http://${ImageServer}/${poster.image.qiniuKey}?imageView/1/w/${700}/h/${300}">
 								<div class="carousel-caption">
 									<h4>${poster.title!}</h4>
 									<p>${poster.description!}</p>

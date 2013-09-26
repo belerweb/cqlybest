@@ -66,7 +66,7 @@
 				<div class="carousel-inner">
 					<#list island.pictures as image>
 					<div class="<#if image_index=0>active</#if> item">
-						<img alt="${image.title!}" src="http://${ImageServer}/${image.qiniuKey}?940/300">
+						<img alt="${image.title!}" src="http://${ImageServer}/${image.qiniuKey}?imageView/1/w/940/h/300">
 						<div class="carousel-caption">
 							<h4>${image.title!}</h4>
 							<p>${image.description!}</p>
@@ -128,7 +128,7 @@
 										title="点击查看详情并预定 ${product.name!} <#if product.days?has_content>${product.days}天</#if><#if product.nights?has_content>${product.nights}晚</#if> ${room1!}${room2!}${room3!} <#if product.price?has_content>¥${(product.price/100)?string('0.00')}起</#if>">
 									<#if product.posters?has_content>
 									<#assign image = product.posters[springx.rand(0,product.posters?size-1)] />
-									<img alt="${product.title!}" src="http://${ImageServer}/${image.qiniuKey}?218/163">
+									<img alt="${product.title!}" src="http://${ImageServer}/${image.qiniuKey}?imageView/1/w/218/h/163">
 									<#else>
 									点击查看详情并预定 ${product.name!} <#if product.days?has_content>${product.days}天</#if><#if product.nights?has_content>${product.nights}晚</#if>
 									${room1!}${room2!}${room3!} <#if product.price?has_content>¥${(product.price/100)?string('0.00')}起</#if>

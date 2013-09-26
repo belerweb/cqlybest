@@ -58,7 +58,7 @@
 			<#if room.pictures?has_content>
 			<div class="room-gallery" data-toggle="modal-gallery" data-target="#product-gallery">
 				<#list room.pictures as image>
-				<a data-gallery="gallery" href="http://${ImageServer}/${image.qiniuKey} title="${image.title!}"><img src="http://${ImageServer}/${image.qiniuKey}?100/100"></a>
+				<a data-gallery="gallery" href="http://${ImageServer}/${image.qiniuKey} title="${image.title!}"><img src="http://${ImageServer}/${image.qiniuKey}?imageView/1/w/100/h/100"></a>
 			</#list>
 			</div>
 			</#if>

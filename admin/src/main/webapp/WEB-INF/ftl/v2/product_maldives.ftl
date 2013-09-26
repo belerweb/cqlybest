@@ -29,9 +29,9 @@
 						<div class="gallery-item <#if image_index==0> first</#if><#if image_index%5==1> row-first</#if><#if image_index gt 10> hide</#if>"
 							data-href="http://${ImageServer}/${image.qiniuKey}" title="${image.title!}">
 							<#if image_index==0>
-							<img src="http://${ImageServer}/${image.qiniuKey}?341/260">
+							<img src="http://${ImageServer}/${image.qiniuKey}?imageView/1/w/341/h/260">
 							<#else>
-							<img src="http://${ImageServer}/${image.qiniuKey}?63/50">
+							<img src="http://${ImageServer}/${image.qiniuKey}?imageView/1/w/63/h/50">
 							</#if>
 						</div>
 						</#list>

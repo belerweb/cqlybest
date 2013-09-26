@@ -138,7 +138,7 @@
 						<#if island.hotelPictures?has_content>
 						<#assign rand = springx.rand(0,island.hotelPictures?size-1) />
 						<#list island.hotelPictures as image>
-						<img alt="${image.title!}" src="http://${ImageServer}/${image.qiniuKey}?343/280"
+						<img alt="${image.title!}" src="http://${ImageServer}/${image.qiniuKey}?imageView/1/w/343/h/280"
 							 data-href="http://${ImageServer}/${image.qiniuKey}"
 							 class="<#if image_index!=rand>hide</#if>" style="width:100%;">
 						</#list>
@@ -174,7 +174,7 @@
 								<li class="span6">
 									<div class="thumbnail-style thumbnail-kenburn">
 										<div class="overflow-hidden">
-											<img src="http://${ImageServer}/${image.qiniuKey}?696/400">
+											<img src="http://${ImageServer}/${image.qiniuKey}?imageView/1/w/696/h/400">
 										</div>
 									</div>
 								</li>
@@ -213,7 +213,7 @@
 								<li class="span6">
 									<div class="thumbnail-style thumbnail-kenburn">
 										<div class="overflow-hidden">
-											<img src="http://${ImageServer}/${image.qiniuKey}?696/400">
+											<img src="http://${ImageServer}/${image.qiniuKey}?imageView/1/w/696/h/400">
 										</div>
 									</div>
 								</li>
