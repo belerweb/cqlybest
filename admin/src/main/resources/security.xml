@@ -33,9 +33,6 @@ http://www.springframework.org/schema/beans http://www.springframework.org/schem
 		<intercept-url pattern="/error" access="permitAll" />
 		<intercept-url pattern="/mp" access="permitAll" />
 		<intercept-url pattern="/weibo/**" access="permitAll" />
-		<intercept-url pattern="/image/**/*.jpg" access="permitAll" />
-		<intercept-url pattern="/image/**/*.gif" access="permitAll" />
-		<intercept-url pattern="/image/**/*.png" access="permitAll" />
 		<intercept-url pattern="/image/upload/callback" access="permitAll" />
 		<intercept-url pattern="/**/*.html" access="permitAll" />
 		<intercept-url pattern="/**/*.xml" access="permitAll" />
