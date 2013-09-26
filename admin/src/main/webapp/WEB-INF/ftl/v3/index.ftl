@@ -36,7 +36,7 @@
 					<img alt="${poster.title!}" src="http://${ImageServer}/${poster.image.qiniuKey}?imageView/1/w/700/h/300" width="100%">
 				</li>
 				<li>
-					<img alt="${poster.title!}" src="http://${ImageServer}/${image.qiniuKey}?imageView/1/w/700/h/300" width="100%">
+					<img alt="${poster.title!}" src="http://${ImageServer}/${poster.image.qiniuKey}?imageView/1/w/700/h/300" width="100%">
 				</li>
 				</#list>
 			</ul>
