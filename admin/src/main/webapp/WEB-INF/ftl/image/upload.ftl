@@ -12,7 +12,7 @@
 		<div class="text-center"><button id="callback-btn" type="button" class="btn btn-primary">确定</button></div>
 		<script type="text/javascript" src="${ContextPath}/assets/v1/js/jquery.js"></script>
 		<script type="text/javascript" src="${ContextPath}/assets/v1/js/plupload.js"></script>
-		<script type="text/javascript" src="${ContextPath}/assets/v1/js/plupload.html4.js"></script>
+		<script type="text/javascript" src="${ContextPath}/assets/v1/js/plupload.flash.js"></script>
 		<script type="text/javascript" src="${ContextPath}/assets/v1/js/jquery.plupload.queue.js"></script>
 		<script type="text/javascript">
 		var files = [];
@@ -51,14 +51,51 @@
 			'Error : File too large :': '错误 : 文件太大',
 			'Error: Invalid file extension:': '错误：不允许地文件类型：'
 		});
-		$('#uploader').pluploadQueue({
-			multipart: true,
-			runtimes : 'html4',
-			url : '${ContextPath}/image/upload',
+		var uploader = $('#uploader').pluploadQueue({
+			runtimes : 'flash',
+			flash_swf_url : '${ContextPath}/assets/v1/img/plupload.flash.swf',
+			multi_selection:true,
 			filters : [{title : '图片', extensions : 'jpg,gif,png'}],
+			url:'http://up.qiniu.com/',
+			preinit:{
+				Init: function(up, info) {
+				},
+				UploadFile: function(up, file) {
+					var param;
+					$.ajax({
+						async:false,
+						url:'${ContextPath}/image/upload/token',
+						data:{
+							name: file.name
+						}
+					}).done(function(data, status, xhr){
+						param = data;
+					}).fail(function(xhr, status, data){
+						bootbox.alert('<div class="alert alert-error">' + data + '</div>');
+						throw data;
+					});
+					up.settings.multipart_params = param;
+				}
+			},
 			init : {
+				FilesAdded: function(up, files) {
+				},
+				FilesRemoved: function(up, files) {
+				},
+				QueueChanged: function(up) {
+				},
+				Refresh: function(up) {
+				},
+				StateChanged: function(up) {
+				},
+				UploadProgress: function(up, file) {
+				},
 				FileUploaded: function(up, file, info) {
 					files.push($.parseJSON(info.response));
+				},
+				ChunkUploaded: function(up, file, info) {
+				},
+				Error: function(up, args) {
 				}
 			}
 		});

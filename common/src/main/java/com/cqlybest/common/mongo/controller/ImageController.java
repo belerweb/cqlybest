@@ -4,20 +4,24 @@ import java.awt.image.BufferedImage;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 
 import javax.imageio.IIOImage;
 import javax.imageio.ImageIO;
 import javax.imageio.ImageWriteParam;
 import javax.imageio.ImageWriter;
 import javax.imageio.stream.ImageOutputStream;
+import javax.servlet.http.HttpServletRequest;
 
 import net.coobird.thumbnailator.filters.Watermark;
 import net.coobird.thumbnailator.geometry.Positions;
 
+import org.apache.commons.lang.RandomStringUtils;
 import org.imgscalr.Scalr;
-import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -30,14 +34,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.multipart.MultipartFile;
 
+import com.cqlybest.common.Constant;
 import com.cqlybest.common.controller.ControllerHelper;
 import com.cqlybest.common.mongo.bean.Image;
 import com.cqlybest.common.mongo.service.ImageService;
 import com.cqlybest.common.mongo.service.SettingsService;
-
-import eu.medsea.util.MimeUtil;
+import com.qiniu.api.auth.digest.Mac;
+import com.qiniu.api.rs.PutPolicy;
 
 @Controller
 public class ImageController extends ControllerHelper {
@@ -50,31 +54,78 @@ public class ImageController extends ControllerHelper {
   @RequestMapping(method = RequestMethod.GET, value = "/image/upload")
   public void upload() {}
 
-  @RequestMapping(method = RequestMethod.POST, value = "/image/upload")
-  @ResponseBody
-  public Object upload(@RequestParam MultipartFile file) throws Exception {
-    JSONObject result = new JSONObject();
-    result.put("code", 0);
-    if (file == null) {
-      result.put("code", 11);
-      result.put("message", "Image is must.");
-      return result;
+  /**
+   * 上传图片的Token
+   */
+  @RequestMapping("/image/upload/token")
+  public Object upload(@RequestParam String name) {
+    String accessKey = System.getProperty(Constant.QINIU_AK, System.getenv(Constant.QINIU_AK));
+    String secretKey = System.getProperty(Constant.QINIU_SK, System.getenv(Constant.QINIU_SK));
+    Mac mac = new Mac(accessKey, secretKey);
+    String userId = getUser().getId();
+    String imageId = UUID.randomUUID().toString();
+    String extension = name.substring(name.lastIndexOf(".")).toLowerCase();
+    String key = imageId + extension;
+    PutPolicy putPolicy = new PutPolicy(getQiniuBucket() + ":" + key);
+    putPolicy.endUser = userId;
+    putPolicy.callbackUrl =
+        "http://" + System.getProperty("qiniu.callback") + "/image/upload/callback";
+    putPolicy.callbackBody =
+        "token=$(x:token)&uid=$(x:uid)&imageId=$(x:id)" + "&etag=$(etag)&fname=$(fname)"
+            + "&fsize=$(fsize)&mimeType=$(mimeType)" + "&imageInfo=$(imageInfo)&exif=$(exif)"
+            + "&width=$(imageInfo.width)&height=$(imageInfo.height)";
+    try {
+      String token = putPolicy.token(mac);
+      Map<String, String> result = new HashMap<>();
+      result.put("key", key);
+      result.put("token", token);
+      result.put("x:id", imageId);
+      result.put("x:uid", userId);
+      String imageToken = RandomStringUtils.randomAlphanumeric(16);
+      result.put("x:token", imageToken);
+
+      Image image = new Image();
+      image.setId(imageId);
+      image.setName(name);
+      // image.setTitle(name);
+      image.setUserId(getUser().getId());
+
+      image.setExtension(extension.substring(1));
+      Date current = new Date();
+      image.setCreatedTime(current);
+      image.setLastUpdated(current);
+      image.setToken(imageToken);
+      image.setQiniuKey(key);
+      mongoImageService.addImage(image);
+
+      return json(result);
+    } catch (Exception e) {
+      e.printStackTrace();
+      return error(e.getMessage());
+    }
+  }
+
+  /**
+   * 七牛上传图片回调
+   */
+  @RequestMapping(method = RequestMethod.POST, value = "/image/upload/callback")
+  public Object upload(@RequestParam String token, @RequestParam String uid,
+      @RequestParam String imageId, @RequestParam String etag, @RequestParam String fname,
+      @RequestParam long fsize, @RequestParam String mimeType, @RequestParam String imageInfo,
+      @RequestParam int width, @RequestParam int height, @RequestParam String exif,
+      HttpServletRequest request) {
+    Image image = mongoImageService.getImage(imageId);
+    if (!token.equals(image.getToken())) {
+      return illegal();
     }
 
-    String extention = MimeUtil.getFileExtension(file.getOriginalFilename()).toLowerCase();
-    if (!"gif".equals(extention) && !"jpg".equals(extention) && !"png".equals(extention)) {
-      result.put("code", 12);
-      result.put("message", "Unsupported file.");
-      return result;
-    }
-
-    if (file.getSize() > 32000 * 1024) {
-      result.put("code", 13);
-      result.put("message", "File is too big (over 32M).");
-      return result;
-    }
-
-    return mongoImageService.upload(file);
+    image.setUploaded(Boolean.TRUE);
+    image.setSize(fsize);
+    image.setContentType(mimeType);
+    image.setWidth(width);
+    image.setHeight(height);
+    mongoImageService.updateImage(image);
+    return json(image);
   }
 
   @RequestMapping(value = "/image/update", method = RequestMethod.POST)

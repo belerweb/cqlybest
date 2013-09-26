@@ -16,6 +16,79 @@ public class Image {
   private Date createdTime;
   private Date lastUpdated;
 
+  private String name;// 原始文件名
+  private String token;// 上传校验码
+  private String qiniuKey;// 七牛文件Key
+  private String userId;// 上传者ID
+  private Long size;
+  private Integer width;
+  private Integer height;
+  private Boolean uploaded = Boolean.FALSE;
+
+  public Long getSize() {
+    return size;
+  }
+
+  public void setSize(Long size) {
+    this.size = size;
+  }
+
+  public Integer getWidth() {
+    return width;
+  }
+
+  public void setWidth(Integer width) {
+    this.width = width;
+  }
+
+  public Integer getHeight() {
+    return height;
+  }
+
+  public void setHeight(Integer height) {
+    this.height = height;
+  }
+
+  public Boolean getUploaded() {
+    return uploaded;
+  }
+
+  public void setUploaded(Boolean uploaded) {
+    this.uploaded = uploaded;
+  }
+
+  public String getUserId() {
+    return userId;
+  }
+
+  public void setUserId(String userId) {
+    this.userId = userId;
+  }
+
+  public String getQiniuKey() {
+    return qiniuKey;
+  }
+
+  public void setQiniuKey(String qiniuKey) {
+    this.qiniuKey = qiniuKey;
+  }
+
+  public String getToken() {
+    return token;
+  }
+
+  public void setToken(String token) {
+    this.token = token;
+  }
+
+  public String getName() {
+    return name;
+  }
+
+  public void setName(String name) {
+    this.name = name;
+  }
+
   public String getId() {
     return id;
   }

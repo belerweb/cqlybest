@@ -12,6 +12,14 @@
 		<property name="extraKey" />
 		<property name="createdTime" />
 		<property name="lastUpdated" />
+		<property name="name" />
+		<property name="token" />
+		<property name="qiniuKey" />
+		<property name="userId" />
+		<property name="size" />
+		<property name="width" />
+		<property name="height" />
+		<property name="uploaded" />
 	</object>
 
 	<object class="com.cqlybest.common.mongo.bean.ImageMeta">

@@ -74,8 +74,11 @@ public class Constant {
 
   public static final SimpleDateFormat YYYYMMDD_FORMAT = new SimpleDateFormat("yyyy-MM-dd");
 
-  public static final int SORT_DESC = -1;//降序
-  public static final int SORT_ASC = 1;//升序
+  public static final int SORT_DESC = -1;// 降序
+  public static final int SORT_ASC = 1;// 升序
+
+  public static final String QINIU_AK = "qiniu.ak";
+  public static final String QINIU_SK = "qiniu.sk";
 
 
   public static void checkWeiboConfig(String appKeyConfig, String appSecretConfig) {

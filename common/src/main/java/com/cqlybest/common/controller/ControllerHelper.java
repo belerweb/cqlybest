@@ -15,6 +15,10 @@ import com.cqlybest.common.mongo.bean.User;
 
 public abstract class ControllerHelper {
 
+  protected String getQiniuBucket() {
+    return System.getProperty("qiniu.bk", System.getenv("qiniu.bk"));
+  }
+
   protected ResponseEntity<Object> ok() {
     return new ResponseEntity<Object>(HttpStatus.OK);
   }
