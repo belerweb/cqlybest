@@ -48,8 +48,8 @@ public class Product {
   private List<String> types = new ArrayList<>();// 产品类型
   private List<String> grades = new ArrayList<>();// 产品等级
 
-  private List<ImageMeta> posters = new ArrayList<>();// 海报图片
-  private List<ImageMeta> photos = new ArrayList<>();// 相册图片
+  private List<Image> posters = new ArrayList<>();// 海报图片
+  private List<Image> photos = new ArrayList<>();// 相册图片
 
   private List<ProductMaldives> maldivesDetails = new ArrayList<>(); // 马代详细
 
@@ -297,19 +297,19 @@ public class Product {
     this.grades = grades;
   }
 
-  public List<ImageMeta> getPosters() {
+  public List<Image> getPosters() {
     return posters;
   }
 
-  public void setPosters(List<ImageMeta> posters) {
+  public void setPosters(List<Image> posters) {
     this.posters = posters;
   }
 
-  public List<ImageMeta> getPhotos() {
+  public List<Image> getPhotos() {
     return photos;
   }
 
-  public void setPhotos(List<ImageMeta> photos) {
+  public void setPhotos(List<Image> photos) {
     this.photos = photos;
   }
 

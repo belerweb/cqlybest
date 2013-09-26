@@ -9,7 +9,7 @@ import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import com.cqlybest.common.mongo.bean.ImageMeta;
+import com.cqlybest.common.mongo.bean.Image;
 import com.cqlybest.common.mongo.bean.MaldivesIsland;
 import com.cqlybest.common.mongo.bean.Product;
 import com.cqlybest.common.mongo.service.MaldivesService;
@@ -72,7 +72,7 @@ public class MaldivesIslandHandler implements Handler {
 
     MaldivesIsland island = mongoMaldivesService.queryIsland(conditions);
     if (island != null && !island.getHotelPictures().isEmpty()) {
-      ImageMeta image = island.getHotelPictures().get(0);
+      Image image = island.getHotelPictures().get(0);
       Article article = new Article();
       article.setTitle(island.getZhName() + "|" + island.getEnName());
       article.setDescription(island.getAd());

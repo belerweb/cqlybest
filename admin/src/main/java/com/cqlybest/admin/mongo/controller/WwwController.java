@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.cqlybest.common.controller.ControllerHelper;
 import com.cqlybest.common.mongo.bean.FriendlyLink;
-import com.cqlybest.common.mongo.bean.ImageMeta;
 import com.cqlybest.common.mongo.bean.Link;
 import com.cqlybest.common.mongo.bean.Page;
 import com.cqlybest.common.mongo.bean.page.BooleanCondition;
@@ -24,6 +23,7 @@ import com.cqlybest.common.mongo.bean.page.MaldivesIslandCondition;
 import com.cqlybest.common.mongo.bean.page.ProductCondition;
 import com.cqlybest.common.mongo.bean.page.Section;
 import com.cqlybest.common.mongo.service.FriendlyLinkService;
+import com.cqlybest.common.mongo.service.ImageService;
 import com.cqlybest.common.mongo.service.PageService;
 
 /**
@@ -35,6 +35,8 @@ public class WwwController extends ControllerHelper {
 
   @Autowired
   private PageService pageService;
+  @Autowired
+  private ImageService mongoImageService;
   @Autowired
   private FriendlyLinkService friendlyLinkService;
 
@@ -77,13 +79,7 @@ public class WwwController extends ControllerHelper {
     if (StringUtils.isNotBlank(target)) {
       link.setTarget(target);
     }
-
-    String[] imgStr = image.split("\\.");
-    ImageMeta img = new ImageMeta();
-    img.setId(imgStr[0]);
-    img.setExtension(imgStr[1]);
-    link.setImage(img);
-
+    link.setImage(mongoImageService.getImage(image));
     link.setDisplayOrder(displayOrder);
     pageService.addPoster("www.index", link);
     return ok();
@@ -317,11 +313,7 @@ public class WwwController extends ControllerHelper {
       friendlyLink.setTarget(target);
     }
     if (StringUtils.isNotBlank(image)) {
-      String[] imgStr = image.split("\\.");
-      ImageMeta img = new ImageMeta();
-      img.setId(imgStr[0]);
-      img.setExtension(imgStr[1]);
-      friendlyLink.setImage(img);
+      friendlyLink.setImage(mongoImageService.getImage(image));
     }
     friendlyLink.setDisplayOrder(displayOrder);
     friendlyLinkService.addLink(friendlyLink);

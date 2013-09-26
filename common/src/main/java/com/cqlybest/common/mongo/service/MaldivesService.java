@@ -1,6 +1,5 @@
 package com.cqlybest.common.mongo.service;
 
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -13,7 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.cqlybest.common.Constant;
-import com.cqlybest.common.mongo.bean.ImageMeta;
+import com.cqlybest.common.mongo.bean.Image;
 import com.cqlybest.common.mongo.bean.MaldivesDining;
 import com.cqlybest.common.mongo.bean.MaldivesIsland;
 import com.cqlybest.common.mongo.bean.MaldivesRoom;
@@ -149,24 +148,11 @@ public class MaldivesService {
         "dinings.$." + property, value).update();
   }
 
-  public void addPicture(String islandId, List<String> filenames) {
-    List<Object> images = new ArrayList<>();
-    List<String> imageIds = new ArrayList<>();
-    for (String fileName : filenames) {
-      String[] tmp = fileName.split("\\.");
-      imageIds.add(tmp[0]);
-      ImageMeta image = new ImageMeta();
-      image.setId(tmp[0]);
-      image.setExtension(tmp[1]);
-      images.add(mongoDb.unmap(image));
-    }
+  public void addPicture(String islandId, List<String> imageIds) {
     // 保存图片
-    mongoDb.createQuery("MaldivesIsland").eq("_id", islandId).modify().pushAll("pictures", images)
+    mongoDb.createQuery("MaldivesIsland").eq("_id", islandId).modify().pushAll("pictures",
+        mongoDb.createQuery("Image").in("_id", imageIds).findObjects(Image.class).readAll())
         .update();
-    // 更新原始图片的信息
-    mongoDb.createQuery("Image").in("_id", imageIds).modify()
-        .set("extra", Constant.IMAGE_MALDIVES_ISLAND_POSTER).set("extraKey", islandId)
-        .updateMulti();
   }
 
   public void updatePicture(String imageId, String property, String value) {
@@ -184,24 +170,11 @@ public class MaldivesService {
     mongoDb.createQuery("Image").eq("_id", imageId).modify().delete();
   }
 
-  public void addHotelPicture(String islandId, List<String> filenames) {
-    List<Object> images = new ArrayList<>();
-    List<String> imageIds = new ArrayList<>();
-    for (String fileName : filenames) {
-      String[] tmp = fileName.split("\\.");
-      imageIds.add(tmp[0]);
-      ImageMeta image = new ImageMeta();
-      image.setId(tmp[0]);
-      image.setExtension(tmp[1]);
-      images.add(mongoDb.unmap(image));
-    }
+  public void addHotelPicture(String islandId, List<String> imageIds) {
     // 保存图片
-    mongoDb.createQuery("MaldivesIsland").eq("_id", islandId).modify()
-        .pushAll("hotelPictures", images).update();
-    // 更新原始图片的信息
-    mongoDb.createQuery("Image").in("_id", imageIds).modify()
-        .set("extra", Constant.IMAGE_MALDIVES_HOTEL_PICTURE).set("extraKey", islandId)
-        .updateMulti();
+    mongoDb.createQuery("MaldivesIsland").eq("_id", islandId).modify().pushAll("hotelPictures",
+        mongoDb.createQuery("Image").in("_id", imageIds).findObjects(Image.class).readAll())
+        .update();
   }
 
   public void updateHotelPicture(String imageId, String property, String value) {
@@ -219,23 +192,15 @@ public class MaldivesService {
     mongoDb.createQuery("Image").eq("_id", imageId).modify().delete();
   }
 
-  public void addRoomPicture(String roomId, List<String> filenames) {
-    List<Object> images = new ArrayList<>();
-    List<String> imageIds = new ArrayList<>();
-    for (String fileName : filenames) {
-      String[] tmp = fileName.split("\\.");
-      imageIds.add(tmp[0]);
-      ImageMeta image = new ImageMeta();
-      image.setId(tmp[0]);
-      image.setExtension(tmp[1]);
-      images.add(mongoDb.unmap(image));
-    }
+  public void addRoomPicture(String roomId, List<String> imageIds) {
     // 保存图片
-    mongoDb.createQuery("MaldivesIsland").eq("rooms.id", roomId).modify()
-        .pushAll("rooms.$.pictures", images).update();
+    mongoDb.createQuery("MaldivesIsland").eq("rooms.id", roomId).modify().pushAll(
+        "rooms.$.pictures",
+        mongoDb.createQuery("Image").in("_id", imageIds).findObjects(Image.class).readAll())
+        .update();
     // 更新原始图片的信息
-    mongoDb.createQuery("Image").in("_id", imageIds).modify()
-        .set("extra", Constant.IMAGE_MALDIVES_ROOM_PICTURE).set("extraKey", roomId).updateMulti();
+    mongoDb.createQuery("Image").in("_id", imageIds).modify().set("extra",
+        Constant.IMAGE_MALDIVES_ROOM_PICTURE).set("extraKey", roomId).updateMulti();
   }
 
   public void updateRoomPicture(String index, String imageId, String property, String value) {
@@ -253,24 +218,12 @@ public class MaldivesService {
     mongoDb.createQuery("Image").eq("_id", imageId).modify().delete();
   }
 
-  public void addDiningPicture(String diningId, List<String> filenames) {
-    List<Object> images = new ArrayList<>();
-    List<String> imageIds = new ArrayList<>();
-    for (String fileName : filenames) {
-      String[] tmp = fileName.split("\\.");
-      imageIds.add(tmp[0]);
-      ImageMeta image = new ImageMeta();
-      image.setId(tmp[0]);
-      image.setExtension(tmp[1]);
-      images.add(mongoDb.unmap(image));
-    }
+  public void addDiningPicture(String diningId, List<String> imageIds) {
     // 保存图片
-    mongoDb.createQuery("MaldivesIsland").eq("dinings.id", diningId).modify()
-        .pushAll("dinings.$.pictures", images).update();
-    // 更新原始图片的信息
-    mongoDb.createQuery("Image").in("_id", imageIds).modify()
-        .set("extra", Constant.IMAGE_MALDIVES_DINING_PICTURE).set("extraKey", diningId)
-        .updateMulti();
+    mongoDb.createQuery("MaldivesIsland").eq("dinings.id", diningId).modify().pushAll(
+        "dinings.$.pictures",
+        mongoDb.createQuery("Image").in("_id", imageIds).findObjects(Image.class).readAll())
+        .update();
   }
 
   public void updateDiningPicture(String index, String imageId, String property, String value) {

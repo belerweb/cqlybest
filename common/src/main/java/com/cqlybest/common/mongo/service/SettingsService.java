@@ -29,7 +29,7 @@ public class SettingsService {
   }
 
   public void updateSettings(String property, Object value) {
-    mongoDb.createQuery("Settings").modify().set(property, value).update();
+    mongoDb.createQuery("Settings").modify().set(property, mongoDb.unmap(value)).update();
     cacheSettings = null;
   }
 

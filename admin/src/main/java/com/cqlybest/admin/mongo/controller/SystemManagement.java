@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.cqlybest.common.Constant;
+import com.cqlybest.common.mongo.service.ImageService;
 import com.cqlybest.common.mongo.service.SettingsService;
 
 @Controller
@@ -27,6 +28,8 @@ public class SystemManagement {
 
   @Autowired
   private SettingsService settingsService;
+  @Autowired
+  private ImageService mongoImageService;
 
   @RequestMapping("/system.do")
   public String system() {
@@ -92,15 +95,12 @@ public class SystemManagement {
       @RequestParam(value = "value[]", required = false) List<String> values) throws IOException {
     Object _value = value == null ? values : value;
     if ("watermark.img".equals(name) || "basic.logo".equals(name)) {
-      Map<String, String> img = new HashMap<>();
-      img.put("id", values.get(0));
-      img.put("extension", values.get(1));
-      _value = img;
+      _value = mongoImageService.getImage(value);
     }
     if ("cache.enabled".equals(name)) {
       _value = "true".equals(value);
-      FileUtils.cleanDirectory(new File(System.getProperty(Constant.CONFIG_CACHE_DIR,
-          System.getenv(Constant.CONFIG_CACHE_DIR))));
+      FileUtils.cleanDirectory(new File(System.getProperty(Constant.CONFIG_CACHE_DIR, System
+          .getenv(Constant.CONFIG_CACHE_DIR))));
     }
 
     settingsService.updateSettings(name, _value);

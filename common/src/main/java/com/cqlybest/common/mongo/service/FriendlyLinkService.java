@@ -9,7 +9,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.cqlybest.common.mongo.bean.FriendlyLink;
-import com.cqlybest.common.mongo.bean.ImageMeta;
 import com.cqlybest.common.mongo.bean.QueryResult;
 import com.cqlybest.common.mongo.dao.MongoDb;
 import com.googlecode.mjorm.query.DaoQuery;
@@ -32,11 +31,7 @@ public class FriendlyLinkService {
       if (StringUtils.isBlank(value)) {
         _value = null;
       } else {
-        String[] imageStr = value.split("\\.");
-        ImageMeta image = new ImageMeta();
-        image.setId(imageStr[0]);
-        image.setExtension(imageStr[1]);
-        _value = mongoDb.unmap(image);
+        _value = mongoDb.findById("Image", value);
       }
     }
     if ("displayOrder".equals(property)) {

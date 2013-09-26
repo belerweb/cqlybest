@@ -211,7 +211,7 @@ $('#page-content input[name=displayOrder]').ace_spinner({min:0});
 $('#page-content button[data-action=upload]').click(function(){
 	var images = cqlybest.uploadImage();
 	if (images) {
-		$(this).prev().val(images[0].id + '.' + images[0].extension);
+		$(this).prev().val(images[0].id);
 	}
 });
 

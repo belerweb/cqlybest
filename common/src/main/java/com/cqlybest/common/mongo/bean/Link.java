@@ -11,7 +11,7 @@ public class Link {
   private String description;
   private String link;
   private String target;
-  private ImageMeta image;
+  private Image image;
   private Integer displayOrder;
   private Boolean published = Boolean.FALSE;
 
@@ -55,11 +55,11 @@ public class Link {
     this.target = target;
   }
 
-  public ImageMeta getImage() {
+  public Image getImage() {
     return image;
   }
 
-  public void setImage(ImageMeta image) {
+  public void setImage(Image image) {
     this.image = image;
   }
 

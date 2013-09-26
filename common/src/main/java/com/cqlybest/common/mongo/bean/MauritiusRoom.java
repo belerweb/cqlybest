@@ -19,7 +19,7 @@ public class MauritiusRoom {
   private String roomFacility;// 房间设施
   private Integer displayOrder;
 
-  private List<ImageMeta> pictures = new ArrayList<>();;// 房型图片
+  private List<Image> pictures = new ArrayList<>();;// 房型图片
 
   public String getId() {
     return id;
@@ -69,11 +69,11 @@ public class MauritiusRoom {
     this.requirements = requirements;
   }
 
-  public List<ImageMeta> getPictures() {
+  public List<Image> getPictures() {
     return pictures;
   }
 
-  public void setPictures(List<ImageMeta> pictures) {
+  public void setPictures(List<Image> pictures) {
     this.pictures = pictures;
   }
 

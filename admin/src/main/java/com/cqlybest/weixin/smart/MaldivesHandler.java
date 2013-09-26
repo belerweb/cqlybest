@@ -7,7 +7,7 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import com.cqlybest.common.mongo.bean.ImageMeta;
+import com.cqlybest.common.mongo.bean.Image;
 import com.cqlybest.common.mongo.bean.MaldivesIsland;
 import com.cqlybest.common.mongo.service.MaldivesService;
 import com.cqlybest.common.mongo.service.SettingsService;
@@ -44,7 +44,7 @@ public class MaldivesHandler implements Handler {
     List<MaldivesIsland> islands = mongoMaldivesService.queryIsland(0, 10).getItems();
     boolean first = true;
     for (MaldivesIsland island : islands) {
-      List<ImageMeta> images = island.getHotelPictures();
+      List<Image> images = island.getHotelPictures();
       if (!images.isEmpty()) {
         Article article = new Article();
         article.setTitle(island.getZhName() + "|" + island.getEnName());

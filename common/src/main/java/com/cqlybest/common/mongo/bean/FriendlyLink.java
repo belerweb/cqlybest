@@ -10,7 +10,7 @@ public class FriendlyLink {
   private String title;
   private String link;
   private String target;
-  private ImageMeta image;
+  private Image image;
   private Integer displayOrder;
 
   public String getId() {
@@ -53,11 +53,11 @@ public class FriendlyLink {
     this.target = target;
   }
 
-  public ImageMeta getImage() {
+  public Image getImage() {
     return image;
   }
 
-  public void setImage(ImageMeta image) {
+  public void setImage(Image image) {
     this.image = image;
   }
 

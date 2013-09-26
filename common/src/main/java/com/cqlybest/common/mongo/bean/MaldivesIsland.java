@@ -33,9 +33,9 @@ public class MaldivesIsland {
   private String hotelAirport;// 机场柜台号
   private String hotelDescription;// 酒店介绍
 
-  private List<ImageMeta> hotelPictures = new ArrayList<>();// 酒店图片
+  private List<Image> hotelPictures = new ArrayList<>();// 酒店图片
 
-  private List<ImageMeta> pictures = new ArrayList<>();// 图片
+  private List<Image> pictures = new ArrayList<>();// 图片
   private List<MaldivesRoom> rooms = new ArrayList<>();// 房型
   private List<MaldivesDining> dinings = new ArrayList<>();// 餐饮设施
 
@@ -196,19 +196,19 @@ public class MaldivesIsland {
     this.hotelDescription = hotelDescription;
   }
 
-  public List<ImageMeta> getHotelPictures() {
+  public List<Image> getHotelPictures() {
     return hotelPictures;
   }
 
-  public void setHotelPictures(List<ImageMeta> hotelPictures) {
+  public void setHotelPictures(List<Image> hotelPictures) {
     this.hotelPictures = hotelPictures;
   }
 
-  public List<ImageMeta> getPictures() {
+  public List<Image> getPictures() {
     return pictures;
   }
 
-  public void setPictures(List<ImageMeta> pictures) {
+  public void setPictures(List<Image> pictures) {
     this.pictures = pictures;
   }
 

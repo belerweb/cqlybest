@@ -173,8 +173,8 @@ public class MaldivesController extends ControllerHelper {
   @RequestMapping(value = "/maldives/picture/add.do", method = RequestMethod.POST)
   @ResponseBody
   public void addPicture(@RequestParam String islandId,
-      @RequestParam("images[]") List<String> filenames) {
-    mongoMaldivesService.addPicture(islandId, filenames);
+      @RequestParam("images[]") List<String> imageIds) {
+    mongoMaldivesService.addPicture(islandId, imageIds);
   }
 
   /**
@@ -202,8 +202,8 @@ public class MaldivesController extends ControllerHelper {
   @RequestMapping(value = "/maldives/hotel/picture/add.do", method = RequestMethod.POST)
   @ResponseBody
   public void addHotelPicture(@RequestParam String islandId,
-      @RequestParam("images[]") List<String> filenames) {
-    mongoMaldivesService.addHotelPicture(islandId, filenames);
+      @RequestParam("images[]") List<String> imageIds) {
+    mongoMaldivesService.addHotelPicture(islandId, imageIds);
   }
 
   /**
@@ -231,8 +231,8 @@ public class MaldivesController extends ControllerHelper {
   @RequestMapping(value = "/maldives/room/picture/add.do", method = RequestMethod.POST)
   @ResponseBody
   public void addRoomPicture(@RequestParam String roomId,
-      @RequestParam("images[]") List<String> filenames) {
-    mongoMaldivesService.addRoomPicture(roomId, filenames);
+      @RequestParam("images[]") List<String> imageIds) {
+    mongoMaldivesService.addRoomPicture(roomId, imageIds);
   }
 
   /**
@@ -261,8 +261,8 @@ public class MaldivesController extends ControllerHelper {
   @RequestMapping(value = "/maldives/dining/picture/add.do", method = RequestMethod.POST)
   @ResponseBody
   public void addDiningPicture(@RequestParam String diningId,
-      @RequestParam("images[]") List<String> filenames) {
-    mongoMaldivesService.addDiningPicture(diningId, filenames);
+      @RequestParam("images[]") List<String> imageIds) {
+    mongoMaldivesService.addDiningPicture(diningId, imageIds);
   }
 
   /**
@@ -545,8 +545,8 @@ public class MaldivesController extends ControllerHelper {
   @RequestMapping(value = "/maldives/product/poster/add.do", method = RequestMethod.POST)
   @ResponseBody
   public void addProductPoster(@RequestParam String productId,
-      @RequestParam("images[]") List<String> filenames) {
-    mongoProductService.addPoster(productId, filenames);
+      @RequestParam("images[]") List<String> imageIds) {
+    mongoProductService.addPoster(productId, imageIds);
   }
 
   /**
@@ -574,8 +574,8 @@ public class MaldivesController extends ControllerHelper {
   @RequestMapping(value = "/maldives/product/photo/add.do", method = RequestMethod.POST)
   @ResponseBody
   public void addProductPhoto(@RequestParam String productId,
-      @RequestParam("images[]") List<String> filenames) {
-    mongoProductService.addPhoto(productId, filenames);
+      @RequestParam("images[]") List<String> imageIds) {
+    mongoProductService.addPhoto(productId, imageIds);
   }
 
   /**

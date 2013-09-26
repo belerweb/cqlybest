@@ -22,11 +22,4 @@
 		<property name="uploaded" />
 	</object>
 
-	<object class="com.cqlybest.common.mongo.bean.ImageMeta">
-		<property name="id" />
-		<property name="extension" />
-		<property name="title" />
-		<property name="description" />
-	</object>
-
 </descriptors>

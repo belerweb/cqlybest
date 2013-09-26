@@ -63,7 +63,7 @@ $('#page-content button[data-action=upload]').click(function(){
 		$.post('${ContextPath}/www/friendlylink/update.do', {
 			pk: $(this).data('id'),
 			name: 'image',
-			value: images[0].id + '.' + images[0].extension
+			value: images[0].id
 		}).done(function(){
 			cqlybest.reload('#main-content');
 		}).fail(function(){

@@ -20,7 +20,7 @@ public class MaldivesDining {
   private Boolean reservation;// 是否预约
   private Integer displayOrder;
 
-  private List<ImageMeta> pictures = new ArrayList<>();// 图片
+  private List<Image> pictures = new ArrayList<>();// 图片
 
   public String getId() {
     return id;
@@ -94,11 +94,11 @@ public class MaldivesDining {
     this.reservation = reservation;
   }
 
-  public List<ImageMeta> getPictures() {
+  public List<Image> getPictures() {
     return pictures;
   }
 
-  public void setPictures(List<ImageMeta> pictures) {
+  public void setPictures(List<Image> pictures) {
     this.pictures = pictures;
   }
 

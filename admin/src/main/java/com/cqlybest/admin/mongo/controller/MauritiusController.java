@@ -166,8 +166,8 @@ public class MauritiusController {
   @RequestMapping(value = "/mauritius/picture/add.do", method = RequestMethod.POST)
   @ResponseBody
   public void addPicture(@RequestParam String hotelId,
-      @RequestParam("images[]") List<String> filenames) {
-    mongoMauritiusService.addPicture(hotelId, filenames);
+      @RequestParam("images[]") List<String> imageIds) {
+    mongoMauritiusService.addPicture(hotelId, imageIds);
   }
 
   /**
@@ -195,8 +195,8 @@ public class MauritiusController {
   @RequestMapping(value = "/mauritius/hotel/picture/add.do", method = RequestMethod.POST)
   @ResponseBody
   public void addHotelPicture(@RequestParam String hotelId,
-      @RequestParam("images[]") List<String> filenames) {
-    mongoMauritiusService.addHotelPicture(hotelId, filenames);
+      @RequestParam("images[]") List<String> imageIds) {
+    mongoMauritiusService.addHotelPicture(hotelId, imageIds);
   }
 
   /**
@@ -224,8 +224,8 @@ public class MauritiusController {
   @RequestMapping(value = "/mauritius/room/picture/add.do", method = RequestMethod.POST)
   @ResponseBody
   public void addRoomPicture(@RequestParam String roomId,
-      @RequestParam("images[]") List<String> filenames) {
-    mongoMauritiusService.addRoomPicture(roomId, filenames);
+      @RequestParam("images[]") List<String> imageIds) {
+    mongoMauritiusService.addRoomPicture(roomId, imageIds);
   }
 
   /**
@@ -254,8 +254,8 @@ public class MauritiusController {
   @RequestMapping(value = "/mauritius/dining/picture/add.do", method = RequestMethod.POST)
   @ResponseBody
   public void addDiningPicture(@RequestParam String diningId,
-      @RequestParam("images[]") List<String> filenames) {
-    mongoMauritiusService.addDiningPicture(diningId, filenames);
+      @RequestParam("images[]") List<String> imageIds) {
+    mongoMauritiusService.addDiningPicture(diningId, imageIds);
   }
 
   /**

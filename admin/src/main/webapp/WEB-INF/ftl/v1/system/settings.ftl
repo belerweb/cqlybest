@@ -191,7 +191,7 @@ $('a[data-action=logo],a[data-action=watermark]', '#page-content').click(functio
 		var el = $(this).parent().next();
 		$.post('${ContextPath}/system/settings/update.do', {
 			name: $(this).data('name'),
-			value: [images[0].id, images[0].extension]
+			value: images[0].id
 		}).done(function(){
 			cqlybest.reload('#main-content');
 		});

@@ -68,7 +68,7 @@ $('button.picture.action-add').click(function(){
 		var param = {images:[]};
 		param[$(this).attr('data-name')] = $(this).attr('data-value');
 		$.each(images, function(i, obj) {
-			param.images.push(obj.id + '.' + obj.extension);
+			param.images.push(obj.id);
 		});
 		$.post(url, param, function(){
 			cqlybest.reload('#main-content', function() {

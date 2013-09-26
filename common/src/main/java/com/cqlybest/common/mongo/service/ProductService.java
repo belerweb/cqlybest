@@ -16,7 +16,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.cqlybest.common.Constant;
-import com.cqlybest.common.mongo.bean.ImageMeta;
+import com.cqlybest.common.mongo.bean.Image;
 import com.cqlybest.common.mongo.bean.Product;
 import com.cqlybest.common.mongo.bean.ProductBriefTrip;
 import com.cqlybest.common.mongo.bean.ProductMaldives;
@@ -216,23 +216,12 @@ public class ProductService {
     }
   }
 
-  public void addPoster(String productId, List<String> filenames) {
-    List<Object> images = new ArrayList<>();
-    List<String> imageIds = new ArrayList<>();
-    for (String fileName : filenames) {
-      String[] tmp = fileName.split("\\.");
-      imageIds.add(tmp[0]);
-      ImageMeta image = new ImageMeta();
-      image.setId(tmp[0]);
-      image.setExtension(tmp[1]);
-      images.add(mongoDb.unmap(image));
-    }
+  public void addPoster(String productId, List<String> imageIds) {
     // 保存图片
-    mongoDb.createQuery("Product").eq("_id", productId).modify().pushAll("posters", images)
+    mongoDb.createQuery("Product").eq("_id", productId).modify().pushAll("posters",
+        mongoDb.createQuery("Image").in("_id", imageIds).findObjects(Image.class).readAll())
         .update();
     // 更新原始图片的信息
-    mongoDb.createQuery("Image").in("_id", imageIds).modify()
-        .set("extra", Constant.IMAGE_PRODUCT_POSTER).set("extraKey", productId).updateMulti();
   }
 
   public void updatePoster(String imageId, String property, String value) {
@@ -250,22 +239,11 @@ public class ProductService {
     mongoDb.createQuery("Image").eq("_id", imageId).modify().delete();
   }
 
-  public void addPhoto(String productId, List<String> filenames) {
-    List<Object> images = new ArrayList<>();
-    List<String> imageIds = new ArrayList<>();
-    for (String fileName : filenames) {
-      String[] tmp = fileName.split("\\.");
-      imageIds.add(tmp[0]);
-      ImageMeta image = new ImageMeta();
-      image.setId(tmp[0]);
-      image.setExtension(tmp[1]);
-      images.add(mongoDb.unmap(image));
-    }
+  public void addPhoto(String productId, List<String> imageIds) {
     // 保存图片
-    mongoDb.createQuery("Product").eq("_id", productId).modify().pushAll("photos", images).update();
-    // 更新原始图片的信息
-    mongoDb.createQuery("Image").in("_id", imageIds).modify()
-        .set("extra", Constant.IMAGE_PRODUCT_PHOTO).set("extraKey", productId).updateMulti();
+    mongoDb.createQuery("Product").eq("_id", productId).modify().pushAll("photos",
+        mongoDb.createQuery("Image").in("_id", imageIds).findObjects(Image.class).readAll())
+        .update();
   }
 
   public void updatePhoto(String imageId, String property, String value) {
