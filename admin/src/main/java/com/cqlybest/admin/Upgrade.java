@@ -4,7 +4,7 @@ import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import com.cqlybest.common.Version;
+import com.cqlybest.common.mongo.bean.Version;
 import com.cqlybest.common.mongo.dao.MongoDb;
 import com.cqlybest.common.mongo.service.SettingsService;
 
@@ -20,12 +20,14 @@ public class Upgrade implements InitializingBean {
 
   @Override
   public void afterPropertiesSet() throws Exception {
-    upgradeVersion();
+    nullToV1();
   }
 
-  private void upgradeVersion() {
-    settingsService.updateSettings("version.name", version.getName());
-    settingsService.updateSettings("version.buildTime", version.getBuildTime());
-  }
+  private void nullToV1() {
+    Version version = mongoDb.createQuery("Version").findObject(Version.class);
+    if (version == null) {
 
+    }
+    mongoDb.createObject("Version", this.version);
+  }
 }
