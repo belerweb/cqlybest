@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <descriptors>
 
-	<object class="com.cqlybest.common.mongo.bean.Product">
+	<object class="com.cqlybest.common.bean.Product">
 		<property name="id" id="true" />
 		<property name="name" />
 		<property name="code" />
@@ -40,26 +40,26 @@
 		<property name="lastUpdated" />
 	</object>
 
-	<object class="com.cqlybest.common.mongo.bean.ProductBriefTrip">
+	<object class="com.cqlybest.common.bean.ProductBriefTrip">
 		<property name="num" />
 		<property name="unit" />
 	</object>
 
-	<object class="com.cqlybest.common.mongo.bean.ProductPriceCalendar">
+	<object class="com.cqlybest.common.bean.ProductPriceCalendar">
 		<property name="date" />
 		<property name="price" />
 		<property name="childPrice" />
 		<property name="special" />
 	</object>
 
-	<object class="com.cqlybest.common.mongo.bean.ProductTransportation">
+	<object class="com.cqlybest.common.bean.ProductTransportation">
 		<property name="id" />
 		<property name="name" />
 		<property name="extra" />
 		<property name="detail" />
 	</object>
 
-	<object class="com.cqlybest.common.mongo.bean.ProductMaldives">
+	<object class="com.cqlybest.common.bean.ProductMaldives">
 		<property name="id" />
 		<property name="name" />
 		<property name="detail" />
@@ -68,7 +68,7 @@
 		<property name="meals" />
 	</object>
 
-	<object class="com.cqlybest.common.mongo.bean.ProductComment">
+	<object class="com.cqlybest.common.bean.ProductComment">
 		<property name="id" id="true" />
 		<property name="productId" />
 		<property name="nickname" />

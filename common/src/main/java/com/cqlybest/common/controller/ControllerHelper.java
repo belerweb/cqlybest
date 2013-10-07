@@ -11,7 +11,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.ui.Model;
 import org.springframework.util.MultiValueMap;
 
-import com.cqlybest.common.mongo.bean.User;
+import com.cqlybest.common.bean.User;
 
 public abstract class ControllerHelper {
 

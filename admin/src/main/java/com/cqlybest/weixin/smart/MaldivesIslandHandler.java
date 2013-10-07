@@ -9,12 +9,12 @@ import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import com.cqlybest.common.mongo.bean.Image;
-import com.cqlybest.common.mongo.bean.MaldivesIsland;
-import com.cqlybest.common.mongo.bean.Product;
-import com.cqlybest.common.mongo.service.MaldivesService;
-import com.cqlybest.common.mongo.service.ProductService;
-import com.cqlybest.common.mongo.service.SettingsService;
+import com.cqlybest.common.bean.Image;
+import com.cqlybest.common.bean.MaldivesIsland;
+import com.cqlybest.common.bean.Product;
+import com.cqlybest.common.service.MaldivesService;
+import com.cqlybest.common.service.ProductService;
+import com.cqlybest.common.service.SettingsService;
 import com.cqlybest.weixin.bean.RequestMessage;
 import com.cqlybest.weixin.bean.ResponseMessage;
 import com.cqlybest.weixin.bean.ResponseNewsMessage;

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <descriptors>
 
-	<object class="com.cqlybest.common.mongo.bean.Link">
+	<object class="com.cqlybest.common.bean.Link">
 		<property name="id" />
 		<property name="name" />
 		<property name="title" />

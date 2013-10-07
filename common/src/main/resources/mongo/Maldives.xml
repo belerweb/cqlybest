@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <descriptors>
 
-	<object class="com.cqlybest.common.mongo.bean.MaldivesIsland">
+	<object class="com.cqlybest.common.bean.MaldivesIsland">
 		<property name="id" id="true" />
 		<property name="zhName" />
 		<property name="enName" />
@@ -33,7 +33,7 @@
 		<property name="hotelPictures" />
 	</object>
 
-	<object class="com.cqlybest.common.mongo.bean.MaldivesRoom">
+	<object class="com.cqlybest.common.bean.MaldivesRoom">
 		<property name="id" />
 		<property name="zhName" />
 		<property name="enName" />
@@ -48,7 +48,7 @@
 		<property name="pictures" />
 	</object>
 
-	<object class="com.cqlybest.common.mongo.bean.MaldivesDining">
+	<object class="com.cqlybest.common.bean.MaldivesDining">
 		<property name="id" />
 		<property name="zhName" />
 		<property name="enName" />

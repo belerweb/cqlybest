@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <descriptors>
 
-	<object class="com.cqlybest.common.mongo.bean.Customer">
+	<object class="com.cqlybest.common.bean.Customer">
 		<property name="id" id="true" />
 		<property name="fullname" />
 		<property name="sex" />
@@ -19,7 +19,7 @@
 		<property name="modified" />
 	</object>
 
-	<object class="com.cqlybest.common.mongo.bean.DateBean">
+	<object class="com.cqlybest.common.bean.DateBean">
 		<property name="dayOfYear" />
 		<property name="dayOfMonth" />
 		<property name="dayOfWeek" />
@@ -32,7 +32,7 @@
 		<property name="millisecond" />
 	</object>
 
-	<object class="com.cqlybest.common.mongo.bean.CustomerEvent">
+	<object class="com.cqlybest.common.bean.CustomerEvent">
 		<property name="id" id="true" />
 		<property name="customerId" />
 		<property name="name" />

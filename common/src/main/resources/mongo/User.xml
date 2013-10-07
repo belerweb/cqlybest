@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <descriptors>
 
-	<object class="com.cqlybest.common.mongo.bean.User">
+	<object class="com.cqlybest.common.bean.User">
 		<property name="id" id="true" />
 		<property name="mobile" />
 		<property name="email" />
@@ -19,12 +19,12 @@
 		<property name="lastUpdated" />
 	</object>
 
-	<object class="com.cqlybest.common.mongo.bean.WeiboUser">
+	<object class="com.cqlybest.common.bean.WeiboUser">
 		<property name="id" />
 		<property name="tokens" />
 	</object>
 
-	<object class="com.cqlybest.common.mongo.bean.WeiboAccessToken">
+	<object class="com.cqlybest.common.bean.WeiboAccessToken">
 		<property name="appKey" />
 		<property name="appId" />
 		<property name="cid" />
@@ -35,12 +35,12 @@
 		<property name="lastUpdated" />
 	</object>
 
-	<object class="com.cqlybest.common.mongo.bean.QQUser">
+	<object class="com.cqlybest.common.bean.QQUser">
 		<property name="id" />
 		<property name="tokens" />
 	</object>
 
-	<object class="com.cqlybest.common.mongo.bean.QQAccessToken">
+	<object class="com.cqlybest.common.bean.QQAccessToken">
 		<property name="appId" />
 		<property name="token" />
 		<property name="expireIn" />

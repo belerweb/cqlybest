@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <descriptors>
 
-	<object class="com.cqlybest.common.mongo.bean.MauritiusHotel">
+	<object class="com.cqlybest.common.bean.MauritiusHotel">
 		<property name="id" id="true" />
 		<property name="zhName" />
 		<property name="enName" />
@@ -29,7 +29,7 @@
 		<property name="hotelPictures" />
 	</object>
 
-	<object class="com.cqlybest.common.mongo.bean.MauritiusRoom">
+	<object class="com.cqlybest.common.bean.MauritiusRoom">
 		<property name="id" />
 		<property name="zhName" />
 		<property name="enName" />
@@ -43,7 +43,7 @@
 		<property name="pictures" />
 	</object>
 
-	<object class="com.cqlybest.common.mongo.bean.MauritiusDining">
+	<object class="com.cqlybest.common.bean.MauritiusDining">
 		<property name="id" />
 		<property name="zhName" />
 		<property name="enName" />

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <descriptors>
 
-	<object class="com.cqlybest.common.mongo.bean.Image">
+	<object class="com.cqlybest.common.bean.Image">
 		<property name="_id" id="true" />
 		<property name="id" />
 		<property name="extension" />

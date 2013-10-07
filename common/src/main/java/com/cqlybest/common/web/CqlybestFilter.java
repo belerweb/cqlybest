@@ -22,9 +22,9 @@ import org.springframework.web.context.WebApplicationContext;
 import org.springframework.web.context.support.WebApplicationContextUtils;
 
 import com.cqlybest.common.Constant;
-import com.cqlybest.common.mongo.bean.RequestProcessTime;
-import com.cqlybest.common.mongo.dao.MongoDb;
-import com.cqlybest.common.mongo.service.SettingsService;
+import com.cqlybest.common.bean.RequestProcessTime;
+import com.cqlybest.common.dao.MongoDb;
+import com.cqlybest.common.service.SettingsService;
 
 /**
  * 纪录请求处理时间，缓存页面、图片等

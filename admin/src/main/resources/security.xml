@@ -13,7 +13,7 @@ http://www.springframework.org/schema/beans http://www.springframework.org/schem
 	</beans:bean>
 
 	<authentication-manager>
-		<authentication-provider user-service-ref="mongoUserService">
+		<authentication-provider user-service-ref="userService">
 			<password-encoder hash="sha-256" />
 		</authentication-provider>
 	</authentication-manager>

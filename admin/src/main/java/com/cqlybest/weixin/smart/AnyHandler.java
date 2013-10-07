@@ -6,7 +6,7 @@ import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import com.cqlybest.common.mongo.service.SettingsService;
+import com.cqlybest.common.service.SettingsService;
 import com.cqlybest.weixin.bean.RequestMessage;
 import com.cqlybest.weixin.bean.ResponseMessage;
 import com.cqlybest.weixin.bean.ResponseTextMessage;

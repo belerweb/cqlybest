@@ -7,10 +7,10 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import com.cqlybest.common.mongo.bean.Image;
-import com.cqlybest.common.mongo.bean.MaldivesIsland;
-import com.cqlybest.common.mongo.service.MaldivesService;
-import com.cqlybest.common.mongo.service.SettingsService;
+import com.cqlybest.common.bean.Image;
+import com.cqlybest.common.bean.MaldivesIsland;
+import com.cqlybest.common.service.MaldivesService;
+import com.cqlybest.common.service.SettingsService;
 import com.cqlybest.weixin.bean.RequestMessage;
 import com.cqlybest.weixin.bean.ResponseMessage;
 import com.cqlybest.weixin.bean.ResponseNewsMessage;
@@ -20,7 +20,7 @@ import com.cqlybest.weixin.bean.ResponseNewsMessage.Article;
 public class MaldivesHandler implements Handler {
 
   @Autowired
-  private MaldivesService mongoMaldivesService;
+  private MaldivesService maldivesService;
   @Autowired
   private SettingsService settingsService;
 
@@ -41,7 +41,7 @@ public class MaldivesHandler implements Handler {
     response.setCreateTime(System.currentTimeMillis());
 
     List<Article> articles = new ArrayList<>();
-    List<MaldivesIsland> islands = mongoMaldivesService.queryIsland(0, 10).getItems();
+    List<MaldivesIsland> islands = maldivesService.queryIsland(0, 10).getItems();
     boolean first = true;
     for (MaldivesIsland island : islands) {
       List<Image> images = island.getHotelPictures();

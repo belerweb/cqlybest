@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <descriptors>
 
-	<object class="com.cqlybest.common.mongo.bean.RequestProcessTime">
+	<object class="com.cqlybest.common.bean.RequestProcessTime">
 		<property name="start" />
 		<property name="end" />
 		<property name="time" />

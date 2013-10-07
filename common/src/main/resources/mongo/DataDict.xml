@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <descriptors>
 
-	<object class="com.cqlybest.common.mongo.bean.DataDict">
+	<object class="com.cqlybest.common.bean.DataDict">
 		<property name="id" id="true" />
 		<property name="name" />
 		<property name="pinyin" />

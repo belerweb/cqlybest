@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <descriptors>
 
-	<object class="com.cqlybest.common.mongo.bean.Transportation">
+	<object class="com.cqlybest.common.bean.Transportation">
 		<property name="id" id="true" />
 		<property name="type" />
 		<property name="number" />
@@ -20,7 +20,7 @@
 		<property name="schedule" />
 	</object>
 
-	<object class="com.cqlybest.common.mongo.bean.TransferComb">
+	<object class="com.cqlybest.common.bean.TransferComb">
 		<property name="id" id="true" />
 		<property name="type" />
 		<property name="transfers" />

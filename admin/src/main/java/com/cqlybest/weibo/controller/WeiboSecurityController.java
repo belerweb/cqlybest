@@ -18,12 +18,12 @@ import weibo4j.model.WeiboException;
 import weibo4j.util.WeiboConfig;
 
 import com.cqlybest.common.Constant;
-import com.cqlybest.common.mongo.bean.User;
-import com.cqlybest.common.mongo.bean.WeiboAccessToken;
-import com.cqlybest.common.mongo.bean.WeiboAuthToken;
-import com.cqlybest.common.mongo.bean.WeiboUser;
-import com.cqlybest.common.mongo.service.MaldivesService;
-import com.cqlybest.common.mongo.service.UserService;
+import com.cqlybest.common.bean.User;
+import com.cqlybest.common.bean.WeiboAccessToken;
+import com.cqlybest.common.bean.WeiboAuthToken;
+import com.cqlybest.common.bean.WeiboUser;
+import com.cqlybest.common.service.MaldivesService;
+import com.cqlybest.common.service.UserService;
 
 @Controller
 public class WeiboSecurityController {
@@ -31,7 +31,7 @@ public class WeiboSecurityController {
   private static final Oauth WEIBO_OAUTH = new Oauth();
 
   @Autowired
-  private MaldivesService mongoMaldivesService;
+  private MaldivesService maldivesService;
   @Autowired
   private UserService mongoUserService;
 
