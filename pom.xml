@@ -33,7 +33,7 @@
 
 	<modules>
 		<module>common</module>
-		<module>admin</module>
+		<module>site</module>
 	</modules>
 
 	<dependencies>
