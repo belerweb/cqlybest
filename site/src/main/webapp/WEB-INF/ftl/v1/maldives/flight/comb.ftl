@@ -28,7 +28,7 @@
 					<td><span class="label label-success">往</span> ${flight.number!} <#if flight.nonStop!false><span class="label label-success">直飞</span></#if></td>
 					<td>${flight.from!}${flight.departuresAirportCode!}</td>
 					<td>${flight.to!}${flight.arrivalsAirportCode!}</td>
-					<td>${['星期一','星期二','星期三','星期四','星期五','星期六','星期日'][flight.day-1]}</td>
+					<td><#if flight.day?has_content>${['星期一','星期二','星期三','星期四','星期五','星期六','星期日'][flight.day-1]}</#if></td>
 					<td><#if flight.departuresTime?has_content>${flight.departuresTime?string('HH:mm')}</#if></td>
 					<td><#if flight.arrivalsTime?has_content>${flight.arrivalsTime?string('HH:mm')} <span class="label label-success">＋${flight.arrivalsTime?string('d')}</span></#if></td>
 					<td>${flight.airline!}（${flight.airlineCode!}）</td>
@@ -47,7 +47,7 @@
 					<td><span class="label label-warning">返</span> ${flight.number!} <#if flight.nonStop!false><span class="label label-success">直飞</span></#if></td>
 					<td>${flight.from!}${flight.departuresAirportCode!}</td>
 					<td>${flight.to!}${flight.arrivalsAirportCode!}</td>
-					<td>${['星期一','星期二','星期三','星期四','星期五','星期六','星期日'][flight.day-1]}</td>
+					<td><#if flight.day?has_content>${['星期一','星期二','星期三','星期四','星期五','星期六','星期日'][flight.day-1]}</#if></td>
 					<td><#if flight.departuresTime?has_content>${flight.departuresTime?string('HH:mm')}</#if></td>
 					<td><#if flight.arrivalsTime?has_content>${flight.arrivalsTime?string('HH:mm')} <span class="label label-success">＋${flight.arrivalsTime?string('d')}</span></#if></td>
 					<td>${flight.airline!}（${flight.airlineCode!}）</td>
