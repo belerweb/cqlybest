@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<descriptors>
+
+	<object class="com.cqlybest.common.bean.example.Example">
+		<property name="id" id="true" />
+		<property name="name" />
+		<property name="logo" />
+		<property name="description" />
+	</object>
+
+	<object class="com.cqlybest.common.bean.example.Case">
+		<property name="id" id="true" />
+		<property name="name" />
+		<property name="description" />
+	</object>
+
+</descriptors>
