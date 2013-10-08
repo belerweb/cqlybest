@@ -29,8 +29,8 @@ import com.cqlybest.common.service.ProductService;
 import com.cqlybest.common.service.SettingsService;
 import com.cqlybest.common.service.UserService;
 
-@Controller("siteIndexController")
-public class IndexController extends ControllerHelper {
+@Controller
+public class WwwIndexController extends ControllerHelper {
 
   private static final String ATOM = "[a-z0-9!#$%&'*+/=?^_`{|}~-]";
   private static final String DOMAIN = ATOM + "+(\\." + ATOM + "+)+";
