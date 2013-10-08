@@ -12,6 +12,7 @@ import org.springframework.ui.Model;
 import org.springframework.util.MultiValueMap;
 
 import com.cqlybest.common.bean.User;
+import com.cqlybest.common.exception.NotFoundException;
 
 public abstract class ControllerHelper {
 
@@ -23,8 +24,8 @@ public abstract class ControllerHelper {
     return new ResponseEntity<Object>(HttpStatus.OK);
   }
 
-  protected ResponseEntity<Object> notFound() {
-    return new ResponseEntity<Object>(HttpStatus.NOT_FOUND);
+  protected void notFound() {
+    throw new NotFoundException();
   }
 
   protected ResponseEntity<Object> error(String message) {

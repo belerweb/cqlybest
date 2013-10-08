@@ -51,15 +51,6 @@ public class WwwIndexController extends ControllerHelper {
   @Autowired
   private UserService userService;
 
-  @RequestMapping("/robots.txt")
-  public Object robots(HttpServletRequest request) {
-    String host = request.getServerName();
-    if (host.startsWith("admin.")) {
-      return notFound();
-    }
-    return "/robots";
-  }
-
   @RequestMapping({"/", "/index.html"})
   public Object index(@RequestParam(required = false) String cid,
       @RequestParam(required = false) String sub_appkey, HttpServletRequest request, Model model) {

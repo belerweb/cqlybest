@@ -2,7 +2,9 @@ package com.cqlybest.site.controller.www;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
+import org.apache.http.HttpStatus;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +13,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.cqlybest.common.controller.ControllerHelper;
+import com.cqlybest.common.exception.ForbiddenException;
+import com.cqlybest.common.exception.NotFoundException;
 import com.cqlybest.common.service.SettingsService;
 
 @Controller
@@ -22,7 +26,7 @@ public class ErrorController extends ControllerHelper {
   private SettingsService settingsService;
 
   @RequestMapping("/error")
-  public Object error(HttpServletRequest request, Model model) {
+  public Object error(HttpServletRequest request, HttpServletResponse response, Model model) {
     String xRequestedWith = request.getHeader("X-Requested-With");
     boolean ajax = "XMLHttpRequest".equals(xRequestedWith);
     model.addAttribute("ajax", ajax);
@@ -40,9 +44,17 @@ public class ErrorController extends ControllerHelper {
     model.addAttribute("uri", uri);
     model.addAttribute("message", errorMessage);
 
-    if ((exception != null && exception instanceof Exception)
-        || new Integer(403).equals(statusCode)) {
+    if (new Integer(403).equals(statusCode)) {
       // TODO return "v1/error/403";
+    }
+
+    if (exception != null) {
+      if (exception instanceof ForbiddenException) {
+        response.setStatus(HttpStatus.SC_FORBIDDEN);
+      }
+      if (exception instanceof NotFoundException) {
+        response.setStatus(HttpStatus.SC_NOT_FOUND);
+      }
     }
 
     model.addAttribute("Settings", settingsService.getSettings());
