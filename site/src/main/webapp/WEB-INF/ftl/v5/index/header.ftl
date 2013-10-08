@@ -13,10 +13,14 @@
 	<meta name="Description" content="${Description!(Settings.basic.description)!}>"/>
 	<meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0;">
 
+	<#if dev>
 	<link href="${ContextPath}/assets/v5/css/bootstrap.css" rel="stylesheet" media="screen">
 	<link href="${ContextPath}/assets/v5/css/font-awesome.css" rel="stylesheet">
 	<link href="${ContextPath}/assets/v5/css/revolution-settings.css" rel="stylesheet" media="screen">
 	<link href="${ContextPath}/assets/v5/css/application2.css" rel="stylesheet" media="screen">
+	<#else>
+	<link href="${ContextPath}/assets/v5/css/style2.min.css" rel="stylesheet" media="screen">
+	</#if>
 </head> 
 
 <body class="fixed-bottom">

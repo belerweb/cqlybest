@@ -64,6 +64,7 @@ http://www.springframework.org/schema/mvc http://www.springframework.org/schema/
 				<entry key="securityContextHolder" value-ref="securityContextHolder" />
 				<entry key="version" value-ref="version" />
 				<entry key="ImageServer" value="#{T(System).getProperty('image.server', T(System).getenv('image.server'))}" />
+				<entry key="dev" value="#{T(Boolean).valueOf(T(System).getProperty('dev', 'false'))}" />
 			</map>
 		</property>
 	</bean>
