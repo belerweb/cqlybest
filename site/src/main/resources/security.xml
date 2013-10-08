@@ -27,6 +27,7 @@ http://www.springframework.org/schema/beans http://www.springframework.org/schem
 		<intercept-url pattern="/favicon.ico" access="permitAll" />
 		<intercept-url pattern="/robots.txt" access="permitAll" />
 		<intercept-url pattern="/" access="permitAll" />
+		<intercept-url pattern="/session" access="permitAll" />
 		<intercept-url pattern="/index.do" access="permitAll" />
 		<intercept-url pattern="/connector/**" access="permitAll" />
 		<intercept-url pattern="/cometd/**" access="permitAll" />

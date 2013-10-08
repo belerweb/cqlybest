@@ -26,6 +26,9 @@
 		<!--[if lt IE 9]>
 			<script src="${ContextPath}/assets/v5/js/html5shiv.js"></script>
 		<![endif]-->
+		<script type="text/javascript">
+			var ContextPath = '${ContextPath}';
+		</script>
 	</head>
 
 	<body>

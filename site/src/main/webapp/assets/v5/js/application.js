@@ -10,4 +10,15 @@ $(function() {
 	if (!!page.init && $.isFunction(page.init)) {
 		page.init();
 	}
+	
+	// check session
+	$.get(ContextPath + '/session').done(function(user){
+		if (user) {
+			$('[data-display=session]').show();
+			$('[data-text=top-nickname]').html('欢迎您，' + user.nickname + '!');
+		} else {
+			$('[data-display=nosession]').show();
+		}
+	}).fail(function(){
+	});
 });

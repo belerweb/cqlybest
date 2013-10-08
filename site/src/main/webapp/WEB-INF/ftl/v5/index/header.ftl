@@ -21,6 +21,10 @@
 	<#else>
 	<link href="${ContextPath}/assets/v5/css/style2.min.css" rel="stylesheet" media="screen">
 	</#if>
+
+	<script type="text/javascript">
+		var ContextPath = '${ContextPath}';
+	</script>
 </head> 
 
 <body class="fixed-bottom">

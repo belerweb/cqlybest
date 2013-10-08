@@ -89,8 +89,7 @@ public class WwwIndexController extends ControllerHelper {
         return "redirect:/weibo/security/proxy";
       }
 
-      List<MaldivesIsland> islands =
-          maldivesService.queryIsland(0, Integer.MAX_VALUE).getItems();
+      List<MaldivesIsland> islands = maldivesService.queryIsland(0, Integer.MAX_VALUE).getItems();
       List<MaldivesIsland> result = new ArrayList<>();
       for (MaldivesIsland island : islands) {
         if (!island.getHotelPictures().isEmpty()) {
@@ -131,6 +130,11 @@ public class WwwIndexController extends ControllerHelper {
     model.addAttribute("Settings", settingsService.getSettings());
     model.addAttribute("Links", friendlyLinkService.queryLink(0, Integer.MAX_VALUE));
     return "/v5/index/index";
+  }
+
+  @RequestMapping("/session")
+  public Object session() {
+    return json(getUser());
   }
 
   @RequestMapping("/login.html")

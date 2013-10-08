@@ -5,9 +5,14 @@
 				<#if (Settings.basic.weibo.id)?has_content>
 				<li class="pull-left"><wb:follow-button uid="${Settings.basic.weibo.id}" type="red_1" width="67" height="24" ></wb:follow-button></li>
 				</#if>
-				<li><span>亲，欢迎访问${(Settings.basic.siteName)!}！</span></li>
-				<li><a href="${ContextPath}/connector/qq_login" class="mg"><img alt="QQ登录" src="${ContextPath}/assets/v2/img/connector/Connect_logo_7.png" width="63" height="24"></a></li>
-				<li><a href="${ContextPath}/connector/weibo_login" class="mg" title="使用新浪微博登录并关注我们的官方微博"><img alt="用微博登录" src="${ContextPath}/assets/v2/img/connector/loginButton_24.png" width="102" height="24"></a></li> 
+				<li data-display="nosession" style="display:none;"><span>亲，欢迎访问${(Settings.basic.siteName)!}！</span></li>
+				<li data-display="nosession" style="display:none;"><a href="${ContextPath}/connector/qq_login" class="mg"><img alt="QQ登录" src="${ContextPath}/assets/v2/img/connector/Connect_logo_7.png" width="63" height="24"></a></li>
+				<li data-display="nosession" style="display:none;"><a href="${ContextPath}/connector/weibo_login" class="mg" title="使用新浪微博登录并关注我们的官方微博"><img alt="用微博登录" src="${ContextPath}/assets/v2/img/connector/loginButton_24.png" width="102" height="24"></a></li> 
+				<li data-display="session" style="display:none;">
+					<span data-text="top-nickname"></span>
+				</li>
+				<!-- li data-display="session" style="display:none;"><a href="${ContextPath}/home" title="查看订单、修改资料...">用户中心</a></li --> 
+				<li data-display="session" style="display:none;"><a href="${ContextPath}/logout" title="退出登录">退出</a></li> 
 			</ul>
 		</div>
 	</div>
