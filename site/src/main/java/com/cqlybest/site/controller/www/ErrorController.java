@@ -5,16 +5,21 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.cqlybest.common.controller.ControllerHelper;
+import com.cqlybest.common.service.SettingsService;
 
 @Controller
 public class ErrorController extends ControllerHelper {
 
   private static final Logger LOGGER = LoggerFactory.getLogger(ErrorController.class);
+
+  @Autowired
+  private SettingsService settingsService;
 
   @RequestMapping("/error")
   public Object error(HttpServletRequest request, Model model) {
@@ -40,6 +45,7 @@ public class ErrorController extends ControllerHelper {
       // TODO return "v1/error/403";
     }
 
+    model.addAttribute("Settings", settingsService.getSettings());
     return "v5/error/default";
   }
 

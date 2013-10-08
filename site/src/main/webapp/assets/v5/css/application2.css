@@ -2171,7 +2171,6 @@ i.style-switcher-btn-option:hover {
 /*Menu*/
 .navbar {
 	border: medium none;
-	float: right;
 }
 
 .navbar,.navbar-inner,.nav,.navbar-inverse {

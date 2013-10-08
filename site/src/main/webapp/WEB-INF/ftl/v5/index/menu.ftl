@@ -1,4 +1,3 @@
-<!--=== Top ===-->    
 <div class="top">
 	<div class="container-fluid">
 		<div class="row-fluid">
@@ -11,18 +10,14 @@
 				<li><a href="${ContextPath}/connector/weibo_login" class="mg" title="使用新浪微博登录并关注我们的官方微博"><img alt="用微博登录" src="${ContextPath}/assets/v2/img/connector/loginButton_24.png" width="102" height="24"></a></li> 
 			</ul>
 		</div>
-	</div><!--/container-->
-</div><!--/top-->
-<!--=== End Top ===-->
-<!--=== Header ===-->
+	</div>
+</div>
 <div class="header">
 	<div class="container-fluid">
-		<!-- Logo -->
 		<div class="logo">
 			<a href="/"><#if (Settings.basic.logo)?has_content><img src="http://${ImageServer}/${Settings.basic.logo.qiniuKey}" height="60" style="height:60px;"><#else>${(Settings.basic.siteName)!}</#if></a>
-		</div><!-- /logo -->
-		<!-- Menu -->
-		<div class="navbar">
+		</div>
+		<div class="navbar pull-left" style="margin-left:40px;">
 			<div class="navbar-inner">
 				<div class="nav-collapse collapse">
 					<ul class="nav">
@@ -41,15 +36,20 @@
 						<li data-active-nav="maldives">
 							<a href="${ContextPath}/maldives.html" class="dropdown-toggle">马尔代夫</a>
 						</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+		<div class="navbar pull-right">
+			<div class="navbar-inner">
+				<div class="nav-collapse collapse">
+					<ul class="nav">
 						<#if (Settings.basic.hotline)?has_content>
 						<li><a class="hotline"><i class="icon-phone"></i> ${Settings.basic.hotline}</a></li>
 						</#if>
 					</ul>
-					<div class="search-open search-open-inner">
-					</div>
-				</div><!-- /nav-collapse -->
-			</div><!-- /navbar-inner -->
-		</div><!-- /navbar -->
-	</div><!-- /container -->
-</div><!--/header -->
-<!--=== End Header ===-->
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
