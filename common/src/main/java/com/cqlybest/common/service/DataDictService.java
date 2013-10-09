@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 import com.cqlybest.common.Cn2Spell;
 import com.cqlybest.common.bean.DataDict;
 import com.cqlybest.common.bean.QueryResult;
-import com.cqlybest.common.dao.MongoDb;
+import com.cqlybest.common.dao.MongoDao;
 import com.googlecode.mjorm.query.DaoQuery;
 import com.googlecode.mjorm.query.Query;
 
@@ -17,7 +17,7 @@ import com.googlecode.mjorm.query.Query;
 public class DataDictService {
 
   @Autowired
-  private MongoDb mongoDb;
+  private MongoDao mongoDao;
 
   public DataDict addDict(String type, String name) {
     DataDict dict = new DataDict();
@@ -26,17 +26,17 @@ public class DataDictService {
     dict.setName(name);
     dict.setPinyin(Cn2Spell.converterToSpell(dict.getName()));
     dict.setPy(Cn2Spell.converterToFirstSpell(dict.getName()));
-    mongoDb.createObject("DataDict", dict);
+    mongoDao.createObject("DataDict", dict);
     return dict;
   }
 
   public void deleteDict(String id) {
-    mongoDb.deleteObject("DataDict", id);
+    mongoDao.deleteObject("DataDict", id);
   }
 
   public QueryResult<DataDict> queryDict(String type, String q, int page, int pageSize) {
     QueryResult<DataDict> result = new QueryResult<>(page, pageSize);
-    DaoQuery query = mongoDb.createQuery("DataDict");
+    DaoQuery query = mongoDao.createQuery("DataDict");
     query.eq("type", type);
     if (StringUtils.isNotBlank(q)) {
       String pattern = ".*" + q + ".*";
@@ -53,7 +53,7 @@ public class DataDictService {
   }
 
   public void updateDict(String id, String property, Object value) {
-    mongoDb.createQuery("DataDict").eq("_id", id).modify().set(property, value).update();
+    mongoDao.createQuery("DataDict").eq("_id", id).modify().set(property, value).update();
   }
 
 }

@@ -15,33 +15,8 @@
 		<property name="version" value="${project.version}" />
 		<property name="time" value="${timestamp}" />
 	</bean>
-	<bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver" />
 
-	<!-- Mongodb start -->
-	<bean id="mongo" class="com.googlecode.mjorm.spring.MongoFactoryBean">
-		<property name="uri" value="#{T(System).getProperty('cqlybest.mongo.uri', T(System).getenv('cqlybest.mongo.uri'))}" />
-		<property name="closeOnDestroy" value="true" />
-	</bean>
-	<bean id="mongoObjectMapper" class="com.cqlybest.common.mongo.XmlDescriptorObjectMapperFactoryBean">
-		<property name="xmlResources">
-			<list>
-				<value>classpath*:mongo/**/*.xml</value>
-			</list>
-		</property>
-		<property name="typeConverters">
-			<list>
-				<bean class="com.cqlybest.common.mongo.ByteArrayToBinary" />
-				<bean class="com.cqlybest.common.mongo.BinaryToByteArray" />
-				<bean class="com.cqlybest.common.mongo.MongoToMapTypeConverter" />
-			</list>
-		</property>
-	</bean>
-	<bean id="mongoDb" class="com.cqlybest.common.dao.MongoDb">
-		<property name="mongo" ref="mongo" />
-		<property name="dbName" value="#{T(System).getProperty('cqlybest.mongo.dbName', T(System).getenv('cqlybest.mongo.dbName'))}" />
-		<property name="objectMapper" ref="mongoObjectMapper" />
-	</bean>
-	<!-- Mongodb end -->
+	<bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver" />
 
 	<bean id="securityContextHolder" class="org.springframework.security.core.context.SecurityContextHolder" />
 

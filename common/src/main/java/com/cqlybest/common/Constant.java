@@ -2,18 +2,7 @@ package com.cqlybest.common;
 
 import java.text.SimpleDateFormat;
 
-import org.apache.commons.lang.StringUtils;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
-import weibo4j.util.WeiboConfig;
-
 public class Constant {
-
-  private static final Logger LOGGER = LoggerFactory.getLogger(Constant.class);
-
-
-  public static final String CONFIG_CACHE_DIR = "cqlybest.cache.dir";
 
   public static final String OPTION_SITE_NAME = "site_name";// 网站名称
   public static final String OPTION_SITE_META_KEYWORD = "site_meta_keyword";// 网页 meta keyword
@@ -51,12 +40,6 @@ public class Constant {
   public static final String DICT_TRAFFIC = "traffic";// 交通方式
   public static final String DICT_TAG = "tag";// 标签
 
-  public static final String WEIBO_APP_KEY = "weibo.app_key";
-  public static final String WEIBO_APP_SECRET = "weibo.app_secret";
-
-  public static final String WEIBO_PRO_APP_KEY = "weibo.pro.app_key";
-  public static final String WEIBO_PRO_APP_SECRET = "weibo.pro.app_secret";
-
   public static final String CLIENT_ID = "client_ID";
   public static final String CLIENT_SECRET = "client_SERCRET";
   public static final String REDIRECT_URI = "redirect_URI";
@@ -77,19 +60,8 @@ public class Constant {
   public static final int SORT_DESC = -1;// 降序
   public static final int SORT_ASC = 1;// 升序
 
-  public static final String QINIU_AK = "qiniu.ak";
-  public static final String QINIU_SK = "qiniu.sk";
-
-
   public static void checkWeiboConfig(String appKeyConfig, String appSecretConfig) {
-    String appKey = System.getProperty(appKeyConfig, System.getenv(appKeyConfig));
-    String appSecret = System.getProperty(appSecretConfig, System.getenv(appSecretConfig));
-    if (StringUtils.isEmpty(appKey) || StringUtils.isEmpty(appSecret)) {
-      LOGGER.warn("Weibo app key & secret not exixt, weibo login will be disabled.");
-      return;
-    }
-    WeiboConfig.updateProperties(Constant.CLIENT_ID, appKey);
-    WeiboConfig.updateProperties(Constant.CLIENT_SECRET, appSecret);
+  // TODO
   }
 
   static {

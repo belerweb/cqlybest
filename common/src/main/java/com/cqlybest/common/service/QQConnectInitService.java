@@ -1,6 +1,7 @@
 package com.cqlybest.common.service;
 
 import org.springframework.beans.factory.InitializingBean;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.qq.connect.utils.QQConnectConfig;
@@ -8,8 +9,8 @@ import com.qq.connect.utils.QQConnectConfig;
 @Service
 public class QQConnectInitService implements InitializingBean {
 
-  private static final String QQ_APP_ID = "qq.app_id";
-  private static final String QQ_APP_KEY = "qq.app_key";
+  @Autowired
+  private CentralConfig centralConfig;
 
   public static final String APP_ID = "app_ID";
   public static final String APP_KEY = "app_KEY";
@@ -18,8 +19,8 @@ public class QQConnectInitService implements InitializingBean {
 
   @Override
   public void afterPropertiesSet() throws Exception {
-    String appId = System.getProperty(QQ_APP_ID, System.getenv(QQ_APP_ID));
-    String appKey = System.getProperty(QQ_APP_KEY, System.getenv(QQ_APP_KEY));
+    String appId = centralConfig.get(CentralConfig.QQ_APP_ID);
+    String appKey = centralConfig.get(CentralConfig.QQ_APP_KEY);
     QQConnectConfig.updateProperties(APP_ID, appId);
     QQConnectConfig.updateProperties(APP_KEY, appKey);
   }

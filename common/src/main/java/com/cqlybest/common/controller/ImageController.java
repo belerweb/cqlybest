@@ -16,8 +16,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.cqlybest.common.Constant;
 import com.cqlybest.common.bean.Image;
+import com.cqlybest.common.service.CentralConfig;
 import com.cqlybest.common.service.ImageService;
 import com.cqlybest.common.service.SettingsService;
 import com.qiniu.api.auth.digest.Mac;
@@ -39,8 +39,8 @@ public class ImageController extends ControllerHelper {
    */
   @RequestMapping("/image/upload/token")
   public Object upload(@RequestParam String name) {
-    String accessKey = System.getProperty(Constant.QINIU_AK, System.getenv(Constant.QINIU_AK));
-    String secretKey = System.getProperty(Constant.QINIU_SK, System.getenv(Constant.QINIU_SK));
+    String accessKey = centralConfig.get(CentralConfig.QINIU_AK);
+    String secretKey = centralConfig.get(CentralConfig.QINIU_SK);
     Mac mac = new Mac(accessKey, secretKey);
     String userId = getUser().getId();
     String imageId = UUID.randomUUID().toString();
@@ -49,7 +49,7 @@ public class ImageController extends ControllerHelper {
     PutPolicy putPolicy = new PutPolicy(getQiniuBucket() + ":" + key);
     putPolicy.endUser = userId;
     putPolicy.callbackUrl =
-        "http://" + System.getProperty("qiniu.callback") + "/image/upload/callback";
+        "http://" + centralConfig.get(CentralConfig.QINIU_CALLBACK) + "/image/upload/callback";
     putPolicy.callbackBody =
         "token=$(x:token)&uid=$(x:uid)&imageId=$(x:id)" + "&etag=$(etag)&fname=$(fname)"
             + "&fsize=$(fsize)&mimeType=$(mimeType)" + "&imageInfo=$(imageInfo)&exif=$(exif)"

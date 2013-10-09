@@ -1,4 +1,4 @@
-package com.cqlybest.common.mongo;
+package com.cqlybest.common.dao;
 
 import org.bson.types.Binary;
 
@@ -8,17 +8,17 @@ import com.googlecode.mjorm.convert.JavaType;
 import com.googlecode.mjorm.convert.TypeConversionHints;
 import com.googlecode.mjorm.convert.TypeConverter;
 
-public class ByteArrayToBinary implements TypeConverter<byte[], Binary> {
+public class BinaryToByteArray implements TypeConverter<Binary, byte[]> {
 
   @Override
   public boolean canConvert(Class<?> sourceClass, Class<?> targetClass) {
-    return byte[].class.isAssignableFrom(sourceClass) && Binary.class.isAssignableFrom(targetClass);
+    return Binary.class.isAssignableFrom(sourceClass) && byte[].class.isAssignableFrom(targetClass);
   }
 
   @Override
-  public Binary convert(byte[] source, JavaType targetType, ConversionContext context,
+  public byte[] convert(Binary source, JavaType targetType, ConversionContext context,
       TypeConversionHints hints) throws ConversionException {
-    return new Binary(source);
+    return source.getData();
   }
 
 }

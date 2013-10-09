@@ -26,6 +26,7 @@ import com.cqlybest.common.bean.User;
 import com.cqlybest.common.bean.WeiboAccessToken;
 import com.cqlybest.common.bean.WeiboAuthToken;
 import com.cqlybest.common.bean.WeiboUser;
+import com.cqlybest.common.service.CentralConfig;
 import com.cqlybest.common.service.SettingsService;
 import com.cqlybest.common.service.UserService;
 
@@ -39,6 +40,8 @@ public class WeiboLoginController {
   private UserService userService;
   @Autowired
   private SettingsService settingsService;
+  @Autowired
+  private CentralConfig centralConfig;
 
   @RequestMapping("/connector/weibo_login")
   public String weiboLogin(HttpServletRequest request) {
@@ -47,7 +50,8 @@ public class WeiboLoginController {
       String redirectURI =
           request.getScheme() + "://" + request.getServerName() + request.getContextPath()
               + "/connector/weibo";
-      Constant.checkWeiboConfig(Constant.WEIBO_APP_KEY, Constant.WEIBO_APP_SECRET);
+      Constant.checkWeiboConfig(centralConfig.get(CentralConfig.WEIBO_APP_KEY), centralConfig
+          .get(CentralConfig.WEIBO_APP_SECRET));
       WeiboConfig.updateProperties(Constant.REDIRECT_URI, redirectURI);
       redirect =
           "redirect:" + WEIBO_OAUTH.authorize(Constant.RESPONSE_TYPE_CODE, Constant.SCOPE_ALL);

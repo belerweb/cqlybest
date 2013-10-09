@@ -6,7 +6,7 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.cqlybest.common.dao.MongoDb;
+import com.cqlybest.common.dao.MongoDao;
 
 @Service
 public class SettingsService {
@@ -14,13 +14,13 @@ public class SettingsService {
   private static Map<?, ?> cacheSettings = null;
 
   @Autowired
-  private MongoDb mongoDb;
+  private MongoDao mongoDao;
 
   public Map<?, ?> getSettings() {
     if (cacheSettings == null) {
-      Map<?, ?> settings = mongoDb.createQuery("Settings").findObject(Map.class);
+      Map<?, ?> settings = mongoDao.createQuery("Settings").findObject(Map.class);
       if (settings == null) {
-        settings = mongoDb.createObject("Settings", new HashMap<>());
+        settings = mongoDao.createObject("Settings", new HashMap<>());
       }
       cacheSettings = settings;
     }
@@ -29,7 +29,7 @@ public class SettingsService {
   }
 
   public void updateSettings(String property, Object value) {
-    mongoDb.createQuery("Settings").modify().set(property, mongoDb.unmap(value)).update();
+    mongoDao.createQuery("Settings").modify().set(property, value).update();
     cacheSettings = null;
   }
 

@@ -16,7 +16,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.web.context.ServletContextAware;
 
-import com.cqlybest.common.Constant;
 import com.cqlybest.common.bean.FriendlyLink;
 import com.cqlybest.common.bean.Image;
 import com.cqlybest.common.bean.Link;
@@ -29,7 +28,8 @@ import com.cqlybest.common.bean.MauritiusRoom;
 import com.cqlybest.common.bean.Page;
 import com.cqlybest.common.bean.Product;
 import com.cqlybest.common.bean.Version;
-import com.cqlybest.common.dao.MongoDb;
+import com.cqlybest.common.dao.MongoDao;
+import com.cqlybest.common.service.CentralConfig;
 import com.cqlybest.common.service.SettingsService;
 import com.qiniu.api.auth.digest.Mac;
 import com.qiniu.api.net.CallRet;
@@ -46,7 +46,9 @@ public class Upgrade implements ServletContextAware {
   @Autowired
   private SettingsService settingsService;
   @Autowired
-  private MongoDb mongoDb;
+  private MongoDao mongoDao;
+  @Autowired
+  private CentralConfig centralConfig;
 
   @Override
   public void setServletContext(ServletContext servletContext) {
@@ -66,30 +68,31 @@ public class Upgrade implements ServletContextAware {
   }
 
   private void nullToV1() throws Exception {// 上传图片到七牛
-    Version version = mongoDb.createQuery("Version").findObject(Version.class);
+    Version version = mongoDao.createQuery("Version").findObject(Version.class);
     if (version == null) {
-      String accessKey = System.getProperty(Constant.QINIU_AK, System.getenv(Constant.QINIU_AK));
-      String secretKey = System.getProperty(Constant.QINIU_SK, System.getenv(Constant.QINIU_SK));
+      String accessKey = centralConfig.get(CentralConfig.QINIU_AK);
+      String secretKey = centralConfig.get(CentralConfig.QINIU_SK);
       Mac mac = new Mac(accessKey, secretKey);
 
-      long total = mongoDb.createQuery("Image").countObjects();
+      long total = mongoDao.createQuery("Image").countObjects();
       LOGGER.info("Upgrade image, total {}", total);
       Client client = new Client();
       for (int i = 0; i < total; i++) {
         Image image =
-            mongoDb.createQuery("Image").addSort("_id", 1).setFirstDocument(i).setMaxDocuments(1)
+            mongoDao.createQuery("Image").addSort("_id", 1).setFirstDocument(i).setMaxDocuments(1)
                 .findObject(Image.class);
-        mongoDb.createQuery("Image").eq("_id", image.get_id()).modify().set("id", image.get_id())
+        mongoDao.createQuery("Image").eq("_id", image.get_id()).modify().set("id", image.get_id())
             .update();
         byte[] data = image.getData();
         if (data != null) {
           LOGGER.info("Upgrade image {}: {}", i, image.getId());
           String key = image.getId() + "." + image.getExtension();
           PutPolicy putPolicy =
-              new PutPolicy(System.getProperty("qiniu.bk", System.getenv("qiniu.bk")) + ":" + key);
+              new PutPolicy(centralConfig.get(CentralConfig.QINIU_BK) + ":" + key);
           putPolicy.endUser = "0";
           putPolicy.callbackUrl =
-              "http://" + System.getProperty("qiniu.callback") + "/image/upload/callback";
+              "http://" + centralConfig.get(CentralConfig.QINIU_CALLBACK)
+                  + "/image/upload/callback";
           putPolicy.callbackBody =
               "token=$(x:token)&uid=$(x:uid)&imageId=$(x:id)" + "&etag=$(etag)&fname=$(fname)"
                   + "&fsize=$(fsize)&mimeType=$(mimeType)" + "&imageInfo=$(imageInfo)&exif=$(exif)"
@@ -103,12 +106,12 @@ public class Upgrade implements ServletContextAware {
           entity.addPart("x:uid", new StringBody("0"));
           String imageToken = RandomStringUtils.randomAlphanumeric(16);
           entity.addPart("x:token", new StringBody(imageToken));
-          mongoDb.createQuery("Image").eq("_id", image.getId()).modify().set("token", imageToken)
+          mongoDao.createQuery("Image").eq("_id", image.getId()).modify().set("token", imageToken)
               .set("qiniuKey", key).update();
           CallRet ret = client.callWithMultiPart("http://up.qiniu.com/", entity);
           LOGGER.info("Ret {}", ret);
           if (ret.ok()) {
-            mongoDb.createQuery("Image").eq("_id", image.getId()).modify().unset("data").update();
+            mongoDao.createQuery("Image").eq("_id", image.getId()).modify().unset("data").update();
           }
         }
       }
@@ -117,28 +120,28 @@ public class Upgrade implements ServletContextAware {
 
   @SuppressWarnings( {"unchecked", "rawtypes"})
   private void v1ToV2() throws Exception {// 历史图片数据处理
-    Version version = mongoDb.createQuery("Version").findObject(Version.class);
+    Version version = mongoDao.createQuery("Version").findObject(Version.class);
     if (version == null || version.getId() < 2) {
       // 产品
-      long total = mongoDb.createQuery("Product").countObjects();
+      long total = mongoDao.createQuery("Product").countObjects();
       for (int i = 0; i < total; i++) {
         Product product =
-            mongoDb.createQuery("Product").addSort("_id", 1).setFirstDocument(i).setMaxDocuments(1)
-                .findObject(Product.class);
+            mongoDao.createQuery("Product").addSort("_id", 1).setFirstDocument(i)
+                .setMaxDocuments(1).findObject(Product.class);
         for (Image image : product.getPhotos()) {
           updateImage(image);
         }
         for (Image image : product.getPosters()) {
           updateImage(image);
         }
-        mongoDb.updateObject("Product", product.getId(), product);
+        mongoDao.updateObject("Product", product.getId(), product);
       }
 
       // 毛求
-      total = mongoDb.createQuery("MauritiusHotel").countObjects();
+      total = mongoDao.createQuery("MauritiusHotel").countObjects();
       for (int i = 0; i < total; i++) {
         MauritiusHotel hotel =
-            mongoDb.createQuery("MauritiusHotel").addSort("_id", 1).setFirstDocument(i)
+            mongoDao.createQuery("MauritiusHotel").addSort("_id", 1).setFirstDocument(i)
                 .setMaxDocuments(1).findObject(MauritiusHotel.class);
         for (Image image : hotel.getHotelPictures()) {
           updateImage(image);
@@ -156,14 +159,14 @@ public class Upgrade implements ServletContextAware {
             updateImage(image);
           }
         }
-        mongoDb.updateObject("MauritiusHotel", hotel.getId(), hotel);
+        mongoDao.updateObject("MauritiusHotel", hotel.getId(), hotel);
       }
 
       // 马代
-      total = mongoDb.createQuery("MaldivesIsland").countObjects();
+      total = mongoDao.createQuery("MaldivesIsland").countObjects();
       for (int i = 0; i < total; i++) {
         MaldivesIsland island =
-            mongoDb.createQuery("MaldivesIsland").addSort("_id", 1).setFirstDocument(i)
+            mongoDao.createQuery("MaldivesIsland").addSort("_id", 1).setFirstDocument(i)
                 .setMaxDocuments(1).findObject(MaldivesIsland.class);
         for (Image image : island.getHotelPictures()) {
           updateImage(image);
@@ -181,41 +184,41 @@ public class Upgrade implements ServletContextAware {
             updateImage(image);
           }
         }
-        mongoDb.updateObject("MaldivesIsland", island.getId(), island);
+        mongoDao.updateObject("MaldivesIsland", island.getId(), island);
       }
 
       // 友情链接
-      total = mongoDb.createQuery("FriendlyLink").countObjects();
+      total = mongoDao.createQuery("FriendlyLink").countObjects();
       for (int i = 0; i < total; i++) {
         FriendlyLink link =
-            mongoDb.createQuery("FriendlyLink").addSort("_id", 1).setFirstDocument(i)
+            mongoDao.createQuery("FriendlyLink").addSort("_id", 1).setFirstDocument(i)
                 .setMaxDocuments(1).findObject(FriendlyLink.class);
         if (link.getImage() != null) {
           updateImage(link.getImage());
         }
-        mongoDb.updateObject("FriendlyLink", link.getId(), link);
+        mongoDao.updateObject("FriendlyLink", link.getId(), link);
       }
 
       // 页面
-      total = mongoDb.createQuery("Page").countObjects();
+      total = mongoDao.createQuery("Page").countObjects();
       for (int i = 0; i < total; i++) {
         Page page =
-            mongoDb.createQuery("Page").addSort("_id", 1).setFirstDocument(i).setMaxDocuments(1)
+            mongoDao.createQuery("Page").addSort("_id", 1).setFirstDocument(i).setMaxDocuments(1)
                 .findObject(Page.class);
         for (Link link : page.getPosters()) {
           if (link.getImage() != null) {
             updateImage(link.getImage());
           }
         }
-        mongoDb.updateObject("Page", page.getId(), page);
+        mongoDao.updateObject("Page", page.getId(), page);
       }
     }
 
     // 设置
-    Map settings = mongoDb.createQuery("Settings").findObject(Map.class);
+    Map settings = mongoDao.createQuery("Settings").findObject(Map.class);
     Map watermark = (Map) settings.get("watermark");
     Map watermarkImg = (Map) watermark.get("img");
-    Image newImage = mongoDb.findById("Image", Image.class, (String) watermarkImg.get("id"));
+    Image newImage = mongoDao.findById("Image", Image.class, (String) watermarkImg.get("id"));
     watermarkImg.put("contentType", newImage.getContentType());
     watermarkImg.put("qiniuKey", newImage.getQiniuKey());
     watermarkImg.put("size", newImage.getSize());
@@ -224,24 +227,24 @@ public class Upgrade implements ServletContextAware {
 
     Map basic = (Map) settings.get("basic");
     Map logo = (Map) basic.get("logo");
-    newImage = mongoDb.findById("Image", Image.class, (String) watermarkImg.get("id"));
+    newImage = mongoDao.findById("Image", Image.class, (String) watermarkImg.get("id"));
     logo.put("contentType", newImage.getContentType());
     logo.put("qiniuKey", newImage.getQiniuKey());
     logo.put("size", newImage.getSize());
     logo.put("width", newImage.getWidth());
     logo.put("height", newImage.getHeight());
 
-    mongoDb.createQuery("Settings").modify().delete();
+    mongoDao.createQuery("Settings").modify().delete();
     settings.remove("_id");
-    mongoDb.createObject("Settings", settings);
+    mongoDao.createObject("Settings", settings);
   }
 
   private void setNewVersion() {
-    mongoDb.createObject("Version", this.version);
+    mongoDao.createObject("Version", this.version);
   }
 
   private void updateImage(Image old) {
-    Image newImage = mongoDb.findById("Image", Image.class, old.getId());
+    Image newImage = mongoDao.findById("Image", Image.class, old.getId());
     old.set_id(old.get_id());
     if (newImage != null) {
       old.setExtension(newImage.getExtension());

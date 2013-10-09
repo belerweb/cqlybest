@@ -10,19 +10,18 @@ import org.springframework.stereotype.Service;
 
 import com.cqlybest.common.bean.FriendlyLink;
 import com.cqlybest.common.bean.QueryResult;
-import com.cqlybest.common.dao.MongoDb;
+import com.cqlybest.common.dao.MongoDao;
 import com.googlecode.mjorm.query.DaoQuery;
-import com.mongodb.WriteResult;
 
 @Service
 public class FriendlyLinkService {
 
   @Autowired
-  private MongoDb mongoDb;
+  private MongoDao mongoDao;
 
   public void addLink(FriendlyLink link) {
     link.setId(UUID.randomUUID().toString());
-    mongoDb.createObject("FriendlyLink", link);
+    mongoDao.createObject("FriendlyLink", link);
   }
 
   public void updateLink(String linkId, String property, String value) {
@@ -31,23 +30,23 @@ public class FriendlyLinkService {
       if (StringUtils.isBlank(value)) {
         _value = null;
       } else {
-        _value = mongoDb.findById("Image", value);
+        _value = mongoDao.findById("Image", value);
       }
     }
     if ("displayOrder".equals(property)) {
       _value = StringUtils.isBlank(value) ? null : Integer.valueOf(value);
     }
 
-    mongoDb.createQuery("FriendlyLink").eq("_id", linkId).modify().set(property, _value).update();
+    mongoDao.createQuery("FriendlyLink").eq("_id", linkId).modify().set(property, _value).update();
   }
 
   public FriendlyLink getLink(String id) {
-    return mongoDb.findById("FriendlyLink", FriendlyLink.class, id);
+    return mongoDao.findById("FriendlyLink", FriendlyLink.class, id);
   }
 
   public QueryResult<FriendlyLink> queryLink(int page, int pageSize) {
     QueryResult<FriendlyLink> result = new QueryResult<>(page, pageSize);
-    DaoQuery query = mongoDb.createQuery("FriendlyLink");
+    DaoQuery query = mongoDao.createQuery("FriendlyLink");
     result.setTotal(query.countObjects());
 
     Map<String, Integer> sort = new HashMap<>();
@@ -60,8 +59,8 @@ public class FriendlyLinkService {
     return result;
   }
 
-  public WriteResult deleteLink(String id) {
-    return mongoDb.deleteObject("FriendlyLink", id);
+  public void deleteLink(String id) {
+    mongoDao.deleteObject("FriendlyLink", id);
   }
 
 }

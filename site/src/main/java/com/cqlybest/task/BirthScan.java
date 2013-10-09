@@ -16,14 +16,14 @@ import org.springframework.stereotype.Component;
 
 import com.cqlybest.common.bean.Customer;
 import com.cqlybest.common.bean.CustomerEvent;
-import com.cqlybest.common.dao.MongoDb;
+import com.cqlybest.common.dao.MongoDao;
 
 @Component
 public class BirthScan implements InitializingBean {
   private static final Logger LOGGER = LoggerFactory.getLogger(BirthScan.class);
 
   @Autowired
-  private MongoDb mongoDb;
+  private MongoDao mongoDao;
 
   @Override
   public void afterPropertiesSet() throws Exception {
@@ -39,11 +39,11 @@ public class BirthScan implements InitializingBean {
       DateTime firstDay = DateTime.now().plusDays(1);
       DateTime secondDay = firstDay.plusDays(1);
       List<Customer> firstCustomers =
-          mongoDb.createQuery("Customer").eq("birth.month", firstDay.getMonthOfYear())
+          mongoDao.createQuery("Customer").eq("birth.month", firstDay.getMonthOfYear())
               .eq("birth.dayOfMonth", firstDay.getDayOfMonth()).findObjects(Customer.class)
               .readAll();
       List<Customer> secondCustomers =
-          mongoDb.createQuery("Customer").eq("birth.month", secondDay.getMonthOfYear())
+          mongoDao.createQuery("Customer").eq("birth.month", secondDay.getMonthOfYear())
               .eq("birth.dayOfMonth", secondDay.getDayOfMonth()).findObjects(Customer.class)
               .readAll();
       List<CustomerEvent> events = new ArrayList<>();
@@ -70,7 +70,7 @@ public class BirthScan implements InitializingBean {
         events.add(event);
       }
       if (!events.isEmpty()) {
-        mongoDb.createObjects("CustomerEvent", events.toArray());
+        mongoDao.createObjects("CustomerEvent", events.toArray());
       }
       LOGGER.info("BirthScanTask is finished.");
     }

@@ -19,12 +19,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.cqlybest.common.Constant;
+import com.cqlybest.common.controller.ControllerHelper;
+import com.cqlybest.common.service.CentralConfig;
 import com.cqlybest.common.service.ImageService;
 import com.cqlybest.common.service.SettingsService;
 
 @Controller
-public class SystemManagement {
+public class SystemManagement extends ControllerHelper {
 
   @Autowired
   private SettingsService settingsService;
@@ -43,8 +44,7 @@ public class SystemManagement {
             .equals(((Map<?, ?>) settingsService.getSettings().get("cache")).get("enabled"));
     model.addAttribute("cacheEnabled", cacheEnabled);
     if (cacheEnabled) {
-      String cacheDirPath =
-          System.getProperty(Constant.CONFIG_CACHE_DIR, System.getenv(Constant.CONFIG_CACHE_DIR));
+      String cacheDirPath = centralConfig.get(CentralConfig.CACHE_DIR);
       File cachDir = new File(cacheDirPath);
       List<Map<String, Object>> result = new ArrayList<>();
       Collection<File> files =
@@ -70,8 +70,7 @@ public class SystemManagement {
   @RequestMapping("/system/cache/clean.do")
   @ResponseBody
   public void cleanCache() throws IOException {
-    FileUtils.cleanDirectory(new File(System.getProperty(Constant.CONFIG_CACHE_DIR, System
-        .getenv(Constant.CONFIG_CACHE_DIR))));
+    FileUtils.cleanDirectory(new File(centralConfig.get(CentralConfig.CACHE_DIR)));
   }
 
   /**
@@ -99,8 +98,7 @@ public class SystemManagement {
     }
     if ("cache.enabled".equals(name)) {
       _value = "true".equals(value);
-      FileUtils.cleanDirectory(new File(System.getProperty(Constant.CONFIG_CACHE_DIR, System
-          .getenv(Constant.CONFIG_CACHE_DIR))));
+      FileUtils.cleanDirectory(new File(centralConfig.get(CentralConfig.CACHE_DIR)));
     }
 
     settingsService.updateSettings(name, _value);

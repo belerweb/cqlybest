@@ -12,7 +12,7 @@ import com.cqlybest.common.bean.QQUser;
 import com.cqlybest.common.bean.QueryResult;
 import com.cqlybest.common.bean.User;
 import com.cqlybest.common.bean.WeiboUser;
-import com.cqlybest.common.dao.MongoDb;
+import com.cqlybest.common.dao.MongoDao;
 import com.googlecode.mjorm.query.DaoModifier;
 import com.googlecode.mjorm.query.DaoQuery;
 import com.mongodb.BasicDBObject;
@@ -22,11 +22,11 @@ import com.qq.connect.javabeans.qzone.UserInfoBean;
 public class UserService implements UserDetailsService {
 
   @Autowired
-  private MongoDb mongoDb;
+  private MongoDao mongoDao;
 
   public QueryResult<User> queryUser(int page, int pageSize) {
     QueryResult<User> result = new QueryResult<>(page, pageSize);
-    DaoQuery query = mongoDb.createQuery("User");
+    DaoQuery query = mongoDao.createQuery("User");
     result.setTotal(query.countObjects());
 
     query.setFirstDocument(result.getStart());
@@ -38,7 +38,7 @@ public class UserService implements UserDetailsService {
 
   public User register(WeiboUser weiboUser, weibo4j.model.User detail) {
     User user =
-        mongoDb.createQuery("User").eq("weibo.id", weiboUser.getId()).findObject(User.class);
+        mongoDao.createQuery("User").eq("weibo.id", weiboUser.getId()).findObject(User.class);
     if (user == null) {
       user = new User();
       user.setId("WEIBO-" + weiboUser.getId());
@@ -49,7 +49,7 @@ public class UserService implements UserDetailsService {
       Date current = new Date();
       user.setCreatedTime(current);
       user.setLastUpdated(current);
-      user = mongoDb.createObject("User", user);
+      user = mongoDao.createObject("User", user);
     } else {
       // TODO 更新原Token
     }
@@ -57,7 +57,7 @@ public class UserService implements UserDetailsService {
   }
 
   public User register(QQUser qqUser, UserInfoBean detail) {
-    User user = mongoDb.createQuery("User").eq("qzone.id", qqUser.getId()).findObject(User.class);
+    User user = mongoDao.createQuery("User").eq("qzone.id", qqUser.getId()).findObject(User.class);
     if (user == null) {
       user = new User();
       user.setId("QZONE-" + qqUser.getId());
@@ -68,7 +68,7 @@ public class UserService implements UserDetailsService {
       Date current = new Date();
       user.setCreatedTime(current);
       user.setLastUpdated(current);
-      user = mongoDb.createObject("User", user);
+      user = mongoDao.createObject("User", user);
     } else {
       // TODO 更新原Token
     }
@@ -78,11 +78,11 @@ public class UserService implements UserDetailsService {
   public void subscribe(String type, String id) {
     BasicDBObject obj = new BasicDBObject();
     obj.put("type", id);
-    mongoDb.createObject("Subscription", obj);
+    mongoDao.createObject("Subscription", obj);
   }
 
   public void toggleRole(String id, String role, boolean toggle) {
-    DaoModifier modify = mongoDb.createQuery("User").eq("_id", id).modify();
+    DaoModifier modify = mongoDao.createQuery("User").eq("_id", id).modify();
     if (toggle) {
       modify.push("roles", role);
     } else {
@@ -101,7 +101,7 @@ public class UserService implements UserDetailsService {
     } else {
       property = "username";
     };
-    User user = mongoDb.createQuery("User").eq(property, username).findObject(User.class);
+    User user = mongoDao.createQuery("User").eq(property, username).findObject(User.class);
     if (user == null) {
       throw new UsernameNotFoundException("用户不存在");
     }

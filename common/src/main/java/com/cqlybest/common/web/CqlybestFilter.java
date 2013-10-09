@@ -21,9 +21,9 @@ import org.slf4j.LoggerFactory;
 import org.springframework.web.context.WebApplicationContext;
 import org.springframework.web.context.support.WebApplicationContextUtils;
 
-import com.cqlybest.common.Constant;
 import com.cqlybest.common.bean.RequestProcessTime;
-import com.cqlybest.common.dao.MongoDb;
+import com.cqlybest.common.dao.MongoDao;
+import com.cqlybest.common.service.CentralConfig;
 import com.cqlybest.common.service.SettingsService;
 
 /**
@@ -37,7 +37,8 @@ public class CqlybestFilter implements Filter {
   private WebApplicationContext applicationContext;
 
   private SettingsService settingsService;
-  private MongoDb mongdoDb;
+  private MongoDao mongoDao;
+  private CentralConfig centralConfig;
   private File cacheDir;
 
   @Override
@@ -45,9 +46,9 @@ public class CqlybestFilter implements Filter {
     servletContext = filterConfig.getServletContext();
     applicationContext = WebApplicationContextUtils.getWebApplicationContext(servletContext);
     settingsService = applicationContext.getBean(SettingsService.class);
-    mongdoDb = applicationContext.getBean(MongoDb.class);
-    String cacheDirPath =
-        System.getProperty(Constant.CONFIG_CACHE_DIR, System.getenv(Constant.CONFIG_CACHE_DIR));
+    mongoDao = applicationContext.getBean(MongoDao.class);
+    centralConfig = applicationContext.getBean(CentralConfig.class);
+    String cacheDirPath = centralConfig.get(CentralConfig.CACHE_DIR);
     if (cacheDirPath == null) {
       throw new ServletException("请配置缓存文件夹");
     }
@@ -98,7 +99,7 @@ public class CqlybestFilter implements Filter {
     rpt.setMethod(httpRequest.getMethod());
     rpt.setRequest(httpRequest.getRequestURL().toString());
     rpt.setQuery(httpRequest.getQueryString());
-    mongdoDb.createObject("RequestProcessTime", rpt);
+    mongoDao.createObject("RequestProcessTime", rpt);
   }
 
   @Override

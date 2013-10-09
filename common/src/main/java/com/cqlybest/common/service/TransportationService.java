@@ -10,32 +10,32 @@ import org.springframework.stereotype.Service;
 import com.cqlybest.common.bean.QueryResult;
 import com.cqlybest.common.bean.TransferComb;
 import com.cqlybest.common.bean.Transportation;
-import com.cqlybest.common.dao.MongoDb;
+import com.cqlybest.common.dao.MongoDao;
 import com.googlecode.mjorm.query.DaoQuery;
 
 @Service
 public class TransportationService {
 
   @Autowired
-  private MongoDb mongoDb;
+  private MongoDao mongoDao;
 
   public void updateTransportation(Transportation transportation) {
     String id = transportation.getId();
     if (StringUtils.isBlank(id)) {
       transportation.setId(UUID.randomUUID().toString());
-      mongoDb.createObject("Transportation", transportation);
+      mongoDao.createObject("Transportation", transportation);
     } else {
-      mongoDb.getMongoDao().updateObject("Transportation", id, transportation);
+      mongoDao.updateObject("Transportation", id, transportation);
     }
   }
 
   public Transportation getTransportation(String id) {
-    return mongoDb.findById("Transportation", Transportation.class, id);
+    return mongoDao.findById("Transportation", Transportation.class, id);
   }
 
   public QueryResult<Transportation> queryTransportation(String lineType, int page, int pageSize) {
     QueryResult<Transportation> result = new QueryResult<>(page, pageSize);
-    DaoQuery query = mongoDb.createQuery("Transportation");
+    DaoQuery query = mongoDao.createQuery("Transportation");
     query.eq("lineType", lineType);
     result.setTotal(query.countObjects());
 
@@ -47,7 +47,7 @@ public class TransportationService {
   }
 
   public List<Transportation> queryTransportation(String lineType, String keyword, int pageSize) {
-    DaoQuery query = mongoDb.createQuery("Transportation");
+    DaoQuery query = mongoDao.createQuery("Transportation");
     query.eq("lineType", lineType);
     query.regex("number", ".*" + keyword + ".*");
     query.addSort("number", 1);
@@ -59,15 +59,15 @@ public class TransportationService {
     String id = comb.getId();
     if (StringUtils.isBlank(id)) {
       comb.setId(UUID.randomUUID().toString());
-      mongoDb.createObject("TransferComb", comb);
+      mongoDao.createObject("TransferComb", comb);
     } else {
-      mongoDb.getMongoDao().updateObject("TransferComb", id, comb);
+      mongoDao.updateObject("TransferComb", id, comb);
     }
   }
 
   public QueryResult<TransferComb> queryTransferComb(String lineType, int page, int pageSize) {
     QueryResult<TransferComb> result = new QueryResult<>(page, pageSize);
-    DaoQuery query = mongoDb.createQuery("TransferComb");
+    DaoQuery query = mongoDao.createQuery("TransferComb");
     query.eq("type", lineType);
     result.setTotal(query.countObjects());
 
@@ -79,7 +79,7 @@ public class TransportationService {
   }
 
   public void deleteTransferComb(String id) {
-    mongoDb.deleteObject("TransferComb", id);
+    mongoDao.deleteObject("TransferComb", id);
   }
 
 }

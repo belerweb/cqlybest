@@ -15,7 +15,7 @@ import com.cqlybest.common.bean.Customer;
 import com.cqlybest.common.bean.CustomerEvent;
 import com.cqlybest.common.bean.DateBean;
 import com.cqlybest.common.bean.QueryResult;
-import com.cqlybest.common.dao.MongoDb;
+import com.cqlybest.common.dao.MongoDao;
 import com.googlecode.mjorm.query.DaoQuery;
 import com.googlecode.mjorm.query.Query;
 import com.googlecode.mjorm.query.QueryGroup;
@@ -24,7 +24,7 @@ import com.googlecode.mjorm.query.QueryGroup;
 public class CustomerService {
 
   @Autowired
-  private MongoDb mongoDb;
+  private MongoDao mongoDao;
 
   public void importCustomer(List<Map<String, String>> customers) {
     for (Map<String, String> data : customers) {
@@ -45,7 +45,7 @@ public class CustomerService {
       if (email != null) {
         qGroup.add(Query.start().eq("email", email));
       }
-      Customer customer = mongoDb.createQuery("Customer").or(qGroup).findObject(Customer.class);
+      Customer customer = mongoDao.createQuery("Customer").or(qGroup).findObject(Customer.class);
       if (customer == null) {
         customer = new Customer();
       }
@@ -89,15 +89,15 @@ public class CustomerService {
 
       if (customer.getId() == null) {
         customer.setId(UUID.randomUUID().toString());
-        mongoDb.createObject("Customer", customer);
+        mongoDao.createObject("Customer", customer);
       } else {
-        mongoDb.updateObject("Customer", customer.getId(), customer);
+        mongoDao.updateObject("Customer", customer.getId(), customer);
       }
     }
   }
 
   public List<CustomerEvent> getTodayCustomerEvent() {
-    return mongoDb.createQuery("CustomerEvent").eq("created", DateTime.now().toString("yyyyMMdd"))
+    return mongoDao.createQuery("CustomerEvent").eq("created", DateTime.now().toString("yyyyMMdd"))
         .findObjects(CustomerEvent.class).readAll();
   }
 
@@ -116,7 +116,7 @@ public class CustomerService {
     queries.add(Query.start().regex("email", pattern));
     queries.add(Query.start().regex("qq", pattern));
 
-    DaoQuery query = mongoDb.createQuery("Customer").or(queries);
+    DaoQuery query = mongoDao.createQuery("Customer").or(queries);
     result.setTotal(query.countObjects());
     query.setFirstDocument(result.getStart());
     query.setMaxDocuments(result.getPageSize());
@@ -132,7 +132,7 @@ public class CustomerService {
   public QueryResult<Customer> getCustomer(String property, String keyword, int page, int pageSize) {
     QueryResult<Customer> result = new QueryResult<>(page, pageSize);
     String pattern = ".*" + keyword + ".*";
-    DaoQuery query = mongoDb.createQuery("Customer").regex(property, pattern);
+    DaoQuery query = mongoDao.createQuery("Customer").regex(property, pattern);
     result.setTotal(query.countObjects());
     query.setFirstDocument(result.getStart());
     query.setMaxDocuments(result.getPageSize());

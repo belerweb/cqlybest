@@ -1,4 +1,4 @@
-package com.cqlybest.common.mongo;
+package com.googlecode.mjorm.convert.converters;
 
 import java.util.HashMap;
 import java.util.Map;

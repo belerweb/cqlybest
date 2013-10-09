@@ -4,6 +4,7 @@ import java.lang.reflect.Method;
 import java.util.UUID;
 
 import org.codehaus.jackson.map.ObjectMapper;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -13,11 +14,15 @@ import org.springframework.util.MultiValueMap;
 
 import com.cqlybest.common.bean.User;
 import com.cqlybest.common.exception.NotFoundException;
+import com.cqlybest.common.service.CentralConfig;
 
 public abstract class ControllerHelper {
 
+  @Autowired
+  protected CentralConfig centralConfig;
+
   protected String getQiniuBucket() {
-    return System.getProperty("qiniu.bk", System.getenv("qiniu.bk"));
+    return centralConfig.get(CentralConfig.QINIU_BK);
   }
 
   protected ResponseEntity<Object> ok() {

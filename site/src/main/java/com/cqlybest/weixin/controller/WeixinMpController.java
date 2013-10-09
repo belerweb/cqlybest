@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.cqlybest.common.controller.ControllerHelper;
+import com.cqlybest.common.service.CentralConfig;
 import com.cqlybest.common.service.SettingsService;
 import com.cqlybest.weixin.bean.RequestMessage;
 import com.cqlybest.weixin.bean.ResponseMessage;
@@ -34,7 +35,6 @@ public class WeixinMpController extends ControllerHelper {
 
   private static final Logger LOGGER = LoggerFactory.getLogger(WeixinMpController.class);
 
-  private static final String TOKEN_CONFIG = "weixin.token";
   private static final XmlMapper XML = new XmlMapper();
 
   @Autowired
@@ -91,7 +91,7 @@ public class WeixinMpController extends ControllerHelper {
 
   private boolean auth(String signature, String timestamp, String nonce) {
     try {
-      String token = System.getProperty(TOKEN_CONFIG, System.getenv(TOKEN_CONFIG));
+      String token = centralConfig.get(CentralConfig.WEIXIN_TOKEN);
       String[] chars = new String[] {token, timestamp, nonce,};
       Arrays.sort(chars);
       String sha1 = DigestUtils.shaHex(StringUtils.join(chars));

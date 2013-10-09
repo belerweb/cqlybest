@@ -22,11 +22,13 @@ import com.cqlybest.common.bean.User;
 import com.cqlybest.common.bean.WeiboAccessToken;
 import com.cqlybest.common.bean.WeiboAuthToken;
 import com.cqlybest.common.bean.WeiboUser;
+import com.cqlybest.common.controller.ControllerHelper;
+import com.cqlybest.common.service.CentralConfig;
 import com.cqlybest.common.service.MaldivesService;
 import com.cqlybest.common.service.UserService;
 
 @Controller
-public class WeiboSecurityController {
+public class WeiboSecurityController extends ControllerHelper {
 
   private static final Oauth WEIBO_OAUTH = new Oauth();
 
@@ -41,7 +43,8 @@ public class WeiboSecurityController {
       String redirectURI =
           request.getScheme() + "://" + request.getServerName() + request.getContextPath()
               + "/weibo/security/auth";
-      Constant.checkWeiboConfig(Constant.WEIBO_PRO_APP_KEY, Constant.WEIBO_PRO_APP_SECRET);
+      Constant.checkWeiboConfig(centralConfig.get(CentralConfig.WEIBO_APP_KEY), centralConfig
+          .get(CentralConfig.WEIBO_APP_SECRET));
       WeiboConfig.updateProperties(Constant.REDIRECT_URI, redirectURI);
       return "redirect:" + WEIBO_OAUTH.authorize(Constant.RESPONSE_TYPE_CODE, Constant.SCOPE_ALL);
     } catch (WeiboException e) {

@@ -26,7 +26,7 @@ import com.cqlybest.common.bean.QueryResult;
 import com.cqlybest.common.bean.page.BooleanCondition;
 import com.cqlybest.common.bean.page.Condition;
 import com.cqlybest.common.bean.page.ProductCondition;
-import com.cqlybest.common.dao.MongoDb;
+import com.cqlybest.common.dao.MongoDao;
 import com.googlecode.mjorm.query.DaoModifier;
 import com.googlecode.mjorm.query.DaoQuery;
 import com.googlecode.mjorm.query.criteria.DocumentCriterion;
@@ -37,7 +37,7 @@ import com.mongodb.DBObject;
 public class ProductService {
 
   @Autowired
-  private MongoDb mongoDb;
+  private MongoDao mongoDao;
 
   public Product addProduct(String type, String name) {
     Product product = new Product();
@@ -48,7 +48,7 @@ public class ProductService {
     Date now = new Date();
     product.setCreatedTime(now);
     product.setLastUpdated(now);
-    return mongoDb.createObject("Product", product);
+    return mongoDao.createObject("Product", product);
   }
 
   public int updateProduct(String productId, String property, Object value) {
@@ -61,12 +61,12 @@ public class ProductService {
           ProductBriefTrip trip = new ProductBriefTrip();
           trip.setNum(Integer.valueOf(matcher.group(1)));
           trip.setUnit(matcher.group(2));
-          trips.add(mongoDb.unmap(trip));
+          trips.add(mongoDao.unmap(trip));
         }
         _value = trips;
       }
     }
-    DaoModifier modify = mongoDb.createQuery("Product").eq("_id", productId).modify();
+    DaoModifier modify = mongoDao.createQuery("Product").eq("_id", productId).modify();
     modify.set(property, _value);
     modify.set("lastUpdated", new Date());
     if (!("popular".equals(property) || "recommend".equals(property) || "special".equals(property) || "published"
@@ -77,12 +77,12 @@ public class ProductService {
   }
 
   public Product getProduct(String id) {
-    return mongoDb.findById("Product", Product.class, id);
+    return mongoDao.findById("Product", Product.class, id);
   }
 
   public QueryResult<Product> queryProduct(int page, int pageSize) {
     QueryResult<Product> result = new QueryResult<>(page, pageSize);
-    DaoQuery query = mongoDb.createQuery("Product");
+    DaoQuery query = mongoDao.createQuery("Product");
     result.setTotal(query.countObjects());
 
     query.addSort("createdTime", Constant.SORT_DESC);
@@ -94,7 +94,7 @@ public class ProductService {
   }
 
   public Product queryProduct(List<DocumentCriterion> conditions) {
-    DaoQuery query = mongoDb.createQuery("Product");
+    DaoQuery query = mongoDao.createQuery("Product");
     for (DocumentCriterion cnd : conditions) {
       query.add(cnd);
     }
@@ -105,7 +105,7 @@ public class ProductService {
       int pageSize) {
     QueryResult<Product> result = new QueryResult<>(page, pageSize);
 
-    DaoQuery query = mongoDb.createQuery("Product");
+    DaoQuery query = mongoDao.createQuery("Product");
     for (DocumentCriterion cnd : conditions) {
       query.add(cnd);
     }
@@ -122,23 +122,23 @@ public class ProductService {
     ProductTransportation transportation = new ProductTransportation();
     transportation.setId(UUID.randomUUID().toString());
     transportation.setName(name);
-    mongoDb.createQuery("Product").eq("_id", productId).modify().push("transportations",
-        mongoDb.unmap(transportation)).update();
+    mongoDao.createQuery("Product").eq("_id", productId).modify().push("transportations",
+        mongoDao.unmap(transportation)).update();
   }
 
   public void updateTransportation(String id, String property, Object value) {
     Object _value = value;
     if ("detail".equals(property)) {
-      _value = mongoDb.findById("Transportation", (String) value);
+      _value = mongoDao.findById("Transportation", (String) value);
     }
-    mongoDb.createQuery("Product").eq("transportations.id", id).modify().set(
+    mongoDao.createQuery("Product").eq("transportations.id", id).modify().set(
         "transportations.$." + property, _value).update();
   }
 
   public void deleteTransportation(String id) {
     Map<String, String> transportation = new HashMap<>();
     transportation.put("id", id);
-    mongoDb.createQuery("Product").eq("transportations.id", id).modify()
+    mongoDao.createQuery("Product").eq("transportations.id", id).modify()
         .pull("transportations", transportation).update();
   }
 
@@ -146,8 +146,8 @@ public class ProductService {
     ProductMaldives detail = new ProductMaldives();
     detail.setId(UUID.randomUUID().toString());
     detail.setName(name);
-    mongoDb.createQuery("Product").eq("_id", productId).modify().push("maldivesDetails",
-        mongoDb.unmap(detail)).update();
+    mongoDao.createQuery("Product").eq("_id", productId).modify().push("maldivesDetails",
+        mongoDao.unmap(detail)).update();
   }
 
   public void updateMaldivesDetail(String id, String property, Object value) {
@@ -156,20 +156,20 @@ public class ProductService {
       Properties fields = new Properties();
       fields.put("rooms", Boolean.FALSE); // 不包含房型
       fields.put("dinings", Boolean.FALSE); // 不包含餐饮设施
-      _value = mongoDb.findById("MaldivesIsland", (String) value, fields);
-      mongoDb.createQuery("Product").eq("maldivesDetails.id", id).modify().set(
+      _value = mongoDao.findById("MaldivesIsland", (String) value, fields);
+      mongoDao.createQuery("Product").eq("maldivesDetails.id", id).modify().set(
           "maldivesDetails.$." + property, _value).set("maldivesDetails.$.room", null).update();
     } else if ("room".equals(property)) {
       Properties fields = new Properties();
       fields.put("rooms.$", Boolean.TRUE); // 只查询房型
       DBObject result =
-          mongoDb.createQuery("MaldivesIsland").eq("rooms.id", value).findObject(
-              mongoDb.unmap(fields));
+          mongoDao.createQuery("MaldivesIsland").eq("rooms.id", value).findObject(
+              mongoDao.unmap(fields));
       _value = ((BasicDBList) result.get("rooms")).get(0);
-      mongoDb.createQuery("Product").eq("maldivesDetails.id", id).modify().set(
+      mongoDao.createQuery("Product").eq("maldivesDetails.id", id).modify().set(
           "maldivesDetails.$." + property, _value).update();
     } else {
-      mongoDb.createQuery("Product").eq("maldivesDetails.id", id).modify().set(
+      mongoDao.createQuery("Product").eq("maldivesDetails.id", id).modify().set(
           "maldivesDetails.$." + property, _value).update();
     }
   }
@@ -177,7 +177,7 @@ public class ProductService {
   public void deleteMaldivesDetail(String id) {
     Map<String, String> detail = new HashMap<>();
     detail.put("id", id);
-    mongoDb.createQuery("Product").eq("maldivesDetails.id", id).modify()
+    mongoDao.createQuery("Product").eq("maldivesDetails.id", id).modify()
         .pull("maldivesDetails", detail).update();
   }
 
@@ -198,7 +198,7 @@ public class ProductService {
         toAdd.setPrice(price);
         toAdd.setChildPrice(childPrice);
         toAdd.setSpecial(special);
-        toAdds.add(mongoDb.unmap(toAdd));
+        toAdds.add(mongoDao.unmap(toAdd));
       }
 
       date = DateUtils.addDays(date, 1);
@@ -208,61 +208,62 @@ public class ProductService {
     in.put("$in", toDeleteds);
     Map<String, Object> subQuery = new HashMap<>();
     subQuery.put("date", in);
-    mongoDb.createQuery("Product").eq("_id", productId).modify().pull("priceCalendar", subQuery)
+    mongoDao.createQuery("Product").eq("_id", productId).modify().pull("priceCalendar", subQuery)
         .update();
     if (!delete) {
-      mongoDb.createQuery("Product").eq("_id", productId).modify().pushAll("priceCalendar", toAdds)
-          .update();
+      mongoDao.createQuery("Product").eq("_id", productId).modify()
+          .pushAll("priceCalendar", toAdds).update();
     }
   }
 
   public void addPoster(String productId, List<String> imageIds) {
     // 保存图片
-    mongoDb.createQuery("Product").eq("_id", productId).modify().pushAll("posters",
-        mongoDb.createQuery("Image").in("_id", imageIds).findObjects(Image.class).readAll())
+    mongoDao.createQuery("Product").eq("_id", productId).modify().pushAll("posters",
+        mongoDao.createQuery("Image").in("_id", imageIds).findObjects(Image.class).readAll())
         .update();
     // 更新原始图片的信息
   }
 
   public void updatePoster(String imageId, String property, String value) {
-    mongoDb.createQuery("Product").eq("posters.id", imageId).modify().set("posters.$." + property,
+    mongoDao.createQuery("Product").eq("posters.id", imageId).modify().set("posters.$." + property,
         value).update();
     // 更新原始图片的信息
-    mongoDb.createQuery("Image").eq("_id", imageId).modify().set(property, value).update();
+    mongoDao.createQuery("Image").eq("_id", imageId).modify().set(property, value).update();
   }
 
   public void deletePoster(String imageId) {
     Map<String, String> image = new HashMap<>();
     image.put("id", imageId);
-    mongoDb.createQuery("Product").eq("posters.id", imageId).modify().pull("posters", image)
+    mongoDao.createQuery("Product").eq("posters.id", imageId).modify().pull("posters", image)
         .update();
-    mongoDb.createQuery("Image").eq("_id", imageId).modify().delete();
+    mongoDao.createQuery("Image").eq("_id", imageId).modify().delete();
   }
 
   public void addPhoto(String productId, List<String> imageIds) {
     // 保存图片
-    mongoDb.createQuery("Product").eq("_id", productId).modify().pushAll("photos",
-        mongoDb.createQuery("Image").in("_id", imageIds).findObjects(Image.class).readAll())
+    mongoDao.createQuery("Product").eq("_id", productId).modify().pushAll("photos",
+        mongoDao.createQuery("Image").in("_id", imageIds).findObjects(Image.class).readAll())
         .update();
   }
 
   public void updatePhoto(String imageId, String property, String value) {
-    mongoDb.createQuery("Product").eq("photos.id", imageId).modify().set("photos.$." + property,
+    mongoDao.createQuery("Product").eq("photos.id", imageId).modify().set("photos.$." + property,
         value).update();
     // 更新原始图片的信息
-    mongoDb.createQuery("Image").eq("_id", imageId).modify().set(property, value).update();
+    mongoDao.createQuery("Image").eq("_id", imageId).modify().set(property, value).update();
   }
 
   public void deletePhoto(String imageId) {
     Map<String, String> image = new HashMap<>();
     image.put("id", imageId);
-    mongoDb.createQuery("Product").eq("photos.id", imageId).modify().pull("photos", image).update();
-    mongoDb.createQuery("Image").eq("_id", imageId).modify().delete();
+    mongoDao.createQuery("Product").eq("photos.id", imageId).modify().pull("photos", image)
+        .update();
+    mongoDao.createQuery("Image").eq("_id", imageId).modify().delete();
   }
 
   public QueryResult<Product> queryProduct(ProductCondition pc, int page, int pageSize) {
     QueryResult<Product> result = new QueryResult<>(page, pageSize);
-    DaoQuery query = mongoDb.createQuery("Product");
+    DaoQuery query = mongoDao.createQuery("Product");
     Condition cnd = pc.getType();
     if (cnd != null) {// 类型
       query.eq("type", cnd.getValue());

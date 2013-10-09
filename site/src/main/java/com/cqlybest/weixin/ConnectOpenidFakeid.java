@@ -29,11 +29,7 @@ public class ConnectOpenidFakeid {
   }
 
   static {
-    String username =
-        System.getProperty(WeixinMP.CONFIG_USERNAME, System.getenv(WeixinMP.CONFIG_USERNAME));
-    String password =
-        System.getProperty(WeixinMP.CONFIG_PASSWORD, System.getenv(WeixinMP.CONFIG_PASSWORD));
-    mp = WeixinMP.init(username, password);
+    // TODO mp = WeixinMP.init(username, password);
   }
 
 }
