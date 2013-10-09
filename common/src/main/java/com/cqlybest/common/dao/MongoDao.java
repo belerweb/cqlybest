@@ -22,7 +22,6 @@ import com.googlecode.mjorm.MapReduce;
 import com.googlecode.mjorm.MapReduceResult;
 import com.googlecode.mjorm.MongoDaoImpl;
 import com.googlecode.mjorm.ObjectIterator;
-import com.googlecode.mjorm.XmlDescriptorObjectMapper;
 import com.googlecode.mjorm.mql.Statement;
 import com.googlecode.mjorm.query.DaoQuery;
 import com.mongodb.CommandResult;
@@ -70,6 +69,7 @@ public class MongoDao implements com.googlecode.mjorm.MongoDao, InitializingBean
     mapper = new XmlDescriptorObjectMapper();
     mapper.registerTypeConverter(new ByteArrayToBinary());
     mapper.registerTypeConverter(new BinaryToByteArray());
+    mapper.registerTypeConverter(new MongoToMapTypeConverter());
     PathMatchingResourcePatternResolver resolver = new PathMatchingResourcePatternResolver();
     Resource[] xmlResources = resolver.getResources("classpath:/mongo/**/*.xml");
     for (Resource resource : xmlResources) {

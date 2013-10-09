@@ -1,4 +1,4 @@
-package com.googlecode.mjorm.convert.converters;
+package com.cqlybest.common.dao;
 
 import java.util.HashMap;
 import java.util.Map;
