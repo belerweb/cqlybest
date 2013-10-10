@@ -15,6 +15,7 @@
 		<link href="${ContextPath}/assets/v5/css/font-awesome.css" rel="stylesheet">
 		<link href="${ContextPath}/assets/v5/css/supersized.css" rel="stylesheet">
 		<link href="${ContextPath}/assets/v5/css/supersized.shutter.css" rel="stylesheet">
+		<link href="${ContextPath}/assets/v5/css/bootstrap-image-gallery.css" rel="stylesheet">
 		<link href="${ContextPath}/assets/v5/css/application.css" rel="stylesheet" media="screen">
 		<#else>
 		<link href="${ContextPath}/assets/v5/css/style1.min.css" rel="stylesheet" media="screen">

@@ -37,7 +37,7 @@
 			</ul>
 		</nav>
 	</div>
-	<div id="container">
+	<div id="container" data-toggle="modal-gallery" data-target="#modal-gallery" data-selector=".gallery-item">
 		<section id="section-poster" class="section" data-section="1">
 			<a id="prevslide" class="load-item"></a>
 			<a id="nextslide" class="load-item"></a>
@@ -133,13 +133,13 @@
 						</div>
 						</#if>
 					</div>
-					<div class="span6" data-toggle="modal-gallery" data-target="#maldives-gallery" data-selector="img">
+					<div class="span6">
 						<#if island.hotelPictures?has_content>
 						<#assign rand = springx.rand(0,island.hotelPictures?size-1) />
 						<#list island.hotelPictures as image>
 						<img alt="${image.title!}" src="http://${ImageServer}/${image.qiniuKey}?imageView/1/w/343/h/280"
 							 data-href="http://${ImageServer}/${image.qiniuKey}"
-							 class="<#if image_index!=rand>hide</#if>" style="width:100%;">
+							 class="gallery-item <#if image_index!=rand>hide</#if>" style="width:100%;">
 						</#list>
 						</#if>
 					</div>
@@ -172,10 +172,13 @@
 							<ul class="thumbnails">
 								</#if>
 								<li class="span6">
-									<div class="thumbnail-style thumbnail-kenburn">
-										<div class="overflow-hidden">
-											<img src="http://${ImageServer}/${image.qiniuKey}?imageView/1/w/696/h/400">
-										</div>
+									<div class="thumbnail-style">
+										<a href="http://${ImageServer}/${image.qiniuKey}" class="gallery-item fancybox-button zoomer">
+											<div class="overlay-zoom">
+												<img src="http://${ImageServer}/${image.qiniuKey}?imageView/1/w/696/h/400">
+												<div class="zoom-icon"></div>
+											</div>
+										</a>
 									</div>
 								</li>
 								</#list>
@@ -212,10 +215,13 @@
 							<ul class="thumbnails">
 								</#if>
 								<li class="span6">
-									<div class="thumbnail-style thumbnail-kenburn">
-										<div class="overflow-hidden">
-											<img src="http://${ImageServer}/${image.qiniuKey}?imageView/1/w/696/h/400">
-										</div>
+									<div class="thumbnail-style">
+										<a href="http://${ImageServer}/${image.qiniuKey}" class="gallery-item fancybox-button zoomer">
+											<div class="overlay-zoom">
+												<img src="http://${ImageServer}/${image.qiniuKey}?imageView/1/w/696/h/400">
+												<div class="zoom-icon"></div>
+											</div>
+										</a>
 									</div>
 								</li>
 								</#list>
@@ -226,6 +232,18 @@
 			</div>
 		</section>
 		</#list>
+	</div>
+	<div id="modal-gallery" class="modal-fullscreen modal modal-gallery hide fade" tabindex="-1">
+		<div class="modal-header">
+			<a class="close" data-dismiss="modal">&times;</a>
+			<h3 class="modal-title"></h3>
+		</div>
+		<div class="modal-body"><div class="modal-image"></div></div>
+		<div class="modal-footer">
+			<a class="btn btn-success modal-play modal-slideshow" data-slideshow="3000"><i class="icon-play icon-white"></i> 自动播放</a>
+			<a class="btn btn-info modal-prev"><i class="icon-arrow-left icon-white"></i> 上一张</a>
+			<a class="btn btn-primary modal-next">下一张 <i class="icon-arrow-right icon-white"></i></a>
+		</div>
 	</div>
 	<script type="text/javascript">
 		window.PageContext = {

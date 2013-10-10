@@ -42,6 +42,7 @@
 								<cssSourceFile>font-awesome.css</cssSourceFile>
 								<cssSourceFile>supersized.css</cssSourceFile>
 								<cssSourceFile>supersized.shutter.css</cssSourceFile>
+								<cssSourceFile>bootstrap-image-gallery.css</cssSourceFile>
 								<cssSourceFile>application.css</cssSourceFile>
 							</cssSourceFiles>
 							<jsFinalFile>script1.js</jsFinalFile>
@@ -53,6 +54,8 @@
 								<jsSourceFile>jquery.easing.js</jsSourceFile>
 								<jsSourceFile>supersized.js</jsSourceFile>
 								<jsSourceFile>supersized.shutter.js</jsSourceFile>
+								<jsSourceFile>load-image.js</jsSourceFile>
+								<jsSourceFile>bootstrap-image-gallery.js</jsSourceFile>
 								<jsSourceFile>application.js</jsSourceFile>
 							</jsSourceFiles>
 						</configuration>
