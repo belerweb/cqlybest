@@ -59,7 +59,7 @@ public class SystemManagement extends ControllerHelper {
       Collections.sort(result, new Comparator<Map<String, Object>>() {
         @Override
         public int compare(Map<String, Object> o1, Map<String, Object> o2) {
-          return (int) (((Date) o2.get("time")).getTime() - ((Date) o1.get("time")).getTime());
+          return ((Date) o2.get("time")).compareTo(((Date) o1.get("time")));
         }
       });
       model.addAttribute("caches", result);
