@@ -35,8 +35,8 @@
 				<li data-section="6" class=""><i class="icon-tasks"></i> <span>本岛行程</span></li>
 				<li data-section="7" class=""><i class="icon-cloud"></i> <span>其他岛屿</span></li>
 			</ul>
-		</nav><!-- /nav -->
-	</div><!-- /sidebar -->
+		</nav>
+	</div>
 	<div id="container">
 
 		<section id="section-poster" class="section" data-section="1">
@@ -59,8 +59,8 @@
 						</#if>
 					</ul>
 				</div>
-			</div><!-- /row-fluid -->
-		</section><!-- /section -->
+			</div>
+		</section>
 		<section id="section-hotel" class="section" data-section="2">
 			<div class="content">
 				<div class="title">
@@ -146,7 +146,7 @@
 					</div>
 				</div>
 			</div>
-		</section><!-- /section -->
+		</section>
 		<#list island.rooms as room>
 		<section id="section-room" class="section style1" data-section="3">
 			<div class="content">
@@ -163,6 +163,7 @@
 				</div>
 				<div class="row-fluid">
 					<div class="span4">
+						<p>${room.description!}</p>
 					</div>
 					<div class="span8">
 							<ul class="thumbnails">
@@ -184,7 +185,7 @@
 					</div>
 				</div>
 			</div>
-		</section><!-- /section -->
+		</section>
 		</#list>
 		<#list island.dinings as dining>
 		<section id="section-dining" class="section" data-section="4">
@@ -202,6 +203,7 @@
 				</div>
 				<div class="row-fluid">
 					<div class="span4">
+						<p>${dining.description!}</p>
 					</div>
 					<div class="span8">
 							<ul class="thumbnails">
@@ -223,9 +225,8 @@
 					</div>
 				</div>
 			</div>
-		</section><!-- /section -->
+		</section>
 		</#list>
-
 	</div>
 	<script type="text/javascript">
 		window.PageContext = {
