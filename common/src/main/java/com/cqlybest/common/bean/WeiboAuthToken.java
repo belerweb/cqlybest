@@ -1,5 +1,6 @@
 package com.cqlybest.common.bean;
 
+import java.io.Serializable;
 import java.util.Collection;
 
 import org.springframework.security.authentication.AbstractAuthenticationToken;
@@ -31,7 +32,8 @@ public class WeiboAuthToken extends AbstractAuthenticationToken {
     return userWrapper;
   }
 
-  public class UserWrapper {
+  public class UserWrapper implements Serializable {
+    private static final long serialVersionUID = 5648648498359812216L;
     private User detail;
 
     public UserWrapper(User detail) {

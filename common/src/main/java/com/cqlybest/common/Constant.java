@@ -60,10 +60,6 @@ public class Constant {
   public static final int SORT_DESC = -1;// 降序
   public static final int SORT_ASC = 1;// 升序
 
-  public static void checkWeiboConfig(String appKeyConfig, String appSecretConfig) {
-  // TODO
-  }
-
   static {
     // YYYYMMDD_FORMAT.setTimeZone(TimeZone.getTimeZone("GMT"));
   }

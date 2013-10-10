@@ -50,7 +50,9 @@ public class WeiboLoginController {
       String redirectURI =
           request.getScheme() + "://" + request.getServerName() + request.getContextPath()
               + "/connector/weibo";
-      Constant.checkWeiboConfig(centralConfig.get(CentralConfig.WEIBO_APP_KEY), centralConfig
+      WeiboConfig.updateProperties(Constant.CLIENT_ID, centralConfig
+          .get(CentralConfig.WEIBO_APP_KEY));
+      WeiboConfig.updateProperties(Constant.CLIENT_SECRET, centralConfig
           .get(CentralConfig.WEIBO_APP_SECRET));
       WeiboConfig.updateProperties(Constant.REDIRECT_URI, redirectURI);
       redirect =
