@@ -38,7 +38,6 @@
 		</nav>
 	</div>
 	<div id="container">
-
 		<section id="section-poster" class="section" data-section="1">
 			<a id="prevslide" class="load-item"></a>
 			<a id="nextslide" class="load-item"></a>
@@ -148,7 +147,7 @@
 			</div>
 		</section>
 		<#list island.rooms as room>
-		<section id="section-room" class="section style1" data-section="3">
+		<section id="section-room" class="section bg style${room_index%7}" data-section="3">
 			<div class="content">
 				<div class="title">
 					<div class="row-fluid">
@@ -188,7 +187,7 @@
 		</section>
 		</#list>
 		<#list island.dinings as dining>
-		<section id="section-dining" class="section" data-section="4">
+		<section id="section-dining" class="section bg style${6-dining_index%7}" data-section="4">
 			<div class="content">
 				<div class="title">
 					<div class="row-fluid">

@@ -168,12 +168,36 @@ body {
 	/*color:#FF770D;*/
 	
 }
-
-.section.style1 {
-	background-color: #009DD3;
+/*'#87C116','#00AFF1','#0BA6FF','#FC8E00','#04B1E0','#FFC400','#1D86C9'*/
+.section.bg.style0  {
+	background-color: #87C116;
 }
 
-.section.style1 * {
+.section.bg.style1  {
+	background-color: #00AFF1;
+}
+
+.section.bg.style2  {
+	background-color: #0BA6FF;
+}
+
+.section.bg.style3  {
+	background-color: #FC8E00;
+}
+
+.section.bg.style4  {
+	background-color: #04B1E0;
+}
+
+.section.bg.style5  {
+	background-color: #FFC400;
+}
+
+.section.bg.style6  {
+	background-color: #1D86C9;
+}
+
+.section.bg * {
 	color: #FFF;
 }
 
