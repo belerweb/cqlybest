@@ -1,16 +1,4 @@
-<#assign TopNav=[{
-	'name':'马尔代夫',
-	'url':'/maldives.do'
-},'divider',{
-	'name':'毛里求斯',
-	'url':'/mauritius.do'
-},'divider',{
-	'name':'客户关系',
-	'url':'/crm.do'
-},'divider',{
-	'name':'系统管理',
-	'url':'/system.do'
-}] />
+<#assign TopNav=[] />
 <div class="navbar navbar-inverse navbar-fixed-top">
 	<div class="navbar-inner">
 		<div class="container-fluid">
@@ -33,7 +21,6 @@
 							<small>你好，</small>
 							${User.nickname!'未设置昵称'}!
 						</span>
-
 						<i class="icon-caret-down"></i>
 					</a>
 					<ul class="pull-right dropdown-menu dropdown-yellow dropdown-caret dropdown-closer" id="user_menu">
@@ -50,7 +37,6 @@
 						</#if>
 						</#list>
 						</#if>
-						<li class="divider"></li>
 						<li><a href="${ContextPath}/logout"><i class="icon-off"></i> 退出</a></li>
 					</ul>
 				</li>
