@@ -35,11 +35,20 @@
 						<li data-active-nav="business">
 							<a href="${ContextPath}/soon.html" class="dropdown-toggle">公商务定制</a>
 						</li>
+						<li data-active-nav="example">
+							<a href="${ContextPath}/soon.html" class="dropdown-toggle">标杆</a>
+						</li>
 						<li data-active-nav="theme">
 							<a href="${ContextPath}/soon.html" class="dropdown-toggle">主题定制</a>
 						</li>
 						<li data-active-nav="maldives">
 							<a href="${ContextPath}/maldives.html" class="dropdown-toggle">马尔代夫</a>
+						</li>
+						<li data-active-nav="mauritius">
+							<a href="${ContextPath}/soon.html" class="dropdown-toggle">毛里求斯</a>
+						</li>
+						<li data-active-nav="seychelles">
+							<a href="${ContextPath}/soon.html" class="dropdown-toggle">塞舌尔</a>
 						</li>
 					</ul>
 				</div>
