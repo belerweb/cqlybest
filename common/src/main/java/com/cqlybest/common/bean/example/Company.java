@@ -3,7 +3,7 @@ package com.cqlybest.common.bean.example;
 /**
  * 标杆
  */
-public class Example {
+public class Company {
 
   private String id;
   private String name; // 标杆名称
