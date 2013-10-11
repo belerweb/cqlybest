@@ -7,8 +7,7 @@
 	<script type="text/javascript" src="${ContextPath}/assets/v5/js/jquery.easing.js"></script>
 	<script type="text/javascript" src="${ContextPath}/assets/v5/js/supersized.js"></script>
 	<script type="text/javascript" src="${ContextPath}/assets/v5/js/supersized.shutter.js"></script>
-	<script type="text/javascript" src="${ContextPath}/assets/v5/js/jquery.themepunch.plugins.js"></script>
-	<script type="text/javascript" src="${ContextPath}/assets/v5/js/jquery.themepunch.revolution.js"></script>
+	<script type="text/javascript" src="${ContextPath}/assets/v5/js/slider.js"></script>
 	<script type="text/javascript" src="${ContextPath}/assets/v5/js/jquery.form.js"></script>
 	<script type="text/javascript" src="${ContextPath}/assets/v5/js/application.js"></script>
 	<#else>

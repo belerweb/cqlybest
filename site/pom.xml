@@ -72,7 +72,7 @@
 							<cssSourceFiles>
 								<cssSourceFile>bootstrap.css</cssSourceFile>
 								<cssSourceFile>font-awesome.css</cssSourceFile>
-								<cssSourceFile>revolution-settings.css</cssSourceFile>
+								<cssSourceFile>slider.css</cssSourceFile>
 								<cssSourceFile>application2.css</cssSourceFile>
 							</cssSourceFiles>
 							<jsFinalFile>script2.js</jsFinalFile>
@@ -85,8 +85,7 @@
 								<jsSourceFile>jquery.easing.js</jsSourceFile>
 								<jsSourceFile>supersized.js</jsSourceFile>
 								<jsSourceFile>supersized.shutter.js</jsSourceFile>
-								<jsSourceFile>jquery.themepunch.plugins.js</jsSourceFile>
-								<jsSourceFile>jquery.themepunch.revolution.js</jsSourceFile>
+								<jsSourceFile>slider.js</jsSourceFile>
 								<jsSourceFile>jquery.form.js</jsSourceFile>
 								<jsSourceFile>application.js</jsSourceFile>
 							</jsSourceFiles>

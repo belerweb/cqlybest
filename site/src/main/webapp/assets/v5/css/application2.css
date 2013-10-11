@@ -1,3 +1,7 @@
+html,body {
+	min-width: 960px;
+}
+
 * {
 	border-radius: 0 !important;
 }
@@ -2368,20 +2372,6 @@ i.style-switcher-btn-option:hover {
 	font-size: 19px;
 	padding-left: 1px;
 	padding-right: 1px;
-}
-
-.fullwidthbanner-container {
-	width: 100% !important;
-	position: relative;
-	padding: 0;
-	max-height: 500px !important;
-	overflow: hidden;
-}
-
-.fullwidthbanner-container .fullwidthabnner {
-	width: 100% !important;
-	max-height: 500px !important;
-	position: relative;
 }
 
 /* theme start */
