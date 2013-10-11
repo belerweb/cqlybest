@@ -14,12 +14,12 @@
 	<meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0;">
 
 	<#if dev>
-	<link href="${ContextPath}/assets/v5/css/bootstrap.css" rel="stylesheet" media="screen">
-	<link href="${ContextPath}/assets/v5/css/font-awesome.css" rel="stylesheet">
-	<link href="${ContextPath}/assets/v5/css/slider.css" rel="stylesheet" media="screen">
-	<link href="${ContextPath}/assets/v5/css/application2.css" rel="stylesheet" media="screen">
+	<link href="${ContextPath}/assets/v5/css/bootstrap.css?v=${version.time}" rel="stylesheet" media="screen">
+	<link href="${ContextPath}/assets/v5/css/font-awesome.css?v=${version.time}" rel="stylesheet">
+	<link href="${ContextPath}/assets/v5/css/slider.css?v=${version.time}" rel="stylesheet" media="screen">
+	<link href="${ContextPath}/assets/v5/css/application2.css?v=${version.time}" rel="stylesheet" media="screen">
 	<#else>
-	<link href="${ContextPath}/assets/v5/css/style2.min.css" rel="stylesheet" media="screen">
+	<link href="${ContextPath}/assets/v5/css/style2.min.css?v=${version.time}" rel="stylesheet" media="screen">
 	</#if>
 
 	<script type="text/javascript">
