@@ -17,11 +17,11 @@ public class ImageService {
   }
 
   public void updateImage(Image image) {
-    mongoDao.updateObject("Image", image.getId(), image);;
+    mongoDao.updateObject("Image", image.get_id(), image);;
   }
 
   public Image getImage(String imageId) {
-    return mongoDao.createQuery("Image").eq("_id", imageId).findObject(Image.class);
+    return mongoDao.createQuery("Image").eq("id", imageId).findObject(Image.class);
   }
 
 }

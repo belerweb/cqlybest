@@ -12,6 +12,8 @@
 		<div class="text-center"><button id="callback-btn" type="button" class="btn btn-primary">确定</button></div>
 		<script type="text/javascript" src="${ContextPath}/assets/v1/js/jquery.js"></script>
 		<script type="text/javascript" src="${ContextPath}/assets/v1/js/plupload.js"></script>
+		<script type="text/javascript" src="${ContextPath}/assets/v1/js/plupload.html5.js"></script>
+		<script type="text/javascript" src="${ContextPath}/assets/v1/js/plupload.html4.js"></script>
 		<script type="text/javascript" src="${ContextPath}/assets/v1/js/plupload.flash.js"></script>
 		<script type="text/javascript" src="${ContextPath}/assets/v1/js/jquery.plupload.queue.js"></script>
 		<script type="text/javascript">
@@ -52,7 +54,7 @@
 			'Error: Invalid file extension:': '错误：不允许地文件类型：'
 		});
 		var uploader = $('#uploader').pluploadQueue({
-			runtimes : 'flash',
+			runtimes : 'flash,html5,html4',
 			flash_swf_url : '${ContextPath}/assets/v1/img/plupload.flash.swf',
 			multi_selection:true,
 			filters : [{title : '图片', extensions : 'jpg,gif,png'}],
