@@ -12,7 +12,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.cqlybest.common.Constant;
-import com.cqlybest.common.bean.Image;
 import com.cqlybest.common.bean.MaldivesDining;
 import com.cqlybest.common.bean.MaldivesIsland;
 import com.cqlybest.common.bean.MaldivesRoom;
@@ -151,8 +150,7 @@ public class MaldivesService {
   public void addPicture(String islandId, List<String> imageIds) {
     // 保存图片
     mongoDao.createQuery("MaldivesIsland").eq("_id", islandId).modify().pushAll("pictures",
-        mongoDao.createQuery("Image").in("id", imageIds).findObjects(Image.class).readAll())
-        .update();
+        mongoDao.createQuery("Image").in("id", imageIds).findObjects().toArray()).update();
   }
 
   public void updatePicture(String imageId, String property, String value) {
@@ -173,8 +171,7 @@ public class MaldivesService {
   public void addHotelPicture(String islandId, List<String> imageIds) {
     // 保存图片
     mongoDao.createQuery("MaldivesIsland").eq("_id", islandId).modify().pushAll("hotelPictures",
-        mongoDao.createQuery("Image").in("id", imageIds).findObjects(Image.class).readAll())
-        .update();
+        mongoDao.createQuery("Image").in("id", imageIds).findObjects().toArray()).update();
   }
 
   public void updateHotelPicture(String imageId, String property, String value) {
@@ -196,8 +193,7 @@ public class MaldivesService {
     // 保存图片
     mongoDao.createQuery("MaldivesIsland").eq("rooms.id", roomId).modify().pushAll(
         "rooms.$.pictures",
-        mongoDao.createQuery("Image").in("id", imageIds).findObjects(Image.class).readAll())
-        .update();
+        mongoDao.createQuery("Image").in("id", imageIds).findObjects().toArray()).update();
     // 更新原始图片的信息
     mongoDao.createQuery("Image").in("id", imageIds).modify().set("extra",
         Constant.IMAGE_MALDIVES_ROOM_PICTURE).set("extraKey", roomId).updateMulti();
@@ -222,8 +218,7 @@ public class MaldivesService {
     // 保存图片
     mongoDao.createQuery("MaldivesIsland").eq("dinings.id", diningId).modify().pushAll(
         "dinings.$.pictures",
-        mongoDao.createQuery("Image").in("id", imageIds).findObjects(Image.class).readAll())
-        .update();
+        mongoDao.createQuery("Image").in("id", imageIds).findObjects().toArray()).update();
   }
 
   public void updateDiningPicture(String index, String imageId, String property, String value) {

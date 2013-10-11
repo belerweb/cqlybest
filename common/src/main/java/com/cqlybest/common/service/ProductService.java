@@ -16,7 +16,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.cqlybest.common.Constant;
-import com.cqlybest.common.bean.Image;
 import com.cqlybest.common.bean.Product;
 import com.cqlybest.common.bean.ProductBriefTrip;
 import com.cqlybest.common.bean.ProductMaldives;
@@ -219,8 +218,7 @@ public class ProductService {
   public void addPoster(String productId, List<String> imageIds) {
     // 保存图片
     mongoDao.createQuery("Product").eq("_id", productId).modify().pushAll("posters",
-        mongoDao.createQuery("Image").in("id", imageIds).findObjects(Image.class).readAll())
-        .update();
+        mongoDao.createQuery("Image").in("id", imageIds).findObjects().toArray()).update();
     // 更新原始图片的信息
   }
 
@@ -242,8 +240,7 @@ public class ProductService {
   public void addPhoto(String productId, List<String> imageIds) {
     // 保存图片
     mongoDao.createQuery("Product").eq("_id", productId).modify().pushAll("photos",
-        mongoDao.createQuery("Image").in("id", imageIds).findObjects(Image.class).readAll())
-        .update();
+        mongoDao.createQuery("Image").in("id", imageIds).findObjects().toArray()).update();
   }
 
   public void updatePhoto(String imageId, String property, String value) {
