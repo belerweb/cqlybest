@@ -219,7 +219,7 @@ public class ProductService {
   public void addPoster(String productId, List<String> imageIds) {
     // 保存图片
     mongoDao.createQuery("Product").eq("_id", productId).modify().pushAll("posters",
-        mongoDao.createQuery("Image").in("_id", imageIds).findObjects(Image.class).readAll())
+        mongoDao.createQuery("Image").in("id", imageIds).findObjects(Image.class).readAll())
         .update();
     // 更新原始图片的信息
   }
@@ -228,7 +228,7 @@ public class ProductService {
     mongoDao.createQuery("Product").eq("posters.id", imageId).modify().set("posters.$." + property,
         value).update();
     // 更新原始图片的信息
-    mongoDao.createQuery("Image").eq("_id", imageId).modify().set(property, value).update();
+    mongoDao.createQuery("Image").eq("id", imageId).modify().set(property, value).update();
   }
 
   public void deletePoster(String imageId) {
@@ -236,13 +236,13 @@ public class ProductService {
     image.put("id", imageId);
     mongoDao.createQuery("Product").eq("posters.id", imageId).modify().pull("posters", image)
         .update();
-    mongoDao.createQuery("Image").eq("_id", imageId).modify().delete();
+    mongoDao.createQuery("Image").eq("id", imageId).modify().delete();
   }
 
   public void addPhoto(String productId, List<String> imageIds) {
     // 保存图片
     mongoDao.createQuery("Product").eq("_id", productId).modify().pushAll("photos",
-        mongoDao.createQuery("Image").in("_id", imageIds).findObjects(Image.class).readAll())
+        mongoDao.createQuery("Image").in("id", imageIds).findObjects(Image.class).readAll())
         .update();
   }
 
@@ -250,7 +250,7 @@ public class ProductService {
     mongoDao.createQuery("Product").eq("photos.id", imageId).modify().set("photos.$." + property,
         value).update();
     // 更新原始图片的信息
-    mongoDao.createQuery("Image").eq("_id", imageId).modify().set(property, value).update();
+    mongoDao.createQuery("Image").eq("id", imageId).modify().set(property, value).update();
   }
 
   public void deletePhoto(String imageId) {
@@ -258,7 +258,7 @@ public class ProductService {
     image.put("id", imageId);
     mongoDao.createQuery("Product").eq("photos.id", imageId).modify().pull("photos", image)
         .update();
-    mongoDao.createQuery("Image").eq("_id", imageId).modify().delete();
+    mongoDao.createQuery("Image").eq("id", imageId).modify().delete();
   }
 
   public QueryResult<Product> queryProduct(ProductCondition pc, int page, int pageSize) {

@@ -146,14 +146,14 @@ public class MauritiusService {
   public void addPicture(String hotelId, List<String> imageIds) {
     // 保存图片
     mongoDao.createQuery("MauritiusHotel").eq("_id", hotelId).modify().pushAll("pictures",
-        mongoDao.createQuery("Image").in("_id", imageIds).findObjects(Image.class).readAll());
+        mongoDao.createQuery("Image").in("id", imageIds).findObjects(Image.class).readAll());
   }
 
   public void updatePicture(String imageId, String property, String value) {
     mongoDao.createQuery("MauritiusHotel").eq("pictures.id", imageId).modify().set(
         "pictures.$." + property, value).update();
     // 更新原始图片的信息
-    mongoDao.createQuery("Image").eq("_id", imageId).modify().set(property, value).update();
+    mongoDao.createQuery("Image").eq("id", imageId).modify().set(property, value).update();
   }
 
   public void deletePicture(String imageId) {
@@ -161,13 +161,13 @@ public class MauritiusService {
     image.put("id", imageId);
     mongoDao.createQuery("MauritiusHotel").eq("pictures.id", imageId).modify()
         .pull("pictures", image).update();
-    mongoDao.createQuery("Image").eq("_id", imageId).modify().delete();
+    mongoDao.createQuery("Image").eq("id", imageId).modify().delete();
   }
 
   public void addHotelPicture(String hotelId, List<String> imageIds) {
     // 保存图片
     mongoDao.createQuery("MauritiusHotel").eq("_id", hotelId).modify().pushAll("hotelPictures",
-        mongoDao.createQuery("Image").in("_id", imageIds).findObjects(Image.class).readAll())
+        mongoDao.createQuery("Image").in("id", imageIds).findObjects(Image.class).readAll())
         .update();
   }
 
@@ -175,7 +175,7 @@ public class MauritiusService {
     mongoDao.createQuery("MauritiusHotel").eq("hotelPictures.id", imageId).modify().set(
         "hotelPictures.$." + property, value).update();
     // 更新原始图片的信息
-    mongoDao.createQuery("Image").eq("_id", imageId).modify().set(property, value).update();
+    mongoDao.createQuery("Image").eq("id", imageId).modify().set(property, value).update();
   }
 
   public void deleteHotelPicture(String imageId) {
@@ -183,14 +183,14 @@ public class MauritiusService {
     image.put("id", imageId);
     mongoDao.createQuery("MauritiusHotel").eq("hotelPictures.id", imageId).modify()
         .pull("hotelPictures", image).update();
-    mongoDao.createQuery("Image").eq("_id", imageId).modify().delete();
+    mongoDao.createQuery("Image").eq("id", imageId).modify().delete();
   }
 
   public void addRoomPicture(String roomId, List<String> imageIds) {
     // 保存图片
     mongoDao.createQuery("MauritiusHotel").eq("rooms.id", roomId).modify().pushAll(
         "rooms.$.pictures",
-        mongoDao.createQuery("Image").in("_id", imageIds).findObjects(Image.class).readAll())
+        mongoDao.createQuery("Image").in("id", imageIds).findObjects(Image.class).readAll())
         .update();
   }
 
@@ -198,7 +198,7 @@ public class MauritiusService {
     mongoDao.createQuery("MauritiusHotel").eq("rooms.pictures.id", imageId).modify().set(
         "rooms.$.pictures." + index + "." + property, value).update();
     // 更新原始图片的信息
-    mongoDao.createQuery("Image").eq("_id", imageId).modify().set(property, value).update();
+    mongoDao.createQuery("Image").eq("id", imageId).modify().set(property, value).update();
   }
 
   public void deleteRoomPicture(String imageId) {
@@ -206,14 +206,14 @@ public class MauritiusService {
     image.put("id", imageId);
     mongoDao.createQuery("MauritiusHotel").eq("rooms.pictures.id", imageId).modify()
         .pull("rooms.$.pictures", image).update();
-    mongoDao.createQuery("Image").eq("_id", imageId).modify().delete();
+    mongoDao.createQuery("Image").eq("id", imageId).modify().delete();
   }
 
   public void addDiningPicture(String diningId, List<String> imageIds) {
     // 保存图片
     mongoDao.createQuery("MauritiusHotel").eq("dinings.id", diningId).modify().pushAll(
         "dinings.$.pictures",
-        mongoDao.createQuery("Image").in("_id", imageIds).findObjects(Image.class).readAll())
+        mongoDao.createQuery("Image").in("id", imageIds).findObjects(Image.class).readAll())
         .update();
   }
 
@@ -221,7 +221,7 @@ public class MauritiusService {
     mongoDao.createQuery("MauritiusHotel").eq("dinings.pictures.id", imageId).modify().set(
         "dinings.$.pictures." + index + "." + property, value).update();
     // 更新原始图片的信息
-    mongoDao.createQuery("Image").eq("_id", imageId).modify().set(property, value).update();
+    mongoDao.createQuery("Image").eq("id", imageId).modify().set(property, value).update();
   }
 
   public void deleteDiningPicture(String imageId) {
@@ -229,6 +229,6 @@ public class MauritiusService {
     image.put("id", imageId);
     mongoDao.createQuery("MauritiusHotel").eq("dinings.pictures.id", imageId).modify()
         .pull("dinings.$.pictures", image).update();
-    mongoDao.createQuery("Image").eq("_id", imageId).modify().delete();
+    mongoDao.createQuery("Image").eq("id", imageId).modify().delete();
   }
 }
