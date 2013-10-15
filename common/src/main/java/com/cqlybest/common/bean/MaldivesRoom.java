@@ -19,6 +19,8 @@ public class MaldivesRoom {
   private Boolean containPool;// 是否包含泳池
   private String roomFacility;// 房间设施
   private Integer displayOrder;
+  private String tags;
+  private String ad;
 
   private List<Image> pictures = new ArrayList<>();// 房型图片
 
@@ -116,6 +118,22 @@ public class MaldivesRoom {
 
   public void setContainPool(Boolean containPool) {
     this.containPool = containPool;
+  }
+
+  public String getTags() {
+    return tags;
+  }
+
+  public void setTags(String tags) {
+    this.tags = tags;
+  }
+
+  public String getAd() {
+    return ad;
+  }
+
+  public void setAd(String ad) {
+    this.ad = ad;
   }
 
 }

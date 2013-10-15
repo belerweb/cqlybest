@@ -45,6 +45,8 @@
 		<property name="containPool" />
 		<property name="roomFacility" />
 		<property name="displayOrder" />
+		<property name="tags" />
+		<property name="ad" />
 		<property name="pictures" />
 	</object>
 

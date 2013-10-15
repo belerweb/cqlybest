@@ -1,5 +1,7 @@
 package com.cqlybest;
 
+import java.util.UUID;
+
 import javax.servlet.ServletContext;
 
 import org.apache.commons.io.IOUtils;
@@ -12,6 +14,7 @@ import org.springframework.web.context.ServletContextAware;
 
 import com.cqlybest.common.bean.DataDict;
 import com.cqlybest.common.bean.MaldivesIsland;
+import com.cqlybest.common.bean.MaldivesRoom;
 import com.cqlybest.common.bean.Version;
 import com.cqlybest.common.dao.MongoDao;
 import com.cqlybest.common.service.DataDictService;
@@ -30,6 +33,7 @@ public class DataUpgrade implements ServletContextAware {
   private void upgrade() throws Exception {
     Version version = mongoDao.createQuery("Version").findObject(Version.class);
     version = v2ToV3(version);
+    version = v3ToV4(version);
     mongoDao.createQuery("Version").modify().delete();
     mongoDao.createObject("Version", this.version);
   }
@@ -113,6 +117,57 @@ public class DataUpgrade implements ServletContextAware {
       }
     }
     version.setId(3);
+    return version;
+  }
+
+  private Version v3ToV4(Version version) throws Exception {
+    if (version.getId() == 3) {
+      String jsonString =
+          IOUtils.toString(servletContext
+              .getResourceAsStream("/WEB-INF/data/maldives_island_room.js"));
+      JSONObject json = new JSONObject(jsonString);
+      JSONArray data = json.getJSONArray("data");
+      MaldivesIsland island = null;
+      for (int i = 0; i < data.length(); i++) {
+        JSONObject src = data.getJSONObject(i);
+        String islandName = src.getString("island_name");
+
+        if (island != null && !islandName.equals(island.getZhName())) {
+          mongoDao.updateObject("MaldivesIsland", island.getId(), island);
+          island = null;
+        }
+
+        if (island == null) {
+          island =
+              mongoDao.createQuery("MaldivesIsland").eq("zhName", islandName).findObject(
+                  MaldivesIsland.class);
+          if (island == null || !island.getRooms().isEmpty()) {
+            island = null;
+            continue;
+          }
+        }
+
+        MaldivesRoom room = new MaldivesRoom();
+        room.setId(UUID.randomUUID().toString());
+        room.setZhName(src.optString("zhName"));
+        room.setEnName(src.optString("enName"));
+        room.setTags(src.optString("tags"));
+        room.setDescription(src.optString("description"));
+        room.setAd(src.optString("ad"));
+        room.setRequirements(src.optString("required"));
+        room.setRoomFacility("共有\n" + src.optString("public_facility") + "\n\n\n\n私有\n"
+            + src.optString("private_facility"));
+        room.setRoomSize(src.optString("size"));
+        int rooms = src.optInt("rooms");
+        room.setNum(rooms == 0 ? null : rooms);
+        island.getRooms().add(room);
+
+        if (i == data.length() - 1) {
+          mongoDao.updateObject("MaldivesIsland", island.getId(), island);
+        }
+      }
+    }
+    version.setId(4);
     return version;
   }
 
