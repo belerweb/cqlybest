@@ -5,7 +5,7 @@
 	<div class="accordion-group">
 		<div class="accordion-heading" style="position:relative;">
 			<a class="accordion-toggle" data-toggle="collapse" data-parent="#island-dining-accordion" href="#island-dining-accordion-${dining_index}">
-			${dining.zhName!} ${dining.enName}
+			${dining.zhName!} ${dining.enName!}
 			</a>
 			<button data-id="${dining.id}" type="button" class="btn btn-danger btn-mini delete" style="position:absolute;right:30px;top:4px;">删除</button>
 		</div>

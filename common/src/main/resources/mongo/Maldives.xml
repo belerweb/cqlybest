@@ -61,6 +61,7 @@
 		<property name="location" />
 		<property name="reservation" />
 		<property name="displayOrder" />
+		<property name="ad" />
 		<property name="pictures" />
 	</object>
 

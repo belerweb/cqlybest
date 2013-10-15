@@ -10,7 +10,7 @@
      http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.2.xsd">
 
 	<bean id="version" class="com.cqlybest.common.bean.Version">
-		<property name="id" value="4" />
+		<property name="id" value="5" />
 		<property name="name" value="${project.name}" />
 		<property name="version" value="${project.version}" />
 		<property name="time" value="${timestamp}" />

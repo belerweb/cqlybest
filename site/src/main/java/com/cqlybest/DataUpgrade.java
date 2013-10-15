@@ -13,6 +13,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.context.ServletContextAware;
 
 import com.cqlybest.common.bean.DataDict;
+import com.cqlybest.common.bean.MaldivesDining;
 import com.cqlybest.common.bean.MaldivesIsland;
 import com.cqlybest.common.bean.MaldivesRoom;
 import com.cqlybest.common.bean.Version;
@@ -34,6 +35,7 @@ public class DataUpgrade implements ServletContextAware {
     Version version = mongoDao.createQuery("Version").findObject(Version.class);
     version = v2ToV3(version);
     version = v3ToV4(version);
+    version = v4ToV5(version);
     mongoDao.createQuery("Version").modify().delete();
     mongoDao.createObject("Version", this.version);
   }
@@ -168,6 +170,54 @@ public class DataUpgrade implements ServletContextAware {
       }
     }
     version.setId(4);
+    return version;
+  }
+
+  private Version v4ToV5(Version version) throws Exception {
+    if (version.getId() == 4) {
+      String jsonString =
+          IOUtils.toString(servletContext
+              .getResourceAsStream("/WEB-INF/data/maldives_island_dining.js"));
+      JSONObject json = new JSONObject(jsonString);
+      JSONArray data = json.getJSONArray("data");
+      MaldivesIsland island = null;
+      for (int i = 0; i < data.length(); i++) {
+        JSONObject src = data.getJSONObject(i);
+        String islandName = src.getString("island_name");
+
+        if (island != null && !islandName.equals(island.getZhName())) {
+          mongoDao.updateObject("MaldivesIsland", island.getId(), island);
+          island = null;
+        }
+
+        if (island == null) {
+          island =
+              mongoDao.createQuery("MaldivesIsland").eq("zhName", islandName).findObject(
+                  MaldivesIsland.class);
+          if (island == null || !island.getDinings().isEmpty()) {
+            island = null;
+            continue;
+          }
+        }
+
+        MaldivesDining dining = new MaldivesDining();
+        dining.setId(UUID.randomUUID().toString());
+        dining.setZhName(src.optString("enName"));
+        dining.setDescription(src.optString("description"));
+        dining.setAd(src.optString("ad"));
+        dining.setStyle(src.optString("style"));
+        dining.setLocation(src.optString("location"));
+        dining.setFood(src.optString("food"));
+        String reservation = src.optString("reservation");
+        dining.setReservation(reservation == null ? null : !reservation.equals("否"));
+        island.getDinings().add(dining);
+
+        if (i == data.length() - 1) {
+          mongoDao.updateObject("MaldivesIsland", island.getId(), island);
+        }
+      }
+    }
+    version.setId(5);
     return version;
   }
 

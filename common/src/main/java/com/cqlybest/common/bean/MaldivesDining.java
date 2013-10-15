@@ -19,6 +19,7 @@ public class MaldivesDining {
   private String location;// 就餐地点
   private Boolean reservation;// 是否预约
   private Integer displayOrder;
+  private String ad;
 
   private List<Image> pictures = new ArrayList<>();// 图片
 
@@ -108,6 +109,14 @@ public class MaldivesDining {
 
   public void setDisplayOrder(Integer displayOrder) {
     this.displayOrder = displayOrder;
+  }
+
+  public String getAd() {
+    return ad;
+  }
+
+  public void setAd(String ad) {
+    this.ad = ad;
   }
 
 }
