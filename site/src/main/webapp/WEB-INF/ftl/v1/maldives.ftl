@@ -19,5 +19,5 @@
 }] />
 <#include "sidebar.ftl">
 <div id="main-content" class="clearfix" data-init="${ContextPath}/maldives/list.do">
-</div><!--/#main-content-->
+</div>
 <#include "footer.ftl">

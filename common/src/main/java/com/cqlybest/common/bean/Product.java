@@ -8,6 +8,7 @@ public class Product {
 
   public static final String TYPE_MALDIVES = "maldives";// 马尔代夫
   public static final String TYPE_MAURITIUS = "mauritius";// 毛里求斯
+  public static final String TYPE_SEYCHELLES = "mauritius";// 塞舌尔
 
   private String id;
   private String name;// 产品名称
