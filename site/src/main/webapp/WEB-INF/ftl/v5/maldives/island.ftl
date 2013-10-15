@@ -141,7 +141,7 @@
 						<#assign rand = springx.rand(0,island.hotelPictures?size-1) />
 						<#list island.hotelPictures as image>
 						<img alt="${image.title!}" src="http://${ImageServer}/${image.qiniuKey}?imageView/1/w/343/h/280"
-							 data-href="http://${ImageServer}/${image.qiniuKey}"
+							 data-href="http://${ImageServer}/${image.qiniuKey}-gallery"
 							 class="gallery-item <#if image_index!=rand>hide</#if>" style="width:100%;">
 						</#list>
 						</#if>
@@ -176,7 +176,7 @@
 								</#if>
 								<li class="span6">
 									<div class="thumbnail-style">
-										<a href="http://${ImageServer}/${image.qiniuKey}" class="gallery-item fancybox-button zoomer">
+										<a href="http://${ImageServer}/${image.qiniuKey}-gallery" class="gallery-item fancybox-button zoomer">
 											<div class="overlay-zoom">
 												<img src="http://${ImageServer}/${image.qiniuKey}?imageView/1/w/696/h/400">
 												<div class="zoom-icon"></div>
@@ -219,7 +219,7 @@
 								</#if>
 								<li class="span6">
 									<div class="thumbnail-style">
-										<a href="http://${ImageServer}/${image.qiniuKey}" class="gallery-item fancybox-button zoomer">
+										<a href="http://${ImageServer}/${image.qiniuKey}-gallery" class="gallery-item fancybox-button zoomer">
 											<div class="overlay-zoom">
 												<img src="http://${ImageServer}/${image.qiniuKey}?imageView/1/w/696/h/400">
 												<div class="zoom-icon"></div>

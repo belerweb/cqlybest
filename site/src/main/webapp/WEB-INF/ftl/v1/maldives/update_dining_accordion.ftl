@@ -91,7 +91,7 @@
 									<#list dining.pictures as image>
 										<li class="span3">
 											<div class="thumbnail">
-												<img src="http://${ImageServer}/${image.qiniuKey}">
+												<img src="http://${ImageServer}/${image.qiniuKey}-gallery">
 												<div class="caption">
 													<p><a href="#" class="editable" data-pk="${image_index}|${image.id}" data-name="title" data-type="text" data-value="${image.title!}" data-url="${ContextPath}/maldives/dining/picture/update.do"></a></p>
 													<p><a href="#" class="editable" data-pk="${image_index}|${image.id}" data-name="description" data-type="textarea" data-url="${ContextPath}/maldives/dining/picture/update.do">${image.description!?html}</a></p>
