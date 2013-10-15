@@ -43,20 +43,23 @@
 			<a id="nextslide" class="load-item"></a>
 			<div class="row-fluid" style="background: transparent;">
 				<div class="span6 offset1 intro">
-					<h2>${island.zhName!}</h2>
-					<h3>${island.enName!}</h3>
-					<p>${island.description!}</p>
-					<ul class="tags">
-						<#if island.level?has_content><li class="bg0">${island.level}</li></#if>
-						<#if island.way?has_content><li class="bg1">${island.way}</li></#if>
-						<#if island.area?has_content><li class="bg2">${island.area}</li></#if>
-						<#if island.snorkeling?has_content><li class="bg3">${island.snorkeling}级浮潜</li></#if>
-						<#if island.tags?has_content>
-						<#list island.tags?split(',') as tag>
-						<li class="bg${springx.rand(0,6)}">${tag}</li>
-						</#list>
-						</#if>
-					</ul>
+					<div class="inner">
+						<h2>${island.zhName!}</h2>
+						<h3>${island.enName!}</h3>
+						<p>${island.description!}</p>
+						<ul class="tags">
+							<#if island.level?has_content><li class="bg0">${island.level}</li></#if>
+							<#if island.way?has_content><li class="bg1">${island.way}</li></#if>
+							<#if island.area?has_content><li class="bg2">${island.area}</li></#if>
+							<#if island.snorkeling?has_content><li class="bg3">${island.snorkeling}级浮潜</li></#if>
+							<#if island.tags?has_content>
+							<#list island.tags?split(',') as tag>
+							<li class="bg${springx.rand(0,6)}">${tag}</li>
+							</#list>
+							</#if>
+						</ul>
+						<div class="clearfix"> </div>
+					</div>
 				</div>
 			</div>
 		</section>
@@ -248,6 +251,11 @@
 	<script type="text/javascript">
 		window.PageContext = {
 			init: function(){
+				var oHeight = $('#section-poster').height();
+				$('#section-poster').height(Math.max(oHeight, $(window).height()));
+				$(window).on('resize', function(){
+					$('#section-poster').height(Math.max(oHeight, $(window).height()));
+				});
 				$('body').append('<div id="supersized-loader"></div><ul id="supersized"></ul>');
 				$.supersized({
 					slide_interval: 3000,

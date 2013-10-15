@@ -1,10 +1,17 @@
+#sidebar {
+	background-color: rgba(11,166,255,0.5);
+}
 #section-poster {
 	background: transparent;
 }
 
 #section-poster .intro {
-	margin-top: 300px;
+	margin-top: 150px;
 	color: #FFF;
+	background-color: rgba(0,175,241,0.4);
+}
+#section-poster .intro .inner{
+	padding:10px;
 }
 
 #section-poster .tags {

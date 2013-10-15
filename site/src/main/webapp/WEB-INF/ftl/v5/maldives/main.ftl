@@ -58,9 +58,6 @@
 		fixCopyright: false,
 		activeNav: 'maldives',
 		init: function(){
-			$('.fullwidthabnner').revolution({
-				fullWidth:'on'
-			});
 		}
 	};
 </script>
