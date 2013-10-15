@@ -48,26 +48,26 @@ public class DataUpgrade implements ServletContextAware {
                 MaldivesIsland.class);
         if (island != null) {
           if (StringUtils.isBlank(island.getHotelTel())) {
-            island.setHotelTel(src.getString("tel"));
+            island.setHotelTel(src.optString("tel"));
           }
           if (island.getHotelLevel() == null) {
             island.setHotelLevel(src.getInt("hotel_level"));
           }
           if (StringUtils.isBlank(island.getWay())) {
-            island.setWay(src.getString("way"));
+            island.setWay(src.optString("way"));
           }
           if (island.getHotelChinese() == null) {
-            String chinese = src.getString("chinese");
+            String chinese = src.optString("chinese");
             island.setHotelChinese(chinese == null ? null : chinese.equals("有"));
           }
           if (StringUtils.isBlank(island.getArea())) {
-            island.setArea(src.getString("island_size"));
+            island.setArea(src.optString("island_size"));
           }
           if (StringUtils.isBlank(island.getHotelStart())) {
-            island.setHotelStart(src.getString("open"));
+            island.setHotelStart(src.optString("open"));
           }
           if (StringUtils.isBlank(island.getDescription())) {
-            island.setDescription(src.getString("description"));
+            island.setDescription(src.optString("description"));
           }
           if (island.getHotelRoomNum() == null) {
             int rooms = src.optInt("rooms", 0);
@@ -76,7 +76,7 @@ public class DataUpgrade implements ServletContextAware {
             }
           }
           if (StringUtils.isBlank(island.getTags())) {
-            String tags = src.getString("tags");
+            String tags = src.optString("tags");
             if (StringUtils.isNotBlank(tags)) {
               for (String tag : tags.split(",")) {
                 if (mongoDao.createQuery("DataDict").eq("name", tag).findObject(DataDict.class) == null) {
@@ -87,25 +87,25 @@ public class DataUpgrade implements ServletContextAware {
             }
           }
           if (StringUtils.isBlank(island.getPrice())) {
-            island.setPrice(src.getString("m_price"));
+            island.setPrice(src.optString("m_price"));
           }
           if (StringUtils.isBlank(island.getHotelFax())) {
-            island.setHotelFax(src.getString("fax"));
+            island.setHotelFax(src.optString("fax"));
           }
           if (StringUtils.isBlank(island.getLevel())) {
-            island.setLevel(src.getString("island_level"));
+            island.setLevel(src.optString("island_level"));
           }
           if (StringUtils.isBlank(island.getHotelDescription())) {
             island.setHotelDescription(src.getString("hotel_description"));
           }
           if (StringUtils.isBlank(island.getAd())) {
-            island.setAd(src.getString("ad"));
+            island.setAd(src.optString("ad"));
           }
           if (StringUtils.isBlank(island.getHotelName())) {
-            island.setHotelName(src.getString("hotel"));
+            island.setHotelName(src.optString("hotel"));
           }
           if (StringUtils.isBlank(island.getByName())) {
-            island.setByName(src.getString("cname"));
+            island.setByName(src.optString("cname"));
           }
 
           mongoDao.updateObject("MaldivesIsland", island.getId(), island);
