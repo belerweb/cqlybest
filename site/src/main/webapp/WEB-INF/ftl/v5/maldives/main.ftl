@@ -7,30 +7,30 @@
 	<div class="row-fluid">
 		<div class="span9">
 			<div class="headline"><h3>全部海岛</h3></div>
-			<div class="row-fluid islands">
+			<div class="row-fluid items">
 				<ul class="thumbnails">
 				<#assign index=0>
-				<#list result.items as island>
-					<#if island.hotelPictures?has_content>
+				<#list result.items as item>
+					<#if item.hotelPictures?has_content>
 					<#if index%3==0>
 				</ul>
 			</div>
-			<div class="row-fluid islands">
+			<div class="row-fluid items">
 				<ul class="thumbnails">
 					</#if>
 					<li class="span4">
 						<div class="thumbnail-style thumbnail-kenburn border">
-							<h3><a <@mdlink island 'zhName' /> class="hover-effect">${island.zhName!}</a></h3>
-							<h4><a <@mdlink island 'enName' /> class="hover-effect">${island.enName!}</a></h4>
+							<h3><a <@mdlink item 'zhName' /> class="hover-effect">${item.zhName!}</a></h3>
+							<h4><a <@mdlink item 'enName' /> class="hover-effect">${item.enName!}</a></h4>
 							<div class="thumbnail-img">
 								<div class="overflow-hidden">
-									<a <@mdlink island 'id' /> ><img <@mdalt island /> src="<@randImage island.hotelPictures 290 150 />"></a>
+									<a <@mdlink item 'id' /> ><img alt="<@mdalt item />" src="<@randImage item.hotelPictures 290 150 />"></a>
 								</div>
-								<a <@mdlink island 'enName' /> class="btn-more hover-effect">查看详细 +</a>
+								<a <@mdlink item 'enName' /> class="btn-more hover-effect">查看详细 +</a>
 							</div>
-							<#if island.tags?has_content>
+							<#if item.tags?has_content>
 							<ul class="tags">
-							<#list island.tags?split(',') as tag>
+							<#list item.tags?split(',') as tag>
 								<li class="bg${tag_index%7}">${tag}</li>
 							</#list>
 							</ul>
