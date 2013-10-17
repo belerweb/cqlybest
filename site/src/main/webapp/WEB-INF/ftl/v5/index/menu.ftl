@@ -45,7 +45,7 @@
 							<a href="${ContextPath}/maldives.html" class="dropdown-toggle">马尔代夫</a>
 						</li>
 						<li data-active-nav="mauritius">
-							<a href="${ContextPath}/soon.html" class="dropdown-toggle">毛里求斯</a>
+							<a href="${ContextPath}/mauritius.html" class="dropdown-toggle">毛里求斯</a>
 						</li>
 						<li data-active-nav="seychelles">
 							<a href="${ContextPath}/soon.html" class="dropdown-toggle">塞舌尔</a>
