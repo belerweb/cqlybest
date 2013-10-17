@@ -32,7 +32,7 @@
 				<div class="carousel-inner">
 					<#list hotel.pictures as image>
 					<div class="<#if image_index==0>active</#if> item">
-						<img src="http://${ImageServer}/${image.qiniuKey}">
+						<img src="http://${ImageServer}/${image.qiniuKey}-carousel">
 					</div>
 					</#list>
 				</div>
