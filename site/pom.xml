@@ -73,6 +73,7 @@
 								<cssSourceFile>bootstrap.css</cssSourceFile>
 								<cssSourceFile>font-awesome.css</cssSourceFile>
 								<cssSourceFile>slider.css</cssSourceFile>
+								<cssSourceFile>bootstrap-image-gallery.css</cssSourceFile>
 								<cssSourceFile>application2.css</cssSourceFile>
 							</cssSourceFiles>
 							<jsFinalFile>script2.js</jsFinalFile>
@@ -86,6 +87,8 @@
 								<jsSourceFile>supersized.js</jsSourceFile>
 								<jsSourceFile>supersized.shutter.js</jsSourceFile>
 								<jsSourceFile>slider.js</jsSourceFile>
+								<jsSourceFile>load-image.js</jsSourceFile>
+								<jsSourceFile>bootstrap-image-gallery.js</jsSourceFile>
 								<jsSourceFile>jquery.form.js</jsSourceFile>
 								<jsSourceFile>application.js</jsSourceFile>
 							</jsSourceFiles>

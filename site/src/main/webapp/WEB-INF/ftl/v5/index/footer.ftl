@@ -7,6 +7,8 @@
 	<script type="text/javascript" src="${ContextPath}/assets/v5/js/jquery.easing.js?v=${version.time}"></script>
 	<script type="text/javascript" src="${ContextPath}/assets/v5/js/supersized.js?v=${version.time}"></script>
 	<script type="text/javascript" src="${ContextPath}/assets/v5/js/supersized.shutter.js?v=${version.time}"></script>
+	<script type="text/javascript" src="${ContextPath}/assets/v5/js/load-image.js?v=${version.time}"></script>
+	<script type="text/javascript" src="${ContextPath}/assets/v5/js/bootstrap-image-gallery.js?v=${version.time}"></script>
 	<script type="text/javascript" src="${ContextPath}/assets/v5/js/slider.js?v=${version.time}"></script>
 	<script type="text/javascript" src="${ContextPath}/assets/v5/js/jquery.form.js?v=${version.time}"></script>
 	<script type="text/javascript" src="${ContextPath}/assets/v5/js/application.js?v=${version.time}"></script>

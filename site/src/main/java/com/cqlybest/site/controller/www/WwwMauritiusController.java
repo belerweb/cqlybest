@@ -48,19 +48,19 @@ public class WwwMauritiusController extends ControllerHelper {
   public Object mauritius(@PathVariable String id, HttpServletRequest request, Model model) {
     String host = request.getServerName();
     if (host.startsWith("m.")) {
-      List<DocumentCriterion> conditions = new ArrayList<>();
-      QueryGroup queryGroup =
-          new QueryGroup(Arrays.asList(new Query[] {Query.start().eq("_id", id),
-              Query.start().eq("zhName", id), Query.start().eq("enName", id)}));
-      conditions.add(new GroupedQueryCriterion(Group.OR, queryGroup));
-      MauritiusHotel hotel = mauritiusService.queryHotel(conditions);
-      if (hotel == null) {
-        return new ResponseEntity<Object>(HttpStatus.NOT_FOUND);
-      }
-      model.addAttribute("hotel", hotel);
-      model.addAttribute("Settings", settingsService.getSettings());
-      model.addAttribute("Links", friendlyLinkService.queryLink(0, Integer.MAX_VALUE));
-      return "/v3/mauritius_hotel";
+      // List<DocumentCriterion> conditions = new ArrayList<>();
+      // QueryGroup queryGroup =
+      // new QueryGroup(Arrays.asList(new Query[] {Query.start().eq("_id", id),
+      // Query.start().eq("zhName", id), Query.start().eq("enName", id)}));
+      // conditions.add(new GroupedQueryCriterion(Group.OR, queryGroup));
+      // MauritiusHotel hotel = mauritiusService.queryHotel(conditions);
+      // if (hotel == null) {
+      // return new ResponseEntity<Object>(HttpStatus.NOT_FOUND);
+      // }
+      // model.addAttribute("hotel", hotel);
+      // model.addAttribute("Settings", settingsService.getSettings());
+      // model.addAttribute("Links", friendlyLinkService.queryLink(0, Integer.MAX_VALUE));
+      // return "/v3/mauritius_hotel";
     }
 
     List<DocumentCriterion> conditions = new ArrayList<>();
