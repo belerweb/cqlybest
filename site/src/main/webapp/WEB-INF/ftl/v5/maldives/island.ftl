@@ -11,14 +11,11 @@
 			<span class="icon-bar"></span>
 			<span class="icon-bar"></span>
 		</a>
-		<#if (Settings.basic.logo)?has_content>
 		<div id="logo">
 			<a href="/" target="_blank">
-				<#assign image=Settings.basic.logo>
-				<img src="http://${ImageServer}/${image.qiniuKey}" width="150">
+				<img src="${ContextPath}/assets/img/logo.png" width="150">
 			</a>
 		</div>
-		</#if>
 		<#if (Settings.basic.hotline)?has_content>
 		<div id="hotline">
 			<p class="phone">${Settings.basic.hotline}</p>

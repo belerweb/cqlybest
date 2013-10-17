@@ -29,16 +29,6 @@
 							</div>
 						</div>
 						<div class="control-group">
-							<label class="control-label"><a href="#" data-name="basic.logo" data-action="logo">LOGO：</a></label>
-							<div class="controls">
-								<#if (settings.basic.logo)?has_content>
-								<img src="http://${ImageServer}/${settings.basic.logo.qiniuKey}">
-								<#else>
-								<a class="editable editable-empty">未设置</a>
-								</#if>
-							</div>
-						</div>
-						<div class="control-group">
 							<label class="control-label">网站地址：</label>
 							<div class="controls">
 								<a href="#" class="editable" data-name="basic.siteUrl" data-type="text"
@@ -183,7 +173,7 @@
 $('#page-content a.editable[data-type=text]').editable();
 $('#page-content a.editable[data-type=textarea]').editable();
 cqlybest.editableTag('#page-content a.editable[data-name="basic.keywords"]');
-$('a[data-action=logo],a[data-action=watermark]', '#page-content').click(function(e) {
+$('a[data-action=watermark]', '#page-content').click(function(e) {
 	e.stopPropagation();
 	e.preventDefault();
 	var images = cqlybest.uploadImage();

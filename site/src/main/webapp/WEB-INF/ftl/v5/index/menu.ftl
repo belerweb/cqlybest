@@ -20,7 +20,7 @@
 <div class="header">
 	<div class="container-fluid">
 		<div class="logo">
-			<a href="/"><#if (Settings.basic.logo)?has_content><img src="http://${ImageServer}/${Settings.basic.logo.qiniuKey}" height="60" style="height:60px;"><#else>${(Settings.basic.siteName)!}</#if></a>
+			<a href="/"><img src="${ContextPath}/assets/img/logo.png" height="60" style="height:60px;"></a>
 		</div>
 		<div class="navbar pull-left" style="margin-left:40px;">
 			<div class="navbar-inner">

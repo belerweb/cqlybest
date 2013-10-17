@@ -1,11 +1,7 @@
 <#include "/v2/header_top.ftl">
 <div id="top-logo" class="container text-right">
 	<div class="pull-left">
-		<#if (Settings.basic.logo)?has_content>
-		<img src="http://${ImageServer}/${Settings.basic.logo.qiniuKey}">
-		<#else>
-		${(Settings.basic.siteName)!}
-		</#if>
+		<img src="${ContextPath}/assets/img/logo.png">
 	</div>
 	<#if (Settings.basic.hotline)?has_content>
 	<div class="pull-right">
