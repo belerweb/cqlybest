@@ -265,7 +265,7 @@
 					vertical_center:0,
 					slides:[
 						<#list island.pictures as image>
-						<#if image_index gt 0>,</#if>{image : 'http://${ImageServer}/${image.qiniuKey}'}
+						<#if image_index gt 0>,</#if>{image : 'http://${ImageServer}/${image.qiniuKey}-fullgallery'}
 						</#list>
 					]
 				});
