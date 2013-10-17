@@ -4,6 +4,10 @@
 <#assign image = images[springx.rand(0, images?size-1)] />
 http://${ImageServer}/${image.qiniuKey}?imageView/1/w/${width}/h/${height}</#macro>
 
+<#macro randImage images style>
+<#assign image = images[springx.rand(0, images?size-1)] />
+http://${ImageServer}/${image.qiniuKey}-${style}</#macro>
+
 <#macro mdlink item type>
 href="${ContextPath}/maldives/${item[type]!island.id}.html" title="<@mdalt item />" target="_blank"</#macro>
 

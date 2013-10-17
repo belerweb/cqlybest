@@ -24,7 +24,7 @@
 							<h4><a <@mqlink item 'enName' /> class="hover-effect">${item.enName!}</a></h4>
 							<div class="thumbnail-img">
 								<div class="overflow-hidden">
-									<a <@mqlink item 'id' /> ><img alt="<@mqalt item />" src="<@randImage item.hotelPictures 290 150 />"></a>
+									<a <@mqlink item 'id' /> ><img alt="<@mqalt item />" src="<@randImage item.hotelPictures 'thumbnail' />"></a>
 								</div>
 								<a <@mqlink item 'enName' /> class="btn-more hover-effect">查看详细 +</a>
 							</div>

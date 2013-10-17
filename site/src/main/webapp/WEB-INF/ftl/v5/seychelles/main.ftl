@@ -24,7 +24,7 @@
 							<h4><a <@sselink item 'enName' /> class="hover-effect">${item.enName!}</a></h4>
 							<div class="thumbnail-img">
 								<div class="overflow-hidden">
-									<a <@sselink item 'id' /> ><img alt="<@ssealt item />" src="<@randImage item.hotelPictures 290 150 />"></a>
+									<a <@sselink item 'id' /> ><img alt="<@ssealt item />" src="<@randImage item.hotelPictures 'thumbnail' />"></a>
 								</div>
 								<a <@sselink item 'enName' /> class="btn-more hover-effect">查看详细 +</a>
 							</div>
