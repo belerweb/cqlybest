@@ -1,0 +1,17 @@
+.items .thumbnail-style h3 {
+	
+}
+.items .thumbnail-style img {
+	width: 100%;
+}
+
+.items .thumbnail-style h4,.items .thumbnail-style h4 a {
+	color: #AAAAAA;
+	font-size: 12px;
+	margin-top: 0;
+	font-weight: bold;
+}
+
+.items .thumbnail-style a.btn-more {
+	/*background: none repeat scroll 0 0 #87C116;*/
+}

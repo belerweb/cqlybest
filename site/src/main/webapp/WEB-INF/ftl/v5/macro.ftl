@@ -15,3 +15,9 @@ href="${ContextPath}/mauritius/${item[type]!hotel.id}.html" title="<@mqalt item 
 
 <#macro mqalt item>
 ${item.zhName!} ${item.enName!} 毛球 毛求 毛里求斯 毛里球斯 海岛 自由行 海岛自由行 毛求自由行 毛求酒店 毛里求斯自由行 毛里求斯酒店</#macro>
+
+<#macro sselink item type>
+href="${ContextPath}/seychelles/${item[type]!hotel.id}.html" title="<@ssealt item />" target="_blank"</#macro>
+
+<#macro ssealt item>
+${item.zhName!} ${item.enName!} 塞舌尔 海岛 自由行 海岛自由行 塞舌尔自由行 塞舌尔酒店</#macro>

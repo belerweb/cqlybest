@@ -5,7 +5,7 @@
 	<div class="container-fluid">
 		<h1 class="color-green pull-left">${hotel.ad!}</h1>
 		<ul class="pull-right breadcrumb">
-			<li><a href="${ContextPath}/mauritius.html">毛里求斯</a> <span class="divider">/</span></li>
+			<li><a href="${ContextPath}/seychelles.html">塞舌尔</a> <span class="divider">/</span></li>
 			<li class="active">${hotel.zhName!}</li>
 		</ul>
 	</div>
@@ -110,7 +110,7 @@
 <script type="text/javascript">
 	window.PageContext = {
 		fixCopyright: false,
-		activeNav: 'mauritius',
+		activeNav: 'seychelles',
 		init: function(){
 		}
 	};
