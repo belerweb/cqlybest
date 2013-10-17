@@ -11,6 +11,7 @@ import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.cqlybest.common.Constant;
 import com.cqlybest.common.bean.MauritiusDining;
 import com.cqlybest.common.bean.MauritiusHotel;
 import com.cqlybest.common.bean.MauritiusRoom;
@@ -51,6 +52,7 @@ public class MauritiusService {
     DaoQuery query = mongoDao.createQuery("MauritiusHotel");
     result.setTotal(query.countObjects());
 
+    query.addSort("createdTime", Constant.SORT_ASC);
     query.setFirstDocument(result.getStart());
     query.setMaxDocuments(result.getPageSize());
     result.setItems(query.findObjects(MauritiusHotel.class).readAll());
@@ -145,7 +147,7 @@ public class MauritiusService {
   public void addPicture(String hotelId, List<String> imageIds) {
     // 保存图片
     mongoDao.createQuery("MauritiusHotel").eq("_id", hotelId).modify().pushAll("pictures",
-        mongoDao.createQuery("Image").in("id", imageIds).findObjects().toArray());
+        mongoDao.createQuery("Image").in("id", imageIds).findObjects().toArray()).update();
   }
 
   public void updatePicture(String imageId, String property, String value) {
