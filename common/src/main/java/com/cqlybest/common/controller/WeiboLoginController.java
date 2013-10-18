@@ -45,7 +45,7 @@ public class WeiboLoginController {
 
   @RequestMapping("/connector/weibo_login")
   public String weiboLogin(HttpServletRequest request) {
-    String redirect = "redirect:/index.html";
+    String redirect = "redirect:/redirect";
     try {
       String redirectURI =
           request.getScheme() + "://" + request.getServerName() + request.getContextPath()
@@ -67,7 +67,7 @@ public class WeiboLoginController {
   @RequestMapping("/connector/weibo")
   public String weibo(@RequestParam String state, @RequestParam String code,
       HttpServletRequest request) {
-    String redirect = "redirect:/index.html";
+    String redirect = "redirect:/redirect";
     try {
       AccessToken accessToken = WEIBO_OAUTH.getAccessTokenByCode(code);
       WeiboUser weiboUser = new WeiboUser();
