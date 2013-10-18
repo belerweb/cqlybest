@@ -32,7 +32,7 @@ public class QQLoginController {
 
   @RequestMapping("/connector/qq_login")
   public String qqLogin(HttpServletRequest request) {
-    String redirect = "redirect:/index.html";
+    String redirect = "redirect:/redirect";
     try {
       String redirectURI =
           request.getScheme() + "://" + request.getServerName() + request.getContextPath()
@@ -48,7 +48,7 @@ public class QQLoginController {
 
   @RequestMapping("/connector/qq")
   public String qq(HttpServletRequest request) {
-    String redirect = "redirect:/index.html";
+    String redirect = "redirect:/redirect";
     try {
       AccessToken accessToken = OAUTH.getAccessTokenByRequest(request);
       String id = new OpenID(accessToken.getAccessToken()).getUserOpenID();
