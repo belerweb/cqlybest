@@ -140,20 +140,21 @@ jQuery('input[placeholder], textarea[placeholder]').placeholder();
 
 $.fn.editable.defaults.emptytext = '未设置';
 $.fn.editable.defaults.send = 'always';
+$.fn.editable.defaults.mode = 'inline';
 
 window.cqlybest = {
 	fixed : function(fixed) {
-		if (fixed) {
-			// fixed top
-			$(".navbar").addClass("navbar-fixed-top");
-			$(document.body).addClass("navbar-fixed");
-			$("#sidebar").addClass("fixed"); // fixed sidebar
-		} else {
-			// unfixed top
-			$(".navbar").removeClass("navbar-fixed-top");
-			$(document.body).removeClass("navbar-fixed");
-			$("#sidebar").removeClass("fixed"); // unfixed sidebar
-		}
+		// if (fixed) {
+		// // fixed top
+		// $(".navbar").addClass("navbar-fixed-top");
+		// $(document.body).addClass("navbar-fixed");
+		// $("#sidebar").addClass("fixed"); // fixed sidebar
+		// } else {
+		// // unfixed top
+		// $(".navbar").removeClass("navbar-fixed-top");
+		// $(document.body).removeClass("navbar-fixed");
+		// $("#sidebar").removeClass("fixed"); // unfixed sidebar
+		// }
 	},
 	go : function(el, url) {
 		var history = $(el).data('history') || [];
@@ -182,49 +183,64 @@ window.cqlybest = {
 		}
 	},
 	editableTag : function(el) {
-		$(el).each(function(i, obj) {
-			var type = $(obj).attr('data-dict');
-			$(obj).editable({
-				inputclass : 'input-large',
-				select2 : {
-					multiple : true,
-					ajax : {
-						url : window.ContextPath + '/datadict/ajax.do?type=' + type,
-						data : function(term, page) {
-							return {q : term};
-						},
-						results : function(response) {
-							var result = {results:[]};
-							$.each(response.items, function(i, obj) {
-								result.results.push({id:obj.name,text:obj.name});
-							});
-							return result;
-						}
-					},
-					formatNoMatches : function(term) {
-						setTimeout(function() {
-							if ($.trim(term).length==0) {
-								return;
-							}
-							$('.select2-no-results button').off('click').on('click', function() {
-								var btn = $(this);
-								$.post(window.ContextPath + '/datadict/add.do', {
-									type : type,
-									name : term
-								}, function() {
-									btn.prev().text('保存成功，重新选择即可');
-									btn.remove();
-								});
-							});
-						}, 1000);
-						return '<span class="clearfix">没有找到匹配项</span><button type="button" class="btn btn-primary btn-mini" style="width:100%;">保存 [' + term + ']</button>';
-					},
-					initSelection : function(el, callback) {
-						callback(cqlybest.v2ss(el.val() || $(el).data('value')));
-					}
-				}
-			});
-		});
+		$(el)
+				.each(
+						function(i, obj) {
+							var type = $(obj).attr('data-dict');
+							$(obj)
+									.editable(
+											{
+												inputclass : 'input-large',
+												select2 : {
+													multiple : true,
+													ajax : {
+														url : window.ContextPath + '/datadict/ajax.do?type=' + type,
+														data : function(term, page) {
+															return {
+																q : term
+															};
+														},
+														results : function(response) {
+															var result = {
+																results : []
+															};
+															$.each(response.items, function(i, obj) {
+																result.results.push({
+																	id : obj.name,
+																	text : obj.name
+																});
+															});
+															return result;
+														}
+													},
+													formatNoMatches : function(term) {
+														setTimeout(function() {
+															if ($.trim(term).length == 0) {
+																return;
+															}
+															$('.select2-no-results button').off('click').on(
+																	'click',
+																	function() {
+																		var btn = $(this);
+																		$.post(window.ContextPath + '/datadict/add.do',
+																				{
+																					type : type,
+																					name : term
+																				}, function() {
+																					btn.prev().text('保存成功，重新选择即可');
+																					btn.remove();
+																				});
+																	});
+														}, 1000);
+														return '<span class="clearfix">没有找到匹配项</span><button type="button" class="btn btn-primary btn-mini" style="width:100%;">保存 ['
+																+ term + ']</button>';
+													},
+													initSelection : function(el, callback) {
+														callback(cqlybest.v2ss(el.val() || $(el).data('value')));
+													}
+												}
+											});
+						});
 	},
 	uploadImage : function() {
 		var winParam = [ 'dialogWidth=650px;dialogHeight=380px' ];

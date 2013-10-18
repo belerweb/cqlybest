@@ -67,7 +67,8 @@
 							<label class="control-label">网页关键词：</label>
 							<div class="controls">
 								<a href="#" class="editable" data-name="basic.keywords" data-type="select2"
-									data-url="${UpdateURL}" data-dict="tag">
+									data-url="${UpdateURL}" data-dict="tag"
+									data-value="<#if (settings.basic.keywords)?has_content>${settings.basic.keywords?join(',')}</#if>">
 									<#if (settings.basic.keywords)?has_content>
 									${settings.basic.keywords?join(',')}
 									</#if>
@@ -121,23 +122,6 @@
 							<div class="controls">
 								<a href="#" class="editable" data-name="basic.statistical" data-type="textarea"
 									data-url="${UpdateURL}">${(settings.basic.statistical)!?html}</a>
-							</div>
-						</div>
-						<div class="control-group">
-							<label class="control-label"><a href="#" data-name="watermark.img" data-action="watermark">水印图片：</a></label>
-							<div class="controls">
-								<#if (settings.watermark.img)?has_content>
-								<img src="http://${ImageServer}/${settings.watermark.img.qiniuKey}">
-								<#else>
-								<a class="editable editable-empty">未设置</a>
-								</#if>
-							</div>
-						</div>
-						<div class="control-group">
-							<label class="control-label">图片水印位置：</label>
-							<div class="controls">
-								<a href="#" class="editable" data-name="watermark.position" data-type="select"
-									data-url="${UpdateURL}" data-value="${(settings.watermark.position)!}"></a>
 							</div>
 						</div>
 					</div>
