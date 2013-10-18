@@ -20,7 +20,6 @@ body {
 }
 
 #sidebar {
-	background-color: #16A085;
 	height: 120%;
 	left: 0;
 	padding: 0;
@@ -262,38 +261,57 @@ body {
 }
 
 .zoomer:hover .overlay-zoom .zoom-icon {
-	opacity: 0.4;
+	-webkit-transform: scale(1);
+	-moz-transform: scale(1);
+	-o-transform: scale(1);
+	-ms-transform: scale(1);
 	transform: scale(1);
+	opacity: 0.4;
+	filter: alpha(opacity = 50);
 }
 
 .overlay-zoom {
 	cursor: pointer;
+	width: 100%;
 	height: 100%;
 	position: relative;
-	transition: all 0.1s ease-in-out 0s;
-	width: 100%;
+	-webkit-transition: all 0.1s ease-in-out;
+	-moz-transition: all 0.1s ease-in-out;
+	-o-transition: all 0.1s ease-in-out;
+	-ms-transition: all 0.1s ease-in-out;
+	transition: all 0.1s ease-in-out;
 	z-index: 90;
 }
 
 .overlay-zoom .zoom-icon {
-	background-color: #000000;
 	background-image: url("../img/overlay-icon.png");
-	background-position: 50% center;
+	background-color: #000;
 	background-repeat: no-repeat;
+	background-position: 50%;
+	position: absolute;
+	width: inherit;
 	height: inherit;
 	opacity: 0;
-	position: absolute;
-	top: 0;
-	transform: scale(0);
-	transition: all 0.4s ease-in-out 0s;
-	width: inherit;
 	z-index: 100;
+	filter: alpha(opacity = 0);
+	top: 0;
+	-webkit-transition: all 0.4s ease-in-out;
+	-moz-transition: all 0.4s ease-in-out;
+	-o-transition: all 0.4s ease-in-out;
+	-ms-transition: all 0.4s ease-in-out;
+	transition: all 0.4s ease-in-out;
+	-webkit-transform: scale(0);
+	-moz-transform: scale(0);
+	-o-transform: scale(0);
+	-ms-transform: scale(0);
+	transform: scale(0);
+	-webkit-backface-visibility: hidden;
 }
 
 .ie7 .overlay-zoom .zoom-icon {
-	clear: both;
-	height: 100%;
-	left: 0;
-	top: 0;
 	width: 100%;
+	height: 100%;
+	clear: both;
+	top: 0px;
+	left: 0px;
 }

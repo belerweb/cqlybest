@@ -1,6 +1,9 @@
 #sidebar {
 	background-color: rgba(11,166,255,0.5);
 }
+.ie7 #sidebar, .ie8 #sidebar {
+	filter: "progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr='#660BA6FF', endColorstr='#660BA6FF')";
+}
 #section-poster {
 	background: transparent;
 }

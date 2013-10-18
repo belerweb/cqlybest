@@ -1,10 +1,10 @@
 <#import "/springx.ftl" as springx>
 <#include "../macro.ftl">
 <!DOCTYPE html>
-<!--[if IE 7]> <html lang="zh" class="ie7" xmlns:wb="http://open.weibo.com/wb"> <![endif]-->  
-<!--[if IE 8]> <html lang="zh" class="ie8" xmlns:wb="http://open.weibo.com/wb"> <![endif]-->  
-<!--[if IE 9]> <html lang="zh" class="ie9" xmlns:wb="http://open.weibo.com/wb"> <![endif]-->  
-<!--[if !IE]><!--> <html lang="zh" xmlns:wb="http://open.weibo.com/wb"> <!--<![endif]-->  
+<!--[if IE 7]><html lang="zh" class="ie7" xmlns:wb="http://open.weibo.com/wb"><![endif]-->
+<!--[if IE 8]><html lang="zh" class="ie8" xmlns:wb="http://open.weibo.com/wb"><![endif]-->
+<!--[if IE 9]><html lang="zh" class="ie9" xmlns:wb="http://open.weibo.com/wb"><![endif]-->
+<!--[if !IE]><html lang="zh"><![endif]-->
 <head>
 	<meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
 	<title>${Title!(Settings.basic.siteName)!}</title>
@@ -22,7 +22,9 @@
 	<#else>
 	<link href="${ContextPath}/assets/v5/css/style2.min.css?v=${version.time}" rel="stylesheet" media="screen">
 	</#if>
-
+	<!--[if lt IE 9]>
+		<script src="${ContextPath}/assets/v5/js/html5shiv.js?v=${version.time}"></script>
+	<![endif]-->
 	<script type="text/javascript">
 		var ContextPath = '${ContextPath}';
 	</script>

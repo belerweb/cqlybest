@@ -1,7 +1,10 @@
 <#import "/springx.ftl" as springx>
 <#include "macro.ftl">
 <!DOCTYPE HTML>
-<html>
+<!--[if IE 7]><html lang="zh" class="ie7"><![endif]-->
+<!--[if IE 8]><html lang="zh" class="ie8"><![endif]-->
+<!--[if IE 9]><html lang="zh" class="ie9"><![endif]-->
+<!--[if !IE]><html lang="zh"><![endif]-->
 	<head>
 		<meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
 		<title>${Title!(Settings.basic.siteName)!}</title>
