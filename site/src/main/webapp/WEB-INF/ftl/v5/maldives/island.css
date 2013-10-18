@@ -2,7 +2,7 @@
 	background-color: rgba(11,166,255,0.5);
 }
 .ie7 #sidebar, .ie8 #sidebar {
-	filter: "progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr='#660BA6FF', endColorstr='#660BA6FF')";
+	filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr='#660BA6FF', endColorstr='#660BA6FF');
 }
 #section-poster {
 	background: transparent;
@@ -14,7 +14,7 @@
 	background-color: rgba(0,175,241,0.4);
 }
 .ie7 #section-poster .intro, .ie8 #section-poster .intro {
-	filter: "progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr='#6600AFF1', endColorstr='#6600AFF1')";
+	filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr='#6600AFF1', endColorstr='#6600AFF1');
 }
 #section-poster .intro .inner{
 	padding:10px;
