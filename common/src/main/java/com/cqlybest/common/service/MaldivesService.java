@@ -51,8 +51,18 @@ public class MaldivesService {
   }
 
   public QueryResult<MaldivesIsland> queryIsland(int page, int pageSize) {
+    return queryIsland(StringUtils.EMPTY, page, pageSize);
+  }
+
+  public QueryResult<MaldivesIsland> queryIsland(String keyword, int page, int pageSize) {
     QueryResult<MaldivesIsland> result = new QueryResult<>(page, pageSize);
     DaoQuery query = mongoDao.createQuery("MaldivesIsland");
+    keyword = StringUtils.trim(keyword);
+    if (StringUtils.isNotBlank(keyword)) {
+      String pattern = ".*" + keyword + ".*";
+      query.or(Query.start().regex("zhName", pattern), Query.start().regex("enName", pattern),
+          Query.start().regex("byName", pattern));
+    }
     result.setTotal(query.countObjects());
 
     query.addSort("createdTime", Constant.SORT_ASC);

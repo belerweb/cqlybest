@@ -4,6 +4,21 @@
 		<h3 class="header smaller lighter blue">马尔代夫海岛/酒店
 			<button type="button" class="btn btn-mini btn-primary pull-right" data-action="add">增加新岛</button>
 		</h3>
+	</div>
+	<div class="row-fluid form-horizontal" data-form="search">
+		<div class="control-group">
+			<label class="control-label">关键词：</label>
+			<div class="controls">
+				<input name="keyword" type="text" value="${keyword!?trim}" placeholder="名称/别名">
+			</div>
+		</div>
+		<div class="form-actions">
+			<button type="button" class="btn btn-info" data-action="search">
+				<i class="icon-ok bigger-110"></i> 搜索
+			</button>
+		</div>
+	</div>
+	<div class="row-fluid">
 		<table class="table table-striped table-bordered table-hover">
 			<thead>
 				<tr>
@@ -68,6 +83,11 @@ $('#page-content button[data-action=add]').click(function(){
 		dialog.find(".btn-primary").click();
 	});
 });
+$('#page-content button[data-action=search]').click(function(){
+	var q = {};
+	q.keyword = $('div[data-form=search] input[name=keyword]').val();
+	cqlybest.go('#main-content', '${ContextPath}/maldives/list.do?' + $.param(q));
+});
 $('#page-content table').dataTable({
 	iDeferLoading: ${result.total},
 	iDisplayStart: ${result.start},
@@ -81,6 +101,7 @@ $('#page-content table').dataTable({
 			p[obj.name] = obj.value;
 		});
 		var q = {};
+		q.keyword = $('div[data-form=search] input[name=keyword]').val();
 		q.page = p.iDisplayStart / p.iDisplayLength;
 		cqlybest.go('#main-content', '${ContextPath}/maldives/list.do?' + $.param(q));
 	}

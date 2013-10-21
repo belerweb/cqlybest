@@ -88,9 +88,11 @@ public class MaldivesController extends ControllerHelper {
    * 海岛列表
    */
   @RequestMapping(value = "/maldives/list.do", method = RequestMethod.GET)
-  public String list(@RequestParam(defaultValue = "0") int page, Model model) {
+  public String list(@RequestParam(defaultValue = "0") int page,
+      @RequestParam(required = false) String keyword, Model model) {
     int pageSize = 10;
-    model.addAttribute("result", maldivesService.queryIsland(page, pageSize));
+    model.addAttribute("keyword", keyword);
+    model.addAttribute("result", maldivesService.queryIsland(keyword, page, pageSize));
     model.addAttribute("settings", settingsService.getSettings());
     return "/v1/maldives/list";
   }
