@@ -1,3 +1,6 @@
+<#assign Title='${hotel.zhName!} ${hotel.enName!} 塞舌尔 塞舌尔 塞舌尔自由行 海岛自由行' />
+<#assign Description=hotel.description!?html />
+<#assign Keywords='${hotel.zhName!} ${hotel.enName!} 塞舌尔 塞舌尔 塞舌尔自由行 海岛自由行' />
 <#include "../index/header.ftl">
 <#include "../index/menu.ftl">
 <div class="breadcrumbs margin-bottom-20">

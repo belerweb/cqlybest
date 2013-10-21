@@ -1,3 +1,6 @@
+<#assign Title='${hotel.zhName!} ${hotel.enName!} 毛球 毛求 毛里球斯 毛里求斯 海岛 自由行' />
+<#assign Description=hotel.description!?html />
+<#assign Keywords='${hotel.zhName!} ${hotel.enName!} 毛球 毛求 毛里球斯 毛里求斯 海岛 自由行' />
 <#include "../index/header.ftl">
 <#include "../index/menu.ftl">
 <div class="breadcrumbs margin-bottom-20">

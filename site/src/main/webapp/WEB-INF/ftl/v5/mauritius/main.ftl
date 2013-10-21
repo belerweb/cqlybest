@@ -1,3 +1,5 @@
+<#assign Title="毛里求斯自由行 ${(Settings.basic.siteName)!}">
+<#assign Description="毛里求斯自由行 ${(Settings.basic.description)!}">
 <#include "../index/header.ftl">
 <#include "../index/menu.ftl">
 <style type="text/css">
