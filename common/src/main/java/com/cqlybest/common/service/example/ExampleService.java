@@ -35,4 +35,16 @@ public class ExampleService {
     mongoDao.createObject("ExampleCompany", company);
   }
 
+  public void updateCompany(Company company) {
+    mongoDao.updateObject("ExampleCompany", company.getId(), company);
+  }
+
+  public Company getCompany(String id) {
+    return mongoDao.findById("ExampleCompany", Company.class, id);
+  }
+
+  public void deleteCompany(String id) {
+    mongoDao.deleteObject("ExampleCompany", id);
+  }
+
 }

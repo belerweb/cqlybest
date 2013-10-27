@@ -38,7 +38,7 @@ public class AdminExampleController extends ControllerHelper {
 
   @RequestMapping(method = RequestMethod.GET, value = "/admin/example/company/add.do")
   public String addCompany(Model model) {
-    return "/v1/example/company/add";
+    return "/v1/example/company/update";
   }
 
   @RequestMapping(method = RequestMethod.POST, value = "/admin/example/company/add.do")
@@ -55,4 +55,36 @@ public class AdminExampleController extends ControllerHelper {
     return ok();
   }
 
+  @RequestMapping(method = RequestMethod.GET, value = "/admin/example/company/update.do")
+  public String updateCompany(@RequestParam String id, Model model) {
+    model.addAttribute("company", exampleService.getCompany(id));
+    return "/v1/example/company/update";
+  }
+
+  @RequestMapping(method = RequestMethod.POST, value = "/admin/example/company/update.do")
+  public Object updateCompany(@RequestParam String id, @RequestParam String name,
+      @RequestParam String area, @RequestParam String description, @RequestParam String logo,
+      Model model) {
+    Company company = exampleService.getCompany(id);
+    if (company == null) {
+      return illegal();
+    }
+
+    company.setName(name);
+    company.setArea(area);
+    company.setDescription(description);
+    if (StringUtils.isNotBlank(logo)) {
+      company.setLogo(imageService.getImage(logo));
+    } else {
+      company.setLogo(null);
+    }
+    exampleService.updateCompany(company);
+    return ok();
+  }
+
+  @RequestMapping(method = RequestMethod.POST, value = "/admin/example/company/delete.do")
+  public Object deleteCompany(@RequestParam String id, Model model) {
+    exampleService.deleteCompany(id);
+    return ok();
+  }
 }

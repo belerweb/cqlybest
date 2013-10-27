@@ -7,30 +7,35 @@
 				<i class="icon-mail-reply"></i> 返回
 			</button>
 		</h3>
+		<#if company?has_content>
+		<form method="POST" action="${ContextPath}/admin/example/company/update.do" class="form-horizontal">
+			<input type="hidden" name="id" value="${company.id}">
+		<#else>
 		<form method="POST" action="${ContextPath}/admin/example/company/add.do" class="form-horizontal">
+		</#if>
 			<div class="control-group">
 				<label class="control-label">企业名称：</label>
 				<div class="controls">
-					<input name="name" type="text" placeholder="" class="input-xlarge">
+					<input name="name" type="text" value="${(company.name)!}" placeholder="" class="input-xlarge">
 				</div>
 			</div>
 			<div class="control-group">
 				<label class="control-label">地区：</label>
 				<div class="controls">
-					<input name="area" type="text" placeholder="" class="input-xlarge">
+					<input name="area" type="text" value="${(company.area)!}" placeholder="" class="input-xlarge">
 				</div>
 			</div>
 			<div class="control-group">
 				<label class="control-label">企业LOGO：</label>
 				<div class="controls">
-					<input name="logo" type="text" readonly="readonly" placeholder="" class="input-xlarge">
+					<input name="logo" type="text" value="${(company.logo.id)!}" readonly="readonly" placeholder="" class="input-xlarge">
 					<button type="button" class="btn btn-info btn-mini" data-action="upload">上传图片</button>
 				</div>
 			</div>
 			<div class="control-group">
 				<label class="control-label">企业信息：</label>
 				<div class="controls">
-					<textarea name="description" class="hide"></textarea>
+					<textarea name="description" class="hide">${(company.description)!}</textarea>
 					<div id="text-editor-toolbar" class="wysiwyg-toolbar wysiwyg-style2 btn-toolbar center" data-target="#editor">
 						<div class="btn-group">
 							<a class="btn btn-small  dropdown-toggle" data-toggle="dropdown" title="Font">
@@ -163,7 +168,7 @@
 						</div>
 						<input type="text" data-edit="inserttext" class="wysiwyg-speech-input" id="voiceBtn" x-webkit-speech="" />
 					</div>
-					<div class="wysiwyg-editor" id="text-editor"></div>
+					<div class="wysiwyg-editor" id="text-editor">${(company.description)!}</div>
 				</div>
 			</div>
 			<div class="form-actions">
@@ -251,11 +256,13 @@ $('#page-content button[data-action=upload]').click(function(){
 });
 
 $('#page-content form').submit(function() {
-	$('textarea[name=description]').val($('#text-editor').html());
+	$('textarea[name=description]').val($('#text-editor').cleanHtml());
 	$(this).ajaxSubmit({
 		success: function(response, status, xhr, form) {
 			cqlybest.success("保存成功，可继续添加。返回列表请点 [返回] 按钮。");
 			$('input[type=text]', form).val('');
+			$('textarea', form).val('');
+			$('#text-editor').html('');
 		},
 		error: function(xhr, status, response, form) {
 			cqlybest.error(eval(xhr.responseText||'操作失败'));
