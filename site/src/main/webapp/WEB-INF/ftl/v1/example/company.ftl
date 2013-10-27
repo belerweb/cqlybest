@@ -3,7 +3,7 @@
 	<div class="row-fluid">
 		<h3 class="header smaller lighter blue">
 			标杆企业
-			<button type="button" class="btn btn-mini btn-primary pull-right" data-action="add">增加标杆企业</button>
+			<button type="button" class="btn btn-mini btn-primary pull-right" data-action="add" onclick="cqlybest.go('#main-content', '${ContextPath}/admin/example/company/add.do');">增加标杆企业</button>
 		</h3>
 		<table id="main-list-table" class="table table-striped table-bordered table-hover">
 			<thead>

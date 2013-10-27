@@ -4,6 +4,7 @@
 	<object class="com.cqlybest.common.bean.example.Company">
 		<property name="id" id="true" />
 		<property name="name" />
+		<property name="area" />
 		<property name="logo" />
 		<property name="description" />
 	</object>

@@ -23,6 +23,8 @@
 		<script src="${ContextPath}/assets/v1/js/cometd.js"></script>
 		<script src="${ContextPath}/assets/v1/js/intro.js"></script>
 		<script src="${ContextPath}/assets/v1/js/bootstrap-tour.js"></script>
+		<script src="${ContextPath}/assets/v1/js/jquery.hotkeys.js"></script>
+		<script src="${ContextPath}/assets/v1/js/bootstrap-wysiwyg.js"></script>
 		<script src="${ContextPath}/assets/v1/js/ace-elements.js"></script>
 		<script src="${ContextPath}/assets/v1/js/ace.js"></script>
 		<script src="${ContextPath}/assets/v1/js/cqlybest.js"></script>
