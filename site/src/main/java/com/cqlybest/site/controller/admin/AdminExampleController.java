@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.cqlybest.common.bean.example.Case;
 import com.cqlybest.common.bean.example.Company;
 import com.cqlybest.common.controller.ControllerHelper;
 import com.cqlybest.common.service.ImageService;
@@ -87,4 +88,65 @@ public class AdminExampleController extends ControllerHelper {
     exampleService.deleteCompany(id);
     return ok();
   }
+
+  /**
+   * 成功案例
+   */
+  @RequestMapping("/admin/example/case.do")
+  public String exampleCase(@RequestParam(defaultValue = "0") int page, Model model) {
+    int pageSize = 10;
+    model.addAttribute("result", exampleService.queryCase(page, pageSize));
+    return "/v1/example/case";
+  }
+
+
+  @RequestMapping(method = RequestMethod.GET, value = "/admin/example/case/add.do")
+  public String addCase(Model model) {
+    return "/v1/example/case/update";
+  }
+
+  @RequestMapping(method = RequestMethod.POST, value = "/admin/example/case/add.do")
+  public Object addCase(@RequestParam String name, @RequestParam String description,
+      @RequestParam String cover, Model model) {
+    Case c = new Case();
+    c.setName(name);
+    c.setDescription(description);
+    if (StringUtils.isNotBlank(cover)) {
+      c.setCover(imageService.getImage(cover));
+    }
+    exampleService.addCase(c);
+    return ok();
+  }
+
+  @RequestMapping(method = RequestMethod.GET, value = "/admin/example/case/update.do")
+  public String updateCase(@RequestParam String id, Model model) {
+    model.addAttribute("case", exampleService.getCase(id));
+    return "/v1/example/case/update";
+  }
+
+  @RequestMapping(method = RequestMethod.POST, value = "/admin/example/case/update.do")
+  public Object updateCase(@RequestParam String id, @RequestParam String name,
+      @RequestParam String description, @RequestParam String cover, Model model) {
+    Case c = exampleService.getCase(id);
+    if (c == null) {
+      return illegal();
+    }
+
+    c.setName(name);
+    c.setDescription(description);
+    if (StringUtils.isNotBlank(cover)) {
+      c.setCover(imageService.getImage(cover));
+    } else {
+      c.setCover(null);
+    }
+    exampleService.updateCase(c);
+    return ok();
+  }
+
+  @RequestMapping(method = RequestMethod.POST, value = "/admin/example/case/delete.do")
+  public Object deleteCase(@RequestParam String id, Model model) {
+    exampleService.deleteCase(id);
+    return ok();
+  }
+
 }

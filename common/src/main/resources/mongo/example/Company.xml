@@ -12,6 +12,7 @@
 	<object class="com.cqlybest.common.bean.example.Case">
 		<property name="id" id="true" />
 		<property name="name" />
+		<property name="cover" />
 		<property name="description" />
 	</object>
 

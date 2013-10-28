@@ -4,6 +4,9 @@
 <#assign Menu=[{
 	'name':'标杆企业',
 	'url':'/admin/example/company.do'
+},{
+	'name':'成功案例',
+	'url':'/admin/example/case.do'
 }] />
 <#include "sidebar.ftl">
 <div id="main-content" class="clearfix" data-init="${ContextPath}/admin/example/company.do">

@@ -1,5 +1,7 @@
 package com.cqlybest.common.bean.example;
 
+import com.cqlybest.common.bean.Image;
+
 /**
  * 标杆案例
  */
@@ -7,6 +9,7 @@ public class Case {
 
   private String id;
   private String name;
+  private Image cover;
   private String description;
 
   public String getId() {
@@ -23,6 +26,14 @@ public class Case {
 
   public void setName(String name) {
     this.name = name;
+  }
+
+  public Image getCover() {
+    return cover;
+  }
+
+  public void setCover(Image cover) {
+    this.cover = cover;
   }
 
   public String getDescription() {
