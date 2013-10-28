@@ -10,6 +10,7 @@
 				<tr>
 					<th class="center" style="width:40px;"><input type="checkbox"><span class="lbl"></span></th>
 					<th>案例</th>
+					<th class="center">封面</th>
 					<th class="center" style="width:100px;">操作</th>
 				</tr>
 			</thead>
@@ -18,6 +19,7 @@
 				<tr>
 					<td class="center"><input type="checkbox" value="${case.id}"><span class="lbl"></span></td>
 					<td>${case.name!}</td>
+					<td class="center"><#if case.cover?has_content>有<#else>无</#if></td>
 					<td class="td-actions center">
 						<div class="btn-group">
 							<button type="button" class="btn btn-mini btn-info" title="修改"
@@ -51,7 +53,7 @@ $('#page-content table').dataTable({
 		});
 		var q = {};
 		q.page = p.iDisplayStart / p.iDisplayLength;
-		cqlybest.go('#main-content', '${ContextPath}/admin/example/company.do?' + $.param(q));
+		cqlybest.go('#main-content', '${ContextPath}/admin/example/case.do?' + $.param(q));
 	}
 });
 
