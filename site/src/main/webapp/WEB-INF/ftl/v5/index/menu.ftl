@@ -18,7 +18,7 @@
 	</div>
 </div>
 <div class="header">
-	<div class="container-fluid">
+	<div class="container-fluid" style="position: relative;">
 		<div class="logo">
 			<a href="/"><img src="${ContextPath}/assets/img/logo.png" height="60" style="height:60px;"></a>
 		</div>
@@ -39,7 +39,14 @@
 							<a href="${ContextPath}/soon.html" class="dropdown-toggle">主题定制</a>
 						</li>
 						<li data-active-nav="example">
-							<a href="${ContextPath}/soon.html" class="dropdown-toggle">企业考察</a>
+							<a href="${ContextPath}/enterprise.html" class="dropdown-toggle" data-hover="dropdown" class="dropdown-toggle">
+								企业考察
+							</a>
+							<ul class="dropdown-menu">
+								<li><a href="${ContextPath}/case.html">成功案例</a></li>
+								<li><a href="${ContextPath}/enterprise/partner.html">标杆企业</a></li>
+							</ul>
+							<b class="caret-out"></b>
 						</li>
 						<li data-active-nav="maldives">
 							<a href="${ContextPath}/maldives.html" class="dropdown-toggle">马尔代夫</a>
@@ -54,7 +61,7 @@
 				</div>
 			</div>
 		</div>
-		<div class="navbar pull-right">
+		<div class="navbar" style="position: absolute; right: 20px; top: 0px;">
 			<div class="navbar-inner">
 				<div class="nav-collapse collapse">
 					<ul class="nav">

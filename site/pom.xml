@@ -82,6 +82,7 @@
 								<jsSourceFile>jquery.js</jsSourceFile>
 								<jsSourceFile>bootstrap.js</jsSourceFile>
 								<jsSourceFile>bootbox.js</jsSourceFile>
+								<jsSourceFile>twitter-bootstrap-hover-dropdown.js</jsSourceFile>
 								<jsSourceFile>waypoints.js</jsSourceFile>
 								<jsSourceFile>jquery.easing.js</jsSourceFile>
 								<jsSourceFile>supersized.js</jsSourceFile>

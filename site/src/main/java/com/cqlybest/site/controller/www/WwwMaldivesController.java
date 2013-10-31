@@ -16,9 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.cqlybest.common.bean.MaldivesIsland;
 import com.cqlybest.common.controller.ControllerHelper;
-import com.cqlybest.common.service.FriendlyLinkService;
 import com.cqlybest.common.service.MaldivesService;
-import com.cqlybest.common.service.SettingsService;
 import com.googlecode.mjorm.query.Query;
 import com.googlecode.mjorm.query.QueryGroup;
 import com.googlecode.mjorm.query.criteria.DocumentCriterion;
@@ -30,10 +28,6 @@ public class WwwMaldivesController extends ControllerHelper {
 
   @Autowired
   private MaldivesService maldivesService;
-  @Autowired
-  protected SettingsService settingsService;
-  @Autowired
-  protected FriendlyLinkService friendlyLinkService;
 
   @RequestMapping("/maldives.html")
   public Object maldives(HttpServletRequest request, Model model) {

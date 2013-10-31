@@ -2,6 +2,7 @@
 	<script type="text/javascript" src="${ContextPath}/assets/v5/js/jquery.js?v=${version.time}"></script>
 	<script type="text/javascript" src="${ContextPath}/assets/v5/js/bootstrap.js?v=${version.time}"></script>
 	<script type="text/javascript" src="${ContextPath}/assets/v5/js/bootbox.js?v=${version.time}"></script>
+	<script type="text/javascript" src="${ContextPath}/assets/v5/js/twitter-bootstrap-hover-dropdown.js?v=${version.time}"></script>
 	<script type="text/javascript" src="${ContextPath}/assets/v5/js/waypoints.js?v=${version.time}"></script>
 	<script type="text/javascript" src="${ContextPath}/assets/v5/js/jquery.easing.js?v=${version.time}"></script>
 	<script type="text/javascript" src="${ContextPath}/assets/v5/js/supersized.js?v=${version.time}"></script>

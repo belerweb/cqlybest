@@ -18,6 +18,10 @@ body.fixed-bottom {
 	padding-bottom: 60px;
 }
 
+ul,li {
+	list-style: none;
+}
+
 p,a,li {
 	color: #555;
 	line-height: 1.6;
@@ -2766,4 +2770,69 @@ ul.tags li {
 
 .carousel-inner>.item>img,.carousel-inner>.item>a>img {
 	width: 100%;
+}
+
+.portfolio {
+	margin-left: 0;
+}
+
+.portfolio li {
+	margin-bottom: 40px;
+}
+
+.portfolio li.first {
+	margin-left: 0;
+}
+
+.portfolio li img {
+	width: 100%;
+}
+
+.portfolio li a span {
+	border-bottom: 2px solid #EEEEEE;
+	display: block;
+	padding: 10px;
+	text-align: center;
+}
+
+.portfolio li a span strong {
+	color: #555555;
+	display: block;
+	overflow: hidden;
+	height: 20px;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+
+.portfolio li a img {
+	-webkit-transition: all 0.8s ease-in-out;
+	-moz-transition: all 0.8s ease-in-out;
+	-o-transition: all 0.8s ease-in-out;
+	-ms-transition: all 0.8s ease-in-out;
+	transition: all 0.8s ease-in-out;
+}
+
+.portfolio li a:hover img {
+	opacity: 0.8;
+	-webkit-transform: scale(1.2) rotate(3deg);
+	-moz-transform: scale(1.2) rotate(3deg);
+	-o-transform: scale(1.0) rotate(3deg);
+	-ms-transform: scale(1.2) rotate(3deg);
+	transform: scale(1.2) rotate(3deg);
+}
+
+.portfolio li a:hover {
+	text-decoration: none;
+}
+
+.portfolio li a:hover span {
+	border-bottom: solid 2px #3498DB;
+	-webkit-transition: all 0.2s ease-in-out;
+	-moz-transition: all 0.3s ease-in-out;
+	-o-transition: all 0.2s ease-in-out;
+	transition: all 0.3s ease-in-out;
+}
+
+.portfolio em.overflow-hidden {
+	display: block;
 }

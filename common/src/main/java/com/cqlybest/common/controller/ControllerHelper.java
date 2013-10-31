@@ -15,11 +15,17 @@ import org.springframework.util.MultiValueMap;
 import com.cqlybest.common.bean.User;
 import com.cqlybest.common.exception.NotFoundException;
 import com.cqlybest.common.service.CentralConfig;
+import com.cqlybest.common.service.FriendlyLinkService;
+import com.cqlybest.common.service.SettingsService;
 
 public abstract class ControllerHelper {
 
   @Autowired
   protected CentralConfig centralConfig;
+  @Autowired
+  protected SettingsService settingsService;
+  @Autowired
+  protected FriendlyLinkService friendlyLinkService;
 
   protected String getQiniuBucket() {
     return centralConfig.get(CentralConfig.QINIU_BK);
