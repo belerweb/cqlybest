@@ -2836,3 +2836,28 @@ ul.tags li {
 .portfolio em.overflow-hidden {
 	display: block;
 }
+
+ul.partners {
+	margin-left: 0;
+}
+
+ul.partners li {
+	margin-bottom: 20px;
+}
+
+ul.partners li.first {
+	margin-left: 0;
+	clear: left;
+}
+
+ul.partners li a {
+	border: 1px solid #cccccc;
+	padding: 2px;
+	text-align: center;
+	display: block;
+}
+
+ul.partners li img {
+	width: 100%;
+	height: 100%;
+}
