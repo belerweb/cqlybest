@@ -12,6 +12,7 @@
 	<meta name="Keywords" content="${Keywords!(Settings.basic.keywords)!?join(',')}"/>
 	<meta name="Description" content="${Description!(Settings.basic.description)!}>"/>
 	<meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0;">
+	${(Settings.basic.meta)!}
 
 	<#if dev>
 	<link href="${ContextPath}/assets/v5/css/bootstrap.css?v=${version.time}" rel="stylesheet" media="screen">
