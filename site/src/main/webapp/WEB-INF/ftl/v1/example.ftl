@@ -2,6 +2,9 @@
 <#assign Title='标杆' />
 <#include "header_top.ftl">
 <#assign Menu=[{
+	'name':'标杆介绍',
+	'url':'/admin/example/description.do'
+},{
 	'name':'标杆企业',
 	'url':'/admin/example/company.do'
 },{

@@ -59,6 +59,7 @@ h1 i,h2 i,h3 i,h4 i,h5 i {
 	display: block;
 	margin: 10px 0 25px 0;
 	border-bottom: 1px dotted #e4e9f0;
+	position: relative;
 }
 
 .headline h3,.headline h4 {
@@ -68,6 +69,12 @@ h1 i,h2 i,h3 i,h4 i,h5 i {
 	display: inline-block;
 	text-shadow: 0 0 1px #f6f6f6;
 	border-bottom: 2px solid #72c02c;
+}
+
+.headline .more {
+	position: absolute;
+	right: 5px;
+	bottom: 0;
 }
 
 /*Purchase*/

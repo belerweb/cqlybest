@@ -21,6 +21,9 @@ public class ExampleController extends ControllerHelper {
 
   @RequestMapping("/enterprise.html")
   public Object enterprise(Model model) {
+    model.addAttribute("cases", exampleService.queryCase(0, 4));
+    model.addAttribute("companys", exampleService.queryCompany(0, 12));
+
     model.addAttribute("Settings", settingsService.getSettings());
     model.addAttribute("Links", friendlyLinkService.queryLink(0, Integer.MAX_VALUE));
     return "/v5/enterprise/index";

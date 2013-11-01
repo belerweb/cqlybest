@@ -27,6 +27,12 @@ public class AdminExampleController extends ControllerHelper {
     return "/v1/example";
   }
 
+  @RequestMapping("/admin/example/description.do")
+  public String exampleDdescription(Model model) {
+    model.addAttribute("settings", settingsService.getSettings());
+    return "/v1/example/description";
+  }
+
   /**
    * 标杆企业
    */

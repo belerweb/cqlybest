@@ -39,7 +39,7 @@
 							<a href="${ContextPath}/soon.html" class="dropdown-toggle">主题定制</a>
 						</li>
 						<li data-active-nav="example">
-							<a href="#" class="dropdown-toggle" data-hover="dropdown" class="dropdown-toggle">
+							<a href="${ContextPath}/enterprise.html" class="dropdown-toggle" data-hover="dropdown" class="dropdown-toggle">
 								企业考察
 							</a>
 							<ul class="dropdown-menu">
