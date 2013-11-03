@@ -227,7 +227,7 @@
 			<version>${dependency.weixin-mp-sdk.version}</version>
 		</dependency>
 		<dependency>
-			<groupId>com.googlecode</groupId>
+			<groupId>com.belerweb</groupId>
 			<artifactId>mongo-java-orm</artifactId>
 			<version>1.2</version>
 		</dependency>
@@ -368,16 +368,5 @@
 			</plugins>
 		</pluginManagement>
 	</build>
-
-	<repositories>
-		<repository>
-			<id>central</id>
-			<url>http://repo1.maven.org/maven2/</url>
-		</repository>
-		<repository>
-			<id>mjorm-webdav-maven-repo</id>
-			<url>http://mongo-java-orm.googlecode.com/svn/maven/repo/</url>
-		</repository>
-	</repositories>
 
 </project>
